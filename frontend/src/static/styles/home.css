@@ -1,0 +1,293 @@
+
+:root{
+  --background-color:"red";
+  --button-primary:"blue";
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* background-color: #F2F8FF; */
+  background-color:var(--background-color);
+}
+
+.tagline {
+  text-align: center;
+  font-size: 28px;
+  color:#014891;
+  margin-bottom: 40px;
+}
+
+.eye-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+
+/* .eye-section:hover {
+  transform: scale(1.05);
+} */
+
+.eye-section img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
+  color: #014891;
+}
+
+.description {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.truncated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 80px;
+}
+
+.transplanted-persons-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.transplanted-persons-section h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #014891;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(50% - 20px);
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+/* .person:hover {
+  transform: scale(1.05);
+} */
+
+.person img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.person .description {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.read-more-button {
+  background-color: #014891;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease-in-out;
+  /* Additional styles */
+  margin-top: 10px; /* Example margin */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Example box shadow */
+  /* Add any other desired styles */
+}
+
+.read-more-button:hover {
+  background-color: #012f56;
+}
+
+
+/* About section */
+.about-section {
+  background-color: #FFFFFF;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.about-section p {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.column {
+  flex-basis: 50%;
+}
+
+.img-ab {
+  max-width: 100%;
+  height: auto;
+}
+
+.content {
+  text-align: left;
+}
+
+.content p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+/* this is the contact page for the eye bank management system for ethiopia */
+.container4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+.contact-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.form-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+/* Media Queries */
+
+@media (max-width: 768px) {
+  .eye-section {
+    padding: 20px;
+  }
+  
+  .eye-section img {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+  
+ 
+  .transplanted-persons-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .person {
+    width: 100%;
+  }
+  
+  .person img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .person .description {
+    font-size: 12px;
+  }
+}
+
+.loading-circle {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

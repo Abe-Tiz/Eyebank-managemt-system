@@ -1,0 +1,13 @@
+{
+  "loginLabel": "ወደ መለያዎ ይግቡ",
+  "loginDontLabel": "መለያ የለዎትም",
+  "loginNavigatToSignup": "ተመዝገብ",
+  "loginTitleLabel": "ግባ",
+  "labelLoginEmail": "ኢሜይል",
+  "labelLoginPassword": "የይለፍ ቃል",
+  "forgotPasswordLabel": "መክፈቻ ቁልፉን ረሳኽው",
+  "labelErrorEmail": "እባክህን ትክክለኛ ኢሜል አስገባ",
+  "forgotpasswordButton": "መላክ",
+  "labelLoginNewPassword": "አዲስ የይለፍ ቃል",
+  "labelErrorPassword": "የይለፍ ቃል ቢያንስ 8 ቁምፊዎች መሆን አለበት።"
+}

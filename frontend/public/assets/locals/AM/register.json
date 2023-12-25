@@ -1,0 +1,20 @@
+{
+  "titleLabel": "ወደ መለያዎ ይመዝገቡ",
+  "signUpLabel": "ተመዝገብ",
+  "signupOptionLabel": "መለያ አለህ ",
+  "LabelsignUpName": "ሙሉ ስም",
+  "LabelsignUpImage": "ምስል",
+  "LabelsignUpRole": "ሚና",
+  "LabelConfirmPassword": "የይለፍ ቃል አረጋግጥ",
+  "LabelConfirmPasswordError": "የይለፍ ቃሎች ተመሳሳይ አይደሉም.",
+  "LabelImageError": "የመገለጫ ምስል መምረጥ አለብህ",
+  "LabelFullNameError": "ሙሉ ስም ትክክለኛ ቁምፊዎች እንጂ አሃዝ መሆን የለበትም",
+  "LabelRoleError": "የተጠቃሚውን ሚና መምረጥ አለብዎት",
+  "LabelRoleSelect": "ሚና ይምረጡ",
+  "LabelAdmin": "አስተዳዳሪ",
+  "LabelDoctor": "ዶክተር",
+  "LabelMedicalDirector": "የሕክምና ዳይሬክተር",
+  "LabelLabTechinician": "የላብራቶሪ ቴክኒሻን",
+  "resetPasswordLabel": "የይለፍ ቃል ዳግም አስጀምር",
+  "resetPasswordButton": "ዳግም አስጀምር"
+}

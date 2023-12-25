@@ -1,0 +1,13 @@
+{
+  "loginLabel": "Akkaawuntii keessanitti galmaa'aa",
+  "loginDontLabel": "Herrega Hin Qabatinaa",
+  "loginNavigatToSignup": "Galmaa'i",
+  "loginTitleLabel": "seenuu",
+  "labelLoginEmail": "Imeelii",
+  "labelLoginPassword": "Jecha iccitii",
+  "labelLoginNewPassword": "New Password",
+  "forgotPasswordLabel": "Jecha Darbii Haaraa",
+  "forgotpasswordButton": "erguu",
+  "labelErrorEmail": "Mee teessoo imeelii sirrii ta'e galchi.",
+  "labelErrorPassword": "Jechi icciitii yoo xiqqaate arfiilee 8 ta'uu qaba."
+}

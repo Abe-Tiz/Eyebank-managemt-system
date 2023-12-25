@@ -1,0 +1,20 @@
+{
+  "titleLabel": "ናብ ኣካውንትካ ምእታው",
+  "signUpLabel": "ተመዝገብ",
+  "signupOptionLabel": "ድሮ ኣካውንት ኣለካ ",
+  "LabelsignUpName": "ምሉእ ስም",
+  "LabelsignUpImage": "ስእሊ",
+  "LabelsignUpRole": "ግደ",
+  "LabelConfirmPassword": "ፓስዎርድ ኣረጋግጽ",
+  "LabelConfirmPasswordError": "ፓስዎርድታት ኣይሰማምዑን እዮም።",
+  "LabelImageError": "ናይ ፕሮፋይል ምስሊ ክትመርጽ ኣለካ",
+  "LabelFullNameError": "ምሉእ ስም ቅኑዕ ፊደላት እምበር ኣሃዝ ክኸውን የብሉን",
+  "LabelRoleError": "ናይ ተጠቃሚ ተራ ክትመርጽ ኣለካ",
+  "LabelRoleSelect": "ተራ ምረጽ",
+  "LabelAdmin": "ኣድሚን",
+  "LabelDoctor": "ዶክቶር",
+  "LabelMedicalDirector": "ሕክምናዊ ዳይረክተር",
+  "LabelLabTechinician": "ቴክኒሻን ላብራቶሪ",
+  "resetPasswordLabel": "ፓስዎርድ ዳግማይ ምትካል",
+  "resetPasswordButton": "ዳግማይ ምትካል"
+}

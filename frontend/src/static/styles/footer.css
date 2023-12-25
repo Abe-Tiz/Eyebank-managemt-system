@@ -1,0 +1,168 @@
+.section_padding{
+	padding: 0.4rem 0.4rem;
+	margin: 10px;
+ 
+}
+
+.footer{
+	background-color: #001E00;
+	border-top: 0;
+	color: #fff;
+	padding-bottom: 5px;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+.sb_footer{
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+}
+
+.sb_footer-links{
+	display: flex;
+	justify-content : space-between;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+	text-align: center;
+	margin-bottom: rem;
+}
+
+.sb_footer-links-div{
+	width:  150px;
+	margin: 2.5rem;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	color:  white;
+	gap:20px;
+	align-items:center;
+	margin-left: 3.6rem;
+}
+
+ a{
+ 	color: rgb(175,175,179);
+ 	text-decoration: none;
+ }
+
+.socialmedia{
+	display: flex;
+	flex-direction: row;
+	gap:20px;
+}
+
+ 
+
+.sb_footer-links-div h4{
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 0.9rem;
+}
+
+.sb_footer-links-div p{
+	font-size: 12px;
+	line-height: 15px;
+	margin: 0.5rem 0;
+	cursor: pointer;
+}
+
+.sb_footer-below{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 0.2rem;
+	margin-right: 0.8rem;
+	margin-left: 0.8rem;
+}
+
+.sb_footer-below-links{
+	display: flex;
+	flex-direction: row;
+}
+
+.sb_footer-below-links p{
+	font-size: 13px;
+	line-height: 15px;
+	margin-left: 2rem;
+	color:  white;
+	font-weight: 600;
+}
+
+hr{
+	color: white !important;
+	width: 100%;
+}
+
+.sb_footer-copyright p{
+	font-size: 13px;
+	line-height: 15px;
+	color:  rgb(255, 255, 255);
+	font-weight: 600;
+}
+
+@media screen and (max-width: 850px) {
+	.sb_footer-heading h1{
+		font-size: 44px;
+		line-height: 50px;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.sb_footer-heading h1{
+		font-size: 34px;
+		line-height: 42px;
+	}
+
+	.sb_footer-links div{
+		margin: 1rem 0;
+	}
+
+	.sb_footer-btn p{
+		font-size: 14px;
+		line-height: 20px;
+	}
+
+	.sb_footer-below{
+		flex-direction: column;
+		justify-content: left;
+	}
+
+	.sb_footer-below-links {
+		flex-direction: column;
+	}
+
+	.sb_footer-below-links p{
+		margin-left: 0rem;
+		margin-top: 1rem;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.sb_footer-heading h1{
+		font-size: 27px;
+		line-height: 38px;
+	}
+}
+
+.social_link{
+	border: 2px solid white;
+	border-radius:50%;
+	padding:10px;
+	align-self:"center";
+
+}
+.social_link:hover{
+	background-color:white;
+	border-color:#001E00;
+	
+}
+.social_link-icon{
+  color:white;
+}
+.social_link:hover .social_link-icon {
+  color:#001E00;
+  transition: 0.5s ease-in;
+}
+ 

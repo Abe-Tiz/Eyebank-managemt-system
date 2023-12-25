@@ -1,0 +1,10 @@
+{
+  "passwordPlaceholderLabel": "Enter Password",
+  "emailPlaceholderLabel": "Enter Email",
+  "namePlaceholderLabel": "Enter Name",
+  "backButtonLabel": "Back",
+  "updateButtonLabel": "Update",
+  "printButtonLabel": "Print",
+  "registerButtonLabel": "Register"
+ 
+}

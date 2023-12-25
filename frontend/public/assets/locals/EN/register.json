@@ -1,0 +1,21 @@
+{
+    "titleLabel" : "SIgn Up to your account",
+    "signUpLabel" :"Sign Up",
+    "resetPasswordLabel" :"Reset Password",
+    "resetPasswordButton" :"Reset",
+    "LabelsignUpName" :"Full Name",
+    "LabelsignUpImage" :"Image",
+    "LabelsignUpRole" :"Role",
+    "LabelConfirmPassword" :"Confirm Password",
+    "LabelConfirmPasswordError" :"Passwords do not match.",
+    "LabelImageError" :"you must be select a profile image",
+    "LabelFullNameError" :"Full name must be a valid characters and not a digit",
+    "LabelRoleError" :"you must select the role of user",
+    "LabelRoleSelect" :"Select Role",
+    "LabelAdmin" :"Admin",
+    "LabelDoctor" :"Doctor",
+    "LabelMedicalDirector" :"Medical Director",
+    "LabelLabTechinician" :"Lab Techinician",
+    "signupOptionLabel" :"Already Have an Account "
+     
+}

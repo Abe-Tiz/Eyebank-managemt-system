@@ -1,0 +1,14 @@
+{
+    "loginLabel" : "SIgn In to your account",
+    "loginDontLabel":" Don't Have an Account",
+    "loginNavigatToSignup" : "Sign Up",
+    "labelLoginEmail" : "Email",
+    "labelLoginPassword" : "Password",
+    "labelLoginNewPassword" : "New Password",
+    "labelErrorEmail" : "Please enter a valid email address.",
+    "labelErrorPassword" : "Password must be at least 8 characters.",
+    "loginTitleLabel" :"Login",
+    "forgotPasswordLabel":"Forgot Password",
+    "forgotpasswordButton":"Send"
+    
+}

@@ -1,0 +1,134 @@
+/* Add custom styles to the contact form */
+
+.page-section {
+  padding: 30px 0;
+  
+}
+.tittle{
+    padding-left: 7px;
+    margin-right: 70%;
+}
+
+.section-heading {
+  font-size: 36px;
+  margin-bottom: 30px;
+  margin-left: 0%;
+} 
+
+.form-control {
+  /* background-color: #f8f8f8; */
+  border: none;
+  border-radius: 4px;
+  padding: 10px 10px;
+  margin-bottom: 20px;
+  height: 35px;
+  font-size: 16px;
+   color:black; 
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
+  /* border: 1px solid #333333; */
+   box-shadow: 4px 6px 4px 4px rgba(19, 26, 22, 0.1);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #17b8aa;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+textarea.form-control {
+  height: 80px;
+}
+
+.help-block {
+  color: #dc3545;
+  margin-top: 5px;
+}
+
+.btn-primary {
+  background-color: #0ba7e0;
+  border-color: #007bff;
+  border-radius: 4px;
+
+  font-size: 16px;
+  margin-bottom: 9px;
+  /* text-transform: lowercase; */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.text-muted {
+  color: #999999;
+}
+.btn-warning{
+  border-radius: 4px;
+ 
+  font-size: 16px;
+  margin-bottom: 9px;
+
+  /* text-transform: lowercase; */
+  transition: background-color 0.3s ease-in-out;  
+}
+.btn-warning:hover{
+background-color:rgb(148, 72, 72);
+
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  max-width: 800px;
+  /* margin-left: auto; */
+  margin-right: auto;
+}
+
+
+
+.col-lg-12 {
+  width: 100%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.col-md-6 {
+  width: 50%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.contact{
+    box-shadow: 4px 6px 4px 4px rgba(22, 26, 24, 0.1);
+    
+}
+@media (max-width: 600px) {
+  /* .inputForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }  */
+
+
+.addresss {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+} 
+
+}

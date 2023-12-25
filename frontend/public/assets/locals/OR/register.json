@@ -1,0 +1,20 @@
+{
+  "titleLabel": "Akkaawuntii keessanitti galmaa'aa",
+  "signUpLabel": "Galmaa'i",
+  "signupOptionLabel": "Duraanis Herrega Qabadhaa ",
+  "LabelsignUpName": "Maqaa Guutuu",
+  "LabelsignUpImage": "Bifa",
+  "LabelsignUpRole": "Ga'ee",
+  "LabelConfirmPassword": "Password Mirkaneessi",
+  "LabelConfirmPasswordError": "Jechoonni icciitii wal hin simne.",
+  "LabelImageError": "fakkii piroofaayilii filachuu qabda.",
+  "LabelFullNameError": "Maqaan guutuun arfiilee sirrii ta'uu qaba malee dijiitii ta'uu hin qabu",
+  "LabelRoleError": "gahee fayyadamaa filachuu qabda",
+  "LabelRoleSelect": "Gahee Filadhu",
+  "LabelAdmin": "Admin",
+  "LabelDoctor": "Dooktora",
+  "LabelMedicalDirector": "Daarektarri Meedikaalaa",
+  "LabelLabTechinician": "Teeknishaan Laab",
+  "resetPasswordLabel": "Jecha Darbii Irra Deebi'i",
+  "resetPasswordButton": "Reset gochuu"
+}

@@ -1,0 +1,13 @@
+{
+  "loginLabel": "ናብ ኣካውንትካ ምእታው",
+  "loginDontLabel": "ኣካውንት ኣይትሃሉኻ",
+  "loginNavigatToSignup": "ተመዝገብ",
+  "loginTitleLabel": "መእተዊ",
+  "labelLoginEmail": "ኢመይል",
+  "labelLoginPassword": "መሕለፊ ቓል",
+  "labelErrorEmail": "በጃኹም ቅኑዕ ኢመይል ኣድራሻ ኣእትዉ።",
+  "forgotPasswordLabel": "መሕለፊ ቓል ረሲዐዮd",
+  "forgotpasswordButton": "ስደድ",
+  "labelLoginNewPassword": "ሓድሽ ፓስዎርድ",
+  "labelErrorPassword": "ፓስዎርድ እንተወሓደ 8 ፊደላት ክኸውን ኣለዎ።"
+}
