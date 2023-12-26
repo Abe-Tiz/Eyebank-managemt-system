@@ -23,7 +23,7 @@ const About = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="about-section" id="about">
         <h2 className="title">About Us</h2>
         <div className="container">
@@ -67,7 +67,7 @@ const About = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

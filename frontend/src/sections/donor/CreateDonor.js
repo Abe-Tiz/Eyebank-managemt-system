@@ -124,7 +124,7 @@ const handleName = (e) =>{
 
   return (
     <>
-   <Header />
+   {/* <Header /> */}
       <div class="flex mt-4 md:mt-4">
         <div className="container border-2 py-6 border-gray-300 mb-4">
           <div className="flex flex-col md:flex-row mt-6">
@@ -415,7 +415,7 @@ const handleName = (e) =>{
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
