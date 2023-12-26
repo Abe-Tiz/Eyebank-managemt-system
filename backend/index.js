@@ -9,18 +9,19 @@ const userRoute = require("./routes/userRoute");
 const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
 
-
+ 
 dotenv.config();  
 connectDB();
 const app = express();
-
 const port = process.env.PORT || 4000;
 
 //!  Middleware
-app.use(cors());
+app.use(
+    cors()
+);
 app.use(express.json());
-//?  app.use(cookieParser());
-app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+// app.use(express.urlencoded({ extended: false }));
 
 //!  Allow cross-domain requests
 const allowCrossDomain = (req, res, next) => {

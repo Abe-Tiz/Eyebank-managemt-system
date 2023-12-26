@@ -35,7 +35,7 @@ const AdminDashboard = () => {
       <Layout>
         <Header style={{ background: "#fff", padding: 0 }} />
         <Content style={{ margin: "16px" }}>
-          {/* Your dashboard content goes here */}
+           
           <h1>Welcome to the Admin Dashboard</h1>
           <p>Put your charts, tables, and other content here.</p>
         </Content>

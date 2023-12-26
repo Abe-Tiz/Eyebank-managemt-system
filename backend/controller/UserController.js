@@ -104,12 +104,13 @@ const loginUser = asyncHandler(async (req, res) => {
       Bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
           if (user.verified) {
-            const token = jwt.sign({ userId: user._id }, secretKey, {
+            const token = jwt.sign({ userId: user._id ,role:user.role}, secretKey, {
               expiresIn: "1d",
             });
-            res.status(200).json({ user, token });
+            res.cookie({ 'token': token });
+            res.status(200).json({ status:"Success",name:user.name, role:user.role,token:token});
             console.log(user);
-          } else {
+          } else { 
             console.log(
               "You are not a verified user. Please verify your account first."
             );
