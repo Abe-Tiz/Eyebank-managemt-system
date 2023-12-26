@@ -5,7 +5,8 @@
 }
 
 .footer{
-	background-color: #001E00;
+	/* background-color: #001E00; */
+	background-color: #32475C;
 	border-top: 0;
 	color: #fff;
 	padding-bottom: 5px;
@@ -39,7 +40,7 @@
 	color:  white;
 	gap:20px;
 	align-items:center;
-	margin-left: 3.6rem;
+	margin-left: 5.6rem;
 }
 
  a{
@@ -109,12 +110,18 @@ hr{
 	}
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 768px) {
 	.sb_footer-heading h1{
 		font-size: 34px;
 		line-height: 42px;
 	}
-
+	.sb_footer-links{
+       display: flex;
+       flex-direction: column;
+	   justify-content: left;
+	  
+	}
+	
 	.sb_footer-links div{
 		margin: 1rem 0;
 	}
