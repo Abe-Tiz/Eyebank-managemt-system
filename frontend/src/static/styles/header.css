@@ -19,10 +19,7 @@ background-color: #32475C;
 border-radius: 8px;
 height: 20%;
 padding-right: 20px;
--webkit-border-radius:;
--moz-border-radius:;
--ms-border-radius:;
--o-border-radius:;
+
 }
 
 .navbar {
@@ -59,9 +56,7 @@ transition: color 0.3s ease-in-out;
 
 }
 
-.nav-elements ul a:hover {
-/* color: #333333 ; */
-}
+
 
 .nav-elements ul a.active {
 /* color: #333333 ; */
