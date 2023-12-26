@@ -1,39 +1,39 @@
 import React from "react";
-import '../../static/styles/footer.css';
+import "../../static/styles/footer.css";
 import { BsFacebook } from "react-icons/bs";
 import { BiLogoLinkedin } from "react-icons/bi";
-import { FaTwitter ,FaInstagram} from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { FaTwitter, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 function Footer() {
   // const navigate = useNavigate();
   const { t } = useTranslation();
-  
+
   return (
     <div className="footer">
       <div className="sb_footer section_padding">
         <div className="sb_footer-links">
           <div className="sb_footer-links-div">
-            {/* <h4>Company</h4> */}
-            <Link to="/">{t("labelHome")}</Link>
-            <Link to="/about">About</Link>
-            <Link to="/aware">Awareness</Link>
-            <Link to="/contact">Contact</Link>
+            <Link to="/">{t("Home")}</Link>
+            <Link to="/about">{t("About")}</Link>
+            <Link to="/aware">{t("Awarness")}</Link>
+            <Link to="/contact">{t("Contact")}</Link>
           </div>
           <div className="sb_footer-links-div">
             {/* <h4>Coming Soon on </h4> */}
+
             <div className="socialmedia">
-              <a href="#" className="social_link" >
-                <FaInstagram className="social_link-icon"   size={24} />
+              <a href="#" className="social_link">
+                <FaInstagram className="social_link-icon" size={24} />
               </a>
-              <a href="#" className="social_link" >
+              <a href="#" className="social_link">
                 <FaTwitter className="social_link-icon" size={24} />
               </a>
-              <a href="#" className="social_link" >
-                <BiLogoLinkedin className="social_link-icon"  size={24} />
+              <a href="#" className="social_link">
+                <BiLogoLinkedin className="social_link-icon" size={24} />
               </a>
-              <a href="#" className="social_link" >
+              <a href="#" className="social_link">
                 <BsFacebook className="social_link-icon" size={24} />
               </a>
             </div>
