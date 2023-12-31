@@ -27,7 +27,7 @@ const Home = () => {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
 
             <div className="container">
                 <h1 className='text-blue-600/50'>{t("translation:tagLabel2")}</h1>
@@ -111,7 +111,7 @@ const Home = () => {
        </div> */}
 
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }

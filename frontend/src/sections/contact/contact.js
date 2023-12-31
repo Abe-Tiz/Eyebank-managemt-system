@@ -70,7 +70,7 @@ const Contact = () => {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <section className="page-section" id="contact">
                 <div className="container">
 
@@ -201,7 +201,7 @@ const Contact = () => {
                 </div>
             </section>
 
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };

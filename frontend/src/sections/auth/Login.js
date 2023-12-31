@@ -36,11 +36,10 @@ const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [attempts, setAttempts] = useState(0); 
+  const [attempts, setAttempts] = useState(0);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const toast = useToast();
-
 
   // axios.defaults.withCredentials = true;
   const handleSubmit = async (e) => {
@@ -53,6 +52,11 @@ const Login = () => {
         password,
       });
 
+      console.log(response.data.name)
+      console.log(response.data.status)
+      console.log(response.data.token)
+      console.log(response.data.role)
+
       if (response.data.message === "not verified") {
         console.log(response.data.message);
         toast({
@@ -63,53 +67,59 @@ const Login = () => {
           isClosable: true,
           position: "top",
         });
-      }else if (response.data.user.role === "admin") {
-        console.log(response.data.user.role);
-        toast({
-          title: "Login Succeeded",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-       localStorage.setItem("userInfo", JSON.stringify(response.data.token));
-        console.log(JSON.stringify(response.data.token));
-        navigate("/dashboard");
-      } else {
-        console.log(response.data.user.role);
-        toast({
-          title: "Login Succeeded",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-        localStorage.setItem("userInfo", JSON.stringify(response.data.token));
-        console.log(JSON.stringify(response.data.token));
-          navigate("/");
-      }
-    } catch (err) {
-      setAttempts(attempts + 1);
-        if (attempts >= 4) {
-          // If attempts exceed 4, notify or block the user
+      } else if (response.data.status === "Success") {
+        if (response.data.role === "admin") {
+          // console.log(response.data.role);
           toast({
-            title: "Too many failed attempts",
-            description: "Your account has been locked. Please contact support.",
-            status: "error",
+            title: "Login Succeeded",
+            status: "success",
             duration: 5000,
             isClosable: true,
             position: "top",
           });
-        } else {
-            toast({
-              title: "Error Occured!",
-              description: err.message,
-              status: "error",
-              duration: 5000,
-              isClosable: true,
-              position: "top",
-            });
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify(response.data.token),
+          "role",
+          JSON.stringify(response.data.role)
+        );
+          console.log(JSON.stringify(response.data.token));
+          navigate("/dashboard");
         }
+      } else {
+        toast({
+          title: "Login Succeeded",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+        localStorage.setItem("userInfo", JSON.stringify(response.data.token),'role',JSON.stringify(response.data.role));
+        console.log(JSON.stringify(response.data.token));
+        navigate("/");
+      }
+    } catch (err) {
+      setAttempts(attempts + 1);
+      if (attempts >= 4) {
+        // If attempts exceed 4, notify or block the user
+        toast({
+          title: "Too many failed attempts",
+          description: "Your account has been locked. Please contact support.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      } else {
+        toast({
+          title: "Error Occured!",
+          description: err.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
     } finally {
       setIsLoading(false);
     }
