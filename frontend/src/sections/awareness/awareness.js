@@ -6,7 +6,7 @@ import "../../static/styles/awareness.css";
 const EyeCareAwareness = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="eye-care-container">
         <h1 className="eye-care-title">Eye Care Awareness</h1>
         <p className="eye-care-content">
@@ -29,7 +29,7 @@ const EyeCareAwareness = () => {
         </p>
         {/* Add more awareness content */}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

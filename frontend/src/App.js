@@ -17,6 +17,8 @@ import PrintCard from "./sections/donor/PrintCard";
 import EditDonor from "./sections/donor/EditDonor";
 import ForgotPassword from "./sections/auth/ForgotPassword";
 import ResetPassword from "./sections/auth/ResetPassword";
+import Navbar from "./sections/header/Header";
+import Footer from "./sections/footer/footer";
 // import About from './config/sections/about/About';
 
 
@@ -31,6 +33,7 @@ function App() {
 
     return (
       <>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -46,6 +49,7 @@ function App() {
           <Route path="/print/:id" element={<PrintCard />} />
           <Route path="/update/:id" element={<EditDonor />} />
         </Routes>
+        <Footer />
       </>
     );
 }
