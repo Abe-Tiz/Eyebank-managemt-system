@@ -41,87 +41,97 @@ const Login = () => {
   const { t } = useTranslation();
   const toast = useToast();
 
-  // axios.defaults.withCredentials = true;
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-
+      e.preventDefault();
     try {
       const response = await axios.post("http://localhost:4000/user/login", {
         email,
         password,
       });
-
-      console.log(response.data.name)
-      console.log(response.data.status)
-      console.log(response.data.token)
-      console.log(response.data.role)
-
-      if (response.data.message === "not verified") {
-        console.log(response.data.message);
+      const data = response.data;
+      if (data.message === "Not verified") {
         toast({
           title: "Not Verified",
-          description: "Please Verifiy Your Account.",
+          description: "Please Verify Your Account.",
           status: "warning",
           duration: 5000,
           isClosable: true,
           position: "top",
         });
-      } else if (response.data.status === "Success") {
-        if (response.data.role === "admin") {
-          // console.log(response.data.role);
+      } else {
+        if (data.status === "ok") {
+          if (data.user.role === "admin") {
+            localStorage.setItem("token", data.data);
+            localStorage.setItem("loggedIn", true);
+            toast({
+              title: "Login Succeeded",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+              position: "top",
+            });
+            navigate("/dashboard");
+          } else {
+              localStorage.setItem("token", data.data);
+              localStorage.setItem("loggedIn", true);
+            toast({
+              title: "Login Succeeded",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+              position: "top",
+            });
+            navigate("/dashboard");
+          }
+        }
+      }
+    } catch (error) {
+      if (error.response) {
+        if (
+          error.response.status === 404 &&
+          error.response.data.message === "User is not found."
+        ) {
           toast({
-            title: "Login Succeeded",
-            status: "success",
+            title: "User Not Found",
+            description: "Please check your email and try again.",
+            status: "warning",
             duration: 5000,
             isClosable: true,
             position: "top",
           });
-        localStorage.setItem(
-          "userInfo",
-          JSON.stringify(response.data.token),
-          "role",
-          JSON.stringify(response.data.role)
-        );
-          console.log(JSON.stringify(response.data.token));
-          navigate("/dashboard");
+        } else if (
+          error.response.status === 500 &&
+          error.response.data.message === "Password is not matched"
+        ) {
+          toast({
+            title: "Incorrect Password",
+            description: "Please double-check your password.",
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+          });
+        } else if (error.response.data.message === "Not verified") {
+          toast({
+            title: "Not Verified",
+            description: "Please verify your account.",
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+          });
         }
       } else {
+        console.log(error.message);
         toast({
-          title: "Login Succeeded",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-        localStorage.setItem("userInfo", JSON.stringify(response.data.token),'role',JSON.stringify(response.data.role));
-        console.log(JSON.stringify(response.data.token));
-        navigate("/");
-      }
-    } catch (err) {
-      setAttempts(attempts + 1);
-      if (attempts >= 4) {
-        // If attempts exceed 4, notify or block the user
-        toast({
-          title: "Too many failed attempts",
-          description: "Your account has been locked. Please contact support.",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-      } else {
-        toast({
-          title: "Error Occured!",
-          description: err.message,
+          title: "Error Occurred!",
+          description: error.message,
           status: "error",
           duration: 5000,
           isClosable: true,
           position: "top",
         });
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 

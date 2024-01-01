@@ -10,7 +10,7 @@ import { languages } from "./Languages";
 import About from "./sections/about/About";
 import AdminDashboard from "./components/AdminDashboard";
 import Contact from "./sections/contact/contact";
-import EyeCareAwareness from "./sections/awareness/awareness";
+import EyeCareAwareness from "./sections/awareness/getAwareness";
 import CreateDonor from "./sections/donor/CreateDonor";
 import DisplayDonor from "./sections/donor/DisplayDonor";
 import PrintCard from "./sections/donor/PrintCard";
@@ -19,6 +19,8 @@ import ForgotPassword from "./sections/auth/ForgotPassword";
 import ResetPassword from "./sections/auth/ResetPassword";
 import Navbar from "./sections/header/Header";
 import Footer from "./sections/footer/footer";
+import CreateAwareness from "./sections/awareness/createAwareness"; 
+import CreateVideo from "./sections/awareness/createVideo";
 // import About from './config/sections/about/About';
 
 
@@ -31,19 +33,29 @@ function App() {
         document.title = t("app_title");
     }, [currentLanguage, t]);
 
+    const isLogedin = localStorage.getItem("loggedIn");
+
     return (
       <>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={isLogedin === true ? <AdminDashboard /> : <Home />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset_password/:id/:token" element={<ResetPassword />} />
+          <Route
+            path="/reset_password/:id/:token"
+            element={<ResetPassword />}
+          />
           <Route path="/register" element={<Signup />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/awareness" element={<EyeCareAwareness />} />
+          <Route path="/createAwareness" element={<CreateAwareness/>}/>
+          <Route path="/createVideo" element={<CreateVideo/>}/>
           <Route path="/registerDonor" element={<CreateDonor />} />
           <Route path="/displayDonor" element={<DisplayDonor />} />
           <Route path="/print/:id" element={<PrintCard />} />
