@@ -33,14 +33,22 @@ function App() {
         document.title = t("app_title");
     }, [currentLanguage, t]);
 
+    const isLogedin = localStorage.getItem("loggedIn");
+
     return (
       <>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={isLogedin === true ? <AdminDashboard /> : <Home />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset_password/:id/:token" element={<ResetPassword />} />
+          <Route
+            path="/reset_password/:id/:token"
+            element={<ResetPassword />}
+          />
           <Route path="/register" element={<Signup />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/about" element={<About />} />
