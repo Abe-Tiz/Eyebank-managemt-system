@@ -15,7 +15,7 @@ i18next
             order: ["path", "cookie", "htmlTag"],
             caches: ["cookie"],
         },
-        ns: ["login", "translation", "common", "register", "donor", "contact"],
+        ns: ["login", "translation", "common", "register", "donor", "about", "contact"],
         backend: {
             loadPath: "/assets/locals/{{lng}}/{{ns}}.json", //
             allowMultiLoading: true, //
