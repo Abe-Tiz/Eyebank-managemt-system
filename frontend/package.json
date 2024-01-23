@@ -5,6 +5,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
+    "@emailjs/browser": "^3.12.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.2",
@@ -32,7 +33,6 @@
     "react-i18next": "^13.5.0",
     "react-icons": "^4.12.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
-    "react-redux": "^9.0.4",
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.18.0",
     "react-scripts": "^5.0.1",

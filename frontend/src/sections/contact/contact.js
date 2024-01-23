@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+
+import emailjs from '@emailjs/browser';
 import axios from "axios";
 import Header from "../header/Header";
 import "../../static/styles/contact.css";
@@ -21,6 +23,7 @@ const Contact = () => {
     const [showEmailWarning, setShowEmailWarning] = useState(false);
     const [showPhoneWarning, setShowPhoneWarning] = useState(false);
     const [showMessageWarning, setShowMessageWarning] = useState(false);
+    const form = useRef();
     const handleNameChange = (event) => {
         const inputValue = event.target.value;
         const isValid = /^[A-Za-z]+$/.test(inputValue); // Only allow letters
@@ -70,52 +73,13 @@ const Contact = () => {
             setShowMessageWarning(false);
         }
     }
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setIsLoading(true);
-        //const contactmessage = await axios.post('/contact')
-        axios
-            .post("http://localhost:4000/contact/create", {
-                name,
-                email,
-                phone,
-                message,
-            })
-            .then((res) => {
-                if (name === "" || !email || !phone || !message) {
-                    toast({
-                        title: "Please Fill all the Feilds",
-                        status: "warning",
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top",
-                    });
-                    setIsLoading(false);
-                } else {
-                    toast({
-                        title: "Message sent successfully! Thanks you",
-                        status: "success",
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top",
-                    });
-                    setIsLoading(false);
-                    setName("");
-                    setEmail("");
-                    setPhone("");
-                    setMessage("");
-                }
-            })
-            .catch((err) => {
-                toast({
-                    title: "Error Occured!",
-                    description: err.response.data.message,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "top",
-                });
-                setIsLoading(false);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        emailjs.sendForm('service_0a0l7kp', 'template_orivcky', form.current, 'k0FfFK_lalSy7U739')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
             });
     };
 
@@ -135,7 +99,7 @@ const Contact = () => {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <form
+                            <form ref={form}
                                 id="contactForm"
                                 name="contactForm"
                                 onSubmit={handleSubmit}
