@@ -75,12 +75,24 @@ const Contact = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(false);
         emailjs.sendForm('service_0a0l7kp', 'template_orivcky', form.current, 'k0FfFK_lalSy7U739')
             .then((result) => {
                 console.log(result.text);
             }, (error) => {
                 console.log(error.text);
             });
+        toast({
+            title: "Message have been sent successefully",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+        });
+        setName("");
+        setEmail("");
+        setPhone("");
+        setMessage("");
     };
 
     return (
