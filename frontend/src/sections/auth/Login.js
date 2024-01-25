@@ -188,7 +188,6 @@ const Login = () => {
                   </span>
                 </div>
               </div>
-
               {isLoading ? (
                 <LoadingCircle />
               ) : (
