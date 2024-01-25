@@ -113,12 +113,12 @@ const Login = () => {
     }
   };
 
-    // useEffect(() => {
-    //   if (refreshed) {
-    //      window.location.reload();
-    //      setRefreshed(false);
-    //   }
-    // }, [refreshed]);
+    useEffect(() => {
+      if (refreshed) {
+          window.location.reload();
+          setRefreshed(false);
+      }
+    }, [refreshed]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
