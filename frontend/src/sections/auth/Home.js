@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Typewriter from "typewriter-effect";
 import Header from "../header/Header";
 import Footer from "../footer/footer";
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const imagePath = process.env.PUBLIC_URL + "/images/eye2.png";
@@ -12,6 +13,8 @@ const Home = () => {
     "https://content.jdmagicbox.com/comp/ahmednagar/c5/9999px241.x241.141227004503.z9c5/catalogue/prakash-netralaya-dr-chitgopekar-savedi-ahmednagar-eye-hospitals-ly3f6k8kxx.jpg?clr=";
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpen3, setIsOpen3] = useState(false);
@@ -44,11 +47,17 @@ const Home = () => {
             </div>
 
             <div className="mt-8 space-x-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                Get in Touch
+              <button
+                onClick={() => navigate("/contact")}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+              >
+                {t("translation:homeContact")}
               </button>
-              <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
-                Become a Donor
+              <button
+                onClick={() => navigate("/registerDonor")}
+                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+              >
+                {t("translation:Donor")}
               </button>
             </div>
           </div>
