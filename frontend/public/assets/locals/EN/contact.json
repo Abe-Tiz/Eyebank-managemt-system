@@ -1,0 +1,15 @@
+{
+  "name": "Name",
+  "email": "Email",
+  "message": "Message",
+  "phone": "Phone Number",
+  "sendmessage": "Send Message",
+  "reset": "Reset",
+  "contactus": "Contact Us",
+  "Address": "Address",
+  "MenelikHospital": "Menelik II Referal Hospital",
+  "invalidemail": "Please enter a valid email address.",
+  "invalidname": " Please enter a valid name.",
+  "invalidphone": " Please enter a valid phone number",
+  "invalidmessage": " text must be at least 50 characters long."
+}
