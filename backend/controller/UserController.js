@@ -153,9 +153,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email: email });
     if (user) {
           if (user.verified) {
-            const token = jwt.sign({ userId: user._id }, secretKey, {
-              expiresIn: "1d",
-            });
+            const token = jwt.sign(
+              { userId: user._id },
+              process.env.JWT_SECRET,
+              {
+                expiresIn: "1d",
+              }
+            );
 
             //! create nodemailer transporter
             const transporter = nodemailer.createTransport({
@@ -174,13 +178,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
               text: `http://127.0.0.1:3000/reset_password/${user._id}/${token}`,
             };
 
-             transporter.sendMail(mailOption, function (error, info) {
-               if (error) {
-                 console.log(error);
-               } else {
-                 return res.send({ Status: "Success" });
-               }
-             });
+            transporter.sendMail(mailOption, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                return res.send({ Status: "Success" });
+              }
+            });
             res.status(200).json({ user, token });
             console.log(user);
           } else {
@@ -205,7 +209,7 @@ const resetPassword = asyncHandler(async (req, res) => {
 
   try {
     // Verify the JWT token
-    const decoded = jwt.verify(token, secretKey);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.userId !== id) {
       return res
         .status(403)
