@@ -23,6 +23,8 @@ import CreateAwareness from "./sections/awareness/createAwareness";
 import CreateVideo from "./sections/awareness/createVideo";
 import DonorLog from "./sections/donor/DonorLog";
 import ViewDonor from './sections/donor/ViewDonor';
+import Edit from "./sections/donor/Edit";
+import ViewUsers from './sections/auth/ViewUsers';
   
 
 function App() {
@@ -58,10 +60,12 @@ function App() {
         <Route path="/displayDonor" element={<DisplayDonor />} />
         <Route path="/print/:id" element={<PrintCard />} />
         <Route path="/update/:id" element={<EditDonor />} />
+        <Route path="/updateOne/:id" element={<Edit />} />
         <Route path="/donorlog" element={<DonorLog />} />
         <Route path="/viewdonor" element={<ViewDonor />} />
+        <Route path="/userList" element={<ViewUsers />} />
 
-       </Routes>
+      </Routes>
 
       {/* Conditionally render Navbar and Footer */}
       {!isLoggedin && <Footer />}

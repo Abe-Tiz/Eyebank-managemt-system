@@ -168,6 +168,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
                 user: "abebetizazu157@gmail.com",
                 pass: "gezm fqmn asjl bqxj",
               },
+              tls: {
+                rejectUnauthorized: false,
+              },
             });
 
             //! compose the email message

@@ -114,7 +114,7 @@ const Signup = () => {
             position: "top",
           });
           localStorage.setItem("userInfo", JSON.stringify(data));
-          navigate("/login");
+          // navigate("/userList");
           console.log(res);
         }
       })

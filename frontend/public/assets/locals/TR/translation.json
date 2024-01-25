@@ -1,13 +1,13 @@
 {
   "greeting": "Selam Abebe",
-  "labelHome": "ገዛ",
-  "labelAbout": "ብዝዕባ",
-  "labelAwarness": "ኣፍልጦ",
-  "labelContact": "ንዓና ርኸቡ",
-  "labelLogin": "መእተዊ",
+  "Home": "ገዛ",
+  "About": "ብዝዕባ",
+  "Awarness": "ኣፍልጦ",
+  "Contact": "ንዓና ርኸቡ",
+  "Login": "መእተዊ",
   "app_title": "ስርዓት ምሕደራ ባንኪ ዓይኒ",
   "language": "ቋንቋ",
-  "labelDonor": "ለጋሲ ኩን",
+  "Donor": "ለጋሲ ኩን",
   "tagLabel": "ደረጃኡ ዝሓለወ ስርዓተ ምትካል ኮርኒያና ተስፋ የምጽእ ትኹረት ምግባር፣ ብህያብ ራእይ ህይወት ምቕያር ብሓባር ንሓንቲ ዓለም ተኽእሎታት ነብርህ።",
   "tagLabel2": "ምርኣይ ምምላስ፡ ኣብ ሓደ እዋን ሓደ ምትካል።"
 }

@@ -121,35 +121,35 @@ const getDonor = asyncHandler(async (req, res) => {
   }
 });
 
-const getDonorCount = asyncHandler(async (req, res) => {
-  try {
+// const getDonorCount = asyncHandler(async (req, res) => {
+  // try {
  
-    const totalDonorsCount = await Donor.estimatedDocumentCount();
+  //   const totalDonorsCount = await Donor.estimatedDocumentCount();
  
-    const count = await Donor.countDocuments();
-     res.status(200).json(count);
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+  //   const count = await Donor.countDocuments();
+  //    res.status(200).json(count);
+  // } catch (error) {
+  //   console.error("Error:", error);
+  //   res.status(500).json({ error: "Internal server error" });
+  // }
+// });
 
 
 // displays donor by id
 const getDonorById = asyncHandler(async (req, res) => {
-  // try {
-  //   const id = req.params.id;;
-  //   const donor = await Donor.findById(id).exec();
+  try {
+    const id = req.params.id;;
+    const donor = await Donor.findById(id).exec();
 
-  //   if (!donor) {
-  //     return res.status(404).json({ message: "Donor not found" });
-  //   }
+    if (!donor) {
+      return res.status(404).json({ message: "Donor not found" });
+    }
 
-  //   res.status(200).json(donor);
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ error: "Internal server error" });
-  // }
+    res.status(200).json(donor);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 // displays donor by Email address
@@ -217,5 +217,5 @@ module.exports = {
   getDonorById,
   deleteDonor,
   getDonorByEmail,
-  getDonorCount,
+  // getDonorCount,
 };
