@@ -1,6 +1,4 @@
 import React, { useState, useRef } from "react";
-
-import emailjs from '@emailjs/browser';
 import axios from "axios";
 import Header from "../header/Header";
 import "../../static/styles/contact.css";
@@ -10,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { ChakraProvider, Text, Box, Icon, Spinner } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
     const [name, setName] = useState("");
@@ -24,6 +23,7 @@ const Contact = () => {
     const [showPhoneWarning, setShowPhoneWarning] = useState(false);
     const [showMessageWarning, setShowMessageWarning] = useState(false);
     const form = useRef();
+    
     const handleNameChange = (event) => {
         const inputValue = event.target.value;
         const isValid = /^[A-Za-z]+$/.test(inputValue); // Only allow letters
