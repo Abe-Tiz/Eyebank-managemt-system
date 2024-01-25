@@ -114,7 +114,7 @@ const Signup = () => {
             position: "top",
           });
           localStorage.setItem("userInfo", JSON.stringify(data));
-          navigate("/login");
+          // navigate("/userList");
           console.log(res);
         }
       })
@@ -152,18 +152,11 @@ const Signup = () => {
   return (
     <>
       <div className="container">
-        <div className="login-form m-10">
+        <div className="login-form m-10 w-3/4 ">
           <h3 className="title">{t("register:titleLabel")}</h3>
-          <div className="form">
+          <div className="form ">
             <form onSubmit={handleSubmit}>
-              <div
-                style={{
-                  display: "flex", 
-                  flexDirection: "column",
-                  gap: 10,
-                  justifyContent: "center",
-                }}
-              >
+              <div className="grid lg:grid-cols-2 gap-8 md:grid-cols-1 ">
                 <div className="mt-4">
                   <label
                     htmlFor="age"
@@ -317,12 +310,12 @@ const Signup = () => {
                 </div>
                 <ButtonComponent title={t("register:signUpLabel")} />
               </div>
-            </form> 
+            </form>
           </div>
-          <Link to="/login">
+          {/* <Link to="/login">
             {" "}
             {t("register:signupOptionLabel")} ? {t("login:loginTitleLabel")}
-          </Link>
+          </Link> */}
         </div>
       </div>
     </>

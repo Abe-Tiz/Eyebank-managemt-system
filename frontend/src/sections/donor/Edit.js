@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 
  
-const EditDonor = () => {
+const Edit = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
@@ -119,12 +119,8 @@ const EditDonor = () => {
             isClosable: true,
             position: "top",
           });
-          navigate("/viewdonor", {
-            state: {
-              data: res.data.result,
-            },
-          });
-          console.log(res.data.result);
+          navigate("/displayDonor");
+          console.log(res);
         }
       })
       .catch((err) => {
@@ -465,4 +461,4 @@ const EditDonor = () => {
   );
 };
 
-export default EditDonor;
+export default Edit;
