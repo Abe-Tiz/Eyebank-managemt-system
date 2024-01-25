@@ -108,7 +108,7 @@ const DisplayDonor = () => {
                       </div>
                     )}
                   </td>
-                  <td className="px-6 py-4">
+                  {/* <td className="px-6 py-4">
                     <Link
                       to={`/update/${donor._id}`}
                       className="bg-orange-500 border-2 p-1 border-orange-500 mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
@@ -127,7 +127,7 @@ const DisplayDonor = () => {
                         {t("common:printButtonLabel")}
                       </span>
                     )}
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>

@@ -43,9 +43,10 @@ const createDonor = asyncHandler(async (req, res) => {
                   );
                   
                   console.log("Registeriation Successfull", result);
-                  res
-                    .status(200)
-                    .json({ message: "Registeriation Successfull" });
+                  res.status(200).json({
+                    message: "Registeriation Successfull",
+                    result: newDonor,
+                  });
                 }
             })
     } catch (error) {
@@ -120,6 +121,20 @@ const getDonor = asyncHandler(async (req, res) => {
   }
 });
 
+// const getDonorCount = asyncHandler(async (req, res) => {
+  // try {
+ 
+  //   const totalDonorsCount = await Donor.estimatedDocumentCount();
+ 
+  //   const count = await Donor.countDocuments();
+  //    res.status(200).json(count);
+  // } catch (error) {
+  //   console.error("Error:", error);
+  //   res.status(500).json({ error: "Internal server error" });
+  // }
+// });
+
+
 // displays donor by id
 const getDonorById = asyncHandler(async (req, res) => {
   try {
@@ -137,6 +152,22 @@ const getDonorById = asyncHandler(async (req, res) => {
   }
 });
 
+// displays donor by Email address
+const getDonorByEmail = asyncHandler(async (req, res) => {
+  try {
+    const { email } = req.body;  
+    const donor = await Donor.findOne({ email }).exec();  
+    if (!donor) {
+      return res.status(404).json({ message: "Donor not found" });
+    }
+    res.status(200).json(donor);  
+    console.log(donor);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 // Update a donor
 const updateDonor = asyncHandler(async (req, res) => {
@@ -145,7 +176,7 @@ const updateDonor = asyncHandler(async (req, res) => {
     const { name, email, age, sex, city, subcity, kebele, HNumber, mobile } = req.body;
 
     // Assuming you have a Donor model
-    await Donor.findByIdAndUpdate(id, {
+    const newDonor = await Donor.findByIdAndUpdate(id, {
       name : name,
       email : email,
       age : age,
@@ -156,8 +187,9 @@ const updateDonor = asyncHandler(async (req, res) => {
       HNumber : HNumber,
       mobile : mobile,
     });
+    const result= newDonor.save();
 
-    res.status(200).json({ message: "Donor Updated Successfully." });
+    res.status(200).json({ message: "Donor Updated Successfully.",result:newDonor });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
@@ -183,5 +215,7 @@ module.exports = {
   updateDonor,
   getVerification,
   getDonorById,
-  deleteDonor
+  deleteDonor,
+  getDonorByEmail,
+  // getDonorCount,
 };
