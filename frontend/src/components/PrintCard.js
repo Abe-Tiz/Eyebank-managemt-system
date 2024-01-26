@@ -254,7 +254,7 @@ const Card = ({id}) => {
         <div className="mb-3 flex justify-center">
           <button
             onClick={handlePrint}
-            className="print-button bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 border-2  mr-2"
+            className="print-button bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 border-2  mr-2"
           >
             {t("common:printButtonLabel")}
           </button>
