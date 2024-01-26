@@ -35,10 +35,10 @@ const Home = () => {
             </h1> */}
             {/* <p className="text-white">{t("translation:tagLabel")}</p> */}
 
-            <div className="group bg-transparent shadow-lg rounded-lg overflow-hidden py-8 px-4 sm:px-6 lg:px-8 transition-transform transform hover:scale-105">
+            <div className="group bg-gray-300 shadow-lg rounded-lg overflow-hidden py-8 px-4 sm:px-6 lg:px-8 transition-transform transform ">
               <div className="max-w-3xl mx-auto">
-                <blockquote className="text-2xl leading-8 font-medium font-mono  text-white  italic">
-                  <span className="text-2xl text-yellow-500 font-bold font-mono ">
+                <blockquote className="text-2xl leading-8 font-medium font-mono  text-black  italic">
+                  <span className="text-2xl text-blue-500 font-bold font-mono ">
                     {t("translation:tagLabel2")}
                   </span>{" "}
                   {t("translation:tagLabel")}
