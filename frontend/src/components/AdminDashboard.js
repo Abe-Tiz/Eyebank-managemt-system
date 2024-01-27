@@ -11,6 +11,8 @@ import CustomSidebar from './CustomeSider';
 import Signup from './../sections/auth/Signup';
 import Report from './Report';
 import ViewUsers from './../sections/auth/ViewUsers';
+import Edit from './../sections/donor/Edit';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const { Header, Content } = Layout;
 
@@ -18,7 +20,8 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
  const [searchText, setSearchText] = useState("");
- const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+   const [editClicked, setEditClicked] = useState(false);
 
   const [state, setState] = useState({
     displayCreateDonor: false,
@@ -268,22 +271,20 @@ const AdminDashboard = () => {
         </Header>
         <Content className="p-4">
           <div className="bg-white p-4 rounded shadow w-full">
-            {/* Display search results or the regular content based on search */}
-            {searchResults.length > 0 ? (
-              <ul>
-                {searchResults.map((result) => (
-                  <li key={result.id}>{result.name}</li>
-                ))}
-              </ul>
-            ) : (
-              <>
-                {state.isDashboard ? <Report /> : null}
-                {state.displayCreateDonor ? <CreateDonor /> : null}
-                {state.displayDonor ? <DisplayDonor /> : null}
-                {state.isaddUser ? <Signup /> : null}
-                {state.isuserList ? <ViewUsers /> : null}
-              </>
-            )}
+            {state.isDashboard ? <Report /> : null}
+            {state.displayCreateDonor ? <CreateDonor /> : null}
+            {state.displayDonor ? (
+              <DisplayDonor
+                editClicked={editClicked}
+                setEditClicked={setEditClicked}
+              />
+            ) : null}
+            {state.isaddUser ? <Signup /> : null}
+            {state.isuserList ? <ViewUsers /> : null}
+
+            <Routes>
+              <Route path="/updateOne/:id" element={<Edit />} />
+            </Routes>
           </div>
         </Content>
       </Layout>
