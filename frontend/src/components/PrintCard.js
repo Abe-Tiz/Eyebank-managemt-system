@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import { useToast } from '@chakra-ui/react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 import { MdOutlineMail } from "react-icons/md";
 import { GiRotaryPhone } from "react-icons/gi";
-import { useTranslation } from 'react-i18next';
- 
-const Card = ({id}) => {
+import { useTranslation } from "react-i18next";
+
+const Card = ({ id }) => {
   const [showButtons, setShowButtons] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const Card = ({id}) => {
   const [kebele, setKebele] = useState("");
   const [HNumber, setHnumber] = useState("");
   const [mobile, setMobile] = useState("");
-  
+
   const toast = useToast();
   const { t } = useTranslation();
   const imagePath = process.env.PUBLIC_URL + "/images/eye2.png";
@@ -26,7 +26,7 @@ const Card = ({id}) => {
       try {
         if (!id) {
           toast({
-            title: "Udefined",
+            title: "Undefined",
             description: "Id is Undefined",
             status: "error",
             duration: 5000,
@@ -51,7 +51,7 @@ const Card = ({id}) => {
         setMobile(donorData.mobile);
       } catch (error) {
         toast({
-          title: "Error Occured!",
+          title: "Error Occurred!",
           description: error.response.data.message,
           status: "error",
           duration: 5000,
@@ -61,16 +61,18 @@ const Card = ({id}) => {
       }
     };
     fetchDonor();
-  }, []);
+  }, [id, toast]);
 
-    const handlePrint = () => {
-      setShowButtons(false);
-      window.print();
-    };
-    
+  const handlePrint = () => {
+    setShowButtons(false);
+    window.print();
+  };
 
   return (
-    <div className="container m-10 bg-white px-5 py-5 max-w-md mx-auto border-2 shadow-md">
+    <div
+      className="container m-10 bg-white px-5 py-5 max-w-md mx-auto border-2 shadow-md"
+      id="printable"
+    >
       <div className="text-center flex flex-col md:flex-row mt-2">
         <div className="flex justify-center mb-4 md:mb-0">
           <img
@@ -254,7 +256,7 @@ const Card = ({id}) => {
         <div className="mb-3 flex justify-center">
           <button
             onClick={handlePrint}
-            className="print-button bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 border-2  mr-2"
+            className="print-button bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 border-2  mr-2"
           >
             {t("common:printButtonLabel")}
           </button>
@@ -272,12 +274,24 @@ const Card = ({id}) => {
             .print-button {
               display: none;
             }
+
+            body * {
+              visibility: hidden;
+            }
+            #printable,
+            #printable * {
+              visibility: visible;
+            }
+            #printable {
+              position: absolute;
+              left: 0;
+              top: 0;
+            }
           }
         `}
       </style>
     </div>
   );
-}
+};
 
-export default Card
-
+export default Card;

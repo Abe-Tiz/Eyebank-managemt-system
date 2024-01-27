@@ -218,54 +218,54 @@ const Edit = () => {
                       </span>
                     </div>
                   </div>
-               
-                    <div className="mt-4">
-                      <label
-                        htmlFor="age"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Age
-                        <span className="text-red-500">*</span>
-                      </label>
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="age"
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          type="numeric"
-                          value={age}
-                          autoComplete="off"
-                          required
-                          pattern="[2-9]|[1-7][0-9]|80"
-                          placeholder="Enter Your Age"
-                          onChange={handleAge}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          Age must be between 2 and 80.
-                        </span>
-                      </div>
-                    </div>
-                 
-                    <div className="mt-4">
-                      <label
-                        htmlFor="sex"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Sex
-                        <span className="text-red-500">*</span>
-                      </label>
-                      <select
-                        name="sex"
-                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
-                        onChange={handleSex}
-                      >
-                        <option value="">Select Sex</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
+
+                  <div className="mt-4">
+                    <label
+                      htmlFor="age"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Age
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="age"
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        type="numeric"
+                        value={age}
+                        autoComplete="off"
+                        required
+                        pattern="[2-9]|[1-7][0-9]|80"
+                        placeholder="Enter Your Age"
+                        onChange={handleAge}
+                      />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        you must select the sex
+                        Age must be between 2 and 80.
                       </span>
                     </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <label
+                      htmlFor="sex"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Sex
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      name="sex"
+                      className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
+                      onChange={handleSex}
+                    >
+                      <option value="">Select Sex</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                    <span className="mt-1 hidden text-sm text-red-400">
+                      you must select the sex
+                    </span>
+                  </div>
                 </div>
 
                 <div className="flex flex-column justify-item-start  md:mr-4">
@@ -294,59 +294,58 @@ const Edit = () => {
                       </span>
                     </div>
                   </div>
-                  
-                    <div className="mt-4">
-                      <label
-                        htmlFor="subcity"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Sub City
-                        <span className="text-red-500">*</span>
-                      </label>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="subcity"
-                          type="text"
-                          value={subcity}
-                          pattern="[0-9a-zA-Z ]{2,}"
-                          required
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          placeholder="Enter Sub City"
-                          onChange={handleSubcity}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          subcity must be at least 2 characters long
-                        </span>
-                      </div>
-                    </div>
-                 
-                    <div className="mt-4">
-                      <label
-                        htmlFor="kebele"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Kebele
-                        <span className="text-red-500">*</span>
-                      </label>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="subcity"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Sub City
+                      <span className="text-red-500">*</span>
+                    </label>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="kebele"
-                          type="text"
-                          value={kebele}
-                          pattern="[0-9a-zA-Z ]{2,}"
-                          required
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          placeholder="Enter Kebele"
-                          onChange={handleKebele}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          kebele must be at least 2 characters long
-                        </span>
-                      </div>
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="subcity"
+                        type="text"
+                        value={subcity}
+                        pattern="[0-9a-zA-Z ]{2,}"
+                        required
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        placeholder="Enter Sub City"
+                        onChange={handleSubcity}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        subcity must be at least 2 characters long
+                      </span>
                     </div>
-                
+                  </div>
+
+                  <div className="mt-4">
+                    <label
+                      htmlFor="kebele"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Kebele
+                      <span className="text-red-500">*</span>
+                    </label>
+
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="kebele"
+                        type="text"
+                        value={kebele}
+                        pattern="[0-9a-zA-Z ]{2,}"
+                        required
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        placeholder="Enter Kebele"
+                        onChange={handleKebele}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        kebele must be at least 2 characters long
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <div className="flex flex-column justify-item-start ">
                   <div className="mt-4">
@@ -374,60 +373,60 @@ const Edit = () => {
                       </span>
                     </div>
                   </div>
-                    <div className="mt-4">
-                      <label
-                        htmlFor="mobile"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Mobile
-                        <span className="text-red-500">*</span>
-                      </label>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="mobile"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Mobile
+                      <span className="text-red-500">*</span>
+                    </label>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="mobile"
-                          type="numeric"
-                          value={mobile}
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          autoComplete="off"
-                          required
-                          pattern="[0-9]{10}"
-                          placeholder="Enter Mobile/House Phone "
-                          onChange={handleMobile}
-                        />
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="mobile"
+                        type="numeric"
+                        value={mobile}
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        autoComplete="off"
+                        required
+                        pattern="[0-9]{10}"
+                        placeholder="Enter Mobile/House Phone "
+                        onChange={handleMobile}
+                      />
 
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          Mobile Number must be 10 digit.{" "}
-                        </span>
-                      </div>
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        Mobile Number must be 10 digit.{" "}
+                      </span>
                     </div>
-                  
-                    <div className="mt-4">
-                      <label
-                        htmlFor="email"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Email
-                        <span className="text-red-500">*</span>
-                      </label>
+                  </div>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="email"
-                          type="email"
-                          value={email}
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          autoComplete="off"
-                          required
-                          pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                          placeholder="Enter Your Email"
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          Please enter a valid email address.{" "}
-                        </span>
-                      </div>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Email
+                      <span className="text-red-500">*</span>
+                    </label>
+
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="email"
+                        type="email"
+                        value={email}
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        autoComplete="off"
+                        required
+                        pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        placeholder="Enter Your Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        Please enter a valid email address.{" "}
+                      </span>
                     </div>
+                  </div>
                 </div>
               </div>
               <div className="d-flex justify-content-center pt-3 mb-4">
@@ -436,7 +435,7 @@ const Edit = () => {
                     onClick={() => navigate(-1)}
                     className=" bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 border-2 mr-2"
                   >
-                    Back
+                    {t("common:backButtonLabel")}
                   </button>
                 </div>
                 <div className="mt-4 flex items-center">

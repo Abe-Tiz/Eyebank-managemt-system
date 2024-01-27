@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../static/styles/donor.css";
@@ -19,10 +19,31 @@ const initialState = {
   mobile: "",
 };
 
+const citiesInEthiopia = [
+  "Addis Ababa",
+  "Dire Dawa",
+  "Mekelle",
+  "Gondar",
+  "Hawassa",
+];
+
+// Subcities for each city
+const subcitiesInEthiopia = {
+  "Addis Ababa": ["Arada","Kirkos","Yeka","Gulele","Lideta","Addis Ketema","Akaky Kaliti","Nifas Silk-Lafto","Kolfe Keranio","Bole"],
+  "Dire Dawa": ["SubcityA", "SubcityB", "SubcityC", "SubcityD", "SubcityE"],
+  "Mekelle": ["SubcityX", "SubcityY", "SubcityZ", "SubcityW", "SubcityV"],
+  "Gondar": ["SubcityI", "SubcityII", "SubcityIII", "SubcityIV", "SubcityV"],
+  "Hawassa": ["SubcityP", "SubcityQ", "SubcityR", "SubcityS", "SubcityT"],
+};
+
 const CreateDonor = () => {
   const [formData, setFormData] = useState(initialState);
   const [isName, setIsName] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isValidAge, setIsValidAge] = useState(false);
+   const [selectedDate, setSelectedDate] = useState("");
+   const [selectedCity, setSelectedCity] = useState("");
+   const [selectedSubcity, setSelectedSubcity] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
   const toast = useToast();
@@ -97,9 +118,20 @@ const CreateDonor = () => {
     setFormData({ ...formData, age: e.target.value });
   };
 
+  // const handleSubcity = (e) => {
+  //   setFormData({ ...formData, subcity: e.target.value });
+  // };
+
+  const handleCity = (e) => {
+    setSelectedCity(e.target.value);
+    setFormData({ ...formData, city: e.target.value, subcity: "" });
+  };
+
   const handleSubcity = (e) => {
+    setSelectedSubcity(e.target.value);
     setFormData({ ...formData, subcity: e.target.value });
   };
+
 
   const handleKebele = (e) => {
     setFormData({ ...formData, kebele: e.target.value });
@@ -115,9 +147,9 @@ const CreateDonor = () => {
     setIsMobile(true);
   };
 
-  const handleCity = (e) => {
-    setFormData({ ...formData, city: e.target.value });
-  };
+  // const handleCity = (e) => {
+  //   setFormData({ ...formData, city: e.target.value });
+  // };
 
   const handleSex = (e) => {
     setFormData({ ...formData, sex: e.target.value });
@@ -127,10 +159,58 @@ const CreateDonor = () => {
   setFormData({ ...formData, email: e.target.value });
 };
 
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
+
+useEffect(() => {
+  if (selectedDate) {
+    const birthdate = new Date(selectedDate);
+    const currentDate = new Date();
+    const ageInMilliseconds = currentDate - birthdate;
+    const ageInYears = Math.floor(
+      ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000)
+    );
+
+    if (ageInYears < 2 || ageInYears > 80) {
+      setIsValidAge(true);
+    } else {
+      setIsValidAge(false);
+      setFormData({ ...formData, age: ageInYears.toString() });
+      console.log(formData.age, "Years");
+    }
+  }
+}, [selectedDate]);
+  
+
+   // Size of the circles
+  const circleSize = 32;
+
   return (
     <>
-      <div class="flex mt-4 md:mt-4">
-        <div className="container border-2 py-6 border-gray-300 mb-4">
+      <div class="relative bg-white min-h-screen flex items-center justify-center md:mt-4">
+        <div
+          className={`absolute top-8 left-16 w-52 h-52 bg-yellow-400 rounded-full opacity-60`}
+        ></div>
+        <div
+          className={`absolute bottom-10 right-16 w-52 h-52 bg-orange-500 rounded-full opacity-60`}
+        ></div>
+
+        <div class="bg-gray-300 rounded-md overflow-hidden shadow-md p-6 mx-auto w-3/4 relative">
+          <div
+            className={`absolute top-10 left-10 w-64 h-64 bg-indigo-400 rounded-full opacity-30`}
+          ></div>
+          <div
+            className={`absolute -top-10 -right-10 w-${circleSize} h-${circleSize} bg-purple-600 rounded-full opacity-30`}
+          ></div>
+          <div
+            className={`absolute -bottom-10 -left-10 w-${circleSize} h-${circleSize} bg-pink-400 rounded-full opacity-30`}
+          ></div>
+          <div
+            className={`absolute -bottom-10 -right-10 w-${circleSize} h-${circleSize} bg-blue-400 rounded-full opacity-30`}
+          ></div>
+
           <div className="flex flex-col md:flex-row mt-6">
             <div className="flex justify-center mb-4 md:mb-0">
               <img
@@ -166,7 +246,7 @@ const CreateDonor = () => {
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         name="name"
                         type="text"
-                        pattern="[0-9a-zA-Z ]{6,}"
+                        pattern="[a-zA-Z ]{6,}"
                         required
                         placeholder={t("common:namePlaceholderLabel")}
                         onChange={handleName}
@@ -187,18 +267,20 @@ const CreateDonor = () => {
                       </label>
                       <div className="flex flex-col items-start">
                         <input
-                          name="age"
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          type="numeric"
+                          name="birthdate"
+                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
+                          type="date"
                           autoComplete="off"
                           required
-                          pattern="[2-9]|[1-7][0-9]|80"
-                          placeholder={t("donor:placeHolderAge")}
-                          onChange={handleAge}
+                          value={selectedDate}
+                          onChange={handleDateChange}
                         />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          {t("donor:donorAgeError")}
-                        </span>
+
+                        {isValidAge && (
+                          <div className="warning text-danger">
+                            {t("donor:donorAgeError")}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -235,25 +317,28 @@ const CreateDonor = () => {
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       {t("donor:donorCity")}
-                      <span class="text-red-500">*</span>
+                      <span className="text-red-500">*</span>
                     </label>
-
                     <div className="flex flex-col items-start">
-                      <input
+                      <select
                         name="city"
-                        type="text"
-                        pattern="[0-9a-zA-Z ]{2,}"
-                        required
-                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        placeholder={t("donor:placeHolderCity")}
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
                         onChange={handleCity}
-                      />
+                        value={selectedCity}
+                      >
+                        <option value="">{t("donor:placeHolderCity")}</option>
+                        {citiesInEthiopia.map((city) => (
+                          <option key={city} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("donor:donorCityError")}
                       </span>
                     </div>
                   </div>
-                  {isName && (
+                  {/* {isName && (
                     <div className="mt-4">
                       <label
                         htmlFor="subcity"
@@ -278,7 +363,42 @@ const CreateDonor = () => {
                         </span>
                       </div>
                     </div>
-                  )}
+                  )} */}
+
+                  {selectedCity && isName && (
+                      <div className="mt-4">
+                        <label
+                          htmlFor="subcity"
+                          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          {t("donor:donorSubCity")}
+                          <span className="text-red-500">*</span>
+                        </label>
+                        <div className="flex flex-col items-start">
+                          <select
+                            name="subcity"
+                            className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
+                            onChange={handleSubcity}
+                            value={selectedSubcity}
+                          >
+                            <option value="">
+                              {t("donor:placeHolderSubcity")}
+                            </option>
+                            {subcitiesInEthiopia[selectedCity].map(
+                              (subcity) => (
+                                <option key={subcity} value={subcity}>
+                                  {subcity}
+                                </option>
+                              )
+                            )}
+                          </select>
+                          <span className="mt-1 hidden text-sm text-red-400">
+                            {t("donor:donorSubCityError")}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
                   {isMobile && (
                     <div className="mt-4">
                       <label
@@ -395,7 +515,7 @@ const CreateDonor = () => {
                 <div className="mt-4 flex items-center">
                   <button
                     onClick={() => window.history.back()}
-                    className=" bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 border-2 mr-2"
+                    className=" bg-transparent px-5 py-2  border-2 border-blue-700  hover:bg-orange-600 text-orange-700 font-extrabold text-xl mt-3 mr-5 "
                   >
                     {t("common:backButtonLabel")}
                   </button>
@@ -405,7 +525,7 @@ const CreateDonor = () => {
                   <button
                     type="submit"
                     disabled={!canSubmit}
-                    className={`bg-orange-500 hover:bg-orange-700 text-white font-bold  py-2 px-4  border-orange-500 border-2  hover:border-orange-700   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
+                    className={`bg-gray-400 text-xl px-5 py-2 border-2 border-gray-700  hover:bg-gray-600 text-orange-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
                       !canSubmit
                         ? "disabled:cursor-no-drop disabled:border-2 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
                         : ""
@@ -419,7 +539,6 @@ const CreateDonor = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
     </>
   );
 };

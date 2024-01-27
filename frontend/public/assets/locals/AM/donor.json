@@ -1,6 +1,6 @@
 {
   "labelDonor": "የኢትዮጵያ ዓይን ባንክ",
-  "donorAge": "ዕድሜ",
+  "donorAge": "የተወለደበት ቀን",
   "donorAgeError": " እድሜ በ2 እና 80 መካከል መሆን አለበት።",
   "donorSubCity": "ክፍለ ከተማ",
   "donorSubCityError": "ክፍለ ከተማ ቢያንስ 2 ቁምፊዎች ርዝመት ሊኖረው ይገባል።",
