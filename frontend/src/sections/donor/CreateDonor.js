@@ -36,6 +36,7 @@ const CreateDonor = () => {
   const [formData, setFormData] = useState(initialState);
   const [isName, setIsName] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isValidAge, setIsValidAge] = useState(false);
    const [selectedDate, setSelectedDate] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -155,16 +156,32 @@ const CreateDonor = () => {
       const ageInYears = Math.floor(
         ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000)
       )
-      setFormData({ ...formData, age: ageInYears.toString() });
-      console.log(formData.age,"Years");
+      if (ageInYears.toString() < 2 && ageInYears.toString() > 80) {
+        setIsValidAge(true);
+      }else{
+          setFormData({ ...formData, age: ageInYears.toString() });
+          console.log(formData.age, "Years");
+      }
+      
     }
  }, [selectedDate]);
   
 
+   // Size of the circles
+  const circleSize = 32;
+
   return (
     <>
-      <div class="flex mt-4 md:mt-4">
-        <div class="container bg-white shadow-md py-6 mb-4">
+      <div class="relative bg-white min-h-screen flex items-center justify-center md:mt-4">
+        <div className={`absolute top-8 left-16 w-52 h-52 bg-yellow-400 rounded-full opacity-60`} ></div>
+        <div className={`absolute bottom-10 right-16 w-52 h-52 bg-orange-500 rounded-full opacity-60`} ></div>
+
+        <div class="bg-gray-300 rounded-md overflow-hidden shadow-md p-6 mx-auto w-3/4 relative">
+          <div className={`absolute top-10 left-10 w-64 h-64 bg-indigo-400 rounded-full opacity-30`} ></div>
+          <div className={`absolute -top-10 -right-10 w-${circleSize} h-${circleSize} bg-purple-600 rounded-full opacity-30`} ></div>
+          <div className={`absolute -bottom-10 -left-10 w-${circleSize} h-${circleSize} bg-pink-400 rounded-full opacity-30`} ></div>
+          <div className={`absolute -bottom-10 -right-10 w-${circleSize} h-${circleSize} bg-blue-400 rounded-full opacity-30`} ></div>
+
           <div className="flex flex-col md:flex-row mt-6">
             <div className="flex justify-center mb-4 md:mb-0">
               <img
@@ -240,10 +257,12 @@ const CreateDonor = () => {
                           value={selectedDate}
                           onChange={handleDateChange}
                         />
-
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          {t("donor:donorAgeError")}
-                        </span>
+ 
+                        {isValidAge && (
+                          <div className="warning text-danger">
+                            {t("donor:donorAgeError")}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -440,7 +459,7 @@ const CreateDonor = () => {
                 <div className="mt-4 flex items-center">
                   <button
                     onClick={() => window.history.back()}
-                    className=" bg-green-500 hover:bg-green-600 text-white py-2 px-4 border-2 mr-2"
+                    className=" bg-transparent px-5 py-2  border-2 border-blue-700  hover:bg-orange-600 text-orange-700 font-extrabold text-xl mt-3 mr-5 "
                   >
                     {t("common:backButtonLabel")}
                   </button>
@@ -450,7 +469,7 @@ const CreateDonor = () => {
                   <button
                     type="submit"
                     disabled={!canSubmit}
-                    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold  py-2 px-4  border-blue-500 border-2  hover:border-blue-700   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
+                    className={`bg-gray-400 text-xl px-5 py-2 border-2 border-gray-700  hover:bg-gray-600 text-orange-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
                       !canSubmit
                         ? "disabled:cursor-no-drop disabled:border-2 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
                         : ""
@@ -464,7 +483,6 @@ const CreateDonor = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
     </>
   );
 };

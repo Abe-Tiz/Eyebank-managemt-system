@@ -4,6 +4,7 @@
   "namePlaceholderLabel": "Enter Name",
   "backButtonLabel": "Back",
   "updateButtonLabel": "Update",
+  "deleteButtonLabel": "Delete",
   "printButtonLabel": "Print",
   "registerButtonLabel": "Register"
  

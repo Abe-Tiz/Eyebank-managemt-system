@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri';
  
 
 const ViewUsers = () => {
@@ -61,10 +62,13 @@ const ViewUsers = () => {
                   {t("register:LabelsignUpName")}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {t("donor:donorCity")}
+                  {t("login:labelLoginEmail")}{" "}
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t("donor:userstatus")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t("register:LabelsignUpRole")}
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t("donor:donorAction")}
@@ -102,21 +106,26 @@ const ViewUsers = () => {
                       </div>
                     )}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4">{user.role}</td>
+                  <td className="flex px-6 py-4">
                     <Link
-                      to={`/update/${user._id}`}
-                      className="bg-orange-500 border-2 p-1 border-orange-500 mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
+                      to={`/updateOne/${user._id}`}
+                      className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                     >
-                      {t("common:updateButtonLabel")}
+                      <RiEdit2Line size={20} color="#000" className="mr-2" />
+                      {/* {t("common:updateButtonLabel")} */}
                     </Link>
                     <Link
                       to={`/delete/${user._id}`}
-                      className="bg-orange-500 border-2 p-1 border-orange-500 mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
+                      className="flex items-center bg-transparent  border-2 p-1 font-medium text-white dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
                     >
-                      {/* {t("common:updateButtonLabel")} */}
-                      Delete
+                      <RiDeleteBin2Line
+                        size={20}
+                        color="#000"
+                        className="mr-2"
+                      />
+                      {/* {t("common:deleteButtonLabel")} */}
                     </Link>
-                    
                   </td>
                 </tr>
               ))}
