@@ -4,57 +4,57 @@ import { Link } from 'react-router-dom';
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from 'react-i18next';
 import { RiEdit2Line, RiDeleteBin2Line } from 'react-icons/ri'; 
+import Edit from './Edit';
 
 
-const DisplayDonor = () => {
-    const [donors, setDonors] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const toast = useToast();
+const DisplayDonor = ({ editClicked, setEditClicked }) => {
+  const [donors, setDonors] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const toast = useToast();
   const { t } = useTranslation();
-  
-    useEffect(() => {
-        const fetchDonor = async () => {
-        try {
-            const response = await axios.get("http://localhost:4000/donor");
-            const donordata =  response.data;
 
-            // Check if the array is not empty
-            if (donordata && donordata.length > 0) {
-                const donors = donordata.map((donor) => donor);
-                setLoading(true);
-                setDonors(donors);
-                console.log(donors);
-              
-                 
-            } else {
-                console.log("Array is empty.");
-                toast({
-                    title: "Empty Array",
-                    description: "Array is empty.",
-                    status: "warning",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "top",
-                });
-            }
-        } catch (error) {
-            toast({
-              title: "Error Occured!",
-              description: error.donordata.message,
-              status: "error",
-              duration: 5000,
-              isClosable: true,
-              position: "top",
-            });
+  useEffect(() => {
+    const fetchDonor = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/donor");
+        const donordata = response.data;
+
+        // Check if the array is not empty
+        if (donordata && donordata.length > 0) {
+          const donors = donordata.map((donor) => donor);
+          setLoading(true);
+          setDonors(donors);
+          console.log(donors);
+        } else {
+          console.log("Array is empty.");
+          toast({
+            title: "Empty Array",
+            description: "Array is empty.",
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+          });
         }
-        };
+      } catch (error) {
+        toast({
+          title: "Error Occured!",
+          description: error.donordata.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+    };
 
-        fetchDonor();
-    });
+    fetchDonor();
+  });
 
   return (
     <>
-      {/* <Header /> */}
+      {editClicked ? <Edit /> : null}
       {loading ? (
         <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -111,6 +111,7 @@ const DisplayDonor = () => {
 
                   <td className="flex px-6 py-4">
                     <Link
+                      onClick={() =>setEditClicked(true)}
                       to={`/updateOne/${donor._id}`}
                       className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                     >
@@ -143,6 +144,6 @@ const DisplayDonor = () => {
       {/* <Footer /> */}
     </>
   );
-}
+};
 
 export default DisplayDonor
