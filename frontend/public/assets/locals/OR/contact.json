@@ -11,5 +11,7 @@
   "invalidemail": "Geçerli bir e-posta adresi girin.",
   "invalidname": "Geçerli bir ad girin.",
   "invalidphone": "Geçerli bir telefon numarası girin.",
+  "Subject": "mata duree",
+  "invalidsubject": "Mee Mata duree sirrii ta'e galchi.",
   "invalidmessage": "Mesaj en az 50 karakter uzunlugunda olmalıdır."
 }

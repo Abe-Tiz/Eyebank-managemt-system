@@ -66,20 +66,21 @@ function Awareness() {
                   href="https://youtu.be/Z2tTP3eUtwM"
                   target="_blank"
                   rel="noopener noreferrer"
-                ><div className="group">
-                <div className="relative">
-                  <img
-                    className="w-1/2 mx-auto h-48 object-cover transition-all duration-300 group-hover:w-full group-hover:shadow-lg group-hover:bg-gray-200 rounded-lg"
-                    src={cornea}
-                    alt="Person 2"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center border-4 border-solid border-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="bg-orange-500 text-white py-2 px-5 rounded-lg">
-                      Go to Video
-                    </button>
+                >
+                  <div className="group">
+                    <div className="relative">
+                      <img
+                        className="w-1/2 mx-auto h-48 object-cover transition-all duration-300 group-hover:w-full group-hover:shadow-lg group-hover:bg-gray-200 rounded-lg"
+                        src={cornea}
+                        alt="Person 2"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center border-4 border-solid border-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button className="bg-orange-500 text-white py-2 px-5 rounded-lg">
+                          Go to Video
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
                 </a>
               </div>
               <div
@@ -102,7 +103,9 @@ function Awareness() {
             </div>
 
             <div className="border shadow-lg">
-            <h3 class="text-xl text-center capitalize   text-blue-500 font-bold p-4">{t("awareness:awarenessSubTitle2")}</h3>
+              <h3 class="text-xl text-center capitalize   text-blue-500 font-bold p-4">
+                {t("awareness:awarenessSubTitle2")}
+              </h3>
               <div className="relative overflow-hidden">
                 <a
                   href="https://youtu.be/hE0eZay2T0g"
@@ -111,8 +114,8 @@ function Awareness() {
                 >
                   <div className="group">
                     <img
-                    className="w-1/2 mx-auto h-48 object-cover transition-all duration-300 group-hover:w-full group-hover:shadow-lg group-hover:bg-gray-200 rounded-lg"
-                    src={imagePath}
+                      className="w-1/2 mx-auto h-48 object-cover transition-all duration-300 group-hover:w-full group-hover:shadow-lg group-hover:bg-gray-200 rounded-lg"
+                      src={imagePath}
                       alt="Person 2"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300">
@@ -146,7 +149,7 @@ function Awareness() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 p-2">
             <div className="border shadow-lg">
               <h3 className="text-xl text-center  text-blue-500 font-bold p-4">
-                {t("awareness:awarenessSubTitle2")}
+                {t("awareness:awarenessSubTitle3")}
               </h3>
               <div className="relative overflow-hidden">
                 <a
@@ -156,8 +159,8 @@ function Awareness() {
                 >
                   <div className="group">
                     <img
-                    className="w-1/2 mx-auto h-48 object-cover transition-all duration-300 group-hover:w-full group-hover:shadow-lg group-hover:bg-gray-200 rounded-lg"
-                    src={imagePath2}
+                      className="w-1/2 mx-auto h-48 object-cover transition-all duration-300 group-hover:w-full group-hover:shadow-lg group-hover:bg-gray-200 rounded-lg"
+                      src={imagePath2}
                       alt="Person 2"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300">
@@ -200,8 +203,8 @@ function Awareness() {
                 >
                   <div className="group">
                     <img
-                    className="w-1/2 mx-auto h-48 object-cover transition-all duration-300 group-hover:w-full group-hover:shadow-lg group-hover:bg-gray-200 rounded-lg"
-                    src={eyeEthiopia}
+                      className="w-1/2 mx-auto h-48 object-cover transition-all duration-300 group-hover:w-full group-hover:shadow-lg group-hover:bg-gray-200 rounded-lg"
+                      src={eyeEthiopia}
                       alt="Person 2"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300">

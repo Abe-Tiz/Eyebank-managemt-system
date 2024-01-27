@@ -101,7 +101,7 @@ const Navbar = () => {
 
         <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
           <button
-            className="btn btn-link dropdown-toggle"
+            className="bg-transparent border-4 border-purple-800 p-1 text-white font-bold  dropdown-toggle"
             type="button"
             id="dropdownMenuButton1"
             onClick={toggleDropdown}
