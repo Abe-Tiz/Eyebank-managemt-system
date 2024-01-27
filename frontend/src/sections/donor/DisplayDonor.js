@@ -12,7 +12,6 @@ const DisplayDonor = () => {
     const [loading, setLoading] = useState(false);
     const toast = useToast();
   const { t } = useTranslation();
-  
     useEffect(() => {
         const fetchDonor = async () => {
         try {
