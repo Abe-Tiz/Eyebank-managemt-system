@@ -2,7 +2,8 @@
   "labelDonor": "BANKII IJA ITOOPHIYAA",
   "donorAge": "Guyyaa Dhalootaa",
   "donorAgeError": " Umriin 2 hanga 80 gidduutti ta’uu qaba.",
-  "donorSubCity": "Sub City",
+  "donorSubCity": "Magaalaa Xiqqaa",
+  "AgeDonor": "umurii",
   "donorSubCityError": "magaalaan xiqqaan yoo xiqqaate arfiilee 2 dheerachuu qaba",
   "donorCity": "magaalaa",
   "donorCityError": "Magaalaan yoo xiqqaate arfii 2 dheerachuu qaba",
@@ -30,5 +31,6 @@
   "faxLabel": "Faksii",
   "refNumberLabel": "Lakkoofsa eenyummaa",
   "dateLabel": "Guyyaa",
+  "viewDonorTitle": " Maaloo osoo hin maxxanfamin dura odeeffannoo keessan ilaalaa",
   "labelDonorCardBottom": "Kaayyoo Baankii Ija Itoophiyaa qofaaf kan oolu"
 }

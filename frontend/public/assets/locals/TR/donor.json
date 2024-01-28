@@ -3,6 +3,7 @@
   "donorAge": "ዕለት ልደት",
   "donorAgeError": "ዕድመ ካብ 2 ክሳብ 80 ክኸውን ኣለዎ",
   "donorSubCity": "ንኡስ ከተማ",
+  "AgeDonor": "ዕድመ",
   "donorSubCityError": "ንኡስ ከተማ እንተወሓደ 2 ፊደላት ንውሓት ክህልዎ ኣለዎ",
   "donorCity": "ከተማ",
   "donorCityError": "ከተማ እንተወሓደ 2 ፊደላት ንውሓት ክህልዎ ኣለዎ።",
@@ -30,5 +31,6 @@
   "faxLabel": "ፋክስ",
   "refNumberLabel": "መለለዪ ቁጽሪ",
   "dateLabel": "ዕለት",
+  "viewDonorTitle": " ቅድሚ ሕትመት ሓበሬታኹም ኣረጋግጹ",
   "labelDonorCardBottom": "ንዕላማ ባንኪ ዓይኒ ኢትዮጵያ ጥራሕ ዝውዕል"
 }

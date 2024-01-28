@@ -77,7 +77,7 @@ const CustomSidebar = ({
           </div>
         ) : (
           <>
-            <span className="text-sm font-normal ml-10">{role}</span>
+            {/* <span className="text-sm font-normal ml-10">{role}</span> */}
             <img
               className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"
               src={image}

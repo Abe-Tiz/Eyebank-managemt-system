@@ -45,6 +45,9 @@ const sendverificationEmail = async (email, verificationToken, route) => {
       user: "abebetizazu157@gmail.com",
       pass: "gezm fqmn asjl bqxj",
     },
+    tls: {
+      rejectUnauthorized: false,
+    },
   });
 
   //! compose the email message
