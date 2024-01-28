@@ -237,7 +237,7 @@ return (
                   <div className="form-group text-center ">
                     <button
                       title="Sent your message"
-                      className="bg-white  border-2 border-blue-700  hover:bg-orange-600 text-pink-600 font-bold mt-3 mr-5 px-5 py-2 "
+                      className="bg-white  border-2 border-blue-700  hover:bg-orange-600 text-gray-600 text-xl font-bold mt-3 mr-5 px-5 py-2 "
                       disabled={isLoading} // Disable the button when loading is true
                       type="submit"
                     >

@@ -29,11 +29,40 @@ const citiesInEthiopia = [
 
 // Subcities for each city
 const subcitiesInEthiopia = {
-  "Addis Ababa": ["Arada","Kirkos","Yeka","Gulele","Lideta","Addis Ketema","Akaky Kaliti","Nifas Silk-Lafto","Kolfe Keranio","Bole"],
-  "Dire Dawa": ["SubcityA", "SubcityB", "SubcityC", "SubcityD", "SubcityE"],
-  "Mekelle": ["SubcityX", "SubcityY", "SubcityZ", "SubcityW", "SubcityV"],
-  "Gondar": ["SubcityI", "SubcityII", "SubcityIII", "SubcityIV", "SubcityV"],
-  "Hawassa": ["SubcityP", "SubcityQ", "SubcityR", "SubcityS", "SubcityT"],
+  "Addis Ababa": [
+    "Arada",
+    "Kirkos",
+    "Yeka",
+    "Gulele",
+    "Lideta",
+    "Addis Ketema",
+    "Akaky Kaliti",
+    "Nifas Silk-Lafto",
+    "Kolfe Keranio",
+    "Bole",
+  ],
+  "Dire Dawa": ["Abuna", "Dirdabò", "Oboshe", "ድሬዳዋ", "Ware Roble"],
+  Mekelle: [
+    "Ayder",
+    "Hawelti",
+    "Adi Haqi",
+    "Hadnet",
+    "Kedamay",
+    "Weyane",
+    "Quiha",
+    "Semien",
+  ],
+  Gondar: ["Fasil", "Jantekel", "Arada", "Zobel ", "Maraki ", "Azezo "],
+  Hawassa: [
+    " Hayek Dare",
+    " Menehariya",
+    "Tabore",
+    "Misrak",
+    "BahileAdarash",
+    "Addis Ketema",
+    "Hawela Tula",
+    "Mehalketema",
+  ],
 };
 
 const CreateDonor = () => {
@@ -515,7 +544,7 @@ useEffect(() => {
                 <div className="mt-4 flex items-center">
                   <button
                     onClick={() => window.history.back()}
-                    className=" bg-transparent px-5 py-2  border-2 border-blue-700  hover:bg-orange-600 text-orange-700 font-extrabold text-xl mt-3 mr-5 "
+                    className=" bg-transparent px-5 py-2  border-2 border-blue-700  hover:bg-orange-600 text-gray-700 font-extrabold text-xl mt-3 mr-5 "
                   >
                     {t("common:backButtonLabel")}
                   </button>
@@ -525,9 +554,9 @@ useEffect(() => {
                   <button
                     type="submit"
                     disabled={!canSubmit}
-                    className={`bg-gray-400 text-xl px-5 py-2 border-2 border-gray-700  hover:bg-gray-600 text-orange-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
+                    className={`bg-gray-400 text-xl px-5 py-2 border-2 border-gray-700  hover:bg-gray-600 text-black-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
                       !canSubmit
-                        ? "disabled:cursor-no-drop disabled:border-2 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
+                        ? "disabled:cursor-no-drop disabled:border-1 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
                         : ""
                     }`}
                   >

@@ -186,10 +186,10 @@ const EditDonor = () => {
             </div>
             <div className="flex flex-col justify-center ml-0 md:ml-4 mb-4 md:mb-0">
               <h3 className="block font-sans text-2xl ml-10 md:text-3xl antialiased font-semibold leading-snug tracking-normal text-inherit">
-                EYE BANK OF ETHIOPIA
+                {t("donor:labelDonor")}
               </h3>
               <h4 className="block font-sans text-xl md:text-2xl antialiased font-semibold leading-snug tracking-normal text-inherit">
-                Please Fill The following Information Carfully.
+                {t("donor:subTitleDonor")}
               </h4>
             </div>
           </div>
@@ -203,7 +203,7 @@ const EditDonor = () => {
                       htmlFor="age"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Full Name
+                      {t("register:LabelsignUpName")}
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
@@ -214,11 +214,11 @@ const EditDonor = () => {
                         value={name}
                         pattern="[0-9a-zA-Z ]{6,}"
                         required
-                        placeholder="Enter Full Name"
+                        placeholder={t("common:namePlaceholderLabel")}
                         onChange={handleName}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        Full name must be at least 6 characters long
+                        {t("register:LabelFullNameError")}
                       </span>
                     </div>
                   </div>
@@ -228,7 +228,7 @@ const EditDonor = () => {
                       htmlFor="age"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Age
+                      {t("donor:AgeDonor")}
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
@@ -242,9 +242,10 @@ const EditDonor = () => {
                         pattern="[2-9]|[1-7][0-9]|80"
                         placeholder="Enter Your Age"
                         onChange={handleAge}
+                        readOnly
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        Age must be between 2 and 80.
+                        {t("donor:donorAgeError")}
                       </span>
                     </div>
                   </div>
@@ -254,10 +255,27 @@ const EditDonor = () => {
                       htmlFor="sex"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Sex
+                      {t("donor:donorSex")}
                       <span className="text-red-500">*</span>
                     </label>
-                    <select
+
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="sex"
+                        type="text"
+                        value={sex}
+                        // pattern="[a-zA-Z ]{2,}"
+                        required
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        // placeholder="Enter Your Sex"
+                        onChange={handleSex}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("donor:donorSexError")}
+                      </span>
+                    </div>
+
+                    {/* <select
                       name="sex"
                       className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
                       onChange={handleSex}
@@ -268,7 +286,7 @@ const EditDonor = () => {
                     </select>
                     <span className="mt-1 hidden text-sm text-red-400">
                       you must select the sex
-                    </span>
+                    </span> */}
                   </div>
                 </div>
 
@@ -278,7 +296,7 @@ const EditDonor = () => {
                       htmlFor="city"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      City
+                      {t("donor:donorCity")}
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -290,11 +308,11 @@ const EditDonor = () => {
                         pattern="[0-9a-zA-Z ]{2,}"
                         required
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        placeholder="Enter Your City"
+                        // placeholder="Enter Your City"
                         onChange={handleCity}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        City must be at least 2 characters long
+                        {t("donor:donorCityError")}
                       </span>
                     </div>
                   </div>
@@ -304,7 +322,7 @@ const EditDonor = () => {
                       htmlFor="subcity"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Sub City
+                      {t("donor:donorSubCity")}
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -313,15 +331,15 @@ const EditDonor = () => {
                         name="subcity"
                         type="text"
                         value={subcity}
-                        pattern="[0-9a-zA-Z ]{2,}"
+                        // pattern="[0-9a-zA-Z ]"
                         required
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         placeholder="Enter Sub City"
                         onChange={handleSubcity}
                       />
-                      <span className="mt-1 hidden text-sm text-red-400">
-                        subcity must be at least 2 characters long
-                      </span>
+                      {/* <span className="mt-1 hidden text-sm text-red-400">
+                        subcity must be  characters  
+                      </span> */}
                     </div>
                   </div>
 
@@ -330,7 +348,7 @@ const EditDonor = () => {
                       htmlFor="kebele"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Kebele
+                      {t("donor:donorKebele")}
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -346,7 +364,7 @@ const EditDonor = () => {
                         onChange={handleKebele}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        kebele must be at least 2 characters long
+                        {t("donor:donorKebeleError")}
                       </span>
                     </div>
                   </div>
@@ -357,7 +375,7 @@ const EditDonor = () => {
                       htmlFor="hno"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      H.No
+                      {t("donor:donorHno")}
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
@@ -373,7 +391,7 @@ const EditDonor = () => {
                         onChange={handleHouseNumber}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        House Number minimum 2 and maximum 12 digit.{" "}
+                        {t("donor:donorHnoError")}
                       </span>
                     </div>
                   </div>
@@ -382,7 +400,7 @@ const EditDonor = () => {
                       htmlFor="mobile"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Mobile
+                      {t("donor:donorMobile")}
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -400,7 +418,7 @@ const EditDonor = () => {
                       />
 
                       <span className="mt-1 hidden text-sm text-red-400">
-                        Mobile Number must be 10 digit.{" "}
+                        {t("donor:donorMobileError")}
                       </span>
                     </div>
                   </div>
@@ -410,7 +428,7 @@ const EditDonor = () => {
                       htmlFor="email"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Email
+                      {t("login:labelLoginEmail")}
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -427,7 +445,7 @@ const EditDonor = () => {
                         onChange={(e) => setEmail(e.target.value)}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        Please enter a valid email address.{" "}
+                        {t("login:labelErrorEmail")}
                       </span>
                     </div>
                   </div>
@@ -437,7 +455,7 @@ const EditDonor = () => {
                 <div className="mt-4 flex items-center">
                   <button
                     onClick={() => navigate(-1)}
-                    className=" bg-transparent px-5 py-2  border-2 border-blue-700  hover:bg-orange-600 text-orange-700 font-extrabold text-xl mt-3 mr-5 "
+                    className="bg-transparent px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5 "
                   >
                     {t("common:backButtonLabel")}
                   </button>
@@ -446,14 +464,14 @@ const EditDonor = () => {
                   <button
                     type="submit"
                     disabled={!canSubmit}
-                    className={`bg-gray-400 text-xl px-5 py-2 border-2 border-gray-700  hover:bg-gray-600 text-orange-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
+                    className={`bg-gray-400 px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5    focus:outline-none focus:ring-1 focus:ring-blue-300 ${
                       !canSubmit
                         ? "disabled:cursor-no-drop disabled:border-2 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
                         : ""
                     }`}
                   >
                     {t("common:updateButtonLabel")}
-                   </button>
+                  </button>
                 </div>
               </div>
             </form>

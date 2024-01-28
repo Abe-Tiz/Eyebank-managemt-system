@@ -21,7 +21,8 @@ const AdminDashboard = () => {
 
  const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-   const [editClicked, setEditClicked] = useState(false);
+  const [editClicked, setEditClicked] = useState(false);
+  const [refreshed, setRefreshed] = useState(true);
 
   const [state, setState] = useState({
     displayCreateDonor: false,
@@ -140,7 +141,9 @@ const AdminDashboard = () => {
   //! handle Logout
   const handleLogout = () => {
     localStorage.clear();
+    
     navigate("/login");
+
   };
 
   //! handle loggedin user
@@ -170,10 +173,26 @@ const AdminDashboard = () => {
 
         if (data.data === "token expired") {
           localStorage.clear();
+          setRefreshed(localStorage.getItem("token"));
           navigate("/login");
         }
       });
-  }, [navigate]);
+
+
+      if (!refreshed) {
+        window.location.reload();
+        setRefreshed(true);
+      }
+
+  }, [navigate,refreshed]);
+
+
+    // useEffect(() => {
+    //   if (refreshed) {
+    //     window.location.reload();
+    //     setRefreshed(false);
+    //   }
+    // }, [refreshed]);
 
 
   return (
@@ -209,7 +228,9 @@ const AdminDashboard = () => {
                 onClick={toggleSidebar}
               />
             )}
-            <span className="text-xl font-bold">Admin {state.name}</span>
+             <span className="text-xl font-bold">
+              {state.role} {" "} {state.name}
+            </span>
           </div>
 
           <div className="flex items-center space-x-4">

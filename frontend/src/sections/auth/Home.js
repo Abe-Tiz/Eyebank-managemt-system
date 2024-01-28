@@ -48,13 +48,13 @@ const Home = () => {
             <div className="mt-8 space-x-4">
               <button
                 onClick={() => navigate("/contact")}
-                className="bg-gray-400 px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-orange-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5  "
+                className="bg-gray-400 px-5 py-2 text-2xl border-2 text-gray-700 border-gray-700  hover:bg-gray-600 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5  "
               >
                 {t("translation:homeContact")}
               </button>
               <button
                 onClick={() => navigate("/registerDonor")}
-                className="bg-transparent px-5 py-2 text-2xl  border-2 border-blue-700  hover:bg-orange-600 text-orange-700 font-extrabold mt-3 mr-5 "
+                className="bg-transparent px-5 py-2 text-2xl  border-2 border-blue-700  hover:bg-yellow-600 text-black font-extrabold mt-3 mr-5 "
               >
                 {t("translation:Donor")}
               </button>
@@ -88,7 +88,7 @@ const Home = () => {
             </div>
             <div className="flex justify-center">
               <button
-                className="bg-white  border-2 border-blue-700  hover:bg-orange-600 text-pink-600 font-extrabold mt-3 mr-5 px-5 py-2 "
+                className="bg-white text-xl border-2 border-blue-700  hover:bg-orange-600 text-black font-extrabold mt-3 mr-5 px-4 py-2 "
                 onClick={() => navigate("/About")}
               >
                 {t("about:readmore")}
@@ -118,7 +118,7 @@ const Home = () => {
             </div>
             <div className="flex justify-center">
               <button
-                className="bg-white  border-2 border-blue-700  hover:bg-orange-600 text-pink-600 font-extrabold mt-3 mr-5 px-5 py-2 "
+                className="bg-white  border-2 border-blue-700  hover:bg-orange-600 text-black font-extrabold mt-3 text-xl mr-5 px-4 py-2 "
                 onClick={() => navigate("/awareness")}
               >
                 {t("about:readmore")}

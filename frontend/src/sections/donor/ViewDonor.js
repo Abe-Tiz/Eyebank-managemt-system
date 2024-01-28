@@ -66,44 +66,46 @@ const ViewDonor = () => {
         ></div>
 
         <h2 className="text-4xl font-bold text-gray-800 mb-4">
-          Please check your information before print
+          {t("donor:viewDonorTitle")}
         </h2>
         <div className="flex justify-center gap-x-80 ">
           <div>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              Name: <span>{donorData.name} </span>
+              {t("register:LabelsignUpName")}: <span>{donorData.name} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              Email:{" "}
+              {t("login:labelLoginEmail")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.email} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              City:{" "}
+              {t("donor:donorCity")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.city} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              Age: <span className="text-gray-700 mb-2">{donorData.age} </span>
+              {t("donor:AgeDonor")}:{" "}
+              <span className="text-gray-700 mb-2">{donorData.age} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              Sex: <span className="text-gray-700 mb-2">{donorData.sex} </span>
+              {t("donor:donorSex")}:{" "}
+              <span className="text-gray-700 mb-2">{donorData.sex} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              Subcity:{" "}
+              {t("donor:donorSubCity")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.subcity} </span>
             </p>
           </div>
 
           <div>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              Kebele:{" "}
+              {t("donor:donorKebele")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.kebele} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              House Number:{" "}
+              {t("donor:donorHno")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.HNumber} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
-              Mobile:{" "}
+              {t("donor:donorMobile")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.mobile} </span>
             </p>
           </div>

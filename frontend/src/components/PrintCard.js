@@ -4,6 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import { MdOutlineMail } from "react-icons/md";
 import { GiRotaryPhone } from "react-icons/gi";
 import { useTranslation } from "react-i18next";
+import QRCode from "react-qr-code";
 
 const Card = ({ id }) => {
   const [showButtons, setShowButtons] = useState(true);
@@ -16,10 +17,14 @@ const Card = ({ id }) => {
   const [kebele, setKebele] = useState("");
   const [HNumber, setHnumber] = useState("");
   const [mobile, setMobile] = useState("");
+  // const [id, setId] = useState("");
 
   const toast = useToast();
   const { t } = useTranslation();
   const imagePath = process.env.PUBLIC_URL + "/images/eye2.png";
+
+  const contactNumber = "+251-11-122 38 38";  
+  const qrCodeValue = `${contactNumber}-${id}`;
 
   useEffect(() => {
     const fetchDonor = async () => {
@@ -38,6 +43,7 @@ const Card = ({ id }) => {
         const res = await axios.get(`http://localhost:4000/donor/${id}`);
         const donorData = res.data;
         console.log(donorData);
+        console.log(id);
 
         // Update state variables with the fetched data
         setName(donorData.name);
@@ -49,6 +55,7 @@ const Card = ({ id }) => {
         setKebele(donorData.kebele);
         setHnumber(donorData.HNumber);
         setMobile(donorData.mobile);
+        // setId(donorData._id);
       } catch (error) {
         toast({
           title: "Error Occurred!",
@@ -139,7 +146,7 @@ const Card = ({ id }) => {
             htmlFor="age"
             className="mr-3 text-sm font-bold text-gray-600 block"
           >
-            {t("donor:donorAge")}:
+            {t("donor:AgeDonor")}:
           </label>
           <p className="px-1 text-sm border-b-2 border-gray-500 text-gray-800">
             {age}
@@ -247,6 +254,20 @@ const Card = ({ id }) => {
       </div>
 
       <div className="text-center mb-4">
+        <QRCode
+          size={200}
+          style={{
+            height: "auto",
+            maxWidth: "50%",
+            width: "50%",
+            color: "brown",
+          }}
+          value={qrCodeValue}
+          viewBox={`0 0 256 256`}
+        />
+      </div>
+
+      <div className="text-center mb-4">
         <h2 className="text-xl font-semibold text-blue-400">
           {t("donor:labelDonorCardBottom")}
         </h2>
@@ -256,13 +277,13 @@ const Card = ({ id }) => {
         <div className="mb-3 flex justify-center">
           <button
             onClick={handlePrint}
-            className="print-button bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 border-2  mr-2"
+            className="print-button bg-gray-400 px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5  "
           >
             {t("common:printButtonLabel")}
           </button>
           <button
             onClick={() => window.history.back()}
-            className="print-button bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 border-2 mr-2"
+            className="print-button bg-transparent px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5  "
           >
             {t("common:backButtonLabel")}
           </button>
