@@ -2,14 +2,9 @@ const User = require("../models/User");
 const Bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
-const passport = require("passport");
 const jwt = require("jsonwebtoken");
-const multer = require('multer');
-const GridFsStorage = require("multer-gridfs-storage");
-const Grid = require("gridfs-stream");
 const asyncHandler = require("express-async-handler");
-const { generateSecretKey } = require("../middleware/generateSecretKey");
-
+ 
 const createUser = asyncHandler(async (req, res) => {
   const { name, email, image, password, role } = req.body;
   try {
@@ -49,6 +44,9 @@ const sendverificationEmail = async (email, verificationToken, route) => {
     auth: {
       user: "abebetizazu157@gmail.com",
       pass: "gezm fqmn asjl bqxj",
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   });
 
@@ -91,45 +89,66 @@ const getVerification = asyncHandler(async (req, res) => {
     }
 })
 
- 
-
-const secretKey = generateSecretKey();
-
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email: email });
+    const { email, password } = req.body;
 
-    if (user) {
-      Bcrypt.compare(password, user.password, (err, result) => {
-        if (result) {
-          if (user.verified) {
-            const token = jwt.sign({ userId: user._id }, secretKey, {
-              expiresIn: "1d",
-            });
-            res.status(200).json({ user, token });
-            console.log(user);
-          } else {
-            console.log(
-              "You are not a verified user. Please verify your account first."
-            );
-            res.json({ message: "not verified" });
-          }
-        } else {
-          console.log("Password is not matched");
-          res.status(500).json({ message: "Password is not matched" });
-        }
-      });
-    } else {
+    const user = await User.findOne({ email });
+
+    if (!user) {
       console.log("User is not found.");
       return res.status(404).json({ message: "User is not found." });
     }
+
+    const passwordMatch = await Bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      if (user.verified) {
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
+          expiresIn: "1d",
+        });
+
+        res.status(200).json({ status: "ok", data: token, user });
+      } else {
+        console.log("User not verified");
+        res.json({ message: "Not verified" });
+      }
+    } else {
+      console.log("Password is not matched");
+      res.status(500).json({ message: "Password is not matched" });
+    }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("Error in loginUser:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
+const getloggedInUser = asyncHandler(async (req, res) => {
+    const { token } = req.body;
+    try {
+      const user = jwt.verify(token, process.env.JWT_SECRET, (err, res) => {
+        if (err) {
+          return "token expired";
+        }
+        return res;
+      });
+      console.log(user);
+      if (user === "token expired") {
+        return res.send({ status: "error", data: "token expired" });
+      }
+
+      const useremail = user.email;
+      User.findOne({ email: useremail })
+        .then((data) => {
+          res.send({ status: "ok", data: data });
+        })
+        .catch((error) => {
+          res.send({ status: "error", data: error });
+        });
+    } catch (error) {
+      res.send({ status: "error", data: error });
+    }
+});
 
 const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
@@ -137,9 +156,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email: email });
     if (user) {
           if (user.verified) {
-            const token = jwt.sign({ userId: user._id }, secretKey, {
-              expiresIn: "1d",
-            });
+            const token = jwt.sign(
+              { userId: user._id },
+              process.env.JWT_SECRET,
+              {
+                expiresIn: "1d",
+              }
+            );
 
             //! create nodemailer transporter
             const transporter = nodemailer.createTransport({
@@ -147,6 +170,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
               auth: {
                 user: "abebetizazu157@gmail.com",
                 pass: "gezm fqmn asjl bqxj",
+              },
+              tls: {
+                rejectUnauthorized: false,
               },
             });
 
@@ -158,13 +184,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
               text: `http://127.0.0.1:3000/reset_password/${user._id}/${token}`,
             };
 
-             transporter.sendMail(mailOption, function (error, info) {
-               if (error) {
-                 console.log(error);
-               } else {
-                 return res.send({ Status: "Success" });
-               }
-             });
+            transporter.sendMail(mailOption, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                return res.send({ Status: "Success" });
+              }
+            });
             res.status(200).json({ user, token });
             console.log(user);
           } else {
@@ -189,7 +215,7 @@ const resetPassword = asyncHandler(async (req, res) => {
 
   try {
     // Verify the JWT token
-    const decoded = jwt.verify(token, secretKey);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.userId !== id) {
       return res
         .status(403)
@@ -223,7 +249,6 @@ const resetPassword = asyncHandler(async (req, res) => {
   }
 });
 
-
 const getUser = asyncHandler(async (req, res) => {
     try {
     User.find()
@@ -240,7 +265,6 @@ const getUser = asyncHandler(async (req, res) => {
     }
 });
 
-
 const deleteUser =  asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
@@ -253,7 +277,6 @@ const deleteUser =  asyncHandler(async (req, res) => {
   }
 });
 
-
 module.exports = {
   createUser,
   getUser,
@@ -262,5 +285,6 @@ module.exports = {
   deleteUser,
   forgotPassword,
   resetPassword,
+  getloggedInUser,
 };
 

@@ -4,5 +4,15 @@
   "message": "መልእክት",
   "send": "አስገባ",
   "reset": "ሰርዝ",
-  "contactus": "አግኙን"
+  "contactus": "አግኙን",
+  "invalidname": "እባክዎን ስም አስፈላጊ ነው",
+  "invalidemail": "እባክዎን ኢሜል አስፈላጊ ነው ",
+  "invalidphone": "እባክዎን ስልክ ቁጥር አስፈላጊ ነው",
+  "invalidmessage": "እባክዎን መልእክት አስፈላጊ ነው",
+  "phone": "ስልክ ቁጥር",
+  "sendmessage": "መልእክት ላክ",
+  "Subject": "ርዕሰ ጉዳይ",
+  "Address": "መገኛ",
+   "invalidsubject": "እባክህ የሚሰራ ርዕሰ ጉዳይ አስገባ።",
+  "MenelikHospital": "ምኒልክ 2 ሪፈራል ሆስፒታል"
 }

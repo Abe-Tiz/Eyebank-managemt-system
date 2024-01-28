@@ -1,84 +1,137 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../static/styles/donor.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 import Footer from "../footer/footer";
-import Header from '../header/Header';
+import Header from "../header/Header";
 
+const initialState = {
+  name: "",
+  email: "",
+  age: "",
+  sex: " ",
+  city: "",
+  subcity: "",
+  kebele: "",
+  HNumber: "",
+  mobile: "",
+};
 
- 
+const citiesInEthiopia = [
+  "Addis Ababa",
+  "Dire Dawa",
+  "Mekelle",
+  "Gondar",
+  "Hawassa",
+];
+
+// Subcities for each city
+const subcitiesInEthiopia = {
+  "Addis Ababa": [
+    "Arada",
+    "Kirkos",
+    "Yeka",
+    "Gulele",
+    "Lideta",
+    "Addis Ketema",
+    "Akaky Kaliti",
+    "Nifas Silk-Lafto",
+    "Kolfe Keranio",
+    "Bole",
+  ],
+  "Dire Dawa": ["Abuna", "Dirdabò", "Oboshe", "ድሬዳዋ", "Ware Roble"],
+  Mekelle: [
+    "Ayder",
+    "Hawelti",
+    "Adi Haqi",
+    "Hadnet",
+    "Kedamay",
+    "Weyane",
+    "Quiha",
+    "Semien",
+  ],
+  Gondar: ["Fasil", "Jantekel", "Arada", "Zobel ", "Maraki ", "Azezo "],
+  Hawassa: [
+    " Hayek Dare",
+    " Menehariya",
+    "Tabore",
+    "Misrak",
+    "BahileAdarash",
+    "Addis Ketema",
+    "Hawela Tula",
+    "Mehalketema",
+  ],
+};
+
 const CreateDonor = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [sex, setSex] = useState(" ");
-  const [city, setCity] = useState("");
-  const [subcity, setSubcity] = useState("");
-  const [kebele, setKebele] = useState("");
-  const [HNumber, setHnumber] = useState("");
-  const [mobile, setMobile] = useState("");
-
+  const [formData, setFormData] = useState(initialState);
   const [isName, setIsName] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
-
+  const [isValidAge, setIsValidAge] = useState(false);
+   const [selectedDate, setSelectedDate] = useState("");
+   const [selectedCity, setSelectedCity] = useState("");
+   const [selectedSubcity, setSelectedSubcity] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
   const toast = useToast();
 
   const imagePath = process.env.PUBLIC_URL + "/images/eye2.png";
 
-
   // Disable submit button until all fields are filled in
- const allData = { name, email, age, sex, city, subcity, kebele, HNumber, mobile };
-  const canSubmit = Object.values(allData).every(Boolean);
+  const canSubmit = Object.values(formData).every(Boolean);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const payload = {
-      name,
-      email,
-      age,
-      sex,
-      city,
-      subcity,
-      kebele,
-      HNumber,
-      mobile,
+      ...formData,
     };
 
     axios
       .post("http://localhost:4000/donor/register", payload)
       .then((res) => {
-        if (!name || !email || !sex || !age) {
+        if (
+          !formData.name ||
+          !formData.email ||
+          !formData.sex ||
+          !formData.age
+        ) {
           toast({
-            title: "Please Fill all the Feilds",
+            title: "Please Fill all the Fields",
             status: "warning",
             duration: 5000,
             isClosable: true,
             position: "top",
           });
         } else {
-          // alert("Registered successfully.");
           toast({
-            title: "Registration successed.",
+            title: "Registration succeeded.",
             status: "success",
             duration: 5000,
             isClosable: true,
             position: "top",
           });
-          navigate("/displayDonor");
-          console.log(res);
+
+          console.log(res.data.result);
+          navigate("/viewdonor", {
+            state: {
+              data: res.data.result,
+            },
+          });
+          // Clear the form data after successful registration
+          setFormData(initialState);
+          setIsName(false);
+          setIsMobile(false);
+
         }
       })
       .catch((err) => {
         toast({
-          title: "Error Occured!",
+          title: "Error Occurred!",
           description: err.response.data.message,
-          status: "warining",
+          status: "warning",
           duration: 5000,
           isClosable: true,
           position: "top",
@@ -86,47 +139,107 @@ const CreateDonor = () => {
       });
   };
 
-const handleName = (e) =>{
-  setName(e.target.value);
- 
-}
+  const handleName = (e) => {
+    setFormData({ ...formData, name: e.target.value });
+  };
 
   const handleAge = (e) => {
-    setAge(e.target.value);
+    setFormData({ ...formData, age: e.target.value });
+  };
+
+  // const handleSubcity = (e) => {
+  //   setFormData({ ...formData, subcity: e.target.value });
+  // };
+
+  const handleCity = (e) => {
+    setSelectedCity(e.target.value);
+    setFormData({ ...formData, city: e.target.value, subcity: "" });
   };
 
   const handleSubcity = (e) => {
-    setSubcity(e.target.value);
+    setSelectedSubcity(e.target.value);
+    setFormData({ ...formData, subcity: e.target.value });
   };
 
+
   const handleKebele = (e) => {
-    setKebele(e.target.value);
+    setFormData({ ...formData, kebele: e.target.value });
   };
 
   const handleHouseNumber = (e) => {
-    setHnumber(e.target.value);
+    setFormData({ ...formData, HNumber: e.target.value });
     setIsName(true);
   };
 
   const handleMobile = (e) => {
-    setMobile(e.target.value);
+    setFormData({ ...formData, mobile: e.target.value });
     setIsMobile(true);
   };
 
-  const handleCity = (e) => {
-    setCity(e.target.value);
-  };
+  // const handleCity = (e) => {
+  //   setFormData({ ...formData, city: e.target.value });
+  // };
+
   const handleSex = (e) => {
-    setSex(e.target.value);
+    setFormData({ ...formData, sex: e.target.value });
   };
 
+  const handleEmail = (e) => {
+  setFormData({ ...formData, email: e.target.value });
+};
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
+
+useEffect(() => {
+  if (selectedDate) {
+    const birthdate = new Date(selectedDate);
+    const currentDate = new Date();
+    const ageInMilliseconds = currentDate - birthdate;
+    const ageInYears = Math.floor(
+      ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000)
+    );
+
+    if (ageInYears < 2 || ageInYears > 80) {
+      setIsValidAge(true);
+    } else {
+      setIsValidAge(false);
+      setFormData({ ...formData, age: ageInYears.toString() });
+      console.log(formData.age, "Years");
+    }
+  }
+}, [selectedDate]);
   
+
+   // Size of the circles
+  const circleSize = 32;
 
   return (
     <>
-   <Header />
-      <div class="flex mt-4 md:mt-4">
-        <div className="container border-2 py-6 border-gray-300 mb-4">
+      <div class="relative bg-white min-h-screen flex items-center justify-center md:mt-4">
+        <div
+          className={`absolute top-8 left-16 w-52 h-52 bg-yellow-400 rounded-full opacity-60`}
+        ></div>
+        <div
+          className={`absolute bottom-10 right-16 w-52 h-52 bg-orange-500 rounded-full opacity-60`}
+        ></div>
+
+        <div class="bg-gray-300 rounded-md overflow-hidden shadow-md p-6 mx-auto w-3/4 relative">
+          <div
+            className={`absolute top-10 left-10 w-64 h-64 bg-indigo-400 rounded-full opacity-30`}
+          ></div>
+          <div
+            className={`absolute -top-10 -right-10 w-${circleSize} h-${circleSize} bg-purple-600 rounded-full opacity-30`}
+          ></div>
+          <div
+            className={`absolute -bottom-10 -left-10 w-${circleSize} h-${circleSize} bg-pink-400 rounded-full opacity-30`}
+          ></div>
+          <div
+            className={`absolute -bottom-10 -right-10 w-${circleSize} h-${circleSize} bg-blue-400 rounded-full opacity-30`}
+          ></div>
+
           <div className="flex flex-col md:flex-row mt-6">
             <div className="flex justify-center mb-4 md:mb-0">
               <img
@@ -162,7 +275,7 @@ const handleName = (e) =>{
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         name="name"
                         type="text"
-                        pattern="[0-9a-zA-Z ]{6,}"
+                        pattern="[a-zA-Z ]{6,}"
                         required
                         placeholder={t("common:namePlaceholderLabel")}
                         onChange={handleName}
@@ -183,18 +296,20 @@ const handleName = (e) =>{
                       </label>
                       <div className="flex flex-col items-start">
                         <input
-                          name="age"
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          type="numeric"
+                          name="birthdate"
+                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
+                          type="date"
                           autoComplete="off"
                           required
-                          pattern="[2-9]|[1-7][0-9]|80"
-                          placeholder={t("donor:placeHolderAge")}
-                          onChange={handleAge}
+                          value={selectedDate}
+                          onChange={handleDateChange}
                         />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          {t("donor:donorAgeError")}
-                        </span>
+
+                        {isValidAge && (
+                          <div className="warning text-danger">
+                            {t("donor:donorAgeError")}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -231,25 +346,28 @@ const handleName = (e) =>{
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       {t("donor:donorCity")}
-                      <span class="text-red-500">*</span>
+                      <span className="text-red-500">*</span>
                     </label>
-
                     <div className="flex flex-col items-start">
-                      <input
+                      <select
                         name="city"
-                        type="text"
-                        pattern="[0-9a-zA-Z ]{2,}"
-                        required
-                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        placeholder={t("donor:placeHolderCity")}
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
                         onChange={handleCity}
-                      />
+                        value={selectedCity}
+                      >
+                        <option value="">{t("donor:placeHolderCity")}</option>
+                        {citiesInEthiopia.map((city) => (
+                          <option key={city} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("donor:donorCityError")}
                       </span>
                     </div>
                   </div>
-                  {isName && (
+                  {/* {isName && (
                     <div className="mt-4">
                       <label
                         htmlFor="subcity"
@@ -274,7 +392,42 @@ const handleName = (e) =>{
                         </span>
                       </div>
                     </div>
-                  )}
+                  )} */}
+
+                  {selectedCity && isName && (
+                      <div className="mt-4">
+                        <label
+                          htmlFor="subcity"
+                          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          {t("donor:donorSubCity")}
+                          <span className="text-red-500">*</span>
+                        </label>
+                        <div className="flex flex-col items-start">
+                          <select
+                            name="subcity"
+                            className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
+                            onChange={handleSubcity}
+                            value={selectedSubcity}
+                          >
+                            <option value="">
+                              {t("donor:placeHolderSubcity")}
+                            </option>
+                            {subcitiesInEthiopia[selectedCity].map(
+                              (subcity) => (
+                                <option key={subcity} value={subcity}>
+                                  {subcity}
+                                </option>
+                              )
+                            )}
+                          </select>
+                          <span className="mt-1 hidden text-sm text-red-400">
+                            {t("donor:donorSubCityError")}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
                   {isMobile && (
                     <div className="mt-4">
                       <label
@@ -377,7 +530,7 @@ const handleName = (e) =>{
                           required
                           pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                           placeholder={t("common:emailPlaceholderLabel")}
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={handleEmail}
                         />
                         <span className="mt-1 hidden text-sm text-red-400">
                           {t("login:labelErrorEmail")}
@@ -391,19 +544,19 @@ const handleName = (e) =>{
                 <div className="mt-4 flex items-center">
                   <button
                     onClick={() => window.history.back()}
-                    className=" bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 border-2 mr-2"
+                    className=" bg-transparent px-5 py-2  border-2 border-blue-700  hover:bg-orange-600 text-gray-700 font-extrabold text-xl mt-3 mr-5 "
                   >
                     {t("common:backButtonLabel")}
                   </button>
                 </div>
-                
+
                 <div className="mt-4 flex items-center">
                   <button
                     type="submit"
                     disabled={!canSubmit}
-                    className={`bg-orange-500 hover:bg-orange-700 text-white font-bold  py-2 px-4  border-orange-500 border-2  hover:border-orange-700   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
+                    className={`bg-gray-400 text-xl px-5 py-2 border-2 border-gray-700  hover:bg-gray-600 text-black-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
                       !canSubmit
-                        ? "disabled:cursor-no-drop disabled:border-2 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
+                        ? "disabled:cursor-no-drop disabled:border-1 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
                         : ""
                     }`}
                   >
@@ -415,7 +568,6 @@ const handleName = (e) =>{
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

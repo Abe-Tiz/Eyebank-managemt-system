@@ -114,7 +114,13 @@ const Signup = () => {
             position: "top",
           });
           localStorage.setItem("userInfo", JSON.stringify(data));
-          navigate("/login");
+          setName("");
+          setEmail("");
+          setImage("");
+          setPassword("");
+          setRole("");
+          setConfirmPassword("");
+          setImageLoading(false);
           console.log(res);
         }
       })
@@ -152,18 +158,11 @@ const Signup = () => {
   return (
     <>
       <div className="container">
-        <div className="login-form m-10">
+        <div className="login-form m-10 w-3/4 ">
           <h3 className="title">{t("register:titleLabel")}</h3>
-          <div className="form">
+          <div className="form ">
             <form onSubmit={handleSubmit}>
-              <div
-                style={{
-                  display: "flex", 
-                  flexDirection: "column",
-                  gap: 10,
-                  justifyContent: "center",
-                }}
-              >
+              <div className="grid lg:grid-cols-2 gap-8 md:grid-cols-1 ">
                 <div className="mt-4">
                   <label
                     htmlFor="age"
@@ -176,6 +175,7 @@ const Signup = () => {
                     <input
                       className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                       name="name"
+                      value={name}
                       type="text"
                       placeholder={t("common:namePlaceholderLabel")}
                       onChange={handleName}
@@ -198,6 +198,7 @@ const Signup = () => {
                   </label>
                   <div className="flex flex-col items-center">
                     <input
+                      value={email}
                       name="email"
                       type="email"
                       placeholder={t("common:emailPlaceholderLabel")}
@@ -224,6 +225,7 @@ const Signup = () => {
                   <div className="flex flex-col items-center">
                     <input
                       name="file"
+                      // value={image}
                       type="file"
                       accept="image/*"
                       onChange={(e) => uploadImage(e.target.files[0])}
@@ -249,7 +251,7 @@ const Signup = () => {
                     className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
                     onChange={handleRole}
                   >
-                    <option value="">{t("register:LabelRoleSelect")}</option>
+                    <option value={role}>{t("register:LabelRoleSelect")}</option>
                     <option value="admin">{t("register:LabelAdmin")}</option>
                     <option value="lab Techinician">
                       {t("register:LabelLabTechinician")}
@@ -274,6 +276,7 @@ const Signup = () => {
                   <div className="flex flex-col items-center">
                     <input
                       name="password"
+                      value={password}
                       type="password"
                       className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                       autoComplete="off"
@@ -299,6 +302,7 @@ const Signup = () => {
                   <div className="flex flex-col items-center">
                     <input
                       type="password"
+                      value={confirmPassword}
                       name="password_confirmation"
                       placeholder="Confirm password"
                       className="block w-full border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
@@ -317,12 +321,12 @@ const Signup = () => {
                 </div>
                 <ButtonComponent title={t("register:signUpLabel")} />
               </div>
-            </form> 
+            </form>
           </div>
-          <Link to="/login">
+          {/* <Link to="/login">
             {" "}
             {t("register:signupOptionLabel")} ? {t("login:loginTitleLabel")}
-          </Link>
+          </Link> */}
         </div>
       </div>
     </>

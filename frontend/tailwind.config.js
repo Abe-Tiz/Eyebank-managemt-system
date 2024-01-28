@@ -11,6 +11,7 @@ module.exports = {
             colors: {
                 primary: "#ff4800",
             },
+            
         },
     },
     plugins: [require("@tailwindcss/forms"), require("flowbite/plugin")],

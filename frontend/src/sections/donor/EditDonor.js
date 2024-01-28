@@ -119,8 +119,12 @@ const EditDonor = () => {
             isClosable: true,
             position: "top",
           });
-          navigate("/displayDonor");
-          console.log(res);
+          navigate("/viewdonor", {
+            state: {
+              data: res.data.result,
+            },
+          });
+          console.log(res.data.result);
         }
       })
       .catch((err) => {
@@ -182,10 +186,10 @@ const EditDonor = () => {
             </div>
             <div className="flex flex-col justify-center ml-0 md:ml-4 mb-4 md:mb-0">
               <h3 className="block font-sans text-2xl ml-10 md:text-3xl antialiased font-semibold leading-snug tracking-normal text-inherit">
-                EYE BANK OF ETHIOPIA
+                {t("donor:labelDonor")}
               </h3>
               <h4 className="block font-sans text-xl md:text-2xl antialiased font-semibold leading-snug tracking-normal text-inherit">
-                Please Fill The following Information Carfully.
+                {t("donor:subTitleDonor")}
               </h4>
             </div>
           </div>
@@ -199,7 +203,7 @@ const EditDonor = () => {
                       htmlFor="age"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Full Name
+                      {t("register:LabelsignUpName")}
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
@@ -210,62 +214,80 @@ const EditDonor = () => {
                         value={name}
                         pattern="[0-9a-zA-Z ]{6,}"
                         required
-                        placeholder="Enter Full Name"
+                        placeholder={t("common:namePlaceholderLabel")}
                         onChange={handleName}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        Full name must be at least 6 characters long
+                        {t("register:LabelFullNameError")}
                       </span>
                     </div>
                   </div>
-               
-                    <div className="mt-4">
-                      <label
-                        htmlFor="age"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Age
-                        <span className="text-red-500">*</span>
-                      </label>
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="age"
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          type="numeric"
-                          value={age}
-                          autoComplete="off"
-                          required
-                          pattern="[2-9]|[1-7][0-9]|80"
-                          placeholder="Enter Your Age"
-                          onChange={handleAge}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          Age must be between 2 and 80.
-                        </span>
-                      </div>
-                    </div>
-                 
-                    <div className="mt-4">
-                      <label
-                        htmlFor="sex"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Sex
-                        <span className="text-red-500">*</span>
-                      </label>
-                      <select
-                        name="sex"
-                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
-                        onChange={handleSex}
-                      >
-                        <option value="">Select Sex</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
+
+                  <div className="mt-4">
+                    <label
+                      htmlFor="age"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:AgeDonor")}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="age"
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        type="numeric"
+                        value={age}
+                        autoComplete="off"
+                        required
+                        pattern="[2-9]|[1-7][0-9]|80"
+                        placeholder="Enter Your Age"
+                        onChange={handleAge}
+                        readOnly
+                      />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        you must select the sex
+                        {t("donor:donorAgeError")}
                       </span>
                     </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <label
+                      htmlFor="sex"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorSex")}
+                      <span className="text-red-500">*</span>
+                    </label>
+
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="sex"
+                        type="text"
+                        value={sex}
+                        // pattern="[a-zA-Z ]{2,}"
+                        required
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        // placeholder="Enter Your Sex"
+                        onChange={handleSex}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("donor:donorSexError")}
+                      </span>
+                    </div>
+
+                    {/* <select
+                      name="sex"
+                      className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
+                      onChange={handleSex}
+                    >
+                      <option value="">Select Sex</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                    <span className="mt-1 hidden text-sm text-red-400">
+                      you must select the sex
+                    </span> */}
+                  </div>
                 </div>
 
                 <div className="flex flex-column justify-item-start  md:mr-4">
@@ -274,7 +296,7 @@ const EditDonor = () => {
                       htmlFor="city"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      City
+                      {t("donor:donorCity")}
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -286,67 +308,66 @@ const EditDonor = () => {
                         pattern="[0-9a-zA-Z ]{2,}"
                         required
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        placeholder="Enter Your City"
+                        // placeholder="Enter Your City"
                         onChange={handleCity}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        City must be at least 2 characters long
+                        {t("donor:donorCityError")}
                       </span>
                     </div>
                   </div>
-                  
-                    <div className="mt-4">
-                      <label
-                        htmlFor="subcity"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Sub City
-                        <span className="text-red-500">*</span>
-                      </label>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="subcity"
-                          type="text"
-                          value={subcity}
-                          pattern="[0-9a-zA-Z ]{2,}"
-                          required
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          placeholder="Enter Sub City"
-                          onChange={handleSubcity}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          subcity must be at least 2 characters long
-                        </span>
-                      </div>
-                    </div>
-                 
-                    <div className="mt-4">
-                      <label
-                        htmlFor="kebele"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Kebele
-                        <span className="text-red-500">*</span>
-                      </label>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="subcity"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorSubCity")}
+                      <span className="text-red-500">*</span>
+                    </label>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="kebele"
-                          type="text"
-                          value={kebele}
-                          pattern="[0-9a-zA-Z ]{2,}"
-                          required
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          placeholder="Enter Kebele"
-                          onChange={handleKebele}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          kebele must be at least 2 characters long
-                        </span>
-                      </div>
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="subcity"
+                        type="text"
+                        value={subcity}
+                        // pattern="[0-9a-zA-Z ]"
+                        required
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        placeholder="Enter Sub City"
+                        onChange={handleSubcity}
+                      />
+                      {/* <span className="mt-1 hidden text-sm text-red-400">
+                        subcity must be  characters  
+                      </span> */}
                     </div>
-                
+                  </div>
+
+                  <div className="mt-4">
+                    <label
+                      htmlFor="kebele"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorKebele")}
+                      <span className="text-red-500">*</span>
+                    </label>
+
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="kebele"
+                        type="text"
+                        value={kebele}
+                        pattern="[0-9a-zA-Z ]{2,}"
+                        required
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        placeholder="Enter Kebele"
+                        onChange={handleKebele}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("donor:donorKebeleError")}
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <div className="flex flex-column justify-item-start ">
                   <div className="mt-4">
@@ -354,7 +375,7 @@ const EditDonor = () => {
                       htmlFor="hno"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      H.No
+                      {t("donor:donorHno")}
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
@@ -370,86 +391,86 @@ const EditDonor = () => {
                         onChange={handleHouseNumber}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        House Number minimum 2 and maximum 12 digit.{" "}
+                        {t("donor:donorHnoError")}
                       </span>
                     </div>
                   </div>
-                    <div className="mt-4">
-                      <label
-                        htmlFor="mobile"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Mobile
-                        <span className="text-red-500">*</span>
-                      </label>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="mobile"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorMobile")}
+                      <span className="text-red-500">*</span>
+                    </label>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="mobile"
-                          type="numeric"
-                          value={mobile}
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          autoComplete="off"
-                          required
-                          pattern="[0-9]{10}"
-                          placeholder="Enter Mobile/House Phone "
-                          onChange={handleMobile}
-                        />
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="mobile"
+                        type="numeric"
+                        value={mobile}
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        autoComplete="off"
+                        required
+                        pattern="[0-9]{10}"
+                        placeholder="Enter Mobile/House Phone "
+                        onChange={handleMobile}
+                      />
 
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          Mobile Number must be 10 digit.{" "}
-                        </span>
-                      </div>
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("donor:donorMobileError")}
+                      </span>
                     </div>
-                  
-                    <div className="mt-4">
-                      <label
-                        htmlFor="email"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Email
-                        <span className="text-red-500">*</span>
-                      </label>
+                  </div>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="email"
-                          type="email"
-                          value={email}
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          autoComplete="off"
-                          required
-                          pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                          placeholder="Enter Your Email"
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          Please enter a valid email address.{" "}
-                        </span>
-                      </div>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("login:labelLoginEmail")}
+                      <span className="text-red-500">*</span>
+                    </label>
+
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="email"
+                        type="email"
+                        value={email}
+                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        autoComplete="off"
+                        required
+                        pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        placeholder="Enter Your Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("login:labelErrorEmail")}
+                      </span>
                     </div>
+                  </div>
                 </div>
               </div>
               <div className="d-flex justify-content-center pt-3 mb-4">
                 <div className="mt-4 flex items-center">
                   <button
                     onClick={() => navigate(-1)}
-                    className=" bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 border-2 mr-2"
+                    className="bg-transparent px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5 "
                   >
-                    Back
+                    {t("common:backButtonLabel")}
                   </button>
                 </div>
                 <div className="mt-4 flex items-center">
                   <button
                     type="submit"
                     disabled={!canSubmit}
-                    className={`bg-orange-500 hover:bg-orange-700 text-white font-bold  py-2 px-4  border-orange-500 border-2  hover:border-orange-700   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
+                    className={`bg-gray-400 px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5    focus:outline-none focus:ring-1 focus:ring-blue-300 ${
                       !canSubmit
                         ? "disabled:cursor-no-drop disabled:border-2 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
                         : ""
                     }`}
                   >
-                    Update
+                    {t("common:updateButtonLabel")}
                   </button>
                 </div>
               </div>
