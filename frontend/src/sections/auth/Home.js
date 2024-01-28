@@ -1,119 +1,150 @@
-import React, { useState, useEffect } from 'react';
-import "../../static/styles/home.css";
-import Header from '../header/Header';
-import Footer from '../footer/footer';
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Typewriter from "typewriter-effect";
-
-
-const paragraphStyles = {
-    WebkitLineClamp: 3,
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden',
-    display: '-webkit-box',
-}
+import Header from "../header/Header";
+import Footer from "../footer/footer";
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const imagePath = process.env.PUBLIC_URL + '/images/eye2.png';
-    const imagePath2 = process.env.PUBLIC_URL + '/images/eyet2.jpg';
-    const imagePath3 = process.env.PUBLIC_URL + '/images/eyet3.jpg';
-    const imagePath4 = process.env.PUBLIC_URL + '/images/eyet1.jpg';
+  const imagePath = process.env.PUBLIC_URL + "/images/eye2.png";
+  const imagePath2 = process.env.PUBLIC_URL + "/images/eyet2.jpg";
+  const imagePath3 = process.env.PUBLIC_URL + "/images/eyet3.jpg";
+  const imagePath4 =
+    "https://content.jdmagicbox.com/comp/ahmednagar/c5/9999px241.x241.141227004503.z9c5/catalogue/prakash-netralaya-dr-chitgopekar-savedi-ahmednagar-eye-hospitals-ly3f6k8kxx.jpg?clr=";
 
-    const { t } = useTranslation();
-    const [isOpen, setIsOpen] = useState(false);
-    const [isOpen2, setIsOpen2] = useState(false);
-    const [isOpen3, setIsOpen3] = useState(false);
-    const [isOpen4, setIsOpen4] = useState(false);
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-    return (
-        <>
-            <Header />
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [isOpen3, setIsOpen3] = useState(false);
+  const [isOpen4, setIsOpen4] = useState(false);
+  const [toggle, setToggle] = useState(true);
 
-            <div className="container">
-                <h1 className='text-blue-600/50'>{t("translation:tagLabel2")}</h1>
-                <p className="text-blue-600/80">{t("translation:tagLabel")}</p>
+  return (
+    <>
+      <div className="mt-0 mb-0 pt-1">
+        <div
+          className="m-0 px-10 py-20  bg-cover bg-center bg-fixed  w-full h-auto flex flex-col justify-center items-center relative"
+          style={{ backgroundImage: `url(${imagePath4})` }}
+        >
+          <div className="text-white text-center">
+            {/* <h1 className="mb-10 text-4xl font-bold text-white">
+              {t("translation:tagLabel2")}
+            </h1> */}
+            {/* <p className="text-white">{t("translation:tagLabel")}</p> */}
 
-                <Typewriter
-                    options={{
-                        strings: [t("translation:tagLabel2")],
-                        autoStart: true,
-                        loop: true,
-                    }}
-                />
-
-                <div className="eye-section">
-                    <img src={imagePath} alt="Eye" />
-                    <h2 className="title">{t('mracleTitle')}</h2>
-                    <p className="description" style={isOpen4 ? null : paragraphStyles} >
-                        {t('homeDescriptionLabel')}
-                    </p>
-                    <button className="read-more-button" onClick={() => setIsOpen4(!isOpen4)}>
-                        {isOpen4 ? 'Read less...' : 'Read more...'}
-                    </button>
-                </div>
-
-                <div className="transplanted-persons-section">
-                    <h2>{t('transplant')} </h2>
-
-                    <div className="person">
-                        <img src={imagePath3} alt="Person 1" />
-                        <h3 className="person-name">John Doe</h3>
-                        <p className="description" style={isOpen ? null : paragraphStyles} >
-                            John Doe is a recipient of a corneal transplant. He was suffering
-                            from a condition called keratoconus, which caused his cornea to
-                            become thin and misshapen. After the transplant, his vision
-                            improved significantly, and he can now see the world clearly.
-                        </p>
-                        <button className="read-more-button" onClick={() => setIsOpen(!isOpen)}>
-                            {isOpen ? 'Read less...' : 'Read more...'}
-                        </button>
-                    </div>
-
-                    <div className="person">
-                        <img src={imagePath2} alt="Person 2" />
-                        <h3 className="person-name">Jane Smith</h3>
-                        <p className="description" style={isOpen3 ? null : paragraphStyles} >
-                            Jane Smith had a corneal transplant due to a corneal injury she
-                            sustained in an accident. The transplant restored her vision and
-                            allowed her to resume her normal activities. She is grateful for
-                            the gift of sight she received through the transplant.
-                        </p>
-                        <button className="read-more-button" onClick={() => setIsOpen3(!isOpen3)}>
-                            {isOpen3 ? 'Read Less' : 'Read More'}
-                        </button>
-                    </div>
-                </div>
-
-                {/* <div class="about-section" id="about">
-         <h2 className="title">About Us</h2>
-         <div class="container">
-           <div class="row">
-             <div class="column">
-               <img class="img-ab" src={imagePath4} alt="about us"/>
-             </div>
-             <div class="column">
-               <div class="content">
-                 <p className="description" style={{ ...isOpen2 ? null : paragraphStyles, textAlign: 'center', marginTop: '20px', fontSize: '16px', color: '#333', padding: '10px', backgroundColor: '#f5f5f5', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
-                   At Eye Bank Management System, we are committed to facilitating the noble cause of eye donation
-                   and transplantation. Our organization serves as a bridge between eye donors and those
-                   in need of corneal transplants, ensuring that the gift of sight is shared with those
-                   who need it the most. Our organization serves as a bridge between eye donors and those
-                   in need of corneal transplants, ensuring that the gift of sight is shared with those
-                   who need it the most.
-                 </p>
-                 <button className="read-more-button" onClick={()=>setIsOpen2(!isOpen2)}>
-                   {isOpen2?'Read less ...':'Read more...'}
-                 </button>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div> */}
-
+            <div className="group bg-gray-300 shadow-lg rounded-lg overflow-hidden py-8 px-4 sm:px-6 lg:px-8 transition-transform transform ">
+              <div className="max-w-3xl mx-auto">
+                <blockquote className="text-2xl leading-8 font-medium font-mono  text-black  italic">
+                  <span className="text-2xl text-blue-500 font-bold font-mono ">
+                    {t("translation:tagLabel2")}
+                  </span>{" "}
+                  {t("translation:tagLabel")}
+                </blockquote>
+              </div>
             </div>
-            <Footer />
-        </>
-    );
-}
+
+            <div className="mt-8 space-x-4">
+              <button
+                onClick={() => navigate("/contact")}
+                className="bg-gray-400 px-5 py-2 text-2xl border-2 text-gray-700 border-gray-700  hover:bg-gray-600 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5  "
+              >
+                {t("translation:homeContact")}
+              </button>
+              <button
+                onClick={() => navigate("/registerDonor")}
+                className="bg-transparent px-5 py-2 text-2xl  border-2 border-blue-700  hover:bg-yellow-600 text-black font-extrabold mt-3 mr-5 "
+              >
+                {t("translation:Donor")}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
+          <h1 className=" text-4xl font-bold text-center mt-1 font-sans  border-y-4 py-3 border-yellow-500 ">
+            {t("about:whoweare")}
+          </h1>
+          <div className=" section-container lg:columns-2 md:columns-1 sm:columns-1 gap-10">
+            <div className="flex flex-col md:flex-row px-3 items-center ">
+              <img
+                src="../images/stakeholders.jpeg"
+                alt="Stakeholders"
+                className="rounded-2 mt-5"
+              />
+            </div>
+
+            <div className="flex flex-col md:flex-row mt-5 px-3 items-center">
+              <p className="pt-5 justify-center text-justify">
+                {/* {t("about:content")} */}
+                {/* <p className="mt-1 font-semibold space-x-1 space-y-5 font-mono ">
+                  {t("about:toggle")}
+                </p> */}
+                <p className="mt-1 font-semibold space-x-1 space-y-5 font-mono ">
+                  {t("about:content")}{" "}
+                </p>
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <button
+                className="bg-white text-xl border-2 border-blue-700  hover:bg-orange-600 text-black font-extrabold mt-3 mr-5 px-4 py-2 "
+                onClick={() => navigate("/About")}
+              >
+                {t("about:readmore")}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* information page */}
+        <div className="mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
+          <h1 className=" text-4xl font-bold text-center mt-1 font-sans  border-y-4 py-3 border-yellow-500">
+            {t("mracleTitle")}
+          </h1>
+          <div className="section-container lg:columns-2 md:columns-1 sm:columns-1 gap-10">
+            <div className="flex flex-col md:flex-row px-3 items-center ">
+              <img src={imagePath} alt="Eye" className="rounded-2 mt-5" />
+            </div>
+
+            <div className="flex flex-col md:flex-row mt-5 px-3 items-center">
+              <p className="pt-5 justify-center text-justify">
+                {/* {t("about:content")} */}
+                <p className="mt-1 font-semibold space-x-1 space-y-1 font-mono ">
+                  {" "}
+                  {t("homeDescriptionLabel")}
+                </p>
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <button
+                className="bg-white  border-2 border-blue-700  hover:bg-orange-600 text-black font-extrabold mt-3 text-xl mr-5 px-4 py-2 "
+                onClick={() => navigate("/awareness")}
+              >
+                {t("about:readmore")}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="flex items-center justify-center">
+          <img
+            src={imagePath}
+            alt="Eye"
+            className="rounded shadow-lg mr-4 w-40 md:w-60 lg:w-48" // Adjust the width as needed
+          />
+          <div className="w-full md:w-1/2 text-center">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold my-4 font-segoe-mdl2">
+              {t("mracleTitle")}
+            </h2>
+            <p className="text-sm md:text-base lg:text-lg font-segoe-mdl2">
+              {t("homeDescriptionLabel")}
+            </p>
+          </div>
+        </div> */}
+      </div>
+    </>
+  );
+};
 
 export default Home;

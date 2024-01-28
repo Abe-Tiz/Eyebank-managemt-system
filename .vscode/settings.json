@@ -1,5 +1,5 @@
 {
-  "editor.inlineSuggest.showToolbar": "onHover",
+  "editor.inlineSuggest.showToolbar": "always",
   "editor.cursorBlinking": "expand",
   "editor.cursorStyle": "line",
   "editor.cursorWidth": 10,

@@ -3,59 +3,58 @@ import axios  from 'axios';
 import { Link } from 'react-router-dom';
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from 'react-i18next';
-import Header from "../header/Header";
-import Footer from './../footer/footer';
+import { RiEdit2Line, RiDeleteBin2Line } from 'react-icons/ri'; 
+import Edit from './Edit';
 
 
-const DisplayDonor = () => {
-    const [donors, setDonors] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const toast = useToast();
+const DisplayDonor = ({ editClicked, setEditClicked }) => {
+  const [donors, setDonors] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const toast = useToast();
   const { t } = useTranslation();
-  
-    useEffect(() => {
-        const fetchDonor = async () => {
-        try {
-            const response = await axios.get("http://localhost:4000/donor");
-            const donordata =  response.data;
 
-            // Check if the array is not empty
-            if (donordata && donordata.length > 0) {
-                const donors = donordata.map((donor) => donor);
-                setLoading(true);
-                setDonors(donors);
-                console.log(donors);
-              
-                 
-            } else {
-                console.log("Array is empty.");
-                toast({
-                    title: "Empty Array",
-                    description: "Array is empty.",
-                    status: "warning",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "top",
-                });
-            }
-        } catch (error) {
-            toast({
-              title: "Error Occured!",
-              description: error.donordata.message,
-              status: "error",
-              duration: 5000,
-              isClosable: true,
-              position: "top",
-            });
+  useEffect(() => {
+    const fetchDonor = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/donor");
+        const donordata = response.data;
+
+        // Check if the array is not empty
+        if (donordata && donordata.length > 0) {
+          const donors = donordata.map((donor) => donor);
+          setLoading(true);
+          setDonors(donors);
+          console.log(donors);
+        } else {
+          console.log("Array is empty.");
+          toast({
+            title: "Empty Array",
+            description: "Array is empty.",
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+          });
         }
-        };
+      } catch (error) {
+        toast({
+          title: "Error Occured!",
+          description: error.donordata.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+    };
 
-        fetchDonor();
-    });
+    fetchDonor();
+  });
 
   return (
     <>
-      <Header />
+      {editClicked ? <Edit /> : null}
       {loading ? (
         <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -68,7 +67,7 @@ const DisplayDonor = () => {
                   {t("donor:donorCity")}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {t("donor:donorStatus")}
+                  {t("donor:donorMobile")}
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t("donor:donorAction")}
@@ -96,7 +95,8 @@ const DisplayDonor = () => {
                   </th>
                   <td className="px-6 py-4">{donor.city}</td>
                   <td className="px-6 py-4">
-                    {donor.verified ? (
+                    {donor.mobile}
+                    {/* {donor.verified ? (
                       <div className="flex items-center">
                         <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
                         {t("donor:verifedStatus")}
@@ -106,27 +106,29 @@ const DisplayDonor = () => {
                         <div className="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
                         {t("donor:pendingStatus")}
                       </div>
-                    )}
+                    )} */}
                   </td>
-                  <td className="px-6 py-4">
+
+                  <td className="flex px-6 py-4">
                     <Link
-                      to={`/update/${donor._id}`}
-                      className="bg-orange-500 border-2 p-1 border-orange-500 mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
+                      onClick={() =>setEditClicked(true)}
+                      to={`/updateOne/${donor._id}`}
+                      className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                     >
-                      {t("common:updateButtonLabel")}
+                      <RiEdit2Line size={20} color="#000" className="mr-2" />
+                      {/* {t("common:updateButtonLabel")} */}
                     </Link>
-                    {donor.verified ? (
-                      <Link
-                        to={`/print/${donor._id}`}
-                        className="bg-green-500 border-2 p-1 border-green-500 mr-5 font-medium text-white dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
-                      >
-                        {t("common:printButtonLabel")}
-                      </Link>
-                    ) : (
-                      <span className="bg-green-500 border-2 p-1 border-green-500 mr-5 font-medium text-white dark:text-blue-500 opacity-50 cursor-not-allowed">
-                        {t("common:printButtonLabel")}
-                      </span>
-                    )}
+                    <Link
+                      to={`/delete/${donor._id}`}
+                      className="flex items-center bg-transparent  border-2 p-1 font-medium text-white dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
+                    >
+                      <RiDeleteBin2Line
+                        size={20}
+                        color="#000"
+                        className="mr-2"
+                      />
+                      {/* {t("common:deleteButtonLabel")} */}
+                    </Link>
                   </td>
                 </tr>
               ))}
@@ -139,9 +141,9 @@ const DisplayDonor = () => {
         </div>
       )}
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
-}
+};
 
 export default DisplayDonor

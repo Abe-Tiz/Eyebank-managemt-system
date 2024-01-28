@@ -8,19 +8,21 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const userRoute = require("./routes/userRoute");
 const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
+const reportRoute = require("./routes/ReportRoute");
 
-
+ 
 dotenv.config();  
 connectDB();
 const app = express();
-
 const port = process.env.PORT || 4000;
 
 //!  Middleware
-app.use(cors());
+app.use(
+    cors()
+);
 app.use(express.json());
-//?  app.use(cookieParser());
-app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+// app.use(express.urlencoded({ extended: false }));
 
 //!  Allow cross-domain requests
 const allowCrossDomain = (req, res, next) => {
@@ -32,8 +34,9 @@ const allowCrossDomain = (req, res, next) => {
 app.use(allowCrossDomain);
 
 app.use('/user', userRoute)
-app.use('/contact', contactRoute)
+// app.use('/contact', contactRoute)
 app.use('/donor', donorRoute)
+app.use('/report', reportRoute)
 
 app.use(notFound);
 app.use(errorHandler);

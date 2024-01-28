@@ -1,0 +1,16 @@
+{
+  "name": "ስም",
+  "email": "ኢ-መይል",
+  "message": "መልእኽቲ",
+  "phone": "ተሌፎን",
+  "sendmessage": "መልእኽቲ ለኣኽ",
+  "Subject": "ዋና",
+  "contactus": "ምሳና ተራኸብ",
+  "Address": "ኣድራሻ",
+  "MenelikHospital": "ሆስፒታል ምኒሊክ",
+  "invalidemail": "ኢ-መይል ቅኑዕ ኣይኰነን",
+  "invalidname": "በጃኻ ቕኑዕ ስም ኣእቱ.",
+  "invalidphone": "በጃኻ ቕኑዕ ተሌፎን ኣእቱ.",
+  "invalidsubject": "በጃኹም ቅኑዕ ዋና ኣእትዉ።",
+  "invalidmessage": "በጃኻ ቕኑዕ መልእኽቲ ኣእቱr."
+}

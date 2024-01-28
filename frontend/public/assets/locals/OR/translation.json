@@ -6,20 +6,15 @@
   "Contact": "Nu qunnamaa",
   "Login": "Galmaa'i",
   "Donor": "Arjooma Ta'aa",
+<<<<<<< HEAD
+=======
+  "homeContact": "Wal qunnamaa",
+>>>>>>> origin/main
   "app_title": "Sirna Bulchiinsa Baankii Ija",
   "language": "afaan",
-  "tagLabel": "Addunyaa Mul'ataa EyeBank waliin qoradhu",
-  "tagLabel2": "Gara Sirna Bulchiinsa EyeBank baga nagaan dhuftan",
-  "mracleTitle": "Ija Dinqii",
+  "tagLabel": " Sirni jijjiirraa korniyaa keenya ammayyaa abdii namatti fida xiyyeeffannoo, kennaa mul’ataatiin jireenya jijjiiruu.  Waliin taanee addunyaa ta'uu danda'u haa ibsinu.",
+  "tagLabel2": "Ija deebisuu, yeroo tokkotti qaama jijjiirrachuu tokko.",
+  "mracleTitle": "Dinqii",
   "transplant": "Namoota qaama namaa jijjiiran",
-  "name": "Cibra",
-  "email": "fi rifaralaa ",
-  "message": "Beenoo",
-  "phone": "Lakkoofsa Bilbilla",
-  "sendmessage": "Dhaamsa Ergi",
-  "reset": "Harromsuu",
-  "contactus": "qunnamtii",
-  "Address": "Teesso",
-  "MenelikHospital": "Menelik II Referal Hospitaala",
   "homeDescriptionLabel": "Ijji qaama nama hin amansiifnee fi addunyaa kana arguuf nu dandeessisudha naannoo keenyatti. Caasaa walxaxaa adda addaa hedduu irraa ijaarameedha kutaalee waliin hojjechuun mul’ata kennuu. Korniyaa irraa kaasee hanga... retina, tokkoon tokkoon qaama adeemsa ijaa keessatti gahee guddaa qaba. Ijji qaama nama hin amansiifnee fi addunyaa kana arguuf nu dandeessisudha naannoo keenyatti. Caasaa walxaxaa adda addaa hedduu irraa ijaarameedha kutaalee waliin hojjechuun mul’ata kennuu. Korniyaa irraa kaasee hanga... retina, tokkoon tokkoon qaama adeemsa ijaa keessatti gahee guddaa qaba."
 }
