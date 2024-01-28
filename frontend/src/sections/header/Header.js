@@ -9,6 +9,8 @@ import i18next from "i18next";
 import cookies from "js-cookie";
 import classNames from "classnames";
 import { languages } from "../../Languages";
+import { logo} from "../../static/assets/icons/eye.png";
+
 
 const Navbar = () => {
   const currentLanguageCode = cookies.get("i18next") || "en";
@@ -37,9 +39,10 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="container-fluid">
+      <div className="container-fluid navbar-containe">
         <Link to="/" className="logo">
-          <Brand style={{ width: "50px", height: "50px", marginTop: "-30px",backgroundColor:"white",borderRadius:"50%"}} />
+           <
+          {/* <Brand style={{ width: "50px", height: "50px", marginTop: "-30px",backgroundColor:"white",borderRadius:"50%"}} /> */}
         </Link>
         <div className="menu-icon" onClick={handleShowNavbar}>
           {showNavbar ? (
