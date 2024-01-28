@@ -82,13 +82,24 @@ const Contact = () => {
             }, (error) => {
                 console.log(error.text);
             });
-        toast({
-            title: "Message have been sent successefully",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-            position: "top",
-        });
+        if (!name || !email || !phone || !message) {
+            toast({
+                title: "Please Fill all the Feilds",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
+        }
+        else {
+            toast({
+                title: "Message have been sent successefully",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
+        }
         setName("");
         setEmail("");
         setPhone("");
