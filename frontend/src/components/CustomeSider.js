@@ -7,6 +7,8 @@ import { PiUserListBold } from "react-icons/pi";
 import { CiBoxList } from "react-icons/ci";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
+import { useTranslation } from 'react-i18next';
+import { Link } from "react-router-dom";
  
 const CustomSidebar = ({
   collapsed,
@@ -20,6 +22,9 @@ const CustomSidebar = ({
   handleUserList,
   handleReport,
 }) => {
+
+  const { t } = useTranslation();
+  
   return (
     <div
       className={`bg-indigo-900 overflow-auto h-screen fixed text-white transition-all duration-300 ${
@@ -29,51 +34,51 @@ const CustomSidebar = ({
       <div className="flex flex-col h-full mt-0">
         {collapsed ? (
           <div className="flex flex-col items-center">
-            <button
+            <Link
               className="text-white p-2 hover:bg-gray-800 rounded"
-              onClick={handleReport}
+              to="/adminDashboard/report"
               data-tooltip-id="my-dashboard"
               data-tooltip-content="Dashboard"
             >
               {/* <BellOutlined className="text-2xl" /> */}
               <MdSpaceDashboard className="text-2xl" />
-            </button>
-            <button
+            </Link>
+            <Link
               className="text-white p-2 hover:bg-gray-800 rounded"
-              onClick={handleAddDonorClick}
+              to="/adminDashboard/addDonor"
               data-tooltip-id="add-donor"
               data-tooltip-content="Add Donor"
             >
               {/* <IoIosPersonAdd className="text-2xl" /> */}
               <MdOutlineGroupAdd className="text-2xl" />
-            </button>
-            <button
+            </Link>
+            <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-              onClick={handleDisplayDonorClick}
+              to="/adminDashboard/donorList"
               data-tooltip-id="donor-list"
               data-tooltip-content="Donor List"
             >
               {/* <SettingOutlined className="text-2xl" /> */}
               <PiUserListBold className="text-2xl" />
-            </button>
-            <button
+            </Link>
+            <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-              onClick={handleAddUser}
+              to="/adminDashboard/addUser"
               data-tooltip-id="add-user"
               data-tooltip-content="Add User"
             >
               {/* <SettingOutlined className="text-2xl" /> */}
               <IoIosPersonAdd className="text-2xl" />
-            </button>
-            <button
+            </Link>
+            <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-              onClick={handleUserList}
+              to="/adminDashboard/userList"
               data-tooltip-id="user-list"
               data-tooltip-content="User List"
             >
               {/* <SettingOutlined className="text-2xl" /> */}
               <CiBoxList className="text-2xl" />
-            </button>
+            </Link>
           </div>
         ) : (
           <>
@@ -85,51 +90,57 @@ const CustomSidebar = ({
             />
             <span className="text-lg font-semibold ml-10">{name}</span>
             <div className="mt-4 flex flex-col items-center">
-              <button
-                className="flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
-                onClick={handleReport}
+              <a
+                href="/adminDashboard/report"
+                className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
+                // onClick={handleReport}
                 data-tooltip-id="my-dashboard"
                 data-tooltip-content="Dashboard"
               >
                 <MdSpaceDashboard className="text-2xl" />
-                <span className="ml-2">Dashboard</span>
-              </button>
-              <button
-                className="flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
-                onClick={handleAddDonorClick}
+                <span className="ml-2">{t("common:dashboardLabel")}</span>
+              </a>
+              <a
+                href="/adminDashboard/addDonor"
+                className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
+                // onClick={handleAddDonorClick}
+
                 data-tooltip-id="add-donor"
                 data-tooltip-content="Add Donor"
               >
                 <MdOutlineGroupAdd className="text-2xl" />
-                <span className="ml-2">Add Donor</span>
-              </button>
-              <button
+                <span className="ml-2">{t("common:addDonorLabel")}</span>
+              </a>
+              <a
+                href="/adminDashboard/donorList"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                onClick={handleDisplayDonorClick}
+                // onClick={handleDisplayDonorClick}
                 data-tooltip-id="donor-list"
                 data-tooltip-content="Donor List"
               >
                 <PiUserListBold className="text-2xl" />
-                <span className="ml-2">Donor List</span>
-              </button>
-              <button
+                <span className="ml-2">{t("common:listDonorLabel")}</span>
+              </a>
+              <a
+                href="/adminDashboard/addUser"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                onClick={handleAddUser}
+                // onClick={handleAddUser}
                 data-tooltip-id="add-user"
                 data-tooltip-content="Add User"
               >
                 <IoIosPersonAdd className="text-2xl" />
-                <span className="ml-2">Add User</span>
-              </button>
-              <button
+                <span className="ml-2">{t("common:addUserrLabel")}</span>
+              </a>
+              <a
+                href="/adminDashboard/userList"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                onClick={handleUserList}
+                // onClick={handleUserList}
                 data-tooltip-id="user-list"
                 data-tooltip-content="User List"
               >
                 <CiBoxList className="text-2xl" />
-                <span className="ml-2"> User List</span>
-              </button>
+                <span className="ml-2"> {t("common:listUserrLabel")}</span>
+              </a>
             </div>
           </>
         )}

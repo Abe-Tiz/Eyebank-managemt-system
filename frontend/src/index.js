@@ -7,8 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./i18next";
 import './static/styles/signup.css'
 import { ChakraProvider } from "@chakra-ui/react";
-import {BrowserRouter} from 'react-router-dom' 
+import { RouterProvider } from "react-router-dom";
 import LoadingCircle from './components/LoadingCircle';
+import router from "./router/Router";
 
 const Root = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,11 +24,11 @@ const Root = () => {
 
   return (
     <Suspense fallback={<LoadingCircle />}>
-      <BrowserRouter>
+      <RouterProvider router={router}>
         <ChakraProvider>
           {isLoading ? <LoadingCircle /> : <App />}
         </ChakraProvider>
-      </BrowserRouter>
+      </RouterProvider>
     </Suspense>
   );
 };
