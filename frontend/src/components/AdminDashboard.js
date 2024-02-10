@@ -13,11 +13,14 @@ import Report from './Report';
 import ViewUsers from './../sections/auth/ViewUsers';
 import Edit from './../sections/donor/Edit';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
 
 const { Header, Content } = Layout;
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
  const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -179,12 +182,12 @@ const AdminDashboard = () => {
       });
 
 
-      if (!refreshed) {
-        window.location.reload();
-        setRefreshed(true);
-      }
+      // if (!refreshed) {
+      //   window.location.reload();
+      //   setRefreshed(true);
+      // }
 
-  }, [navigate,refreshed]);
+  }, [navigate]);
 
 
     // useEffect(() => {
@@ -228,8 +231,8 @@ const AdminDashboard = () => {
                 onClick={toggleSidebar}
               />
             )}
-             <span className="text-xl font-bold">
-              {state.role} {" "} {state.name}
+            <span className="text-xl font-bold">
+              {state.role} {state.name}
             </span>
           </div>
 
@@ -273,7 +276,7 @@ const AdminDashboard = () => {
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
                         <SettingOutlined className="text-2xl text-blue-500" />{" "}
-                        Settings
+                        {t("common:settingButtonLabel")}
                       </Link>
                     </li>
                   </ul>
@@ -282,7 +285,7 @@ const AdminDashboard = () => {
                       onClick={handleLogout}
                       className="ml-5 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
-                      Logout
+                      {t("common:logouttButtonLabel")}
                     </button>
                   </div>
                 </div>
@@ -292,7 +295,10 @@ const AdminDashboard = () => {
         </Header>
         <Content className="p-4">
           <div className="bg-white p-4 rounded shadow w-full">
-            {state.isDashboard ? <Report /> : null}
+           
+            <Outlet />
+            
+            {/* {state.isDashboard ? <Report /> : null}
             {state.displayCreateDonor ? <CreateDonor /> : null}
             {state.displayDonor ? (
               <DisplayDonor
@@ -301,11 +307,11 @@ const AdminDashboard = () => {
               />
             ) : null}
             {state.isaddUser ? <Signup /> : null}
-            {state.isuserList ? <ViewUsers /> : null}
+            {state.isuserList ? <ViewUsers /> : null} */}
 
-            <Routes>
+            {/* <Routes>
               <Route path="/updateOne/:id" element={<Edit />} />
-            </Routes>
+            </Routes> */}
           </div>
         </Content>
       </Layout>
