@@ -19,17 +19,12 @@ const AdminDashboard = () => {
   const [searchResults, setSearchResults] = useState([]);
   
   const [state, setState] = useState({
-    displayCreateDonor: false,
     name: "",
     image: "",
     isDropdownOpen: false,
-    displayDonor: false,
     isLoggedin: false,
     collapsed: false,
     role: "",
-    isaddUser: false,
-    isuserList: false,
-    isDashboard: true,
     
   });
 
