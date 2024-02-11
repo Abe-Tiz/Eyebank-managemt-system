@@ -14,6 +14,7 @@ import Report from './../components/Report';
 import DisplayDonor from "../sections/donor/DisplayDonor";
 import Signup from './../sections/auth/Signup';
 import ViewUsers from './../sections/auth/ViewUsers';
+import Edit from "../sections/donor/Edit";
    
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "/adminDashboard/userList",
         element: <ViewUsers />,
+      },
+      {
+        path: "/adminDashboard/edit/:id",
+        element: <Edit />,
       },
     ],
   },
