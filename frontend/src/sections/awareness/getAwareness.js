@@ -75,7 +75,7 @@ function Awareness() {
                         alt="Person 2"
                       />
                       <div className="absolute inset-0 flex items-center justify-center border-4 border-solid border-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <button className="bg-orange-500 text-white py-2 px-5 rounded-lg">
+                        <button className="bg-green text-white py-2 px-5 rounded-lg">
                           Go to Video
                         </button>
                       </div>
@@ -95,7 +95,7 @@ function Awareness() {
                 </p>
               </div>{" "}
               <button
-                className="block mx-auto mt-4 mb-4 bg-blue-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full transform hover:scale-110"
+                className="block mx-auto mt-4 mb-4 bg-green hover:bg-gray-300 text-white font-bold py-2 px-4 rounded-full transform hover:scale-110"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 {isOpen ? t("awareness:readless") : t("awareness:readmore")}
@@ -119,7 +119,7 @@ function Awareness() {
                       alt="Person 2"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300">
-                      <button className="bg-orange-500 text-white py-2 px-5">
+                      <button className="bg-green text-white  py-2 px-5">
                         Go to Video
                       </button>
                     </div>
@@ -138,7 +138,7 @@ function Awareness() {
                 </p>
               </div>
               <button
-                className="block mx-auto mt-4 mb-4 bg-blue-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full transform hover:scale-110"
+                className="block mx-auto mt-4 mb-4 bg-green hover:bg-gray-300 text-white font-bold py-2 px-4 rounded-full transform hover:scale-110"
                 onClick={() => setIsOpen1(!isOpen1)}
               >
                 {isOpen1 ? t("awareness:readless") : t("awareness:readmore")}
@@ -164,7 +164,7 @@ function Awareness() {
                       alt="Person 2"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300">
-                      <button className="bg-orange-500 text-white py-2 px-5">
+                      <button className="bg-green text-white  py-2 px-5">
                         Go to Video
                       </button>
                     </div>
@@ -183,7 +183,7 @@ function Awareness() {
                 </p>
               </div>
               <button
-                className="block mx-auto mt-4 mb-4 bg-blue-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full transform hover:scale-110"
+                className="block mx-auto mt-4 mb-4 bg-green hover:bg-gray-300 text-white font-bold py-2 px-4 rounded-full transform hover:scale-110"
                 onClick={() => setIsOpen2(!isOpen2)}
               >
                 {isOpen2 ? t("awareness:readless") : t("awareness:readmore")}
@@ -208,7 +208,7 @@ function Awareness() {
                       alt="Person 2"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300">
-                      <button className="bg-orange-500 text-white py-2 px-5">
+                      <button className="bg-green text-white py-2 px-5">
                         Go to Video
                       </button>
                     </div>
@@ -227,7 +227,7 @@ function Awareness() {
                 </p>
               </div>
               <button
-                className="block mx-auto mt-4 mb-4 bg-blue-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full transform hover:scale-110"
+                className="block mx-auto mt-4 mb-4 bg-green hover:bg-gray-300 text-white  hover:text-gray-600  font-bold py-2 px-4 rounded-full transform hover:scale-110"
                 onClick={() => setIsOpen3(!isOpen3)}
               >
                 {isOpen3 ? t("awareness:readless") : t("awareness:readmore")}

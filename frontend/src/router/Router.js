@@ -15,6 +15,10 @@ import DisplayDonor from "../sections/donor/DisplayDonor";
 import Signup from './../sections/auth/Signup';
 import ViewUsers from './../sections/auth/ViewUsers';
 import Edit from "../sections/donor/Edit";
+import ForgotPassword from "../sections/auth/ForgotPassword";
+import ResetPassword from "../sections/auth/ResetPassword";
+import CreateAwareness from "../sections/awareness/createAwareness";
+import CreateVideo from "../sections/awareness/createVideo";
    
 const router = createBrowserRouter([
   {
@@ -25,6 +29,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/reset_password/:id/:token",
+        element: <ResetPassword />,
+      },
 
       {
         path: "/about",
@@ -33,6 +45,14 @@ const router = createBrowserRouter([
       {
         path: "/awareness",
         element: <Awareness />,
+      },
+      {
+        path: "/createAwareness",
+        element: <CreateAwareness />,
+      },
+      {
+        path: "/createVideo",
+        element: <CreateVideo />,
       },
       {
         path: "/contact",
