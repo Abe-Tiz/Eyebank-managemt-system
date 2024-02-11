@@ -18,7 +18,7 @@ const ReportCard = ({ category, number }) => {
       break;
     case "evaluated":
       icon = <CheckCircleOutlined />;
-      color = "bg-green-500";
+      color = "bg-green";
       title = "Evaluated Cornea";
       break;
     case "stored":
