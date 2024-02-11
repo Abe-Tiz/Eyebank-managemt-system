@@ -1,5 +1,4 @@
-import { SettingOutlined } from "@ant-design/icons";
-import { BellOutlined } from "@ant-design/icons";
+
 import { IoIosPersonAdd } from "react-icons/io";
 import { MdOutlineGroupAdd } from "react-icons/md";
 import { MdSpaceDashboard } from "react-icons/md";
@@ -12,15 +11,8 @@ import { Link } from "react-router-dom";
  
 const CustomSidebar = ({
   collapsed,
-  toggleSidebar,
   name,
   image,
-  role,
-  handleAddDonorClick,
-  handleDisplayDonorClick,
-  handleAddUser,
-  handleUserList,
-  handleReport,
 }) => {
 
   const { t } = useTranslation();
@@ -33,6 +25,8 @@ const CustomSidebar = ({
     >
       <div className="flex flex-col h-full mt-0">
         {collapsed ? (
+
+          // collapsed btn
           <div className="flex flex-col items-center">
             <Link
               className="text-white p-2 hover:bg-gray-800 rounded"
@@ -81,17 +75,20 @@ const CustomSidebar = ({
             </Link>
           </div>
         ) : (
-          <>
-            {/* <span className="text-sm font-normal ml-10">{role}</span> */}
+            <>
+              
+            {/* user progfile inage */}
             <img
               className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"
               src={image}
               alt="user photo"
             />
             <span className="text-lg font-semibold ml-10">{name}</span>
+
+              {/* btn */}
             <div className="mt-4 flex flex-col items-center">
-              <a
-                href="/adminDashboard/report"
+              <Link
+                to="/adminDashboard/report"
                 className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
                 // onClick={handleReport}
                 data-tooltip-id="my-dashboard"
@@ -99,9 +96,9 @@ const CustomSidebar = ({
               >
                 <MdSpaceDashboard className="text-2xl" />
                 <span className="ml-2">{t("common:dashboardLabel")}</span>
-              </a>
-              <a
-                href="/adminDashboard/addDonor"
+              </Link>
+              <Link
+                to="/adminDashboard/addDonor"
                 className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
                 // onClick={handleAddDonorClick}
 
@@ -110,9 +107,9 @@ const CustomSidebar = ({
               >
                 <MdOutlineGroupAdd className="text-2xl" />
                 <span className="ml-2">{t("common:addDonorLabel")}</span>
-              </a>
-              <a
-                href="/adminDashboard/donorList"
+              </Link>
+              <Link
+                to="/adminDashboard/donorList"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 // onClick={handleDisplayDonorClick}
                 data-tooltip-id="donor-list"
@@ -120,9 +117,9 @@ const CustomSidebar = ({
               >
                 <PiUserListBold className="text-2xl" />
                 <span className="ml-2">{t("common:listDonorLabel")}</span>
-              </a>
-              <a
-                href="/adminDashboard/addUser"
+              </Link>
+              <Link
+                to="/adminDashboard/addUser"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 // onClick={handleAddUser}
                 data-tooltip-id="add-user"
@@ -130,9 +127,9 @@ const CustomSidebar = ({
               >
                 <IoIosPersonAdd className="text-2xl" />
                 <span className="ml-2">{t("common:addUserrLabel")}</span>
-              </a>
-              <a
-                href="/adminDashboard/userList"
+              </Link>
+              <Link
+                to="/adminDashboard/userList"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 // onClick={handleUserList}
                 data-tooltip-id="user-list"
@@ -140,11 +137,14 @@ const CustomSidebar = ({
               >
                 <CiBoxList className="text-2xl" />
                 <span className="ml-2"> {t("common:listUserrLabel")}</span>
-              </a>
+              </Link>
             </div>
           </>
         )}
       </div>
+
+
+      {/* tooltips */}
       <Tooltip
         id="my-dashboard"
         style={{ backgroundColor: "#940B92", color: "#fff" }}
@@ -165,14 +165,6 @@ const CustomSidebar = ({
         id="user-list"
         style={{ backgroundColor: "#940B92", color: "#fff" }}
       />
-
-      {/* Collapse/Expand button */}
-      {/* <button
-        className="text-white p-2 hover:bg-gray-800 rounded mt-2 ml-2"
-        onClick={toggleSidebar}
-      >
-        {collapsed ? "→" : "←"}
-      </button> */}
     </div>
   );
 };
