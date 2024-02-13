@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import axios  from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
-import { useTranslation } from 'react-i18next';
-import { RiEdit2Line, RiDeleteBin2Line } from 'react-icons/ri'; 
-import Edit from './Edit';
+import { useTranslation } from "react-i18next";
+import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri';
+ 
 
-
-const DisplayDonor = ({ editClicked, setEditClicked }) => {
-  const [donors, setDonors] = useState([]);
+const ViewUsers = () => {
+  const [users, setusers] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const toast = useToast();
   const { t } = useTranslation();
 
   useEffect(() => {
-    const fetchDonor = async () => {
+    const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/donor");
-        const donordata = response.data;
+        const response = await axios.get("http://localhost:4000/user");
+        const userdata = response.data;
 
         // Check if the array is not empty
-        if (donordata && donordata.length > 0) {
-          const donors = donordata.map((donor) => donor);
+        if (userdata && userdata.length > 0) {
+          const users = userdata.map((user) => user);
           setLoading(true);
-          setDonors(donors);
-          console.log(donors);
+          setusers(users);
+          console.log(users);
         } else {
           console.log("Array is empty.");
           toast({
@@ -40,7 +38,7 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
       } catch (error) {
         toast({
           title: "Error Occured!",
-          description: error.donordata.message,
+          description: error.userdata.message,
           status: "error",
           duration: 5000,
           isClosable: true,
@@ -49,12 +47,12 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
       }
     };
 
-    fetchDonor();
+    fetchUser();
   });
 
   return (
     <>
-      {editClicked ? <Edit /> : null}
+      {/* <Header /> */}
       {loading ? (
         <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -64,10 +62,13 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
                   {t("register:LabelsignUpName")}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {t("donor:donorCity")}
+                  {t("login:labelLoginEmail")}{" "}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {t("donor:donorMobile")}
+                  {t("donor:userstatus")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {t("register:LabelsignUpRole")}
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t("donor:donorAction")}
@@ -75,9 +76,9 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
               </tr>
             </thead>
             <tbody>
-              {donors.map((donor) => (
+              {users.map((user) => (
                 <tr
-                  key={donor.id}
+                  key={user.id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <th
@@ -85,18 +86,15 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
                     className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     <div className="ps-3">
-                      <div className="text-base font-semibold">
-                        {donor.name}
-                      </div>
-                      <div className="font-normal text-gray-500">
-                        {donor.email}
-                      </div>
+                      <div className="text-base font-semibold">{user.name}</div>
+                      {/* <div className="font-normal text-gray-500">
+                        {user.email}
+                      </div> */}
                     </div>
                   </th>
-                  <td className="px-6 py-4">{donor.city}</td>
+                  <td className="px-6 py-4">{user.email}</td>
                   <td className="px-6 py-4">
-                    {donor.mobile}
-                    {/* {donor.verified ? (
+                    {user.verified ? (
                       <div className="flex items-center">
                         <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
                         {t("donor:verifedStatus")}
@@ -106,20 +104,19 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
                         <div className="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
                         {t("donor:pendingStatus")}
                       </div>
-                    )} */}
+                    )}
                   </td>
-
+                  <td className="px-6 py-4">{user.role}</td>
                   <td className="flex px-6 py-4">
                     <Link
-                      onClick={() =>setEditClicked(true)}
-                      to={`/updateOne/${donor._id}`}
+                      to={`/updateOne/${user._id}`}
                       className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                     >
                       <RiEdit2Line size={20} color="#000" className="mr-2" />
                       {/* {t("common:updateButtonLabel")} */}
                     </Link>
                     <Link
-                      to={`/delete/${donor._id}`}
+                      to={`/delete/${user._id}`}
                       className="flex items-center bg-transparent  border-2 p-1 font-medium text-white dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
                     >
                       <RiDeleteBin2Line
@@ -146,4 +143,4 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
   );
 };
 
-export default DisplayDonor
+export default ViewUsers;

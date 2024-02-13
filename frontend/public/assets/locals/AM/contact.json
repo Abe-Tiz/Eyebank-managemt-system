@@ -11,6 +11,8 @@
   "invalidmessage": "እባክዎን መልእክት አስፈላጊ ነው",
   "phone": "ስልክ ቁጥር",
   "sendmessage": "መልእክት ላክ",
+  "Subject": "ርዕሰ ጉዳይ",
   "Address": "መገኛ",
+   "invalidsubject": "እባክህ የሚሰራ ርዕሰ ጉዳይ አስገባ።",
   "MenelikHospital": "ምኒልክ 2 ሪፈራል ሆስፒታል"
 }

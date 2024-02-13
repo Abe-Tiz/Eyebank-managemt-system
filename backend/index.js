@@ -8,6 +8,7 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const userRoute = require("./routes/userRoute");
 const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
+const reportRoute = require("./routes/ReportRoute");
 
  
 dotenv.config();  
@@ -33,8 +34,9 @@ const allowCrossDomain = (req, res, next) => {
 app.use(allowCrossDomain);
 
 app.use('/user', userRoute)
-app.use('/contact', contactRoute)
+// app.use('/contact', contactRoute)
 app.use('/donor', donorRoute)
+app.use('/report', reportRoute)
 
 app.use(notFound);
 app.use(errorHandler);
