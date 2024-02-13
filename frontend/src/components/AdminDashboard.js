@@ -1,31 +1,152 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Avatar, Badge, Drawer } from "antd";
-import {
-  DashboardOutlined,
-  UserOutlined,
-  BellOutlined,
-  SettingOutlined,
-  LogoutOutlined,
-} from "@ant-design/icons";
-import CreateDonor from "../sections/donor/CreateDonor";
+import { Layout, Badge } from "antd";
+import { BellOutlined, SettingOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import CreateDonor from "../sections/donor/CreateDonor";
+import DisplayDonor from "../sections/donor/DisplayDonor";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { TfiMenuAlt } from "react-icons/tfi";
+import CustomSidebar from './CustomeSider';
+import Signup from './../sections/auth/Signup';
+import Report from './Report';
+import ViewUsers from './../sections/auth/ViewUsers';
+import Edit from './../sections/donor/Edit';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// import "antd/dist/antd.css"; // Import Ant Design styles
-
-const { Header, Content, Sider } = Layout;
+const { Header, Content } = Layout;
 
 const AdminDashboard = () => {
-  const [displayCreateDonor, setDisplayCreateDonor] = useState(false);
-  const [name, setName] = useState("");
-  const [collapsed, setCollapsed] = useState(false);
-
   const navigate = useNavigate();
 
-  const handleAddDonorClick = () => {
-    setDisplayCreateDonor(true);
+ const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [editClicked, setEditClicked] = useState(false);
+  const [refreshed, setRefreshed] = useState(true);
+
+  const [state, setState] = useState({
+    displayCreateDonor: false,
+    name: "",
+    image: "",
+    isDropdownOpen: false,
+    displayDonor: false,
+    isLoggedin: false,
+    collapsed: false,
+    role: "",
+    isaddUser: false,
+    isuserList: false,
+    isDashboard: true,
+    
+  });
+
+    const handleSearch = () => {
+      const sampleList = [
+        { id: 1, name: "John Doe" },
+        { id: 2, name: "Jane Doe" },
+        
+      ];
+
+      const results = sampleList.filter((item) =>
+        item.name.toLowerCase().includes(searchText.toLowerCase())
+      );
+
+      setSearchResults(results);
+    };
+
+    const handleSearchInputChange = (e) => {
+      setSearchText(e.target.value);
+    };
+
+  const toggleDropdown = () => {
+    setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
   };
 
+  const toggleSidebar = () => {
+    setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
+  };
+
+
+  //! handle add user
+  // const handleViewUsers = () => {
+  //   setState({
+  //     ...state,
+  //     displayCreateDonor: false,
+  //     displayDonor: false,
+  //     isaddUser: false,
+  //     isuserList: false,
+  //     isDashboard: false,
+  //     isviewUser: !state.isviewUser,
+  //   });
+  // };
+  //! handle add donor
+  const handleAddDonorClick = () => {
+    setState({
+      ...state,
+      displayCreateDonor: !state.displayCreateDonor,
+      displayDonor: false,
+      isaddUser: false,
+      isuserList: false,
+      isDashboard: false,
+     });
+  };
+
+  //! handle display donor
+  const handleDisplayDonorClick = () => {
+    setState({
+      ...state,
+      displayDonor: !state.displayDonor,
+      displayCreateDonor: false,
+      isaddUser: false,
+      isuserList: false,
+      isDashboard: false,
+     });
+  };
+
+  //! handle user List
+  const handleUserList = () => {
+    setState({
+      ...state,
+      displayDonor: false,
+      displayCreateDonor: false,
+      isaddUser: false,
+      isuserList: !state.isuserList,
+      isDashboard: false,
+    });
+  };
+
+  //! handle add user
+  const handleAddUser = () => {
+    setState({
+      ...state,
+      displayDonor: false,
+      isaddUser: !state.isaddUser,
+      displayCreateDonor: false,
+      isDashboard: false,
+      isuserList: false,
+    });
+  };
+
+  //! handle dashboard
+  const handleDashboard = () => {
+    setState({
+      ...state,
+      displayDonor: false,
+      isaddUser: false,
+      isDashboard: !state.isDashboard,
+      displayCreateDonor: false,
+      isuserList: false,
+    });
+  };
+
+  //! handle Logout
+  const handleLogout = () => {
+    localStorage.clear();
+    
+    navigate("/login");
+
+  };
+
+  //! handle loggedin user
   useEffect(() => {
     fetch("http://127.0.0.1:4000/user/userLogedin", {
       method: "POST",
@@ -42,120 +163,149 @@ const AdminDashboard = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data.data, "user logged in");
-        setName(data.data.name);
+        setState((prev) => ({
+          ...prev,
+          name: data.data.name,
+          image: data.data.image,
+          role: data.data.role,
+          isLoggedin: true,
+        }));
+
         if (data.data === "token expired") {
           localStorage.clear();
+          setRefreshed(localStorage.getItem("token"));
           navigate("/login");
         }
       });
-  }, []);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
+      if (!refreshed) {
+        window.location.reload();
+        setRefreshed(true);
+      }
+
+  }, [navigate,refreshed]);
+
+
+    // useEffect(() => {
+    //   if (refreshed) {
+    //     window.location.reload();
+    //     setRefreshed(false);
+    //   }
+    // }, [refreshed]);
+
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={toggleCollapsed}
-        theme="dark"
-        breakpoint="lg"
-        collapsedWidth="0"
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0,
-        }}
-      >
-        <div
-          style={{
-            height: "60px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <DashboardOutlined
-            style={{ fontSize: "24px", color: "white", cursor: "pointer" }}
-            onClick={toggleCollapsed}
-          />
-        </div>
-        <Menu
-          mode="vertical"
-          theme="dark"
-          defaultSelectedKeys={["dashboard"]}
-          inlineCollapsed={collapsed}
-        >
-          <Menu.Item
-            key="addDonor"
-            icon={<UserOutlined />}
-            onClick={handleAddDonorClick}
-          >
-            Add Donor
-          </Menu.Item>
-        </Menu>
-      </Sider>
+    <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
+      <CustomSidebar
+        collapsed={state.collapsed}
+        toggleSidebar={toggleSidebar}
+        name={state.name}
+        image={state.image}
+        role={state.role}
+        handleAddDonorClick={handleAddDonorClick}
+        handleDisplayDonorClick={handleDisplayDonorClick}
+        handleUserList={handleUserList}
+        handleAddUser={handleAddUser}
+        handleReport={handleDashboard}
+      />
+
       <Layout
-        className="site-layout"
-        style={{ marginLeft: collapsed ? 80 : 200 }}
+        className={`${
+          state.collapsed ? "ml-20" : "ml-64"
+        } transition-all duration-300 ease-in-out flex-grow`}
       >
-        <Header
-          className="site-layout-background"
-          style={{
-            padding: 0,
-            background: "#fff",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Avatar
-              size={40}
-              style={{ backgroundColor: "#87d068", marginRight: "10px" }}
-              icon={<UserOutlined />}
-            />
-            <span>Admin {name}</span>
+        <Header className="bg-gray-900 p-4 shadow-lg flex justify-between items-center text-white">
+          <div className="flex items-center">
+            {state.collapsed ? (
+              <TfiMenuAlt
+                className="text-2xl text-gray-200 mr-2 cursor-pointer"
+                onClick={toggleSidebar}
+              />
+            ) : (
+              <GiHamburgerMenu
+                className="text-2xl text-gray-200 mr-2 cursor-pointer"
+                onClick={toggleSidebar}
+              />
+            )}
+             <span className="text-xl font-bold">
+              {state.role} {" "} {state.name}
+            </span>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Badge count={5} offset={[0, 5]} style={{ marginRight: "20px" }}>
-              <BellOutlined style={{ fontSize: "18px", color: "#1890ff" }} />
+          <div className="flex items-center space-x-4">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchText}
+              onChange={handleSearchInputChange}
+              className="border p-2 rounded bg-gray-800 text-white"
+            />
+            <button
+              onClick={handleSearch}
+              className="text-white hover:text-gray-300 transition-all duration-300"
+            >
+              Search
+            </button>
+
+            <Badge count={5} offset={[0, 5]} className="mr-5">
+              <BellOutlined className="text-2xl text-blue-500" />
             </Badge>
-            <SettingOutlined
-              style={{
-                fontSize: "18px",
-                color: "#1890ff",
-                cursor: "pointer",
-              }}
-            />
-            <LogoutOutlined
-              onClick={handleLogout}
-              style={{
-                fontSize: "18px",
-                color: "#1890ff",
-                marginLeft: "20px",
-                cursor: "pointer",
-              }}
-            />
+            <div className="relative inline-block">
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
+                type="button"
+              >
+                <img
+                  className="w-8 h-8 rounded-full"
+                  src={state.image}
+                  alt="user photo"
+                />
+              </button>
+
+              {state.isDropdownOpen && (
+                <div className="absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                  <ul className="py-2 text-sm text-gray-700">
+                    <li>
+                      <Link
+                        to="/settings"
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        <SettingOutlined className="text-2xl text-blue-500" />{" "}
+                        Settings
+                      </Link>
+                    </li>
+                  </ul>
+                  <div className="py-2">
+                    <button
+                      onClick={handleLogout}
+                      className="ml-5 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </Header>
-        <Content style={{ margin: "16px" }}>
-          <div
-            className="site-layout-background"
-            style={{ padding: 24, minHeight: 360 }}
-          >
-            <h1>Welcome to the Admin Dashboard</h1>
-            {displayCreateDonor && <CreateDonor />}
-            <p>Put your charts, tables, and other content here.</p>
+        <Content className="p-4">
+          <div className="bg-white p-4 rounded shadow w-full">
+            {state.isDashboard ? <Report /> : null}
+            {state.displayCreateDonor ? <CreateDonor /> : null}
+            {state.displayDonor ? (
+              <DisplayDonor
+                editClicked={editClicked}
+                setEditClicked={setEditClicked}
+              />
+            ) : null}
+            {state.isaddUser ? <Signup /> : null}
+            {state.isuserList ? <ViewUsers /> : null}
+
+            <Routes>
+              <Route path="/updateOne/:id" element={<Edit />} />
+            </Routes>
           </div>
         </Content>
       </Layout>

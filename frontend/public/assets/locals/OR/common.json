@@ -3,7 +3,8 @@
   "emailPlaceholderLabel": "Email galchaa",
   "namePlaceholderLabel": "Maqaa Galchi",
   "updateButtonLabel": "Odeeffannoo dhiyeenyaa",
-  "printButtonLabel": "Maxxansa",
+  "deleteButtonLabel": "Haquu",
+  "printButtonLabel": "maxxansaa",
   "registerButtonLabel": "Galmeessuu",
   "backButtonLabel": "Dugda"
 }

@@ -1,6 +1,7 @@
 {
     "labelDonor": "EYE BANK OF ETHIOPIA",
-    "donorAge": "Age",
+    "donorAge": "Date Of Birth",
+    "AgeDonor": "Age",
     "cardDonor": "Cornea Donation Card",
     "faxLabel": "Fax",
     "refNumberLabel": "Ref Number",
@@ -30,5 +31,6 @@
     "donorStatus": "Status",
     "verifedStatus": "Verified",
     "pendingStatus": "Pending",
+    "viewDonorTitle": " Please check your information before print",
     "donorAction": "Action"
 }

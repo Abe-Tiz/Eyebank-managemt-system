@@ -9,10 +9,13 @@ import i18next from "i18next";
 import cookies from "js-cookie";
 import classNames from "classnames";
 import { languages } from "../../Languages";
+ 
 
 const Navbar = () => {
   const currentLanguageCode = cookies.get("i18next") || "en";
   const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
+
+   const imagePath = process.env.PUBLIC_URL + "/images/log_ebms.jpg";
 
   const { t } = useTranslation();
 
@@ -39,11 +42,22 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container-fluid">
         <Link to="/" className="logo">
-          <Brand style={{ width: "50px", height: "50px", marginTop: "-30px",backgroundColor:"white",borderRadius:"50%"}} />
+          {/* <Brand style={{ width: "50px", height: "50px", marginTop: "-30px",backgroundColor:"white",borderRadius:"50%"}} /> */}
+          <img
+            style={{
+              width: "50px",
+              height: "50px",
+              marginTop: "-30px",
+              backgroundColor: "white",
+              borderRadius: "50%",
+            }}
+            src={imagePath}
+            alt="Profile Image"
+          />
         </Link>
         <div className="menu-icon" onClick={handleShowNavbar}>
           {showNavbar ? (
-            <IoMdClose color="white"/>
+            <IoMdClose color="white" />
           ) : (
             <Hamburger color="white" />
           )}
@@ -86,39 +100,39 @@ const Navbar = () => {
         {/* <ButtonPrimary title={t("translation:Login")}/> */}
 
         <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
-      <button
-        className="btn btn-link dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton1"
-        onClick={toggleDropdown}
-      >
-        {t("translation:language")}
-      </button>
-      <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        {languages.map(({ code, name, country_code }) => (
-          <li key={country_code}>
-            <a
-              href="#"
-              className={classNames("dropdown-item", {
-                disabled: currentLanguageCode === code,
-              })}
-              onClick={() => {
-                i18next.changeLanguage(code);
-                setDropdownOpen(false); // Close the dropdown after selecting
-              }}
-            >
-              <span
-                className={`flag-icon flag-icon-${country_code} mx-2`}
-                style={{
-                  opacity: currentLanguageCode === code ? 0.5 : 1,
-                }}
-              ></span>
-              {name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
+          <button
+            className="bg-transparent border-4 border-purple-800 p-1 text-white font-bold  dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            onClick={toggleDropdown}
+          >
+            {t("translation:language")}
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {languages.map(({ code, name, country_code }) => (
+              <li key={country_code}>
+                <a
+                  href="#"
+                  className={classNames("dropdown-item", {
+                    disabled: currentLanguageCode === code,
+                  })}
+                  onClick={() => {
+                    i18next.changeLanguage(code);
+                    setDropdownOpen(false); // Close the dropdown after selecting
+                  }}
+                >
+                  <span
+                    className={`flag-icon flag-icon-${country_code} mx-2`}
+                    style={{
+                      opacity: currentLanguageCode === code ? 0.5 : 1,
+                    }}
+                  ></span>
+                  {name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </nav>
   );

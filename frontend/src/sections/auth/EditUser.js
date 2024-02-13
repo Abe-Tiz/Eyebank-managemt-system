@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { BsLockFill, BsFillPersonFill } from "react-icons/bs";
 import "../../static/styles/signup.css";
@@ -9,8 +9,8 @@ import InputField from "../../components/InputField";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 import { FormControl } from "@chakra-ui/form-control";
- 
-const Signup = () => {
+
+const EditUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
@@ -20,90 +20,127 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatchError, setPasswordMatchError] = useState(false);
 
-
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const toast = useToast();
+    const toast = useToast();
+     const { id } = useParams();
 
-   const uploadImage = (pics) => {
-      setImageLoading(true);
-      // https://api.cloudinary.com/v1_1/dxa20yutc
-      if (pics === undefined) {
-        toast({
-          title: "Please Select an Image!",
-          status: "warning",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-        return;
-      }
-      console.log(pics);
 
-      if (pics.type === "image/jpeg" || pics.type === "image/png") {
-        const data = new FormData();
-        data.append("file", pics);
-        data.append("upload_preset", "mern-chat-app");
-        data.append("cloud_name", "dxa20yutc");
-        fetch("https://api.cloudinary.com/v1_1/dxa20yutc/image/upload", {
-          method: "post",
-          body: data,
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setImage(data.url.toString());
-            console.log(data.url.toString());
-            setImageLoading(false);
-          })
-          .catch((err) => {
-            console.log(err);
-            setImageLoading(false);
-          });
-      } else {
-        toast({
-          title: "Please Select an Image!",
-          status: "warning",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-        setImageLoading(false);
-        return;
-      }
+    useEffect(() =>{
+    const fetchDonor = async () => {
+        try {
+            if (!id) {
+                toast({
+                    title: "Udefined",
+                    description: "Id is Undefined",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top",
+                });
+            }
+
+            const res = await axios.get(`http://localhost:4000/user/${id}`);
+            const userData = res.data;
+            console.log(userData);
+
+            // Update state variables with the fetched data
+            setName(userData.name);
+            setEmail(userData.email);
+            setImage(userData.image);
+            setRole(userData.role);
+            } catch (error) {
+                toast({
+                    title: "Error Occured!",
+                    description: error.response.data.message,
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top",
+                });
+            } 
+        }
+        fetchDonor();
+  },[])
+
+  const uploadImage = (pics) => {
+    setImageLoading(true);
+    // https://api.cloudinary.com/v1_1/dxa20yutc
+    if (pics === undefined) {
+      toast({
+        title: "Please Select an Image!",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
     }
+    console.log(pics);
 
-
-  const handleConfirmPassword = (e) => {
-    const confirmPasswordValue = e.target.value;
-
-    setConfirmPassword(confirmPasswordValue);
-
-    // Check if passwords match and set error state
-    setPasswordMatchError(password !== confirmPasswordValue);
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "mern-chat-app");
+      data.append("cloud_name", "dxa20yutc");
+      fetch("https://api.cloudinary.com/v1_1/dxa20yutc/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setImage(data.url.toString());
+          console.log(data.url.toString());
+          setImageLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setImageLoading(false);
+        });
+    } else {
+      toast({
+        title: "Please Select an Image!",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+      setImageLoading(false);
+      return;
+    }
   };
+
+//   const handleConfirmPassword = (e) => {
+//     const confirmPasswordValue = e.target.value;
+
+//     setConfirmPassword(confirmPasswordValue);
+
+//     // Check if passwords match and set error state
+//     setPasswordMatchError(password !== confirmPasswordValue);
+//   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // setImageLoading(true);
 
-    const data  = axios
-      .post("http://localhost:4000/user/register", {
-        name,
-        email,
-        image,
-        password,
-        role,
-      });
-    
-      data.then((res) => {
+    const data = axios.post("http://localhost:4000/user/register", {
+      name,
+      email,
+      image,
+      password,
+      role,
+    });
+
+    data
+      .then((res) => {
         if (!name || !email || !password || !image || !role) {
-            toast({
-              title: "Please Fill all the Feilds",
-              status: "warning",
-              duration: 5000,
-              isClosable: true,
-              position: "top",
-            });
+          toast({
+            title: "Please Fill all the Feilds",
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+          });
         } else {
           // alert("Registered successfully.");
           toast({
@@ -114,25 +151,19 @@ const Signup = () => {
             position: "top",
           });
           localStorage.setItem("userInfo", JSON.stringify(data));
-          setName("");
-          setEmail("");
-          setImage("");
-          setPassword("");
-          setRole("");
-          setConfirmPassword("");
-          setImageLoading(false);
+          // navigate("/userList");
           console.log(res);
         }
       })
       .catch((err) => {
-          toast({
-            title: "Error Occured!",
-            description: err.response.data.message,
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-            position: "top",
-          });
+        toast({
+          title: "Error Occured!",
+          description: err.response.data.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
       });
   };
 
@@ -144,11 +175,11 @@ const Signup = () => {
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
-   
+
   //handle password change
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
+//   const handlePassword = (e) => {
+//     setPassword(e.target.value);
+//   };
 
   //handle role
   const handleRole = (e) => {
@@ -175,7 +206,6 @@ const Signup = () => {
                     <input
                       className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                       name="name"
-                      value={name}
                       type="text"
                       placeholder={t("common:namePlaceholderLabel")}
                       onChange={handleName}
@@ -198,7 +228,6 @@ const Signup = () => {
                   </label>
                   <div className="flex flex-col items-center">
                     <input
-                      value={email}
                       name="email"
                       type="email"
                       placeholder={t("common:emailPlaceholderLabel")}
@@ -225,7 +254,6 @@ const Signup = () => {
                   <div className="flex flex-col items-center">
                     <input
                       name="file"
-                      // value={image}
                       type="file"
                       accept="image/*"
                       onChange={(e) => uploadImage(e.target.files[0])}
@@ -251,7 +279,7 @@ const Signup = () => {
                     className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
                     onChange={handleRole}
                   >
-                    <option value={role}>{t("register:LabelRoleSelect")}</option>
+                    <option value="">{t("register:LabelRoleSelect")}</option>
                     <option value="admin">{t("register:LabelAdmin")}</option>
                     <option value="lab Techinician">
                       {t("register:LabelLabTechinician")}
@@ -265,7 +293,7 @@ const Signup = () => {
                     {t("register:LabelRoleError")}
                   </span>
                 </div>
-                <div className="mt-4">
+                {/* <div className="mt-4">
                   <label
                     htmlFor="password"
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
@@ -276,7 +304,6 @@ const Signup = () => {
                   <div className="flex flex-col items-center">
                     <input
                       name="password"
-                      value={password}
                       type="password"
                       className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                       autoComplete="off"
@@ -289,9 +316,9 @@ const Signup = () => {
                       {t("login:labelErrorPassword")}
                     </span>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="mt-4">
+                {/* <div className="mt-4">
                   <label
                     htmlFor="password_confirmation"
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
@@ -302,7 +329,6 @@ const Signup = () => {
                   <div className="flex flex-col items-center">
                     <input
                       type="password"
-                      value={confirmPassword}
                       name="password_confirmation"
                       placeholder="Confirm password"
                       className="block w-full border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
@@ -318,7 +344,7 @@ const Signup = () => {
                       </span>
                     )}
                   </div>
-                </div>
+                </div> */}
                 <ButtonComponent title={t("register:signUpLabel")} />
               </div>
             </form>
@@ -333,4 +359,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default EditUser;

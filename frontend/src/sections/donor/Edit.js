@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 
  
-const EditDonor = () => {
+const Edit = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
@@ -119,12 +119,8 @@ const EditDonor = () => {
             isClosable: true,
             position: "top",
           });
-          navigate("/viewdonor", {
-            state: {
-              data: res.data.result,
-            },
-          });
-          console.log(res.data.result);
+          navigate("/displayDonor");
+          console.log(res);
         }
       })
       .catch((err) => {
@@ -186,10 +182,10 @@ const EditDonor = () => {
             </div>
             <div className="flex flex-col justify-center ml-0 md:ml-4 mb-4 md:mb-0">
               <h3 className="block font-sans text-2xl ml-10 md:text-3xl antialiased font-semibold leading-snug tracking-normal text-inherit">
-                {t("donor:labelDonor")}
+                EYE BANK OF ETHIOPIA
               </h3>
               <h4 className="block font-sans text-xl md:text-2xl antialiased font-semibold leading-snug tracking-normal text-inherit">
-                {t("donor:subTitleDonor")}
+                Please Fill The following Information Carfully.
               </h4>
             </div>
           </div>
@@ -203,7 +199,7 @@ const EditDonor = () => {
                       htmlFor="age"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("register:LabelsignUpName")}
+                      Full Name
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
@@ -214,11 +210,11 @@ const EditDonor = () => {
                         value={name}
                         pattern="[0-9a-zA-Z ]{6,}"
                         required
-                        placeholder={t("common:namePlaceholderLabel")}
+                        placeholder="Enter Full Name"
                         onChange={handleName}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        {t("register:LabelFullNameError")}
+                        Full name must be at least 6 characters long
                       </span>
                     </div>
                   </div>
@@ -228,7 +224,7 @@ const EditDonor = () => {
                       htmlFor="age"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("donor:AgeDonor")}
+                      Age
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
@@ -242,10 +238,9 @@ const EditDonor = () => {
                         pattern="[2-9]|[1-7][0-9]|80"
                         placeholder="Enter Your Age"
                         onChange={handleAge}
-                        readOnly
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        {t("donor:donorAgeError")}
+                        Age must be between 2 and 80.
                       </span>
                     </div>
                   </div>
@@ -255,27 +250,10 @@ const EditDonor = () => {
                       htmlFor="sex"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("donor:donorSex")}
+                      Sex
                       <span className="text-red-500">*</span>
                     </label>
-
-                    <div className="flex flex-col items-start">
-                      <input
-                        name="sex"
-                        type="text"
-                        value={sex}
-                        // pattern="[a-zA-Z ]{2,}"
-                        required
-                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        // placeholder="Enter Your Sex"
-                        onChange={handleSex}
-                      />
-                      <span className="mt-1 hidden text-sm text-red-400">
-                        {t("donor:donorSexError")}
-                      </span>
-                    </div>
-
-                    {/* <select
+                    <select
                       name="sex"
                       className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
                       onChange={handleSex}
@@ -286,7 +264,7 @@ const EditDonor = () => {
                     </select>
                     <span className="mt-1 hidden text-sm text-red-400">
                       you must select the sex
-                    </span> */}
+                    </span>
                   </div>
                 </div>
 
@@ -296,7 +274,7 @@ const EditDonor = () => {
                       htmlFor="city"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("donor:donorCity")}
+                      City
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -308,11 +286,11 @@ const EditDonor = () => {
                         pattern="[0-9a-zA-Z ]{2,}"
                         required
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        // placeholder="Enter Your City"
+                        placeholder="Enter Your City"
                         onChange={handleCity}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        {t("donor:donorCityError")}
+                        City must be at least 2 characters long
                       </span>
                     </div>
                   </div>
@@ -322,7 +300,7 @@ const EditDonor = () => {
                       htmlFor="subcity"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("donor:donorSubCity")}
+                      Sub City
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -331,15 +309,15 @@ const EditDonor = () => {
                         name="subcity"
                         type="text"
                         value={subcity}
-                        // pattern="[0-9a-zA-Z ]"
+                        pattern="[0-9a-zA-Z ]{2,}"
                         required
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         placeholder="Enter Sub City"
                         onChange={handleSubcity}
                       />
-                      {/* <span className="mt-1 hidden text-sm text-red-400">
-                        subcity must be  characters  
-                      </span> */}
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        subcity must be at least 2 characters long
+                      </span>
                     </div>
                   </div>
 
@@ -348,7 +326,7 @@ const EditDonor = () => {
                       htmlFor="kebele"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("donor:donorKebele")}
+                      Kebele
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -364,7 +342,7 @@ const EditDonor = () => {
                         onChange={handleKebele}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        {t("donor:donorKebeleError")}
+                        kebele must be at least 2 characters long
                       </span>
                     </div>
                   </div>
@@ -375,7 +353,7 @@ const EditDonor = () => {
                       htmlFor="hno"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("donor:donorHno")}
+                      H.No
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
@@ -391,7 +369,7 @@ const EditDonor = () => {
                         onChange={handleHouseNumber}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        {t("donor:donorHnoError")}
+                        House Number minimum 2 and maximum 12 digit.{" "}
                       </span>
                     </div>
                   </div>
@@ -400,7 +378,7 @@ const EditDonor = () => {
                       htmlFor="mobile"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("donor:donorMobile")}
+                      Mobile
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -418,7 +396,7 @@ const EditDonor = () => {
                       />
 
                       <span className="mt-1 hidden text-sm text-red-400">
-                        {t("donor:donorMobileError")}
+                        Mobile Number must be 10 digit.{" "}
                       </span>
                     </div>
                   </div>
@@ -428,7 +406,7 @@ const EditDonor = () => {
                       htmlFor="email"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("login:labelLoginEmail")}
+                      Email
                       <span className="text-red-500">*</span>
                     </label>
 
@@ -445,7 +423,7 @@ const EditDonor = () => {
                         onChange={(e) => setEmail(e.target.value)}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
-                        {t("login:labelErrorEmail")}
+                        Please enter a valid email address.{" "}
                       </span>
                     </div>
                   </div>
@@ -455,7 +433,7 @@ const EditDonor = () => {
                 <div className="mt-4 flex items-center">
                   <button
                     onClick={() => navigate(-1)}
-                    className="bg-transparent px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5 "
+                    className=" bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 border-2 mr-2"
                   >
                     {t("common:backButtonLabel")}
                   </button>
@@ -464,13 +442,13 @@ const EditDonor = () => {
                   <button
                     type="submit"
                     disabled={!canSubmit}
-                    className={`bg-gray-400 px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5    focus:outline-none focus:ring-1 focus:ring-blue-300 ${
+                    className={`bg-orange-500 hover:bg-orange-700 text-white font-bold  py-2 px-4  border-orange-500 border-2  hover:border-orange-700   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
                       !canSubmit
                         ? "disabled:cursor-no-drop disabled:border-2 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
                         : ""
                     }`}
                   >
-                    {t("common:updateButtonLabel")}
+                    Update
                   </button>
                 </div>
               </div>
@@ -482,4 +460,4 @@ const EditDonor = () => {
   );
 };
 
-export default EditDonor;
+export default Edit;

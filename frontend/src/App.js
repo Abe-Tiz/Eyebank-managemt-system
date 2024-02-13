@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./sections/auth/Login";
 import Signup from "./sections/auth/Signup";
@@ -19,51 +19,58 @@ import ForgotPassword from "./sections/auth/ForgotPassword";
 import ResetPassword from "./sections/auth/ResetPassword";
 import Navbar from "./sections/header/Header";
 import Footer from "./sections/footer/footer";
-import CreateAwareness from "./sections/awareness/createAwareness"; 
+import CreateAwareness from "./sections/awareness/createAwareness";
 import CreateVideo from "./sections/awareness/createVideo";
-// import About from './config/sections/about/About';
-
+import DonorLog from "./sections/donor/DonorLog";
+import ViewDonor from './sections/donor/ViewDonor';
+import Edit from "./sections/donor/Edit";
+import ViewUsers from './sections/auth/ViewUsers';
+  
 
 function App() {
-    const currentLanguageCode = cookies.get("i18next") || "en";
-    const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
+  const currentLanguageCode = cookies.get("i18next") || "en";
+  const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
+  const [isLoggedin, setIsLoggedin] = useState(false);
 
-    const { t } = useTranslation();
-    useEffect(() => {
-        document.title = t("app_title");
-    }, [currentLanguage, t]);
+  const { t } = useTranslation();
+  useEffect(() => {
+    document.title = t("app_title");
+    setIsLoggedin(localStorage.getItem("loggedIn") === "true");
+  }, [currentLanguage, t]);
 
-    const isLogedin = localStorage.getItem("loggedIn");
+  return (
+    <>
+      {/* Conditionally render Navbar and Footer */}
+      {!isLoggedin ? <Navbar /> : ""}
 
-    return (
-      <>
-        <Navbar />
-        <Routes>
-          <Route
-            path="/"
-            element={isLogedin === true ? <AdminDashboard /> : <Home />}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route
-            path="/reset_password/:id/:token"
-            element={<ResetPassword />}
-          />
-          <Route path="/register" element={<Signup />} />
-          <Route path="/dashboard" element={<AdminDashboard />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/awareness" element={<EyeCareAwareness />} />
-          <Route path="/createAwareness" element={<CreateAwareness/>}/>
-          <Route path="/createVideo" element={<CreateVideo/>}/>
-          <Route path="/registerDonor" element={<CreateDonor />} />
-          <Route path="/displayDonor" element={<DisplayDonor />} />
-          <Route path="/print/:id" element={<PrintCard />} />
-          <Route path="/update/:id" element={<EditDonor />} />
-        </Routes>
-        <Footer />
-      </>
-    );
+      <Routes>
+        {/*  */}
+        <Route path="/" element={isLoggedin ? <AdminDashboard /> : <Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset_password/:id/:token" element={<ResetPassword />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/awareness" element={<EyeCareAwareness />} />
+        <Route path="/createAwareness" element={<CreateAwareness />} />
+        <Route path="/createVideo" element={<CreateVideo />} />
+        <Route path="/registerDonor" element={<CreateDonor />} />
+        <Route path="/displayDonor" element={<DisplayDonor />} />
+        <Route path="/print/:id" element={<PrintCard />} />
+        <Route path="/update/:id" element={<EditDonor />} />
+        <Route path="/updateOne/:id" element={<Edit />} />
+        <Route path="/donorlog" element={<DonorLog />} />
+        <Route path="/viewdonor" element={<ViewDonor />} />
+        <Route path="/userList" element={<ViewUsers />} />
+
+      </Routes>
+
+      {/* Conditionally render Navbar and Footer */}
+      {!isLoggedin && <Footer />}
+    </>
+  );
 }
 
 export default App;
