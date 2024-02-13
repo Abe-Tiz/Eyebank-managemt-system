@@ -48,13 +48,13 @@ const Home = () => {
             <div className="mt-8 space-x-4">
               <button
                 onClick={() => navigate("/contact")}
-                className="bg-gray-400 px-5 py-2 text-2xl border-2 text-gray-700 border-gray-700  hover:bg-gray-600 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5  "
+                className="bg-green hover:bg-gray-400 px-3 py-2 text-2xl text-white font-extrabold mt-3 mr-5  "
               >
                 {t("translation:homeContact")}
               </button>
               <button
                 onClick={() => navigate("/registerDonor")}
-                className="bg-transparent px-5 py-2 text-2xl  border-2 border-blue-700  hover:bg-yellow-600 text-black font-extrabold mt-3 mr-5 "
+                className="bg-green hover:bg-gray-400 px-5 py-2 text-2xl text-white font-extrabold mt-3 mr-5 "
               >
                 {t("translation:Donor")}
               </button>
@@ -88,8 +88,8 @@ const Home = () => {
             </div>
             <div className="flex justify-center">
               <button
-                className="bg-white text-xl border-2 border-blue-700  hover:bg-orange-600 text-black font-extrabold mt-3 mr-5 px-4 py-2 "
-                onClick={() => navigate("/About")}
+                className="bg-green hover:bg-gray-400 text-white font-extrabold mt-3 text-xl mr-5 px-4 py-2 "
+                onClick={() => navigate("/about")}
               >
                 {t("about:readmore")}
               </button>
@@ -118,7 +118,7 @@ const Home = () => {
             </div>
             <div className="flex justify-center">
               <button
-                className="bg-white  border-2 border-blue-700  hover:bg-orange-600 text-black font-extrabold mt-3 text-xl mr-5 px-4 py-2 "
+                className="bg-green hover:bg-gray-400 text-white font-extrabold mt-3 text-xl mr-5 px-4 py-2 "
                 onClick={() => navigate("/awareness")}
               >
                 {t("about:readmore")}
@@ -126,22 +126,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        {/* <div className="flex items-center justify-center">
-          <img
-            src={imagePath}
-            alt="Eye"
-            className="rounded shadow-lg mr-4 w-40 md:w-60 lg:w-48" // Adjust the width as needed
-          />
-          <div className="w-full md:w-1/2 text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold my-4 font-segoe-mdl2">
-              {t("mracleTitle")}
-            </h2>
-            <p className="text-sm md:text-base lg:text-lg font-segoe-mdl2">
-              {t("homeDescriptionLabel")}
-            </p>
-          </div>
-        </div> */}
       </div>
     </>
   );
