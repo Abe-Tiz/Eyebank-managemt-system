@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from 'react-i18next';
 import { RiEdit2Line, RiDeleteBin2Line } from 'react-icons/ri'; 
-import Edit from './Edit';
 
 
-const DisplayDonor = ({ editClicked, setEditClicked }) => {
+
+const DisplayDonor = () => {
   const [donors, setDonors] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -54,7 +54,6 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
 
   return (
     <>
-      {editClicked ? <Edit /> : null}
       {loading ? (
         <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -111,8 +110,7 @@ const DisplayDonor = ({ editClicked, setEditClicked }) => {
 
                   <td className="flex px-6 py-4">
                     <Link
-                      onClick={() =>setEditClicked(true)}
-                      to={`/updateOne/${donor._id}`}
+                      to={`/adminDashboard/edit/${donor._id}`}
                       className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                     >
                       <RiEdit2Line size={20} color="#000" className="mr-2" />

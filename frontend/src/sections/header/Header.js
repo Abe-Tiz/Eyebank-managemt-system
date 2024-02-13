@@ -70,7 +70,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/About" onClick={hideNavbar}>
+              <NavLink to="/about" onClick={hideNavbar}>
                 {t("translation:About")}
               </NavLink>
             </li>

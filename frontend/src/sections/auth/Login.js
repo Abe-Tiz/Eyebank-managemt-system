@@ -48,7 +48,7 @@ const Login = () => {
               position: "top",
             });
              setRefreshed(true);
-            navigate("/dashboard");
+            navigate("/adminDashboard");
           } else {
               localStorage.setItem("token", data.data);
               localStorage.setItem("loggedIn", true);
@@ -59,7 +59,7 @@ const Login = () => {
               isClosable: true,
               position: "top",
             });
-            navigate("/dashboard");
+            navigate("/adminDashboard");
           }
         }
       }
