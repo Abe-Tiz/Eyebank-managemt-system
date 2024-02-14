@@ -12,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [attempts, setAttempts] = useState(0);
-  const [refreshed, setRefreshed] = useState(false);
+  // const [refreshed, setRefreshed] = useState(false);
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ const Login = () => {
               isClosable: true,
               position: "top",
             });
-             setRefreshed(true);
+            //  setRefreshed(true);
             navigate("/adminDashboard");
           } else {
               localStorage.setItem("token", data.data);
@@ -113,12 +113,12 @@ const Login = () => {
     }
   };
 
-    useEffect(() => {
-      if (refreshed) {
-          window.location.reload();
-          setRefreshed(false);
-      }
-    }, [refreshed]);
+    // useEffect(() => {
+    //   if (refreshed) {
+    //       window.location.reload();
+    //       setRefreshed(false);
+    //   }
+    // }, [refreshed]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);

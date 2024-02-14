@@ -19,6 +19,7 @@ import ForgotPassword from "../sections/auth/ForgotPassword";
 import ResetPassword from "../sections/auth/ResetPassword";
 import CreateAwareness from "../sections/awareness/createAwareness";
 import CreateVideo from "../sections/awareness/createVideo";
+import EditUser from './../sections/auth/EditUser';
    
 const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: "/adminDashboard/edit/:id",
         element: <Edit />,
+      },
+      {
+        path: "/adminDashboard/edituser/:id",
+        element: <EditUser />,
       },
     ],
   },
