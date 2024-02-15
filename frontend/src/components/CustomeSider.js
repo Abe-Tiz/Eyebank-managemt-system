@@ -29,7 +29,7 @@ const CustomSidebar = ({
           <div className="flex flex-col items-center">
             <Link
               className="text-white p-2 hover:bg-gray-800 rounded"
-              to="/adminDashboard/report"
+              to="/adminDashboard"
               data-tooltip-id="my-dashboard"
               data-tooltip-content="Dashboard"
             >
@@ -95,7 +95,7 @@ const CustomSidebar = ({
             {/* btn */}
             <div className="mt-4 flex flex-col items-center">
               <Link
-                to="/adminDashboard/report"
+                to="/adminDashboard"
                 className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
                 // onClick={handleReport}
                 data-tooltip-id="my-dashboard"
