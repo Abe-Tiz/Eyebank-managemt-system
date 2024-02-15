@@ -25,7 +25,7 @@ const StoredCornea = () => {
                   htmlFor="age"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  {t("register:LabelsignUpName")}{" "}
+                  Lot Number
                   <span class="text-red-500">*</span>
                 </label>
                 <div className="flex flex-col items-start">
@@ -33,13 +33,29 @@ const StoredCornea = () => {
                     className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                     name="name"
                     type="text"
-                    placeholder={t("common:namePlaceholderLabel")}
-                    pattern="[a-zA-Z ]{6,}"
+                    placeholder="enter lot number of cornea"
+                    pattern="[a-zA-Z0-9 ]"
                     required
                   />
                   <span className="mt-1 hidden text-sm text-red-400">
-                    {t("register:LabelFullNameError")}
+                    Lot Number is required
                   </span>
+                </div>
+              </div>
+              <div className="mt-4">
+                <label
+                  htmlFor="age"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Date of preservation 
+                  <span class="text-red-500">*</span>
+                </label>
+                <div className="flex flex-col items-start">
+                  <input
+                    className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                    name="date of preserve"
+                    type="date"
+                  />
                 </div>
               </div>
 
@@ -53,11 +69,9 @@ const StoredCornea = () => {
                 </label>
                 <div className="flex flex-col items-center">
                   <input
-                    // value={email}
                     name="email"
                     type="email"
                     placeholder={t("common:emailPlaceholderLabel")}
-                    // onChange={handleEmail}
                     className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                     autoComplete="off"
                     required
@@ -79,7 +93,6 @@ const StoredCornea = () => {
                 <select
                   name="sex"
                   className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
-                  //   onChange={handleRole}
                 >
                   <option>{t("register:LabelRoleSelect")}</option>
                   <option value="admin">{t("register:LabelAdmin")}</option>

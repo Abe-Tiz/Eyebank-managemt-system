@@ -80,10 +80,6 @@ const router = createBrowserRouter([
         path: "/update/:id",
         element: <EditDonor />,
       },
-      {
-        path: "/storeCornea",
-        element: <StoredCornea />,
-      },
     ],
   },
   {
@@ -117,6 +113,10 @@ const router = createBrowserRouter([
       {
         path: "/adminDashboard/edituser/:id",
         element: <EditUser />,
+      },
+      {
+        path: "/adminDashboard/storeCornea",
+        element: <StoredCornea />,
       },
     ],
   },
