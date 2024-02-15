@@ -25,7 +25,6 @@ const CustomSidebar = ({
     >
       <div className="flex flex-col h-full mt-0">
         {collapsed ? (
-
           // collapsed btn
           <div className="flex flex-col items-center">
             <Link
@@ -73,10 +72,18 @@ const CustomSidebar = ({
               {/* <SettingOutlined className="text-2xl" /> */}
               <CiBoxList className="text-2xl" />
             </Link>
+            <Link
+              className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+              to="/adminDashboard/storeCornea"
+              data-tooltip-id="user-list"
+              data-tooltip-content="Store Cornea"
+            >
+              {/* <SettingOutlined className="text-2xl" /> */}
+              <CiBoxList className="text-2xl" />
+            </Link>
           </div>
         ) : (
-            <>
-              
+          <>
             {/* user progfile inage */}
             <img
               className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"
@@ -85,7 +92,7 @@ const CustomSidebar = ({
             />
             <span className="text-lg font-semibold ml-10">{name}</span>
 
-              {/* btn */}
+            {/* btn */}
             <div className="mt-4 flex flex-col items-center">
               <Link
                 to="/adminDashboard/report"
@@ -138,11 +145,19 @@ const CustomSidebar = ({
                 <CiBoxList className="text-2xl" />
                 <span className="ml-2"> {t("common:listUserrLabel")}</span>
               </Link>
+              <Link
+                to="/adminDashboard/storeCornea"
+                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                data-tooltip-id="user-list"
+                data-tooltip-content="Store Cornea"
+              >
+                <CiBoxList className="text-2xl" />
+                <span className="ml-2"> Store Cornea</span>
+              </Link>
             </div>
           </>
         )}
       </div>
-
 
       {/* tooltips */}
       <Tooltip
