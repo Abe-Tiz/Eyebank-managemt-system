@@ -119,7 +119,7 @@ const Edit = () => {
             isClosable: true,
             position: "top",
           });
-          navigate("/displayDonor");
+          navigate("/adminDashboard/donorList");
           console.log(res);
         }
       })
@@ -454,6 +454,7 @@ const Edit = () => {
               </div>
             </form>
           </div>
+          
         </div>
       </div>
     </>
