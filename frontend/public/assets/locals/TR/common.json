@@ -6,5 +6,12 @@
   "printButtonLabel": "ሕትመት",
   "deleteButtonLabel": "ምድምሳስ",
   "registerButtonLabel": "ምዝገባ",
+  "logouttButtonLabel": "ኣውት ኣውት",
+  "settingtButtonLabel": "ቅጥዕታት",
+   "dashboardLabel": "ዳሽቦርድ",
+  "addDonorLabel": "ለጋሲ ወስኽ",
+  "listDonorLabel": "ዝርዝር ለገስቲ",
+  "addUserrLabel": "ተጠቃሚ ምውሳኽ",
+  "listUserrLabel": "ዝርዝር ተጠቀምቲ",
   "backButtonLabel": "ዝባን"
 }

@@ -3,39 +3,28 @@ import { Layout, Badge } from "antd";
 import { BellOutlined, SettingOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import CreateDonor from "../sections/donor/CreateDonor";
-import DisplayDonor from "../sections/donor/DisplayDonor";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiMenuAlt } from "react-icons/tfi";
 import CustomSidebar from './CustomeSider';
-import Signup from './../sections/auth/Signup';
-import Report from './Report';
-import ViewUsers from './../sections/auth/ViewUsers';
-import Edit from './../sections/donor/Edit';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
 
 const { Header, Content } = Layout;
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
  const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [editClicked, setEditClicked] = useState(false);
-  const [refreshed, setRefreshed] = useState(true);
-
+  
   const [state, setState] = useState({
-    displayCreateDonor: false,
     name: "",
     image: "",
     isDropdownOpen: false,
-    displayDonor: false,
     isLoggedin: false,
     collapsed: false,
     role: "",
-    isaddUser: false,
-    isuserList: false,
-    isDashboard: true,
     
   });
 
@@ -65,83 +54,9 @@ const AdminDashboard = () => {
     setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
   };
 
-
-  //! handle add user
-  // const handleViewUsers = () => {
-  //   setState({
-  //     ...state,
-  //     displayCreateDonor: false,
-  //     displayDonor: false,
-  //     isaddUser: false,
-  //     isuserList: false,
-  //     isDashboard: false,
-  //     isviewUser: !state.isviewUser,
-  //   });
-  // };
-  //! handle add donor
-  const handleAddDonorClick = () => {
-    setState({
-      ...state,
-      displayCreateDonor: !state.displayCreateDonor,
-      displayDonor: false,
-      isaddUser: false,
-      isuserList: false,
-      isDashboard: false,
-     });
-  };
-
-  //! handle display donor
-  const handleDisplayDonorClick = () => {
-    setState({
-      ...state,
-      displayDonor: !state.displayDonor,
-      displayCreateDonor: false,
-      isaddUser: false,
-      isuserList: false,
-      isDashboard: false,
-     });
-  };
-
-  //! handle user List
-  const handleUserList = () => {
-    setState({
-      ...state,
-      displayDonor: false,
-      displayCreateDonor: false,
-      isaddUser: false,
-      isuserList: !state.isuserList,
-      isDashboard: false,
-    });
-  };
-
-  //! handle add user
-  const handleAddUser = () => {
-    setState({
-      ...state,
-      displayDonor: false,
-      isaddUser: !state.isaddUser,
-      displayCreateDonor: false,
-      isDashboard: false,
-      isuserList: false,
-    });
-  };
-
-  //! handle dashboard
-  const handleDashboard = () => {
-    setState({
-      ...state,
-      displayDonor: false,
-      isaddUser: false,
-      isDashboard: !state.isDashboard,
-      displayCreateDonor: false,
-      isuserList: false,
-    });
-  };
-
   //! handle Logout
   const handleLogout = () => {
     localStorage.clear();
-    
     navigate("/login");
 
   };
@@ -173,26 +88,12 @@ const AdminDashboard = () => {
 
         if (data.data === "token expired") {
           localStorage.clear();
-          setRefreshed(localStorage.getItem("token"));
           navigate("/login");
         }
       });
 
-
-      if (!refreshed) {
-        window.location.reload();
-        setRefreshed(true);
-      }
-
-  }, [navigate,refreshed]);
-
-
-    // useEffect(() => {
-    //   if (refreshed) {
-    //     window.location.reload();
-    //     setRefreshed(false);
-    //   }
-    // }, [refreshed]);
+  }, [navigate]);
+ 
 
 
   return (
@@ -203,11 +104,6 @@ const AdminDashboard = () => {
         name={state.name}
         image={state.image}
         role={state.role}
-        handleAddDonorClick={handleAddDonorClick}
-        handleDisplayDonorClick={handleDisplayDonorClick}
-        handleUserList={handleUserList}
-        handleAddUser={handleAddUser}
-        handleReport={handleDashboard}
       />
 
       <Layout
@@ -228,8 +124,8 @@ const AdminDashboard = () => {
                 onClick={toggleSidebar}
               />
             )}
-             <span className="text-xl font-bold">
-              {state.role} {" "} {state.name}
+            <span className="text-xl font-bold">
+              {state.role} {state.name}
             </span>
           </div>
 
@@ -273,7 +169,7 @@ const AdminDashboard = () => {
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
                         <SettingOutlined className="text-2xl text-blue-500" />{" "}
-                        Settings
+                        {t("common:settingButtonLabel")}
                       </Link>
                     </li>
                   </ul>
@@ -282,7 +178,7 @@ const AdminDashboard = () => {
                       onClick={handleLogout}
                       className="ml-5 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
-                      Logout
+                      {t("common:logouttButtonLabel")}
                     </button>
                   </div>
                 </div>
@@ -290,22 +186,12 @@ const AdminDashboard = () => {
             </div>
           </div>
         </Header>
+
         <Content className="p-4">
           <div className="bg-white p-4 rounded shadow w-full">
-            {state.isDashboard ? <Report /> : null}
-            {state.displayCreateDonor ? <CreateDonor /> : null}
-            {state.displayDonor ? (
-              <DisplayDonor
-                editClicked={editClicked}
-                setEditClicked={setEditClicked}
-              />
-            ) : null}
-            {state.isaddUser ? <Signup /> : null}
-            {state.isuserList ? <ViewUsers /> : null}
-
-            <Routes>
-              <Route path="/updateOne/:id" element={<Edit />} />
-            </Routes>
+          
+            <Outlet />
+          
           </div>
         </Content>
       </Layout>
