@@ -87,12 +87,12 @@ const router = createBrowserRouter([
     element: <AdminDashboard />,
     children: [
       {
-        path: "/adminDashboard/addDonor",
-        element: <CreateDonor />,
+        path: "/adminDashboard",
+        element: <Report />,
       },
       {
-        path: "/adminDashboard/report",
-        element: <Report />,
+        path: "/adminDashboard/addDonor",
+        element: <CreateDonor />,
       },
       {
         path: "/adminDashboard/donorList",
