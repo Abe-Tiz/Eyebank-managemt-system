@@ -128,7 +128,7 @@ const AdminDashboard = () => {
           </div>
 
           <div className="bg-base-100 flex items-center justify-center space-x-4">
-            <div className="flex-none">
+            <div className="flex-none gap-2">
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}
@@ -136,10 +136,10 @@ const AdminDashboard = () => {
                   className="btn btn-ghost btn-circle items-center justify-center text-center mr-5"
                 >
                   <div className="indicator flex items-center  ">
-                    <Badge count={5} offset={[0, 5]} className="mr-5">
+                    <Badge count={5} offset={[0, 5]} className="mr-5 mt-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-5xl"
+                        className="h-10 w-10 text-5xl"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -173,14 +173,13 @@ const AdminDashboard = () => {
               <div className="dropdown dropdown-end ">
                 <div
                   tabIndex={0}
-                  // role="button"
-                  className="btn btn-ghost btn-circle avatar items-center  text-center"
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
                 >
-                  <div>
+                  <div className="w-10 rounded-full">
                     <img
                       alt="Tailwind CSS Navbar component"
                       src={state.image}
-                      className="w-16 h-16 rounded-full avatar"
                     />
                   </div>
                 </div>
