@@ -20,6 +20,7 @@ import ResetPassword from "../sections/auth/ResetPassword";
 import CreateAwareness from "../sections/awareness/createAwareness";
 import CreateVideo from "../sections/awareness/createVideo";
 import EditUser from './../sections/auth/EditUser';
+import StoredCornea from './../sections/corneas/StoredCornea';
    
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <EditDonor />,
+      },
+      {
+        path: "/storeCornea",
+        element: <StoredCornea />,
       },
     ],
   },
