@@ -448,13 +448,12 @@ const Edit = () => {
                         : ""
                     }`}
                   >
-                    Update
+                    {t("common:updateButtonLabel")}
                   </button>
                 </div>
               </div>
             </form>
           </div>
-          
         </div>
       </div>
     </>

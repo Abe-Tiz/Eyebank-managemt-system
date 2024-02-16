@@ -110,7 +110,7 @@ const getDonor = asyncHandler(async (req, res) => {
     Donor.find()
       .maxTimeMS(20000)
       .then((respons) => {
-        console.log(respons);
+        // console.log(respons);
         res.json(respons);
       })
       .catch((err) => {
