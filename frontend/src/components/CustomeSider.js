@@ -19,7 +19,7 @@ const CustomSidebar = ({
   
   return (
     <div
-      className={`bg-indigo-900 overflow-auto h-screen fixed text-white transition-all duration-300 ${
+      className={`bg-indigo-900 overflow-auto h-screen fixed overflow-scroll overflow-x-hidden text-white transition-all duration-300 ${
         collapsed ? "w-20" : "w-64"
       }`}
     >
