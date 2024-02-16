@@ -22,6 +22,7 @@ const Navbar = () => {
   useEffect(() => {
     document.title = t("app_title");
   }, [currentLanguage, t]);
+  
 
   const [showNavbar, setShowNavbar] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);

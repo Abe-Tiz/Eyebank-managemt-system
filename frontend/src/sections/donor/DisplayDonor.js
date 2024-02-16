@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import axios  from 'axios';
-import { Link } from 'react-router-dom';
-import { useToast } from "@chakra-ui/react";
-import { useTranslation } from 'react-i18next';
-import { RiEdit2Line, RiDeleteBin2Line } from 'react-icons/ri'; 
-
-
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import {
+  useToast,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+} from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+import { RiEdit2Line, RiDeleteBin2Line } from "react-icons/ri";
 
 const DisplayDonor = () => {
   const [donors, setDonors] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   const toast = useToast();
   const { t } = useTranslation();
+  const cancelRef = useRef();
 
   useEffect(() => {
     const fetchDonor = async () => {
@@ -20,12 +29,9 @@ const DisplayDonor = () => {
         const response = await axios.get("http://localhost:4000/donor");
         const donordata = response.data;
 
-        // Check if the array is not empty
         if (donordata && donordata.length > 0) {
-          const donors = donordata.map((donor) => donor);
           setLoading(true);
-          setDonors(donors);
-          console.log(donors);
+          setDonors(donordata);
         } else {
           console.log("Array is empty.");
           toast({
@@ -39,8 +45,8 @@ const DisplayDonor = () => {
         }
       } catch (error) {
         toast({
-          title: "Error Occured!",
-          description: error.donordata.message,
+          title: "Error Occurred!",
+          description: error.message,
           status: "error",
           duration: 5000,
           isClosable: true,
@@ -50,7 +56,40 @@ const DisplayDonor = () => {
     };
 
     fetchDonor();
-  });
+  }, [toast]);
+
+  const onClose = () => setIsOpen(false);
+
+  const onOpen = (id) => {
+    setIsOpen(true);
+    setDeleteId(id);
+  };
+
+  // delete donor
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:4000/donor/delete/${deleteId}`);
+      setDonors(donors.filter((donor) => donor._id !== deleteId));
+      toast({
+        title: "Donor Deleted",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    } catch (error) {
+      toast({
+        title: "Error Occurred!",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    } finally {
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -76,7 +115,7 @@ const DisplayDonor = () => {
             <tbody>
               {donors.map((donor) => (
                 <tr
-                  key={donor.id}
+                  key={donor._id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <th
@@ -93,31 +132,16 @@ const DisplayDonor = () => {
                     </div>
                   </th>
                   <td className="px-6 py-4">{donor.city}</td>
-                  <td className="px-6 py-4">
-                    {donor.mobile}
-                    {/* {donor.verified ? (
-                      <div className="flex items-center">
-                        <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                        {t("donor:verifedStatus")}
-                      </div>
-                    ) : (
-                      <div className="flex items-center">
-                        <div className="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>
-                        {t("donor:pendingStatus")}
-                      </div>
-                    )} */}
-                  </td>
-
+                  <td className="px-6 py-4">{donor.mobile}</td>
                   <td className="flex px-6 py-4">
                     <Link
                       to={`/adminDashboard/edit/${donor._id}`}
                       className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                     >
                       <RiEdit2Line size={20} color="#000" className="mr-2" />
-                      {/* {t("common:updateButtonLabel")} */}
                     </Link>
-                    <Link
-                      to={`/delete/${donor._id}`}
+                    <button
+                      onClick={() => onOpen(donor._id)}
                       className="flex items-center bg-transparent  border-2 p-1 font-medium text-white dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
                     >
                       <RiDeleteBin2Line
@@ -125,8 +149,7 @@ const DisplayDonor = () => {
                         color="#000"
                         className="mr-2"
                       />
-                      {/* {t("common:deleteButtonLabel")} */}
-                    </Link>
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -139,9 +162,40 @@ const DisplayDonor = () => {
         </div>
       )}
 
-      {/* <Footer /> */}
+      {/* confirmation alert */}
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              {t("donor:deleteTitleDonor")}
+            </AlertDialogHeader>
+
+            <AlertDialogBody>{t("donor:deleteSubtitleDonor")}</AlertDialogBody>
+
+            <AlertDialogFooter>
+              <button
+                ref={cancelRef}
+                onClick={onClose}
+                className="bg-gray-200 text-gray-600 hover:bg-gray-300 px-4 py-2 rounded mr-2"
+              >
+                {t("donor:deleteCancelDonor")}
+              </button>
+              <button
+                onClick={handleDelete}
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+              >
+                {t("common:deleteButtonLabel")}
+              </button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </>
   );
 };
 
-export default DisplayDonor
+export default DisplayDonor;
