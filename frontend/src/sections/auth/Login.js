@@ -37,7 +37,7 @@ const Login = () => {
                 });
             } else {
                 if (data.status === "ok") {
-                    if (data.user.role === "doctor") {
+                    if (data.user.role === "admin") {
                         localStorage.setItem("token", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
