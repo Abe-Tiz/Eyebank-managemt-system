@@ -77,127 +77,153 @@ const CollectCornea = () => {
         <div>
             <h2 className="header" style={{ textAlign: 'center' }}>Welcome to Collect Cornea Form</h2>
             <form onSubmit={handleFormSubmit}>
+            
+                    <div className="grid grid-cols-2">
+                        <label>
+                            Date of Recovery:
+                            <input
+                                type="date"
+                                value={dateOfRecovery}
+                                onChange={handleDateOfRecoveryChange}
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            />
+                        </label>
+                        <label>
+                            Recovery Site:
+                            <select
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={recoverySite} onChange={handleRecoverySite}>
+                                <option value="">Select Recovery Site</option>
+                                <option value="Site 1">Site 1</option>
+                                <option value="Site 2">Site 2</option>
+                                <option value="Site 3">Site 3</option>
 
-                <label>
-                    Date of Recovery:
-                    <input
-                        type="date"
-                        value={dateOfRecovery}
-                        onChange={handleDateOfRecoveryChange}
-                        className="form-input mt-1 block w-full"
-                    />
-                </label>
-                <label>
-                    Recovery Site:
-                    <select value={recoverySite} onChange={handleRecoverySite}>
-                        <option value="">Select Recovery Site</option>
-                        <option value="Site 1">Site 1</option>
-                        <option value="Site 2">Site 2</option>
-                        <option value="Site 3">Site 3</option>
-                    </select>
-                </label>
-                <label>
-                    Recovery Technical:
-                    <select
-                        value={recoveryTechnical}
-                        onChange={(e) => setRecoveryTechnical(e.target.value)}
-                    >
-                        <option value="">Select Recovery Technical</option>
-                        <option value="Technical 1">Technical 1</option>
-                        <option value="Technical 2">Technical 2</option>
-                        <option value="Technical 3">Technical 3</option>
-                    </select>
-                </label>
-                <label>
-                    Serology Test:
-                    <select value={serologyTest} onChange={(e) => setSerologyTest(e.target.value)}>
-                        <option value="">Select Serology Test</option>
-                        <option value="Test 1">Test 1</option>
-                        <option value="Test 2">Test 2</option>
-                        <option value="Test 3">Test 3</option>
-                    </select>
-                </label>
-                <label>
-                    Covid:
-                    <select value={covid} onChange={(e) => setCovid(e.target.value)}>
-                        <option value="">Select Covid</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </label>
-                <label>
-                    Cornea Evaluation:
-                    <select
-                        value={corneaEvaluation}
-                        onChange={(e) => setCorneaEvaluation(e.target.value)}
-                    >
-                        <option value="">Select Cornea Evaluation</option>
-                        <option value="Evaluation 1">Evaluation 1</option>
-                        <option value="Evaluation 2">Evaluation 2</option>
-                        <option value="Evaluation 3">Evaluation 3</option>
-                    </select>
-                </label>
-                <label>
-                    Distribution Date:
-                    <input
-                        type="date"
-                        value={distributionDate}
-                        onChange={(e) => setDistributionDate(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Name of Surgeon:
-                    <input
-                        type="text"
-                        value={surgeonName}
-                        onChange={(e) => setSurgeonName(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Type of Surgeon:
-                    <input
-                        type="text"
-                        value={surgeonType}
-                        onChange={(e) => setSurgeonType(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Hospital Status:
-                    <select value={hospitalStatus} onChange={(e) => setHospitalStatus(e.target.value)}>
-                        <option value="">Select Hospital Status</option>
-                        <option value="Status 1">Status 1</option>
-                        <option value="Status 2">Status 2</option>
-                        <option value="Status 3">Status 3</option>
-                    </select>
-                </label>
-                <label>
-                    Delivery By:
-                    <input type="text" value={deliveryBy} onChange={(e) => setDeliveryBy(e.target.value)} />
-                </label>
-                <label>
-                    Mode of Transportation:
-                    <input
-                        type="text"
-                        value={transportationMode}
-                        onChange={(e) => setTransportationMode(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Remark:
-                    <input type="text" value={remark} onChange={(e) => setRemark(e.target.value)} />
-                </label>
-                <button type="submit">Add Cornea</button>
-                <div className="mt-6">
-                    <button
-                        onClick={handleFormSubmit}
-                        type="submit"
-                        className="w-1/3 mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded"
-                    >
-                        Add Cornea
-                    </button>
-                </div>
-            </form>
-        </div>
+                            </select>
+                        </label>
+                        <label>
+                            Recovery Technical:
+                            <select
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={recoveryTechnical}
+                                onChange={(e) => setRecoveryTechnical(e.target.value)}
+                            >
+                                <option value="">Select Recovery Technical</option>
+                                <option value="Technical 1">Technical 1</option>
+                                <option value="Technical 2">Technical 2</option>
+                                <option value="Technical 3">Technical 3</option>
+                            </select>
+                        </label>
+                        <label>
+                            Serology Test:
+                            <select
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={serologyTest} onChange={(e) => setSerologyTest(e.target.value)}>
+                                <option value="">Select Serology Test</option>
+                                <option value="Test 1">Test 1</option>
+                                <option value="Test 2">Test 2</option>
+                                <option value="Test 3">Test 3</option>
+                            </select>
+                        </label>
+                        <label>
+                            Covid:
+                            <select
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={covid} onChange={(e) => setCovid(e.target.value)}>
+                                <option value="">Select Covid</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </label>
+                        <label>
+                            Cornea Evaluation:
+                            <select
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={corneaEvaluation}
+                                onChange={(e) => setCorneaEvaluation(e.target.value)}
+                            >
+                                <option value="">Select Cornea Evaluation</option>
+                                <option value="Evaluation 1">Evaluation 1</option>
+                                <option value="Evaluation 2">Evaluation 2</option>
+                                <option value="Evaluation 3">Evaluation 3</option>
+                            </select>
+                        </label>
+                        <label>
+                            Distribution Date:
+                            <input
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                type="date"
+                                value={distributionDate}
+                                onChange={(e) => setDistributionDate(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <label>
+                            Name of Surgeon:
+                            <input
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                type="text"
+                                value={surgeonName}
+                                onChange={(e) => setSurgeonName(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            Type of Surgeon:
+                            <input
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                type="text"
+                                value={surgeonType}
+                                onChange={(e) => setSurgeonType(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            Hospital Status:
+                            <select
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={hospitalStatus} onChange={(e) => setHospitalStatus(e.target.value)}>
+                                <option value="">Select Hospital Status</option>
+                                <option value="Status 1">Status 1</option>
+                                <option value="Status 2">Status 2</option>
+                                <option value="Status 3">Status 3</option>
+                            </select>
+                        </label>
+                        <label>
+                            Delivery By:
+                            <input
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                type="text" value={deliveryBy} onChange={(e) => setDeliveryBy(e.target.value)} />
+                        </label>
+                        <label>
+                            Mode of Transportation:
+                            <input
+                                className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                type="text"
+                                value={transportationMode}
+                                onChange={(e) => setTransportationMode(e.target.value)}
+                            />
+                        </label>
+                        <label >
+                            Remark:
+                            <textarea
+                                className="form-textarea mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={remark}
+                                placeholder="Enter Remark"
+                                onChange={(e) => setRemark(e.target.value)}
+                            />
+                        </label>
+                    </div>
+
+                    <div className="mt-6">
+                        <button
+                            onClick={handleFormSubmit}
+                            type="submit"
+                            className="w-1/3 mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded"
+                        >
+                            Add Cornea
+                        </button>
+                    </div>
+            </form >
+        </div >
     );
 };
 
