@@ -29,6 +29,7 @@ import RecordMedicalParticular from "../components/labTechnical/RecordMedicalPar
 import DiscardCornea from "../components/labTechnical/DiscardCornea";
 import StoreCornea from "../components/labTechnical/StoreCornea";
 import DistributeCornea from "../components/labTechnical/DistributeCornea";
+import ViewCornea from "../components/labTechnical/ViewCornea";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -154,6 +155,10 @@ const router = createBrowserRouter([
             {
                 path: "/labtechnicaldashboard/distributeCornea",
                 element: <DistributeCornea />,
+            },
+            {
+                path: "/labtechnicaldashboard/viewCornea",
+                element: <ViewCornea />,
             },
         ],
     }
