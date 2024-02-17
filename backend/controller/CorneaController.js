@@ -11,4 +11,8 @@ const createCornea = async (req, res) => {
     }
 
 }
-module.exports = { createCornea }
+const getCornea = async (req, res) => {
+    const cornea = await Cornea.find()
+    res.send(cornea)
+}
+module.exports = { createCornea, getCornea}
