@@ -73,6 +73,42 @@ const CustomSidebar = ({
                             {/* <SettingOutlined className="text-2xl" /> */}
                             <CiBoxList className="text-2xl" />
                         </Link>
+                        <Link
+                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                            to="/labtechnicaldashboard/discardCornea"
+                            data-tooltip-id="user-list"
+                            data-tooltip-content="Discard Cornea"
+                        >
+                            {/* <SettingOutlined className="text-2xl" /> */}
+                            <CiBoxList className="text-2xl" />
+                        </Link>
+                        <Link
+                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                            to="/labtechnicaldashboard/storeCornea"
+                            data-tooltip-id="user-list"
+                            data-tooltip-content=" Store cornea"
+                        >
+                            {/* <SettingOutlined className="text-2xl" /> */}
+                            <CiBoxList className="text-2xl" />
+                        </Link>
+                        <Link
+                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                            to="/labtechnicaldashboard/distributeCornea"
+                            data-tooltip-id="user-list"
+                            data-tooltip-content=" Distribute cornea"
+                        >
+                            {/* <SettingOutlined className="text-2xl" /> */}
+                            <CiBoxList className="text-2xl" />
+                        </Link>
+                        <Link
+                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                            to="/labtechnicaldashboard/viewCornea"
+                            data-tooltip-id="user-list"
+                            data-tooltip-content=" View cornea"
+                        >
+                            {/* <SettingOutlined className="text-2xl" /> */}
+                            <CiBoxList className="text-2xl" />
+                        </Link>
                     </div>
                 ) : (
                     <>
@@ -95,7 +131,7 @@ const CustomSidebar = ({
                                 data-tooltip-content="Collect Cornea"
                             >
                                 <MdSpaceDashboard className="text-2xl" />
-                                <span className="ml-2">{t("common:collectCorneaLabel")}</span>
+                                <span className="ml-2 ">{t("cornea:collectCorneaLabel")}</span>
                             </Link>
                             <Link
                                 to="/labtechnicaldashboard/donorRegistration"
@@ -106,7 +142,7 @@ const CustomSidebar = ({
                                 data-tooltip-content="Register Donor"
                             >
                                 <MdOutlineGroupAdd className="text-2xl" />
-                                <span className="ml-2">{t("common:registerDonorLabel")}</span>
+                                <span className="ml-2">{t("cornea:registerDonorLabel")}</span>
                             </Link>
                             <Link
                                 to="/labtechnicaldashboard/recordSerology"
@@ -116,7 +152,7 @@ const CustomSidebar = ({
                                 data-tooltip-content="Record Serology"
                             >
                                 <PiUserListBold className="text-2xl" />
-                                <span className="ml-2">{t("common:recordSerologyLabel")}</span>
+                                <span className="ml-2">{t("cornea:recordSerologyLabel")}</span>
                             </Link>
                             <Link
                                 to="/labtechnicaldashboard/screenDonor"
@@ -126,7 +162,7 @@ const CustomSidebar = ({
                                 data-tooltip-content="Screen Donor"
                             >
                                 <IoIosPersonAdd className="text-2xl" />
-                                <span className="ml-2">{t("common:screenDonorLabel")}</span>
+                                <span className="ml-2">{t("cornea:screenDonorLabel")}</span>
                             </Link>
                             <Link
                                 to="/labtechnicaldashboard/recordMedicalParticular"
@@ -136,7 +172,7 @@ const CustomSidebar = ({
                                 data-tooltip-content="Record Medical Particular"
                             >
                                 <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("common:recordMedicalParticularLabel")}</span>
+                                <span className="ml-2"> {t("cornea:recordMedicalParticularLabel")}</span>
                             </Link>
                             <Link
                                 to="/labtechnicaldashboard/discardCornea"
@@ -146,7 +182,7 @@ const CustomSidebar = ({
                                 data-tooltip-content=" discard Cornea"
                             >
                                 <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("common:discardCorneaLabel")}</span>
+                                <span className="ml-2"> {t("cornea:discardCorneaLabel")}</span>
                             </Link>
                             <Link
                                 to="/labtechnicaldashboard/storeCornea"
@@ -156,7 +192,7 @@ const CustomSidebar = ({
                                 data-tooltip-content=" store Cornea"
                             >
                                 <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("common:storeCorneaLabel")}</span>
+                                <span className="ml-2"> {t("cornea:storeCorneaLabel")}</span>
                             </Link>
                             <Link
                                 to="/labtechnicaldashboard/distributeCornea"
@@ -166,7 +202,17 @@ const CustomSidebar = ({
                                 data-tooltip-content=" distribute Cornea"
                             >
                                 <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("common:distributeCorneaLabel")}</span>
+                                <span className="ml-2"> {t("cornea:distributeCorneaLabel")}</span>
+                            </Link>
+                            <Link
+                                to="/labtechnicaldashboard/viewCornea"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content=" view Cornea"
+                            >
+                                <CiBoxList className="text-2xl" />
+                                <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
                             </Link>
                         </div>
                     </>
