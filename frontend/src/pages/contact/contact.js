@@ -1,10 +1,7 @@
 import React, { useState, useRef } from "react";
 
 import emailjs from "@emailjs/browser";
-import axios from "axios";
-import Header from "../header/Header";
 import "../../static/styles/contact.css";
-import Footer from "../footer/footer";
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { ChakraProvider, Text, Box, Icon, Spinner } from "@chakra-ui/react";

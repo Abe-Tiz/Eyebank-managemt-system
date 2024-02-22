@@ -1,17 +1,18 @@
 import React from 'react'
-import Navbar from './../sections/header/Header';
-import Footer from './../sections/footer/footer';
+ 
 import { Outlet } from "react-router-dom";
+import Navbar from '../components/Header';
+import Footer from '../components/footer';
 
 const Main = () => {
-  return (
-    <>
+  return  (
+    <div className=''>
       <Navbar />
       <div className="min-h-screen space-y-5 mt-24">
         <Outlet />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

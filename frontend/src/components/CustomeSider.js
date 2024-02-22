@@ -24,7 +24,8 @@ const CustomSidebar = ({
       }`}
     >
       <div className="flex flex-col h-full mt-0">
-        {collapsed ? (
+        {
+          collapsed ? (
           // collapsed btn
           <div className="flex flex-col items-center">
             <Link
@@ -82,7 +83,8 @@ const CustomSidebar = ({
               <CiBoxList className="text-2xl" />
             </Link>
           </div>
-        ) : (
+          ) : (
+              
           <>
             {/* user progfile inage */}
             <img
@@ -156,6 +158,7 @@ const CustomSidebar = ({
               </Link>
             </div>
           </>
+
         )}
       </div>
 

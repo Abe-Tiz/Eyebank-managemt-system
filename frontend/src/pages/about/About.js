@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaFacebook, FaTwitter, FaGithub, FaTelegram } from "react-icons/fa";
 import "../../static/styles/home.css";
-import Header from "../header/Header";
-import Footer from "../footer/footer";
-// import { Typewriter } from "react-simple-typewriter";
 import { useTranslation } from "react-i18next";
-import Typewriter from "typewriter-effect";
-import Clients from "./Clients";
+ 
 
 const About = () => {
   const { t } = useTranslation();
@@ -14,7 +10,7 @@ const About = () => {
 
   return (
     <>
-      <div className="mt-0 mb-0 ">
+      <div className="mt-0 mb-0  ">
         {/* <Header /> */}
         <div className="mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
           <h1 className=" text-4xl font-bold text-center mt-1 font-sans">

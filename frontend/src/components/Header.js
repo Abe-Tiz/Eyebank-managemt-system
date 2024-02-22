@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { ReactComponent as Hamburger } from "../../static/assets/icons/hamburger.svg";
-import { ReactComponent as Brand } from "../../static/assets/icons/eyel.svg";
-import "../../static/styles/header.css";
+import "../../src/static/styles/header.css";
 import { IoMdClose } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import cookies from "js-cookie";
 import classNames from "classnames";
-import { languages } from "../../Languages";
- 
+import { GiHamburgerMenu } from "react-icons/gi";
+import { languages } from './../Languages';
+
 
 const Navbar = () => {
+    const [isSticky, setSticky] = useState(false)
   const currentLanguageCode = cookies.get("i18next") || "en";
   const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
 
-   const imagePath = process.env.PUBLIC_URL + "/images/log_ebms.jpg";
+  const imagePath = process.env.PUBLIC_URL + "/images/log_ebms.jpg";
 
   const { t } = useTranslation();
 
@@ -23,6 +23,24 @@ const Navbar = () => {
     document.title = t("app_title");
   }, [currentLanguage, t]);
   
+  // handle scroll functrions
+  useEffect(() => {
+    const handleScroll = () => {
+      const offSet = window.scrollY;
+
+      if (offSet > 0) {
+        setSticky(true)
+      } else {
+        setSticky(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+       window.addEventListener("scroll", handleScroll);
+    }
+  },[])
 
   const [showNavbar, setShowNavbar] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -40,8 +58,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="container-fluid">
+    <header className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% max-w-full-2xl  mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out z-10">
+    <nav  className={`bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% navbar xl:px-24 ${
+            isSticky
+              ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out "
+              : ""
+          }`}>
+      <div className="container-fluid bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% ">
         <Link to="/" className="logo">
           {/* <Brand style={{ width: "50px", height: "50px", marginTop: "-30px",backgroundColor:"white",borderRadius:"50%"}} /> */}
           <img
@@ -58,9 +81,9 @@ const Navbar = () => {
         </Link>
         <div className="menu-icon" onClick={handleShowNavbar}>
           {showNavbar ? (
-            <IoMdClose color="white" />
+            <IoMdClose color="gray" />
           ) : (
-            <Hamburger color="white" />
+            <GiHamburgerMenu color="gray" />
           )}
         </div>
         <div className={`nav-elements ${showNavbar && "active"}`}>
@@ -102,7 +125,7 @@ const Navbar = () => {
 
         <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
           <button
-            className="bg-transparent border-4 border-purple-800 p-1 text-white font-bold  dropdown-toggle"
+            className="bg-transparent border-4 border-purple-800 p-1 text-gray-400 font-bold  dropdown-toggle"
             type="button"
             id="dropdownMenuButton1"
             onClick={toggleDropdown}
@@ -136,6 +159,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+      </header>
   );
 };
 
