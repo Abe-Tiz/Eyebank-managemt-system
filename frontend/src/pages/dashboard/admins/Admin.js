@@ -5,20 +5,19 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiMenuAlt } from "react-icons/tfi";
-import CustomSidebar from './CustomeSider';
+import CustomSidebar from "../../../components/CustomeSider";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
-import Profile from './../sections/donor/Profile';
-
+ 
 const { Header, Content } = Layout;
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
- const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  
+
   const [state, setState] = useState({
     name: "",
     image: "",
@@ -26,26 +25,24 @@ const AdminDashboard = () => {
     isLoggedin: false,
     collapsed: false,
     role: "",
-    
   });
 
-    const handleSearch = () => {
-      const sampleList = [
-        { id: 1, name: "John Doe" },
-        { id: 2, name: "Jane Doe" },
-        
-      ];
+  const handleSearch = () => {
+    const sampleList = [
+      { id: 1, name: "John Doe" },
+      { id: 2, name: "Jane Doe" },
+    ];
 
-      const results = sampleList.filter((item) =>
-        item.name.toLowerCase().includes(searchText.toLowerCase())
-      );
+    const results = sampleList.filter((item) =>
+      item.name.toLowerCase().includes(searchText.toLowerCase())
+    );
 
-      setSearchResults(results);
-    };
+    setSearchResults(results);
+  };
 
-    const handleSearchInputChange = (e) => {
-      setSearchText(e.target.value);
-    };
+  const handleSearchInputChange = (e) => {
+    setSearchText(e.target.value);
+  };
 
   const toggleDropdown = () => {
     setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
@@ -59,7 +56,6 @@ const AdminDashboard = () => {
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
-
   };
 
   //! handle loggedin user
@@ -92,10 +88,7 @@ const AdminDashboard = () => {
           navigate("/login");
         }
       });
-
   }, [navigate]);
- 
-
 
   return (
     <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">

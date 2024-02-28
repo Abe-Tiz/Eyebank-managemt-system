@@ -4,8 +4,7 @@ import axios from "axios";
 import "../../static/styles/donor.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
-import Footer from "../footer/footer";
-import Header from "../header/Header";
+
 
 const initialState = {
   name: "",

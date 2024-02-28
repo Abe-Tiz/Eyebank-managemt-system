@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/footer.css";
+import "../../src/static/styles/footer.css";
 import { BsFacebook } from "react-icons/bs";
 import { BiLogoLinkedin } from "react-icons/bi";
 import { FaTwitter, FaInstagram } from "react-icons/fa";
