@@ -10,7 +10,7 @@ const About = () => {
 
   return (
     <>
-      <div className="mt-0 mb-0  ">
+      <div className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%  mt-0 mb-0  ">
         {/* <Header /> */}
         <div className="mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
           <h1 className=" text-4xl font-bold text-center mt-1 font-sans">
@@ -50,7 +50,7 @@ const About = () => {
           <section className="bg-gray-500 my-5 py-10 w-full">
             <div className="container mx-auto px-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div className="p-8 w-96 bg-white shadow-md transform hover:-translate-y-1 hover:shadow-lg transition duration-300">
+                <div className="p-8 w-96  shadow-md transform hover:-translate-y-1 hover:shadow-lg transition duration-300">
                   <h2 className="text-3xl font-bold mb-4">
                     {t("about:mission")}
                   </h2>
@@ -354,21 +354,7 @@ const About = () => {
                           </svg>
                         </a>
                       </li>
-                      {/* <li>
-                        <a
-                          href="#"
-                          className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                        >
-                          <svg
-                            className="w-8 h-7 mt-1"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <FaGithub />
-                          </svg>
-                        </a>
-                      </li> */}
+                      
                       <li>
                         <a
                           href="#"
@@ -429,21 +415,7 @@ const About = () => {
                           </svg>
                         </a>
                       </li>
-                      {/* <li>
-                        <a
-                          href="#"
-                          className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                        >
-                          <svg
-                            className="w-8 h-7 mt-1"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <FaGithub />
-                          </svg>
-                        </a>
-                      </li> */}
+                    
                       <li>
                         <a
                           href="#"
@@ -541,8 +513,7 @@ const About = () => {
             </div>
           </section>
         </div>
-
-        {/* <Footer /> */}
+     
       </div>
     </>
   );
