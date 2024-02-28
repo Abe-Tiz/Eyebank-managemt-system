@@ -110,7 +110,8 @@ const LabTechnicalDashboard = () => {
                 className={`${state.collapsed ? "ml-20" : "ml-64"
                     } transition-all duration-300 ease-in-out flex-grow`}
             >
-                <Header className="bg-gray-900 p-4 shadow-lg flex justify-between items-center text-white">
+                <Header className="bg-gray-900 p-4 shadow-lg flex justify-between items-center text-white"
+                    style={{ position: 'sticky', top: 0, right: 0 }}>
                     <div className="flex items-center">
                         {state.collapsed ? (
                             <TfiMenuAlt
