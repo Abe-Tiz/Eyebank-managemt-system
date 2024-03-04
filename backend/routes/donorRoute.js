@@ -1,5 +1,12 @@
 const express = require("express");
-const { getDonor, createDonor, updateDonor, getVerification, getDonorById, deleteDonor, getDonorByEmail, getDonorCount } = require("../controller/DonorController");
+const { getDonor, 
+    createDonor, 
+    updateDonor,
+     getVerification, 
+     getDonorById,
+      deleteDonor,
+       getDonorByEmail, 
+       getDonorCount } = require("../controller/DonorController");
 
 const router = express.Router();
 
