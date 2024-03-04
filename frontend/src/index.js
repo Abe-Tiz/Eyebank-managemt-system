@@ -5,14 +5,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./i18next";
 import "./static/styles/signup.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import { RouterProvider } from "react-router-dom";
-import router from "./router/Router";
+import App from './App';
+import './App.css'
 
 const Root = () => {
   return (
     <Suspense>
         <ChakraProvider>
-            <RouterProvider router={router} />
+          <div className='bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%'>
+           <App />
+           </div>
         </ChakraProvider>
     </Suspense>
   );
