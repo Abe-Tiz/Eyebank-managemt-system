@@ -25,11 +25,12 @@ import CollectCornea from "../components/labTechnical/CollectCornea";
 import DonorRegistration from "../components/labTechnical/DonorRegistration";
 import RecordSerology from "../components/labTechnical/RecordSerology";
 import ScreenDonor from "../components/labTechnical/ScreenDonor";
-import RecordMedicalParticular from "../components/labTechnical/RecordMedicalParticular";
+import EvaluateCornea from "../components/labTechnical/EvaluateCornea";
 import DiscardCornea from "../components/labTechnical/DiscardCornea";
 import StoreCornea from "../components/labTechnical/StoreCornea";
 import DistributeCornea from "../components/labTechnical/DistributeCornea";
 import ViewCornea from "../components/labTechnical/ViewCornea";
+import EditCornea from "../components/labTechnical/EditCornea";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -141,8 +142,8 @@ const router = createBrowserRouter([
                 element: <ScreenDonor />,
             },
             {
-                path: "/labtechnicaldashboard/recordMedicalParticular",
-                element: <RecordMedicalParticular />,
+                path: "/labtechnicaldashboard/evaluatecornea/:id",
+                element: <EvaluateCornea />,
             },
             {
                 path: "/labtechnicaldashboard/discardCornea",
@@ -159,6 +160,10 @@ const router = createBrowserRouter([
             {
                 path: "/labtechnicaldashboard/viewCornea",
                 element: <ViewCornea />,
+            },
+            {
+                path: "/labtechnicaldashboard/editCornea/:id",
+                element: <EditCornea />,
             },
         ],
     }
