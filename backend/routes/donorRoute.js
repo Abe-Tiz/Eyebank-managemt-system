@@ -7,7 +7,7 @@ const {
     getDonorById, 
     deleteDonor, 
     getDonorByEmail, 
-    getDonorCount 
+    // getDonorCount 
 } = require("../controller/DonorController");
 
 const router = express.Router();

@@ -96,7 +96,8 @@ const CreateDonor = () => {
           !formData.email ||
           !formData.sex ||
           !formData.age
-        ) {
+        )
+         {
           toast({
             title: "Please Fill all the Fields",
             status: "warning",
