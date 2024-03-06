@@ -254,7 +254,7 @@ const getUser = asyncHandler(async (req, res) => {
     User.find()
         .maxTimeMS(20000)
         .then((respons) => {
-            console.log(respons);
+            // console.log(respons);
             res.json(respons);
         })
         .catch((err) => {
