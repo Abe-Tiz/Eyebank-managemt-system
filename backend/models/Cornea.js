@@ -1,10 +1,33 @@
 const mongoose = require('mongoose');
+
+const evaluatioSchema = new mongoose.Schema({
+
+    evaluation: {
+        epitheliam: {
+            type: String,
+        },
+        dateofEvaluation: {
+            type: Date,
+        },
+        stroma: {
+            type: String,
+        },
+        endothelium: {
+            type: String,
+        },
+        approval: {
+            type: Boolean,
+            default: false
+        },
+        evaluater: {
+            type: String
+        },
+
+    }
+});
 const corneaSchema = new mongoose.Schema({
     DonorId: {
-        // type: SchemaTypes.ObjectId,
-        // ref: 'donor'
         type: String
-
     },
     nameOfSurgeon: {
         type: String
@@ -36,30 +59,7 @@ const corneaSchema = new mongoose.Schema({
     Lens: {
         type: String,
     },
-
-    evaluation: {
-        epitheliam: {
-            type: String,
-        },
-        dateofEvaluation: {
-            type: Date,
-        },
-        stroma: {
-            type: String,
-        },
-        endothelium: {
-            type: String,
-        },
-        approval: {
-            type: Boolean,
-            default: false
-        },
-        evaluater: {
-            type: String
-        },
-
-    }
-
+    evaluation: evaluatioSchema
 });
 const Cornea = mongoose.model('cornea', corneaSchema);
 module.exports = Cornea

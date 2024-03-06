@@ -32,5 +32,8 @@
   "refNumberLabel": "መለለዪ ቁጽሪ",
   "dateLabel": "ዕለት",
   "viewDonorTitle": " ቅድሚ ሕትመት ሓበሬታኹም ኣረጋግጹ",
-  "labelDonorCardBottom": "ንዕላማ ባንኪ ዓይኒ ኢትዮጵያ ጥራሕ ዝውዕል"
+  "labelDonorCardBottom": "ንዕላማ ባንኪ ዓይኒ ኢትዮጵያ ጥራሕ ዝውዕል",
+  "deleteTitleDonor": "ለጋሲ ምድምሳስ",
+    "deleteCancelDonor": "ሰርዝ",
+    "deleteSubtitleDonor": " ነዚ ለጋሲ ክትድምስሶ ከም እትደሊ ርግጸኛ ዲኻ ? እዚ ተግባር እዚ ክምለስ ኣይክእልን እዩ።"
 }
