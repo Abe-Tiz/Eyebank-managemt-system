@@ -14,7 +14,7 @@ const About = () => {
         {/* <Header /> */}
         <div className="mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
           <h1 className=" text-4xl font-bold text-center mt-1 font-sans">
-            {t("about:whoweare")}
+            {t("about:Who We are")}
           </h1>
           <div className="border-y-4 py-4 border-yellow-500 section-container lg:columns-2 md:columns-1 sm:columns-1 gap-10">
             <div className="flex flex-col md:flex-row px-3 items-center ">

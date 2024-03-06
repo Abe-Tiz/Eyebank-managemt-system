@@ -1,14 +1,4 @@
 const express = require("express");
-<<<<<<< HEAD
-const { getDonor, 
-    createDonor, 
-    updateDonor,
-     getVerification, 
-     getDonorById,
-      deleteDonor,
-       getDonorByEmail, 
-       getDonorCount } = require("../controller/DonorController");
-=======
 const { 
     getDonor, 
     createDonor, 
@@ -17,9 +7,8 @@ const {
     getDonorById, 
     deleteDonor, 
     getDonorByEmail, 
-    getDonorCount 
+    // getDonorCount 
 } = require("../controller/DonorController");
->>>>>>> origin/main
 
 const router = express.Router();
 
