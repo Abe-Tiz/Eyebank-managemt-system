@@ -30,6 +30,7 @@ import RecordSerology from '../pages/dashboard/lab/RecordSerology';
 import CollectCornea from '../pages/dashboard/lab/CollectCornea';
 import LabTechnicalDashboard from "../layout/LabTechnicalLayout";
 import AdminDashboard from "../layout/AdminLayout";
+import VerifiyCode from "../pages/donor/VerifiyCode";
     
 const router = createBrowserRouter([
     {
@@ -48,7 +49,6 @@ const router = createBrowserRouter([
                 path: "/reset_password/:id/:token",
                 element: <ResetPassword />,
             },
-
             {
                 path: "/about",
                 element: <About />,
@@ -88,6 +88,10 @@ const router = createBrowserRouter([
             {
                 path: "/update/:id",
                 element: <EditDonor />,
+            },
+            {
+                path: "/verifiy-code",
+                element: <VerifiyCode />,
             },
         ],
     },

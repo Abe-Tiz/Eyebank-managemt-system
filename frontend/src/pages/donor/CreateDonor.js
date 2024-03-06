@@ -113,7 +113,7 @@ const CreateDonor = () => {
             position: "top",
           });
 
-          console.log(res.data.result);
+          // console.log(res.data.result);
           navigate("/viewdonor", {
             state: {
               data: res.data.result,

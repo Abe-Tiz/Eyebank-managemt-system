@@ -3,6 +3,19 @@ const asyncHandler = require("express-async-handler");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 
+const twilio = require("twilio");
+
+// recovery code twilio sms code
+// 6X6Y5MMXWPTFW1DAQHF1J8EB
+
+
+// Initialize Twilio client
+// const accountSid = "YOUR_TWILIO_ACCOUNT_SID";
+// const authToken = "YOUR_TWILIO_AUTH_TOKEN";
+// const twilioPhoneNumber = "YOUR_TWILIO_PHONE_NUMBER";
+// const client = twilio(accountSid, authToken);
+
+
 //create donor
 const createDonor = asyncHandler(async (req, res) => {
     const { name, email ,age,sex,city, subcity, kebele, HNumber, mobile} = req.body;
@@ -207,7 +220,58 @@ const deleteDonor = asyncHandler(async (req, res) => {
   }
 });
 
+const activateDonor = async (req, res) => {
+  const { id } = req.params;
 
+  try {
+    // Find the donor by ID and update their verified status
+    const donor = await Donor.findByIdAndUpdate(
+      id,
+      { verified: true },
+      { new: true }
+    );
+
+    if (!donor) {
+      return res.status(404).json({ message: "Donor not found" });
+    }
+
+    // Generate and store verification code
+    const verificationCode = Math.floor(1000 + Math.random() * 9000).toString();
+    donor.verificationCode = verificationCode;
+    await donor.save();
+
+    // Send short code to donor's mobile number
+    // await client.messages.create({
+    //   body: `Your verification code is ${verificationCode}`,
+    //   from: twilioPhoneNumber,
+    //   to: donor.mobile,
+    // });
+
+
+    res.status(200).json({ message: "Donor activated successfully", donor });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const verifyCode = async (req, res) => {
+  const { mobile, code } = req.body;
+
+  try {
+    // Find the donor by mobile number and check if the code matches
+    const donor = await Donor.findOne({ mobile });
+
+    if (!donor || donor.verificationCode !== code) {
+      return res.status(400).json({ message: 'Invalid verification code' });
+    }
+
+    res.status(200).json({ message: 'Verification successful', donor });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 module.exports = {
   createDonor,
@@ -217,5 +281,6 @@ module.exports = {
   getDonorById,
   deleteDonor,
   getDonorByEmail,
-  // getDonorCount,
+  activateDonor,
+  verifyCode
 };
