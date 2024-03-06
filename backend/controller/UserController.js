@@ -265,6 +265,43 @@ const getUser = asyncHandler(async (req, res) => {
     }
 });
 
+// displays donor by id
+const getUserById = asyncHandler(async (req, res) => {
+  try {
+    const id = req.params.id;;
+    const user = await User.findById(id).exec();
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Update a donor
+const updateUser = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email, role } = req.body;
+
+    // Assuming you have a Donor model
+    const newUser = await User.findByIdAndUpdate(id, {
+      name : name,
+      email : email,
+      role:role
+    });
+    const result= newUser.save();
+
+    res.status(200).json({ message: "Donor Updated Successfully.",result:newUser });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 const deleteUser =  asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
@@ -286,5 +323,7 @@ module.exports = {
   forgotPassword,
   resetPassword,
   getloggedInUser,
+  getUserById,
+  updateUser,
 };
 

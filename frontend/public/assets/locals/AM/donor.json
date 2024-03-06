@@ -32,5 +32,8 @@
   "refNumberLabel": "መለያ ቁጥር",
   "dateLabel": "ቀን",
   "viewDonorTitle": " እባክዎ ከማተምዎ በፊት መረጃዎን ያረጋግጡ",
-  "labelDonorCardBottom": "ለኢትዮጵያ የአይን ባንክ አገልግሎት ብቻ ጥቅም ላይ ይውላል"
+  "labelDonorCardBottom": "ለኢትዮጵያ የአይን ባንክ አገልግሎት ብቻ ጥቅም ላይ ይውላል",
+  "deleteTitleDonor": "ለጋሹን ሰርዝ",
+  "deleteCancelDonor": "ሰርዝ",
+  "deleteSubtitleDonor": " እርግጠኛ ነዎት ይህን ለጋሽ መሰረዝ ይፈልጋሉ? ይህ እርምጃ ሊቀለበስ አይችልም።"
 }
