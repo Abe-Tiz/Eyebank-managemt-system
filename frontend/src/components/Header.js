@@ -6,16 +6,9 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import cookies from "js-cookie";
 import classNames from "classnames";
-<<<<<<< HEAD:frontend/src/sections/header/Header.js
-import { languages } from "../../Languages";
-import { logo} from "../../static/assets/icons/eye.png";
-
- 
-=======
 import { GiHamburgerMenu } from "react-icons/gi";
 import { languages } from './../Languages';
 
->>>>>>> origin/main:frontend/src/components/Header.js
 
 const Navbar = () => {
     const [isSticky, setSticky] = useState(false)
@@ -65,10 +58,6 @@ const Navbar = () => {
   };
 
   return (
-<<<<<<< HEAD:frontend/src/sections/header/Header.js
-    <nav className="navbar">
-      <div className="container-fluid navbar-containe">
-=======
     <header className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% max-w-full-2xl  mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out z-10">
     <nav  className={`bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% navbar xl:px-24 ${
             isSticky
@@ -76,7 +65,6 @@ const Navbar = () => {
               : ""
           }`}>
       <div className="container-fluid bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% ">
->>>>>>> origin/main:frontend/src/components/Header.js
         <Link to="/" className="logo">
           {/* <Brand style={{ width: "50px", height: "50px", marginTop: "-30px",backgroundColor:"white",borderRadius:"50%"}} /> */}
           <img
