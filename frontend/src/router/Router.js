@@ -24,13 +24,15 @@ import ViewCornea from '../components/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
+import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
+import EditCornea from '../pages/dashboard/lab/EditCornea';
 import RecordMedicalParticular from '../pages/dashboard/lab/RecordMedicalParticular';
 import ScreenDonor from '../pages/dashboard/lab/ScreenDonor';
 import RecordSerology from '../pages/dashboard/lab/RecordSerology';
 import CollectCornea from '../pages/dashboard/lab/CollectCornea';
 import LabTechnicalDashboard from "../layout/LabTechnicalLayout";
 import AdminDashboard from "../layout/AdminLayout";
-    
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -96,7 +98,7 @@ const router = createBrowserRouter([
         element: <LabTechnicalDashboard />,
         children: [
             {
-                path: "",
+                path: "collectCornea",
                 element: <CollectCornea />,
             },
             {
@@ -127,46 +129,54 @@ const router = createBrowserRouter([
                 path: "viewCornea",
                 element: <ViewCornea />,
             },
+            {
+                path: "evaluateCornea/:id",
+                element: <EvaluateCornea />,
+            },
+            {
+                path: "editCornea/:id",
+                element: <EditCornea />,
+            },
         ],
     },
-  {
-    path: "/adminDashboard",
-    element: <AdminDashboard />,
-    children: [
-      {
-        path: "",
-        element: <Report />,
-      },
-      {
-        path: "addDonor",
-        element: <CreateDonor />,
-      },
-      {
-        path: "donorList",
-        element: <DisplayDonor />,
-      },
-      {
-        path: "addUser",
-        element: <Signup />,
-      },
-      {
-        path: "userList",
-        element: <ViewUsers />,
-      },
-      {
-        path: "edit/:id",
-        element: <Edit />,
-      },
-      {
-        path: "edituser/:id",
-        element: <EditUser />,
-      },
-      {
-        path: "storeCornea",
-        element: <StoredCornea />,
-      },
-    ],
-  },
+    {
+        path: "/adminDashboard",
+        element: <AdminDashboard />,
+        children: [
+            {
+                path: "",
+                element: <Report />,
+            },
+            {
+                path: "addDonor",
+                element: <CreateDonor />,
+            },
+            {
+                path: "donorList",
+                element: <DisplayDonor />,
+            },
+            {
+                path: "addUser",
+                element: <Signup />,
+            },
+            {
+                path: "userList",
+                element: <ViewUsers />,
+            },
+            {
+                path: "edit/:id",
+                element: <Edit />,
+            },
+            {
+                path: "edituser/:id",
+                element: <EditUser />,
+            },
+            {
+                path: "storeCornea",
+                element: <StoredCornea />,
+            },
+        ],
+    },
 ]);
 
 export default router;
