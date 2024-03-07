@@ -26,40 +26,38 @@ const evaluatioSchema = new mongoose.Schema({
     }
 });
 const corneaSchema = new mongoose.Schema({
-    DonorId: {
-        type: String
-    },
-    nameOfSurgeon: {
-        type: String
-    },
-    date: {
+    dateOfRecovery: {
         type: Date,
         default: Date.now
     },
-    Position: {
+
+    recoveryTechnical: {
+        type: String
+    },
+    position: {
         type: String, enum: ['Left', 'Right']
     },
-    EyeLid: {
+    eyeLid: {
         type: String,
     },
     size: {
         type: Number,
     },
-    IrisColor: {
+    irisColor: {
         type: String,
     },
 
-    CorneaStatus: {
+    corneaStatus: {
         type: Boolean,
         default: false
     },
-    Clarity: {
+    clarity: {
         type: String,
     },
-    Lens: {
+    lens: {
         type: String,
     },
-    evaluation: evaluatioSchema
+
 });
-const Cornea = mongoose.model('cornea', corneaSchema);
+const Cornea = mongoose.model('Cornea', corneaSchema);
 module.exports = Cornea

@@ -26,6 +26,7 @@ const CollectCornea = () => {
         const data = {
 
             dateOfRecovery,
+            recoveryTechnical,
             position,
             eyeLid,
             size,
@@ -33,7 +34,6 @@ const CollectCornea = () => {
             corneaStatus,
             clarity,
             lens,
-            recoveryTechnical,
         }
         console.log(data);
         try {
@@ -95,11 +95,9 @@ const CollectCornea = () => {
                                 value="left"
                                 checked={position === 'left'}
                                 onChange={handlePosition}
-
                             />
                             Left
                         </label>
-
                         <label>
                             <input
                                 type="radio"
