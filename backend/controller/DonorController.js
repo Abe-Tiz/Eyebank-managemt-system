@@ -1,22 +1,24 @@
 const Donor = require("../models/Donor");
 const asyncHandler = require("express-async-handler");
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-
+const dotenv = require("dotenv");
+dotenv.config();
 const twilio = require("twilio");
 
-// recovery code twilio sms code
+//!  recovery code twilio sms code
 // 6X6Y5MMXWPTFW1DAQHF1J8EB
 
 
-// Initialize Twilio client
-// const accountSid = "YOUR_TWILIO_ACCOUNT_SID";
-// const authToken = "YOUR_TWILIO_AUTH_TOKEN";
-// const twilioPhoneNumber = "YOUR_TWILIO_PHONE_NUMBER";
-// const client = twilio(accountSid, authToken);
+//! Initialize Twilio client
+const accountSid = process.env.ACCOUNT_SID; ;
+const authToken = process.env.AUTHTOKEN;
+const twilioPhoneNumber = process.env.TWILIO_PHONENUMBER;
+const client = twilio(accountSid, authToken);
 
 
-//create donor
+//! create donor
 const createDonor = asyncHandler(async (req, res) => {
     const { name, email ,age,sex,city, subcity, kebele, HNumber, mobile} = req.body;
     
@@ -50,10 +52,10 @@ const createDonor = asyncHandler(async (req, res) => {
                     .randomBytes(20)
                     .toString("hex");
                 const result = newDonor.save();
-                  sendverificationEmail(
-                    newDonor.email,
-                    newDonor.verificationToken
-                  );
+                  // sendverificationEmail(
+                  //   newDonor.email,
+                  //   newDonor.verificationToken
+                  // );
                   
                   console.log("Registeriation Successfull", result);
                   res.status(200).json({
@@ -67,6 +69,64 @@ const createDonor = asyncHandler(async (req, res) => {
     } 
 });
 
+
+const loginDonor = asyncHandler(async (req, res) => {
+  try {
+    const { email, code } = req.body;
+
+    const donor = await Donor.findOne({ email });
+
+    if (!donor) {
+      console.log("Donor is not found.");
+      return res.status(404).json({ message: "Donor is not found." });
+    }
+
+    // Assuming 'code' is stored in the database as 'verificationCode'
+    if (donor.verificationCode !== code) {
+      console.log("Code is not matched");
+      return res.status(400).json({ message: "Code is not matched" });
+    } else {
+      if (donor.verified) {
+         console.log(donor)
+         res.status(200).json({ status: "ok", data: donor });
+       } else {
+         console.log("donor not verified");
+         res.status(401).json({ message: "donor not verified" });
+       }
+    }
+  } catch (error) {
+    console.error("Error in logindonor:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+const getloggedInDonor = asyncHandler(async (req, res) => {
+  const { code } = req.body;
+  try {
+    // const donor = jwt.verify(token, process.env.JWT_SECRET, (err, res) => {
+      // if (err) {
+      //   return "token expired";
+      // }
+    //   return res;
+    // });
+    // console.log(donor);
+    // if (donor === "token expired") {
+    //   return res.send({ status: "error", data: "token expired" });
+    // }
+   
+    Donor.findOne({ email: code })
+      .then((data) => {
+        res.send({ status: "ok", data: data });
+      })
+      .catch((error) => {
+        res.send({ status: "error", data: error });
+      });
+  } catch (error) {
+    res.send({ status: "error", data: error });
+  }
+});
+
+//! send verification
 const sendverificationEmail = async (email, verificationToken, route) => {
   //create nodemailer transporter
   const transporter = nodemailer.createTransport({
@@ -92,7 +152,7 @@ const sendverificationEmail = async (email, verificationToken, route) => {
   }
 };
 
-
+//! get verificaton
 const getVerification = asyncHandler(async (req, res) => {
     try {
     const token = req.params.tokenId;
@@ -117,7 +177,7 @@ const getVerification = asyncHandler(async (req, res) => {
     }
 })
 
-//get all donor
+//! get all donor
 const getDonor = asyncHandler(async (req, res) => {
   try {
     Donor.find()
@@ -134,6 +194,7 @@ const getDonor = asyncHandler(async (req, res) => {
   }
 });
 
+//! get donor by id
 // const getDonorCount = asyncHandler(async (req, res) => {
   // try {
  
@@ -152,12 +213,12 @@ const getDonor = asyncHandler(async (req, res) => {
 const getDonorById = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;;
-    const donor = await Donor.findById(id).exec();
+    const donor = await Donor.findById(id);
 
     if (!donor) {
       return res.status(404).json({ message: "Donor not found" });
     }
-
+  console.log(donor);
     res.status(200).json(donor);
   } catch (error) {
     console.error(error);
@@ -165,11 +226,14 @@ const getDonorById = asyncHandler(async (req, res) => {
   }
 });
 
-// displays donor by Email address
+//! displays donor by Email address
 const getDonorByEmail = asyncHandler(async (req, res) => {
   try {
     const { email } = req.body;  
-    const donor = await Donor.findOne({ email }).exec();  
+    const donor = await Donor.findOne(
+      { email },
+      { new: true }
+    ).exec();  
     if (!donor) {
       return res.status(404).json({ message: "Donor not found" });
     }
@@ -181,8 +245,7 @@ const getDonorByEmail = asyncHandler(async (req, res) => {
   }
 });
 
-
-// Update a donor
+//! Update a donor
 const updateDonor = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
@@ -199,7 +262,9 @@ const updateDonor = asyncHandler(async (req, res) => {
       kebele: kebele,
       HNumber : HNumber,
       mobile : mobile,
-    });
+    },
+      { new: true }
+    );
     const result= newDonor.save();
 
     res.status(200).json({ message: "Donor Updated Successfully.",result:newDonor });
@@ -208,18 +273,57 @@ const updateDonor = asyncHandler(async (req, res) => {
   }
 });
 
+//! delete donor
 const deleteDonor = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
     // Assuming you have a Donor model
-    await Donor.deleteOne({ _id: id }); // Assuming the donor ID is stored in the "_id" field
+    await Donor.deleteOne(
+      { _id: id },
+      { new: true }
+      ); 
     res.status(200).json({ message: "Donor deleted successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
+
+
+
+
+  //! send email 
+    const sendEmail = async (email, verificationCode) => {
+      //create nodemailer transporter
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "abebetizazu157@gmail.com",
+          pass: "gezm fqmn asjl bqxj",
+        },
+        tls: {
+          rejectUnauthorized: false,  
+        },
+      });
+
+      //compose the email message
+      const mailOption = {
+        from: "abebetizazu157@gmail.com",
+        to: email,
+        subject: "Email Activation Code ",
+        text: `please click the following link to Login your Profile  verification code:${verificationCode} email: ${email} and use This Link: http://localhost:3000/donor-login`,
+      };
+
+      try {
+        await transporter.sendMail(mailOption);
+      } catch (error) {
+        console.log("error sending email", error);
+      }
+};
+    
+
+//! activate the donor by admin
 const activateDonor = async (req, res) => {
   const { id } = req.params;
 
@@ -240,13 +344,15 @@ const activateDonor = async (req, res) => {
     donor.verificationCode = verificationCode;
     await donor.save();
 
+    console.log(donor.email,donor.verificationCode);
+
+      sendEmail(donor.email, donor.verificationCode);
     // Send short code to donor's mobile number
     // await client.messages.create({
-    //   body: `Your verification code is ${verificationCode}`,
+    //   body: `Your verification code is ${verificationCode}. Please login using this code and print  your card.`,
     //   from: twilioPhoneNumber,
-    //   to: donor.mobile,
+    //   to: `+251${donor.mobile}`,
     // });
-
 
     res.status(200).json({ message: "Donor activated successfully", donor });
   } catch (error) {
@@ -255,6 +361,7 @@ const activateDonor = async (req, res) => {
   }
 };
 
+//! verify code 
 const verifyCode = async (req, res) => {
   const { mobile, code } = req.body;
 
@@ -282,5 +389,7 @@ module.exports = {
   deleteDonor,
   getDonorByEmail,
   activateDonor,
-  verifyCode
+  verifyCode,
+  loginDonor,
+  getloggedInDonor,
 };
