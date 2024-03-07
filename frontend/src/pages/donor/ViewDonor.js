@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEdit, FaPrint } from "react-icons/fa";
 
 const ViewDonor = () => {
@@ -16,27 +16,69 @@ const ViewDonor = () => {
     mobile: "",
     id:'',
   });
+
+  
+  const [state, setState] = useState({
+    name: "",
+    isLoggedin: false,
+  });
+
   const { t } = useTranslation();
   const location = useLocation();
+    const navigate = useNavigate();
+
+  
 
   useEffect(() => {
-    if (location.state && location.state.data) {
-      const newDonorData = location.state.data;
+    // if (location.state && location.state.data) {
+    //   const newDonorData = location.state.data;
 
-      setDonorData({
-        name: newDonorData.name,
-        email: newDonorData.email,
-        city: newDonorData.city,
-        age: newDonorData.age,
-        sex: newDonorData.sex,
-        subcity: newDonorData.subcity,
-        kebele: newDonorData.kebele,
-        HNumber: newDonorData.HNumber,
-        mobile: newDonorData.mobile,
-        id: newDonorData._id,
-      });
-    }
-  }, [location.state]);
+    //   setDonorData({
+    //     name: newDonorData.name,
+    //     email: newDonorData.email,
+    //     city: newDonorData.city,
+    //     age: newDonorData.age,
+    //     sex: newDonorData.sex,
+    //     subcity: newDonorData.subcity,
+    //     kebele: newDonorData.kebele,
+    //     HNumber: newDonorData.HNumber,
+    //     mobile: newDonorData.mobile,
+    //     id: newDonorData._id,
+    //   });
+    // }
+
+      const getLoggedInDonor = async () => {
+        fetch("http://127.0.0.1:4000/donor/donorLogedin", {
+          method: "POST",
+          crossDomain: true,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            token: localStorage.getItem("token"),
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.data, "user logged in");
+            setState((prev) => ({
+              ...prev,
+              name: data.data.name,
+              isLoggedin: true,
+            }));
+
+            if (data.data === "token expired") {
+              localStorage.clear();
+              navigate("/login");
+            }
+          });
+    };
+
+    getLoggedInDonor();
+    
+  }, []);
 
   // Size of the circles
   const circleSize = 32;
@@ -52,7 +94,7 @@ const ViewDonor = () => {
         <div className="flex flex-col md:flex-row gap-y-4 md:gap-x-8">
           <div className="md:w-1/2">
             <p className="text-xl font-bold text-gray-800 mb-2">
-              {t("register:LabelsignUpName")}: <span>{donorData.name} </span>
+              {t("register:LabelsignUpName")}: <span>{state.name} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
               {t("login:labelLoginEmail")}:{" "}
@@ -85,8 +127,6 @@ const ViewDonor = () => {
           </Link>
 
           {/* print button */}
-          {
-            donorData.verified && (
             <Link
               className="like-button bg-orange-500 text-white cursor-pointer px-6 py-3 rounded focus:outline-none border border-gray-300 hover:bg-green-600 shadow-md z-30"
               to={`/print/${donorData.id}`}
@@ -94,8 +134,6 @@ const ViewDonor = () => {
               <FaPrint className="mr-2" />
               {t("common:printButtonLabel")}
             </Link>
-            )
-          }
         </div>
       </div>
     </div>

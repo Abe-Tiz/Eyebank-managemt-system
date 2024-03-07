@@ -1,13 +1,121 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaEdit, FaPrint } from "react-icons/fa";
 
 const Profile = () => {
-    return (
-        <div>
-            <div>
-                <img src='' alt='profile' />
-            </div>
-        </div>
-    )
-}
+//   const [donorData, setDonorData] = useState({
+//     name: "",
+//     email: "",
+//     age: "",
+//     sex: "",
+//     city: "",
+//     subcity: "",
+//     kebele: "",
+//     HNumber: "",
+//     mobile: "",
+//     id: "",
+//   });
 
-export default Profile
+      const [state, setState] = useState({
+        name: "",
+        isLoggedin: false,
+        email: "",
+        id:""
+      });
+    
+  const { t } = useTranslation();
+    const location = useLocation();
+      const navigate = useNavigate();
+
+  useEffect(() => {
+    const getLoggedInDonor = async () => {
+      fetch("http://127.0.0.1:4000/donor/donorLogedin", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          code: localStorage.getItem("code"),
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.data, "user logged in");
+          setState((prev) => ({
+            ...prev,
+            name: data.data.name,
+            isLoggedin: true,
+            email:data.data.email,
+            id:data.data._id
+          }));
+
+          if (data.data === "token expired") {
+            localStorage.clear();
+            // navigate("/login");
+          }
+        });
+    };
+
+    getLoggedInDonor();
+  }, []);
+
+  // Size of the circles
+  const circleSize = 32;
+
+  return (
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="bg-gray-100 rounded-md overflow-hidden shadow-md p-6 mx-auto w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 relative">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">Profile</h2>
+
+        <div className="flex flex-col md:flex-row gap-y-4 md:gap-x-8">
+          <div className="md:w-1/2">
+            <p className="text-xl font-bold text-gray-800 mb-2">
+              {t("register:LabelsignUpName")}: <span>{state.name} </span>
+            </p>
+            <p className="text-xl font-bold text-gray-800 mb-2">
+              {t("login:labelLoginEmail")}:{" "}
+              <span className="text-gray-700 mb-2"> {state.email}</span>
+            </p>
+          </div>
+
+          <div className="md:w-1/2">
+            <p className="text-xl font-bold text-gray-800 mb-2">
+              {t("donor:donorKebele")}:{" "}
+              <span className="text-gray-700 mb-2"> kebele </span>
+            </p>
+            <p className="text-xl font-bold text-gray-800 mb-2">
+              {t("donor:donorHno")}:{" "}
+              <span className="text-gray-700 mb-2">Hnumber </span>
+            </p>
+          </div>
+        </div>
+
+        <div className="flex justify-between mt-6 ">
+          {/* update btn */}
+          <Link
+            className="like-button bg-blue-500 text-white cursor-pointer px-6 py-3 rounded focus:outline-none border border-gray-300 hover:bg-blue-600 shadow-md z-30"
+            to={`/update/${state.id}`}
+          >
+            <FaEdit className="mr-2" />
+            {t("common:updateButtonLabel")}
+          </Link>
+
+          {/* print button */}
+          <Link
+            className="like-button bg-orange-500 text-white cursor-pointer px-6 py-3 rounded focus:outline-none border border-gray-300 hover:bg-green-600 shadow-md z-30"
+            to={`/print/${state.id}`}
+          >
+            <FaPrint className="mr-2" />
+            {t("common:printButtonLabel")}
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Profile;

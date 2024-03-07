@@ -30,109 +30,114 @@ import RecordSerology from '../pages/dashboard/lab/RecordSerology';
 import CollectCornea from '../pages/dashboard/lab/CollectCornea';
 import LabTechnicalDashboard from "../layout/LabTechnicalLayout";
 import AdminDashboard from "../layout/AdminLayout";
-import VerifiyCode from "../pages/donor/VerifiyCode";
+import LoginDonor from "../pages/donor/LoginDonor";
+import Profile from './../pages/donor/Profile';
     
 const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <Main />,
+    children: [
+      {
         path: "/",
-        element: <Main />,
-        children: [
-            {
-                path: "/",
-                element: <Home />,
-            },
-            {
-                path: "/forgot-password",
-                element: <ForgotPassword />,
-            },
-            {
-                path: "/reset_password/:id/:token",
-                element: <ResetPassword />,
-            },
-            {
-                path: "/about",
-                element: <About />,
-            },
-            {
-                path: "/awareness",
-                element: <Awareness />,
-            },
-            {
-                path: "/createAwareness",
-                element: <CreateAwareness />,
-            },
-            {
-                path: "/createVideo",
-                element: <CreateVideo />,
-            },
-            {
-                path: "/contact",
-                element: <Contact />,
-            },
-            {
-                path: "/registerDonor",
-                element: <CreateDonor />,
-            },
-            {
-                path: "/login",
-                element: <Login />,
-            },
-            {
-                path: "/viewdonor",
-                element: <ViewDonor />,
-            },
-            {
-                path: "/print/:id",
-                element: <PrintCard />,
-            },
-            {
-                path: "/update/:id",
-                element: <EditDonor />,
-            },
-            {
-                path: "/verifiy-code",
-                element: <VerifiyCode />,
-            },
-        ],
-    },
-    {
-        path: "/labtechnicaldashboard",
-        element: <LabTechnicalDashboard />,
-        children: [
-            {
-                path: "",
-                element: <CollectCornea />,
-            },
-            {
-                path: "recordSerology",
-                element: <RecordSerology />,
-            },
-            {
-                path: "screenDonor",
-                element: <ScreenDonor />,
-            },
-            {
-                path: "recordMedicalParticular",
-                element: <RecordMedicalParticular />,
-            },
-            {
-                path: "discardCornea",
-                element: <DiscardCornea />,
-            },
-            {
-                path: "storeCornea",
-                element: <StoreCornea />,
-            },
-            {
-                path: "distributeCornea",
-                element: <DistributeCornea />,
-            },
-            {
-                path: "viewCornea",
-                element: <ViewCornea />,
-            },
-        ],
-    },
+        element: <Home />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/reset_password/:id/:token",
+        element: <ResetPassword />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/awareness",
+        element: <Awareness />,
+      },
+      {
+        path: "/createAwareness",
+        element: <CreateAwareness />,
+      },
+      {
+        path: "/createVideo",
+        element: <CreateVideo />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/registerDonor",
+        element: <CreateDonor />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/viewdonor",
+        element: <ViewDonor />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/print/:id",
+        element: <PrintCard />,
+      },
+      {
+        path: "/update/:id",
+        element: <EditDonor />,
+      },
+      {
+        path: "/donor-login",
+        element: <LoginDonor />,
+      },
+    ],
+  },
+  {
+    path: "/labtechnicaldashboard",
+    element: <LabTechnicalDashboard />,
+    children: [
+      {
+        path: "",
+        element: <CollectCornea />,
+      },
+      {
+        path: "recordSerology",
+        element: <RecordSerology />,
+      },
+      {
+        path: "screenDonor",
+        element: <ScreenDonor />,
+      },
+      {
+        path: "recordMedicalParticular",
+        element: <RecordMedicalParticular />,
+      },
+      {
+        path: "discardCornea",
+        element: <DiscardCornea />,
+      },
+      {
+        path: "storeCornea",
+        element: <StoreCornea />,
+      },
+      {
+        path: "distributeCornea",
+        element: <DistributeCornea />,
+      },
+      {
+        path: "viewCornea",
+        element: <ViewCornea />,
+      },
+    ],
+  },
   {
     path: "/adminDashboard",
     element: <AdminDashboard />,

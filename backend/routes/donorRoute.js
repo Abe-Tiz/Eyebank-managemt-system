@@ -8,7 +8,9 @@ const {
     deleteDonor, 
     getDonorByEmail, 
     activateDonor,
-    verifyCode
+    verifyCode,
+    loginDonor,
+    getloggedInDonor
 } = require("../controller/DonorController");
 
 const router = express.Router();
@@ -21,6 +23,8 @@ router.get('/:id', getDonorById);
 router.delete('/delete/:id', deleteDonor);
 router.post('/verify-code', verifyCode);
 router.put("/activate/:id", activateDonor);
+router.post("/login", loginDonor);
+router.post("/donorLogedin", getloggedInDonor);
 router.post('/displayByEmail', getDonorByEmail);
 // router.get('/countDonor', getDonorCount);
  

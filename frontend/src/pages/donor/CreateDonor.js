@@ -114,11 +114,11 @@ const CreateDonor = () => {
           });
 
           // console.log(res.data.result);
-          navigate("/viewdonor", {
-            state: {
-              data: res.data.result,
-            },
-          });
+          // navigate("/viewdonor", {
+          //   state: {
+          //     data: res.data.result,
+          //   },
+          // });
           // Clear the form data after successful registration
           setFormData(initialState);
           setIsName(false);
