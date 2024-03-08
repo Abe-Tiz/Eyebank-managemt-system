@@ -24,6 +24,8 @@ import ViewCornea from '../components/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
+import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
+import EditCornea from '../pages/dashboard/lab/EditCornea';
 import RecordMedicalParticular from '../pages/dashboard/lab/RecordMedicalParticular';
 import ScreenDonor from '../pages/dashboard/lab/ScreenDonor';
 import RecordSerology from '../pages/dashboard/lab/RecordSerology';
@@ -33,6 +35,7 @@ import AdminDashboard from "../layout/AdminLayout";
 import PhysicalExam from "../sections/labTech/PhysicalExam";
 import PhysicalExamView from "../sections/labTech/PhysicalExamView";
 import EditPage from "../sections/labTech/EditPage";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -113,7 +116,7 @@ const router = createBrowserRouter([
         element: <LabTechnicalDashboard />,
         children: [
             {
-                path: "",
+                path: "collectCornea",
                 element: <CollectCornea />,
             },
             {

@@ -1,18 +1,63 @@
 const mongoose = require('mongoose');
-const corneaSchema = new mongoose.Schema({
-    dateOfRecovery: String,
-    recoverySite: String,
-    recoveryTechnical: String,
-    serologyTest: String,
-    covid: String,
-    corneaEvaluation: String,
-    distributionDate: String,
-    surgeonName: String,
-    surgeonType: String,
-    hospitalStatus: String,
-    deliveryBy: String,
-    transportationMode: String,
-    remark: String
+
+const evaluatioSchema = new mongoose.Schema({
+
+    evaluation: {
+        epitheliam: {
+            type: String,
+        },
+        dateofEvaluation: {
+            type: Date,
+        },
+        stroma: {
+            type: String,
+        },
+        endothelium: {
+            type: String,
+        },
+        approval: {
+            type: Boolean,
+            default: false
+        },
+        evaluater: {
+            type: String
+        },
+
+    }
 });
-const Cornea = mongoose.model('cornea', corneaSchema);
+const corneaSchema = new mongoose.Schema({
+    dateOfRecovery: {
+        type: Date,
+        default: Date.now
+    },
+
+    recoveryTechnical: {
+        type: String
+    },
+    position: {
+        type: String, enum: ['Left', 'Right']
+    },
+    eyeLid: {
+        type: String,
+    },
+    size: {
+        type: Number,
+    },
+    irisColor: {
+        type: String,
+    },
+
+    corneaStatus: {
+        type: Boolean,
+        default: false
+    },
+    clarity: {
+        type: String,
+    },
+    lens: {
+        type: String,
+    },
+
+});
+const Cornea = mongoose.model('Cornea', corneaSchema);
 module.exports = Cornea
