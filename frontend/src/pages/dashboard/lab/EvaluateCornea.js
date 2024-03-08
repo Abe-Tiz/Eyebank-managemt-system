@@ -9,7 +9,7 @@ const EvaluateCornea = () => {
     const { id } = useParams();
     const { t } = useTranslation();
     const toast = useToast();
-    const [evaluation, setEvaluation] = useState('');
+    const [evaluationdata, setEvaluationdata] = useState('');
     const [evaluationDate, setEvaluationDate] = useState('');
     const [epitheliam, setEpitheliam] = useState('');
     const [isLoading, setIsLoading] = useState(true);
@@ -19,10 +19,7 @@ const EvaluateCornea = () => {
     const [evaluater, setEvaluater] = useState('');
     const [evaluationComment, setEvaluationComment] = useState('');
 
-    // Example state variables
-
-    const evaluateCornea = {
-
+    const evaluation = {
         evaluationDate,
         epitheliam,
         stroma,
@@ -36,8 +33,9 @@ const EvaluateCornea = () => {
         // Fetch cornea data from the server based on the provided ID
         const fetchCorneaData = async () => {
             try {
+
                 const response = await axios.get(`http://localhost:4000/cornea/getOne/${id}`);
-                setEvaluation(response.data);
+                setEvaluationdata(response.data);
                 setIsLoading(false);
             } catch (error) {
                 // Handle error
@@ -57,8 +55,9 @@ const EvaluateCornea = () => {
 
     const handleSave = async () => {
         // Example save functionality
+        //console.log(evaluateCornea)
         try {
-            await axios.put(`http://localhost:4000/cornea/evaluate/${id}`, evaluateCornea);
+            await axios.put(`http://localhost:4000/cornea/evaluate/${id}`, { evaluation });
             toast({
                 title: t('Success'),
                 description: t('Cornea data saved successfully.'),
@@ -78,11 +77,12 @@ const EvaluateCornea = () => {
             });
         }
     };
-
+    const handleApproval = (event) => {
+        setApproval(event.target.value);
+    }
     if (isLoading) {
         return <div>{t('Loading...')}</div>;
     }
-
     return (
         <div>
             <h1>{t('Evaluate Cornea')}</h1>
@@ -93,25 +93,8 @@ const EvaluateCornea = () => {
                 }}
             >
                 <label>
-                    Recovery Date:
+                    Evaluation Date:
                     <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="date"
-                        value={evaluateCornea.date}
-
-                    />
-                </label>
-                <label>
-                    Name of Surgeon:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={evaluateCornea.nameOfSurgeon}
-                    />
-                </label>
-                <label>
-                    <input
-                        Evaluation Date
                         className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                         type="date"
                         value={evaluationDate}
@@ -126,7 +109,6 @@ const EvaluateCornea = () => {
                         value={endothelium}
                         onChange={(e) => setEndothelium(e.target.value)}
                     />
-
                 </label>
                 <label>
                     stroma:
@@ -136,7 +118,6 @@ const EvaluateCornea = () => {
                         value={stroma}
                         onChange={(e) => setStroma(e.target.value)}
                     />
-
                 </label>
                 <label>
                     epitheliam:
@@ -146,7 +127,15 @@ const EvaluateCornea = () => {
                         value={epitheliam}
                         onChange={(e) => setEpitheliam(e.target.value)}
                     />
-
+                </label>
+                <label>
+                    Evaluator:
+                    <input
+                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        type="text"
+                        value={evaluater}
+                        onChange={(e) => setEvaluater(e.target.value)}
+                    />
                 </label>
                 <label>
                     Comment:
@@ -157,7 +146,31 @@ const EvaluateCornea = () => {
                         onChange={(e) => setEvaluationComment(e.target.value)}
                     />
                 </label>
-                <button type='submit'>{t('Save')}</button>
+                <label>
+                    Approval:
+                    <br />
+                    <label>
+
+                        <input
+                            type="radio"
+                            value="positive"
+                            checked={approval === 'positive'}
+                            onChange={handleApproval}
+                        />
+                        Positive
+                    </label>
+                    <br />
+                    <label>
+                        <input
+                            type="radio"
+                            value="negative"
+                            checked={approval === 'negative'}
+                            onChange={handleApproval}
+                        />
+                        Negative
+                    </label>
+                </label>
+                <button className='bg-success' type=' submit'>Evaluate</button>
             </form>
         </div >
     );
