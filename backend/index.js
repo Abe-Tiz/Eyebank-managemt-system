@@ -11,15 +11,14 @@ const donorRoute = require("./routes/donorRoute");
 const reportRoute = require("./routes/ReportRoute");
 const corneaRoute = require("./routes/CorneaRoute");
 const RecipientRoute = require("./routes/RecipientRoute");
+const physicalExamRoute = require("./routes/physicalExamRoute");
 dotenv.config();
 connectDB();
 const app = express();
 const port = process.env.PORT || 4000;
 
 //!  Middleware
-app.use(
-    cors()
-);
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 // app.use(express.urlencoded({ extended: false }));
@@ -39,6 +38,8 @@ app.use('/donor', donorRoute)
 app.use('/report', reportRoute)
 app.use('/cornea', corneaRoute)
 app.use('/routes',RecipientRoute)
+app.use("/exams", physicalExamRoute);
+
 app.use(notFound);
 app.use(errorHandler);
 
