@@ -1,19 +1,24 @@
 const Cornea = require("../models/Cornea");
 const Donor = require("../models/Donor");
 const createCornea = async (req, res) => {
-    const { DonorId, nameOfSurgeon, date, Position, EyeLid, size, IrisColor, CorneaStatus, Clarity, Lens, evaluation } = req.body;
+    //const { dateOfRecovery, recoveryTechnical, position, eyeLid, size, irisColor, corneaStatus, clarity, lens } = req.body;
     const cornea = new Cornea({
-        DonorId,
-        nameOfSurgeon,
-        date,
-        Position,
-        EyeLid,
-        size,
-        IrisColor,
-        CorneaStatus,
-        Clarity,
-        Lens,
-        evaluation,
+        recoveryTechnical: req.body.recoveryTechnical,
+        position: req.body.position,
+        eyeLid: req.body.eyeLid,
+        size: req.body.size,
+        irisColor: req.body.irisColor,
+        corneaStatus: req.body.corneaStatus,
+        clarity: req.body.clarity,
+        lens: req.body.lens,
+        evaluation: {
+            epitheliam: req.body.epitheliam,
+            dateofEvaluation: req.body.dateofEvaluation,
+            stroma: req.body.stroma,
+            endothelium: req.body.endothelium,
+            approval: req.body.approval,
+            evaluater: req.body.evaluater
+        }
     });
     try {
         const createdCornea = await cornea.save(); // Add await here
