@@ -14,75 +14,51 @@ const examinedSchema = new mongoose.Schema({
 
 // risk examined for the donor
 const riskExaminedSchema = new mongoose.Schema({
-  sexual: {
-    type: String,
-    enum: ["no evidence", "evidence"],
-    default: "no evidence",
-  },
-  analInterCourse: {
-    type: String,
-    enum: ["no evidence", "evidence"],
-    default: "no evidence",
-  },
-  NonMedical: {
-    type: String,
-    enum: ["no evidence", "evidence"],
-    default: "no evidence",
-  },
-  oralThrush: {
-    type: String,
-    enum: ["no evidence", "evidence"],
-    default: "no evidence",
-  },
-  Blue: {
-    type: String,
-    enum: ["no evidence", "evidence"],
-    default: "no evidence",
-  },
-  enlargedLiver: {
-    type: String,
-    enum: ["no evidence", "evidence"],
-    default: "no evidence",
-  },
+    sexual: { type: String, enum: ["no evidence", "evidence"], default: "no evidence", },
+    analInterCourse: { type: String, enum: ["no evidence", "evidence"], default: "no evidence", },
+    NonMedical: { type: String, enum: ["no evidence", "evidence"], default: "no evidence", },
+    oralThrush: { type: String, enum: ["no evidence", "evidence"], default: "no evidence", },
+    Blue: { type: String, enum: ["no evidence", "evidence"], default: "no evidence", },
+    enlargedLiver: { type: String, enum: ["no evidence", "evidence"], default: "no evidence", },
 });
 
-const physicalExamSchema = new mongoose.Schema(
-  {
+
+const physiaclSchema = new mongoose.Schema({
     height: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true,
     },
     weight: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true,
     },
     sex: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
     },
     isRefrigerated: {
-      type: Boolean,
-      default: false,
+        type: Boolean,
+        default: false,
     },
     examined: [examinedSchema],
     highRiskexamined: [riskExaminedSchema],
     causeOfDeath: String,
     dod: {
-      type: Date,
-      required: true,
+        type: Date,
+        required: true,
     },
-    story: {
-      type: String,
-      required: true,
+    strory: {
+        type: String,
+        required: true,
     },
     time: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
     },
-  },
-  {
-    timestamps: true,
-  }
+},
+    {
+        timestamps: true,
+    }
 );
 
 const PhysicalExam =
