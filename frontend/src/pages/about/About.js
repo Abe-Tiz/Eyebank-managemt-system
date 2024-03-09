@@ -80,7 +80,7 @@ const About = () => {
               </div>
 
               <div className="grid -space-x-1  lg:gap-x-0 md:gap-7 sm:gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-md transition duration-300 shadow-xl">
+                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1  hover:shadow-md transition duration-300 shadow-xl">
                   <div className="text-center text-gray-500 mt-8 mb-8 pb-4 dark:text-gray-400">
                     <img
                       className="mx-auto mb-4 w-32 h-32 rounded-full "
@@ -162,7 +162,7 @@ const About = () => {
                   })
                 } */}
 
-                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-md transition duration-300 shadow-xl">
+                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1  hover:shadow-md transition duration-300 shadow-xl">
                   <div className="text-center text-gray-500 mt-8 mb-8 pb-4 dark:text-gray-400">
                     <img
                       className="mx-auto mb-4 w-32 h-32 rounded-full "
@@ -237,7 +237,7 @@ const About = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-md transition duration-300 shadow-xl">
+                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1  hover:shadow-md transition duration-300 shadow-xl">
                   <div className="text-center text-gray-500 mt-8 mb-8 pb-4 dark:text-gray-400">
                     <img
                       className="mx-auto mb-4 w-32 h-32 rounded-full "
@@ -312,7 +312,7 @@ const About = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5  bg-base-100 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-md transition duration-300 shadow-xl">
+                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5  bg-base-100 transform hover:-translate-y-1  hover:shadow-md transition duration-300 shadow-xl">
                   <div className="text-center text-gray-500 mt-8 mb-8 pb-4 dark:text-gray-400">
                     <img
                       className="mx-auto mb-4 w-32 h-32 rounded-full "
@@ -373,7 +373,7 @@ const About = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-md transition duration-300 shadow-xl">
+                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1  hover:shadow-md transition duration-300 shadow-xl">
                   <div className="text-center text-gray-500 mt-8 mb-8 pb-4 dark:text-gray-400">
                     <img
                       className="mx-auto mb-4 w-32 h-32 rounded-full "
@@ -434,7 +434,7 @@ const About = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-md transition duration-300 shadow-xl">
+                <div className="card card-compact w-72 h-80 mx-4 md:mb-5 sm:mb-5 bg-base-100 transform hover:-translate-y-1  hover:shadow-md transition duration-300 shadow-xl">
                   <div className="text-center text-gray-500 mt-8 mb-8 pb-4 dark:text-gray-400">
                     <img
                       className="mx-auto mb-4 w-32 h-32 rounded-full "
