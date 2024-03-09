@@ -178,11 +178,12 @@ const LoginDonor = () => {
             </div>
           </form>
         </div>
-        {/* <Link to="/register" className="block mt-4 text-blue-500">
-          {t("login:loginDontLabel")}? {t("login:loginNavigatToSignup")}
-        </Link> */}
         <Link to="/forgot-password" className="block ml-3 text-blue-500">
           {t("login:forgotPasswordLabel")} ?
+        </Link>
+        <Link to="/login">
+          {" "}
+          {t("register:signupOptionLabel")} ? {t("login:loginTitleLabel")}
         </Link>
       </div>
     </div>
