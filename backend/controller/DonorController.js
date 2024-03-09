@@ -20,7 +20,18 @@ const client = twilio(accountSid, authToken);
 
 //! create donor
 const createDonor = asyncHandler(async (req, res) => {
-    const { name, email ,age,sex,city, subcity, kebele, HNumber, mobile} = req.body;
+    const {
+      name,
+      email,
+      age,
+      sex,
+      city,
+      subcity,
+      kebele,
+      HNumber,
+      mobile,
+      isVolunter,
+    } = req.body;
     
     try {
 
@@ -44,7 +55,8 @@ const createDonor = asyncHandler(async (req, res) => {
                     subcity,
                     kebele,
                     HNumber,
-                    mobile
+                    mobile,
+                    isVolunter,
                   });
 
                   //generate and store the verification token
@@ -103,17 +115,6 @@ const loginDonor = asyncHandler(async (req, res) => {
 const getloggedInDonor = asyncHandler(async (req, res) => {
   const { code } = req.body;
   try {
-    // const donor = jwt.verify(token, process.env.JWT_SECRET, (err, res) => {
-      // if (err) {
-      //   return "token expired";
-      // }
-    //   return res;
-    // });
-    // console.log(donor);
-    // if (donor === "token expired") {
-    //   return res.send({ status: "error", data: "token expired" });
-    // }
-   
     Donor.findOne({ email: code })
       .then((data) => {
         res.send({ status: "ok", data: data });
@@ -194,21 +195,6 @@ const getDonor = asyncHandler(async (req, res) => {
   }
 });
 
-//! get donor by id
-// const getDonorCount = asyncHandler(async (req, res) => {
-  // try {
- 
-  //   const totalDonorsCount = await Donor.estimatedDocumentCount();
- 
-  //   const count = await Donor.countDocuments();
-  //    res.status(200).json(count);
-  // } catch (error) {
-  //   console.error("Error:", error);
-  //   res.status(500).json({ error: "Internal server error" });
-  // }
-// });
-
-
 // displays donor by id
 const getDonorById = asyncHandler(async (req, res) => {
   try {
@@ -288,10 +274,6 @@ const deleteDonor = asyncHandler(async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-
-
-
 
   //! send email 
     const sendEmail = async (email, verificationCode) => {

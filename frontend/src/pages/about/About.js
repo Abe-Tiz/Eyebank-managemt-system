@@ -12,7 +12,7 @@ const About = () => {
     <>
       <div className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%  mt-0 mb-0  ">
         {/* <Header /> */}
-        <div className="mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
+        <div className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
           <h1 className=" text-4xl font-bold text-center mt-1 font-sans">
             {t("about:whoweare")}
           </h1>
@@ -68,7 +68,7 @@ const About = () => {
 
           {/* Cards that show stackholders */}
 
-          <section className="bg-white dark:bg-gray-900">
+          <section className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%  dark:bg-gray-900">
             <div className="py-4 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
               <div className="mx-auto max-w-screen-sm lg:mt-2 lg:mb-16 md:mb-10 sm:mb-10">
                 <h2 className="border-y-4 py-3 border-yellow-500 mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
