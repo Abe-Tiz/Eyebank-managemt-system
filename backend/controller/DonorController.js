@@ -133,7 +133,7 @@ const sendverificationEmail = async (email, verificationToken, route) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "abebetizazu157@gmail.com",
+      donor: "abebetizazu157@gmail.com",
       pass: "gezm fqmn asjl bqxj",
     },
   });
@@ -177,6 +177,104 @@ const getVerification = asyncHandler(async (req, res) => {
     res.status(500).json({ message: "Email verification failed" });
     }
 })
+
+
+const forgotCode = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  try {
+    const donor = await Donor.findOne({ email: email });
+    if (donor) {
+      if (donor.verified) {
+        const token = jwt.sign({ donorId: donor._id }, process.env.JWT_SECRET, {
+          expiresIn: "1d",
+        });
+
+        //! create nodemailer transporter
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "abebetizazu157@gmail.com",
+            pass: "gezm fqmn asjl bqxj",
+          },
+          tls: {
+            rejectUnauthorized: false,
+          },
+        });
+
+        //! compose the email message
+        const mailOption = {
+          from: "abebetizazu157@gmail.com",
+          to: email,
+          subject: "Reset Code Link",
+          text: ` Please use This Link to change the short code : http://127.0.0.1:3000/reset_code/${donor._id}/${token}`,
+        };
+
+        transporter.sendMail(mailOption, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            return res.send({ Status: "Success" });
+          }
+        });
+
+        res.status(200).json({ donor, token });
+        console.log(donor,token);
+      } else {
+        console.log(
+          "You are not a verified donor. Please verify your account first."
+        );
+        res.json({ message: "not verified" });
+      }
+    } else {
+      console.log("donor is not found.");
+      return res.status(404).json({ message: "donor is not found." });
+    }
+  } catch (error) {
+    console.error("error::::",error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+const resetCode = asyncHandler(async (req, res) => {
+  const { id, token } = req.params;
+  const { code } = req.body;
+
+  try {
+    // Verify the JWT token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (decoded.donorId !== id) {
+      return res
+        .status(403)
+        .json({ status: "Forbidden", message: "Invalid token for this donor" });
+    }
+    // const hashedPassword = await Bcrypt.hash(password, 10);
+    const updateddonor = await Donor.findByIdAndUpdate(
+      { _id: id },
+      { verificationCode: code }
+    );
+
+    if (!updateddonor) {
+      return res
+        .status(404)
+        .json({ status: "Not Found", message: "donor not found" });
+    }
+
+    res.json({ status: "Success", message: "Password reset successfully" });
+  } catch (error) {
+    console.error(error);
+
+    if (error.name === "JsonWebTokenError") {
+      return res
+        .status(401)
+        .json({ status: "Unauthorized", message: "Invalid token" });
+    }
+
+    res
+      .status(500)
+      .json({ status: "Internal Server Error", error: error.message });
+  }
+});
 
 //! get all donor
 const getDonor = asyncHandler(async (req, res) => {
@@ -281,7 +379,7 @@ const deleteDonor = asyncHandler(async (req, res) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "abebetizazu157@gmail.com",
+          donor: "abebetizazu157@gmail.com",
           pass: "gezm fqmn asjl bqxj",
         },
         tls: {
@@ -374,4 +472,6 @@ module.exports = {
   verifyCode,
   loginDonor,
   getloggedInDonor,
+  forgotCode,
+  resetCode,
 };
