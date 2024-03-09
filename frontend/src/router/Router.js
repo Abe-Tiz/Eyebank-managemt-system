@@ -32,6 +32,8 @@ import LabTechnicalDashboard from "../layout/LabTechnicalLayout";
 import AdminDashboard from "../layout/AdminLayout";
 import LoginDonor from "../pages/donor/LoginDonor";
 import Profile from './../pages/donor/Profile';
+import ForgotCode from './../pages/donor/ForgotCode';
+import ResetCode from './../pages/donor/ResetCode';
     
 const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "/forgot-password",
         element: <ForgotPassword />,
+      },
+      {
+        path: "/forgot-code",
+        element: <ForgotCode />,
+      },
+      {
+        path: "/reset_code/:id/:token",
+        element: <ResetCode />,
       },
       {
         path: "/reset_password/:id/:token",

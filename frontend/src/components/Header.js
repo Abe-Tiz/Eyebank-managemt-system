@@ -58,7 +58,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% max-w-full-2xl  mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out z-10">
+    <header className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%  max-w-full-2xl  mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out z-10">
     <nav  className={`bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% navbar xl:px-24 ${
             isSticky
               ? "shadow-md bg-base-200 transition-all duration-300 ease-in-out "
