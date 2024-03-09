@@ -12,18 +12,22 @@ const EditCornea = () => {
 
     // Example state variables
     const [corneaData, setCorneaData] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const [corneaDate, setCorneaDate] = useState('');
-    const [recoverySite, setRecoverySite] = useState('');
     const [recoveryTechnical, setRecoveryTechnical] = useState('');
-    const [serologyTest, setSerologyTest] = useState('');
-    const [covid, setCovid] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const [eyeLid, setEyeLid] = useState('');
+    const [size, setSize] = useState('');
+    const [irisColor, setIrisColor] = useState('');
+    const [corneaStatus, setCorneaStatus] = useState('');
+    const [clarity, setClarity] = useState('');
+    const [lens, setLens] = useState('');
     const cornea = {
-        corneaDate,
-        recoverySite,
         recoveryTechnical,
-        serologyTest,
-        covid
+        eyeLid,
+        size,
+        irisColor,
+        corneaStatus,
+        clarity,
+        lens
     };
 
     useEffect(() => {
@@ -52,6 +56,7 @@ const EditCornea = () => {
     const handleSave = async () => {
         // Example save functionality
         try {
+            console.log(cornea);
             await axios.put(`http://localhost:4000/cornea/update/${id}`, cornea);
             toast({
                 title: t('Success'),
@@ -86,62 +91,107 @@ const EditCornea = () => {
                     handleSave();
                 }}
             >
-                <label>
-                    Recovery Date:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="date"
-                        value={corneaData.corneaDate}
-                        onChange={(e) => setCorneaDate(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Name of Surgeon:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={corneaData.nameOfSurgeon}
-                        onChange={(e) => setRecoverySite(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Recovery Site:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={corneaData.recoverySite}
-                        onChange={(e) => setRecoverySite(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Recovery Technical:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={corneaData.recoveryTechnical}
-                        onChange={(e) => setRecoveryTechnical(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Serology Test:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={corneaData.serologyTest}
-                        onChange={(e) => setSerologyTest(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Covid:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={corneaData.covid}
-                        onChange={(e) => setCovid(e.target.value)}
-                    />
-                </label>
-                <button type='submit'>{t('Save')}</button>
-            </form>
+                <div className='grid grid-cols-3'>
+                    <label>
+                        Recovery Technical:
+                        <select
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={recoveryTechnical}
+                            onChange={(e) => setRecoveryTechnical(e.target.value)}
+                        >
+                            <option value={corneaData.recoveryTechnical}>{corneaData.recoveryTechnical}</option>
+                            <option value="Technical 1">Technical 1</option>
+                            <option value="Technical 2">Technical 2</option>
+                            <option value="Technical 3">Technical 3</option>
+                        </select>
+                    </label>
+                    <label>
+                        Size:
+                        <select
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={size === '' ? corneaData.size : size}
+                            onChange={(e) => setSize(e.target.value)}
+                        >
+                            <option value={corneaData.size}>{corneaData.size}</option>
+                            <option value="3">3 cm</option>
+                            <option value="6">6 cm</option>
+                            <option value="9">9 cm</option>
+                        </select>
+                    </label>
+                    <label>
+                        Eye Lid:
+                        <input
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="text"
+                            value={eyeLid}
+                            onChange={(e) => setEyeLid(e.target.value)}
+                        />
+                    </label>
+                </div>
+                <div className='grid grid-cols-3'>
+                    <label>
+                        Iris Color:
+                        <select
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+
+                            value={irisColor}
+                            onChange={(e) => setIrisColor(e.target.value)}
+                        >
+                            <option value={corneaData.irisColor}>{corneaData.irisColor}</option>
+                            <option value="blue">Blue</option>
+                            <option value="black">Black</option>
+                        </select>
+                    </label>
+                    <label>
+                        Cornea Status:
+                        <select
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+
+                            value={corneaStatus}
+                            onChange={(e) => setCorneaStatus(e.target.value)}
+                        >
+                            <option value={corneaData.corneaStatus}>{corneaData.corneaStatus}</option>
+                            <option value="Status 1">Status 1</option>
+                            <option value="Status 2">Status 2</option>
+                            <option value="Status 3">Status 3</option>
+
+                        </select>
+                    </label>
+                    <label>
+                        Clarity:
+                        <select
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={clarity}
+                            onChange={(e) => setClarity(e.target.value)}
+                        >
+                            <option value={corneaData.clarity}>{corneaData.clarity}</option>
+                            <option value="clear 1">Clear 1</option>
+                            <option value="clear 2">Clear 2</option>
+                            <option value="clear 3">Clear 3</option>
+                        </select>
+                    </label>
+                </div>
+                <div className='grid grid-cols-3'>
+                    <label>
+                        Lens:
+                        <select
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={lens}
+                            onChange={(e) => setLens(e.target.value)}
+                        >
+
+                            <option value={corneaData.lens}>{corneaData.lens}</option>
+                            <option value="Lens 1">Lens 1</option>
+                            <option value="Lens 2">Lens 2</option>
+                            <option value="Lens 3">Lens 3</option>
+                        </select>
+                    </label>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">
+                        Update
+                    </button>
+                </div>
+
+            </form >
         </div >
     );
 };

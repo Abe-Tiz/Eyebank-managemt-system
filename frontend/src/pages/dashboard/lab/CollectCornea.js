@@ -80,7 +80,6 @@ const CollectCornea = () => {
                         Position:
                         <br />
                         <label>
-
                             <input
                                 type="radio"
                                 value="left"
