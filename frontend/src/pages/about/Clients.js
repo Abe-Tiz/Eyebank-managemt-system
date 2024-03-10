@@ -4,7 +4,7 @@ import { FaTwitter } from 'react-icons/fa';
 import { FaTelegram } from 'react-icons/fa';
 
 
-const Clients = () => {
+export const Clients = () => {
     const { t } = useTranslation();
 
     const Client = [
@@ -51,5 +51,4 @@ const Clients = () => {
    
 }
 
-
-export default Clients;
+ 
