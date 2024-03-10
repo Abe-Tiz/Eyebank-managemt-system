@@ -99,7 +99,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/awareness" onClick={hideNavbar}>
+              <NavLink to="/blog" onClick={hideNavbar}>
                 {t("translation:Awarness")}
               </NavLink>
             </li>
