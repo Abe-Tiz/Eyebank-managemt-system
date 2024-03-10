@@ -22,11 +22,10 @@ const Home = () => {
   return (
     <>
       <div className="mt-0 mb-0 pt-1">
-
-         {/* hero section  */}
+        {/* hero section  */}
         <Hero />
-       {/* about section */}
-        <div className="mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
+        {/* about section */}
+        <div className="mx-20 mb-3 mt-3 border-0 p-10 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%  rounded-xl">
           <h1 className=" text-4xl font-bold text-center mt-1 font-sans ">
             {t("about:whoweare")}
           </h1>

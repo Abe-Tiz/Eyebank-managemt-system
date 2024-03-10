@@ -27,18 +27,61 @@ const AdminDashboard = () => {
     role: "",
   });
 
-  const handleSearch = () => {
-    const sampleList = [
-      { id: 1, name: "John Doe" },
-      { id: 2, name: "Jane Doe" },
-    ];
+  const [reportData, setReportData] = useState({
+    donor: "",
+    user: "",
+  });
 
-    const results = sampleList.filter((item) =>
-      item.name.toLowerCase().includes(searchText.toLowerCase())
-    );
+  useEffect(() => {
+    const numberDonor = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/report");
 
-    setSearchResults(results);
-  };
+        setReportData((prevReportData) => ({
+          ...prevReportData,
+          donor: response.data,
+        }));
+
+        console.log(response.data);
+      } catch (error) {
+        console.log("Error : ", error);
+      }
+    };
+
+    const getLoggedInUser = async () => {
+      fetch("http://127.0.0.1:4000/user/userLogedin", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          token: localStorage.getItem("token"),
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.data, "user logged in");
+          setState((prev) => ({
+            ...prev,
+            name: data.data.name,
+            image: data.data.image,
+            role: data.data.role,
+            isLoggedin: true,
+          }));
+
+          if (data.data === "token expired") {
+            localStorage.clear();
+            navigate("/login");
+          }
+        });
+    };
+
+    numberDonor();
+    getLoggedInUser();
+  }, [setReportData, navigate]);
 
   const handleSearchInputChange = (e) => {
     setSearchText(e.target.value);
@@ -59,36 +102,36 @@ const AdminDashboard = () => {
   };
 
   //! handle loggedin user
-  useEffect(() => {
-    fetch("http://127.0.0.1:4000/user/userLogedin", {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        token: localStorage.getItem("token"),
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data, "user logged in");
-        setState((prev) => ({
-          ...prev,
-          name: data.data.name,
-          image: data.data.image,
-          role: data.data.role,
-          isLoggedin: true,
-        }));
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:4000/user/userLogedin", {
+  //     method: "POST",
+  //     crossDomain: true,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //     body: JSON.stringify({
+  //       token: localStorage.getItem("token"),
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data.data, "user logged in");
+  //       setState((prev) => ({
+  //         ...prev,
+  //         name: data.data.name,
+  //         image: data.data.image,
+  //         role: data.data.role,
+  //         isLoggedin: true,
+  //       }));
 
-        if (data.data === "token expired") {
-          localStorage.clear();
-          navigate("/login");
-        }
-      });
-  }, [navigate]);
+  //       if (data.data === "token expired") {
+  //         localStorage.clear();
+  //         navigate("/login");
+  //       }
+  //     });
+  // }, [navigate]);
 
   return (
     <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
@@ -130,7 +173,7 @@ const AdminDashboard = () => {
                   className="btn btn-ghost btn-circle items-center justify-center text-center mr-5"
                 >
                   <div className="indicator flex items-center  ">
-                    <Badge count={5} offset={[0, 5]} className="mr-5 mt-1">
+                    <Badge count={reportData.donor}  className="mr-5 mt-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-10 w-10 text-5xl"

@@ -49,7 +49,7 @@ body {
 
 .nav-elements ul a {
     font-size: 16px;
-    color: gray;
+    color: #000000;
     text-decoration: none;
     letter-spacing: 1px;
     transition: color 0.3s ease-in-out;
@@ -155,6 +155,7 @@ body {
     transform: scaleX(1);
     transform-origin: 0% 100%;
     position: relative;
+    color: rgb(170, 0, 255);
 }
 
 .nav-elements ul a::before {
@@ -164,7 +165,7 @@ body {
     height: 3px; /* Adjust this value based on your desired border thickness */
     bottom: 0;
     left: 0;
-    background-color: yellow;
+    background-color: rgb(170, 0, 255);
     transition: width 0.3s ease;
 }
 
