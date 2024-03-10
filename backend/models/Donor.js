@@ -1,43 +1,44 @@
 const mongoose = require("mongoose");
 
+// donor schema
 const donorSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true
-          },
+            required: true,
+        },
         email: {
             type: String,
-            required: true
-         },
-        age : {
+            required: true,
+        },
+        age: {
             type: Number,
-            required: true
-         },
-        sex : {
+            required: true,
+        },
+        sex: {
             type: String,
-            required: true
-         },
-        city : {
+            required: true,
+        },
+        city: {
             type: String,
-            required: true
-         },
-        subcity : {
+            required: true,
+        },
+        subcity: {
             type: String,
-            required:true
-         },
-        kebele : {
+            required: true,
+        },
+        kebele: {
             type: String,
-            required: true
-         },
-        HNumber :{
+            required: true,
+        },
+        HNumber: {
             type: Number,
-            required: true
-         },
+            required: true,
+        },
         mobile: {
             type: Number,
-            required: true
-         },
+            required: true,
+        },
         verified: {
             type: Boolean,
             default: false,

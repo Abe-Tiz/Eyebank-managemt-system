@@ -9,9 +9,9 @@ const userRoute = require("./routes/userRoute");
 const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
 const reportRoute = require("./routes/ReportRoute");
-
- 
-dotenv.config();  
+const corneaRoute = require("./routes/CorneaRoute");
+//const RecipientRoute = require("./routes/RecipientRoute");
+dotenv.config();
 connectDB();
 const app = express();
 const port = process.env.PORT || 4000;
@@ -37,7 +37,8 @@ app.use('/user', userRoute)
 // app.use('/contact', contactRoute)
 app.use('/donor', donorRoute)
 app.use('/report', reportRoute)
-
+app.use('/cornea', corneaRoute)
+// app.use('/routes', RecipientRoute)
 app.use(notFound);
 app.use(errorHandler);
 

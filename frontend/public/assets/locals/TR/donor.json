@@ -1,8 +1,9 @@
 {
   "labelDonor": "ዓይኒ ባንኪ ኢትዮጵያ",
-  "donorAge": "ዕድመ",
+  "donorAge": "ዕለት ልደት",
   "donorAgeError": "ዕድመ ካብ 2 ክሳብ 80 ክኸውን ኣለዎ",
   "donorSubCity": "ንኡስ ከተማ",
+  "AgeDonor": "ዕድመ",
   "donorSubCityError": "ንኡስ ከተማ እንተወሓደ 2 ፊደላት ንውሓት ክህልዎ ኣለዎ",
   "donorCity": "ከተማ",
   "donorCityError": "ከተማ እንተወሓደ 2 ፊደላት ንውሓት ክህልዎ ኣለዎ።",
@@ -30,5 +31,9 @@
   "faxLabel": "ፋክስ",
   "refNumberLabel": "መለለዪ ቁጽሪ",
   "dateLabel": "ዕለት",
-  "labelDonorCardBottom": "ንዕላማ ባንኪ ዓይኒ ኢትዮጵያ ጥራሕ ዝውዕል"
+  "viewDonorTitle": " ቅድሚ ሕትመት ሓበሬታኹም ኣረጋግጹ",
+  "labelDonorCardBottom": "ንዕላማ ባንኪ ዓይኒ ኢትዮጵያ ጥራሕ ዝውዕል",
+  "deleteTitleDonor": "ለጋሲ ምድምሳስ",
+    "deleteCancelDonor": "ሰርዝ",
+    "deleteSubtitleDonor": " ነዚ ለጋሲ ክትድምስሶ ከም እትደሊ ርግጸኛ ዲኻ ? እዚ ተግባር እዚ ክምለስ ኣይክእልን እዩ።"
 }
