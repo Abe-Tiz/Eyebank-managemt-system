@@ -217,7 +217,7 @@ const EvaluateCornea = () => {
                                 <option value="epitheliam">Epitheliam</option>
                                 <option value="stroma">Stroma</option>
                                 <option value="endothelium">Endothelium</option>
-                                <option value="descement"></option>
+                                <option value="descement"> Descement</option>
                                 <option value="other">Other</option>
 
                             </select>
