@@ -1,0 +1,129 @@
+.blog-list {
+    display: grid;
+    background-color: white;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    margin: 0 5%; /* Adjust the horizontal margins as desired */
+    margin-left: 160px; /* Add margin-left with the desired value */
+    width: 100%; /* Increase the width of the container */
+  }
+  .dashboard{
+background-color: white;
+  }
+  .blog-item {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center-align the content */
+  }
+  
+  .blog-image {
+    width: 40%;
+    background-color: white;
+  }
+  
+  .blog-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+
+  .blog-image img:hover {
+    /* transform: scale(1.1); */
+    filter: brightness(80%);
+  }
+  .blog-image {
+    position: relative;
+  }
+  
+  .blog-image::after {
+    content: "Read More";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 12px 20px;
+    border-radius: 4px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .blog-image:hover::after {
+    opacity: 1;
+  }
+
+
+  .blog-details {
+    display: flex;
+   
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 20px;
+    width: 60%;
+    background-color: white;
+    
+  }
+  
+  .blog-title a {
+    color: #073fc3;
+    font-size: 16px;
+   text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  
+  }
+  .blog-title a:hover {
+    color: #a20707b3;
+    /* text-decoration: underline; */
+  }
+  .blog-info time {
+    color: blue;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .blog-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F5F5F5;
+    padding: 20px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+  }
+  
+  .blog-summary p {
+    color: black;
+    font-size: 16px;
+    text-align: justify;
+    margin: 0;
+  }
+  
+  .blog-link {
+    text-decoration: none;
+  }
+
+/*   
+  .text-center {
+    margin-left: 180px;
+    color: #073fc3;
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom:45px ;
+   
+  } */
+   
+  .row.dashboard {
+    margin-top: 40px;
+  }

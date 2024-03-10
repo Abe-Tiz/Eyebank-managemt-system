@@ -4,9 +4,6 @@ import Home from '../pages/home/Home';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import ResetPassword from '../pages/auth/ResetPassword';
 import About from '../pages/about/About';
-import Awareness from '../pages/awareness/getAwareness';
-import CreateAwareness from '../pages/awareness/createAwareness';
-import CreateVideo from '../pages/awareness/createVideo';
 import Contact from "../pages/contact/contact";
 import CreateDonor from "../pages/donor/CreateDonor";
 import Login from '../pages/auth/Login';
@@ -37,6 +34,14 @@ import Profile from './../pages/donor/Profile';
 import ForgotCode from './../pages/donor/ForgotCode';
 import ResetCode from './../pages/donor/ResetCode';
 
+//blog
+//blog
+import CreatePost from "../components/labTechnical/CreatePost";
+import EditPost from "../components/labTechnical/EditPost";
+import IndexPage from "../components/labTechnical/IndexPage";
+import BlogPage from "./../pages/blog/BlogPage";
+import BlogDetail from "./../pages/blog/BlogDetail";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -66,18 +71,9 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
-      {
-        path: "/awareness",
-        element: <Awareness />,
-      },
-      {
-        path: "/createAwareness",
-        element: <CreateAwareness />,
-      },
-      {
-        path: "/createVideo",
-        element: <CreateVideo />,
-      },
+      
+        
+   
       {
         path: "/contact",
         element: <Contact />,
@@ -106,6 +102,14 @@ const router = createBrowserRouter([
         path: "/update/:id",
         element: <EditDonor />,
       },
+      {
+        path: "/blog",
+        element: <BlogPage />,
+    },
+    {
+        path: "/blog/:slug",
+        element: <BlogDetail />,
+    },
       {
         path: "/donor-login",
         element: <LoginDonor />,
@@ -156,6 +160,18 @@ const router = createBrowserRouter([
           path: "editCornea/:id",
           element: <EditCornea />,
       },
+      {
+        path: "/labtechnicaldashboard/create-post",
+        element: <CreatePost />,
+    },
+    {
+        path: "/labtechnicaldashboard/edit-post/:slug",
+        element: <EditPost />,
+    },
+    {
+        path: "/labtechnicaldashboard/posts",
+        element: <IndexPage />,
+    },
     ],
   },
     {
