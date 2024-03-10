@@ -128,8 +128,8 @@ const Contact = () => {
             <section className="page-section" id="contact">
                 <div className="container">
                     <div className="row">
-                        <div className=" tittle ">
-                            <h2 className=" section-heading text-uppercase">
+                        <div className="tittle">
+                            <h2 className="text-center  section-heading text-uppercase">
                                 {t("contact:contactus")}
                             </h2>
                             {/* <h3 className="section-subheading text-muted">Eye Bank Center</h3> */}

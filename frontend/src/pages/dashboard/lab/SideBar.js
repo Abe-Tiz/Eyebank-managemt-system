@@ -22,7 +22,7 @@ const CustomSidebar = ({
             className={`bg-indigo-900 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
                 }`}
         >
-            <div className="flex flex-col h-full mt-0">
+            <div className="flex flex-col h-full mt-0 overflow-scroll">
                 {collapsed ? (
 
                     // collapsed btn
@@ -142,7 +142,7 @@ const CustomSidebar = ({
                                 >
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
-                                </Link>
+                            
                             <Link
                                 to="/labtechnicaldashboard/donorRegistration"
                                 className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"

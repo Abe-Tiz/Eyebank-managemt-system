@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEdit, FaPrint } from "react-icons/fa";
 
 const ViewDonor = () => {
@@ -16,86 +16,93 @@ const ViewDonor = () => {
     mobile: "",
     id:'',
   });
+
+  
+  const [state, setState] = useState({
+    name: "",
+    isLoggedin: false,
+  });
+
   const { t } = useTranslation();
   const location = useLocation();
+    const navigate = useNavigate();
+
+  
 
   useEffect(() => {
-    if (location.state && location.state.data) {
-      const newDonorData = location.state.data;
+    // if (location.state && location.state.data) {
+    //   const newDonorData = location.state.data;
 
-      setDonorData({
-        name: newDonorData.name,
-        email: newDonorData.email,
-        city: newDonorData.city,
-        age: newDonorData.age,
-        sex: newDonorData.sex,
-        subcity: newDonorData.subcity,
-        kebele: newDonorData.kebele,
-        HNumber: newDonorData.HNumber,
-        mobile: newDonorData.mobile,
-        id: newDonorData._id,
-      });
-    }
-  }, [location.state]);
+    //   setDonorData({
+    //     name: newDonorData.name,
+    //     email: newDonorData.email,
+    //     city: newDonorData.city,
+    //     age: newDonorData.age,
+    //     sex: newDonorData.sex,
+    //     subcity: newDonorData.subcity,
+    //     kebele: newDonorData.kebele,
+    //     HNumber: newDonorData.HNumber,
+    //     mobile: newDonorData.mobile,
+    //     id: newDonorData._id,
+    //   });
+    // }
+
+      const getLoggedInDonor = async () => {
+        fetch("http://127.0.0.1:4000/donor/donorLogedin", {
+          method: "POST",
+          crossDomain: true,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            token: localStorage.getItem("token"),
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.data, "user logged in");
+            setState((prev) => ({
+              ...prev,
+              name: data.data.name,
+              isLoggedin: true,
+            }));
+
+            if (data.data === "token expired") {
+              localStorage.clear();
+              navigate("/login");
+            }
+          });
+    };
+
+    getLoggedInDonor();
+    
+  }, []);
 
   // Size of the circles
   const circleSize = 32;
 
   
   return (
-    <div className="relative bg-white min-h-screen flex items-center justify-center">
-      <div
-        className={`absolute top-8 left-64 w-52 h-52 bg-yellow-400 rounded-full opacity-60`}
-      ></div>
-      <div
-        className={`absolute bottom-10 right-64 w-52 h-52 bg-orange-500 rounded-full opacity-60`}
-      ></div>
-
-      <div className="bg-gray-300 rounded-md overflow-hidden shadow-md p-6 mx-auto w-3/4 relative">
-        <div
-          className={`absolute top-10 left-10 w-64 h-64 bg-indigo-400 rounded-full opacity-30`}
-        ></div>
-        <div
-          className={`absolute -top-10 -right-10 w-${circleSize} h-${circleSize} bg-purple-600 rounded-full opacity-30`}
-        ></div>
-        <div
-          className={`absolute -bottom-10 -left-10 w-${circleSize} h-${circleSize} bg-pink-400 rounded-full opacity-30`}
-        ></div>
-        <div
-          className={`absolute -bottom-10 -right-10 w-${circleSize} h-${circleSize} bg-blue-400 rounded-full opacity-30`}
-        ></div>
-
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="bg-gray-100 rounded-md overflow-hidden shadow-md p-6 mx-auto w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 relative">
         <h2 className="text-4xl font-bold text-gray-800 mb-4">
-          {t("donor:viewDonorTitle")}
+         Profile
         </h2>
-        <div className="flex justify-center gap-x-80 ">
-          <div>
+
+        <div className="flex flex-col md:flex-row gap-y-4 md:gap-x-8">
+          <div className="md:w-1/2">
             <p className="text-xl font-bold text-gray-800 mb-2">
-              {t("register:LabelsignUpName")}: <span>{donorData.name} </span>
+              {t("register:LabelsignUpName")}: <span>{state.name} </span>
             </p>
             <p className="text-xl font-bold text-gray-800 mb-2">
               {t("login:labelLoginEmail")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.email} </span>
             </p>
-            <p className="text-xl font-bold text-gray-800 mb-2">
-              {t("donor:donorCity")}:{" "}
-              <span className="text-gray-700 mb-2">{donorData.city} </span>
-            </p>
-            <p className="text-xl font-bold text-gray-800 mb-2">
-              {t("donor:AgeDonor")}:{" "}
-              <span className="text-gray-700 mb-2">{donorData.age} </span>
-            </p>
-            <p className="text-xl font-bold text-gray-800 mb-2">
-              {t("donor:donorSex")}:{" "}
-              <span className="text-gray-700 mb-2">{donorData.sex} </span>
-            </p>
-            <p className="text-xl font-bold text-gray-800 mb-2">
-              {t("donor:donorSubCity")}:{" "}
-              <span className="text-gray-700 mb-2">{donorData.subcity} </span>
-            </p>
           </div>
 
-          <div>
+          <div className="md:w-1/2">
             <p className="text-xl font-bold text-gray-800 mb-2">
               {t("donor:donorKebele")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.kebele} </span>
@@ -104,32 +111,32 @@ const ViewDonor = () => {
               {t("donor:donorHno")}:{" "}
               <span className="text-gray-700 mb-2">{donorData.HNumber} </span>
             </p>
-            <p className="text-xl font-bold text-gray-800 mb-2">
-              {t("donor:donorMobile")}:{" "}
-              <span className="text-gray-700 mb-2">{donorData.mobile} </span>
-            </p>
           </div>
         </div>
 
         <div className="flex justify-between mt-6 ">
+
+
+          {/* update btn */}
           <Link
-            className="like-button bg-transparent text-black cursor-pointer px-6 py-3 rounded focus:outline-none border border-gray-300 hover:bg-blue-600 shadow-md z-30"
+            className="like-button bg-blue-500 text-white cursor-pointer px-6 py-3 rounded focus:outline-none border border-gray-300 hover:bg-blue-600 shadow-md z-30"
             to={`/update/${donorData.id}`}
           >
             <FaEdit className="mr-2" />
             {t("common:updateButtonLabel")}
           </Link>
-          <Link
-            className="like-button bg-transparent text-black cursor-pointer px-6 py-3 rounded focus:outline-none border border-gray-300 hover:bg-green-600 shadow-md z-30"
-            to={`/print/${donorData.id}`}
-          >
-            <FaPrint className="mr-2" />
-            {t("common:printButtonLabel")}
-          </Link>
+
+          {/* print button */}
+            <Link
+              className="like-button bg-orange-500 text-white cursor-pointer px-6 py-3 rounded focus:outline-none border border-gray-300 hover:bg-green-600 shadow-md z-30"
+              to={`/print/${donorData.id}`}
+            >
+              <FaPrint className="mr-2" />
+              {t("common:printButtonLabel")}
+            </Link>
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

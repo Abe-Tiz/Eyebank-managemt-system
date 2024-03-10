@@ -23,7 +23,7 @@ const ViewUsers = () => {
           const users = userdata.map((user) => user);
           setLoading(true);
           setusers(users);
-          console.log(users);
+          // console.log(users);
         } else {
           console.log("Array is empty.");
           toast({
