@@ -1,41 +1,12 @@
 const mongoose = require('mongoose');
 
-const evaluatioSchema = new mongoose.Schema({
-
-    evaluation: {
-        epitheliam: {
-            type: String,
-        },
-        dateofEvaluation: {
-            type: Date,
-        },
-        stroma: {
-            type: String,
-        },
-        endothelium: {
-            type: String,
-        },
-        approval: {
-            type: Boolean,
-            default: false
-        },
-        evaluater: {
-            type: String
-        },
-
-    }
-});
 const corneaSchema = new mongoose.Schema({
-    dateOfRecovery: {
-        type: Date,
-        default: Date.now
-    },
 
     recoveryTechnical: {
         type: String
     },
     position: {
-        type: String, enum: ['Left', 'Right']
+        type: String, enum: ['left', 'right']
     },
     eyeLid: {
         type: String,
@@ -46,10 +17,9 @@ const corneaSchema = new mongoose.Schema({
     irisColor: {
         type: String,
     },
-
     corneaStatus: {
-        type: Boolean,
-        default: false
+        type: String,
+        // default: false
     },
     clarity: {
         type: String,
@@ -57,7 +27,45 @@ const corneaSchema = new mongoose.Schema({
     lens: {
         type: String,
     },
+    evaluation: {
+        evaluationDate: {
+            type: Date,
+        },
+        epitheliam: {
+            type: String,
+        },
+        stroma: {
+            type: String,
+        },
+        endothelium: {
+            type: String,
+        },
 
-});
+        evaluater: {
+            type: String
+        },
+        evaluationComment: {
+            type: String
+        },
+        approval: {
+            type: String,
+            enum: ['yes', 'no']
+        },
+        suiatablity: {
+            type: String,
+            enum: ['PK', 'EK', 'ALK', 'KLA', 'K-Pro', 'Therapeutic']
+        },
+        reason: {
+            type: String,
+            enum: ['epitheliam', 'stroma', 'endothelium', 'descement', 'other']
+        }
+
+    }
+
+},
+
+
+    { timestamps: true }
+);
 const Cornea = mongoose.model('Cornea', corneaSchema);
 module.exports = Cornea

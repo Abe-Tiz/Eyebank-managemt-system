@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
-// high risk examined for donor
+// high risk examined for donor 
 const examinedSchema = new mongoose.Schema({
-  head: { type: Boolean, default: false },
-  mouth: { type: Boolean, default: false },
-  neck: { type: Boolean, default: false },
-  arms: { type: Boolean, default: false },
-  abdomen: { type: Boolean, default: false },
-  genitals: { type: Boolean, default: false },
-  arteries: { type: Boolean, default: false },
-  back: { type: Boolean, default: false },
+    head: { type: Boolean, default: false },
+    mouth: { type: Boolean, default: false },
+    neck: { type: Boolean, default: false },
+    arms: { type: Boolean, default: false },
+    abdomen: { type: Boolean, default: false },
+    genitals: { type: Boolean, default: false },
+    arteries: { type: Boolean, default: false },
+    back: { type: Boolean, default: false },
 });
 
-// risk examined for the donor
+// risk  examined for the donor
 const riskExaminedSchema = new mongoose.Schema({
     sexual: { type: String, enum: ["no evidence", "evidence"], default: "no evidence", },
     analInterCourse: { type: String, enum: ["no evidence", "evidence"], default: "no evidence", },
@@ -62,7 +62,7 @@ const physiaclSchema = new mongoose.Schema({
 );
 
 const PhysicalExam =
-  mongoose.models.PhysicalExam ||
-  mongoose.model("PhysicalExam", physicalExamSchema);
+    mongoose.models.physicalExam ||
+    mongoose.model("physicalExam", physiaclSchema);
 
 module.exports = PhysicalExam;
