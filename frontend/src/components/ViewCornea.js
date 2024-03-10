@@ -180,12 +180,12 @@ const ViewCornea = () => {
                                             <Td>{cornea.evaluation.approval}</Td>
                                             <Td>{cornea.evaluation.approval === 'yes' ? (cornea.evaluation.suiatablity) : (cornea.evaluation.reason)}</Td>
                                             <div className='text-center'>
-                                                <Td>
+                                                {/* <Td>
                                                     <Link to={`/labtechnicaldashboard/editcornea/${cornea._id}`}>
                                                         <EditIcon />
                                                     </Link>
-                                                </Td>{" "}
-                                                <Td>
+                                                </Td>{" "} */}
+                                                <Td className='text-center ml-3'>
                                                     <button onClick={() => deleteCornea(cornea._id)}>
                                                         <DeleteIcon />
                                                     </button>
@@ -199,7 +199,6 @@ const ViewCornea = () => {
                 )
                 }
             </div >
-
         </div >
     );
 };
