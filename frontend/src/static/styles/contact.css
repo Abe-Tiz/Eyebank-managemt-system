@@ -5,8 +5,10 @@
   
 }
 .tittle{
-    padding-left: 7px;
-    margin-right: 70%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    text-align:center;
 }
 
 .section-heading {

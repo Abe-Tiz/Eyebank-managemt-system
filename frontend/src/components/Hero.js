@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <>
       <div className=" mx-20 mb-3 mt-3 border-0 p-10 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%">
-        <div className="py-24 flex flex-col md:flex-row-reverse justify-between items-center gap-8 ">
+        <div className="py-10 flex flex-col md:flex-row-reverse justify-between items-center gap-8 ">
           {/* images */}
           <div className="md:w-1/2 ">
             <img
@@ -29,7 +29,7 @@ const Hero = () => {
             </p>
             <button
               onClick={() => navigate("/contact")}
-              className="bg-green hover:bg-gray-400 px-3 py-2 text-2xl text-white font-extrabold mt-3 mr-5  "
+              className="bg-green hover:bg-gray-400 px-3 py-2 text-2xl text-white font-extrabold mt-5 mr-5  "
             >
               {t("translation:homeContact")}
             </button>

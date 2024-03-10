@@ -124,29 +124,8 @@ const Login = () => {
                     position: "top",
                 });
             }
-            //  setRefreshed(true);
-        //     navigate("/adminDashboard");
-        //   } else {
-        //       localStorage.setItem("token", data.data);
-        //       localStorage.setItem("loggedIn", true);
-        //     toast({
-        //       title: "Login Succeeded",
-        //       status: "success",
-        //       duration: 5000,
-        //       isClosable: true,
-        //       position: "top",
-        //     });
-        //     navigate("/adminDashboard");
-        //   }
         }
     };
-
-    // useEffect(() => {
-    //   if (refreshed) {
-    //       window.location.reload();
-    //       setRefreshed(false);
-    //   }
-    // }, [refreshed]);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -224,11 +203,11 @@ const Login = () => {
                         </div>
                     </form>
                 </div>
-                {/* <Link to="/register" className="block mt-4 text-blue-500">
-          {t("login:loginDontLabel")}? {t("login:loginNavigatToSignup")}
-        </Link> */}
                 <Link to="/forgot-password" className="block ml-3 text-blue-500">
                     {t("login:forgotPasswordLabel")} ?
+                </Link>
+                <Link to="/donor-login" className="block ml-3 text-blue-500">
+                    have you pledged ? Login
                 </Link>
             </div>
         </div>

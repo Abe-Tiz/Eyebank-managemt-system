@@ -12,7 +12,7 @@ import { FormControl } from "@chakra-ui/form-control";
     
     const ResetPassword = () => {
     
-    const [password, setPassword] = useState("");
+    const [code, setCode] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [passwordMatchError, setPasswordMatchError] = useState(false);
 
@@ -26,7 +26,7 @@ import { FormControl } from "@chakra-ui/form-control";
         setConfirmPassword(confirmPasswordValue);
 
         //! Check if passwords match and set error state
-        setPasswordMatchError(password !== confirmPasswordValue);
+        setPasswordMatchError(code !== confirmPasswordValue);
     };
 
     const handleSubmit = async (e) => {
@@ -36,7 +36,7 @@ import { FormControl } from "@chakra-ui/form-control";
         const response = await axios.post(
         `http://127.0.0.1:4000/user/reset-password/${id}/${token}`,
         {
-            password,
+            code,
         }
         );
 
@@ -74,7 +74,7 @@ import { FormControl } from "@chakra-ui/form-control";
 
     //! handle password change
     const handlePassword = (e) => {
-        setPassword(e.target.value);
+        setCode(e.target.value);
     };
 
     return (
@@ -102,7 +102,7 @@ import { FormControl } from "@chakra-ui/form-control";
                     </label>
                     <div className="flex flex-col items-center">
                       <input
-                        name="password"
+                        name="code"
                         type="password"
                         className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         autoComplete="off"
