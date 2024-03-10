@@ -33,7 +33,7 @@ const DisplayDonor = () => {
           setLoading(true);
           setDonors(donordata);
         } else {
-          console.log("Array is empty.");
+          // console.log("Array is empty.");
           toast({
             title: "Empty Array",
             description: "Array is empty.",
@@ -91,6 +91,34 @@ const DisplayDonor = () => {
     }
   };
 
+
+    const handleActivate = async (id) => {
+    try {
+      await axios.put(`http://localhost:4000/donor/activate/${id}`);
+      setDonors(
+        donors.map((donor) =>
+          donor._id === id ? { ...donor, verified: true } : donor
+        )
+      );
+      toast({
+        title: "Donor Activated",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    } catch (error) {
+      toast({
+        title: "Error Occurred!",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -106,6 +134,10 @@ const DisplayDonor = () => {
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t("donor:donorMobile")}
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  {/* {t("donor:donorMobile")} */}
+                  Status
                 </th>
                 <th scope="col" className="px-6 py-3">
                   {t("donor:donorAction")}
@@ -133,6 +165,22 @@ const DisplayDonor = () => {
                   </th>
                   <td className="px-6 py-4">{donor.city}</td>
                   <td className="px-6 py-4">{donor.mobile}</td>
+                  <td className="px-6 py-4">
+                    {donor.verified ? (
+                      <p className="  hover:bg-base-200 text-blue-700 px-4 py-2 rounded font-bold">
+                        {/* {t("common:activeButtonLabel")} */}
+                        Active
+                      </p>
+                    ) : (
+                      <button
+                        onClick={() => handleActivate(donor._id)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                      >
+                          {/* {t("common:activateButtonLabel")} */}
+                          Pending
+                      </button>
+                    )}
+                  </td>
                   <td className="flex px-6 py-4">
                     <Link
                       to={`/adminDashboard/edit/${donor._id}`}

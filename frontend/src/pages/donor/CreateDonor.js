@@ -5,7 +5,6 @@ import "../../static/styles/donor.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 
-
 const initialState = {
   name: "",
   email: "",
@@ -16,6 +15,7 @@ const initialState = {
   kebele: "",
   HNumber: "",
   mobile: "",
+  isVolunter:false
 };
 
 const citiesInEthiopia = [
@@ -24,6 +24,7 @@ const citiesInEthiopia = [
   "Mekelle",
   "Gondar",
   "Hawassa",
+  "Others"
 ];
 
 // Subcities for each city
@@ -69,9 +70,9 @@ const CreateDonor = () => {
   const [isName, setIsName] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isValidAge, setIsValidAge] = useState(false);
-   const [selectedDate, setSelectedDate] = useState("");
-   const [selectedCity, setSelectedCity] = useState("");
-   const [selectedSubcity, setSelectedSubcity] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedSubcity, setSelectedSubcity] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
   const toast = useToast();
@@ -114,12 +115,13 @@ const CreateDonor = () => {
             position: "top",
           });
 
-          console.log(res.data.result);
-          navigate("/viewdonor", {
-            state: {
-              data: res.data.result,
-            },
-          });
+          // console.log(res.data.result);
+          // navigate("/viewdonor", {
+          //   state: {
+          //     data: res.data.result,
+          //   },
+          // });
+
           // Clear the form data after successful registration
           setFormData(initialState);
           setIsName(false);
@@ -192,8 +194,13 @@ const CreateDonor = () => {
     setSelectedDate(e.target.value);
   };
 
+const handleCheckbox = (e) => {
+  setFormData({ ...formData, isVolunter: e.target.checked });
+  };
+  
 
 useEffect(() => {
+  
   if (selectedDate) {
     const birthdate = new Date(selectedDate);
     const currentDate = new Date();
@@ -218,7 +225,7 @@ useEffect(() => {
 
   return (
     <>
-      <div class="relative bg-white min-h-screen flex items-center justify-center md:mt-4">
+      <div class=" relative bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%   min-h-screen flex items-center justify-center md:mt-4">
         <div
           className={`absolute top-8 left-16 w-52 h-52 bg-yellow-400 rounded-full opacity-60`}
         ></div>
@@ -367,66 +374,38 @@ useEffect(() => {
                       </span>
                     </div>
                   </div>
-                  {/* {isName && (
+
+                  {selectedCity && isName && (
                     <div className="mt-4">
                       <label
                         htmlFor="subcity"
                         className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                       >
                         {t("donor:donorSubCity")}
-                        <span class="text-red-500">*</span>
+                        <span className="text-red-500">*</span>
                       </label>
-
                       <div className="flex flex-col items-start">
-                        <input
+                        <select
                           name="subcity"
-                          type="text"
-                          pattern="[0-9a-zA-Z ]{2,}"
-                          required
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          placeholder={t("donor:placeHolderSubcity")}
+                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
                           onChange={handleSubcity}
-                        />
+                          value={selectedSubcity}
+                        >
+                          <option value="">
+                            {t("donor:placeHolderSubcity")}
+                          </option>
+                          {subcitiesInEthiopia[selectedCity].map((subcity) => (
+                            <option key={subcity} value={subcity}>
+                              {subcity}
+                            </option>
+                          ))}
+                        </select>
                         <span className="mt-1 hidden text-sm text-red-400">
                           {t("donor:donorSubCityError")}
                         </span>
                       </div>
                     </div>
-                  )} */}
-
-                  {selectedCity && isName && (
-                      <div className="mt-4">
-                        <label
-                          htmlFor="subcity"
-                          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          {t("donor:donorSubCity")}
-                          <span className="text-red-500">*</span>
-                        </label>
-                        <div className="flex flex-col items-start">
-                          <select
-                            name="subcity"
-                            className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
-                            onChange={handleSubcity}
-                            value={selectedSubcity}
-                          >
-                            <option value="">
-                              {t("donor:placeHolderSubcity")}
-                            </option>
-                            {subcitiesInEthiopia[selectedCity].map(
-                              (subcity) => (
-                                <option key={subcity} value={subcity}>
-                                  {subcity}
-                                </option>
-                              )
-                            )}
-                          </select>
-                          <span className="mt-1 hidden text-sm text-red-400">
-                            {t("donor:donorSubCityError")}
-                          </span>
-                        </div>
-                      </div>
-                    )}
+                  )}
 
                   {isMobile && (
                     <div className="mt-4">
@@ -512,34 +491,47 @@ useEffect(() => {
                   {/* </div> */}
 
                   {isMobile && (
-                    <div className="mt-4">
-                      <label
-                        htmlFor="email"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        {t("login:labelLoginEmail")}
-                        <span class="text-red-500">*</span>
-                      </label>
+                      <>
+                        <div className="mt-4">
+                          <label
+                            htmlFor="email"
+                            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            {t("login:labelLoginEmail")}
+                            <span class="text-red-500">*</span>
+                          </label>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="email"
-                          type="email"
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          autoComplete="off"
-                          required
-                          pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                          placeholder={t("common:emailPlaceholderLabel")}
-                          onChange={handleEmail}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          {t("login:labelErrorEmail")}
-                        </span>
-                      </div>
-                    </div>
+                          <div className="flex flex-col items-start">
+                            <input
+                              name="email"
+                              type="email"
+                              className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                              autoComplete="off"
+                              required
+                              pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                              placeholder={t("common:emailPlaceholderLabel")}
+                              onChange={handleEmail}
+                            />
+                            <span className="mt-1 hidden text-sm text-red-400">
+                              {t("login:labelErrorEmail")}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* checkbox */}
+                        <label className="cursor-pointer label">
+                          <span className="label-text">am Voluntore </span>
+                          <input
+                            type="checkbox"
+                            className="checkbox checkbox-secondary"
+                            onChange={handleCheckbox}  
+                          />
+                        </label>
+                      </>
                   )}
                 </div>
               </div>
+
               <div class="d-flex justify-content-center pt-3 mb-4">
                 <div className="mt-4 flex items-center">
                   <button

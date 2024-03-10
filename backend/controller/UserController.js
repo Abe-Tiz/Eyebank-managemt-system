@@ -191,6 +191,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
                 return res.send({ Status: "Success" });
               }
             });
+
             res.status(200).json({ user, token });
             console.log(user);
           } else {
@@ -233,7 +234,7 @@ const resetPassword = asyncHandler(async (req, res) => {
         .json({ status: "Not Found", message: "User not found" });
     }
 
-    res.json({ status: "Success", message: "Password reset successfully" });
+    res.json({ status: "Success", message: "code reset successfully" });
   } catch (error) {
     console.error(error);
 
@@ -254,7 +255,7 @@ const getUser = asyncHandler(async (req, res) => {
     User.find()
         .maxTimeMS(20000)
         .then((respons) => {
-            console.log(respons);
+            // console.log(respons);
             res.json(respons);
         })
         .catch((err) => {

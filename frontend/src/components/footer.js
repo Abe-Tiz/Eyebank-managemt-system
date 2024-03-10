@@ -40,7 +40,7 @@ function Footer() {
           </div>
         </div>
 
-        <hr></hr>
+        <hr />
 
         <div className="sb_footer-below">
           <div className="sb_footer-copyright">

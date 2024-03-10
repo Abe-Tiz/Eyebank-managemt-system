@@ -22,7 +22,7 @@ const CustomSidebar = ({
             className={`bg-indigo-900 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
                 }`}
         >
-            <div className="flex flex-col h-full mt-0">
+            <div className="flex flex-col h-full mt-0 overflow-scroll">
                 {collapsed ? (
 
                     // collapsed btn
