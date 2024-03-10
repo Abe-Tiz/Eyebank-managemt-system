@@ -18,6 +18,8 @@ const EvaluateCornea = () => {
     const [approval, setApproval] = useState('');
     const [evaluater, setEvaluater] = useState('');
     const [evaluationComment, setEvaluationComment] = useState('');
+    const [suiatablity, setSuiatablity] = useState('');
+    const [reason, setReason] = useState('');
 
     const evaluation = {
         evaluationDate,
@@ -26,7 +28,9 @@ const EvaluateCornea = () => {
         endothelium,
         approval,
         evaluater,
-        evaluationComment
+        evaluationComment,
+        suiatablity,
+        reason
     };
 
     useEffect(() => {
@@ -86,92 +90,144 @@ const EvaluateCornea = () => {
     return (
         <div>
             <h1>{t('Evaluate Cornea')}</h1>
+
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
                     handleSave();
                 }}
             >
-                <label>
-                    Evaluation Date:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="date"
-                        value={evaluationDate}
-                        onChange={(e) => setEvaluationDate(e.target.value)}
-                    />
-                </label>
-                <label>
-                    endothelium:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={endothelium}
-                        onChange={(e) => setEndothelium(e.target.value)}
-                    />
-                </label>
-                <label>
-                    stroma:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={stroma}
-                        onChange={(e) => setStroma(e.target.value)}
-                    />
-                </label>
-                <label>
-                    epitheliam:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={epitheliam}
-                        onChange={(e) => setEpitheliam(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Evaluator:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={evaluater}
-                        onChange={(e) => setEvaluater(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Comment:
-                    <input
-                        className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        type="text"
-                        value={evaluationComment}
-                        onChange={(e) => setEvaluationComment(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Approval:
-                    <br />
+                <div className="grid grid-cols-3">
                     <label>
+                        Evaluation Date:
+                        <input
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="date"
+                            value={evaluationDate}
+                            onChange={(e) => setEvaluationDate(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        endothelium:
+                        <input
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="text"
+                            value={endothelium}
+                            onChange={(e) => setEndothelium(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        stroma:
+                        <input
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="text"
+                            value={stroma}
+                            onChange={(e) => setStroma(e.target.value)}
+                        />
+                    </label>
+                </div>
+                <div className="grid grid-cols-3">
+                    <label>
+                        epitheliam:
+                        <input
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="text"
+                            value={epitheliam}
+                            onChange={(e) => setEpitheliam(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        Evaluator:
+                        <select
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="text"
+                            value={evaluater}
+                            onChange={(e) => setEvaluater(e.target.value)}
+                        >
+                            <option value="">Select Evaluator</option>
+                            <option value='awoke'>Awoke</option>
+                            <option value="amsalu">Amsalu</option>
+                            <option value="tefera">Tefera</option>
+                        </select>
+                    </label>
+                    <label>
+                        Comment:
+                        <textarea
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={evaluationComment}
+                            onChange={(e) => setEvaluationComment(e.target.value)}
+                        ></textarea>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Approval:
+                        <br />
+                        <label>
+                            <input
+                                type="radio"
+                                value="yes"
+                                checked={approval === 'yes'}
+                                onChange={handleApproval}
+                            />
+                            Yes
+                        </label>
+                        <br />
+                        <label>
+                            <input
+                                type="radio"
+                                value="no"
+                                checked={approval === 'no'}
+                                onChange={handleApproval}
+                            />
+                            No
+                        </label>
+                    </label>
+                    {
+                        approval === "yes" ? (<lable>
+                            Select suiatablty
+                            <select
+                                className="form-input mt-1 block w-1/3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={suiatablity}
+                                onChange={(e) => setSuiatablity(e.target.value)}
+                            >
+                                <option value="">Select Suiatablity</option>
+                                <option value="PK">PK</option>
+                                <option value="EK">EK</option>
+                                <option value="ALK">ALK</option>
+                                <option value="KLA">KLA</option>
+                                <option value="K-Pro">K-Pro</option>
+                                <option value="Therapeutic">Therapeutic</option>
 
-                        <input
-                            type="radio"
-                            value="positive"
-                            checked={approval === 'positive'}
-                            onChange={handleApproval}
-                        />
-                        Positive
-                    </label>
-                    <br />
-                    <label>
-                        <input
-                            type="radio"
-                            value="negative"
-                            checked={approval === 'negative'}
-                            onChange={handleApproval}
-                        />
-                        Negative
-                    </label>
-                </label>
-                <button className='bg-success' type=' submit'>Evaluate</button>
-            </form>
+                            </select>
+
+
+                        </lable>) : (null)
+                    }
+                    {
+                        approval === 'no' ? (<lable>
+                            Select Reason
+                            <select
+                                className="form-input mt-1 block w-1/3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                value={reason}
+                                onChange={(e) => setReason(e.target.value)}
+
+                            >
+                                <option value="">Select Reason</option>
+                                <option value="epitheliam">Epitheliam</option>
+                                <option value="stroma">Stroma</option>
+                                <option value="endothelium">Endothelium</option>
+                                <option value="descement"> Descement</option>
+                                <option value="other">Other</option>
+
+                            </select>
+
+
+                        </lable>) : (null)
+                    }
+                </div>
+                <button className="bg-teal-500 text-center hover:bg-teal-700 focus:outline-none text-white px-4 py-2 mt-2 rounded-md" type="submit">Evaluate</button>
+            </form >
         </div >
     );
 };
