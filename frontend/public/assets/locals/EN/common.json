@@ -4,7 +4,14 @@
   "namePlaceholderLabel": "Enter Name",
   "backButtonLabel": "Back",
   "updateButtonLabel": "Update",
+  "deleteButtonLabel": "Delete",
   "printButtonLabel": "Print",
+  "logouttButtonLabel": "Logout",
+  "settingtButtonLabel": "Settings",
+  "dashboardLabel": "Dashboard",
+  "addDonorLabel": "Add Donor",
+  "listDonorLabel": "Donor List",
+  "addUserrLabel": "Add User",
+  "listUserrLabel": "User List",
   "registerButtonLabel": "Register"
- 
 }

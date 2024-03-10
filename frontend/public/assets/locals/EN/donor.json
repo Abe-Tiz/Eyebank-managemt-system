@@ -1,6 +1,10 @@
 {
     "labelDonor": "EYE BANK OF ETHIOPIA",
-    "donorAge": "Age",
+    "donorAge": "Date Of Birth",
+    "AgeDonor": "Age",
+    "deleteTitleDonor": "Delete Donor",
+    "deleteCancelDonor": "Cancel",
+    "deleteSubtitleDonor": " Are you sure you want to delete this donor ? This action cannot be undone.",
     "cardDonor": "Cornea Donation Card",
     "faxLabel": "Fax",
     "refNumberLabel": "Ref Number",
@@ -30,5 +34,6 @@
     "donorStatus": "Status",
     "verifedStatus": "Verified",
     "pendingStatus": "Pending",
+    "viewDonorTitle": " Please check your information before print",
     "donorAction": "Action"
 }

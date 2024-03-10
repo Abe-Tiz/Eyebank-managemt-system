@@ -5,5 +5,13 @@
   "backButtonLabel": "ተመለስ",
   "registerButtonLabel": "መመዝገብ",
   "updateButtonLabel": "አዘምን",
-  "printButtonLabel": "አትም"
+  "deleteButtonLabel": "ሰርዝ",
+  "logouttButtonLabel": "ውጣ",
+  "settingtButtonLabel": "ቅንብሮች",
+   "dashboardLabel": "ዳሽቦርድ",
+  "addDonorLabel": "ለጋሽ ጨምር",
+  "listDonorLabel": "የለጋሾች ዝርዝር",
+  "addUserrLabel": "ተጠቃሚ አክል",
+  "listUserrLabel": "የተጠቃሚ ዝርዝር",
+  "printButtonLabel": "ማተም"
 }
