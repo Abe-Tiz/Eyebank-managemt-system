@@ -98,13 +98,13 @@ const ViewCornea = () => {
                                         <button onClick={() => deleteCornea(cornea._id)}><DeleteIcon /></button>
                                     </Td>{" "}
                                     {
-                                        cornea.evaluation.approval !== 'positive' && cornea.evaluation.approval !== 'negative' ? (
+                                        cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
                                             <Td>
                                                 <Link to={`/labtechnicaldashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link>
                                             </Td>
 
                                         ) : (
-                                            <Td style={{ color: cornea.evaluation.approval === 'positive' ? 'red' : 'green' }}>
+                                            <Td style={{ color: cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>
                                                 {cornea.evaluation.approval}
                                             </Td>
                                         )
@@ -162,12 +162,13 @@ const ViewCornea = () => {
                                     <Th>Stroma</Th>
                                     <Th>Endothelium</Th>
                                     <Th>Approval</Th>
+                                    <Th>Suiatabl/Reason</Th>
                                     <Th colSpan={2}>Operations</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 {corneas
-                                    .filter(cornea => cornea.evaluation.approval === "negative" || cornea.evaluation.approval === "positive")
+                                    .filter(cornea => cornea.evaluation.approval === "yes" || cornea.evaluation.approval === "no")
                                     .map((cornea, index) => (
                                         <Tr key={index}>
                                             <Td>{index + 1}</Td>
@@ -177,13 +178,14 @@ const ViewCornea = () => {
                                             <Td>{cornea.evaluation.stroma}</Td>
                                             <Td>{cornea.evaluation.endothelium}</Td>
                                             <Td>{cornea.evaluation.approval}</Td>
+                                            <Td>{cornea.evaluation.approval === 'yes' ? (cornea.evaluation.suiatablity) : (cornea.evaluation.reason)}</Td>
                                             <div className='text-center'>
-                                                <Td>
+                                                {/* <Td>
                                                     <Link to={`/labtechnicaldashboard/editcornea/${cornea._id}`}>
                                                         <EditIcon />
                                                     </Link>
-                                                </Td>{" "}
-                                                <Td>
+                                                </Td>{" "} */}
+                                                <Td className='text-center ml-3'>
                                                     <button onClick={() => deleteCornea(cornea._id)}>
                                                         <DeleteIcon />
                                                     </button>
@@ -197,7 +199,6 @@ const ViewCornea = () => {
                 )
                 }
             </div >
-
         </div >
     );
 };

@@ -49,11 +49,22 @@ const corneaSchema = new mongoose.Schema({
         },
         approval: {
             type: String,
-            enum: ['positive', 'negative']
+            enum: ['yes', 'no']
+        },
+        suiatablity: {
+            type: String,
+            enum: ['PK', 'EK', 'ALK', 'KLA', 'K-Pro', 'Therapeutic']
+        },
+        reason: {
+            type: String,
+            enum: ['epitheliam', 'stroma', 'endothelium', 'descement', 'other']
         }
-    },
+
+    }
 
 },
+
+
     { timestamps: true }
 );
 const Cornea = mongoose.model('Cornea', corneaSchema);
