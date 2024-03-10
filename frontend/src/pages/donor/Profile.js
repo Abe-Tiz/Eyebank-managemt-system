@@ -58,7 +58,7 @@ const Profile = () => {
 
           if (data.data === "token expired") {
             localStorage.clear();
-            // navigate("/login");
+            navigate("/donor-login");
           }
         });
     };
@@ -71,9 +71,10 @@ const Profile = () => {
       <h2 className="text-4xl font-bold text-gray-800 mb-4 mt-0">
         Your Profile{" "}
       </h2>
-      <div className="flex  md:flex-row flex-col justify-between gap-8  overflow-hidden   p-6 mx-auto w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 relative">
+      <div className="flex  md:flex-row flex-col justify-between gap-10  overflow-hidden   p-6 mx-auto w-full md:w-3/4 lg:w-2/3 xl:w-1/2 relative">
+       
         {/* left  */}
-        <div className="">
+        <div className="w-1/4">
           <div className="avatar">
             <div className="w-24 mask mask-squircle">
               <img
@@ -85,7 +86,6 @@ const Profile = () => {
               />
             </div>
           </div>
-
           <div className="flex flex-col gap-3 mt-3">
             <div className="badge badge-secondary badge-outline">
               {t("register:LabelsignUpName")}: {state.name}
@@ -99,8 +99,7 @@ const Profile = () => {
         </div>
 
         {/* right */}
-
-        <div className="">
+        <div className="w-3/4 border-l-4 px-5 bord ">
           <div className="flex flex-col md:flex-row gap-y-4 md:gap-x-8">
             <div className="md:w-1/2">
               <p className="text-xl font-bold text-gray-800 mb-2">
@@ -116,7 +115,6 @@ const Profile = () => {
                 <span className="text-gray-700 mb-2"> {state.mobile}</span>
               </p>
             </div>
-
             <div className="md:w-1/2">
               <p className="text-xl font-bold text-gray-800 mb-2">
                 {t("donor:donorKebele")}:{" "}
@@ -137,6 +135,7 @@ const Profile = () => {
             </div>
           </div>
 
+          {/* btns */}
           <div className="flex justify-between mt-6 ">
             {/* update btn */}
             <Link
