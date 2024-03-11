@@ -10,6 +10,8 @@ const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
 const reportRoute = require("./routes/ReportRoute");
 const corneaRoute = require("./routes/CorneaRoute");
+const  postRoutes= require("./routes/postRoutes.js");
+
 //const RecipientRoute = require("./routes/RecipientRoute");
 dotenv.config();
 connectDB();
@@ -38,6 +40,8 @@ app.use('/user', userRoute)
 app.use('/donor', donorRoute)
 app.use('/report', reportRoute)
 app.use('/cornea', corneaRoute)
+app.use("/post", postRoutes);
+
 // app.use('/routes', RecipientRoute)
 app.use(notFound);
 app.use(errorHandler);
