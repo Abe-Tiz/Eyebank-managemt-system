@@ -58,12 +58,10 @@ const ViewCornea = () => {
                                 <Td>
                                     <Link to={`/labtechnicaldashboard/editcornea/${cornea._id}`}>Edit</Link>
                                 </Td>
-                                <Td>
+                                <Td className='text-red-600'>
                                     <button onClick={() => deleteCornea(cornea._id)}>Delete</button>
                                 </Td>
-                                <Td>
-                                    <Link to={`/labtechnicaldashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link>
-                                </Td>
+
                             </Tr>
                         ))}
                     </Tbody>
