@@ -32,9 +32,9 @@ import RecordSerology from '../pages/dashboard/lab/RecordSerology';
 import CollectCornea from '../pages/dashboard/lab/CollectCornea';
 import LabTechnicalDashboard from "../layout/LabTechnicalLayout";
 import AdminDashboard from "../layout/AdminLayout";
-import PhysicalExam from "../sections/labTech/PhysicalExam";
-import PhysicalExamView from "../sections/labTech/PhysicalExamView";
-import EditPage from "../sections/labTech/EditPage";
+import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
+import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
+// import EditPage from "../sections/labTech/EditPage";
 
 const router = createBrowserRouter([
     {
@@ -102,10 +102,10 @@ const router = createBrowserRouter([
                 path: "getExams",
                 element: <PhysicalExamView />,
               },
-              {
-                path: "updateExam/:id",
-                element: <EditPage />,
-              }
+              // {
+              //   path: "updateExam/:id",
+              //   element: <EditPage />,
+              // }
               
                 
               
