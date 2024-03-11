@@ -4,9 +4,6 @@ import Home from '../pages/home/Home';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import ResetPassword from '../pages/auth/ResetPassword';
 import About from '../pages/about/About';
-import Awareness from '../pages/awareness/getAwareness';
-import CreateAwareness from '../pages/awareness/createAwareness';
-import CreateVideo from '../pages/awareness/createVideo';
 import Contact from "../pages/contact/contact";
 import CreateDonor from "../pages/donor/CreateDonor";
 import Login from '../pages/auth/Login';
@@ -41,6 +38,15 @@ import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
+
+//blog
+//blog
+import CreatePost from "../components/labTechnical/CreatePost";
+import EditPost from "../components/labTechnical/EditPost";
+import IndexPage from "../components/labTechnical/IndexPage";
+import BlogPage from "./../pages/blog/BlogPage";
+import BlogDetail from "./../pages/blog/BlogDetail";
+
 const router = createBrowserRouter([
     {
         path: "/",

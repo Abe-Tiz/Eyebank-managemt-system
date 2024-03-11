@@ -1,4 +1,3 @@
-
 import { IoIosPersonAdd } from "react-icons/io";
 import { MdOutlineGroupAdd } from "react-icons/md";
 import { MdSpaceDashboard } from "react-icons/md";
@@ -6,15 +5,10 @@ import { PiUserListBold } from "react-icons/pi";
 import { CiBoxList } from "react-icons/ci";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const CustomSidebar = ({
-    collapsed,
-    name,
-    image,
-}) => {
-
+const CustomSidebar = ({ collapsed, name, image }) => {
     const { t } = useTranslation();
 
     return (
@@ -24,7 +18,6 @@ const CustomSidebar = ({
         >
             <div className="flex flex-col h-full mt-0 overflow-scroll">
                 {collapsed ? (
-
                     // collapsed btn
                     <div className="flex flex-col items-center">
                         <Link
@@ -112,7 +105,6 @@ const CustomSidebar = ({
                     </div>
                 ) : (
                     <>
-
                         {/* user progfile inage */}
                         <img
                             className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"
@@ -143,105 +135,137 @@ const CustomSidebar = ({
                                 <CiBoxList className="text-2xl" />
                                 <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
                             </Link>
-                            <Link
-                                to="/labtechnicaldashboard/donorRegistration"
-                                className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
-                                // onClick={handleAddDonorClick}
-                                data-tooltip-id="add-donor"
-                                data-tooltip-content="Register Donor"
-                            >
-                                <MdOutlineGroupAdd className="text-2xl" />
-                                <span className="ml-2">{t("cornea:registerDonorLabel")}</span>
-                            </Link>
-                            <Link
-                                to="/labtechnicaldashboard/recordSerology"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleDisplayDonorClick}
-                                data-tooltip-id="donor-list"
-                                data-tooltip-content="Record Serology"
-                            >
-                                <PiUserListBold className="text-2xl" />
-                                <span className="ml-2">{t("cornea:recordSerologyLabel")}</span>
-                            </Link>
-                            <Link
-                                to="/labtechnicaldashboard/screenDonor"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleAddUser}
-                                data-tooltip-id="add-user"
-                                data-tooltip-content="Screen Donor"
-                            >
-                                <IoIosPersonAdd className="text-2xl" />
-                                <span className="ml-2">{t("cornea:screenDonorLabel")}</span>
-                            </Link>
-                            <Link
-                                to="/labtechnicaldashboard/recordMedicalParticular"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="user-list"
-                                data-tooltip-content="Record Medical Particular"
-                            >
-                                <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("cornea:recordMedicalParticularLabel")}</span>
-                            </Link>
-                            <Link
-                                to="/labtechnicaldashboard/discardCornea"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="user-list"
-                                data-tooltip-content=" discard Cornea"
-                            >
-                                <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("cornea:discardCorneaLabel")}</span>
-                            </Link>
-                            <Link
-                                to="/labtechnicaldashboard/storeCornea"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="user-list"
-                                data-tooltip-content=" store Cornea"
-                            >
-                                <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("cornea:storeCorneaLabel")}</span>
-                            </Link>
-                            <Link
-                                to="/labtechnicaldashboard/distributeCornea"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="user-list"
-                                data-tooltip-content=" distribute Cornea"
-                            >
-                                <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("cornea:distributeCorneaLabel")}</span>
-                            </Link>
+                            {/* user progfile inage */}
+                            <img
+                                className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"
+                                src={image}
+                                alt="user photo"
+                            />
+                            <span className="text-lg font-semibold ml-10">{name}</span>
 
+                            {/* btn */}
+                            <div className="mt-4 flex flex-col items-center">
+                                <Link
+                                    to="/labtechnicaldashboard/collectCornea"
+                                    className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleReport}
+                                    data-tooltip-id="my-dashboard"
+                                    data-tooltip-content="Collect Cornea"
+                                >
+                                    <MdSpaceDashboard className="text-2xl" />
+                                    <span className="ml-2 ">{t("cornea:collectCorneaLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/viewCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" view Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/donorRegistration"
+                                    className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleAddDonorClick}
+                                    data-tooltip-id="add-donor"
+                                    data-tooltip-content="Register Donor"
+                                >
+                                    <MdOutlineGroupAdd className="text-2xl" />
+                                    <span className="ml-2">{t("cornea:registerDonorLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/recordSerology"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleDisplayDonorClick}
+                                    data-tooltip-id="donor-list"
+                                    data-tooltip-content="Record Serology"
+                                >
+                                    <PiUserListBold className="text-2xl" />
+                                    <span className="ml-2">{t("cornea:recordSerologyLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/screenDonor"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleAddUser}
+                                    data-tooltip-id="add-user"
+                                    data-tooltip-content="Screen Donor"
+                                >
+                                    <IoIosPersonAdd className="text-2xl" />
+                                    <span className="ml-2">{t("cornea:screenDonorLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/recordMedicalParticular"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content="Record Medical Particular"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:recordMedicalParticularLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/discardCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" discard Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:discardCorneaLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/storeCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" store Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:storeCorneaLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/distributeCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" distribute Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:distributeCorneaLabel")}</span>
+                                </Link>
+
+                            </div>
                         </div>
                     </>
                 )}
             </div>
 
 
+
             {/* tooltips */}
-            <Tooltip
+            < Tooltip
                 id="my-dashboard"
                 style={{ backgroundColor: "#940B92", color: "#fff" }}
             />
-            <Tooltip
+            < Tooltip
                 id="add-donor"
                 style={{ backgroundColor: "#940B92", color: "#fff" }}
             />
-            <Tooltip
+            < Tooltip
                 id="donor-list"
                 style={{ backgroundColor: "#940B92", color: "#fff" }}
             />
-            <Tooltip
+            < Tooltip
                 id="add-user"
                 style={{ backgroundColor: "#940B92", color: "#fff" }}
             />
-            <Tooltip
+            < Tooltip
                 id="user-list"
                 style={{ backgroundColor: "#940B92", color: "#fff" }}
             />
-        </div>
+        </div >
     );
 };
 
