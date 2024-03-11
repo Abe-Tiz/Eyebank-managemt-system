@@ -8,11 +8,11 @@ import { useToast } from "@chakra-ui/react";
 import LoadingCircle from './../../components/LoadingCircle';
 
 const Login = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const [attempts, setAttempts] = useState(0);
-  // const [refreshed, setRefreshed] = useState(false);
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+    const [attempts, setAttempts] = useState(0);
+    // const [refreshed, setRefreshed] = useState(false);
 
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -62,6 +62,19 @@ const Login = () => {
                         });
                         // setRefreshed(true);
                         navigate("/labtechnicaldashboard");
+                    }
+                    else if (data.user.role === "medical Director") {
+                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("loggedIn", true);
+                        toast({
+                            title: "Login Succeeded",
+                            status: "success",
+                            duration: 5000,
+                            isClosable: true,
+                            position: "top",
+                        });
+                        // setRefreshed(true);
+                        navigate("/medicaldirectordashboard");
                     }
                     else {
                         localStorage.setItem("token", data.data);

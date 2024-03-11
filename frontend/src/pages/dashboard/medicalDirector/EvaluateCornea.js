@@ -16,11 +16,13 @@ const EvaluateCornea = () => {
     const [stroma, setStroma] = useState('');
     const [endothelium, setEndothelium] = useState('');
     const [approval, setApproval] = useState('');
-    const [evaluater, setEvaluater] = useState('');
+    // const [evaluater, setEvaluater] = useState(n);
     const [evaluationComment, setEvaluationComment] = useState('');
     const [suiatablity, setSuiatablity] = useState('');
     const [reason, setReason] = useState('');
-
+    const [evaluater, setEvaluater] = useState({
+        name: ""
+    });
     const evaluation = {
         evaluationDate,
         epitheliam,
@@ -55,6 +57,7 @@ const EvaluateCornea = () => {
         };
 
         fetchCorneaData();
+
     }, [id, t, toast]);
 
     const handleSave = async () => {
@@ -69,7 +72,7 @@ const EvaluateCornea = () => {
                 duration: 5000,
                 isClosable: true,
             });
-            navigate('/labtechnicaldashboard/viewCornea');
+            navigate('/medicaldirectordashboard/viewTissue');
         } catch (error) {
             // Handle error
             toast({
