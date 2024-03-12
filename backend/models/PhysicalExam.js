@@ -47,7 +47,7 @@ const physiaclSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    strory: {
+    story: {
         type: String,
         required: true,
     },
@@ -65,4 +65,4 @@ const PhysicalExam =
     mongoose.models.physicalExam ||
     mongoose.model("physicalExam", physiaclSchema);
 
-module.exports = PhysicalExam;
+    module.exports = PhysicalExam;
