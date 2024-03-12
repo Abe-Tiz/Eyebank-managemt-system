@@ -95,23 +95,8 @@ const router = createBrowserRouter([
                 path: "/update/:id",
                 element: <EditDonor />,
             },
-            {
-                path: "createExams",
-                element: <PhysicalExam />,
-              },
-              {
-                path: "getAll",
-                element: <PhysicalExamView />,
-              },
-              {
-                path: "getOne/:id",
-                element: <ViewDetails />,
-              }
-              // {
-              //   path: "updateExam/:id",
-              //   element: <EditPage />,
-              // }
-              
+            
+               
                 
               
         ],
@@ -152,6 +137,18 @@ const router = createBrowserRouter([
                 path: "viewCornea",
                 element: <ViewCornea />,
             },
+            {
+              path: "createExams",
+              element: <PhysicalExam />,
+            },
+            {
+              path: "getAll",
+              element: <PhysicalExamView />,
+            },
+            {
+              path: "getOne/:id",
+              element: <ViewDetails />,
+            }
             
         ],
     },
