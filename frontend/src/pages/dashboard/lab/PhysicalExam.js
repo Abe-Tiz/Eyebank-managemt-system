@@ -69,7 +69,7 @@ const PhysicalExam = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/exams/createExams", {
+      const res = await fetch("http://localhost:4001/api/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,64 +120,60 @@ const PhysicalExam = () => {
       className="w-full max-w-3xl mx-auto p-4 mt-10 bg-white rounded shadow md:p-6 dark:bg-gray-800 dark:border-gray-700"
     >
       <div className="card mb-6 shadow">
-        <h2 className="text-3xl text-center font-bold mb-4 font-sans ">
+        <h2 className="text-3xl text-center font-bold mb-4 font-sans bg-blue-500 text-white rounded p-2 h-14">
           Create Physical Exam
         </h2>
-        <div className="mb-4">
-          <label
-            className="block mb-2 font-bold flex justify-center"
-            htmlFor="height"
-          >
-            Height:
+
+        <div className="mb-4 ml-16">
+          <label className="block mb-2 font-bold" htmlFor="height">
+           Height:
           </label>
-          <div className="flex justify-center">
-            <input
-              type="number"
-              name="height"
-              value={formData.height}
-              onChange={handleChange}
-              required
-              className="w-1/2 px-3 py-2 border rounded"
-            />
-          </div>
+          <input
+            type="number"
+            name="height"
+            value={formData.height}
+            onChange={handleChange}
+            placeholder="Height in cm"
+            required
+            className="w-1/2 px-3 py-2 border-2 rounded"
+          />
         </div>
-        <div className="mb-4">
-          <label className="block mb-2 flex justify-center" htmlFor="weight">
+
+        <div className="mb-4 ml-16">
+          <label className="block mb-2 font-bold" htmlFor="weight">
             Weight:
           </label>
-          <div className="flex justify-center">
-            <input
-              type="number"
-              name="weight"
-              value={formData.weight}
-              onChange={handleChange}
-              required
-              className="w-1/2 px-3 py-2 border rounded"
-            />
-          </div>
+          <input
+            type="number"
+            name="weight"
+            value={formData.weight}
+            onChange={handleChange}
+            placeholder="Weight in kg"
+            required
+            className="w-1/2 px-3 py-2 border-2 rounded"
+          />
         </div>
-        <div className="mb-4">
-          <label className="block mb-2 flex justify-center" htmlFor="sex">
+
+        <div className="mb-4 ml-16">
+          <label className="block mb-2 font-bold" htmlFor="sex">
             Sex:
           </label>
-          <div className="flex justify-center">
-            <select
-              name="sex"
-              value={formData.sex}
-              onChange={handleChange1}
-              required
-              className="w-1/2 px-3 py-2 border rounded"
-            >
-              <option value="">Select</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
+          <select
+            name="sex"
+            value={formData.sex}
+            onChange={handleChange1}
+            placeholder="Sex"
+            required
+            className="w-1/2 px-3 py-2 border-2 rounded"
+          >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
         </div>
       </div>
 
-      <div className="card mb-4 shadow">
+      <div className="card mb-4 shadow ml-5">
         <div className="mb-4">
           <label className="flex items-center mx-auto">
             <input
@@ -187,11 +183,13 @@ const PhysicalExam = () => {
               onChange={handleChange}
               className="mr-2"
             />
-            <span className="align-middle">Is Refrigerated?</span>
+            <div className="align-middle">
+              <span className="align-middle">Is Refrigerated?</span>
+            </div>
           </label>
         </div>
-        <h3 className="text-lg font-bold mb-2">Examined</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <h1 className="text-lg font-bold mb-2 text-center">Examined</h1>
+        <div className="grid grid-cols-2 gap-4 ml-16 font-bold">
           {Object.entries(formData.examined).map(([key, value]) => (
             <div key={key} className="mb-2">
               <label className="flex items-center mx-auto">
@@ -208,9 +206,12 @@ const PhysicalExam = () => {
           ))}
         </div>
       </div>
+
       <div className="card mb-4 shadow">
-        <h3 className="text-lg font-bold mb-2">High Risk Examined</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <h3 className="text-lg font-bold mb-2 text-center">
+          High Risk Examined
+        </h3>
+        <div className="grid grid-cols-2 gap-4 ml-16 font-bold">
           {Object.entries(formData.highRiskexamined).map(([key, value]) => (
             <div key={key} className="mb-2">
               <label className="flex items-center">
@@ -221,7 +222,9 @@ const PhysicalExam = () => {
                   onChange={handleChange}
                   className="ml-2 px-3 py-2 border rounded"
                 >
-                  <option value="no evidence">No Evidence</option>
+                  <option value="no evidence" className="ml-2">
+                    No Evidence
+                  </option>
                   <option value="evidence">Evidence</option>
                 </select>
               </label>
@@ -229,10 +232,11 @@ const PhysicalExam = () => {
           ))}
         </div>
       </div>
+
       <div className="card mb-4">
-        <div className="flex flex-col items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ml-6">
           <div className="mb-4">
-            <label className="block mb-2" htmlFor="causeOfDeath">
+            <label className="block mb-2 font-bold" htmlFor="causeOfDeath">
               Cause of Death:
             </label>
             <input
@@ -240,11 +244,11 @@ const PhysicalExam = () => {
               name="causeOfDeath"
               value={formData.causeOfDeath}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 rounded"
             />
           </div>
-          <div className="mb-4">
-            <label className="block mb-2" htmlFor="dod">
+          <div>
+            <label className="block mb-2 font-bold" htmlFor="dod">
               Date of Death:
             </label>
             <input
@@ -253,11 +257,11 @@ const PhysicalExam = () => {
               value={formData.dod}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 rounded"
             />
           </div>
-          <div className="mb-4">
-            <label className="block mb-2" htmlFor="story">
+          <div>
+            <label className="block mb-2 font-bold" htmlFor="story">
               Story:
             </label>
             <textarea
@@ -265,11 +269,11 @@ const PhysicalExam = () => {
               value={formData.story}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 rounded"
             ></textarea>
           </div>
-          <div className="mb-4">
-            <label className="block mb-2" htmlFor="time">
+          <div>
+            <label className="block mb-2 font-bold" htmlFor="time">
               Time:
             </label>
             <input
@@ -278,16 +282,16 @@ const PhysicalExam = () => {
               value={formData.time}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border-2 rounded"
             />
           </div>
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Submit
-          </button>
         </div>
+        <button
+          type="submit"
+          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Submit
+        </button>
       </div>
     </form>
   );
