@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-
+import {useNavigate} from 'react-router-dom';
 const PhysicalExamView = () => {
+  const navigate = useNavigate();
   const [exams, setExams] = useState([]);
   const [editExamId, setEditExamId] = useState(null);
   const [editedHeight, setEditedHeight] = useState("");
@@ -49,6 +50,9 @@ const PhysicalExamView = () => {
     setEditedHeight("");
     setEditedWeight("");
     setEditedSex("");
+  };
+  const navigateToDetails = (examId) => {
+    navigate('/getOne/:id', { state: { examId: examId } });
   };
 
   const saveEdit = async (examId) => {
@@ -155,6 +159,7 @@ const PhysicalExamView = () => {
                       >
                         Edit
                       </button>
+                      <button onClick={() => navigateToDetails(123)}>Go to Details</button>
                     </td>
                   </>
                 )}
