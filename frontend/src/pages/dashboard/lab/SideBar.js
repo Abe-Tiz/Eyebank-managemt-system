@@ -106,35 +106,11 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 ) : (
                     <>
                         {/* user progfile inage */}
-                        <img
-                            className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"
-                            src={image}
-                            alt="user photo"
-                        />
-                        <span className="text-lg font-semibold ml-10">{name}</span>
+
 
                         {/* btn */}
                         <div className="mt-4 flex flex-col items-center">
-                            <Link
-                                to="/labtechnicaldashboard/collectCornea"
-                                className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
-                                // onClick={handleReport}
-                                data-tooltip-id="my-dashboard"
-                                data-tooltip-content="Collect Cornea"
-                            >
-                                <MdSpaceDashboard className="text-2xl" />
-                                <span className="ml-2 ">{t("cornea:collectCorneaLabel")}</span>
-                            </Link>
-                            <Link
-                                to="/labtechnicaldashboard/viewCornea"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="user-list"
-                                data-tooltip-content=" view Cornea"
-                            >
-                                <CiBoxList className="text-2xl" />
-                                <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
-                            </Link>
+
                             {/* user progfile inage */}
                             <img
                                 className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"

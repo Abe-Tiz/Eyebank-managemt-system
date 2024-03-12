@@ -77,17 +77,14 @@ const router = createBrowserRouter([
                 element: <About />,
             },
             {
-                path: "/awareness",
-                element: <Awareness />,
+                path: "/blog",
+                element: <BlogPage />,
             },
             {
-                path: "/createAwareness",
-                element: <CreateAwareness />,
+                path: "/blog/:id",
+                element: <BlogDetail />,
             },
-            {
-                path: "/createVideo",
-                element: <CreateVideo />,
-            },
+
             {
                 path: "/contact",
                 element: <Contact />,
@@ -163,6 +160,19 @@ const router = createBrowserRouter([
                 path: "editCornea/:id",
                 element: <EditCornea />,
             },
+            {
+                path: "create-post",
+                element: <CreatePost />,
+            },
+            {
+                path: "edit-post/:slug",
+                element: <EditPost />,
+            },
+            {
+                path: "posts",
+                element: <IndexPage />,
+            },
+
         ],
     },
     {
@@ -225,6 +235,7 @@ const router = createBrowserRouter([
             }
         ],
     },
+
 ]);
 
 export default router;
