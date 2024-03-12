@@ -10,54 +10,56 @@ const EditCornea = () => {
     const { t } = useTranslation();
     const toast = useToast();
 
-    // Example state variables
     const [corneaData, setCorneaData] = useState({});
-    const [recoveryTechnical, setRecoveryTechnical] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const [eyeLid, setEyeLid] = useState('');
-    const [size, setSize] = useState('');
-    const [irisColor, setIrisColor] = useState('');
-    const [corneaStatus, setCorneaStatus] = useState('');
-    const [clarity, setClarity] = useState('');
-    const [lens, setLens] = useState('');
-    const cornea = {
-        recoveryTechnical,
-        eyeLid,
-        size,
-        irisColor,
-        corneaStatus,
-        clarity,
-        lens
-    };
+
+    const [cornea, setCornea] = useState({
+        recoveryTechnical: '',
+        eyeLid: '',
+        size: '',
+        irisColor: '',
+        corneaStatus: '',
+        clarity: '',
+        lens: '',
+    });
 
     useEffect(() => {
-        // Fetch cornea data from the server based on the provided ID
         const fetchCorneaData = async () => {
             try {
                 const response = await axios.get(`http://localhost:4000/cornea/getOne/${id}`);
                 setCorneaData(response.data);
                 setIsLoading(false);
             } catch (error) {
-                // Handle error
-                toast({
-                    title: t('Error'),
-                    description: t('Failed to fetch cornea data.'),
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true,
-                });
-                setIsLoading(false);
+                handleFetchError();
             }
         };
 
         fetchCorneaData();
-    }, [id, t, toast]);
+    }, [id]);
+
+    const handleFetchError = () => {
+        toast({
+            title: t('Error'),
+            description: t('Failed to fetch cornea data.'),
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+        });
+        setIsLoading(false);
+    };
 
     const handleSave = async () => {
-        // Example save functionality
         try {
-            console.log(cornea);
-            await axios.put(`http://localhost:4000/cornea/update/${id}`, cornea);
+            await axios.put(`http://localhost:4000/cornea/update/${id}`, {
+                recoveryTechnical: cornea.recoveryTechnical || corneaData.recoveryTechnical,
+                eyeLid: cornea.eyeLid || corneaData.eyeLid,
+                size: cornea.size || corneaData.size,
+                irisColor: cornea.irisColor || corneaData.irisColor,
+                corneaStatus: cornea.corneaStatus || corneaData.corneaStatus,
+                clarity: cornea.clarity || corneaData.clarity,
+                lens: cornea.lens || corneaData.lens,
+            });
+
             toast({
                 title: t('Success'),
                 description: t('Cornea data saved successfully.'),
@@ -65,22 +67,27 @@ const EditCornea = () => {
                 duration: 5000,
                 isClosable: true,
             });
+
             navigate('/labtechnicaldashboard/viewCornea');
         } catch (error) {
-            // Handle error
-            toast({
-                title: t('Error'),
-                description: t('Failed to save cornea data.'),
-                status: 'error',
-                duration: 5000,
-                isClosable: true,
-            });
+            handleSaveError();
         }
+    };
+    const handleSaveError = () => {
+        toast({
+            title: t('Error'),
+            description: t('Failed to save cornea data.'),
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+        });
     };
 
     if (isLoading) {
         return <div>{t('Loading...')}</div>;
     }
+
+    const { recoveryTechnical, eyeLid, size, irisColor, corneaStatus, clarity, lens } = cornea;
 
     return (
         <div>
@@ -91,13 +98,13 @@ const EditCornea = () => {
                     handleSave();
                 }}
             >
-                <div className='grid grid-cols-3'>
+                <div className="grid grid-cols-3">
                     <label>
                         Recovery Technical:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={recoveryTechnical}
-                            onChange={(e) => setRecoveryTechnical(e.target.value)}
+                            onChange={(e) => setCornea({ ...cornea, recoveryTechnical: e.target.value })}
                         >
                             <option value={corneaData.recoveryTechnical}>{corneaData.recoveryTechnical}</option>
                             <option value="Technical 1">Technical 1</option>
@@ -109,8 +116,8 @@ const EditCornea = () => {
                         Size:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={size === '' ? corneaData.size : size}
-                            onChange={(e) => setSize(e.target.value)}
+                            value={size || corneaData.size}
+                            onChange={(e) => setCornea({ ...cornea, size: e.target.value })}
                         >
                             <option value={corneaData.size}>{corneaData.size}</option>
                             <option value="3">3 cm</option>
@@ -123,8 +130,8 @@ const EditCornea = () => {
                         <input
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="text"
-                            value={eyeLid}
-                            onChange={(e) => setEyeLid(e.target.value)}
+                            value={eyeLid || corneaData.eyeLid}
+                            onChange={(e) => setCornea({ ...cornea, eyeLid: e.target.value })}
                         />
                     </label>
                 </div>
@@ -134,8 +141,8 @@ const EditCornea = () => {
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
 
-                            value={irisColor}
-                            onChange={(e) => setIrisColor(e.target.value)}
+                            value={irisColor || corneaData.irisColor}
+                            onChange={(e) => setCornea({ ...cornea, irisColor: e.target.value })}
                         >
                             <option value={corneaData.irisColor}>{corneaData.irisColor}</option>
                             <option value="blue">Blue</option>
@@ -148,7 +155,7 @@ const EditCornea = () => {
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
 
                             value={corneaStatus}
-                            onChange={(e) => setCorneaStatus(e.target.value)}
+                            onChange={(e) => setCornea({ ...cornea, corneaStatus: e.target.value })}
                         >
                             <option value={corneaData.corneaStatus}>{corneaData.corneaStatus}</option>
                             <option value="Status 1">Status 1</option>
@@ -162,7 +169,7 @@ const EditCornea = () => {
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={clarity}
-                            onChange={(e) => setClarity(e.target.value)}
+                            onChange={(e) => setCornea({ ...cornea, clarity: e.target.value })}
                         >
                             <option value={corneaData.clarity}>{corneaData.clarity}</option>
                             <option value="clear 1">Clear 1</option>
@@ -176,8 +183,8 @@ const EditCornea = () => {
                         Lens:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={lens}
-                            onChange={(e) => setLens(e.target.value)}
+                            value={lens || corneaData.lens}
+                            onChange={(e) => setCornea({ ...cornea, lens: e.target.value })}
                         >
 
                             <option value={corneaData.lens}>{corneaData.lens}</option>
