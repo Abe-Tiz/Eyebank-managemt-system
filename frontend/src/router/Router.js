@@ -46,6 +46,10 @@ import EditPost from "../components/labTechnical/EditPost";
 import IndexPage from "../components/labTechnical/IndexPage";
 import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
+import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
+import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
+import ViewDetails from "../pages/dashboard/lab/ViewDetails";
+// import EditPage from "../sections/labTech/EditPage";
 
 const router = createBrowserRouter([
     {
@@ -113,10 +117,10 @@ const router = createBrowserRouter([
                 path: "/update/:id",
                 element: <EditDonor />,
             },
-            {
-                path: "/donor-login",
-                element: <LoginDonor />,
-            },
+            
+               
+                
+              
         ],
     },
     {
@@ -155,87 +159,60 @@ const router = createBrowserRouter([
                 path: "viewCornea",
                 element: <ViewCornea />,
             },
-
             {
-                path: "editCornea/:id",
-                element: <EditCornea />,
+              path: "createExams",
+              element: <PhysicalExam />,
             },
             {
-                path: "create-post",
-                element: <CreatePost />,
+              path: "getAll",
+              element: <PhysicalExamView />,
             },
             {
-                path: "edit-post/:slug",
-                element: <EditPost />,
-            },
-            {
-                path: "posts",
-                element: <IndexPage />,
-            },
-
-        ],
-    },
-    {
-        path: "/adminDashboard",
-        element: <AdminDashboard />,
-        children: [
-            {
-                path: "",
-                element: <Report />,
-            },
-            {
-                path: "addDonor",
-                element: <CreateDonor />,
-            },
-            {
-                path: "donorList",
-                element: <DisplayDonor />,
-            },
-            {
-                path: "addUser",
-                element: <Signup />,
-            },
-            {
-                path: "userList",
-                element: <ViewUsers />,
-            },
-            {
-                path: "edit/:id",
-                element: <Edit />,
-            },
-            {
-                path: "edituser/:id",
-                element: <EditUser />,
-            },
-            {
-                path: "storeCornea",
-                element: <StoredCornea />,
-            },
-        ],
-    },
-    {
-        path: "/medicaldirectordashboard",
-        element: <MedicalDirectorDashboard />,
-        children: [
-            {
-                path: "viewTissue",
-                element: <ViewTissue />,
-            },
-            {
-                path: "evaluatecornea/:id",
-                element: <EvaluateCornea />,
-            },
-            {
-                path: "evaluatedlist",
-                element: <EvaluateList />,
-            },
-            {
-                path: "editevaluation/:id",
-                element: <EditEvaluation />,
+              path: "getOne/:id",
+              element: <ViewDetails />,
             }
+            
         ],
     },
-
+  {
+    path: "/adminDashboard",
+    element: <AdminDashboard />,
+    children: [
+      {
+        path: "",
+        element: <Report />,
+      },
+      {
+        path: "addDonor",
+        element: <CreateDonor />,
+      },
+      {
+        path: "donorList",
+        element: <DisplayDonor />,
+      },
+      {
+        path: "addUser",
+        element: <Signup />,
+      },
+      {
+        path: "userList",
+        element: <ViewUsers />,
+      },
+      {
+        path: "edit/:id",
+        element: <Edit />,
+      },
+      {
+        path: "edituser/:id",
+        element: <EditUser />,
+      },
+      {
+        path: "storeCornea",
+        element: <StoredCornea />,
+      },
+      
+    ],
+  },
 ]);
 
 export default router;

@@ -12,6 +12,7 @@ const reportRoute = require("./routes/ReportRoute");
 const corneaRoute = require("./routes/CorneaRoute");
 const  postRoutes= require("./routes/postRoutes.js");
 
+const physicalExamRoutes = require("./routes/PhysicalExamRoute");
 //const RecipientRoute = require("./routes/RecipientRoute");
 dotenv.config();
 connectDB();
@@ -43,6 +44,7 @@ app.use('/cornea', corneaRoute)
 app.use("/post", postRoutes);
 
 // app.use('/routes', RecipientRoute)
+app.use('/api', physicalExamRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
