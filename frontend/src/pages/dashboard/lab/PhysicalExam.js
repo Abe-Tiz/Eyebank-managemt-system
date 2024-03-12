@@ -124,7 +124,7 @@ const PhysicalExam = () => {
           Create Physical Exam
         </h2>
 
-        <div className="mb-4 ml-16">
+        <div className="mb-4 ml-48">
           <label className="block mb-2 font-bold" htmlFor="height">
            Height:
           </label>
@@ -139,7 +139,7 @@ const PhysicalExam = () => {
           />
         </div>
 
-        <div className="mb-4 ml-16">
+        <div className="mb-4 ml-48">
           <label className="block mb-2 font-bold" htmlFor="weight">
             Weight:
           </label>
@@ -154,7 +154,7 @@ const PhysicalExam = () => {
           />
         </div>
 
-        <div className="mb-4 ml-16">
+        <div className="mb-4 ml-48">
           <label className="block mb-2 font-bold" htmlFor="sex">
             Sex:
           </label>
@@ -288,9 +288,10 @@ const PhysicalExam = () => {
         </div>
         <button
           type="submit"
-          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
         >
-          Submit
+          <h1>Submit</h1>
+         
         </button>
       </div>
     </form>

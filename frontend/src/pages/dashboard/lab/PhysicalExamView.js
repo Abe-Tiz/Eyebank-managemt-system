@@ -1,68 +1,167 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
 
 const PhysicalExamView = () => {
-  const [physicalExam, setPhysicalExam] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [exams, setExams] = useState([]);
+  const [editExamId, setEditExamId] = useState(null);
+  const [editedHeight, setEditedHeight] = useState("");
+  const [editedWeight, setEditedWeight] = useState("");
+  const [editedSex, setEditedSex] = useState("");
 
   useEffect(() => {
-    const fetchPhysicalExam = async () => {
-      try {
-        const response = await axios.get('/api/physical-exam/:id'); // Replace '/api/physical-exam/:id' with the appropriate API endpoint
-        setPhysicalExam(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError('Failed to retrieve PhysicalExam');
-        setLoading(false);
-      }
-    };
-
-    fetchPhysicalExam();
+    fetchPhysicalExams();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const fetchPhysicalExams = async () => {
+    try {
+      const response = await fetch("http://localhost:4001/api/getAll");
+      const data = await response.json();
+      setExams(data);
+    } catch (error) {
+      console.error("Failed to fetch physical exams:", error);
+    }
+  };
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  const deletePhysicalExam = async (examId) => {
+    try {
+      const response = await fetch(`http://localhost:4001/api/delete/${examId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        fetchPhysicalExams();
+        alert("Physical exam deleted successfully.");
+      } else {
+        throw new Error("Failed to delete physical exam.");
+      }
+    } catch (error) {
+      console.error("Error deleting physical exam:", error);
+    }
+  };
+
+  const startEdit = (examId, height, weight, sex) => {
+    setEditExamId(examId);
+    setEditedHeight(height);
+    setEditedWeight(weight);
+    setEditedSex(sex);
+  };
+
+  const cancelEdit = () => {
+    setEditExamId(null);
+    setEditedHeight("");
+    setEditedWeight("");
+    setEditedSex("");
+  };
+
+  const saveEdit = async (examId) => {
+    try {
+      const response = await fetch(`http://localhost:4001/api/update/${examId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          height: editedHeight,
+          weight: editedWeight,
+          sex: editedSex,
+        }),
+      });
+      if (response.ok) {
+        fetchPhysicalExams();
+        setEditExamId(null);
+        setEditedHeight("");
+        setEditedWeight("");
+        setEditedSex("");
+        alert("Physical exam updated successfully.");
+      } else {
+        throw new Error("Failed to update physical exam.");
+      }
+    } catch (error) {
+      console.error("Error updating physical exam:", error);
+    }
+  };
 
   return (
-    <div>
-      <h1>Physical Exam Details</h1>
-      {physicalExam && (
-        <div>
-          <p>Height: {physicalExam.height}</p>
-          <p>Weight: {physicalExam.weight}</p>
-          <p>Sex: {physicalExam.sex}</p>
-          <p>Is Refrigerated: {physicalExam.isRefrigerated ? 'Yes' : 'No'}</p>
-          <h2>Examined</h2>
-          <ul>
-            <li>Head: {physicalExam.examined.head ? 'Yes' : 'No'}</li>
-            <li>Mouth: {physicalExam.examined.mouth ? 'Yes' : 'No'}</li>
-            <li>Neck: {physicalExam.examined.neck ? 'Yes' : 'No'}</li>
-            <li>Arms: {physicalExam.examined.arms ? 'Yes' : 'No'}</li>
-            <li>Abdomen: {physicalExam.examined.abdomen ? 'Yes' : 'No'}</li>
-            <li>Genitals: {physicalExam.examined.genitals ? 'Yes' : 'No'}</li>
-            <li>Arteries: {physicalExam.examined.arteries ? 'Yes' : 'No'}</li>
-            <li>Back: {physicalExam.examined.back ? 'Yes' : 'No'}</li>
-          </ul>
-          <h2>High-Risk Examined</h2>
-          <ul>
-            <li>Sexual: {physicalExam.highRiskexamined.sexual}</li>
-            <li>Anal Intercourse: {physicalExam.highRiskexamined.analInterCourse}</li>
-            <li>Non-Medical: {physicalExam.highRiskexamined.NonMedical}</li>
-            <li>Oral Thrush: {physicalExam.highRiskexamined.oralThrush}</li>
-            <li>Blue: {physicalExam.highRiskexamined.Blue}</li>
-            <li>Enlarged Liver: {physicalExam.highRiskexamined.enlargedLiver}</li>
-          </ul>
-          <p>Cause of Death: {physicalExam.causeOfDeath}</p>
-          <p>Date of Death: {physicalExam.dod}</p>
-          <p>Story: {physicalExam.story}</p>
-          <p>Time: {physicalExam.time}</p>
-        </div>
+    <div className="container mx-auto">
+      <h2 className="text-2xl font-bold mb-4">Physical Exams</h2>
+      {exams.length === 0 ? (
+        <p>No physical exams found.</p>
+      ) : (
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th className="px-4 py-2">Height</th>
+              <th className="px-4 py-2">Weight</th>
+              <th className="px-4 py-2">Sex</th>
+              <th className="px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {exams.map((exam) => (
+              <tr key={exam._id}>
+                {editExamId === exam._id ? (
+                  <>
+                    <td className="border px-4 py-2">
+                      <input
+                        type="text"
+                        value={editedHeight}
+                        onChange={(e) => setEditedHeight(e.target.value)}
+                      />
+                    </td>
+                    <td className="border px-4 py-2">
+                      <input
+                        type="text"
+                        value={editedWeight}
+                        onChange={(e) => setEditedWeight(e.target.value)}
+                      />
+                    </td>
+                    <td className="border px-4 py-2">
+                      <input
+                        type="text"
+                        value={editedSex}
+                        onChange={(e) => setEditedSex(e.target.value)}
+                      />
+                    </td>
+                    <td className="border px-4 py-2">
+      <button
+        className="bg-green-500 text-white font-bold py-2 px-4 rounded mr-2"
+        onClick={() => saveEdit(exam._id)}
+      >
+        Save
+      </button>
+      <button
+        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        onClick={cancelEdit}
+      >
+        Cancel
+      </button>
+    </td>
+                  </>
+                ) : (
+                  <>
+                    <td className="border px-4 py-2">{exam.height}</td>
+                    <td className="border px-4 py-2">{exam.weight}</td>
+                    <td className="border px-4 py-2">{exam.sex}</td>
+                    <td className="border px-4 py-2">
+                      <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        onClick={() => deletePhysicalExam(exam._id)}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() =>
+                          startEdit(exam._id, exam.height, exam.weight, exam.sex)
+                        }
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

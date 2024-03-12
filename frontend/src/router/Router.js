@@ -99,7 +99,7 @@ const router = createBrowserRouter([
                 element: <PhysicalExam />,
               },
               {
-                path: "getExams",
+                path: "getAll",
                 element: <PhysicalExamView />,
               },
               // {
