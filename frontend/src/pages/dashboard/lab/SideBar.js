@@ -172,14 +172,24 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <span className="ml-2">{t("cornea:screenDonorLabel")}</span>
                                 </Link>
                                 <Link
-                                    to="/labtechnicaldashboard/recordMedicalParticular"
+                                    to="/labtechnicaldashboard/createExams"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
                                     data-tooltip-id="user-list"
-                                    data-tooltip-content="Record Medical Particular"
+                                    data-tooltip-content="PhysicalExams"
                                 >
                                     <CiBoxList className="text-2xl" />
-                                    <span className="ml-2"> {t("cornea:recordMedicalParticularLabel")}</span>
+                                    <span className="ml-2"> {t("cornea:PhysicalExams")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/getAll"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content="PhysicalExams"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:PhysicalExamView")}</span>
                                 </Link>
                                 <Link
                                     to="/labtechnicaldashboard/discardCornea"
