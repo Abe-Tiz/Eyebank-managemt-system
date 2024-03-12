@@ -34,6 +34,7 @@ import LabTechnicalDashboard from "../layout/LabTechnicalLayout";
 import AdminDashboard from "../layout/AdminLayout";
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
+import ViewDetails from "../pages/dashboard/lab/ViewDetails";
 // import EditPage from "../sections/labTech/EditPage";
 
 const router = createBrowserRouter([
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
                 path: "getAll",
                 element: <PhysicalExamView />,
               },
+              {
+                path: "getOne/:id",
+                element: <ViewDetails />,
+              }
               // {
               //   path: "updateExam/:id",
               //   element: <EditPage />,
