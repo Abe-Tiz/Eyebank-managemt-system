@@ -21,7 +21,7 @@ import ViewCornea from "../components/ViewCornea";
 import DistributeCornea from "../pages/dashboard/lab/DistributeCornea";
 import StoreCornea from "../pages/dashboard/lab/StoreCornea";
 import DiscardCornea from "../pages/dashboard/lab/DiscardCornea";
-import EvaluateCornea from "../pages/dashboard/lab/EvaluateCornea";
+// import EvaluateCornea from "../pages/dashboard/lab/EvaluateCornea";
 import EditCornea from "../pages/dashboard/lab/EditCornea";
 import RecordMedicalParticular from "../pages/dashboard/lab/RecordMedicalParticular";
 import ScreenDonor from "../pages/dashboard/lab/ScreenDonor";
@@ -150,10 +150,10 @@ const router = createBrowserRouter([
         path: "viewCornea",
         element: <ViewCornea />,
       },
-      {
-        path: "evaluateCornea/:id",
-        element: <EvaluateCornea />,
-      },
+      // {
+      //   path: "evaluateCornea/:id",
+      //   element: <EvaluateCornea />,
+      // },
       {
         path: "editCornea/:id",
         element: <EditCornea />,
