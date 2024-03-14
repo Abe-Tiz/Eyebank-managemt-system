@@ -140,43 +140,54 @@ const deletePostController = async (req, res) => {
 //upate post
 const updatePostController = async (req, res) => {
   try {
-    const { title, summery, content } = req.fields;
+    const { title, summary, content } = req.fields;
     const { photo } = req.files;
-    //alidation
-    switch (true) {
-      case !title:
-        return res.status(500).send({ error: "Title is Required" });
-      case !summery:
-        return res.status(500).send({ error: "Summery is Required" });
-      case !content:
-        return res.status(500).send({ error: "Content is Required" });
-      case photo && photo.size > 1000000:
-        return res
-          .status(500)
-          .send({ error: "photo is Required and should be less then 1mb" });
+
+    // Validation
+    if (!title) {
+      return res.status(400).send({ error: "Title is required" });
     }
+    if (!summary) {
+      return res.status(400).send({ error: "Summary is required" });
+    }
+    if (!content) {
+      return res.status(400).send({ error: "Content is required" });
+    }
+    if (photo && photo.size > 1000000) {
+      return res
+        .status(400)
+        .send({ error: "Photo is required and should be less than 1MB" });
+    }
+
+    const updatedFields = {
+      ...req.fields,
+      slug: slugify(title)
+    };
 
     const posts = await postModel.findByIdAndUpdate(
       req.params.pid,
-      { ...req.fields, slug: slugify(title) },
+      updatedFields,
       { new: true }
     );
+
     if (photo) {
       posts.photo.data = fs.readFileSync(photo.path);
       posts.photo.contentType = photo.type;
     }
+
     await posts.save();
-    res.status(201).send({
+
+    res.status(200).send({
       success: true,
-      message: "posts Updated Successfully",
+      message: "Post updated successfully",
       posts,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      error,
-      message: "Error in Update posts",
+      error: error.message,
+      message: "Error updating post",
     });
   }
 };

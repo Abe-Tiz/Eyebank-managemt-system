@@ -29,7 +29,7 @@ export default function CreatePost() {
 
       if (data.success) {
         toast.success(data.message);
-        navigate("/labtechnicaldashboard/posts");
+        navigate("/adminDashboard/posts");
       } else {
         toast.error(data.message);
       }

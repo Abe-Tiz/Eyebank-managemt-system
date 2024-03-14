@@ -8,7 +8,8 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
- 
+import { IoCreate } from 'react-icons/io5';
+import { MdVisibility } from 'react-icons/md';
 const CustomSidebar = ({
   collapsed,
   name,
@@ -81,6 +82,25 @@ const CustomSidebar = ({
             >
               {/* <SettingOutlined className="text-2xl" /> */}
               <CiBoxList className="text-2xl" />
+            </Link>
+            <Link
+              className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+              to="/adminDashboard/create-post"
+              data-tooltip-id="popular-posts"
+              data-tooltip-content="Create Blog"
+            >
+              {/* <SettingOutlined className="text-2xl" /> */}
+              <IoCreate className="text-2xl" />
+            </Link>
+
+            <Link
+              className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+              to="/adminDashboard/create-post"
+              data-tooltip-id="popular-posts"
+              data-tooltip-content="Create Blog"
+            >
+              {/* <SettingOutlined className="text-2xl" /> */}
+              <MdVisibility className="text-2xl" />
             </Link>
           </div>
           ) : (
@@ -156,6 +176,27 @@ const CustomSidebar = ({
                 <CiBoxList className="text-2xl" />
                 <span className="ml-2"> Store Cornea</span>
               </Link>
+
+              <Link
+                to="/adminDashboard/create-post"
+                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                data-tooltip-id="popular-posts"
+                data-tooltip-content="Store Cornea"
+              >
+                <IoCreate className="text-2xl" />
+                <span className="ml-2"> Create Blog</span>
+              </Link>
+             
+              <Link
+                to="/adminDashboard/posts"
+                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                data-tooltip-id="popular-posts"
+                data-tooltip-content="Store Cornea"
+              >
+                <MdVisibility className="text-2xl" />
+                <span className="ml-2"> Blog List</span>
+              </Link>
+              
             </div>
           </>
 

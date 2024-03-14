@@ -6,7 +6,7 @@ const {
   getSinglePostController,
   postPhotoController,
   updatePostController,
-  blogListController
+
 } =require( "../controller/postController.js");
 const  formidable =require( "express-formidable");
 const router = express.Router();
