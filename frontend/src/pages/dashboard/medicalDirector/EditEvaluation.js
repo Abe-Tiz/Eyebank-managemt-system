@@ -13,22 +13,18 @@ const EditEvaluation = () => {
     // Example state variables
     const [corneaData, setCorneaData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [evaluater, setEvaluater] = useState('')
-    const [epitheliam, setEpitheliem] = useState('');
-    const [stroma, setStroma] = useState('');
-    const [endothelium, setEndothelium] = useState('');
-    const [approval, setApproval] = useState('');
-    const [suiatablity, setSuiatablity] = useState('');
-    const [reason, setReason] = useState('');
-    const cornea = {
-        epitheliam,
-        stroma,
-        endothelium,
-        approval,
-        evaluater,
-        suiatablity,
-        reason
-    };
+
+
+    const [evaluateData, setEvaluationData] = useState({
+        epitheliam: "",
+        stroma: "",
+        endothelium: "",
+        approval: "",
+        evaluater: "",
+        suiatablity: "",
+        reason: ""
+
+    });
 
     useEffect(() => {
         // Fetch cornea data from the server based on the provided ID
@@ -52,14 +48,21 @@ const EditEvaluation = () => {
 
         fetchCorneaData();
     }, [id, t, toast]);
-    const handleApproval = (event) => {
-        setApproval(event.target.value);
-    }
     const handleSave = async () => {
         // Example save functionality
         try {
-            console.log(cornea);
-            await axios.put(`http://localhost:4000/cornea/update/${id}`, cornea);
+            console.log(evaluateData);
+            await axios.put(`http://localhost:4000/cornea/update/${id}`, {
+                epitheliam: evaluateData.epitheliam || corneaData.evaluation.epitheliam,
+                stroma: evaluateData.stroma || corneaData.evaluation.stroma,
+                endothelium: evaluateData.endothelium || corneaData.evaluation.endothelium,
+                evaluater: evaluateData.evaluater || corneaData.evaluation.evaluater,
+                approval: evaluateData.approval || corneaData.evaluation.approval,
+                suiatablity: evaluateData.suiatablity || corneaData.evaluation.suiatablity,
+                reason: evaluateData.reason || corneaData.evaluation.reason,
+
+            });
+            console.log(epitheliam)
             toast({
                 title: t('Success'),
                 description: t('Cornea data saved successfully.'),
@@ -72,14 +75,14 @@ const EditEvaluation = () => {
             // Handle error
             toast({
                 title: t('Error'),
-                description: t('Failed to save cornea data.'),
+                description: t('Failed to update cornea data.'),
                 status: 'error',
                 duration: 5000,
                 isClosable: true,
             });
         }
     };
-
+    const { epitheliam, stroma, endothelium, evaluater, approval, suiatablity, reason } = evaluateData;
     if (isLoading) {
         return <div>{t('Loading...')}</div>;
     }
@@ -99,13 +102,26 @@ const EditEvaluation = () => {
                         Epitheliam:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={epitheliam === '' ? corneaData.evalualtion.epitheliam : epitheliam}
-                            onChange={(e) => setEpitheliem(e.target.value)}
+                            value={epitheliam}
+                            onChange={(e) => setEvaluationData({ ...evaluateData, epitheliam: e.target.value })}
                         >
-                            <option value={corneaData.epitheliam}>{corneaData.epitheliam}</option>
+                            <option value={corneaData.evaluation.epitheliam}>{corneaData.evaluation.epitheliam}</option>
                             <option value="3">3 cm</option>
                             <option value="6">6 cm</option>
                             <option value="9">9 cm</option>
+                        </select>
+                    </label>
+                    <label>
+                        Evaluator:
+                        <select
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={evaluater}
+                            onChange={(e) => setEvaluationData({ ...evaluateData, evaluater: e.target.value })}
+                        >
+                            <option value={corneaData.evaluation.evaluater}>{corneaData.evaluation.evaluater}</option>
+                            <option value="awoke">Awoke</option>
+                            <option value="amsalu">Amsalu</option>
+                            <option value="leli">Leli</option>
                         </select>
                     </label>
 
@@ -116,10 +132,10 @@ const EditEvaluation = () => {
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
 
-                            value={stroma === '' ? corneaData.stroma : stroma}
-                            onChange={(e) => setStroma(e.target.value)}
+                            value={stroma}
+                            onChange={(e) => setEvaluationData({ ...evaluateData, stroma: e.target.value })}
                         >
-                            <option value={corneaData.stroma}>{corneaData.stroma}</option>
+                            <option value={corneaData.evaluation.stroma}>{corneaData.evaluation.stroma}</option>
                             <option value="blue">Blue</option>
                             <option value="black">Black</option>
                         </select>
@@ -129,52 +145,52 @@ const EditEvaluation = () => {
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
 
-                            value={endothelium === '' ? corneaData.endothelium : endothelium}
-                            onChange={(e) => setEndothelium(e.target.value)}
+                            value={endothelium}
+                            onChange={(e) => setEvaluationData({ ...evaluateData, endothelium: e.target.value })}
                         >
-                            <option value={corneaData.endothelium}>{corneaData.endothelium}</option>
+                            <option value={corneaData.evaluation.endothelium}>{corneaData.evaluation.endothelium}</option>
                             <option value="Status 1">Status 1</option>
                             <option value="Status 2">Status 2</option>
                             <option value="Status 3">Status 3</option>
-
                         </select>
                     </label>
-
                 </div>
                 <div className='grid grid-cols-3'>
                     <div>
                         <label>
-                            Approval:
-                            <br />
                             <label>
-                                <input
-                                    type="radio"
-                                    value="yes"
-                                    checked={approval === 'yes'}
-                                    onChange={handleApproval}
-                                />
-                                Yes
-                            </label>
-                            <br />
-                            <label>
-                                <input
-                                    type="radio"
-                                    value="no"
-                                    checked={approval === 'no'}
-                                    onChange={handleApproval}
-                                />
-                                No
+                                Approval:
+                                <br />
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="yes"
+                                        checked={approval === 'yes'}
+                                        onChange={(e) => setEvaluationData({ ...evaluateData, approval: e.target.value })}
+                                    />
+                                    Yes
+                                </label>
+                                <br />
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="no"
+                                        checked={approval === 'no'}
+                                        onChange={(e) => setEvaluationData({ ...evaluateData, approval: e.target.value })}
+                                    />
+                                    No
+                                </label>
                             </label>
                         </label>
                         {
-                            approval === "yes" ? (<lable>
+                            approval === "yes" ? (<label>
                                 Select suiatablty
                                 <select
-                                    className="form-input mt-1 block w-1/3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                     value={suiatablity}
-                                    onChange={(e) => setSuiatablity(e.target.value)}
+                                    onChange={(e) => setEvaluationData({ ...evaluateData, suiatablity: e.target.value })}
                                 >
-                                    <option value="">Select Suiatablity</option>
+                                    <option value={corneaData.evaluation.suiatablity}>{corneaData.evaluation.suiatablity}</option>
                                     <option value="PK">PK</option>
                                     <option value="EK">EK</option>
                                     <option value="ALK">ALK</option>
@@ -185,18 +201,17 @@ const EditEvaluation = () => {
                                 </select>
 
 
-                            </lable>) : (null)
+                            </label>) : (null)
                         }
                         {
-                            approval === 'no' ? (<lable>
+                            approval === 'no' ? (<label>
                                 Select Reason
                                 <select
-                                    className="form-input mt-1 block w-1/3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                     value={reason}
-                                    onChange={(e) => setReason(e.target.value)}
-
+                                    onChange={(e) => setEvaluationData({ ...evaluateData, reason: e.target.value })}
                                 >
-                                    <option value="">Select Reason</option>
+                                    <option value={corneaData.evaluation.reason}>{corneaData.evaluation.reason}</option>
                                     <option value="epitheliam">Epitheliam</option>
                                     <option value="stroma">Stroma</option>
                                     <option value="endothelium">Endothelium</option>
@@ -206,7 +221,7 @@ const EditEvaluation = () => {
                                 </select>
 
 
-                            </lable>) : (null)
+                            </label>) : (null)
                         }
                     </div>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">

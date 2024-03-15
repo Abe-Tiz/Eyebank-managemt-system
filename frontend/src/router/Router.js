@@ -50,7 +50,16 @@ import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
 // import EditPage from "../sections/labTech/EditPage";
+//surgeon
+import SurgeonDashboard from "../layout/SurgeonLayout";
+import AddRecipient from "../pages/dashboard/surgeon/AddRecipient"
+import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
+import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
 
+//admin
+import AddHospital from "../pages/dashboard/admins/AddHospital";
+import ViewHospital from "../pages/dashboard/admins/ViewHospital";
+import EditHospital from "../pages/dashboard/admins/EditHospital";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -117,10 +126,10 @@ const router = createBrowserRouter([
                 path: "/update/:id",
                 element: <EditDonor />,
             },
-            
-               
-                
-              
+
+
+
+
         ],
     },
     {
@@ -160,59 +169,158 @@ const router = createBrowserRouter([
                 element: <ViewCornea />,
             },
             {
-              path: "createExams",
-              element: <PhysicalExam />,
+                path: "createExams",
+                element: <PhysicalExam />,
             },
             {
-              path: "getAll",
-              element: <PhysicalExamView />,
+                path: "getAll",
+                element: <PhysicalExamView />,
             },
             {
-              path: "getOne/:id",
-              element: <ViewDetails />,
-            }
-            
+                path: "getOne/:id",
+                element: <ViewDetails />,
+                path: "edit-post/:slug",
+                element: <EditPost />,
+            },
+            {
+                path: "posts",
+                element: <IndexPage />,
+            },
+
         ],
     },
-  {
-    path: "/adminDashboard",
-    element: <AdminDashboard />,
-    children: [
-      {
-        path: "",
-        element: <Report />,
-      },
-      {
-        path: "addDonor",
-        element: <CreateDonor />,
-      },
-      {
-        path: "donorList",
-        element: <DisplayDonor />,
-      },
-      {
-        path: "addUser",
-        element: <Signup />,
-      },
-      {
-        path: "userList",
-        element: <ViewUsers />,
-      },
-      {
-        path: "edit/:id",
-        element: <Edit />,
-      },
-      {
-        path: "edituser/:id",
-        element: <EditUser />,
-      },
-      {
-        path: "storeCornea",
-        element: <StoredCornea />,
-      },
-      
-    ],
-  },
+    {
+        path: "/adminDashboard",
+        element: <AdminDashboard />,
+        children: [
+            {
+                path: "",
+                element: <Report />,
+            },
+            {
+                path: "addDonor",
+                element: <CreateDonor />,
+            },
+            {
+                path: "donorList",
+                element: <DisplayDonor />,
+            },
+            {
+                path: "addUser",
+                element: <Signup />,
+            },
+            {
+                path: "userList",
+                element: <ViewUsers />,
+            },
+            {
+                path: "edit/:id",
+                element: <Edit />,
+            },
+            {
+                path: "edituser/:id",
+                element: <EditUser />,
+            },
+            {
+                path: "storeCornea",
+                element: <StoredCornea />,
+            },
+            {
+                path: "addhospital",
+                element: <AddHospital />,
+            },
+            {
+                path: "viewhospital",
+                element: <ViewHospital />,
+            },
+            {
+                path: "edithospital/:id",
+                element: <EditHospital />,
+            },
+        ],
+    },
+    {
+        path: "/medicaldirectordashboard",
+        element: <MedicalDirectorDashboard />,
+        children: [
+            {
+                path: "viewTissue",
+                element: <ViewTissue />,
+            },
+            {
+                path: "evaluatecornea/:id",
+                element: <EvaluateCornea />,
+            },
+            {
+                path: "evaluatedlist",
+                element: <EvaluateList />,
+            },
+            {
+                path: "editevaluation/:id",
+                element: <EditEvaluation />,
+            }
+
+        ],
+    },
+    {
+        path: "/adminDashboard",
+        element: <AdminDashboard />,
+        children: [
+            {
+                path: "",
+                element: <Report />,
+            },
+            {
+                path: "addDonor",
+                element: <CreateDonor />,
+            },
+            {
+                path: "donorList",
+                element: <DisplayDonor />,
+            },
+            {
+                path: "addUser",
+                element: <Signup />,
+            },
+            {
+                path: "userList",
+                element: <ViewUsers />,
+            },
+            {
+                path: "edit/:id",
+                element: <Edit />,
+            },
+            {
+                path: "edituser/:id",
+                element: <EditUser />,
+            },
+            {
+                path: "storeCornea",
+                element: <StoredCornea />,
+            },
+
+        ],
+    },
+
+    {
+        path: "/surgondashboard",
+        element: <SurgeonDashboard />,
+        children: [
+            {
+                path: "addrecipient",
+                element: <AddRecipient />,
+            },
+            {
+                path: "viewrecipient",
+                element: <ViewRecipient />,
+            },
+            // {
+            //     path: "editrecipient/:id",
+            //     element: <EditRecipient />,
+            // },
+        ],
+    },
+
 ]);
 
 export default router;
