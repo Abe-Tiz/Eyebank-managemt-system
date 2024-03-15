@@ -6,11 +6,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 const { Option } = Select;
 
-const UpdateProduct = () => {
+const UpdatePost = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
-  const [categories, setCategories] = useState([]);
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
@@ -44,17 +43,18 @@ const UpdateProduct = () => {
       const postData = new FormData();
       postData.append("title", title);
       postData.append("summary", summary);
-      postData.append("content", content);
       photo && postData.append("photo", photo);
+      postData.append("content", content);
       const { data } = axios.put(
         `http://localhost:4000/post/update-post/${id}`,
         postData
       );
+      
       if (data?.success) {
         toast.error(data?.message);
       } else {
         toast.success("blog Updated Successfully");
-        navigate("/labtechnicaldashboard/posts");
+        navigate("/adminDashboard/posts");
       }
     } catch (error) {
       console.log(error);
@@ -71,7 +71,7 @@ const UpdateProduct = () => {
         `http://localhost:4000/post/delete-post/${id}`
       );
       toast.success("Post Deleted Succfully");
-      navigate("/labtechnicaldashboard/posts");
+      navigate("/adminDashboard/posts");
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
@@ -193,4 +193,4 @@ const UpdateProduct = () => {
   );
 };
 
-export default UpdateProduct;
+export default UpdatePost;
