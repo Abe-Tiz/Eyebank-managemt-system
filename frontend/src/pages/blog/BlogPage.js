@@ -5,7 +5,6 @@ import { toast } from "react-hot-toast";
 import { formatISO9075 } from "date-fns";
 import { useTranslation } from "react-i18next";
 import "../../static/styles/Blog.css";
-import { format } from 'date-fns';
 const BlogPage = () => {
   const { t } = useTranslation();
   const [posts, setPosts] = useState([]);

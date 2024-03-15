@@ -4,8 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../static/styles/BlogDetail.css";
 import { Link } from "react-router-dom";
-import { toast } from 'react-toastify';
-import { format } from 'date-fns';
+
 const BlogDetails = () => {
   const { t } = useTranslation();
   const params = useParams();

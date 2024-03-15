@@ -39,13 +39,7 @@ import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
 
-//blog
-//blog
-import CreatePost from "../components/labTechnical/CreatePost";
-import EditPost from "../components/labTechnical/EditPost";
-import IndexPage from "../components/labTechnical/IndexPage";
-import BlogPage from "./../pages/blog/BlogPage";
-import BlogDetail from "./../pages/blog/BlogDetail";
+
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
@@ -60,6 +54,14 @@ import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
 import AddHospital from "../pages/dashboard/admins/AddHospital";
 import ViewHospital from "../pages/dashboard/admins/ViewHospital";
 import EditHospital from "../pages/dashboard/admins/EditHospital";
+
+//blog
+import CreatePost from "../pages/dashboard/admins/CreatePost";
+import EditPost from "../pages/dashboard/admins/EditPost";
+import IndexPage from "../pages/dashboard/admins/IndexPage";
+import BlogPage from "./../pages/blog/BlogPage";
+import BlogDetail from "./../pages/blog/BlogDetail";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -176,16 +178,7 @@ const router = createBrowserRouter([
                 path: "getAll",
                 element: <PhysicalExamView />,
             },
-            {
-                path: "getOne/:id",
-                element: <ViewDetails />,
-                path: "edit-post/:slug",
-                element: <EditPost />,
-            },
-            {
-                path: "posts",
-                element: <IndexPage />,
-            },
+           
 
         ],
     },
@@ -237,6 +230,18 @@ const router = createBrowserRouter([
                 path: "edithospital/:id",
                 element: <EditHospital />,
             },
+            {
+                path: "create-post",
+                element: <CreatePost />,
+              },
+              {
+                path: "edit-post/:slug",
+                element: <EditPost />,
+              },
+              {
+                path: "posts",
+                element: <IndexPage />,
+              },
         ],
     },
     {
@@ -298,6 +303,18 @@ const router = createBrowserRouter([
                 path: "storeCornea",
                 element: <StoredCornea />,
             },
+            {
+                path: "create-post",
+                element: <CreatePost />,
+              },
+              {
+                path: "edit-post/:slug",
+                element: <EditPost />,
+              },
+              {
+                path: "posts",
+                element: <IndexPage />,
+              },
 
         ],
     },
