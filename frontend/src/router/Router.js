@@ -46,7 +46,16 @@ import EditPost from "../components/labTechnical/EditPost";
 import IndexPage from "../components/labTechnical/IndexPage";
 import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
+//surgeon
+import SurgeonDashboard from "../layout/SurgeonLayout";
+import AddRecipient from "../pages/dashboard/surgeon/AddRecipient"
+import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
+import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
 
+//admin
+import AddHospital from "../pages/dashboard/admins/AddHospital";
+import ViewHospital from "../pages/dashboard/admins/ViewHospital";
+import EditHospital from "../pages/dashboard/admins/EditHospital";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -211,6 +220,18 @@ const router = createBrowserRouter([
                 path: "storeCornea",
                 element: <StoredCornea />,
             },
+            {
+                path: "addhospital",
+                element: <AddHospital />,
+            },
+            {
+                path: "viewhospital",
+                element: <ViewHospital />,
+            },
+            {
+                path: "edithospital/:id",
+                element: <EditHospital />,
+            },
         ],
     },
     {
@@ -233,6 +254,25 @@ const router = createBrowserRouter([
                 path: "editevaluation/:id",
                 element: <EditEvaluation />,
             }
+        ],
+    },
+
+    {
+        path: "/surgondashboard",
+        element: <SurgeonDashboard />,
+        children: [
+            {
+                path: "addrecipient",
+                element: <AddRecipient />,
+            },
+            {
+                path: "viewrecipient",
+                element: <ViewRecipient />,
+            },
+            // {
+            //     path: "editrecipient/:id",
+            //     element: <EditRecipient />,
+            // },
         ],
     },
 
