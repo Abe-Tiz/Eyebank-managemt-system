@@ -24,7 +24,7 @@ const PhysicalExamView = () => {
 
   const deletePhysicalExam = async (examId) => {
     try {
-      const response = await fetch(`http://localhost:4001/api/delete/${examId}`, {
+      const response = await fetch(`http://localhost:4000/api/delete/${examId}`, {
         method: "DELETE",
       });
       if (response.ok) {
