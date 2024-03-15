@@ -10,7 +10,9 @@ const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
 const reportRoute = require("./routes/ReportRoute");
 const corneaRoute = require("./routes/CorneaRoute");
-const  postRoutes= require("./routes/postRoutes.js");
+const postRoutes = require("./routes/postRoutes.js");
+const HospitalRoute = require("./routes/HospitalRoute");
+const RecipientRoute = require("./routes/RecipientRoute");
 
 const physicalExamRoutes = require("./routes/PhysicalExamRoute");
 //const RecipientRoute = require("./routes/RecipientRoute");
@@ -42,9 +44,12 @@ app.use('/donor', donorRoute)
 app.use('/report', reportRoute)
 app.use('/cornea', corneaRoute)
 app.use("/post", postRoutes);
+app.use('/hospital', HospitalRoute)
+app.use('/recipient', RecipientRoute)
 
 // app.use('/routes', RecipientRoute)
 app.use('/api', physicalExamRoutes);
+//app.use('/recipient', RecipientRoute)
 app.use(notFound);
 app.use(errorHandler);
 

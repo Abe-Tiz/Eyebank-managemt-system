@@ -61,7 +61,7 @@ const Login = () => {
                             position: "top",
                         });
                         // setRefreshed(true);
-                        navigate("/labtechnicaldashboard");
+                        navigate("/surgondashboard");
                     }
                     else if (data.user.role === "medical Director") {
                         localStorage.setItem("token", data.data);
