@@ -6,7 +6,7 @@ dotenv.config();
 
 const createPostController = async (req, res) => {
   try {
-    const { title, summery, content } = req.fields;
+    const { title, summary, content } = req.fields;
     const { photo } = req.files;
 
     const posts = new postModel({ ...req.fields, slug: slugify(title) });
@@ -140,13 +140,13 @@ const deletePostController = async (req, res) => {
 //upate post
 const updatePostController = async (req, res) => {
   try {
-    const { title, summery, content } = req.fields;
+    const { title, summary, content } = req.fields;
     const { photo } = req.files;
     //alidation
     switch (true) {
       case !title:
         return res.status(500).send({ error: "Title is Required" });
-      case !summery:
+      case !summary:
         return res.status(500).send({ error: "Summery is Required" });
       case !content:
         return res.status(500).send({ error: "Content is Required" });
