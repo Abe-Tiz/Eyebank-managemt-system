@@ -36,7 +36,7 @@ const BlogPage = () => {
           style={{ marginLeft: "-10px" }}
         >
           {posts.map((p) => (
-            <Link key={p._id} to={`/labtechnicaldashboard/posts/${p.slug}`} className="blog-link">
+            <Link key={p._id} to={`/adminDashboard/posts/${p.slug}`} className="blog-link">
               <div className="blog-item bg-white rounded-lg shadow">
                 <div className="blog-image">
                   <Link to={`/blog/${p.slug}`}>
