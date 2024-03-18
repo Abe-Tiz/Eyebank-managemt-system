@@ -16,12 +16,12 @@ const Profile = () => {
     subcity: "",
     kebele: "",
     mobile: "",
-    isVolunter:false
+    isVolunter: false,
   });
-    
+
   const { t } = useTranslation();
-    const location = useLocation();
-      const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getLoggedInDonor = async () => {
@@ -67,12 +67,11 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%   min-h-screen flex items-center justify-center flex-col mt-0">
-      <h2 className="text-4xl font-bold text-gray-800 mb-4 mt-0">
+    <div className="container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%   min-h-screen flex items-center justify-center flex-col ">
+      <h2 className="text-4xl font-bold text-gray-800 py-5">
         Your Profile{" "}
       </h2>
-      <div className="flex  md:flex-row flex-col justify-between gap-10  overflow-hidden   p-6 mx-auto w-full md:w-3/4 lg:w-2/3 xl:w-1/2 relative">
-       
+      <div className="flex bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%  md:flex-row flex-col justify-between gap-10  overflow-hidden  mx-auto container m-5 p-5 relative">
         {/* left  */}
         <div className="w-1/4">
           <div className="avatar">
@@ -99,7 +98,7 @@ const Profile = () => {
         </div>
 
         {/* right */}
-        <div className="w-3/4 border-l-4 px-5 bord ">
+        <div className="w-full border-l-4 p-5 bord ">
           <div className="flex flex-col md:flex-row gap-y-4 md:gap-x-8">
             <div className="md:w-1/2">
               <p className="text-xl font-bold text-gray-800 mb-2">
@@ -136,10 +135,10 @@ const Profile = () => {
           </div>
 
           {/* btns */}
-          <div className="flex justify-between mt-6 ">
+          <div className="flex justify-center gap-16  mt-6 ">
             {/* update btn */}
             <Link
-              className="like-button bg-blue-500 text-white cursor-pointer px-3 py-3 rounded focus:outline-none border border-gray-300 hover:bg-blue-600 shadow-md  "
+              className="w-32 like-button bg-blue-500 text-white flex justify-center items-center  text-center  cursor-pointer px-3 py-3 rounded focus:outline-none border border-gray-300 hover:bg-blue-600 shadow-md  "
               to={`/update/${state.id}`}
             >
               <FaEdit className="mr-2" />
@@ -148,7 +147,7 @@ const Profile = () => {
 
             {/* print button */}
             <Link
-              className="like-button bg-orange-500 text-white cursor-pointer px-3 py-3 rounded focus:outline-none border border-gray-300 hover:bg-green-600 shadow-md  "
+              className="w-32 like-button bg-orange-500 text-white flex justify-center items-center  text-center cursor-pointer px-3 py-3 rounded focus:outline-none border border-gray-300 hover:bg-green-600 shadow-md  "
               to={`/print/${state.id}`}
             >
               <FaPrint className="mr-2" />
