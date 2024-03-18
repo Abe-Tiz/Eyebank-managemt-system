@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../static/styles/donor.css";
@@ -15,7 +15,7 @@ const initialState = {
   kebele: "",
   HNumber: "",
   mobile: "",
-  isVolunter:false
+  isVolunter: false,
 };
 
 const citiesInEthiopia = [
@@ -24,7 +24,7 @@ const citiesInEthiopia = [
   "Mekelle",
   "Gondar",
   "Hawassa",
-  "Others"
+  "Others",
 ];
 
 // Subcities for each city
@@ -97,8 +97,7 @@ const CreateDonor = () => {
           !formData.email ||
           !formData.sex ||
           !formData.age
-        )
-         {
+        ) {
           toast({
             title: "Please Fill all the Fields",
             status: "warning",
@@ -126,7 +125,6 @@ const CreateDonor = () => {
           setFormData(initialState);
           setIsName(false);
           setIsMobile(false);
-
         }
       })
       .catch((err) => {
@@ -163,7 +161,6 @@ const CreateDonor = () => {
     setFormData({ ...formData, subcity: e.target.value });
   };
 
-
   const handleKebele = (e) => {
     setFormData({ ...formData, kebele: e.target.value });
   };
@@ -187,40 +184,37 @@ const CreateDonor = () => {
   };
 
   const handleEmail = (e) => {
-  setFormData({ ...formData, email: e.target.value });
-};
+    setFormData({ ...formData, email: e.target.value });
+  };
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
   };
 
-const handleCheckbox = (e) => {
-  setFormData({ ...formData, isVolunter: e.target.checked });
+  const handleCheckbox = (e) => {
+    setFormData({ ...formData, isVolunter: e.target.checked });
   };
-  
 
-useEffect(() => {
-  
-  if (selectedDate) {
-    const birthdate = new Date(selectedDate);
-    const currentDate = new Date();
-    const ageInMilliseconds = currentDate - birthdate;
-    const ageInYears = Math.floor(
-      ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000)
-    );
+  useEffect(() => {
+    if (selectedDate) {
+      const birthdate = new Date(selectedDate);
+      const currentDate = new Date();
+      const ageInMilliseconds = currentDate - birthdate;
+      const ageInYears = Math.floor(
+        ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000)
+      );
 
-    if (ageInYears < 2 || ageInYears > 80) {
-      setIsValidAge(true);
-    } else {
-      setIsValidAge(false);
-      setFormData({ ...formData, age: ageInYears.toString() });
-      console.log(formData.age, "Years");
+      if (ageInYears < 2 || ageInYears > 80) {
+        setIsValidAge(true);
+      } else {
+        setIsValidAge(false);
+        setFormData({ ...formData, age: ageInYears.toString() });
+        console.log(formData.age, "Years");
+      }
     }
-  }
-}, [selectedDate]);
-  
+  }, [selectedDate]);
 
-   // Size of the circles
+  // Size of the circles
   const circleSize = 32;
 
   return (
@@ -491,43 +485,43 @@ useEffect(() => {
                   {/* </div> */}
 
                   {isMobile && (
-                      <>
-                        <div className="mt-4">
-                          <label
-                            htmlFor="email"
-                            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            {t("login:labelLoginEmail")}
-                            <span class="text-red-500">*</span>
-                          </label>
-
-                          <div className="flex flex-col items-start">
-                            <input
-                              name="email"
-                              type="email"
-                              className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                              autoComplete="off"
-                              required
-                              pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                              placeholder={t("common:emailPlaceholderLabel")}
-                              onChange={handleEmail}
-                            />
-                            <span className="mt-1 hidden text-sm text-red-400">
-                              {t("login:labelErrorEmail")}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* checkbox */}
-                        <label className="cursor-pointer label">
-                          <span className="label-text">am Voluntore </span>
-                          <input
-                            type="checkbox"
-                            className="checkbox checkbox-secondary"
-                            onChange={handleCheckbox}  
-                          />
+                    <>
+                      <div className="mt-4">
+                        <label
+                          htmlFor="email"
+                          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          {t("login:labelLoginEmail")}
+                          <span class="text-red-500">*</span>
                         </label>
-                      </>
+
+                        <div className="flex flex-col items-start">
+                          <input
+                            name="email"
+                            type="email"
+                            className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                            autoComplete="off"
+                            required
+                            pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                            placeholder={t("common:emailPlaceholderLabel")}
+                            onChange={handleEmail}
+                          />
+                          <span className="mt-1 hidden text-sm text-red-400">
+                            {t("login:labelErrorEmail")}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* checkbox */}
+                      <label className="cursor-pointer label">
+                        <span className="label-text">am Voluntore </span>
+                        <input
+                          type="checkbox"
+                          className="checkbox checkbox-secondary"
+                          onChange={handleCheckbox}
+                        />
+                      </label>
+                    </>
                   )}
                 </div>
               </div>
@@ -555,6 +549,11 @@ useEffect(() => {
                     {t("common:registerButtonLabel")}
                   </button>
                 </div>
+              </div>
+              <div className="mt-4 flex items-center justify-center">
+                <Link to="/donor-login" className="block ml-3 text-blue-500">
+                  have you pledged ? Login
+                </Link>
               </div>
             </form>
           </div>
