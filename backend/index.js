@@ -15,6 +15,10 @@ const HospitalRoute = require("./routes/HospitalRoute");
 const RecipientRoute = require("./routes/RecipientRoute");
 
 const physicalExamRoutes = require("./routes/PhysicalExamRoute");
+const AccidentalRoute = require("./routes/AccidentRoute");
+const BloodRoute = require("./routes/BloodRoute");
+const RequestRoute = require("./routes/RequestRoute");
+const DistributionRoute = require("./routes/DistributionRoute");
 //const RecipientRoute = require("./routes/RecipientRoute");
 dotenv.config();
 connectDB();
@@ -46,9 +50,11 @@ app.use('/cornea', corneaRoute)
 app.use("/post", postRoutes);
 app.use('/hospital', HospitalRoute)
 app.use('/recipient', RecipientRoute)
-
-// app.use('/routes', RecipientRoute)
+app.use('/accident', AccidentalRoute)
 app.use('/api', physicalExamRoutes);
+app.use('/blood', BloodRoute)
+app.use('/request', RequestRoute);
+app.use('/distribution', DistributionRoute);
 //app.use('/recipient', RecipientRoute)
 app.use(notFound);
 app.use(errorHandler);

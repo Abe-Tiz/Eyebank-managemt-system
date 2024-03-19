@@ -12,10 +12,9 @@ const RecipientSchema = new mongoose.Schema({
         type: Number,
         //required: true,
     },
-    registratioDate: {
-        type: Date,
-        default: Date.now(),
-
+    sex: {
+        type: String,
+        //required: true,
     },
     diagnosis: {
         type: String,
@@ -35,7 +34,11 @@ const RecipientSchema = new mongoose.Schema({
         type: String,
         //required: true,
     },
-})
+},
+    {
+        timestamps: true
+    }
+)
 
 const Recipient = mongoose.model("Recipient", RecipientSchema)
 module.exports = Recipient

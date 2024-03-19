@@ -63,6 +63,19 @@ const Login = () => {
                         // setRefreshed(true);
                         navigate("/surgondashboard");
                     }
+                    else if (data.user.role === "lab Techinician") {
+                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("loggedIn", true);
+                        toast({
+                            title: "Login Succeeded",
+                            status: "success",
+                            duration: 5000,
+                            isClosable: true,
+                            position: "top",
+                        });
+                        // setRefreshed(true);
+                        navigate("/labtechnicaldashboard");
+                    }
                     else if (data.user.role === "medical Director") {
                         localStorage.setItem("token", data.data);
                         localStorage.setItem("loggedIn", true);
