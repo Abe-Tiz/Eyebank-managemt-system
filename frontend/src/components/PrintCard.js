@@ -77,10 +77,10 @@ const Card = ({ id }) => {
 
     return (
         <div
-            className="container m-10 bg-white px-5 py-5 max-w-md mx-auto border-2 shadow-md"
+            className="container m-10 bg-white px-5 py-5  mx-auto border-2 shadow-md"
             id="printable"
         >
-            <div className="text-center flex flex-col md:flex-row mt-2">
+            <div className="text-center flex flex-col md:flex-row mt-2 ">
                 <div className="flex justify-center mb-4 md:mb-0">
                     <img
                         className="w-32 h-32 rounded-full m-3"
