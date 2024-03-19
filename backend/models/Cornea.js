@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const corneaSchema = new mongoose.Schema({
 
     recoveryTechnical: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     },
     position: {
         type: String, enum: ['left', 'right']
