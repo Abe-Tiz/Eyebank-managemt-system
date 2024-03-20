@@ -1,4 +1,5 @@
 const Accident = require('../models/Accident');
+const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
 const CreateAccident = asyncHandler(async (req, res) => {
     const { doctorName, errorType, category } = req.body;
@@ -9,7 +10,7 @@ const CreateAccident = asyncHandler(async (req, res) => {
             category: category
         })
         if (accident) {
-            res.status(200).json({ accident })
+            res.send({ status: "ok", data: accident })
         }
     } catch (error) {
         throw error;
