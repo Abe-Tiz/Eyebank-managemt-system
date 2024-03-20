@@ -264,57 +264,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-//   {
-//     path: "/adminDashboard",
-//     element: <AdminDashboard />,
-//     children: [
-//       {
-//         path: "",
-//         element: <Report />,
-//       },
-//       {
-//         path: "addDonor",
-//         element: <CreateDonor />,
-//       },
-//       {
-//         path: "donorList",
-//         element: <DisplayDonor />,
-//       },
-//       {
-//         path: "addUser",
-//         element: <Signup />,
-//       },
-//       {
-//         path: "userList",
-//         element: <ViewUsers />,
-//       },
-//       {
-//         path: "edit/:id",
-//         element: <Edit />,
-//       },
-//       {
-//         path: "edituser/:id",
-//         element: <EditUser />,
-//       },
-//       {
-//         path: "storeCornea",
-//         element: <StoredCornea />,
-//       },
-//       {
-//         path: "create-post",
-//         element: <CreatePost />,
-//       },
-//       {
-//         path: "edit-post/:slug",
-//         element: <EditPost />,
-//       },
-//       {
-//         path: "posts",
-//         element: <IndexPage />,
-//       },
-//     ],
-//   },
-
   {
     path: "/surgondashboard",
     element: <SurgeonDashboard />,
