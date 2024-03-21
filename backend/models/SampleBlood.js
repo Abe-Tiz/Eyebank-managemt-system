@@ -5,6 +5,11 @@ const sampleBloodSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    Donor:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Donor",
+        required: true,
+    },
     testingStatus:{
         type: String,
         required: false,

@@ -1,22 +1,47 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
-
+import { Select } from "antd";
 import { useTranslation } from "react-i18next";
+const { Option } = Select;
 export default function CreatePost() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [user, setUser] = useState("");
+  const [users, setUsers] = useState([]);
+
   const [photoUrl, setPhotoUrl] = useState(null);
   const { t } = useTranslation();
+
+  
+  
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:4000/user");
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handleUserChange = (event) => {
+    setUser(event.target.value);
+  };
+
   const handlePost = async (e) => {
     e.preventDefault();
     try {
       const postData = new FormData();
+      postData.append("author", user);
       postData.append("title", title);
       postData.append("summary", summary);
       postData.append("photo", photo);
@@ -52,6 +77,17 @@ export default function CreatePost() {
           <h1 className="text-4xl font-bold text-center py-4 text-purple-700 ">
             Create Blog
           </h1>
+          <div className="mb-6 w-full" >
+      <select className="form-input w-full" value={user} onChange={handleUserChange}>
+        <option value="">Select a user</option>
+        {users.map((user) => (
+          <option key={user._id} value={user._id}>
+            {user.name}
+          </option>
+        ))}
+      </select>
+   
+    </div>
 
           <div className="mb-6">
             <input

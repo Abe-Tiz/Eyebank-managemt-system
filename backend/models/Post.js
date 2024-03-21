@@ -8,6 +8,7 @@ const PostSchema = new Schema({
     ref: "User",
     required: false,
   },
+  
   title: {
     type: String,
     required: true,
