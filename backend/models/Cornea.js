@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
 const corneaSchema = new mongoose.Schema({
-
+    dateOfRecovery: {
+        type: Date,
+        default: Date.now
+    },
     recoveryTechnical: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: "User",
     },
     position: {
         type: String, enum: ['left', 'right']

@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 const CollectCornea = () => {
 
-    //const [dateOfRecovery, setDateOfRecovery] = useState('');
+    const dateOfRecovery = Date.now();
     const [recoveryTechnical, setRecoveryTechnical] = useState('');
     const [position, setPosition] = useState('');
     const [eyeLid, setEyeLid] = useState('');
@@ -25,7 +25,7 @@ const CollectCornea = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
-
+            dateOfRecovery,
             recoveryTechnical,
             position,
             eyeLid,
