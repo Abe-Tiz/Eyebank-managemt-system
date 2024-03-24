@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 const PhysicalExamView = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
@@ -24,9 +24,12 @@ const PhysicalExamView = () => {
 
   const deletePhysicalExam = async (examId) => {
     try {
-      const response = await fetch(`http://localhost:4001/api/delete/${examId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:4000/api/delete/${examId}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
         fetchPhysicalExams();
         alert("Physical exam deleted successfully.");
@@ -52,22 +55,25 @@ const PhysicalExamView = () => {
     setEditedSex("");
   };
   const navigateToDetails = (examId) => {
-    navigate('/getOne/:id', { state: { examId: examId } });
+    navigate(`/getOne/${examId}`);
   };
 
   const saveEdit = async (examId) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/update/${examId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          height: editedHeight,
-          weight: editedWeight,
-          sex: editedSex,
-        }),
-      });
+      const response = await fetch(
+        `http://localhost:4000/api/update/${examId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            height: editedHeight,
+            weight: editedWeight,
+            sex: editedSex,
+          }),
+        }
+      );
       if (response.ok) {
         fetchPhysicalExams();
         setEditExamId(null);
@@ -125,19 +131,19 @@ const PhysicalExamView = () => {
                       />
                     </td>
                     <td className="border px-4 py-2">
-      <button
-        className="bg-green-500 text-white font-bold py-2 px-4 rounded mr-2"
-        onClick={() => saveEdit(exam._id)}
-      >
-        Save
-      </button>
-      <button
-        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-        onClick={cancelEdit}
-      >
-        Cancel
-      </button>
-    </td>
+                    <button
+  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+  onClick={() => saveEdit(exam._id)}
+>
+  Save
+</button>
+                      <button
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={cancelEdit}
+                      >
+                        Cancel
+                      </button>
+                    </td>
                   </>
                 ) : (
                   <>
@@ -154,13 +160,22 @@ const PhysicalExamView = () => {
                       <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         onClick={() =>
-                          startEdit(exam._id, exam.height, exam.weight, exam.sex)
+                          startEdit(
+                            exam._id,
+                            exam.height,
+                            exam.weight,
+                            exam.sex
+                          )
                         }
                       >
                         Edit
-                      </button >
-                      <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
- onClick={() => navigateToDetails(exam._id)}>Go to Details</button>
+                      </button>
+                      <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        onClick={() => navigateToDetails(exam._id)}
+                      >
+                        Go to Details
+                      </button>
                     </td>
                   </>
                 )}

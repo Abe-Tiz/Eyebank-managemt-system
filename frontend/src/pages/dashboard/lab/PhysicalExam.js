@@ -117,7 +117,7 @@ const PhysicalExam = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-3xl mx-auto p-4 mt-10 bg-white rounded shadow md:p-6 dark:bg-gray-800 dark:border-gray-700"
+      className="w-full max-w-3xl mx-auto p-4 mt-10 bg-white rounded shadow md:p-6 dark:bg-gray-800 dark:border-gray-700 z-auto"
     >
       <div className="card mb-6 shadow">
         <h2 className="text-3xl text-center font-bold mb-4 font-sans bg-blue-500 text-white rounded p-2 h-14">
