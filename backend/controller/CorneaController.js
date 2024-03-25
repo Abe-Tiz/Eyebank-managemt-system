@@ -11,6 +11,7 @@ const createCornea = async (req, res) => {
         corneaStatus: req.body.corneaStatus,
         clarity: req.body.clarity,
         lens: req.body.lens,
+        expirationDatee: req.body.expirationDatee,
         evaluation: {
             epitheliam: req.body.epitheliam,
             dateofEvaluation: req.body.dateofEvaluation,

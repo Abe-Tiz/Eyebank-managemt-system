@@ -18,6 +18,7 @@ const ViewCornea = () => {
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
     const [corneas, setCorneas] = useState([]);
+
     function formatTimestamp(timestamp) {
         const options = {
             year: 'numeric',
@@ -27,12 +28,44 @@ const ViewCornea = () => {
 
         return new Date(timestamp).toLocaleString('en-US', options);
     }
+    function formatExiryDate(expiryDate) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+        return new Date(expiryDate).toLocaleString('en-US', options);
+    }
+
+    // const [time, setTime] = useState(new Date());
+
+    // useEffect(() => {
+    //     const intervalID = setInterval(() => {
+    //         setCurrentTime(new Date());
+    //     }, 1000);
+
+    //     return () => {
+    //         clearInterval(intervalID);
+    //     };
+    // }, []);
+    // const calculateRemainingTime = () => {
+    //     if (expirationDate) {
+    //         const remainingTime = expirationDate - currentTime;
+    //         const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+    //         const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //         const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+    //         const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    //         return `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    //     }
+    //     return "";
+    // };
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get("http://localhost:4000/cornea/read");
                 const data = response.data;
                 setCorneas(data);
+                // setExpirationDate(new Date(data.expirationDate));
             } catch (error) {
                 console.error(error);
             }
@@ -60,6 +93,7 @@ const ViewCornea = () => {
                 <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
                     List of collected cornea
                 </Text>
+
                 <Table size='sm'>
                     <Thead>
                         <Tr>
@@ -73,6 +107,7 @@ const ViewCornea = () => {
                             <Th>Size</Th>
                             <Th>Eye Lid</Th>
                             <Th>Iris Color</Th>
+                            <Th>Exiption Date</Th>
                             <Th colSpan={3}>Operations</Th>
                         </Tr>
                     </Thead>
@@ -90,11 +125,12 @@ const ViewCornea = () => {
                                 <Td>{cornea.size}</Td>
                                 <Td>{cornea.eyeLid}</Td>
                                 <Td>{cornea.irisColor}</Td>
+                                <Td>{formatExiryDate(cornea.expirationDate)}</Td>
                                 <div className='text-center'>
-                                    <Td>
+                                    <Td className='text-center ml-3 text-blue-600'>
                                         <Link to={`/labtechnicaldashboard/editcornea/${cornea._id}`}><EditIcon /></Link>
                                     </Td>{" "}
-                                    <Td>
+                                    <Td className='text-center ml-3 text-red-600'>
                                         <button onClick={() => deleteCornea(cornea._id)}><DeleteIcon /></button>
                                     </Td>{" "}
 

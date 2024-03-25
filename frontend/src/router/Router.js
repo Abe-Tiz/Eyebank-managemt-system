@@ -149,8 +149,8 @@ const router = createBrowserRouter([
                 element: <ScreenDonor />,
             },
             {
-                path: "recordMedicalParticular",
-                element: <RecordMedicalParticular />,
+                path: "editcornea/:id",
+                element: <EditCornea />,
             },
             {
                 path: "discardCornea",

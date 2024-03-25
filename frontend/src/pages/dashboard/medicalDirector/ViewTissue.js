@@ -92,17 +92,17 @@ const ViewTissue = () => {
                                 <Td>{cornea.irisColor}</Td>
                                 <div className='text-center'>
                                     {
-                                        cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
+                                        cornea.evaluation && cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
                                             <Td>
                                                 <Link to={`/medicaldirectordashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link>
                                             </Td>
-
                                         ) : (
-                                            <Td style={{ color: cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>
-                                                {cornea.evaluation.approval}
+                                            <Td style={{ color: cornea.evaluation && cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>
+                                                {cornea.evaluation && cornea.evaluation.approval}
                                             </Td>
                                         )
                                     }
+
                                 </div>
                             </Tr>
                         ))}

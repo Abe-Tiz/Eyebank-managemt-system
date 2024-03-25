@@ -8,24 +8,38 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 const CollectCornea = () => {
 
-    //const [dateOfRecovery, setDateOfRecovery] = useState('');
-    const [recoveryTechnical, setRecoveryTechnical] = useState('');
+    const dateOfRecovery = Date.now();
     const [position, setPosition] = useState('');
+    const [lotNo, setLotNo] = useState('');
     const [eyeLid, setEyeLid] = useState('');
     const [size, setSize] = useState('');
     const [irisColor, setIrisColor] = useState('');
     const [corneaStatus, setCorneaStatus] = useState('');
     const [clarity, setClarity] = useState('');
     const [lens, setLens] = useState('');
+    const [epitheliam, setEpitheliam] = useState('');
+    const [stroma, setStroma] = useState('');
+    const [endothelium, setEndothelium] = useState('');
+    const [approval, setApproval] = useState('');
+    const [evaluationComment, setEvaluationComment] = useState('');
+    const [suiatablity, setSuiatablity] = useState('');
+    const [reason, setReason] = useState('');
+    const [evaluater, setEvaluater] = useState('');
     //for recovery
+
+
+    const [state, setState] = useState({
+        name: ""
+    })
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const data = {
 
+        const data = {
+            dateOfRecovery,
             recoveryTechnical,
             position,
             eyeLid,
@@ -33,11 +47,24 @@ const CollectCornea = () => {
             irisColor,
             corneaStatus,
             clarity,
+            // expirationDate,
             lens,
+            epitheliam,
+            stroma,
+            endothelium,
+            approval,
+            evaluater,
+            evaluationComment,
+            suiatablity,
+            reason
         }
         console.log(data);
+
         try {
-            const response = await axios.post('http://localhost:4000/cornea/create', data);
+            const response = await axios.post('http://localhost:4000/cornea/create',
+
+                data
+            );
             console.log(response.data);
             toast({
                 title: "Data Registerd successfully",
@@ -54,27 +81,53 @@ const CollectCornea = () => {
 
     };
 
+    useEffect(() => {
+        fetch("http://127.0.0.1:4000/user/userLogedin", {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem("token"),
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data, "user logged in");
+                setState((prev) => ({
+                    ...prev,
+                    name: data.data.name,
+                }));
+
+                if (data.data === "token expired") {
+                    localStorage.clear();
+                    navigate("/login");
+                }
+            });
+    }, [navigate]);
+
+    const recoveryTechnical = state.name
     const handlePosition = (event) => {
         setPosition(event.target.value);
     };
     return (
         <div>
-            <h2 className="" style={{ textAlign: 'center', background: "#6af" }}>Welcome to Cornea Recovery Form</h2>
+            <h2 className="text-xl" style={{ textAlign: 'center', background: "#6af" }}>Welcome to Cornea Recovery Form</h2>
             <form onSubmit={handleFormSubmit}>
                 <div className="grid grid-cols-2">
 
                     <label>
-                        Recovery Technical:
-                        <select
+                        Lot No:
+                        <input
+                            type="text"
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={recoveryTechnical}
-                            onChange={(e) => setRecoveryTechnical(e.target.value)}
+                            value={lotNo}
+                            onChange={(e) => setLotNo(e.target.value)}
                         >
-                            <option value="">Select Technical</option>
-                            <option value="Technical 1">Technical 1</option>
-                            <option value="Technical 2">Technical 2</option>
-                            <option value="Technical 3">Technical 3</option>
-                        </select>
+                        </input>
                     </label>
                     <label>
                         Position:
@@ -164,7 +217,7 @@ const CollectCornea = () => {
                             value={lens}
                             onChange={(e) => setLens(e.target.value)}
                         >
-                            <option value="">Select Cornea Evaluation</option>
+                            <option value="">Select lens</option>
                             <option value="lens 1">lens 1</option>
                             <option value="lens 2">lens 2</option>
                             <option value="lens 3">lens 3</option>
