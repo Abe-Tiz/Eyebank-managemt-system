@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
-
+var currentDate = new Date();
+var expiration = new Date(currentDate.getTime() + (14 * 24 * 60 * 60 * 1000));
+var expirationDate = expiration.toISOString();
 const corneaSchema = new mongoose.Schema({
+    lotNo: {
+        type: String
+    },
     dateOfRecovery: {
         type: Date,
         default: Date.now
@@ -9,6 +14,7 @@ const corneaSchema = new mongoose.Schema({
         type: String,
         // type: mongoose.Schema.Types.ObjectId,
         // ref: "User",
+
     },
     position: {
         type: String, enum: ['left', 'right']
@@ -32,6 +38,12 @@ const corneaSchema = new mongoose.Schema({
     lens: {
         type: String,
     },
+
+    expirationDate: {
+        type: Date,
+        default: expirationDate
+
+    },
     evaluation: {
         evaluationDate: {
             type: Date,
@@ -45,7 +57,6 @@ const corneaSchema = new mongoose.Schema({
         endothelium: {
             type: String,
         },
-
         evaluater: {
             type: String
         },
@@ -54,23 +65,23 @@ const corneaSchema = new mongoose.Schema({
         },
         approval: {
             type: String,
-            enum: ['yes', 'no']
+            // enum: ['yes', 'no']
         },
         suiatablity: {
             type: String,
-            enum: ['PK', 'EK', 'ALK', 'KLA', 'K-Pro', 'Therapeutic']
+            // enum: ['PK', 'EK', 'ALK', 'KLA', 'K-Pro', 'Therapeutic']
         },
         reason: {
             type: String,
-            enum: ['epitheliam', 'stroma', 'endothelium', 'descement', 'other']
+            // enum: ['epitheliam', 'stroma', 'endothelium', 'descement', 'other']
         }
 
     }
 
 },
 
+    { timestamps: true },
 
-    { timestamps: true }
 );
 const Cornea = mongoose.model('Cornea', corneaSchema);
 module.exports = Cornea
