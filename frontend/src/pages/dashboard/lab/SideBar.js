@@ -22,7 +22,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                     <div className="flex flex-col items-center">
                         <Link
                             className="text-white p-2 hover:bg-gray-800 rounded"
-                            to="/labtechnicaldashboard/collectCornea"
+                            to="/labtechnicaldashboard"
                             data-tooltip-id="my-dashboard"
                             data-tooltip-content="Collect Cornea"
                         >
