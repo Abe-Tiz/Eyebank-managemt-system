@@ -19,6 +19,7 @@ import EditUser from './../pages/auth/EditUser';
 import StoredCornea from './../pages/corneas/StoredCornea';
 import ViewCornea from '../components/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
+import ViewDistributed from '../pages/dashboard/lab/ViewDistributed';
 import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
 import ListOfPlege from '../pages/dashboard/lab/ListOfPlege';
@@ -166,6 +167,10 @@ const router = createBrowserRouter([
             {
                 path: "distributeCornea",
                 element: <DistributeCornea />,
+            },
+            {
+                path: "viewDistributed",
+                element: <ViewDistributed />,
             },
             {
                 path: "viewCornea",

@@ -8,13 +8,14 @@ const AddRecipient = () => {
     const [recipinentname, setRecipientname] = useState("");
     const [age, setAge] = useState("");
     const [diagnosis, setDiagnosis] = useState("");
+    const [sex, setSex] = useState("");
     const [surgeons, setSurgeons] = useState([]);
     const [hospitals, setHospitals] = useState([]);
     const [surgeryType, setSurgeryType] = useState("");
     const [address, setAddress] = useState("");
     const [surgeonName, setSurgeonName] = useState("");
     const [hospital, setHospital] = useState("");
-
+    const [phone, setPhone] = useState("");
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
@@ -104,6 +105,30 @@ const AddRecipient = () => {
                         />
                     </label>
                     <label>
+                        Sex:
+                        <div>
+                            <input
+                                type="radio"
+                                id="sex-male"
+                                value="Male"
+                                checked={sex === "Male"}
+                                onChange={(e) => setSex(e.target.value)}
+                            />
+                            <label htmlFor="sex-male">Male</label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                id="sex-female"
+                                value="Female"
+                                checked={sex === "Female"}
+                                onChange={(e) => setSex(e.target.value)}
+                            />
+                            <label htmlFor="sex-female">Female</label>
+                        </div>
+                        {/* Add more sex options as needed */}
+                    </label>
+                    {/* <label>
                         Surgeon:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
@@ -116,28 +141,17 @@ const AddRecipient = () => {
                                 </option>
                             ))}
                         </select>
-                    </label>
+                    </label> */}
                     <label>
-                        Diagnosis:
+                        Phone:
                         <input
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={diagnosis}
-                            onChange={(e) => setDiagnosis(e.target.value)}
+                            type="number"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                         />
                     </label>
-                    <label>
-                        Surgery Type:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={surgeryType}
-                            onChange={(e) => setSurgeryType(e.target.value)}
-                        >
-                            <option value="">Select surgeon type</option>
-                            <option value="hospital 1">hospital 1</option>
-                            <option value="hospital 2">hospital 2</option>
-                            <option value="hospital 3">hospital 3</option>
-                        </select>
-                    </label>
+
                     <label>
                         Hospitals:
                         <select
@@ -172,7 +186,7 @@ const AddRecipient = () => {
                         type="submit"
                         className="w-1/3 mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded"
                     >
-                        Register Cornea
+                        Add Recipient
                     </button>
                 </div>
             </form>

@@ -16,29 +16,62 @@ const RecipientSchema = new mongoose.Schema({
         type: String,
         //required: true,
     },
-    diagnosis: {
-        type: String,
-        //required: true,
-    },
+
     phone: {
         type: String,
         //required: true,
     },
-    hospital: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Hospital",
-        //required: true,
-    },
+
     registerDate: {
         type: Date,
         default: Date.now
     },
     ocularPost: {
+        lotNo: {
+            type: String
+        },
+        surgeonName: {
+            type: String
+        },
+        dateOfSurgry: {
+            type: Date
+
+        },
+        surgeryType: {
+            type: String
+        },
+        hospital: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Hospital",
+            //required: true,
+        },
+        ocularOperativeEye: {
+            type: String
+        },
+        ocularNonOperativeEye: {
+            type: String
+        }
 
     },
     adverseReaction: {
 
-    }
+        dateOfDiagnosis: {
+            type: Date
+        },
+        advererReaction: {
+            type: String
+        },
+        probablityCase: {
+            type: String
+        },
+        donorTissue: {
+            type: String
+        },
+        patient: {
+            type: String
+        }
+
+    },
 },
     {
         timestamps: true
