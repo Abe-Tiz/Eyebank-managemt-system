@@ -21,6 +21,7 @@ import ViewCornea from '../components/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
+import ListOfPlege from '../pages/dashboard/lab/ListOfPlege';
 //import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
 import EditCornea from '../pages/dashboard/lab/EditCornea';
 import RecordMedicalParticular from '../pages/dashboard/lab/RecordMedicalParticular';
@@ -186,6 +187,10 @@ const router = createBrowserRouter([
                 path: "posts",
                 element: <IndexPage />,
             },
+            {
+                path: "viewDonor",
+                element: <ListOfPlege />,
+            },
 
         ],
     },
@@ -298,6 +303,7 @@ const router = createBrowserRouter([
                 path: "storeCornea",
                 element: <StoredCornea />,
             },
+
 
         ],
     },

@@ -44,7 +44,14 @@ const ViewTissue = () => {
         setIsButtonClicked(true);
 
     };
-
+    function formatExiryDate(expiryDate) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+        return new Date(expiryDate).toLocaleString('en-US', options);
+    }
     const deleteCornea = async (id) => {
         try {
             await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
@@ -73,6 +80,7 @@ const ViewTissue = () => {
                             <Th>Size</Th>
                             <Th>Eye Lid</Th>
                             <Th>Iris Color</Th>
+                            <Th>Expiry Date</Th>
                             <Th colSpan={3}>Operations</Th>
                         </Tr>
                     </Thead>
@@ -90,6 +98,7 @@ const ViewTissue = () => {
                                 <Td>{cornea.size}</Td>
                                 <Td>{cornea.eyeLid}</Td>
                                 <Td>{cornea.irisColor}</Td>
+                                <Td>{formatExiryDate(cornea.expirationDate)}</Td>
                                 <div className='text-center'>
                                     {
                                         cornea.evaluation && cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
