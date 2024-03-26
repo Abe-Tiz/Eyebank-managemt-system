@@ -20,9 +20,8 @@ const RecipientSchema = new mongoose.Schema({
         type: String,
         //required: true,
     },
-    surgeonName: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+    phone: {
+        type: String,
         //required: true,
     },
     hospital: {
@@ -30,10 +29,16 @@ const RecipientSchema = new mongoose.Schema({
         ref: "Hospital",
         //required: true,
     },
-    surgeryType: {
-        type: String,
-        //required: true,
+    registerDate: {
+        type: Date,
+        default: Date.now
     },
+    ocularPost: {
+
+    },
+    adverseReaction: {
+
+    }
 },
     {
         timestamps: true

@@ -35,10 +35,8 @@ const ViewTissue = () => {
             month: 'short',
             day: 'numeric',
         };
-
         return new Date(timestamp).toLocaleString('en-US', options);
     }
-
     useEffect(() => {
         const fetchData = async () => {
             try {

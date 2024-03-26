@@ -21,6 +21,7 @@ import ViewCornea from '../components/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
+import ListOfPlege from '../pages/dashboard/lab/ListOfPlege';
 //import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
 import EditCornea from '../pages/dashboard/lab/EditCornea';
 import RecordMedicalParticular from '../pages/dashboard/lab/RecordMedicalParticular';
@@ -178,6 +179,21 @@ const router = createBrowserRouter([
                 path: "getAll",
                 element: <PhysicalExamView />,
             },
+            {
+                path: "getOne/:id",
+                element: <ViewDetails />,
+                path: "edit-post/:slug",
+                element: <EditPost />,
+            },
+            {
+                path: "posts",
+                element: <IndexPage />,
+            },
+            {
+                path: "viewDonor",
+                element: <ListOfPlege />,
+            },
+
         ],
     },
     {
@@ -262,6 +278,48 @@ const router = createBrowserRouter([
                 path: "editevaluation/:id",
                 element: <EditEvaluation />,
             },
+
+
+        ],
+    },
+    {
+        path: "/adminDashboard",
+        element: <AdminDashboard />,
+        children: [
+            {
+                path: "",
+                element: <Report />,
+            },
+            {
+                path: "addDonor",
+                element: <CreateDonor />,
+            },
+            {
+                path: "donorList",
+                element: <DisplayDonor />,
+            },
+            {
+                path: "addUser",
+                element: <Signup />,
+            },
+            {
+                path: "userList",
+                element: <ViewUsers />,
+            },
+            {
+                path: "edit/:id",
+                element: <Edit />,
+            },
+            {
+                path: "edituser/:id",
+                element: <EditUser />,
+            },
+            {
+                path: "storeCornea",
+                element: <StoredCornea />,
+            },
+
+
         ],
     },
     //   {
