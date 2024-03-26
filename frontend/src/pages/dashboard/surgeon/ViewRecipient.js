@@ -71,7 +71,7 @@ const ViewTissue = () => {
                             <Th>Sex</Th>
                             <Th>Diagnosis</Th>
                             <Th>Surgery Type</Th>
-                            <Th colSpan={2}>Operations</Th>
+                            <Th colSpan={4}>Operations</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -86,6 +86,12 @@ const ViewTissue = () => {
                                 <Td>{recipent.sex}</Td>
                                 <Td>{recipent.diagnosis}</Td>
                                 <Td>{recipent.surgeryType}</Td>
+                                <Td>
+                                    <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>Ocular Post</Link>
+                                </Td>
+                                <Td>
+                                    <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>Adverse</Link>
+                                </Td>
                                 <Td>
                                     <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>Edit</Link>
                                 </Td>

@@ -20,14 +20,14 @@ const getRecipients = async (req, res) => {
     // const hospital = await HospitalModel.findById(req.hospital)
     // res.send(hospital);
     const recipient = await RecipientModel.find()
-        .populate({
-            path: 'surgeonName',
-            select: 'name'
-        })
-        .populate({
-            path: 'hospital',
-            select: 'hospitalName address'
-        })
+    // .populate({
+    //     path: 'nameOfSurgeon',
+    //     select: 'name'
+    // })
+    // .populate({
+    //     path: 'hospital',
+    //     select: 'hospitalName address'
+    // })
     res.send(recipient);
 }
 const getRecipient = async (req, res) => {
