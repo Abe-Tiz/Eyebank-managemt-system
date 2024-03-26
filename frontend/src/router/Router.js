@@ -171,13 +171,17 @@ const router = createBrowserRouter([
         element: <ViewCornea />,
       },
       {
-        path: "createExams",
+        path: "create",
         element: <PhysicalExam />,
       },
       {
         path: "getAll",
         element: <PhysicalExamView />,
       },
+      {
+        path: "/getOne/:id",
+        element: <ViewDetails />,
+      }
     ],
   },
   {

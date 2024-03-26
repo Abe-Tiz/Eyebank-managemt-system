@@ -126,7 +126,7 @@ const PhysicalExam = () => {
 
         <div className="mb-4 ml-48">
           <label className="block mb-2 font-bold" htmlFor="height">
-           Height:
+            Height:
           </label>
           <input
             type="number"
@@ -291,7 +291,6 @@ const PhysicalExam = () => {
           className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
         >
           <h1>Submit</h1>
-         
         </button>
       </div>
     </form>

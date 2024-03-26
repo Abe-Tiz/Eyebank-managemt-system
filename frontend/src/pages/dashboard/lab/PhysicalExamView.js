@@ -60,20 +60,18 @@ const PhysicalExamView = () => {
 
   const saveEdit = async (examId) => {
     try {
-      const response = await fetch(
-        `http://localhost:4000/api/update/${examId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            height: editedHeight,
-            weight: editedWeight,
-            sex: editedSex,
-          }),
-        }
-      );
+      const response = await fetch(`http://localhost:4000/api/update/${examId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          height: editedHeight,
+          weight: editedWeight,
+          sex: editedSex,
+        }),
+      });
+  
       if (response.ok) {
         fetchPhysicalExams();
         setEditExamId(null);
@@ -81,11 +79,15 @@ const PhysicalExamView = () => {
         setEditedWeight("");
         setEditedSex("");
         alert("Physical exam updated successfully.");
+      } else if (response.status === 400) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message);
       } else {
-        throw new Error("Failed to update physical exam.");
+        throw new Error("Failed to update physical exam. Server returned status: " + response.status);
       }
     } catch (error) {
       console.error("Error updating physical exam:", error);
+      alert("An error occurred while updating the physical exam. Please try again.");
     }
   };
 
@@ -131,12 +133,12 @@ const PhysicalExamView = () => {
                       />
                     </td>
                     <td className="border px-4 py-2">
-                    <button
-  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
-  onClick={() => saveEdit(exam._id)}
->
-  Save
-</button>
+                      <button
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => saveEdit(exam._id)}
+                      >
+                        Save
+                      </button>
                       <button
                         className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                         onClick={cancelEdit}
