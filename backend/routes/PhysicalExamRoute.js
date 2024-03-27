@@ -8,19 +8,10 @@ const {
     deletePhysicalExamById
 } = require('../controller/physicalExamController');
 
-// Get all physical exams
-router.get('/getAll',getAllPhysicalExams);
-
-// Create a new physical exam
+router.get('/getAll', getAllPhysicalExams);
 router.post('/create', createPhysicalExam);
-
-// Get a specific physical exam by ID
 router.get('/getOne/:id', getPhysicalExamById);
-
-// Update a specific physical exam by ID
-router.put('/update/:id',updatePhysicalExamById);
-
-// Delete a specific physical exam by ID
+router.put('/update/:id', updatePhysicalExamById);
 router.delete('/delete/:id', deletePhysicalExamById);
 
 module.exports = router;

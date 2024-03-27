@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const ViewDetails = () => {
+const ViewDetails = ({ id }) => {
   const [physicalExam, setPhysicalExam] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -8,7 +8,7 @@ const ViewDetails = () => {
   useEffect(() => {
     const fetchPhysicalExam = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/getOne/id'); // Replace 123 with the actual id of the physical exam
+        const response = await fetch(`http://localhost:4000/api/getOne/${id}`);
         const data = await response.json();
         setPhysicalExam(data);
         setLoading(false);
@@ -19,7 +19,7 @@ const ViewDetails = () => {
     };
 
     fetchPhysicalExam();
-  }, []);
+  }, [id]);
 
   if (loading) {
     return <div>Loading...</div>;

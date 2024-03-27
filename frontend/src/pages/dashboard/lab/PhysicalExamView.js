@@ -55,10 +55,11 @@ const PhysicalExamView = () => {
     setEditedSex("");
   };
   const navigateToDetails = (examId) => {
-    navigate(`/getOne/${examId}`);
+    
+    navigate(`/labtechnicaldashboard/getOne/${examId}`);
   };
 
-  const saveEdit = async (examId) => {
+  const saveEdit = async (examId, editedHeight, editedWeight, editedSex) => {
     try {
       const response = await fetch(`http://localhost:4000/api/update/${examId}`, {
         method: "PUT",
@@ -79,18 +80,15 @@ const PhysicalExamView = () => {
         setEditedWeight("");
         setEditedSex("");
         alert("Physical exam updated successfully.");
-      } else if (response.status === 400) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.message);
       } else {
-        throw new Error("Failed to update physical exam. Server returned status: " + response.status);
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message || "Failed to update physical exam.");
       }
     } catch (error) {
       console.error("Error updating physical exam:", error);
       alert("An error occurred while updating the physical exam. Please try again.");
     }
   };
-
   return (
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold mb-4">Physical Exams</h2>

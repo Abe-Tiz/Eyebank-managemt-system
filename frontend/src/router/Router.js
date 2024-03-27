@@ -172,7 +172,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "create",
+        path: "createExams",
         element: <PhysicalExam />,
       },
       {
@@ -180,8 +180,10 @@ const router = createBrowserRouter([
         element: <PhysicalExamView />,
       },
       {
-        path: "/getOne/:id",
-        element: <ViewDetails />,
+        
+          path: "/labtechnicaldashboard/getOne/:id",
+          element: <ViewDetails />,
+        
       }
       
     ],
