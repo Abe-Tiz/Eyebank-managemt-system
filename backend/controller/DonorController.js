@@ -7,17 +7,44 @@ const dotenv = require("dotenv");
 dotenv.config();
 const twilio = require("twilio");
 
-//!  recovery code twilio sms code
-// 6X6Y5MMXWPTFW1DAQHF1J8EB
+const express = require("express");
+const app = express();
+const http = require("http");
+const socketIo = require("socket.io");
+const server = http.createServer(app);
+const io = socketIo(server);
 
+let newDonorCount = 0;
+
+const NotifyNewDonors = async () => {
+  try {
+    const changeStream = Donor.watch();
+
+    changeStream.on("change", (data) => {
+      console.log(
+        "data : ",
+        data,
+        `operation Type : ${data.operationType}`,
+        `time: ${data.wallTime}`
+      );
+
+      if (data.operationType === "insert") {
+        console.log("Inserted Document:", data.fullDocument);
+        newDonorCount++; // Increment the new donor count
+        io.emit("newDonor", { count: newDonorCount }); // Emit socket event with the count
+      }
+    });
+  } catch (error) {
+    console.log(`error : ${error}`);
+  }
+};
 
 //! Initialize Twilio client
 const accountSid = process.env.ACCOUNT_SID;;
 const authToken = process.env.AUTHTOKEN;
 const twilioPhoneNumber = process.env.TWILIO_PHONENUMBER;
 const client = twilio(accountSid, authToken);
-
-
+ 
 //! create donor
 const createDonor = asyncHandler(async (req, res) => {
     const {
@@ -46,38 +73,38 @@ const createDonor = asyncHandler(async (req, res) => {
                     console.log(donor, "donor already exist.");
                     res.status(400).json({ message: "donor already exist." });
                 } else {
-                    const newDonor = new Donor({
-                        name,
-                        email,
-                        age,
-                        sex,
-                        city,
-                        subcity,
-                        kebele,
-                        HNumber,
-                        mobile,
-                        isVolunter,
-                    });
+                  const newDonor = new Donor({
+                    name,
+                    email,
+                    age,
+                    sex,
+                    city,
+                    subcity,
+                    kebele,
+                    HNumber,
+                    mobile,
+                    isVolunter,
+                  });
 
-                    //generate and store the verification token
-                    newDonor.verificationToken = crypto
-                        .randomBytes(20)
-                        .toString("hex");
-                    const result = newDonor.save();
-                    // sendverificationEmail(
-                    //   newDonor.email,
-                    //   newDonor.verificationToken
-                    // );
+                  //generate and store the verification token
+                  newDonor.verificationToken = crypto
+                    .randomBytes(20)
+                    .toString("hex");
 
-                    console.log("Registeriation Successfull", result);
-                    res.status(200).json({
-                        message: "Registeriation Successfull",
-                        result: newDonor,
-                    });
+                  const result = newDonor.save();
+                 
+                    // NotifyNewDonors();
+                    
+                  console.log("new donor notify:",result);
+                  console.log("Registeriation Successfull", result);
+                  res.status(200).json({
+                    message: "Registeriation Successfull",
+                    result: newDonor,
+                  });
                 }
             })
     } catch (error) {
-        res.status(500).json({ error: "Internal se  rver error" });
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 
@@ -340,10 +367,13 @@ const getDonorByEmail = asyncHandler(async (req, res) => {
 const updateDonor = asyncHandler(async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, email, age, sex, city, subcity, kebele, HNumber, mobile } = req.body;
+        const { name, email, age, sex, city, subcity, kebele, HNumber, mobile } =
+        req.body;
 
         // Assuming you have a Donor model
-        const newDonor = await Donor.findByIdAndUpdate(id, {
+        const updatedDonor = await Donor.findByIdAndUpdate(
+        id,
+        {
             name: name,
             email: email,
             age: age,
@@ -354,15 +384,21 @@ const updateDonor = asyncHandler(async (req, res) => {
             HNumber: HNumber,
             mobile: mobile,
         },
-            { new: true }
+        { new: true }
         );
-        const result = newDonor.save();
 
-        res.status(200).json({ message: "Donor Updated Successfully.", result: newDonor });
+        NotifyNewDonors();
+        res
+          .status(200)
+          .json({
+            message: "Donor Updated Successfully.",
+            result: updatedDonor
+          });
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
 
 //! delete donor
 const deleteDonor = asyncHandler(async (req, res) => {

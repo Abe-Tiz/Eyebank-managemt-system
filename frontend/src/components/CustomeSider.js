@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { IoCreate } from "react-icons/io5";
 import { MdVisibility } from "react-icons/md";
+import DynamicIcon from "./DynamicIcon";
 
 const CustomSidebar = ({ collapsed, name, image }) => {
   const { t } = useTranslation();
@@ -30,7 +31,12 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               data-tooltip-content="Dashboard"
             >
               {/* <BellOutlined className="text-2xl" /> */}
-              <MdSpaceDashboard className="text-2xl" />
+              {/* <MdSpaceDashboard className="text-2xl" /> */}
+              <DynamicIcon
+                library="md"
+                iconName="MdSpaceDashboard"
+                className="text-2xl"
+              />
             </Link>
             <Link
               className="text-white p-2 hover:bg-gray-800 rounded"
@@ -39,7 +45,12 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               data-tooltip-content="Add Donor"
             >
               {/* <IoIosPersonAdd className="text-2xl" /> */}
-              <MdOutlineGroupAdd className="text-2xl" />
+              {/* <MdOutlineGroupAdd className="text-2xl" /> */}
+              <DynamicIcon
+                library="md"
+                iconName="MdOutlineGroupAdd"
+                className="text-2xl"
+              />
             </Link>
             <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -115,7 +126,11 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 data-tooltip-id="my-dashboard"
                 data-tooltip-content="Dashboard"
               >
-                <MdSpaceDashboard className="text-2xl" />
+                <DynamicIcon
+                  library="md"
+                  iconName="MdSpaceDashboard"
+                  className="text-2xl"
+                />
                 <span className="ml-2">{t("common:dashboardLabel")}</span>
               </Link>
               <Link
@@ -126,7 +141,11 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 data-tooltip-id="add-donor"
                 data-tooltip-content="Add Donor"
               >
-                <MdOutlineGroupAdd className="text-2xl" />
+                <DynamicIcon
+                  library="md"
+                  iconName="MdOutlineGroupAdd"
+                  className="text-2xl"
+                />
                 <span className="ml-2">{t("common:addDonorLabel")}</span>
               </Link>
               <Link

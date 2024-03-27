@@ -7,13 +7,13 @@ const {
     getDonorById, 
     deleteDonor, 
     getDonorByEmail, 
-    // getDonorCount 
     activateDonor,
     verifyCode,
     loginDonor,
     getloggedInDonor,
     forgotCode,
-    resetCode
+    resetCode,
+  
 } = require("../controller/DonorController");
 
 const router = express.Router();
@@ -31,6 +31,6 @@ router.post("/donorLogedin", getloggedInDonor);
 router.post('/displayByEmail', getDonorByEmail);
 router.post("/forgot_code", forgotCode);
 router.post("/reset-code/:id/:token", resetCode); 
-// router.get('/countDonor', getDonorCount);
+ 
  
 module.exports = router;
