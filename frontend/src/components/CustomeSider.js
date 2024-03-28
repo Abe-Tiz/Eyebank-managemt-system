@@ -58,8 +58,11 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               data-tooltip-id="donor-list"
               data-tooltip-content="Donor List"
             >
-              {/* <SettingOutlined className="text-2xl" /> */}
-              <PiUserListBold className="text-2xl" />
+              <DynamicIcon
+                library="pi"
+                iconName="PiUserListBold"
+                className="text-2xl"
+              />
             </Link>
             <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -67,8 +70,11 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               data-tooltip-id="add-user"
               data-tooltip-content="Add User"
             >
-              {/* <SettingOutlined className="text-2xl" /> */}
-              <IoIosPersonAdd className="text-2xl" />
+              <DynamicIcon
+                library="io"
+                iconName="IoIosPersonAdd"
+                className="text-2xl"
+              />
             </Link>
             <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -76,17 +82,24 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               data-tooltip-id="user-list"
               data-tooltip-content="User List"
             >
-              {/* <SettingOutlined className="text-2xl" /> */}
-              <CiBoxList className="text-2xl" />
+              <DynamicIcon
+                library="ci"
+                iconName="CiBoxList"
+                className="text-2xl"
+              />
             </Link>
             <Link
-              className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-              to="/adminDashboard/storeCornea"
+              to="/adminDashboard/addhospital"
+              className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
               data-tooltip-id="user-list"
-              data-tooltip-content="Store Cornea"
+              data-tooltip-content="Add Hospital"
             >
-              {/* <SettingOutlined className="text-2xl" /> */}
-              <CiBoxList className="text-2xl" />
+              {/* <CiBoxList className="text-2xl" /> */}
+              <DynamicIcon
+                library="ci"
+                iconName="CiHospital1"
+                className="text-2xl"
+              />
             </Link>
             <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -94,8 +107,11 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               data-tooltip-id="popular-posts"
               data-tooltip-content="Create Blog"
             >
-              {/* <SettingOutlined className="text-2xl" /> */}
-              <IoCreate className="text-2xl" />
+              <DynamicIcon
+                library="md"
+                iconName="MdVisibility"
+                className="text-2xl"
+              />
             </Link>
             <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -103,8 +119,11 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               data-tooltip-id="popular-posts"
               data-tooltip-content="Create Blog"
             >
-              {/* <SettingOutlined className="text-2xl" /> */}
-              <MdVisibility className="text-2xl" />
+              <DynamicIcon
+                library="fa"
+                iconName="FaBookOpen"
+                className="text-2xl"
+              />
             </Link>
           </div>
         ) : (
@@ -155,7 +174,12 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 data-tooltip-id="donor-list"
                 data-tooltip-content="Donor List"
               >
-                <PiUserListBold className="text-2xl" />
+                {/* <PiUserListBold className="text-2xl" /> */}
+                <DynamicIcon
+                  library="pi"
+                  iconName="PiUserListBold"
+                  className="text-2xl"
+                />
                 <span className="ml-2">{t("common:listDonorLabel")}</span>
               </Link>
               <Link
@@ -165,7 +189,12 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 data-tooltip-id="add-user"
                 data-tooltip-content="Add User"
               >
-                <IoIosPersonAdd className="text-2xl" />
+                {/* <IoIosPersonAdd className="text-2xl" /> */}
+                <DynamicIcon
+                  library="io"
+                  iconName="IoIosPersonAdd"
+                  className="text-2xl"
+                />
                 <span className="ml-2">{t("common:addUserrLabel")}</span>
               </Link>
               <Link
@@ -175,10 +204,15 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 data-tooltip-id="user-list"
                 data-tooltip-content="User List"
               >
-                <CiBoxList className="text-2xl" />
+                {/* <CiBoxList className="text-2xl" /> */}
+                <DynamicIcon
+                  library="ci"
+                  iconName="CiBoxList"
+                  className="text-2xl"
+                />
                 <span className="ml-2"> {t("common:listUserrLabel")}</span>
               </Link>
-              <Link
+              {/* <Link
                 to="/adminDashboard/storeCornea"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 data-tooltip-id="user-list"
@@ -186,14 +220,19 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               >
                 <CiBoxList className="text-2xl" />
                 <span className="ml-2"> Store Cornea</span>
-              </Link>
+              </Link> */}
               <Link
                 to="/adminDashboard/addhospital"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 data-tooltip-id="user-list"
                 data-tooltip-content="Add Hospital"
               >
-                <CiBoxList className="text-2xl" />
+                {/* <CiBoxList className="text-2xl" /> */}
+                <DynamicIcon
+                  library="ci"
+                  iconName="CiHospital1"
+                  className="text-2xl"
+                />
                 <span className="ml-2"> Add Hospital</span>
               </Link>
 
@@ -203,7 +242,13 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 data-tooltip-id="popular-posts"
                 data-tooltip-content="Store Cornea"
               >
-                <IoCreate className="text-2xl" />
+                {/* <IoCreate className="text-2xl" /> */}
+
+                <DynamicIcon
+                  library="md"
+                  iconName="MdVisibility"
+                  className="text-2xl"
+                />
                 <span className="ml-2"> Create Blog</span>
               </Link>
               <Link
@@ -212,7 +257,12 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 data-tooltip-id="popular-posts"
                 data-tooltip-content="Store Cornea"
               >
-                <MdVisibility className="text-2xl" />
+                {/* <MdVisibility className="text-2xl" /> */}
+                <DynamicIcon
+                  library="fa"
+                  iconName="FaBookOpen"
+                  className="text-2xl"
+                />
                 <span className="ml-2"> Blog List</span>
               </Link>
             </div>
