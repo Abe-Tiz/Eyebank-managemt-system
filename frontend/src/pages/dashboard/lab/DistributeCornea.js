@@ -14,7 +14,6 @@ const DistributeCornea = () => {
     const [nameOfSurgeon, setNameOfSurgeon] = useState('');
     const [modeOfTransportation, setModeOfTransportation] = useState('');
     const [typeOfTissue, setTypeOfTissue] = useState('');
-    const [processingFee, setProcessingFeee] = useState('');
     const [approvedBy, setApprovedBy] = useState('');
     const [nameOfTechnician, setNameOfTechnician] = useState('');
     //for recovery
@@ -37,7 +36,6 @@ const DistributeCornea = () => {
             approvedBy,
             modeOfTransportation,
             typeOfTissue,
-            processingFee,
             nameOfTechnician
         }
         console.log(data);
@@ -211,14 +209,7 @@ const DistributeCornea = () => {
                             <option value="Plane">Plane</option>
                         </select>
                     </label>
-                    <label>
-                        Proccessing Fee:
-                        <input type="number"
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={processingFee}
-                            onChange={(e) => setProcessingFeee(e.target.value)}
-                        />
-                    </label>
+
                     <label>
                         Type of Tissue:
                         <select

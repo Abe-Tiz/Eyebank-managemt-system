@@ -19,6 +19,15 @@ const Viewdistribute = () => {
     const navigate = useNavigate();
     const [distributed, setdistribute] = useState([]);
 
+    function formatTimestamp(timestamp) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+
+        return new Date(timestamp).toLocaleString('en-US', options);
+    }
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -49,14 +58,13 @@ const Viewdistribute = () => {
                 <Table size='sm'>
                     <Thead>
                         <Tr>
-
-                            <Th>No</Th>
                             <Th>Lot No</Th>
                             <Th> Hospital Name</Th>
                             <Th>Surgeon Name</Th>
                             <Th>Mode Of Traporation</Th>
                             <Th>Approved By</Th>
                             <Th>distribute By</Th>
+                            <Th>Type of Tissue</Th>
                             <Th>Distribution Date</Th>
                             <Th >Operations</Th>
                         </Tr>
@@ -64,11 +72,16 @@ const Viewdistribute = () => {
                     <Tbody>
                         {distributed.map((distribute, index) => (
                             <Tr key={index}>
-                                <Td>{index + 1}</Td>
-                                <Td>{distribute.hospitalName}</Td>
-                                <Td>{distribute.nameOfSurgeon}</Td>
-                                <Td>{distribute.approvedBy}</Td>
-                                <Td>{distribute.nameOfTechnician}</Td>
+                                <Td>{distribute.LotNo._id}</Td>
+                                <Td>{distribute.hospitalName.hospitalName}</Td>
+                                <Td>{distribute.nameOfSurgeon.name}</Td>
+                                <Td>{distribute.modeOfTransportation}</Td>
+                                <Td>{distribute.approvedBy.name}</Td>
+                                <Td>{distribute.nameOfTechnician.name}</Td>
+                                <Td>{distribute.typeOfTissue}</Td>
+                                <Td>
+                                    {formatTimestamp(distribute.createdAt)}
+                                </Td>
                                 <Td className='text-center ml-3 text-blue-600'>
                                     <Link to={`/labtechnicaldashboard/editdistributed/${distribute._id}`}>
                                         <EditIcon />
@@ -79,7 +92,6 @@ const Viewdistribute = () => {
                     </Tbody>
                 </Table>
             </TableContainer>
-
         </div >
     );
 };

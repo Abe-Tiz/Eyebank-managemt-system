@@ -20,9 +20,7 @@ const DistributionSchema = new mongoose.Schema({
     typeOfTissue: {
         type: String
     },
-    processingFee: {
-        type: Number
-    },
+
     approvedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
