@@ -13,6 +13,7 @@ const {
     getloggedInDonor,
     forgotCode,
     resetCode,
+    getDonorByName,
   
 } = require("../controller/DonorController");
 
@@ -29,6 +30,7 @@ router.put("/activate/:id", activateDonor);
 router.post("/login", loginDonor);
 router.post("/donorLogedin", getloggedInDonor);
 router.post('/displayByEmail', getDonorByEmail);
+router.post('/search', getDonorByName);
 router.post("/forgot_code", forgotCode);
 router.post("/reset-code/:id/:token", resetCode); 
  

@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "antd";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-// import Notification from "./../pages/donor/Notification";
+// import i18next from "i18next";
+import cookies from "js-cookie";
 import Notification from './../../donor/Notification';
+import { languages } from './../../../Languages';
+import LanguageSelector from './LanguageSelector';
+import axios from 'axios'
 
 const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
+  const currentLanguageCode = cookies.get("i18next") || "en";
+    const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [donors, setDonors] = useState([]);
+  const [error, setError] = useState(null);
+
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -16,9 +28,44 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
     localStorage.clear();
     navigate("/login");
   };
+    
 
+      useEffect(() => {
+        document.title = t("app_title");
+      }, [currentLanguage, t]);
+
+      const toggleDropdown = () => {
+        setDropdownOpen(!isDropdownOpen);
+    };
+
+
+      const getDonorByName = async () => {
+        try {
+          const response = await axios.post("http://localhost:4000/donor/search", {
+            name: searchTerm,
+          });
+          // setDonors(response.data);
+          console.log(response.data);
+          setError(null);
+        } catch (err) {
+          setError(err.response ? err.response.data.error : err.message);
+          setDonors([]);
+        }
+      };
+
+      const handleChange = (e) => {
+        setSearchTerm(e.target.value);
+        if (e.target.value) {
+          getDonorByName();
+        }
+      };
+    
   return (
-    <div className={`bg-base-100 p-4 shadow-lg flex justify-between text-center items-center fixed z-50  ${state.collapsed ?  ` w-11/12` : `w-4/5`}`}>
+    <div
+      className={`bg-base-100 p-4 shadow-lg flex justify-between text-center items-center fixed z-50  ${
+        state.collapsed ? ` w-11/12` : `w-4/5`
+      }`}
+    >
       <div className="flex items-center">
         {state.collapsed ? (
           <TfiMenuAlt
@@ -31,15 +78,30 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
             onClick={toggleSidebar}
           />
         )}
+        {/* language selector */}
+        <LanguageSelector />
       </div>
 
       <div className="bg-base-100 flex items-center justify-center space-x-4">
         <div className="flex-none gap-2">
+          {/* search  */}
           <div className="dropdown dropdown-end">
+            <input
+              type="text"
+              placeholder="Search"
+              className="input input-bordered w-24 md:w-auto"
+              value={searchTerm}
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* notification section  */}
+          <div className="dropdown dropdown-end">
+            {/* notification */}
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle items-center justify-center text-center mr-5"
+              className="ml-5 btn btn-ghost btn-circle items-center justify-center text-center mr-5"
             >
               <div className="indicator flex items-center  ">
                 <Badge
@@ -69,6 +131,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
                 </Badge>
               </div>
             </div>
+
             <div
               tabIndex={0}
               className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
@@ -78,6 +141,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
             </div>
           </div>
 
+          {/* profile section */}
           <div className="dropdown dropdown-end ">
             <div
               tabIndex={0}

@@ -112,6 +112,8 @@ const AdminDashboard = () => {
 
   return (
     <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
+      
+      {/* side bar section */}
       <CustomSidebar
         collapsed={state.collapsed}
         toggleSidebar={toggleSidebar}
@@ -125,12 +127,14 @@ const AdminDashboard = () => {
           state.collapsed ? "ml-20" : "ml-64"
         } transition-all duration-300 ease-in-out flex-grow`}
       >
+        {/* header componnet  */}
         <HeaderComponent
           state={state}
           toggleSidebar={toggleSidebar}
           newDonorCount={newDonorCount}
         />
 
+        {/* content section  */}
         <Content className="p-4 mt-10">
           <div className="bg-white p-4 rounded shadow w-full">
             <Outlet />

@@ -354,14 +354,36 @@ const getDonorByEmail = asyncHandler(async (req, res) => {
         if (!donor) {
             return res.status(404).json({ message: "Donor not found" });
         }
+          console.log(donor);
+    res.status(200).json(donor);
     }
     catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
     }
+});
+//! displays donor by Email address
+const getDonorByName = asyncHandler(async (req, res) => {
+  try {
+    const { name } = req.body;
+    const donor = await Donor.find(
+      // Search by name starting with the provided string, ignoring case
+      { name: { $regex: new RegExp(`^${name}`, "i") } }
+    ).exec();
+
+    if (donor.length === 0) {
+      return res.status(404).json({ message: "Donors not found" });
+    }
+
     console.log(donor);
     res.status(200).json(donor);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
+
+
 
 //! Update a donor
 const updateDonor = asyncHandler(async (req, res) => {
@@ -422,7 +444,7 @@ const sendEmail = async (email, verificationCode) => {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            donor: "abebetizazu157@gmail.com",
+            user: "abebetizazu157@gmail.com",
             pass: "gezm fqmn asjl bqxj",
         },
         tls: {
@@ -504,17 +526,18 @@ const verifyCode = async (req, res) => {
 };
 
 module.exports = {
-    createDonor,
-    getDonor,
-    updateDonor,
-    getVerification,
-    getDonorById,
-    deleteDonor,
-    getDonorByEmail,
-    activateDonor,
-    verifyCode,
-    loginDonor,
-    getloggedInDonor,
-    forgotCode,
-    resetCode,
+  createDonor,
+  getDonor,
+  updateDonor,
+  getVerification,
+  getDonorById,
+  deleteDonor,
+  getDonorByEmail,
+  activateDonor,
+  verifyCode,
+  loginDonor,
+  getloggedInDonor,
+  forgotCode,
+  resetCode,
+  getDonorByName,
 };
