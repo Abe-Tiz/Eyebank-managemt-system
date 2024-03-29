@@ -553,7 +553,7 @@ const CreateDonor = () => {
               </div>
               <div className="mt-4 flex items-center justify-center">
                 <Link to="/donor-login" className="block ml-3 text-blue-500">
-                  have you pledged ? Login
+                  {t("donor:HavePledge")}? {t("login:loginTitleLabel")}
                 </Link>
               </div>
             </form>

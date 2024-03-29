@@ -23,8 +23,8 @@ const Profile = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getLoggedInDonor = async () => {
+
+   const getLoggedInDonor = async () => {
       try {
         const response = await fetch(
           "http://127.0.0.1:4000/donor/donorLogedin",
@@ -65,12 +65,16 @@ const Profile = () => {
         console.error("Error fetching profile:", error);
       }
     };
+
+  useEffect(() => {
     getLoggedInDonor();
   }, [navigate]);
 
   return (
     <div className="container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% min-h-screen flex flex-col items-center justify-center">
-      <h2 className="text-4xl font-bold text-gray-800 mt-3">Your Profile</h2>
+      <h2 className="text-4xl font-bold text-gray-800 mt-3">
+        {t('donor:ProfileHeading')}
+      </h2>
       <div className="flex bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% md:flex-row flex-col justify-between gap-10 overflow-hidden mx-auto container m-5 p-5 rounded-lg shadow-md">
         {/* Left Section */}
         <div className="bg-yellow-400 shadow-lg p-5 w-1/4 flex flex-col items-center justify-center gap-3">

@@ -11,7 +11,7 @@ import { IoCreate } from "react-icons/io5";
 import { MdVisibility } from "react-icons/md";
 import DynamicIcon from "./DynamicIcon";
 
-const CustomSidebar = ({ collapsed, name, image }) => {
+const CustomSidebar = ({ collapsed, name, image,role }) => {
   const { t } = useTranslation();
 
   return (
@@ -135,6 +135,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
               alt="user photo"
             />
             <span className="text-lg font-semibold ml-10">{name}</span>
+            <span className="text-lg font-semibold ml-10 text-pink-500">{role}</span>
 
             {/* btn */}
             <div className="mt-4 flex flex-col items-center">
@@ -212,15 +213,6 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                 />
                 <span className="ml-2"> {t("common:listUserrLabel")}</span>
               </Link>
-              {/* <Link
-                to="/adminDashboard/storeCornea"
-                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                data-tooltip-id="user-list"
-                data-tooltip-content="Store Cornea"
-              >
-                <CiBoxList className="text-2xl" />
-                <span className="ml-2"> Store Cornea</span>
-              </Link> */}
               <Link
                 to="/adminDashboard/addhospital"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
