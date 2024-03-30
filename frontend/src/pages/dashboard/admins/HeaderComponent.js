@@ -10,18 +10,16 @@ import Notification from './../../donor/Notification';
 import { languages } from './../../../Languages';
 import LanguageSelector from './LanguageSelector';
 import axios from 'axios'
+import useSearch from "../../../useHooks/useSearch";
 
 const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
+
   const currentLanguageCode = cookies.get("i18next") || "en";
-    const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [donors, setDonors] = useState([]);
-  const [error, setError] = useState(null);
-
+  const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
+ const { searchTerm, handleChange, donor, error, getDonorByName } = useSearch();
 
   //! handle Logout
   const handleLogout = () => {
@@ -32,33 +30,14 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
 
       useEffect(() => {
         document.title = t("app_title");
+
       }, [currentLanguage, t]);
 
+  
       const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
-    };
-
-
-      const getDonorByName = async () => {
-        try {
-          const response = await axios.post("http://localhost:4000/donor/search", {
-            name: searchTerm,
-          });
-          // setDonors(response.data);
-          console.log(response.data);
-          setError(null);
-        } catch (err) {
-          setError(err.response ? err.response.data.error : err.message);
-          setDonors([]);
-        }
-      };
-
-      const handleChange = (e) => {
-        setSearchTerm(e.target.value);
-        if (e.target.value) {
-          getDonorByName();
-        }
-      };
+  };
+ 
     
   return (
     <div
