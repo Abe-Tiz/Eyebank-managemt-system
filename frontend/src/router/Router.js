@@ -187,8 +187,7 @@ const router = createBrowserRouter([
             {
                 path: "getOne/:id",
                 element: <ViewDetails />,
-                path: "edit-post/:slug",
-                element: <EditPost />,
+                
             },
             {
                 path: "posts",
@@ -296,7 +295,7 @@ const router = createBrowserRouter([
                 element: <Report />,
             },
             {
-                path: "addDonor",
+                path: "addDoynor",
                 element: <CreateDonor />,
             },
             {
