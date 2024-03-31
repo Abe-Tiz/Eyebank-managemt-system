@@ -35,5 +35,9 @@
   "labelDonorCardBottom": "Kaayyoo Baankii Ija Itoophiyaa qofaaf kan oolu",
   "deleteTitleDonor": "Arjooma Haquu",
   "deleteCancelDonor": "Haquu",
-  "deleteSubtitleDonor": " Arjooma kana haquu akka barbaaddu mirkaneeffatteettaa ? Gochi kun duubatti deebi’uu hin danda’u."
+  "deleteSubtitleDonor": " Arjooma kana haquu akka barbaaddu mirkaneeffatteettaa ? Gochi kun duubatti deebi’uu hin danda’u.",
+  "ProfileHeading": "Odeeffannoo Keessan Daawwadhaa",
+  "HavePledge": "waadaa galtaniittu",
+  "ShortCode": "Koodii Gabaabaa",
+  "PlaceholderShortCode": "Koodii Gabaabaa Galchi"
 }

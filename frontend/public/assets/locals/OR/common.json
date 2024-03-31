@@ -8,10 +8,12 @@
   "registerButtonLabel": "Galmeessuu",
   "logouttButtonLabel": "Ba'i",
   "settingtButtonLabel": "Sajoo",
-   "dashboardLabel": "Daashboordii",
+  "dashboardLabel": "Daashboordii",
   "addDonorLabel": "Arjooma Dabalaa",
   "listDonorLabel": "Tarree Arjoomtootaa",
   "addUserrLabel": "Fayyadamaa Dabaluu",
   "listUserrLabel": "Tarree Fayyadamtootaa",
-  "backButtonLabel": "Dugda"
+  "backButtonLabel": "Dugda",
+  "HeroSpan": "Ija",
+  "HeroHeading": " Addunyaa kana kan nama biraatiin ilaalaa"
 }

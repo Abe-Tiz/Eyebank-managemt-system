@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri';
- 
+import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
+import SearchComponent from "./../../components/SearchComponent";
+import useSearch from "./../../useHooks/useSearch";
+import TableHeader from "./../../components/TableHeader";
+import LoadingCircle from "./../../components/LoadingCircle";
+import DeleteAlertDialog from './../../components/DeleteAlertDialog';
 
 const ViewUsers = () => {
   const [users, setusers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
   const toast = useToast();
   const { t } = useTranslation();
+  const cancelRef = useRef();
+  const { searchTerm, data, handleChange } = useSearch("user");
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -50,33 +58,63 @@ const ViewUsers = () => {
     fetchUser();
   });
 
+  const onClose = () => setIsOpen(false);
+
+  const onOpen = (id) => {
+    setIsOpen(true);
+    setDeleteId(id);
+  };
+
+  // handle delete donor
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:4000/user/delete/${deleteId}`);
+      setusers(users.filter((user) => user._id !== deleteId));
+      toast({
+        title: "User Deleted",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    } catch (error) {
+      toast({
+        title: "Error Occurred!",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    } finally {
+      onClose();
+    }
+  };
+
+  const renderUser = searchTerm ? data : users;
+  // console.log("users : ", renderUser);
+
   return (
     <>
+      <div className="w-full mt-2 flex justify-end ">
+        {/* search component */}
+        <SearchComponent searchTerm={searchTerm} handleChange={handleChange} />
+      </div>
+
       {/* <Header /> */}
       {loading ? (
         <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  {t("register:LabelsignUpName")}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t("login:labelLoginEmail")}{" "}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t("donor:userstatus")}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t("register:LabelsignUpRole")}
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {t("donor:donorAction")}
-                </th>
-              </tr>
-            </thead>
+            <TableHeader
+              name={t("register:LabelsignUpName")}
+              city={t("login:labelLoginEmail")}
+              mobile={t("donor:userstatus")}
+              status="Status"
+              action={t("donor:donorAction")}
+            />
+
             <tbody>
-              {users.map((user) => (
+              {renderUser.map((user) => (
                 <tr
                   key={user.id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -116,7 +154,7 @@ const ViewUsers = () => {
                       {/* {t("common:updateButtonLabel")} */}
                     </Link>
                     <Link
-                      to={`/delete/${user._id}`}
+                      onClick={() => onOpen(user._id)}
                       className="flex items-center bg-transparent  border-2 p-1 font-medium text-white dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
                     >
                       <RiDeleteBin2Line
@@ -133,12 +171,17 @@ const ViewUsers = () => {
           </table>
         </div>
       ) : (
-        <div className="text-center text-blue-500 font-semibold text-lg">
-          Loading....
-        </div>
+        <LoadingCircle />
       )}
 
-      {/* <Footer /> */}
+      {/* confirmation alert */}
+      <DeleteAlertDialog
+        isOpen={isOpen}
+        onClose={onClose}
+        cancelRef={cancelRef}
+        handleDelete={handleDelete}
+        t={t}
+      />
     </>
   );
 };

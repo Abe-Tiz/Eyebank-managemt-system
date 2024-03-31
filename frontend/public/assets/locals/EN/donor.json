@@ -35,5 +35,9 @@
     "verifedStatus": "Verified",
     "pendingStatus": "Pending",
     "viewDonorTitle": " Please check your information before print",
-    "donorAction": "Action"
+    "HavePledge": " have you pledged",
+    "ShortCode": " Short Code",
+    "PlaceholderShortCode": "Enter Short Codee",
+    "donorAction": "Action",
+    "ProfileHeading": "Visit Your Information"
 }

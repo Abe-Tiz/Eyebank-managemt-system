@@ -21,8 +21,8 @@ const Hero = () => {
           {/* text */}
           <div className="md:w-1/2 space-y-7 px-4">
             <h2 className="md:text-5xl text-[#4A4A4A] text-4xl font-bold md:leading-snug leading-snug">
-              See the world through someone else's{" "}
-              <span className="text-green">Eyes.</span>
+              {t("common:HeroHeading")}{" "}
+              <span className="text-green">{t("common:HeroSpan")}</span>
             </h2>
             <p className="text-[#4A4A4A] text-xl">
               {t("translation:tagLabel")}
