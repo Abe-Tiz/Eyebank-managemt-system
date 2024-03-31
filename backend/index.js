@@ -86,15 +86,10 @@ const NotifyNewDonors = async () => {
 
     changeStream.on("change", (data) => {
       if (data.operationType === "insert") {
-        // console.log(
-        //   "Inserted Document:",
-        //   data.fullDocument,
-        //   `time: ${data.wallTime}`
-        // );
-        notificationCount++; // Increment the notification counter
+        notificationCount++;  
         io.emit("newDonorNotification", {
           donor: data.fullDocument,
-          count: notificationCount, // Send the updated count to the client
+          count: notificationCount,  
         });
       }
     });
@@ -106,8 +101,7 @@ const NotifyNewDonors = async () => {
 // Call NotifyNewDonors when the server starts
 NotifyNewDonors();
 
-// app.use('/hospital', HospitalRoute)
-// app.use('/recipient', RecipientRoute)
+ 
 app.use('/accident', AccidentalRoute)
 app.use('/api', physicalExamRoutes);
 app.use('/blood', BloodRoute)

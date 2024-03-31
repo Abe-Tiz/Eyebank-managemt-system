@@ -17,7 +17,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
   return (
     <div
       className={`bg-indigo-900   h-screen fixed overflow-scroll overflow-x-hidden text-white transition-all duration-300 ${
-        collapsed ? "w-20" : "w-64"
+        collapsed ? "w-28" : "w-60"
       }`}
     >
       <div className="flex flex-col h-full mt-0">
@@ -267,23 +267,23 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
       {/* tooltips */}
       <Tooltip
         id="my-dashboard"
-        style={{ backgroundColor: "#940B92", color: "#fff" }}
+        style={{ backgroundColor: "#940B92", color: "#fff", zIndex: 5 }}
       />
       <Tooltip
         id="add-donor"
-        style={{ backgroundColor: "#940B92", color: "#fff" }}
+        style={{ backgroundColor: "#940B92", color: "#fff", zIndex: 4 }}
       />
       <Tooltip
         id="donor-list"
-        style={{ backgroundColor: "#940B92", color: "#fff" }}
+        style={{ backgroundColor: "#940B92", color: "#fff", zIndex: 3 }}
       />
       <Tooltip
         id="add-user"
-        style={{ backgroundColor: "#940B92", color: "#fff" }}
+        style={{ backgroundColor: "#940B92", color: "#fff", zIndex: 2 }}
       />
       <Tooltip
         id="user-list"
-        style={{ backgroundColor: "#940B92", color: "#fff" }}
+        style={{ backgroundColor: "#940B92", color: "#fff", zIndex: 1 }}
       />
     </div>
   );

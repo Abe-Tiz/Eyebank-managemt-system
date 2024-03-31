@@ -41,7 +41,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
   //  console.log("donor", donor); 
   return (
     <div
-      className={`bg-purple-600 p-2 flex justify-between text-center items-center fixed z-50  ${
+      className={`bg-indigo-900 p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${
         state.collapsed ? ` w-11/12` : `w-4/5`
       }`}
     >
@@ -61,7 +61,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
         <LanguageSelector />
       </div>
 
-      <div className="bg-purple-600 flex items-center justify-center space-x-4">
+      <div className="bg-indigo-900 flex items-center justify-center space-x-4">
         <div className="flex-none gap-2">
           {/* notification section  */}
           <div className="dropdown dropdown-end">
@@ -75,7 +75,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
                 <Badge className="mr-5 flex ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-5xl -mr-5"
+                    className="h-10 w-10 text-5xl -mr-5 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

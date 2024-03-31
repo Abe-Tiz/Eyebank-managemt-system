@@ -525,6 +525,25 @@ const verifyCode = async (req, res) => {
     }
 };
 
+const getRecentDonors = async (req, res) => {
+  try {
+      const recentDonors = await Donor.find().sort({
+          _id: -1
+      }).limit(5);
+
+      if (recentDonors) {
+           console.log("recent donors:", recentDonors);
+           res.status(200).json(recentDonors);
+      }
+  } catch (error) {
+    // console.error(`Error: ${error}`);
+    res
+      .status(500)
+      .json({ error: "An error occurred while retrieving recent donors." });
+  }
+};
+
+
 module.exports = {
   createDonor,
   getDonor,
@@ -540,4 +559,5 @@ module.exports = {
   forgotCode,
   resetCode,
   getDonorByName,
+  getRecentDonors,
 };
