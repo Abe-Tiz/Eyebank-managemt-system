@@ -5,7 +5,6 @@ import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer } from '@chakra-u
 
 const ViewCornea = () => {
     const [corneas, setCorneas] = useState([]);
-
     useEffect(() => {
         const fetchData = async () => {
             try {

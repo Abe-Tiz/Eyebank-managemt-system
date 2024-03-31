@@ -4,78 +4,80 @@ import axios from "axios";
 
 const EditHospital = () => {
     const { id } = useParams();
-    const [hospitalID, setHospitalID] = useState()
-    const [hospitalName, setHospitalName] = useState()
-    const [address, setAddress] = useState()
-    const navigate = useNavigate()
+    const [hospitalId, setHospitalId] = useState();
+    const [hospitalName, setHospitalName] = useState();
+    const [address, setAddress] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/getHospital/" + id)
+            .get(`http://localhost:4000/hospital/getOne/${id}`)
             .then((result) => {
                 console.log(result);
-                setHospitalID(result.data.hospitalID);
+                setHospitalId(result.data.hospitalId);
                 setHospitalName(result.data.hospitalName);
                 setAddress(result.data.address);
-
             })
             .catch((err) => console.log(err));
     }, [id]);
-    // ,[]
+
     const Update = (e) => {
         e.preventDefault();
-        axios.put("http://localhost:4000/updateHospital/" + id, {
-            hospitalID,
-            hospitalName,
-            address
-        })
-
+        axios
+            .put(`http://localhost:4000/hospital/update/${id}`, {
+                hospitalId,
+                hospitalName,
+                address,
+            })
             .then((result) => {
                 console.log(result);
-                navigate("/");
+                navigate("/adminDashboard/viewhospital");
             })
             .catch((err) => console.log(err));
     };
 
     return (
-        <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-            <div className="w-50 bg-white rounded p-3">
+        <div className="flex justify-center">
+            <div className="w-2/3 rounded p-3">
                 <form onSubmit={Update}>
-                    <h2>Update Hospital</h2>
+                    <h2 className="text-center text-3xl">Update Hospital</h2>
 
-                    <div className="mb-2">
-                        <label htmlFor="">Hospital ID</label>
+                    <div className="mb-4">
+                        <label htmlFor="hospitalID">Hospital ID</label>
                         <input
                             type="text"
-                            className="form-control"
-                            value={hospitalID}
-                            onChange={(e) => setHospitalID(e.target.value)}
+                            id="hospitalID"
+                            className="form-input mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={hospitalId}
+                            onChange={(e) => setHospitalId(e.target.value)}
                             required
                         />
                     </div>
-                    <div className="mb-2">
-                        <label htmlFor="">Hospital Name</label>
+                    <div className="mb-4">
+                        <label htmlFor="hospitalName">Hospital Name</label>
                         <input
                             type="text"
-                            className="form-control"
+                            id="hospitalName"
+                            className="form-input mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={hospitalName}
                             onChange={(e) => setHospitalName(e.target.value)}
                             required
                         />
                     </div>
 
-                    <div className="mb-2">
-                        <label htmlFor="">Address</label>
+                    <div className="mb-4">
+                        <label htmlFor="address">Address</label>
                         <input
                             type="text"
-                            className="form-control"
+                            id="address"
+                            className="form-input mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             required
                         />
                     </div>
 
-                    <button className="btn btn-success">Submit</button>
+                    <button type="submit" className="btn btn-warning">Edit</button>
                 </form>
             </div>
         </div>
