@@ -1,19 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import {
-  useToast,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
-} from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { RiEdit2Line, RiDeleteBin2Line } from "react-icons/ri";
 import useSearch from "../../useHooks/useSearch";
-import TableHeader from "../../components/TableHeader";
-import TableBody from "../../components/TableBody";
+import DonorTable from "./DonorTable";
+import SearchComponent from "../../components/SearchComponent";
+import DeleteAlertDialog from './../../components/DeleteAlertDialog';
 
 
 const DisplayDonor = () => {
@@ -26,9 +18,9 @@ const DisplayDonor = () => {
   const { t } = useTranslation();
   const cancelRef = useRef();
 
-  const { searchTerm, setSearchTerm, donor, error } = useSearch();
+  const { searchTerm, handleChange, donor, error } = useSearch();
 
-  useEffect(() => {
+// fetch donors
     const fetchDonor = async () => {
       try {
         const response = await axios.get("http://localhost:4000/donor");
@@ -57,8 +49,9 @@ const DisplayDonor = () => {
           position: "top",
         });
       }
-    };
-
+  };
+  
+  useEffect(() => {
     fetchDonor();
   }, [toast]);
 
@@ -69,6 +62,8 @@ const DisplayDonor = () => {
     setDeleteId(id);
   };
 
+ 
+// handle delete donor
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:4000/donor/delete/${deleteId}`);
@@ -94,6 +89,7 @@ const DisplayDonor = () => {
     }
   };
 
+  // activate donor
   const handleActivate = async (id) => {
     try {
       await axios.put(`http://localhost:4000/donor/activate/${id}`);
@@ -121,24 +117,25 @@ const DisplayDonor = () => {
     }
   };
 
-
-  
   return (
     <>
-      {loading ? (
-        <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            {/* table header */}
-            <TableHeader />
+      <div className="w-full mt-2 flex justify-end ">
+        {/* search component */}
+        <SearchComponent
+          searchTerm={searchTerm}
+          handleChange={handleChange}
+        />
+      </div>
 
-            {/* table body */}
-            <TableBody
-              donors={donors}
-              handleActivate={handleActivate}
-              onOpen={onOpen}
-            />
-          </table>
-        </div>
+      {/* donor table */}
+      {loading ? (
+        <DonorTable
+          donors={donors}
+          handleActivate={handleActivate}
+          onOpen={onOpen}
+          donor={donor}
+          searchTerm={searchTerm}
+        />
       ) : (
         <div className="text-center text-blue-500 font-semibold text-lg">
           Loading....
@@ -146,37 +143,13 @@ const DisplayDonor = () => {
       )}
 
       {/* confirmation alert */}
-      <AlertDialog
+      <DeleteAlertDialog
         isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
         onClose={onClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              {t("donor:deleteTitleDonor")}
-            </AlertDialogHeader>
-
-            <AlertDialogBody>{t("donor:deleteSubtitleDonor")}</AlertDialogBody>
-
-            <AlertDialogFooter>
-              <button
-                ref={cancelRef}
-                onClick={onClose}
-                className="bg-gray-200 text-gray-600 hover:bg-gray-300 px-4 py-2 rounded mr-2"
-              >
-                {t("donor:deleteCancelDonor")}
-              </button>
-              <button
-                onClick={handleDelete}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-              >
-                {t("common:deleteButtonLabel")}
-              </button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+        cancelRef={cancelRef}
+        handleDelete={handleDelete}
+        t={t}
+      />
     </>
   );
 };

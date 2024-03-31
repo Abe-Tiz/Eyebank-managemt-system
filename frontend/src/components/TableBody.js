@@ -3,18 +3,17 @@ import { Link } from "react-router-dom";
 import { RiEdit2Line, RiDeleteBin2Line } from "react-icons/ri";
 import useSearch from "../useHooks/useSearch";
 
-const TableBody = ({ donors, handleActivate, onOpen }) => {
-  const { donor, searchTerm } = useSearch();
-
+const TableBody = ({ donors, donor, handleActivate, onOpen, searchTerm }) => {
   const renderDonors = searchTerm ? donor : donors;
-    // console.log("donorss: ", renderDonors);
-    
+  // console.log("search term", searchTerm);
+  console.log("donor", renderDonors);
+
   return (
     <tbody>
       {renderDonors.map((donor) => (
         <tr
           key={donor._id}
-          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+          className="bg-base-200 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
         >
           <th
             scope="row"

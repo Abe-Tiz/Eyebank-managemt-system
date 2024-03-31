@@ -4,7 +4,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-// import i18next from "i18next";
 import cookies from "js-cookie";
 import Notification from './../../donor/Notification';
 import { languages } from './../../../Languages';
@@ -38,10 +37,11 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
         setDropdownOpen(!isDropdownOpen);
   };
  
-    
+  //  console.log("search term", searchTerm); 
+  //  console.log("donor", donor); 
   return (
     <div
-      className={`bg-base-100 p-4 shadow-lg flex justify-between text-center items-center fixed z-50  ${
+      className={`bg-base-200 p-2 flex justify-between text-center items-center fixed z-50  ${
         state.collapsed ? ` w-11/12` : `w-4/5`
       }`}
     >
@@ -61,18 +61,9 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
         <LanguageSelector />
       </div>
 
-      <div className="bg-base-100 flex items-center justify-center space-x-4">
+      <div className="bg-base-200 flex items-center justify-center space-x-4">
         <div className="flex-none gap-2">
-          {/* search  */}
-          <div className="dropdown dropdown-end">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered w-24 md:w-auto"
-              value={searchTerm}
-              onChange={handleChange}
-            />
-          </div>
+         
 
           {/* notification section  */}
           <div className="dropdown dropdown-end">

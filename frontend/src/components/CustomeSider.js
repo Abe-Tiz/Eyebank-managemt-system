@@ -138,7 +138,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
             <span className="text-lg font-semibold ml-10 text-pink-500">{role}</span>
 
             {/* btn */}
-            <div className="mt-4 flex flex-col items-center">
+            <div className="w-64- mt-4 flex flex-col justify-center items-center">
               <Link
                 to="/adminDashboard"
                 className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"

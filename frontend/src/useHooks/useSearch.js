@@ -30,9 +30,9 @@ const useSearch = () => {
 
  
   // Automatically fetch donors when the component mounts
-  useEffect(() => {
-      getDonorByName();
-  }, []);
+  // useEffect(() => {
+  //     getDonorByName();
+  // }, []);
 
   return {
     searchTerm,
