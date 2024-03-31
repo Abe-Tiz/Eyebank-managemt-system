@@ -115,7 +115,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
             </Link>
             <Link
               className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-              to="/adminDashboard/create-post"
+              to="/adminDashboard/posts"
               data-tooltip-id="popular-posts"
               data-tooltip-content="Create Blog"
             >
@@ -135,7 +135,9 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               alt="user photo"
             />
             <span className="text-lg font-semibold ml-10">{name}</span>
-            <span className="text-lg font-semibold ml-10 text-pink-500">{role}</span>
+            <span className="text-lg font-semibold ml-10 text-pink-500">
+              {role}
+            </span>
 
             {/* btn */}
             <div className="w-64- mt-4 flex flex-col justify-center items-center">

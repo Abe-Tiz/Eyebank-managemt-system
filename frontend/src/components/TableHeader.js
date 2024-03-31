@@ -2,26 +2,26 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const TableHeader = () => {
+const TableHeader = ({name,city,mobile,status,action}) => {
   const { t } = useTranslation();
 
   return (
     <thead className="bg-blue-300 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
       <tr>
         <th scope="col" className="px-6 py-3">
-          {t("register:LabelsignUpName")}
+          {name}
         </th>
         <th scope="col" className="px-6 py-3">
-          {t("donor:donorCity")}
+          {city}
         </th>
         <th scope="col" className="px-6 py-3">
-          {t("donor:donorMobile")}
+          {mobile}
         </th>
         <th scope="col" className="px-6 py-3">
-          Status
+          {status}
         </th>
         <th scope="col" className="px-6 py-3">
-          {t("donor:donorAction")}
+          {action}
         </th>
       </tr>
     </thead>

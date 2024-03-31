@@ -6,6 +6,7 @@ import useSearch from "../../useHooks/useSearch";
 import DonorTable from "./DonorTable";
 import SearchComponent from "../../components/SearchComponent";
 import DeleteAlertDialog from './../../components/DeleteAlertDialog';
+import LoadingCircle from "../../components/LoadingCircle";
 
 
 const DisplayDonor = () => {
@@ -18,7 +19,7 @@ const DisplayDonor = () => {
   const { t } = useTranslation();
   const cancelRef = useRef();
 
-  const { searchTerm, handleChange, donor, error } = useSearch();
+  const { searchTerm, handleChange, data, error } = useSearch("donor");
 
 // fetch donors
     const fetchDonor = async () => {
@@ -121,10 +122,7 @@ const DisplayDonor = () => {
     <>
       <div className="w-full mt-2 flex justify-end ">
         {/* search component */}
-        <SearchComponent
-          searchTerm={searchTerm}
-          handleChange={handleChange}
-        />
+        <SearchComponent searchTerm={searchTerm} handleChange={handleChange} />
       </div>
 
       {/* donor table */}
@@ -133,13 +131,11 @@ const DisplayDonor = () => {
           donors={donors}
           handleActivate={handleActivate}
           onOpen={onOpen}
-          donor={donor}
+          donor={data}
           searchTerm={searchTerm}
         />
       ) : (
-        <div className="text-center text-blue-500 font-semibold text-lg">
-          Loading....
-        </div>
+       <LoadingCircle />
       )}
 
       {/* confirmation alert */}

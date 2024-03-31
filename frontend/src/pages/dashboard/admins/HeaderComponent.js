@@ -41,7 +41,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
   //  console.log("donor", donor); 
   return (
     <div
-      className={`bg-base-200 p-2 flex justify-between text-center items-center fixed z-50  ${
+      className={`bg-purple-600 p-2 flex justify-between text-center items-center fixed z-50  ${
         state.collapsed ? ` w-11/12` : `w-4/5`
       }`}
     >
@@ -61,10 +61,8 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
         <LanguageSelector />
       </div>
 
-      <div className="bg-base-200 flex items-center justify-center space-x-4">
+      <div className="bg-purple-600 flex items-center justify-center space-x-4">
         <div className="flex-none gap-2">
-         
-
           {/* notification section  */}
           <div className="dropdown dropdown-end">
             {/* notification */}
@@ -74,19 +72,10 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
               className="ml-5 btn btn-ghost btn-circle items-center justify-center text-center mr-5"
             >
               <div className="indicator flex items-center  ">
-                <Badge
-                  count={
-                    newDonorCount > 0 ? (
-                      <span>{newDonorCount}</span>
-                    ) : (
-                      <span>0</span>
-                    )
-                  }
-                  className="mr-5 mt-1"
-                >
+                <Badge className="mr-5 flex ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-5xl"
+                    className="h-10 w-10 text-5xl -mr-5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -98,6 +87,13 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
                       d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                     />
                   </svg>
+                  {newDonorCount > 0 ? (
+                    <span className="badge badge-secondary">
+                      {newDonorCount}
+                    </span>
+                  ) : (
+                    <span className="badge badge-secondary">0</span>
+                  )}
                 </Badge>
               </div>
             </div>
