@@ -24,12 +24,18 @@ const PhysicalExamView = () => {
 
   const deletePhysicalExam = async (examId) => {
     try {
+<<<<<<< HEAD
       const response = await fetch(
         `http://localhost:4000/api/delete/${examId}`,
         {
           method: "DELETE",
         }
       );
+=======
+      const response = await fetch(`http://localhost:4000/api/delete/${examId}`, {
+        method: "DELETE",
+      });
+>>>>>>> main
       if (response.ok) {
         fetchPhysicalExams();
         alert("Physical exam deleted successfully.");
