@@ -5,14 +5,10 @@ import axios from "axios";
 import ButtonComponent from "../../components/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
-import LoadingCircle from "./../../components/LoadingCircle";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [attempts, setAttempts] = useState(0);
-    const MAX_ATTEMPTS = 4; // Define maximum number of login attempts
 
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -118,29 +114,41 @@ const Login = () => {
                         position: "top",
                     });
                 } else if (
-                    error.response.status === 500 &&
-                    error.response.data.message === "Password is not matched"
+                  error.response.status === 500 &&
+                  error.response.data.message === "Password is not matched"
                 ) {
-                    toast({
-                        title: "Incorrect Password",
-                        description: "Please double-check your password.",
-                        status: "warning",
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top",
-                    });
+                  toast({
+                    title: error.response.data.message,
+                    // description: "Please double-check your password.",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top",
+                  });
+                } else if (
+                  error.response.status === 403 
+                ) {
+                    // console.log(error.response.data.message);
+                  toast({
+                    title: error.response.data.message,
+                    // description: error.response.data.message,
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top",
+                  });
                 } else if (error.response.data.message === "Not verified") {
-                    toast({
-                        title: "Not Verified",
-                        description: "Please verify your account.",
-                        status: "warning",
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top",
-                    });
+                  toast({
+                    title: error.response.data.message,
+                    // description: "Please verify your account.",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top",
+                  });
                 }
             } else {
-                console.log(error.message);
+                // console.log(error.message);
                 toast({
                     title: "Error Occurred!",
                     description: error.message,
@@ -222,11 +230,8 @@ const Login = () => {
                                     </span>
                                 </div>
                             </div>
-                            {isLoading ? (
-                                <LoadingCircle />
-                            ) : (
                                 <ButtonComponent title={t("login:loginTitleLabel")} />
-                            )}
+                       
                         </div>
                     </form>
                 </div>

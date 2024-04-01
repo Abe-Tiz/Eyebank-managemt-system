@@ -216,6 +216,21 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
                 <span className="ml-2"> {t("common:listUserrLabel")}</span>
               </Link>
               <Link
+                to="/adminDashboard/activate"
+                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                // onClick={handleUserList}
+                data-tooltip-id="activate-account"
+                data-tooltip-content="Activate User"
+              >
+                {/* <CiBoxList className="text-2xl" /> */}
+                <DynamicIcon
+                  library="ci"
+                  iconName="CiBoxList"
+                  className="text-2xl"
+                />
+                <span className="ml-2"> Activate Account</span>
+              </Link>
+              <Link
                 to="/adminDashboard/addhospital"
                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 data-tooltip-id="user-list"

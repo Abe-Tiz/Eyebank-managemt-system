@@ -29,7 +29,7 @@ const LanguageSelector = ({ currentLanguageCode }) => {
       </button>
       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         {languages.map(({ code, name, country_code }) => (
-          <li key={country_code}>
+          <li>
             <a
               href="#"
               className={classNames("dropdown-item", {
