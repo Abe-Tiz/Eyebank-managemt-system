@@ -1,5 +1,7 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 const PhysicalExamView = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
@@ -7,6 +9,7 @@ const PhysicalExamView = () => {
   const [editedHeight, setEditedHeight] = useState("");
   const [editedWeight, setEditedWeight] = useState("");
   const [editedSex, setEditedSex] = useState("");
+  const [editedDonorId, setEditedDonorId] = useState("");
 
   useEffect(() => {
     fetchPhysicalExams();
@@ -38,11 +41,12 @@ const PhysicalExamView = () => {
     }
   };
 
-  const startEdit = (examId, height, weight, sex) => {
+  const startEdit = (examId, height, weight, sex, donorId) => {
     setEditExamId(examId);
     setEditedHeight(height);
     setEditedWeight(weight);
     setEditedSex(sex);
+    setEditedDonorId(donorId);
   };
 
   const cancelEdit = () => {
@@ -50,13 +54,14 @@ const PhysicalExamView = () => {
     setEditedHeight("");
     setEditedWeight("");
     setEditedSex("");
+    setEditedDonorId("");
   };
+
   const navigateToDetails = (examId) => {
-    
     navigate(`/labtechnicaldashboard/getOne/${examId}`);
   };
 
-  const saveEdit = async (examId, editedHeight, editedWeight, editedSex) => {
+  const saveEdit = async (examId, editedHeight, editedWeight, editedSex, editedDonorId) => {
     try {
       const response = await fetch(`http://localhost:4000/api/update/${examId}`, {
         method: "PUT",
@@ -67,15 +72,17 @@ const PhysicalExamView = () => {
           height: editedHeight,
           weight: editedWeight,
           sex: editedSex,
+          donorId: editedDonorId,
         }),
       });
-  
+
       if (response.ok) {
         fetchPhysicalExams();
         setEditExamId(null);
         setEditedHeight("");
         setEditedWeight("");
         setEditedSex("");
+        setEditedDonorId("");
         alert("Physical exam updated successfully.");
       } else {
         const errorResponse = await response.json();
@@ -86,6 +93,35 @@ const PhysicalExamView = () => {
       alert("An error occurred while updating the physical exam. Please try again.");
     }
   };
+
+  const fetchDonor = async (donorId) => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/donors/${donorId}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(`Failed to fetch donor with ID ${donorId}:`, error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchDonors = async () => {
+      const examsWithDonors = [];
+      for (const exam of exams) {
+        const donor = await fetchDonor(exam.donorId);
+        examsWithDonors.push({ ...exam, donor });
+      }
+      setExams(examsWithDonors);
+    };
+
+    fetchDonors();
+  }, [exams]);
+  if (!Array.isArray(exams)) {
+    console.error("Exams is not an array:", exams);
+    return <p>An error occurred while fetching exams.</p>;
+  }
+
   return (
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold mb-4">Physical Exams</h2>
@@ -98,6 +134,7 @@ const PhysicalExamView = () => {
               <th className="px-4 py-2">Height</th>
               <th className="px-4 py-2">Weight</th>
               <th className="px-4 py-2">Sex</th>
+              <th className="px-4 py-2">Donor</th>
               <th className="px-4 py-2">Actions</th>
             </tr>
           </thead>
@@ -128,9 +165,16 @@ const PhysicalExamView = () => {
                       />
                     </td>
                     <td className="border px-4 py-2">
+                      <input
+                        type="text"
+                        value={editedDonorId}
+                        onChange={(e) => setEditedDonorId(e.target.value)}
+                      />
+                    </td>
+                    <td className="border px-4 py-2">
                       <button
                         className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => saveEdit(exam._id)}
+                        onClick={() => saveEdit(exam._id, editedHeight, editedWeight, editedSex, editedDonorId)}
                       >
                         Save
                       </button>
@@ -147,6 +191,7 @@ const PhysicalExamView = () => {
                     <td className="border px-4 py-2">{exam.height}</td>
                     <td className="border px-4 py-2">{exam.weight}</td>
                     <td className="border px-4 py-2">{exam.sex}</td>
+                    <td className="border px-4 py-2">{exam.donor ? exam.donor.name : ""}</td>
                     <td className="border px-4 py-2">
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -161,7 +206,8 @@ const PhysicalExamView = () => {
                             exam._id,
                             exam.height,
                             exam.weight,
-                            exam.sex
+                            exam.sex,
+                            exam.donorId
                           )
                         }
                       >
@@ -171,7 +217,7 @@ const PhysicalExamView = () => {
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         onClick={() => navigateToDetails(exam._id)}
                       >
-                        Go to Details
+                       Details
                       </button>
                     </td>
                   </>

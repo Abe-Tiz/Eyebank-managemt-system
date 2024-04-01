@@ -1,17 +1,18 @@
+
 const express = require('express');
 const router = express.Router();
 const {
-    getAllPhysicalExams,
-    createPhysicalExam,
-    getPhysicalExamById,
-    updatePhysicalExamById,
-    deletePhysicalExamById
+  getAllPhysicalExams,
+  createPhysicalExam,
+  getPhysicalExamById,
+  updatePhysicalExamById,
+  deletePhysicalExamById
 } = require('../controller/physicalExamController');
 
-router.get('/getAll', getAllPhysicalExams);
-router.post('/create', createPhysicalExam);
-router.get('/getOne/:id', getPhysicalExamById);
-router.put('/update/:id', updatePhysicalExamById);
-router.delete('/delete/:id', deletePhysicalExamById);
+router.get('/physicalExams', getAllPhysicalExams);
+router.post('/physicalExams', createPhysicalExam);
+router.get('/physicalExams/:id', getPhysicalExamById);
+router.put('/physicalExams/:id', updatePhysicalExamById);
+router.delete('/physicalExams/:id', deletePhysicalExamById);
 
 module.exports = router;

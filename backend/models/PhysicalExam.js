@@ -84,11 +84,6 @@ const physiaclSchema = new mongoose.Schema(
             ref: "User",
            // required: true,
         },
-        donor: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Donor",
-            required: true,
-          },
     },
     {
         timestamps: true,
@@ -100,3 +95,4 @@ const PhysicalExam =
     mongoose.model("physicalExam", physiaclSchema);
 
 module.exports = PhysicalExam;
+

@@ -1,12 +1,18 @@
-const PhysicalExam = require('../models/PhysicalExam');
-// Get all physical exams
+
+const PhysicalExam = require("../models/PhysicalExam");
+const Donor = require("../models/Donor");
+
+// Get all physical exams with populated donor field
 const getAllPhysicalExams = async (req, res) => {
   try {
-    const physicalExams = await PhysicalExam.find();
+    const physicalExams = await PhysicalExam.find().populate({
+      path: "donor",
+      select: "id",
+    })
+  ;
     res.json(physicalExams);
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' }
-    );
+    res.status(500).json({ error: "Internal server error" });
     console.error(error);
   }
 };
@@ -24,7 +30,8 @@ const createPhysicalExam = async (req, res) => {
       causeOfDeath,
       dod,
       story,
-      time
+      time,
+      donor, // Add the donor field to the request body
     } = req.body;
 
     const physicalExam = new PhysicalExam({
@@ -37,26 +44,29 @@ const createPhysicalExam = async (req, res) => {
       causeOfDeath,
       dod,
       story,
-      time
+      time,
+      donor, // Assign the donor field value
     });
 
     const savedPhysicalExam = await physicalExam.save();
     res.status(201).json(savedPhysicalExam);
   } catch (error) {
-    res.status(400).json({ error: 'Bad request' });
+    res.status(400).json({ error: "Bad request" });
   }
 };
 
-// Get a specific physical exam by ID
+// Get a specific physical exam by ID with populated donor field
 const getPhysicalExamById = async (req, res) => {
   try {
-    const physicalExam = await PhysicalExam.findById(req.params.id);
+    const physicalExam = await PhysicalExam.findById(req.params.id).populate(
+      "donor"
+    );
     if (!physicalExam) {
-      return res.status(404).json({ error: 'Physical exam not found' });
+      return res.status(404).json({ error: "Physical exam not found" });
     }
     res.json(physicalExam);
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -73,12 +83,13 @@ const updatePhysicalExamById = async (req, res) => {
       causeOfDeath,
       dod,
       story,
-      time
+      time,
+      donor, // Add the donor field to the request body
     } = req.body;
 
     const physicalExam = await PhysicalExam.findById(req.params.id);
     if (!physicalExam) {
-      return res.status(404).json({ error: 'Physical exam not found' });
+      return res.status(404).json({ error: "Physical exam not found" });
     }
 
     physicalExam.height = height;
@@ -91,11 +102,12 @@ const updatePhysicalExamById = async (req, res) => {
     physicalExam.dod = dod;
     physicalExam.story = story;
     physicalExam.time = time;
+    physicalExam.donor = donor; // Assign the donor field value
 
     const updatedPhysicalExam = await physicalExam.save();
     res.json(updatedPhysicalExam);
   } catch (error) {
-    res.status(400).json({ error: 'Bad request' });
+    res.status(400).json({ error: "Bad request" });
   }
 };
 
@@ -104,11 +116,11 @@ const deletePhysicalExamById = async (req, res) => {
   try {
     const physicalExam = await PhysicalExam.findByIdAndDelete(req.params.id);
     if (!physicalExam) {
-      return res.status(404).json({ error: 'Physical exam not found' });
+      return res.status(404).json({ error: "Physical exam not found" });
     }
-    res.json({ message: 'Physical exam deleted successfully' });
+    res.json({ message: "Physical exam deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -117,5 +129,5 @@ module.exports = {
   createPhysicalExam,
   getPhysicalExamById,
   updatePhysicalExamById,
-  deletePhysicalExamById
+  deletePhysicalExamById,
 };
