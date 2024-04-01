@@ -122,9 +122,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-lg text-black"
             >
-              <li>
-                <a>Profile</a>
-              </li>
+              
               <li>
                 <a> Setting</a>
               </li>

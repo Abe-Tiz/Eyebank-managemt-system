@@ -4,6 +4,7 @@ import * as FaIcons from "react-icons/fa"; // Font Awesome icons
 import * as IoIcons from "react-icons/io"; // Ionicons
 import * as PiIcons from "react-icons/pi"; // Ionicons
 import * as CiIcons from "react-icons/ci";  
+import * as VscIcons from "react-icons/vsc";  
 
 const iconLibraries = {
   md: MdIcons,
@@ -11,6 +12,7 @@ const iconLibraries = {
   io: IoIcons,
   pi: PiIcons,
   ci: CiIcons,
+  vsc: VscIcons,
 };
 
 const DynamicIcon = ({ library, iconName, className }) => {

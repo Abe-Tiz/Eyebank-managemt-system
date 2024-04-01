@@ -89,6 +89,18 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               />
             </Link>
             <Link
+              className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+              to="/adminDashboard/activate"
+              data-tooltip-id="user-list"
+              data-tooltip-content="User List"
+            >
+              <DynamicIcon
+                library="vsc"
+                iconName="VscActivateBreakpoints"
+                className="text-2xl"
+              />
+            </Link>
+            <Link
               to="/adminDashboard/addhospital"
               className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
               data-tooltip-id="user-list"
@@ -224,8 +236,8 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               >
                 {/* <CiBoxList className="text-2xl" /> */}
                 <DynamicIcon
-                  library="ci"
-                  iconName="CiBoxList"
+                  library="vsc"
+                  iconName="VscActivateBreakpoints"
                   className="text-2xl"
                 />
                 <span className="ml-2"> Activate Account</span>
