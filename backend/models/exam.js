@@ -84,11 +84,6 @@ const physiaclSchema = new mongoose.Schema(
             ref: "User",
            // required: true,
         },
-        donor: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Donor",
-            required: true,
-          },
     },
     {
         timestamps: true,
