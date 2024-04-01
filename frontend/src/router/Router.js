@@ -177,7 +177,7 @@ const router = createBrowserRouter([
                 element: <ViewCornea />,
             },
             {
-                path: "createExams",
+                path: "createExams/:donor._id",
                 element: <PhysicalExam />,
             },
             {
