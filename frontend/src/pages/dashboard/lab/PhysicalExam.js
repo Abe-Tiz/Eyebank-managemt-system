@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 // import axios from "axios";
 
 const PhysicalExam = () => {
+  const {id}=useParams()
   const [formData, setFormData] = useState({
+    donor_id: id,
     height: "",
     weight: "",
     sex: "",

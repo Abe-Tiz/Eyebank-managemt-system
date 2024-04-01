@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import moment from 'moment';
 const PhysicalExamView = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
@@ -27,9 +28,12 @@ const PhysicalExamView = () => {
 
   const deletePhysicalExam = async (examId) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/delete/${examId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:4000/api/delete/${examId}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
         fetchPhysicalExams();
         alert("Physical exam deleted successfully.");
@@ -61,24 +65,29 @@ const PhysicalExamView = () => {
     setEditTimeOfDeath("");
   };
   const navigateToDetails = (examId) => {
-    
     navigate(`/labtechnicaldashboard/getOne/${examId}`);
   };
 
-  const saveEdit = async (examId, editedHeight, editedWeight, editedSex) => {
+  const saveEdit = async (examId, editedHeight, editedWeight, editedSex,editCauseOfDeath, editDateOfDeath, editTimeOfDeath) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/update/${examId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          height: editedHeight,
-          weight: editedWeight,
-          sex: editedSex,
-        }),
-      });
-  
+      const response = await fetch(
+        `http://localhost:4000/api/update/${examId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            height: editedHeight,
+            weight: editedWeight,
+            sex: editedSex,
+            causeOfDeath: editCauseOfDeath,
+            dod: editDateOfDeath,
+            time: editTimeOfDeath,
+          }),
+        }
+      );
+
       if (response.ok) {
         fetchPhysicalExams();
         setEditExamId(null);
@@ -88,11 +97,15 @@ const PhysicalExamView = () => {
         alert("Physical exam updated successfully.");
       } else {
         const errorResponse = await response.json();
-        throw new Error(errorResponse.message || "Failed to update physical exam.");
+        throw new Error(
+          errorResponse.message || "Failed to update physical exam."
+        );
       }
     } catch (error) {
       console.error("Error updating physical exam:", error);
-      alert("An error occurred while updating the physical exam. Please try again.");
+      alert(
+        "An error occurred while updating the physical exam. Please try again."
+      );
     }
   };
   return (
@@ -142,24 +155,24 @@ const PhysicalExamView = () => {
                     <td className="border px-4 py-2">
                       <input
                         type="text"
-                        value={editedSex}
+                        value={editCauseOfDeath}
                         onChange={(e) => setEditCauseOfDeath(e.target.value)}
                       />
                     </td>
                     <td className="border px-4 py-2">
                       <input
                         type="text"
-                        value={editedSex}
+                        value={editDateOfDeath}
                         onChange={(e) => setEditDateOfDeath(e.target.value)}
                       />
                     </td>
                     <td className="border px-4 py-2">
-                      <input
-                        type="text"
-                        value={editedSex}
-                        onChange={(e) => setEditTimeOfDeath(e.target.value)}
-                      />
-                    </td>
+  <input
+    type="text"
+    value={moment(editTimeOfDeath).format("HH:mm")}
+    onChange={(e) => setEditTimeOfDeath(e.target.value)}
+  />
+</td>
                     <td className="border px-4 py-2">
                       <button
                         className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
@@ -181,8 +194,8 @@ const PhysicalExamView = () => {
                     <td className="border px-4 py-2">{exam.weight}</td>
                     <td className="border px-4 py-2">{exam.sex}</td>
                     <td className="border px-4 py-2">{exam.causeOfDeath}</td>
-                    <td className="border px-4 py-2">{exam.dateOfDeath}</td>
-                    <td className="border px-4 py-2">{exam.timeOfDeath}</td>
+                    <td className="border px-4 py-2">{exam.dod}</td>
+                    <td className="border px-4 py-2">{exam.time}</td>
                     <td className="border px-4 py-2">
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -199,9 +212,8 @@ const PhysicalExamView = () => {
                             exam.weight,
                             exam.sex,
                             exam.causeOfDeath,
-                            exam.dateOfDeath,
-                            exam.timeOfDeath
-                            
+                            exam.dod,
+                            exam.time
                           )
                         }
                       >

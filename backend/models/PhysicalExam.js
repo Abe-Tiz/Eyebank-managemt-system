@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 // high risk examined for donor
 const examinedSchema = new mongoose.Schema({
     head: { type: Boolean, default: false },
@@ -48,6 +47,11 @@ const riskExaminedSchema = new mongoose.Schema({
 
 const physiaclSchema = new mongoose.Schema(
     {
+        donor_id : {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Donor",
+            //required: true,
+        },
         height: {
             type: Number,
             required: true,
@@ -79,12 +83,15 @@ const physiaclSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+       
         technicianName: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
            // required: true,
-        },
+        },  
     },
+
+    
     {
         timestamps: true,
     }
