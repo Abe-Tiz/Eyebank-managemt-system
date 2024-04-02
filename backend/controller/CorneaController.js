@@ -3,6 +3,9 @@ const Donor = require("../models/Donor");
 const createCornea = async (req, res) => {
     //const { dateOfRecovery, recoveryTechnical, position, eyeLid, size, irisColor, corneaStatus, clarity, lens } = req.body;
     const cornea = new Cornea({
+        examId: req.body.id,
+        lotNo: req.body.lotNo,
+        dateOfRecovery: req.body.dateOfRecovery,
         recoveryTechnical: req.body.recoveryTechnical,
         position: req.body.position,
         eyeLid: req.body.eyeLid,

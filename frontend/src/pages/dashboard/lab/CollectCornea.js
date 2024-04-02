@@ -1,13 +1,12 @@
 
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 //import "../../static/styles/cornea.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 const CollectCornea = () => {
-
     const dateOfRecovery = Date.now();
     const [position, setPosition] = useState('');
     const [lotNo, setLotNo] = useState('');
@@ -27,7 +26,7 @@ const CollectCornea = () => {
     const [evaluater, setEvaluater] = useState('');
     //for recovery
 
-
+    const { id } = useParams();
     const [state, setState] = useState({
         name: ""
     })
@@ -38,6 +37,8 @@ const CollectCornea = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
+            id,
+            lotNo,
             dateOfRecovery,
             recoveryTechnical,
             position,
@@ -113,11 +114,10 @@ const CollectCornea = () => {
         setPosition(event.target.value);
     };
     return (
-        <div>
-            <h2 className="text-xl" style={{ textAlign: 'center', background: "#6af" }}>Welcome to Cornea Recovery Form</h2>
+        <div className="mt-0">
+            <h2 className="text-xl " style={{ textAlign: 'center', background: "#6af" }}>Welcome to Cornea Recovery Form</h2>
             <form onSubmit={handleFormSubmit}>
                 <div className="grid grid-cols-2">
-
                     <label>
                         Lot No:
                         <input
@@ -127,29 +127,6 @@ const CollectCornea = () => {
                             onChange={(e) => setLotNo(e.target.value)}
                         >
                         </input>
-                    </label>
-                    <label>
-                        Position:
-                        <br />
-                        <label>
-                            <input
-                                type="radio"
-                                value="left"
-                                checked={position === 'left'}
-                                onChange={handlePosition}
-                            />
-                            Left
-                        </label>
-                        <br />
-                        <label>
-                            <input
-                                type="radio"
-                                value="right"
-                                checked={position === 'right'}
-                                onChange={handlePosition}
-                            />
-                            Right
-                        </label>
                     </label>
                     <label>
                         eyeLid:
@@ -221,6 +198,30 @@ const CollectCornea = () => {
                             <option value="lens 2">lens 2</option>
                             <option value="lens 3">lens 3</option>
                         </select>
+                    </label>
+                    <label>
+                        Position:
+
+                        <label>
+                            <input
+                                type="radio"
+                                value="left"
+                                className="ml-4"
+                                checked={position === 'left'}
+                                onChange={handlePosition}
+                            />
+                            Left
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="right"
+                                className="ml-2"
+                                checked={position === 'right'}
+                                onChange={handlePosition}
+                            />
+                            Right
+                        </label>
                     </label>
                 </div>
 

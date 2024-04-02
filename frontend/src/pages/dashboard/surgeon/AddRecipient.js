@@ -5,16 +5,17 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 
 const AddRecipient = () => {
-    const [recipinentname, setRecipientname] = useState("");
+    const [recipientname, setRecipientname] = useState("");
     const [age, setAge] = useState("");
     const [diagnosis, setDiagnosis] = useState("");
     const [sex, setSex] = useState("");
     const [surgeons, setSurgeons] = useState([]);
     const [hospitals, setHospitals] = useState([]);
-    const [surgeryType, setSurgeryType] = useState("");
+    const [registerDate, setRegisterDate] = useState("");
     const [address, setAddress] = useState("");
     const [surgeonName, setSurgeonName] = useState("");
     const [hospital, setHospital] = useState("");
+    const [surgeryType, setSurgeryType] = useState("");
     const [phone, setPhone] = useState("");
     const navigate = useNavigate();
     const toast = useToast();
@@ -49,13 +50,16 @@ const AddRecipient = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
-            recipinentname,
+            recipientname,
             age,
             diagnosis,
-            surgeonName,
+            surgeryType,
             address,
             hospital,
-            surgeryType,
+            sex,
+            phone,
+            registerDate,
+
         };
         console.log(data);
         try {
@@ -91,7 +95,7 @@ const AddRecipient = () => {
                         Recipient Name:
                         <input
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={recipinentname}
+                            value={recipientname}
                             onChange={(e) => setRecipientname(e.target.value)}
                         />
                     </label>
@@ -104,54 +108,53 @@ const AddRecipient = () => {
                             onChange={(e) => setAge(e.target.value)}
                         />
                     </label>
+                </div>
+                <div className="grid grid-cols-2">
                     <label>
                         Sex:
-                        <div>
-                            <input
-                                type="radio"
-                                id="sex-male"
-                                value="Male"
-                                checked={sex === "Male"}
-                                onChange={(e) => setSex(e.target.value)}
-                            />
-                            <label htmlFor="sex-male">Male</label>
-                        </div>
-                        <div>
-                            <input
-                                type="radio"
-                                id="sex-female"
-                                value="Female"
-                                checked={sex === "Female"}
-                                onChange={(e) => setSex(e.target.value)}
-                            />
-                            <label htmlFor="sex-female">Female</label>
-                        </div>
-                        {/* Add more sex options as needed */}
+                        <input
+                            type="radio"
+                            id="sex-male"
+                            value="Male"
+                            className="ml-2"
+                            checked={sex === "Male"}
+                            onChange={(e) => setSex(e.target.value)}
+                        />
+                        <label htmlFor="sex-male">Male</label>
+                        <input
+                            type="radio"
+                            id="sex-female"
+                            value="Female"
+                            className="ml-2"
+                            checked={sex === "Female"}
+                            onChange={(e) => setSex(e.target.value)}
+                        />
+                        <label htmlFor="sex-female">Female</label>
                     </label>
-                    {/* <label>
-                        Surgeon:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={surgeonName}
-                            onChange={(e) => setSurgeonName(e.target.value)}
-                        >
-                            {surgeons.map((surgeon, index) => (
-                                <option key={index} value={surgeon._id}>
-                                    {surgeon.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label> */}
                     <label>
                         Phone:
                         <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="number"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                         />
                     </label>
-
+                </div>
+                <div className="grid grid-cols-2">
+                    <label>
+                        Surgeon Type:
+                        <select
+                            className="form-input  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={surgeryType}
+                            onChange={(e) => setSurgeryType(e.target.value)}
+                        >
+                            <option value="">Select Surgeon Type</option>
+                            <option value="PK">PK</option>
+                            <option value="AK">AK</option>
+                            <option value="PKA">PKA</option>
+                        </select>
+                    </label>
                     <label>
                         Hospitals:
                         <select
@@ -167,6 +170,8 @@ const AddRecipient = () => {
                             ))}
                         </select>
                     </label>
+                </div>
+                <div className="grid grid-cols-2">
                     <label>
                         Address:
                         <select
@@ -189,8 +194,8 @@ const AddRecipient = () => {
                         Add Recipient
                     </button>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 };
 

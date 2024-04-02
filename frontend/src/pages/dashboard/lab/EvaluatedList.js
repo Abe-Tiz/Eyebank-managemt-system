@@ -23,7 +23,7 @@ import {
     TableContainer,
 } from '@chakra-ui/react';
 
-const ViewTissue = () => {
+const EvaluatedList = () => {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
@@ -78,12 +78,12 @@ const ViewTissue = () => {
                                 <Th>LotNo</Th>
                                 <Th>Date</Th>
                                 <Th>Evaluater</Th>
-                                <Th>Epitheliam</Th>
+                                {/* <Th>Epitheliam</Th>
                                 <Th>Stroma</Th>
                                 <Th>Endothelium</Th>
-                                <Th>Approval</Th>
-                                <Th>Suiatabl/Reason</Th>
-                                <Th colSpan={3}>Operations</Th>
+                                <Th>Approval</Th> */}
+                                <Th>Suiatablity</Th>
+                                <Th colSpan={1}>Operations</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -91,7 +91,7 @@ const ViewTissue = () => {
                                 .filter(
                                     (cornea) =>
                                         cornea.evaluation &&
-                                        (cornea.evaluation.approval === 'yes' || cornea.evaluation.approval === 'no')
+                                        (cornea.evaluation.approval === 'yes')
                                 )
                                 .map((cornea, index) => (
                                     <Tr key={index}>
@@ -99,25 +99,17 @@ const ViewTissue = () => {
                                         <Td>{cornea.lotNo}</Td>
                                         <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td>
                                         <Td>{cornea.evaluation.evaluater}</Td>
-                                        <Td>{cornea.evaluation.epitheliam}</Td>
+                                        {/* <Td>{cornea.evaluation.epitheliam}</Td>
                                         <Td>{cornea.evaluation.stroma}</Td>
-                                        <Td>{cornea.evaluation.endothelium}</Td>
-                                        <Td>{cornea.evaluation.approval}</Td>
+                                        <Td>{cornea.evaluation.endothelium}</Td> */}
+                                        {/* <Td>{cornea.evaluation.approval}</Td> */}
                                         <Td>
-                                            {cornea.evaluation.approval === 'yes'
-                                                ? cornea.evaluation.suiatablity
-                                                : cornea.evaluation.reason}
+                                            {cornea.evaluation.suiatablity}
                                         </Td>
-
                                         <Td className='text-center ml-3 text-blue-600'>
-                                            <Link to={`/medicaldirectordashboard/editevaluation/${cornea._id}`}>
-                                                <EditIcon />
+                                            <Link to={`/labtechnicaldashboard/distributeCornea/${cornea._id}`}>
+                                                <Button colorScheme='green'>Distribute</Button>
                                             </Link>
-                                        </Td>
-                                        <Td className='text-center ml-3 text-red-600'>
-                                            <button onClick={() => deleteCornea(cornea._id)}>
-                                                <DeleteIcon />
-                                            </button>
                                         </Td>
                                     </Tr>
                                 ))}
@@ -129,4 +121,4 @@ const ViewTissue = () => {
     );
 };
 
-export default ViewTissue;
+export default EvaluatedList;
