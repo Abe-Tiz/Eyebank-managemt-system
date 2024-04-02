@@ -8,10 +8,12 @@
   "deleteButtonLabel": "ሰርዝ",
   "logouttButtonLabel": "ውጣ",
   "settingtButtonLabel": "ቅንብሮች",
-   "dashboardLabel": "ዳሽቦርድ",
+  "dashboardLabel": "ዳሽቦርድ",
   "addDonorLabel": "ለጋሽ ጨምር",
   "listDonorLabel": "የለጋሾች ዝርዝር",
   "addUserrLabel": "ተጠቃሚ አክል",
   "listUserrLabel": "የተጠቃሚ ዝርዝር",
-  "printButtonLabel": "ማተም"
+  "printButtonLabel": "ማተም",
+  "HeroSpan": "አይኖች",
+  "HeroHeading": "ዓለምን በሌላ ሰው ይመልከቱ"
 }

@@ -283,6 +283,27 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
+
+const getUserByName = asyncHandler(async (req, res) => {
+  try {
+    const { name } = req.body;
+    const user = await User.find(
+      // Search by name starting with the provided string, ignoring case
+      { name: { $regex: new RegExp(`^${name}`, "i") } }
+    ).exec();
+
+    if (user.length === 0) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    console.log(user);
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // Update a donor
 const updateUser = asyncHandler(async (req, res) => {
   try {
@@ -307,8 +328,11 @@ const deleteUser =  asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Assuming you have a Donor model
-    await User.deleteOne({ _id: id }); // Assuming the donor ID is stored in the "_id" field
+    // Assuming you have a user model
+    await User.deleteOne(
+      { _id: id },
+      { new: true }
+    );  
     res.status(200).json({ message: "User deleted successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -326,5 +350,6 @@ module.exports = {
   getloggedInUser,
   getUserById,
   updateUser,
+  getUserByName,
 };
 

@@ -8,6 +8,7 @@ import cookies from "js-cookie";
 import classNames from "classnames";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { languages } from './../Languages';
+import LanguageSelector from './../pages/dashboard/admins/LanguageSelector';
 
 
 const Navbar = () => {
@@ -69,8 +70,8 @@ const Navbar = () => {
           {/* <Brand style={{ width: "50px", height: "50px", marginTop: "-30px",backgroundColor:"white",borderRadius:"50%"}} /> */}
           <img
             style={{
-              width: "50px",
-              height: "50px",
+                            width: "50px",
+                            height: "50px",
               marginTop: "-30px",
               backgroundColor: "white",
               borderRadius: "50%",
@@ -123,7 +124,7 @@ const Navbar = () => {
 
         {/* <ButtonPrimary title={t("translation:Login")}/> */}
 
-        <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
+        {/* <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
           <button
             className="bg-transparent border-4 border-purple-800 p-1 text-gray-400 font-bold  dropdown-toggle"
             type="button"
@@ -156,7 +157,8 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
+          <LanguageSelector />
       </div>
     </nav>
       </header>

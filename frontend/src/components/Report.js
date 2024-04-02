@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import axios from 'axios';
 import ReportCard from './ReportCard';
+import RecentDonor from "../pages/donor/RecentDonor";
+// import RecentDonor from './../pages/donor/RecentDonor';
 
     const Report = () => {
         const [reportData, setReportData] = useState({
@@ -96,21 +98,25 @@ import ReportCard from './ReportCard';
     }, [data]);
 
     return (
-        <div className="p-4">
-        <h1 className="text-3xl font-bold mb-4">Cornea Report</h1>
+      <div className="p-4 ">
+        {/* <h1 className="text-3xl font-bold mb-4">Cornea Report</h1> */}
+
         <div className="flex flex-wrap -mx-2">
-            {data.map((item, index) => (
+          {data.map((item, index) => (
             <ReportCard
-                key={index}
-                category={item.category}
-                number={item.number}
+              key={index}
+              category={item.category}
+              number={item.number}
             />
-            ))}
+          ))}
         </div>
-        <div className="mt-8">
+        <div className="flex justify-between flex-col md:flex-row">
+          <div className="mt-8 w-3/4">
             <canvas ref={chartRef}></canvas>
+          </div>
+          <RecentDonor />
         </div>
-        </div>
+      </div>
     );
 };
 

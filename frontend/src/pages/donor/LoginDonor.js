@@ -113,7 +113,7 @@ const LoginDonor = () => {
     <div className="signup__container container">
       <div className="login-form m-10">
         <h3 className="title text-2xl md:text-3xl font-semibold text-gray-800">
-          Login to Your Profile
+          {t("login:loginLabel")}
         </h3>
 
         <div className="form">
@@ -151,14 +151,13 @@ const LoginDonor = () => {
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   {/* {t("login:labelLoginPassword")}{" "} */}
-                  Short Code:
-                  <span className="text-red-500">*</span>
+                  {t("donor:ShortCode")}:<span className="text-red-500">*</span>
                 </label>
                 <div className="flex flex-col items-center">
                   <input
                     name="code"
                     type="number"
-                    placeholder="Enter Short Code"
+                    placeholder={t("donor:PlaceholderShortCode")}
                     onChange={handleCodeChange}
                     className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                     autoComplete="off"
@@ -181,10 +180,10 @@ const LoginDonor = () => {
         <Link to="/forgot-code" className="block ml-3 text-blue-500">
           {t("login:forgotPasswordLabel")} ?
         </Link>
-        <Link to="/login">
+        {/* <Link to="/login">
           {" "}
           {t("register:signupOptionLabel")} ? {t("login:loginTitleLabel")}
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

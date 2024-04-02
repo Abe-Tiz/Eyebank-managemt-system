@@ -35,5 +35,9 @@
   "labelDonorCardBottom": "ለኢትዮጵያ የአይን ባንክ አገልግሎት ብቻ ጥቅም ላይ ይውላል",
   "deleteTitleDonor": "ለጋሹን ሰርዝ",
   "deleteCancelDonor": "ሰርዝ",
-  "deleteSubtitleDonor": " እርግጠኛ ነዎት ይህን ለጋሽ መሰረዝ ይፈልጋሉ? ይህ እርምጃ ሊቀለበስ አይችልም።"
+  "deleteSubtitleDonor": " እርግጠኛ ነዎት ይህን ለጋሽ መሰረዝ ይፈልጋሉ? ይህ እርምጃ ሊቀለበስ አይችልም።",
+  "ProfileHeading": "መረጃዎን ይጎብኙ",
+  "HavePledge": "ቃል ገብተሃል",
+  "ShortCode": "አጭር ኮድ",
+  "PlaceholderShortCode": "አጭር ኮድ ያስገቡ"
 }
