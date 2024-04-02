@@ -114,7 +114,7 @@ const ViewCornea = () => {
                     <Tbody>
                         {corneas.map((cornea, index) => (
                             <Tr key={index}>
-                                <Td>{index + 1}</Td>
+                                <Td>{cornea.lotNo}</Td>
                                 <Td>
                                     {formatTimestamp(cornea.createdAt)}
                                 </Td>

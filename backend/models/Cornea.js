@@ -3,6 +3,10 @@ var currentDate = new Date();
 var expiration = new Date(currentDate.getTime() + (14 * 24 * 60 * 60 * 1000));
 var expirationDate = expiration.toISOString();
 const corneaSchema = new mongoose.Schema({
+    examId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PhysicalExam",
+    },
     lotNo: {
         type: String
     },
@@ -12,9 +16,6 @@ const corneaSchema = new mongoose.Schema({
     },
     recoveryTechnical: {
         type: String,
-        // type: mongoose.Schema.Types.ObjectId,
-        // ref: "User",
-
     },
     position: {
         type: String, enum: ['left', 'right']
@@ -42,7 +43,6 @@ const corneaSchema = new mongoose.Schema({
     expirationDate: {
         type: Date,
         default: expirationDate
-
     },
     evaluation: {
         evaluationDate: {

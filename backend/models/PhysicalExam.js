@@ -82,8 +82,12 @@ const physiaclSchema = new mongoose.Schema(
         technicianName: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-           // required: true,
+            // required: true,
         },
+        collect: {
+            type: Boolean,
+            default: false,
+        }
     },
     {
         timestamps: true,
