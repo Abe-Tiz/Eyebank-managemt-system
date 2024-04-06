@@ -83,6 +83,25 @@ const Home = () => {
             </div>
           </div>
         </div>
+       
+        {/* Client Section */}
+        <div className="w-4/5 mx-auto my-8">
+          <div className="flex overflow-x-hidden">
+            <div className="full-screen-slide space-x-4 flex gap-10">
+               
+              <div className="min-w-max">
+                <img src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s=" alt="Client Logo" className="h-24" />
+              </div>
+              <div className="min-w-max">
+                <img src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s=" alt="Client Logo" className="h-24" />
+              </div>
+              <div className="min-w-max">
+                <img src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s=" alt="Client Logo" className="h-24" />
+              </div>
+              
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

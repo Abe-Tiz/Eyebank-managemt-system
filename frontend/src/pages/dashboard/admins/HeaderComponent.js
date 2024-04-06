@@ -42,7 +42,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
   return (
     <div
       className={`bg-indigo-900 p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${
-        state.collapsed ? ` w-11/12` : `w-4/5`
+        state.collapsed ? ` w-11/12 ml-8` : `w-4/5`
       }`}
     >
       <div className="flex items-center">
@@ -122,9 +122,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-lg text-black"
             >
-              <li>
-                <a>Profile</a>
-              </li>
+              
               <li>
                 <a> Setting</a>
               </li>

@@ -11,6 +11,7 @@ const {
   getUserById,
   updateUser,
   getUserByName,
+  activateUser,
 } = require("../controller/UserController");
 
 
@@ -27,6 +28,6 @@ router.post("/userLogedin", getloggedInUser);
 router.get("/:id", getUserById);
 router.put("/update/:id", updateUser);
 router.post("/search", getUserByName);
-// router.delete("/delete/:id", deleteUser);
+router.post("/activate", activateUser);
 
 module.exports = router; 
