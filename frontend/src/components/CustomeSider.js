@@ -155,7 +155,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
             <div className="w-64- mt-4 flex flex-col justify-center items-center">
               <Link
                 to="/adminDashboard"
-                className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
+                className=" flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
                 // onClick={handleReport}
                 data-tooltip-id="my-dashboard"
                 data-tooltip-content="Dashboard"
@@ -169,7 +169,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               </Link>
               <Link
                 to="/adminDashboard/addDonor"
-                className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
+                className=" flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
                 // onClick={handleAddDonorClick}
 
                 data-tooltip-id="add-donor"
@@ -184,7 +184,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               </Link>
               <Link
                 to="/adminDashboard/donorList"
-                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 // onClick={handleDisplayDonorClick}
                 data-tooltip-id="donor-list"
                 data-tooltip-content="Donor List"
@@ -199,7 +199,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               </Link>
               <Link
                 to="/adminDashboard/addUser"
-                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 // onClick={handleAddUser}
                 data-tooltip-id="add-user"
                 data-tooltip-content="Add User"
@@ -214,7 +214,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               </Link>
               <Link
                 to="/adminDashboard/userList"
-                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 // onClick={handleUserList}
                 data-tooltip-id="user-list"
                 data-tooltip-content="User List"
@@ -229,7 +229,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               </Link>
               <Link
                 to="/adminDashboard/activate"
-                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                className="flex w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 // onClick={handleUserList}
                 data-tooltip-id="activate-account"
                 data-tooltip-content="Activate User"
@@ -244,7 +244,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               </Link>
               <Link
                 to="/adminDashboard/addhospital"
-                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 data-tooltip-id="user-list"
                 data-tooltip-content="Add Hospital"
               >
@@ -259,7 +259,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
 
               <Link
                 to="/adminDashboard/create-post"
-                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 data-tooltip-id="popular-posts"
                 data-tooltip-content="Store Cornea"
               >
@@ -274,7 +274,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
               </Link>
               <Link
                 to="/adminDashboard/posts"
-                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 data-tooltip-id="popular-posts"
                 data-tooltip-content="Store Cornea"
               >
