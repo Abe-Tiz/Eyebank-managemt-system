@@ -72,7 +72,7 @@ const Viewdistribute = () => {
                     <Tbody>
                         {distributed.map((distribute, index) => (
                             <Tr key={index}>
-                                <Td>{distribute.LotNo._id}</Td>
+                                <Td>{distribute.LotNo}</Td>
                                 <Td>{distribute.hospitalName.hospitalName}</Td>
                                 <Td>{distribute.nameOfSurgeon.name}</Td>
                                 <Td>{distribute.modeOfTransportation}</Td>

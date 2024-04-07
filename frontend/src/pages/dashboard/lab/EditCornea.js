@@ -193,7 +193,7 @@ const EditCornea = () => {
                             <option value="Lens 3">Lens 3</option>
                         </select>
                     </label>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">
+                    <button className="bg-sky-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">
                         Update
                     </button>
                 </div>

@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const DistributionSchema = new mongoose.Schema({
     LotNo: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Cornea"
+        type: String,
         //required: true,
     },
     hospitalName: {

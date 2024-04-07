@@ -24,8 +24,11 @@ const CollectCornea = () => {
     const [suiatablity, setSuiatablity] = useState('');
     const [reason, setReason] = useState('');
     const [evaluater, setEvaluater] = useState('');
+    const [collect, setCollect] = useState(true);
+    const data = {
+        collect,
+    }
     //for recovery
-
     const { id } = useParams();
     const [state, setState] = useState({
         name: ""
@@ -59,7 +62,7 @@ const CollectCornea = () => {
             reason
         }
         console.log(data);
-
+        handleCollect(id);
         try {
             const response = await axios.post('http://localhost:4000/cornea/create',
 
@@ -78,7 +81,13 @@ const CollectCornea = () => {
         catch (err) {
             console.log(err);
         }
-
+    };
+    const handleCollect = async (id) => {
+        try {
+            await axios.put(`http://localhost:4000/api/collect/${id}`, data);
+        } catch (error) {
+            console.error("Failed to collect physical exam:", error);
+        }
     };
 
     useEffect(() => {
@@ -119,28 +128,28 @@ const CollectCornea = () => {
             <form onSubmit={handleFormSubmit}>
                 <div className="grid grid-cols-2">
                     <label>
-                        Lot No:
+
                         <input
                             type="text"
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            placeholder="Enter Lot No"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={lotNo}
                             onChange={(e) => setLotNo(e.target.value)}
                         >
                         </input>
                     </label>
                     <label>
-                        eyeLid:
                         <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="text"
+                            placeholder="Enter eyeLid"
                             value={eyeLid}
                             onChange={(e) => setEyeLid(e.target.value)}
                         />
                     </label>
                     <label>
-                        size:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={size}
                             onChange={(e) => setSize(e.target.value)}>
                             <option value="">Select Size</option>
@@ -148,12 +157,10 @@ const CollectCornea = () => {
                             <option value="6">6cm</option>
                             <option value="9">9cm</option>
                         </select>
-
                     </label>
                     <label>
-                        Iris Color:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={irisColor}
                             onChange={(e) => setIrisColor(e.target.value)}>
                             <option value="">Select Color</option>
@@ -162,9 +169,8 @@ const CollectCornea = () => {
                         </select>
                     </label>
                     <label>
-                        Cornea Status
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={corneaStatus}
                             onChange={(e) => setCorneaStatus(e.target.value)}>
                             <option value="">Select  Status</option>
@@ -174,9 +180,8 @@ const CollectCornea = () => {
                         </select>
                     </label>
                     <label>
-                        clarity:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={clarity}
                             onChange={(e) => setClarity(e.target.value)}
                         >
@@ -187,9 +192,8 @@ const CollectCornea = () => {
                         </select>
                     </label>
                     <label>
-                        Lens:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={lens}
                             onChange={(e) => setLens(e.target.value)}
                         >
@@ -201,8 +205,7 @@ const CollectCornea = () => {
                     </label>
                     <label>
                         Position:
-
-                        <label>
+                        <label className="mt-4">
                             <input
                                 type="radio"
                                 value="left"
@@ -224,7 +227,6 @@ const CollectCornea = () => {
                         </label>
                     </label>
                 </div>
-
                 <div className="text-center mt-4">
                     <button
                         // onClick={handleFormSubmit}

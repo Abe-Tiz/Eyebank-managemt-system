@@ -166,7 +166,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:storeCorneaLabel")}</span>
                                 </Link>
-                                <Link
+                                {/* <Link
                                     to="/labtechnicaldashboard/distributeCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
@@ -175,7 +175,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                 >
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:distributeCorneaLabel")}</span>
-                                </Link>
+                                </Link> */}
                                 <Link
                                     to="/labtechnicaldashboard/viewDistributed"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"

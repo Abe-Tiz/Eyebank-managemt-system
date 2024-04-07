@@ -98,7 +98,7 @@ const ViewCornea = () => {
                     <Thead>
                         <Tr>
 
-                            <Th>S.No</Th>
+                            <Th>LotNo</Th>
                             <Th>Date</Th>
                             <Th> Technical</Th>
                             <Th>Position</Th>
