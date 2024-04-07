@@ -24,11 +24,8 @@ const CollectCornea = () => {
     const [suiatablity, setSuiatablity] = useState('');
     const [reason, setReason] = useState('');
     const [evaluater, setEvaluater] = useState('');
-    const [collect, setCollect] = useState(true);
-    const data = {
-        collect,
-    }
     //for recovery
+
     const { id } = useParams();
     const [state, setState] = useState({
         name: ""
@@ -62,7 +59,7 @@ const CollectCornea = () => {
             reason
         }
         console.log(data);
-        handleCollect(id);
+
         try {
             const response = await axios.post('http://localhost:4000/cornea/create',
 
@@ -82,14 +79,6 @@ const CollectCornea = () => {
             console.log(err);
         }
     };
-    const handleCollect = async (id) => {
-        try {
-            await axios.put(`http://localhost:4000/api/collect/${id}`, data);
-        } catch (error) {
-            console.error("Failed to collect physical exam:", error);
-        }
-    };
-
     useEffect(() => {
         fetch("http://127.0.0.1:4000/user/userLogedin", {
             method: "POST",
@@ -123,17 +112,16 @@ const CollectCornea = () => {
         setPosition(event.target.value);
     };
     return (
-        <div className="mt-0">
-            <h2 className="text-xl " style={{ textAlign: 'center', background: "#6af" }}>Welcome to Cornea Recovery Form</h2>
+        <div className="mt-[-2]">
+            <h2 className="text-3xl " style={{ textAlign: 'center' }}>Welcome to Cornea Recovery Form</h2>
             <form onSubmit={handleFormSubmit}>
-                <div className="grid grid-cols-2">
+                <div className="grid mt-4 grid-cols-2">
                     <label>
-
                         <input
                             type="text"
-                            placeholder="Enter Lot No"
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={lotNo}
+                            placeholder="Lot No"
                             onChange={(e) => setLotNo(e.target.value)}
                         >
                         </input>
@@ -142,8 +130,8 @@ const CollectCornea = () => {
                         <input
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="text"
-                            placeholder="Enter eyeLid"
                             value={eyeLid}
+                            placeholder="eyeLid"
                             onChange={(e) => setEyeLid(e.target.value)}
                         />
                     </label>
@@ -209,7 +197,7 @@ const CollectCornea = () => {
                             <input
                                 type="radio"
                                 value="left"
-                                className="ml-4"
+                                className="m-2"
                                 checked={position === 'left'}
                                 onChange={handlePosition}
                             />
@@ -219,7 +207,7 @@ const CollectCornea = () => {
                             <input
                                 type="radio"
                                 value="right"
-                                className="ml-2"
+                                className="m-2"
                                 checked={position === 'right'}
                                 onChange={handlePosition}
                             />
@@ -227,11 +215,12 @@ const CollectCornea = () => {
                         </label>
                     </label>
                 </div>
+
                 <div className="text-center mt-4">
                     <button
                         // onClick={handleFormSubmit}
                         type="submit"
-                        className="w-1/3 mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600  text-white font-semibold rounded"
+                        className="w-1/3 mr-4 py-2 px-4 border bg-sky-600  text-white font-semibold rounded"
                     >
                         Register Cornea
                     </button>
