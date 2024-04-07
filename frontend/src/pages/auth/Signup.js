@@ -251,7 +251,9 @@ const Signup = () => {
                     className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
                     onChange={handleRole}
                   >
-                    <option value={role}>{t("register:LabelRoleSelect")}</option>
+                    <option value={role}>
+                      {t("register:LabelRoleSelect")}
+                    </option>
                     <option value="admin">{t("register:LabelAdmin")}</option>
                     <option value="lab Techinician">
                       {t("register:LabelLabTechinician")}
@@ -319,7 +321,10 @@ const Signup = () => {
                     )}
                   </div>
                 </div>
-                <ButtonComponent title={t("register:signUpLabel")} />
+                <ButtonComponent
+                  customClass="w-64 justify-center  mb-3"
+                  title={t("register:signUpLabel")}
+                />
               </div>
             </form>
           </div>

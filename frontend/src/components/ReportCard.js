@@ -11,12 +11,12 @@ const ReportCard = ({ category, number }) => {
   let icon, color, title;
 
   switch (category) {
-    case "discarded":
+    case "cornea":
       icon = <DeleteOutlined />;
-      color = "bg-red-500";
-      title = "Discarded Cornea";
+      color = "bg-blue-500";
+      title = "Total No Cornea";
       break;
-    case "evaluated":
+    case "evaluted":
       icon = <CheckCircleOutlined />;
       color = "bg-green";
       title = "Evaluated Cornea";
@@ -31,10 +31,10 @@ const ReportCard = ({ category, number }) => {
       color = "bg-yellow-500";
       title = "Ready for Distribution";
       break;
-    case "donor":
+    case "pledeged":
       icon = <MedicineBoxOutlined />;
       color = "bg-purple-500";
-      title = "Registered Donor";
+      title = "Pledged People";
       break;
     default:
       icon = null;

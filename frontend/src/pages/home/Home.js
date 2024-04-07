@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import Hero from "../../components/Hero";
- 
+import ButtonComponent from "../../components/ButtonComponent";
+  
 const Home = () => {
   const imagePath = process.env.PUBLIC_URL + "/images/eye2.png";
   const imagePath2 = process.env.PUBLIC_URL + "/images/eyet2.jpg";
@@ -44,12 +45,17 @@ const Home = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              <button
+              {/* <button
                 className="bg-green hover:bg-gray-400 px-5 py-2 text-2xl text-white font-extrabold mt-3 mr-5 "
                 onClick={() => navigate("/about")}
               >
                 {t("about:readmore")}
-              </button>
+              </button> */}
+              <ButtonComponent
+                onClick={() => navigate("/about")}
+                title={t("about:readmore")}
+                customClass="w-32"
+              />
             </div>
           </div>
         </div>
@@ -74,31 +80,47 @@ const Home = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              <button
+              {/* <button
                 className="bg-green hover:bg-gray-400 px-5 py-2 text-2xl text-white font-extrabold mt-3 mr-5  "
                 onClick={() => navigate("/awareness")}
               >
                 {t("about:readmore")}
-              </button>
+              </button> */}
+
+              <ButtonComponent
+                title={t("about:readmore")}
+                onClick={() => navigate("/awareness")}
+                customClass="w-32"
+              />
             </div>
           </div>
         </div>
-       
+
         {/* Client Section */}
         <div className="w-4/5 mx-auto my-8">
           <div className="flex overflow-x-hidden">
             <div className="full-screen-slide space-x-4 flex gap-10">
-               
               <div className="min-w-max">
-                <img src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s=" alt="Client Logo" className="h-24" />
+                <img
+                  src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s="
+                  alt="Client Logo"
+                  className="h-24"
+                />
               </div>
               <div className="min-w-max">
-                <img src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s=" alt="Client Logo" className="h-24" />
+                <img
+                  src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s="
+                  alt="Client Logo"
+                  className="h-24"
+                />
               </div>
               <div className="min-w-max">
-                <img src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s=" alt="Client Logo" className="h-24" />
+                <img
+                  src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s="
+                  alt="Client Logo"
+                  className="h-24"
+                />
               </div>
-              
             </div>
           </div>
         </div>

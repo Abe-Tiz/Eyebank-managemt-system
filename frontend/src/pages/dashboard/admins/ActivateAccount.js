@@ -72,8 +72,8 @@ const ActivateAccount = () => {
       <div className="signup__container container">
         <div className="login-form m-10">
           <h3 className="title text-2xl md:text-3xl font-semibold text-gray-800">
-                      {/* {t("login:loginLabel")} */}
-                      Activate User Account
+            {/* {t("login:loginLabel")} */}
+            Activate User Account
           </h3>
 
           <div className="form">
@@ -104,7 +104,7 @@ const ActivateAccount = () => {
                     </span>
                   </div>
                 </div>
-                  <ButtonComponent title="Activate" />
+                <ButtonComponent customClass="w-64 justify-center  mb-3" title="Activate" />
               </div>
             </form>
           </div>

@@ -16,7 +16,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
 
   return (
     <div
-      className={`bg-indigo-900   h-screen fixed overflow-scroll overflow-x-hidden text-white transition-all duration-300 ${
+      className={`bg-gray-700   h-screen fixed overflow-scroll overflow-x-hidden text-white transition-all duration-300 ${
         collapsed ? "w-28" : "w-60"
       }`}
     >

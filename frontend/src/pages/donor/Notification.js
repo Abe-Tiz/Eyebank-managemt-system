@@ -33,9 +33,9 @@ const Notification = () => {
       setCount(data.count);
     });
 
-    // return () => {
-    //   socket.off("newDonorNotification");
-    // };
+    return () => {
+      socket.off("newDonorNotification");
+    };
   }, []);
 
   const handleNotificationClick = (notification) => {

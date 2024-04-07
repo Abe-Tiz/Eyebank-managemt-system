@@ -1,5 +1,6 @@
 const SampleBlood = require("../models/SampleBlood");
 const asyncHandler = require("express-async-handler");
+
 const createSampleBlood = asyncHandler(async (req, res) => {
     const { donorId, techenicianName, serologyResult, bloodId } = req.body;
     try {
