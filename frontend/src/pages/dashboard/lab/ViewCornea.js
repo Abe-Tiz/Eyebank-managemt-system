@@ -18,14 +18,12 @@ const ViewCornea = () => {
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
     const [corneas, setCorneas] = useState([]);
-
     function formatTimestamp(timestamp) {
         const options = {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
         };
-
         return new Date(timestamp).toLocaleString('en-US', options);
     }
     function formatExiryDate(expiryDate) {
@@ -36,7 +34,6 @@ const ViewCornea = () => {
         };
         return new Date(expiryDate).toLocaleString('en-US', options);
     }
-
     // const [time, setTime] = useState(new Date());
 
     // useEffect(() => {
@@ -90,57 +87,59 @@ const ViewCornea = () => {
     return (
         <div>
             <TableContainer>
-                <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
+                <Text fontSize='3xl' className='text-center text-black mt-0 mb-4'>
                     List of collected cornea
                 </Text>
-
-                <Table size='sm'>
+                <Table variant='simple'>
                     <Thead>
-                        <Tr>
-
-                            <Th>LotNo</Th>
-                            <Th>Date</Th>
-                            <Th> Technical</Th>
-                            <Th>Position</Th>
-                            <Th>Lens</Th>
-                            <Th>Clarity</Th>
-                            <Th>Size</Th>
-                            <Th>Eye Lid</Th>
-                            <Th>Iris Color</Th>
-                            <Th>Exiption Date</Th>
-                            <Th colSpan={3}>Operations</Th>
+                        <Tr className='bg-sky-600 text-white'>
+                            <Th className='text-white'>LotNo</Th>
+                            <Th className='text-white'>Date</Th>
+                            <Th className='text-white' > Technical</Th>
+                            <Th className='text-white'>Position</Th>
+                            <Th className='text-white' >Lens</Th>
+                            <Th className='text-white'>Clarity</Th>
+                            <Th className='text-white'>Size</Th>
+                            <Th className='text-white'>Eye Lid</Th>
+                            <Th className='text-white'>Iris Color</Th>
+                            <Th className='text-white'>Exiption Date</Th>
+                            <Th className='text-white' colSpan={3}>Operations</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
                         {corneas.map((cornea, index) => (
-                            <Tr key={index}>
-                                <Td>{cornea.lotNo}</Td>
-                                <Td>
+                            <Tr key={index} className="mb-2 text-lg">
+                                <Td className="text-lg xl:text-2xl">{cornea.lotNo}</Td>
+                                <Td className="">
                                     {formatTimestamp(cornea.createdAt)}
                                 </Td>
-                                <Td>{cornea.recoveryTechnical}</Td>
-                                <Td>{cornea.position}</Td>
-                                <Td>{cornea.lens}</Td>
-                                <Td>{cornea.clarity}</Td>
-                                <Td>{cornea.size}</Td>
-                                <Td>{cornea.eyeLid}</Td>
-                                <Td>{cornea.irisColor}</Td>
-                                <Td>{formatExiryDate(cornea.expirationDate)}</Td>
-                                <div className='text-center'>
-                                    <Td className='text-center ml-3 text-blue-600'>
-                                        <Link to={`/labtechnicaldashboard/editcornea/${cornea._id}`}><EditIcon /></Link>
-                                    </Td>{" "}
-                                    <Td className='text-center ml-3 text-red-600'>
-                                        <button onClick={() => deleteCornea(cornea._id)}><DeleteIcon /></button>
-                                    </Td>{" "}
-
-
-                                </div>
-                            </Tr>
-                        ))}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+                                <Td >{cornea.recoveryTechnical}</Td>
+                                <Td >{cornea.position}</Td>
+                                <Td >{cornea.lens}</Td>
+                                <Td >{cornea.clarity}</Td>
+                                <Td > {cornea.size}</Td >
+                                <Td > {cornea.eyeLid}</Td >
+                                <Td > {cornea.irisColor}</Td >
+                                <Td  > {formatExiryDate(cornea.expirationDate)}</Td >
+                                <Td className=" text-center " >
+                                    <Link className='text-blue-600' to={`/labtechnicaldashboard/editcornea/${cornea._id}`}>
+                                        <EditIcon className="text-blue-600" />
+                                    </Link>
+                                </Td > {" "}
+                                <Td Td className=" text-center" >
+                                    <button
+                                        onClick={() => deleteCornea(cornea._id)}
+                                        className="text-red-600"
+                                    >
+                                        <DeleteIcon />
+                                    </button>
+                                </Td > {" "}
+                            </Tr >
+                        ))
+                        }
+                    </Tbody >
+                </Table >
+            </TableContainer >
 
         </div >
     );

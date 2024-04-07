@@ -10,10 +10,9 @@ import { Link } from "react-router-dom";
 
 const CustomSidebar = ({ collapsed, name, image }) => {
     const { t } = useTranslation();
-
     return (
         <div
-            className={`bg-indigo-900 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
+            className={`bg-slate-700 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
                 }`}
         >
             <div className="flex flex-col h-full mt-0 overflow-scroll">
@@ -29,8 +28,6 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                             {/* <BellOutlined className="text-2xl" /> */}
                             <MdSpaceDashboard className="text-2xl" />
                         </Link>
-
-
                         <Link
                             className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
                             to="/labtechnicaldashboard/recordSerology"
@@ -40,7 +37,6 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                             {/* <SettingOutlined className="text-2xl" /> */}
                             <PiUserListBold className="text-2xl" />
                         </Link>
-
                         <Link
                             className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
                             to="/labtechnicaldashboard/storeCornea"
