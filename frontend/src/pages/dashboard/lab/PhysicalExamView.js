@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import moment from 'moment';
+import moment from "moment";
 const PhysicalExamView = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
@@ -45,7 +45,15 @@ const PhysicalExamView = () => {
     }
   };
 
-  const startEdit = (examId, height, weight, sex, causeOfDeath, dod, time) => {
+  const startEdit = (
+    examId,
+    height,
+    weight,
+    sex,
+    causeOfDeath,
+    dod,
+    time
+  ) => {
     setEditExamId(examId);
     setEditedHeight(height);
     setEditedWeight(weight);
@@ -54,7 +62,7 @@ const PhysicalExamView = () => {
     setEditDateOfDeath(dod);
     setEditTimeOfDeath(time);
   };
-
+  
   const cancelEdit = () => {
     setEditExamId(null);
     setEditedHeight("");
@@ -64,11 +72,20 @@ const PhysicalExamView = () => {
     setEditDateOfDeath("");
     setEditTimeOfDeath("");
   };
+  
   const navigateToDetails = (examId) => {
     navigate(`/labtechnicaldashboard/getOne/${examId}`);
   };
-
-  const saveEdit = async (examId, editedHeight, editedWeight, editedSex,editCauseOfDeath, editDateOfDeath, editTimeOfDeath) => {
+  
+  const saveEdit = async (
+    examId,
+    editedHeight,
+    editedWeight,
+    editedSex,
+    editCauseOfDeath,
+    editDateOfDeath,
+    editTimeOfDeath
+  ) => {
     try {
       const response = await fetch(
         `http://localhost:4000/api/update/${examId}`,
@@ -87,7 +104,7 @@ const PhysicalExamView = () => {
           }),
         }
       );
-
+  
       if (response.ok) {
         fetchPhysicalExams();
         setEditExamId(null);
@@ -110,20 +127,22 @@ const PhysicalExamView = () => {
   };
   return (
     <div className="container mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Physical Exams</h2>
+      <h2 className="text-3xl text-center font-bold mb-4 font-sans bg-blue-500 text-white rounded p-2 h-14">
+         Physical Exam
+      </h2>{" "}
       {exams.length === 0 ? (
         <p>No physical exams found.</p>
       ) : (
         <table className="table-auto w-full">
           <thead>
             <tr>
-              <th className="px-4 py-2">Height</th>
-              <th className="px-4 py-2">Weight</th>
-              <th className="px-4 py-2">Sex</th>
-              <th className="px-4 py-2">Cause of Death</th>
-              <th className="px-4 py-2">Date of Death</th>
-              <th className="px-4 py-2">Time of Death</th>
-              <th className="px-4 py-2">Actions</th>
+              <th className="px-2 py-2">Height</th>
+              <th className="px-2 py-2">Weight</th>
+              <th className="px-2 py-2">Sex</th>
+              <th className="px-2 py-2">Cause of Death</th>
+              <th className="px-2 py-2">Date of Death</th>
+              <th className="px-2 py-2">Time of Death</th>
+              <th className="px-8 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -131,49 +150,49 @@ const PhysicalExamView = () => {
               <tr key={exam._id}>
                 {editExamId === exam._id ? (
                   <>
-                    <td className="border px-4 py-2">
+                    <td className="border px-2 py-2">
                       <input
                         type="text"
                         value={editedHeight}
                         onChange={(e) => setEditedHeight(e.target.value)}
                       />
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="border px-2 py-2">
                       <input
                         type="text"
                         value={editedWeight}
                         onChange={(e) => setEditedWeight(e.target.value)}
                       />
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="border px-2 py-2">
                       <input
                         type="text"
                         value={editedSex}
                         onChange={(e) => setEditedSex(e.target.value)}
                       />
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="border px-2 py-2">
                       <input
                         type="text"
                         value={editCauseOfDeath}
                         onChange={(e) => setEditCauseOfDeath(e.target.value)}
                       />
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="border px-2 py-2">
                       <input
                         type="text"
                         value={editDateOfDeath}
                         onChange={(e) => setEditDateOfDeath(e.target.value)}
                       />
                     </td>
-                    <td className="border px-4 py-2">
-  <input
-    type="text"
-    value={moment(editTimeOfDeath).format("HH:mm")}
-    onChange={(e) => setEditTimeOfDeath(e.target.value)}
-  />
-</td>
-                    <td className="border px-4 py-2">
+                    <td className="border px-2 py-2">
+                      <input
+                        type="text"
+                        value={moment(editTimeOfDeath).format("HH:mm")}
+                        onChange={(e) => setEditTimeOfDeath(e.target.value)}
+                      />
+                    </td>
+                    <td className="border px-2 py-2">
                       <button
                         className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                         onClick={() => saveEdit(exam._id)}
@@ -190,21 +209,21 @@ const PhysicalExamView = () => {
                   </>
                 ) : (
                   <>
-                    <td className="border px-4 py-2">{exam.height}</td>
-                    <td className="border px-4 py-2">{exam.weight}</td>
-                    <td className="border px-4 py-2">{exam.sex}</td>
-                    <td className="border px-4 py-2">{exam.causeOfDeath}</td>
-                    <td className="border px-4 py-2">{exam.dod}</td>
-                    <td className="border px-4 py-2">{exam.time}</td>
-                    <td className="border px-4 py-2">
+                    <td className="border px-2 py-2">{exam.height}</td>
+                    <td className="border px-2 py-2">{exam.weight}</td>
+                    <td className="border px-2 py-2">{exam.sex}</td>
+                    <td className="border px-2 py-2">{exam.causeOfDeath}</td>
+                    <td className="border px-2 py-2">{exam.dod}</td>
+                    <td className="border px-2 py-2">{exam.time}</td>
+                    <td className="border px-2 py-2">
                       <button
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded mr-2"
                         onClick={() => deletePhysicalExam(exam._id)}
                       >
                         Delete
                       </button>
                       <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
                         onClick={() =>
                           startEdit(
                             exam._id,
@@ -220,7 +239,7 @@ const PhysicalExamView = () => {
                         Edit
                       </button>
                       <button
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-2 rounded mr-2"
                         onClick={() => navigateToDetails(exam._id)}
                       >
                         Details

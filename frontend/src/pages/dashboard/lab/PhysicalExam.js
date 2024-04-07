@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 // import axios from "axios";
 
 const PhysicalExam = () => {
-  const {id}=useParams()
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     donor_id: id,
     height: "",
@@ -52,6 +52,7 @@ const PhysicalExam = () => {
         highRiskexamined: {
           ...prevData.highRiskexamined,
           [name]: value === "evidence" ? "evidence" : "no evidence",
+          // [name]: value === checked ? "yes" : "no",
         },
       }));
     } else {
@@ -181,8 +182,9 @@ const PhysicalExam = () => {
       <hr className="my-4" style={{ borderTop: "2px solid black" }} />
 
       <div className="w-full mb-4 ml-5 text-xl">
-       
-        <h1 className="text-2xl text-center font-bold mb-4 font-san rounded p-2 h-14">Examined</h1>
+        <h1 className="text-2xl text-center font-bold mb-4 font-san rounded p-2 h-14">
+          Examined
+        </h1>
         <div className="mb-4">
           <label className="flex items-center mx-auto">
             <input
@@ -253,7 +255,7 @@ const PhysicalExam = () => {
               value={formData.causeOfDeath}
               onChange={handleChange}
               className="w-48 px-3 py-2 border-2 rounded"
-              />
+            />
           </div>
           <div>
             <label className="block mb-2 font-bold" htmlFor="dod">
@@ -268,7 +270,7 @@ const PhysicalExam = () => {
               className="w-48 px-3 py-2 border-2 rounded"
             />
           </div>
-          
+
           <div>
             <label className="block mb-2 font-bold" htmlFor="time">
               Time:
@@ -296,10 +298,13 @@ const PhysicalExam = () => {
           </div>
         </div>
         <div className="flex justify-center">
-    <button type="submit" className="w-48 px-3 py-2 border-2 rounded bg-blue-600 text-white">
-      Submit
-    </button>
-  </div>
+          <button
+            type="submit"
+            className="w-48 px-3 py-2 border-2 rounded bg-blue-600 text-white"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </form>
   );
