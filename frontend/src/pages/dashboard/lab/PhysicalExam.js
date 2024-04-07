@@ -35,29 +35,31 @@ const PhysicalExam = () => {
     time: "",
   });
 
+  
+ 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     if (type === "checkbox") {
-      setFormData((prevData) => ({
-        ...prevData,
+      setFormData((formData) => ({
+        ...formData,
         examined: {
-          ...prevData.examined,
+          ...formData.examined,
           [name]: checked,
         },
       }));
     } else if (type === "select-one") {
-      setFormData((prevData) => ({
-        ...prevData,
+      setFormData((formData) => ({
+        ...formData,
         highRiskexamined: {
-          ...prevData.highRiskexamined,
+          ...formData.highRiskexamined,
           [name]: value === "evidence" ? "evidence" : "no evidence",
           // [name]: value === checked ? "yes" : "no",
         },
       }));
     } else {
-      setFormData((prevData) => ({
-        ...prevData,
+      setFormData((formData) => ({
+        ...formData,
         [name]: value,
       }));
     }
@@ -65,8 +67,8 @@ const PhysicalExam = () => {
 
   const handleChange1 = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((formData) => ({
+      ...formData,
       [name]: value,
     }));
   };
