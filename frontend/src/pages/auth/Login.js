@@ -5,6 +5,7 @@ import axios from "axios";
 import ButtonComponent from "../../components/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import ButtonPrimary from "../../components/ButtonPrimary";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -171,75 +172,78 @@ const Login = () => {
     };
 
     return (
-        <div className="signup__container container">
-            <div className="login-form m-10">
-                <h3 className="title text-2xl md:text-3xl font-semibold text-gray-800">
-                    {t("login:loginLabel")}
-                </h3>
+      <div className="signup__container container">
+        <div className="login-form m-10">
+          <h3 className="title text-2xl md:text-3xl font-semibold text-gray-800">
+            {t("login:loginLabel")}
+          </h3>
 
-                <div className="form">
-                    <form onSubmit={handleSubmit}>
-                        <div className="flex flex-col gap-4 mt-4">
-                            <div className="mt-4">
-                                <label
-                                    htmlFor="email"
-                                    className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                >
-                                    {t("login:labelLoginEmail")}
-                                    <span class="text-red-500">*</span>
-                                </label>
+          <div className="form">
+            <form onSubmit={handleSubmit}>
+              <div className="flex flex-col gap-4 mt-4">
+                <div className="mt-4">
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    {t("login:labelLoginEmail")}
+                    <span class="text-red-500">*</span>
+                  </label>
 
-                                <div className="flex flex-col items-start">
-                                    <input
-                                        name="email"
-                                        type="email"
-                                        className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                                        autoComplete="off"
-                                        required
-                                        pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                        placeholder={t("common:emailPlaceholderLabel")}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                    <span className="mt-1 hidden text-sm text-red-400">
-                                        {t("login:labelErrorEmail")}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label
-                                    htmlFor="password"
-                                    className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                                >
-                                    {t("login:labelLoginPassword")}{" "}
-                                    <span className="text-red-500">*</span>
-                                </label>
-                                <div className="flex flex-col items-center">
-                                    <input
-                                        name="password"
-                                        type="password"
-                                        placeholder={t("common:passwordPlaceholderLabel")}
-                                        onChange={handlePasswordChange}
-                                        className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                                        autoComplete="off"
-                                        required
-                                        pattern="[a-zA-Z0-9]{8,}$"
-                                    />
-                                    <span className="mt-1 hidden text-sm text-red-400">
-                                        {t("login:labelErrorPassword")}
-                                    </span>
-                                </div>
-                            </div>
-                                <ButtonComponent title={t("login:loginTitleLabel")} />
-                       
-                        </div>
-                    </form>
+                  <div className="flex flex-col items-start">
+                    <input
+                      name="email"
+                      type="email"
+                      className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                      autoComplete="off"
+                      required
+                      pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                      placeholder={t("common:emailPlaceholderLabel")}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <span className="mt-1 hidden text-sm text-red-400">
+                      {t("login:labelErrorEmail")}
+                    </span>
+                  </div>
                 </div>
-                <Link to="/forgot-password" className="block ml-3 text-blue-500">
-                    {t("login:forgotPasswordLabel")} ?
-                </Link>
-            </div>
+
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    {t("login:labelLoginPassword")}{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex flex-col items-center">
+                    <input
+                      name="password"
+                      type="password"
+                      placeholder={t("common:passwordPlaceholderLabel")}
+                      onChange={handlePasswordChange}
+                      className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                      autoComplete="off"
+                      required
+                      pattern="[a-zA-Z0-9]{8,}$"
+                    />
+                    <span className="mt-1 hidden text-sm text-red-400">
+                      {t("login:labelErrorPassword")}
+                    </span>
+                  </div>
+                </div>
+
+                <ButtonComponent
+                  customClass="w-64 justify-center  mb-3"
+                  title={t("login:loginTitleLabel")}
+                />
+              </div>
+            </form>
+          </div>
+          <Link to="/forgot-password" className="block ml-3 text-blue-500">
+            {t("login:forgotPasswordLabel")} ?
+          </Link>
         </div>
+      </div>
     );
 };
 

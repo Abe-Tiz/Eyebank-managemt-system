@@ -36,9 +36,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
       const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
   };
- 
-  //  console.log("search term", searchTerm); 
-  //  console.log("donor", donor); 
+
   return (
     <div
       className={`bg-indigo-900 p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${
@@ -46,7 +44,8 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
       }`}
     >
       <div className="flex items-center">
-        {state.collapsed ? (
+        {
+          state.collapsed ? (
           <TfiMenuAlt
             className="text-2xl text-gray-400 mr-2 cursor-pointer"
             onClick={toggleSidebar}
@@ -56,7 +55,9 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
             className="text-2xl text-gray-400 mr-2 cursor-pointer"
             onClick={toggleSidebar}
           />
-        )}
+          )
+        }
+
         {/* language selector */}
         <LanguageSelector />
       </div>
@@ -65,6 +66,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
         <div className="flex-none gap-2">
           {/* notification section  */}
           <div className="dropdown dropdown-end">
+          
             {/* notification */}
             <div
               tabIndex={0}
