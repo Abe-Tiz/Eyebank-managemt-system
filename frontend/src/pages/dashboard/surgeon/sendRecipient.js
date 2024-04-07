@@ -4,7 +4,7 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 
-const AddRecipient = () => {
+const sendRecipient = () => {
     const [recipinentname, setRecipientname] = useState("");
     const [age, setAge] = useState("");
     const [diagnosis, setDiagnosis] = useState("");
@@ -180,4 +180,4 @@ const AddRecipient = () => {
     );
 };
 
-export default AddRecipient;
+export default sendRecipient;

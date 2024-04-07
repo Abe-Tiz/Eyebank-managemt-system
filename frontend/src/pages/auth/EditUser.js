@@ -39,6 +39,7 @@ const EditUser = () => {
 
             const res = await axios.get(`http://localhost:4000/user/${id}`);
             const userData = res.data;
+        
             console.log(userData);
 
             // Update state variables with the fetched data
@@ -60,6 +61,8 @@ const EditUser = () => {
         fetchDonor();
   },[])
 
+
+  console.log(email);
   const uploadImage = (pics) => {
     setImageLoading(true);
     // https://api.cloudinary.com/v1_1/dxa20yutc

@@ -6,7 +6,7 @@ dotenv.config();
 
 const createPostController = async (req, res) => {
   try {
-    const { title, summary, content } = req.fields;
+    const { title, summary, content,author } = req.fields;
     const { photo } = req.files;
 
     const posts = new postModel({ ...req.fields, slug: slugify(title) });

@@ -1,44 +1,43 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
-import Home from '../pages/home/Home';
-import ForgotPassword from '../pages/auth/ForgotPassword';
-import ResetPassword from '../pages/auth/ResetPassword';
-import About from '../pages/about/About';
+import Home from "../pages/home/Home";
+import ForgotPassword from "../pages/auth/ForgotPassword";
+import ResetPassword from "../pages/auth/ResetPassword";
+import About from "../pages/about/About";
 import Contact from "../pages/contact/contact";
 import CreateDonor from "../pages/donor/CreateDonor";
-import Login from '../pages/auth/Login';
-import ViewDonor from '../pages/donor/ViewDonor';
-import PrintCard from '../pages/donor/PrintCard';
-import EditDonor from '../pages/donor/EditDonor';
-import Report from './../components/Report';
+import Login from "../pages/auth/Login";
+import ViewDonor from "../pages/donor/ViewDonor";
+import PrintCard from "../pages/donor/PrintCard";
+import EditDonor from "../pages/donor/EditDonor";
+import Report from "./../components/Report";
 import DisplayDonor from "../pages/donor/DisplayDonor";
-import Signup from './../pages/auth/Signup';
-import ViewUsers from './../pages/auth/ViewUsers';
+import Signup from "./../pages/auth/Signup";
+import ViewUsers from "./../pages/auth/ViewUsers";
 import Edit from "../pages/donor/Edit";
-import EditUser from './../pages/auth/EditUser';
-import StoredCornea from './../pages/corneas/StoredCornea';
-import ViewCornea from '../components/ViewCornea';
-import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
-import StoreCornea from '../pages/dashboard/lab/StoreCornea';
-import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
+import EditUser from "./../pages/auth/EditUser";
+import StoredCornea from "./../pages/corneas/StoredCornea";
+import ViewCornea from "../components/ViewCornea";
+import DistributeCornea from "../pages/dashboard/lab/DistributeCornea";
+import StoreCornea from "../pages/dashboard/lab/StoreCornea";
+import DiscardCornea from "../pages/dashboard/lab/DiscardCornea";
 //import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
-import EditCornea from '../pages/dashboard/lab/EditCornea';
-import RecordMedicalParticular from '../pages/dashboard/lab/RecordMedicalParticular';
-import ScreenDonor from '../pages/dashboard/lab/ScreenDonor';
-import RecordSerology from '../pages/dashboard/lab/RecordSerology';
-import CollectCornea from '../pages/dashboard/lab/CollectCornea';
+import EditCornea from "../pages/dashboard/lab/EditCornea";
+import RecordMedicalParticular from "../pages/dashboard/lab/RecordMedicalParticular";
+import ScreenDonor from "../pages/dashboard/lab/ScreenDonor";
+import RecordSerology from "../pages/dashboard/lab/RecordSerology";
+import CollectCornea from "../pages/dashboard/lab/CollectCornea";
 import LabTechnicalDashboard from "../layout/LabTechnicalLayout";
 import AdminDashboard from "../layout/AdminLayout";
 import MedicalDirectorDashboard from "../layout/MedicalDirectorLayout";
 import LoginDonor from "../pages/donor/LoginDonor";
-import Profile from './../pages/donor/Profile';
-import ForgotCode from './../pages/donor/ForgotCode';
-import ResetCode from './../pages/donor/ResetCode';
+import Profile from "./../pages/donor/Profile";
+import ForgotCode from "./../pages/donor/ForgotCode";
+import ResetCode from "./../pages/donor/ResetCode";
 import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
-
 
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
@@ -46,11 +45,15 @@ import ViewDetails from "../pages/dashboard/lab/ViewDetails";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
-import AddRecipient from "../pages/dashboard/surgeon/AddRecipient"
-import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
-import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
+import sendRecipient from "../pages/dashboard/surgeon/sendRecipient";
+import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient";
+import ViewRequestedCornea from "../pages/dashboard/surgeon/ViewCorneaRequest";
+import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
+import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
+import EditRequest from "../pages/dashboard/surgeon/EditRequest";
 
-//admin
+import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCornea";
+
 import AddHospital from "../pages/dashboard/admins/AddHospital";
 import ViewHospital from "../pages/dashboard/admins/ViewHospital";
 import EditHospital from "../pages/dashboard/admins/EditHospital";
@@ -178,6 +181,10 @@ const router = createBrowserRouter([
         path: "getAll",
         element: <PhysicalExamView />,
       },
+      {
+        path: "viewRequestCornea",
+        element: <ViewRequestedCornea />,
+      },
     ],
   },
   {
@@ -262,70 +269,91 @@ const router = createBrowserRouter([
         path: "editevaluation/:id",
         element: <EditEvaluation />,
       },
+      {
+        path: "sendRequestCornea",
+        element: <SendRequestCornea />,
+      },
+
+      {
+        path: "editRequestCornea/:id",
+        element: <EditRequest />,
+      },
+      {
+        path: "doctorRequestedCornea/:id",
+        element: <doctorRequestedCornea />,
+      },
+      {
+        path: "viewRequestedCorneaSurgeon",
+        element: <ViewRequestedCorneaSurgeon />,
+      },
     ],
   },
-//   {
-//     path: "/adminDashboard",
-//     element: <AdminDashboard />,
-//     children: [
-//       {
-//         path: "",
-//         element: <Report />,
-//       },
-//       {
-//         path: "addDonor",
-//         element: <CreateDonor />,
-//       },
-//       {
-//         path: "donorList",
-//         element: <DisplayDonor />,
-//       },
-//       {
-//         path: "addUser",
-//         element: <Signup />,
-//       },
-//       {
-//         path: "userList",
-//         element: <ViewUsers />,
-//       },
-//       {
-//         path: "edit/:id",
-//         element: <Edit />,
-//       },
-//       {
-//         path: "edituser/:id",
-//         element: <EditUser />,
-//       },
-//       {
-//         path: "storeCornea",
-//         element: <StoredCornea />,
-//       },
-//       {
-//         path: "create-post",
-//         element: <CreatePost />,
-//       },
-//       {
-//         path: "edit-post/:slug",
-//         element: <EditPost />,
-//       },
-//       {
-//         path: "posts",
-//         element: <IndexPage />,
-//       },
-//     ],
-//   },
+  //   {
+  //     path: "/adminDashboard",
+  //     element: <AdminDashboard />,
+  //     children: [
+  //       {
+  //         path: "",
+  //         element: <Report />,
+  //       },
+  //       {
+  //         path: "addDonor",
+  //         element: <CreateDonor />,
+  //       },
+  //       {
+  //         path: "donorList",
+  //         element: <DisplayDonor />,
+  //       },
+  //       {
+  //         path: "addUser",
+  //         element: <Signup />,
+  //       },
+  //       {
+  //         path: "userList",
+  //         element: <ViewUsers />,
+  //       },
+  //       {
+  //         path: "edit/:id",
+  //         element: <Edit />,
+  //       },
+  //       {
+  //         path: "edituser/:id",
+  //         element: <EditUser />,
+  //       },
+  //       {
+  //         path: "storeCornea",
+  //         element: <StoredCornea />,
+  //       },
+  //       {
+  //         path: "create-post",
+  //         element: <CreatePost />,
+  //       },
+  //       {
+  //         path: "edit-post/:slug",
+  //         element: <EditPost />,
+  //       },
+  //       {
+  //         path: "posts",
+  //         element: <IndexPage />,
+  //       },
+  //     ],
+  //   },
 
   {
     path: "/surgondashboard",
     element: <SurgeonDashboard />,
     children: [
       {
-        path: "addrecipient",
-        element: <AddRecipient />,
+        path: "sendRecipient",
+        element: <sendRecipient />,
       },
       {
         path: "viewrecipient",
         element: <ViewRecipient />,
+      },
+      {
+        path: "sendRequestCornea",
+        element: <SendRequestCornea />,
       },
       // {
       //     path: "editrecipient/:id",
