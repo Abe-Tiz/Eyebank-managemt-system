@@ -17,7 +17,7 @@ import ViewUsers from './../pages/auth/ViewUsers';
 import Edit from "../pages/donor/Edit";
 import EditUser from './../pages/auth/EditUser';
 import StoredCornea from './../pages/corneas/StoredCornea';
-import ViewCornea from '../components/ViewCornea';
+import ViewCornea from '../pages/dashboard/lab/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import ViewDistributed from '../pages/dashboard/lab/ViewDistributed';
 import StoreCornea from '../pages/dashboard/lab/StoreCornea';
@@ -58,7 +58,6 @@ import AdverseList from "../pages/dashboard/surgeon/AdverseList";
 import AddHospital from "../pages/dashboard/admins/AddHospital";
 import ViewHospital from "../pages/dashboard/admins/ViewHospital";
 import EditHospital from "../pages/dashboard/admins/EditHospital";
-
 //blog
 import CreatePost from "../pages/dashboard/admins/CreatePost";
 import EditPost from "../pages/dashboard/admins/EditPost";
@@ -67,7 +66,6 @@ import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
 import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
 // import LoginDonor from './../pages/donor/LoginDonor';
-
 const router = createBrowserRouter([
     {
         path: "/",

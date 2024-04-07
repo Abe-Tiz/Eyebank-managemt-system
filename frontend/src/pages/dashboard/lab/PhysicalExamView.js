@@ -28,7 +28,6 @@ const PhysicalExamView = () => {
     };
     const handleCollect = async (id) => {
         try {
-            await axios.put(`http://localhost:4000/api/collect/${id}`, data);
             navigate(`/labtechnicaldashboard/collectCornea/${id}`);
         } catch (error) {
             console.error("Failed to collect physical exam:", error);
@@ -159,7 +158,7 @@ const PhysicalExamView = () => {
                                             <td className="border px-4 py-2">{exam.height}</td>
                                             <td className="border px-4 py-2">{exam.weight}</td>
                                             <td className="border px-4 py-2">{exam.sex}</td>
-                                            <td>{exam.collect === true ? (<p class="text-green-500 font-bold">Collected</p>) : (<Button colorScheme='blue' onClick={() => handleCollect(exam._id)}>Pledge</Button>)}</td>
+                                            <td>{exam.collect === true ? (<p className="text-green-500 font-bold">Collected</p>) : (<Button colorScheme='blue' onClick={() => handleCollect(exam._id)}>Collect</Button>)}</td>
                                             <td className="border px-4 py-2">{""}</td>
                                             <td className="border px-4 py-2">
                                                 <button

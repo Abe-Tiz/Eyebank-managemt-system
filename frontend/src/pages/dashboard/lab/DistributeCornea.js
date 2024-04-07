@@ -17,7 +17,7 @@ const DistributeCornea = () => {
     const [approvedBy, setApprovedBy] = useState('');
     const [nameOfTechnician, setNameOfTechnician] = useState('');
     //for recovery
-    const [lot, setLot] = useState([])
+    const [LotNo, setLot] = useState([])
     const [hospitals, setHospitals] = useState([])
     const [approved, setApprove] = useState([])
     const [labTechinician, setLabTechinician] = useState([])
@@ -25,12 +25,16 @@ const DistributeCornea = () => {
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
+    const [distributed, setdistribute] = useState(true);
+    const distri = {
+        distributed,
+    };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
 
-            lot,
+            LotNo,
             hospitalName,
             nameOfSurgeon,
             approvedBy,
@@ -39,6 +43,7 @@ const DistributeCornea = () => {
             nameOfTechnician
         }
         console.log(data);
+        handleDistribution(id);
         try {
             const response = await axios.post('http://localhost:4000/distribution/create', data);
             console.log(response.data);
@@ -55,6 +60,15 @@ const DistributeCornea = () => {
             console.log(err);
         }
     };
+    const handleDistribution = async (id) => {
+
+        try {
+            await axios.put(`http://localhost:4000/cornea/distribute/${id}`, distri);
+            //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
+        } catch (error) {
+            console.error("Failed to collect physical exam:", error);
+        }
+    }
     useEffect(() => {
         const fetchSurgeon = async () => {
             try {
@@ -67,7 +81,6 @@ const DistributeCornea = () => {
 
         fetchSurgeon();
     }, []);
-
     useEffect(() => {
         const fetchHospitalData = async () => {
             try {
@@ -84,7 +97,8 @@ const DistributeCornea = () => {
         const fetchLot = async () => {
             try {
                 const response = await axios.get(`http://localhost:4000/cornea/getOne/${id}`);
-                setLot(response.data);
+                const lotlist = response.data;
+                setLot(lotlist.lotNo);
             } catch (error) {
                 console.log(error);
             }
@@ -122,14 +136,12 @@ const DistributeCornea = () => {
             <h2 className="" style={{ textAlign: 'center', background: "#6af" }}>Welcome to Cornea Distribution Form</h2>
             <form onSubmit={handleFormSubmit}>
                 <div className="grid grid-cols-2">
-                    {lot.lotNo}
+                    {LotNo}
                     {/* <label>
-
                         Lot Number:
                         <input
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-
-                            value={lot.lotNo}
+                            value={lot}
                             onChange={(e) => setLot(e.target.value)}
                         />
                     </label> */}
@@ -202,7 +214,6 @@ const DistributeCornea = () => {
                             <option value="Plane">Plane</option>
                         </select>
                     </label>
-
                     <label>
                         Type of Tissue:
                         <select
@@ -218,12 +229,15 @@ const DistributeCornea = () => {
                 </div>
                 <div className="text-center mt-4">
                     <button
-                        // onClick={handleFormSubmit}
+                        // onClick={() => handleDistribution({ id })}
                         type="submit"
                         className="w-1/3 mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600  text-white font-semibold rounded"
                     >
                         Register Cornea
                     </button>
+                    {/* <Td className='text-center ml-3 text-blue-600'>
+                        <Button colorScheme='blue' onClick={() => handleCollect(cornea._id)}>Distribute</Button>
+                    </Td> */}
                 </div>
             </form >
         </div >

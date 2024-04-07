@@ -97,7 +97,7 @@ const LabTechnicalDashboard = () => {
                     } transition-all duration-300 ease-in-out flex-grow`}
             >
                 <Header
-                    className="bg-slate-300 p-4 shadow-lg flex justify-between items-center text-black"
+                    className="bg-slate-300 p-4 w-full  flex justify-between items-center text-black "
                     style={{ position: "sticky", top: 0, right: 0 }}
                 >
                     <div className="flex items-center">
@@ -174,12 +174,12 @@ const LabTechnicalDashboard = () => {
                     </div>
                 </Header>
                 <Content className="">
-                    <div className="bg-white py-4 pl-4 rounded shadow w-full">
+                    <div className=" py-4 pl-4 rounded w-full">
                         <Outlet />
                     </div>
                 </Content>
-            </Layout>
-        </Layout>
+            </Layout >
+        </Layout >
     );
 };
 

@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
-
 const AddRecipient = () => {
     const [recipientname, setRecipientname] = useState("");
     const [age, setAge] = useState("");
@@ -87,24 +86,24 @@ const AddRecipient = () => {
                 className=""
                 style={{ textAlign: "center", background: "#6af" }}
             >
-                Welcome to Cornea Recovery Form
+                Welcome to Recipient  Registration Form
             </h2>
             <form onSubmit={handleFormSubmit}>
                 <div className="grid grid-cols-2">
                     <label>
-                        Recipient Name:
                         <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={recipientname}
+                            placeholder="Recipient Name"
                             onChange={(e) => setRecipientname(e.target.value)}
                         />
                     </label>
                     <label>
-                        Age:
                         <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="number"
                             value={age}
+                            placeholder="Age"
                             onChange={(e) => setAge(e.target.value)}
                         />
                     </label>
@@ -198,5 +197,4 @@ const AddRecipient = () => {
         </div >
     );
 };
-
 export default AddRecipient;

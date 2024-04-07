@@ -28,7 +28,10 @@ const EvaluatedList = () => {
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
     const [corneas, setCorneas] = useState([]);
-
+    const [distributed, setdistribute] = useState(true);
+    const data = {
+        distributed,
+    };
     function formatTimestamp(timestamp) {
         const options = {
             year: 'numeric',
@@ -50,7 +53,14 @@ const EvaluatedList = () => {
 
         fetchData();
     }, []);
-
+    const handleDistribute = async (id) => {
+        try {
+            // await axios.put(`http://localhost:4000/cornea/distribute/${id}`, data);
+            navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
+        } catch (error) {
+            console.error("Failed to collect physical exam:", error);
+        }
+    };
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
@@ -107,9 +117,7 @@ const EvaluatedList = () => {
                                             {cornea.evaluation.suiatablity}
                                         </Td>
                                         <Td className='text-center ml-3 text-blue-600'>
-                                            <Link to={`/labtechnicaldashboard/distributeCornea/${cornea._id}`}>
-                                                <Button colorScheme='green'>Distribute</Button>
-                                            </Link>
+                                            <td>{cornea.distributed === true ? (<p className="text-green-500 font-bold">Distributed</p>) : (<Button colorScheme='blue' onClick={() => handleDistribute(cornea._id)}>Distribute</Button>)}</td>
                                         </Td>
                                     </Tr>
                                 ))}

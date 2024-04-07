@@ -39,7 +39,10 @@ const corneaSchema = new mongoose.Schema({
     lens: {
         type: String,
     },
-
+    distributed: {
+        type: Boolean,
+        default: false
+    },
     expirationDate: {
         type: Date,
         default: expirationDate
