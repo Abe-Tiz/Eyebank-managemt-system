@@ -63,6 +63,7 @@ import EditPost from "../pages/dashboard/admins/EditPost";
 import IndexPage from "../pages/dashboard/admins/IndexPage";
 import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
+import EditPhysicalExam from "../pages/dashboard/lab/EditPhysicalExam";
 // import LoginDonor from './../pages/donor/LoginDonor';
 
 const router = createBrowserRouter([
@@ -192,6 +193,10 @@ const router = createBrowserRouter([
                 path: "getOne/:id",
                 element: <ViewDetails />,
                 
+            },
+            {
+                path: "editExams/:id",
+                element: <EditPhysicalExam />,
             },
             {
                 path: "posts",
@@ -326,6 +331,7 @@ const router = createBrowserRouter([
                 path: "storeCornea",
                 element: <StoredCornea />,
             },
+          
 
 
         ],
