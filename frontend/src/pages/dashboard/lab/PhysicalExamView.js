@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "@chakra-ui/react";
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 const PhysicalExamView = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
@@ -21,23 +22,48 @@ const PhysicalExamView = () => {
       console.error("Failed to fetch physical exams:", error);
     }
   };
+  const deletePhysicalExam = (examId) => {
+    confirmAlert({
+      title: 'Confirm Deletion',
+      message: 'Are you sure you want to delete this physical exam?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => performDelete(examId),
+        },
+        {
+          label: 'No',
+          onClick: () => {},
+        },
+      ],
+    });
+  };
 
-  const deletePhysicalExam = async (examId) => {
+  const performDelete = async (examId) => {
     try {
       const response = await fetch(
         `http://localhost:4000/api/delete/${examId}`,
         {
-          method: "DELETE",
+          method: 'DELETE',
         }
       );
       if (response.ok) {
         fetchPhysicalExams();
-        alert("Physical exam deleted successfully.");
+        confirmAlert({
+          title: 'Success',
+          message: 'Physical exam deleted successfully.',
+          buttons: [
+            {
+              label: 'OK',
+              onClick: () => {},
+            },
+          ],
+        });
       } else {
-        throw new Error("Failed to delete physical exam.");
+        throw new Error('Failed to delete physical exam.');
       }
     } catch (error) {
-      console.error("Error deleting physical exam:", error);
+      console.error('Error deleting physical exam:', error);
     }
   };
 

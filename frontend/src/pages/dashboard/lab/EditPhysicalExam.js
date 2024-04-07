@@ -14,7 +14,7 @@ const EditPhysicalExam = () => {
     height: '',
     weight: '',
     sex: '',
-    causeofdeath: '',
+    causeOfDeath: '',
     dateofdeath: '',
     time: '',
   });
@@ -39,6 +39,7 @@ const EditPhysicalExam = () => {
       status: 'error',
       duration: 5000,
       isClosable: true,
+      position: 'top',
     });
   };
 
@@ -48,6 +49,7 @@ const EditPhysicalExam = () => {
       [e.target.name]: e.target.value,
     }));
   };
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +62,7 @@ const EditPhysicalExam = () => {
         duration: 5000,
         isClosable: true,
       });
-      navigate('/exams');
+      navigate('/labtechnicaldashboard/getAll');
     } catch (error) {
       toast({
         title: t('Error'),
@@ -110,7 +112,7 @@ const EditPhysicalExam = () => {
           <input
             className="w-full border border-gray-300 rounded-md p-2"
             type="text"
-            name="causeofdeath"
+            name="causeOfDeath"
             value={exam.causeOfDeath}
             onChange={handleChange}
           />
@@ -119,9 +121,9 @@ const EditPhysicalExam = () => {
           <label className="block mb-2">{t('Date of Death')}</label>
           <input
             className="w-full border border-gray-300 rounded-md p-2"
-            type="text"
+            type="Date"
             name="dateofdeath"
-            value={exam.dod}
+            value={exam.dateofdeath}
             onChange={handleChange}
           />
         </div>
@@ -135,11 +137,11 @@ const EditPhysicalExam = () => {
             onChange={handleChange}
           />
         </div>
-        <button
+        <button 
           className="bg-blue-500 text-white px-4 py-2 rounded-md"
           type="submit"
         >
-          {t('Save')}
+          {t('Update')}
         </button>
       </form>
     </div>
