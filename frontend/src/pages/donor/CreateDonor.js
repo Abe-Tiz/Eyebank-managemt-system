@@ -4,6 +4,9 @@ import axios from "axios";
 import "../../static/styles/donor.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import InputField from "../../components/InputField";
+import ButtonPrimary from "../../components/ButtonPrimary";
+import ButtonComponent from "../../components/ButtonComponent";
 
 const initialState = {
   name: "",
@@ -227,7 +230,7 @@ const CreateDonor = () => {
           className={`absolute bottom-10 right-16 w-52 h-52 bg-orange-500 rounded-full opacity-60`}
         ></div>
 
-        <div class="bg-gray-300 rounded-md overflow-hidden shadow-md p-6 mx-auto w-3/4 relative">
+        <div class="bg-transparent rounded-md overflow-hidden shadow-md p-6 mx-auto w-4/5 relative">
           <div
             className={`absolute top-10 left-10 w-64 h-64 bg-indigo-400 rounded-full opacity-30`}
           ></div>
@@ -272,15 +275,25 @@ const CreateDonor = () => {
                       <span class="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
-                      <input
-                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                      {/* <input
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         name="name"
                         type="text"
                         pattern="[a-zA-Z ]{6,}"
                         required
                         placeholder={t("common:namePlaceholderLabel")}
                         onChange={handleName}
+                      /> */}
+
+                      {/*   */}
+                      <InputField
+                        name="name"
+                        type="text"
+                        placeholder={t("common:namePlaceholderLabel")}
+                        onChange={handleName}
+                        pattern="[a-zA-Z ]{6,}"
                       />
+
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("register:LabelFullNameError")}
                       </span>
@@ -298,7 +311,7 @@ const CreateDonor = () => {
                       <div className="flex flex-col items-start">
                         <input
                           name="birthdate"
-                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
+                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                           type="date"
                           autoComplete="off"
                           required
@@ -326,7 +339,7 @@ const CreateDonor = () => {
                       </label>
                       <select
                         name="sex"
-                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         onChange={handleSex}
                       >
                         <option value="">{t("donor:placeHolderSex")}</option>
@@ -352,7 +365,7 @@ const CreateDonor = () => {
                     <div className="flex flex-col items-start">
                       <select
                         name="city"
-                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         onChange={handleCity}
                         value={selectedCity}
                       >
@@ -381,7 +394,7 @@ const CreateDonor = () => {
                       <div className="flex flex-col items-start">
                         <select
                           name="subcity"
-                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-60"
+                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                           onChange={handleSubcity}
                           value={selectedSubcity}
                         >
@@ -417,7 +430,7 @@ const CreateDonor = () => {
                           type="text"
                           pattern="[0-9a-zA-Z ]{2,}"
                           required
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                           placeholder={t("donor:placeHolderKebele")}
                           onChange={handleKebele}
                         />
@@ -442,7 +455,7 @@ const CreateDonor = () => {
                       <input
                         name="houseNumber"
                         type="numeric"
-                        className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         autoComplete="off"
                         required
                         pattern="[0-9]{2,12}"
@@ -468,7 +481,7 @@ const CreateDonor = () => {
                         <input
                           name="mobile"
                           type="numeric"
-                          className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                           autoComplete="off"
                           required
                           pattern="[0-9]{10}"
@@ -499,7 +512,7 @@ const CreateDonor = () => {
                           <input
                             name="email"
                             type="email"
-                            className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                            className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                             autoComplete="off"
                             required
                             pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -528,16 +541,22 @@ const CreateDonor = () => {
 
               <div class="d-flex justify-content-center pt-3 mb-4">
                 <div className="mt-4 flex items-center">
-                  <button
+                  {/* <button
                     onClick={() => window.history.back()}
                     className=" bg-green px-5 py-2  border-2 hover:bg-transparent text-white hover:text-green font-extrabold text-xl mt-3 mr-5 "
                   >
                     {t("common:backButtonLabel")}
-                  </button>
+                  </button> */}
+
+                  {/* <ButtonComponent title={t("login:loginTitleLabel")} /> */}
+                  <ButtonPrimary
+                    onClick={() => window.history.back()}
+                    title={t("common:backButtonLabel")}
+                  />
                 </div>
 
                 <div className="mt-4 flex items-center">
-                  <button
+                  {/* <button
                     type="submit"
                     disabled={!canSubmit}
                     className={`bg-green text-xl px-5 py-2 border-2   hover:bg-gray-600 text-black-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
@@ -547,12 +566,17 @@ const CreateDonor = () => {
                     }`}
                   >
                     {t("common:registerButtonLabel")}
-                  </button>
+                  </button> */}
+                  <ButtonComponent
+                    disabled={!canSubmit}
+                    title={t("common:registerButtonLabel")}
+                    canSubmit={!canSubmit}
+                  />
                 </div>
               </div>
               <div className="mt-4 flex items-center justify-center">
                 <Link to="/donor-login" className="block ml-3 text-blue-500">
-                  have you pledged ? Login
+                  {t("donor:HavePledge")}? {t("login:loginTitleLabel")}
                 </Link>
               </div>
             </form>

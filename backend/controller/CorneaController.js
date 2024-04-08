@@ -3,6 +3,9 @@ const Donor = require("../models/Donor");
 const createCornea = async (req, res) => {
     //const { dateOfRecovery, recoveryTechnical, position, eyeLid, size, irisColor, corneaStatus, clarity, lens } = req.body;
     const cornea = new Cornea({
+        examId: req.body.id,
+        lotNo: req.body.lotNo,
+        dateOfRecovery: req.body.dateOfRecovery,
         recoveryTechnical: req.body.recoveryTechnical,
         position: req.body.position,
         eyeLid: req.body.eyeLid,
@@ -11,6 +14,7 @@ const createCornea = async (req, res) => {
         corneaStatus: req.body.corneaStatus,
         clarity: req.body.clarity,
         lens: req.body.lens,
+        distributed: req.body.distributed,
         expirationDatee: req.body.expirationDatee,
         evaluation: {
             epitheliam: req.body.epitheliam,
@@ -59,6 +63,10 @@ const evaluateCornea = async (req, res) => {
     const cornea = await Cornea.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.send(cornea);
 };
+const distributeCornea = async (req, res) => {
+    const cornea = await Cornea.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
+    res.send(cornea);
+};
 
 
-module.exports = { createCornea, getCorneas, getCornea, editCornea, deleteCornea, evaluateCornea };
+module.exports = { createCornea, getCorneas, getCornea, editCornea, deleteCornea, evaluateCornea, distributeCornea };

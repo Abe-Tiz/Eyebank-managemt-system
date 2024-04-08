@@ -18,6 +18,16 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    failedLoginAttempts: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    isActive: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
     verified: {
       type: Boolean,
       default: false,

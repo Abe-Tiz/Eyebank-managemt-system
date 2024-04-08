@@ -5,20 +5,20 @@ const mongoose = require("mongoose");
 
 const createRecipient = async (req, res) => {
   const {
-    recipinentname,
-    recipinentId,
+    recipientName,
+    recipientId,
     age,
-    registratioDate,
+    registrationDate,
     diagnosis,
     surgeonName,
     hospital,
   } = req.body;
   try {
     const recipient = await RecipientModel.create({
-      recipinentname: recipinentname,
-      recipinentId: recipinentId,
+      recipientName: recipientName,
+      recipientId: recipientId,
       age: age,
-      registratioDate: registratioDate,
+      registrationDate: registrationDate,
       diagnosis: diagnosis,
       surgeonName: surgeonName,
       hospital: hospital,
@@ -30,9 +30,10 @@ const createRecipient = async (req, res) => {
     throw error;
   }
 };
-// get all recipients
+
+// Retrieve all recipients
 const getRecipients = async (req, res) => {
-  const recipient = await RecipientModel.find()
+  const recipients = await RecipientModel.find()
     .populate({
       path: "surgeonName",
       select: "name",
@@ -41,13 +42,16 @@ const getRecipients = async (req, res) => {
       path: "hospital",
       select: "hospitalName address",
     });
-  res.send(recipient);
+  res.send(recipients);
 };
-// get Recipient by id
+
+// Retrieve a recipient by id
 const getRecipient = async (req, res) => {
   const recipient = await RecipientModel.findById(req.params.id);
   res.send(recipient);
 };
+
+// Update a recipient
 const updateRecipient = async (req, res) => {
   const recipient = await RecipientModel.findOneAndUpdate(
     { _id: req.params.id },
@@ -55,10 +59,13 @@ const updateRecipient = async (req, res) => {
   );
   res.send(recipient);
 };
+
+// Delete a recipient
 const deleteRecipient = async (req, res) => {
   const recipient = await RecipientModel.findByIdAndDelete(req.params.id);
   res.send(recipient);
 };
+
 module.exports = {
   createRecipient,
   getRecipients,

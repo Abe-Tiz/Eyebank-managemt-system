@@ -5,9 +5,8 @@ const {
     createPhysicalExam,
     getPhysicalExamById,
     updatePhysicalExamById,
-    deletePhysicalExamById
+    deletePhysicalExamById,
 } = require('../controller/physicalExamController');
-
 router.get('/getAll', getAllPhysicalExams);
 router.post('/create', createPhysicalExam);
 router.get('/getOne/:id', getPhysicalExamById);

@@ -75,6 +75,7 @@ const ViewTissue = () => {
                         <Thead>
                             <Tr>
                                 <Th>S.No</Th>
+                                <Th>LotNo</Th>
                                 <Th>Date</Th>
                                 <Th>Evaluater</Th>
                                 <Th>Epitheliam</Th>
@@ -82,7 +83,7 @@ const ViewTissue = () => {
                                 <Th>Endothelium</Th>
                                 <Th>Approval</Th>
                                 <Th>Suiatabl/Reason</Th>
-                                <Th colSpan={2}>Operations</Th>
+                                <Th colSpan={3}>Operations</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -95,6 +96,7 @@ const ViewTissue = () => {
                                 .map((cornea, index) => (
                                     <Tr key={index}>
                                         <Td>{index + 1}</Td>
+                                        <Td>{cornea.lotNo}</Td>
                                         <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td>
                                         <Td>{cornea.evaluation.evaluater}</Td>
                                         <Td>{cornea.evaluation.epitheliam}</Td>
@@ -106,6 +108,7 @@ const ViewTissue = () => {
                                                 ? cornea.evaluation.suiatablity
                                                 : cornea.evaluation.reason}
                                         </Td>
+
                                         <Td className='text-center ml-3 text-blue-600'>
                                             <Link to={`/medicaldirectordashboard/editevaluation/${cornea._id}`}>
                                                 <EditIcon />
@@ -122,7 +125,7 @@ const ViewTissue = () => {
                     </Table>
                 </TableContainer>
             </div>
-        </div>
+        </div >
     );
 };
 

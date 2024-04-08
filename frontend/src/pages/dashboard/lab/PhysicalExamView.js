@@ -5,6 +5,7 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "@chakra-ui/react";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+
 const PhysicalExamView = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
@@ -22,6 +23,7 @@ const PhysicalExamView = () => {
       console.error("Failed to fetch physical exams:", error);
     }
   };
+
   const deletePhysicalExam = (examId) => {
     confirmAlert({
       title: 'Confirm Deletion',
@@ -85,7 +87,7 @@ const PhysicalExamView = () => {
     <div className="container mx-auto">
       <h2 className="text-3xl text-center font-bold mb-4 font-sans bg-blue-500 text-white rounded p-2 h-14">
         Physical Exam
-      </h2>{" "}
+      </h2>
       {exams.length === 0 ? (
         <p>No physical exams found.</p>
       ) : (
@@ -127,7 +129,7 @@ const PhysicalExamView = () => {
                       <EditIcon />
                     </Link>
                   </td>
-                  <td className="border px-2 py-2 text-red-600">
+                  <td className="borderpx-2 py-2 text-red-600">
                     <Link
                       className="text-xl ml-5"
                       onClick={() => deletePhysicalExam(exam._id)}

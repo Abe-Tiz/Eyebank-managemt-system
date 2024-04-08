@@ -4,3 +4,12 @@ body {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
+@keyframes slideRight {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.full-screen-slide {
+  width: 100vw;
+  animation: slideRight 36s linear infinite;
+}

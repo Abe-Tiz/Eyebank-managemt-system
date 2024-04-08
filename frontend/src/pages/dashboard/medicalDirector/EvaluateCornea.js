@@ -67,7 +67,7 @@ const EvaluateCornea = () => {
             await axios.put(`http://localhost:4000/cornea/evaluate/${id}`, { evaluation });
             toast({
                 title: t('Success'),
-                description: t('Cornea data saved successfully.'),
+                description: t('Evalution  data saved successfully.'),
                 status: 'success',
                 duration: 5000,
                 isClosable: true,

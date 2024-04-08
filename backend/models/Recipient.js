@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const RecipientSchema = new mongoose.Schema({
-    recipinentname: {
+    recipientname: {
         type: String,
         // required: true,
     },
@@ -16,34 +16,35 @@ const RecipientSchema = new mongoose.Schema({
         type: String,
         //required: true,
     },
-
     phone: {
         type: String,
         //required: true,
     },
-
+    address: {
+        type: String,
+    },
+    surgeryType: {
+        type: String
+    },
+    surgeonType: {
+        type: String
+    },
     registerDate: {
         type: Date,
         default: Date.now
     },
+    hospital: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Hospital",
+        //required: true,
+    },
     ocularPost: {
-        lotNo: {
-            type: String
-        },
-        surgeonName: {
-            type: String
-        },
         dateOfSurgry: {
-            type: Date
-
+            type: Date,
+            default: Date.now
         },
         surgeryType: {
             type: String
-        },
-        hospital: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Hospital",
-            //required: true,
         },
         ocularOperativeEye: {
             type: String
@@ -51,12 +52,11 @@ const RecipientSchema = new mongoose.Schema({
         ocularNonOperativeEye: {
             type: String
         }
-
     },
-    adverseReaction: {
-
-        dateOfDiagnosis: {
-            type: Date
+    adverse: {
+        dateOfadverse: {
+            type: Date,
+            default: Date.now
         },
         advererReaction: {
             type: String
@@ -69,14 +69,12 @@ const RecipientSchema = new mongoose.Schema({
         },
         patient: {
             type: String
-        }
-
+        },
     },
 },
     {
         timestamps: true
     }
 )
-
 const Recipient = mongoose.model("Recipient", RecipientSchema)
 module.exports = Recipient

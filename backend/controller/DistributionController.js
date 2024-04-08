@@ -1,14 +1,14 @@
 const Distribution = require('../models/CorneaDistribution');
 const createDistribution = async (req, res) => {
-    const { hospitalName, nameOfSurgeon, nameOfTransaction, typeOfTissue, processingFee, approvedBy, nameOfTechnician, LotNo } = req.body;
+    const { hospitalName, nameOfSurgeon, modeOfTransportation, typeOfTissue, approvedBy, nameOfTechnician, LotNo } = req.body;
     try {
         const distribution = await Distribution.create({
             LotNo: LotNo,
             hospitalName: hospitalName,
             nameOfSurgeon: nameOfSurgeon,
-            nameOfTransaction: nameOfTransaction,
+            modeOfTransportation: modeOfTransportation,
             typeOfTissue: typeOfTissue,
-            processingFee: processingFee,
+
             approvedBy: approvedBy,
             nameOfTechnician: nameOfTechnician
         })

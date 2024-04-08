@@ -65,27 +65,35 @@ const ViewTissue = () => {
                         <Tr>
 
                             <Th>S.No</Th>
-                            <Th>Date</Th>
+                            <Th>LotNo</Th>
+                            <Th> Register Date</Th>
                             <Th> Recipinent Name</Th>
                             <Th>Age</Th>
                             <Th>Sex</Th>
-                            <Th>Diagnosis</Th>
+                            <Th>Address</Th>
                             <Th>Surgery Type</Th>
-                            <Th colSpan={2}>Operations</Th>
+                            <Th colSpan={4}>Operations</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
                         {recipient.map((recipent, index) => (
                             <Tr key={index}>
                                 <Td>{index + 1}</Td>
+                                <Td>{recipent._id}</Td>
                                 <Td>
                                     {formatTimestamp(recipent.createdAt)}
                                 </Td>
                                 <Td>{recipent.recipientname}</Td>
                                 <Td>{recipent.age}</Td>
                                 <Td>{recipent.sex}</Td>
-                                <Td>{recipent.diagnosis}</Td>
+                                <Td>{recipent.address}</Td>
                                 <Td>{recipent.surgeryType}</Td>
+                                <Td>
+                                    <Link to={`/surgondashboard/ocularpost/${recipent._id}`}>Ocular Post</Link>
+                                </Td>
+                                <Td>
+                                    <Link to={`/surgondashboard/adverse/${recipent._id}`}>Adverse</Link>
+                                </Td>
                                 <Td>
                                     <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>Edit</Link>
                                 </Td>

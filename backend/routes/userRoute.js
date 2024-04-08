@@ -10,6 +10,8 @@ const {
   getloggedInUser,
   getUserById,
   updateUser,
+  getUserByName,
+  activateUser,
 } = require("../controller/UserController");
 
 
@@ -25,6 +27,7 @@ router.delete("/delete/:id", deleteUser);
 router.post("/userLogedin", getloggedInUser);
 router.get("/:id", getUserById);
 router.put("/update/:id", updateUser);
-// router.post("/logout", userLogout);
+router.post("/search", getUserByName);
+router.post("/activate", activateUser);
 
 module.exports = router; 

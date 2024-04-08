@@ -9,7 +9,6 @@ const EditCornea = () => {
     const { id } = useParams();
     const { t } = useTranslation();
     const toast = useToast();
-
     const [corneaData, setCorneaData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
@@ -36,7 +35,7 @@ const EditCornea = () => {
 
         fetchCorneaData();
     }, [id]);
-
+    const [position, setPosition] = useState([cornea.position]);
     const handleFetchError = () => {
         toast({
             title: t('Error'),
@@ -82,36 +81,20 @@ const EditCornea = () => {
             isClosable: true,
         });
     };
-
-    if (isLoading) {
-        return <div>{t('Loading...')}</div>;
-    }
-
-    const { recoveryTechnical, eyeLid, size, irisColor, corneaStatus, clarity, lens } = cornea;
-
+    const handlePosition = (event) => {
+        setPosition(event.target.value);
+    };
+    const { recoveryTechnical, eyeLid, size, irisColor, clarity, lens } = cornea;
     return (
         <div>
-            <h1>{t('Edit Cornea')}</h1>
+            <h1 className="text-2xl font-bold  mb-4" style={{ textAlign: 'center' }}>{t('Edit Cornea')}</h1>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
                     handleSave();
                 }}
             >
-                <div className="grid grid-cols-3">
-                    <label>
-                        Recovery Technical:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={recoveryTechnical}
-                            onChange={(e) => setCornea({ ...cornea, recoveryTechnical: e.target.value })}
-                        >
-                            <option value={corneaData.recoveryTechnical}>{corneaData.recoveryTechnical}</option>
-                            <option value="Technical 1">Technical 1</option>
-                            <option value="Technical 2">Technical 2</option>
-                            <option value="Technical 3">Technical 3</option>
-                        </select>
-                    </label>
+                <div className="grid grid-cols-2">
                     <label>
                         Size:
                         <select
@@ -135,7 +118,7 @@ const EditCornea = () => {
                         />
                     </label>
                 </div>
-                <div className='grid grid-cols-3'>
+                <div className='grid grid-cols-2'>
                     <label>
                         Iris Color:
                         <select
@@ -149,21 +132,7 @@ const EditCornea = () => {
                             <option value="black">Black</option>
                         </select>
                     </label>
-                    <label>
-                        Cornea Status:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
 
-                            value={corneaStatus}
-                            onChange={(e) => setCornea({ ...cornea, corneaStatus: e.target.value })}
-                        >
-                            <option value={corneaData.corneaStatus}>{corneaData.corneaStatus}</option>
-                            <option value="Status 1">Status 1</option>
-                            <option value="Status 2">Status 2</option>
-                            <option value="Status 3">Status 3</option>
-
-                        </select>
-                    </label>
                     <label>
                         Clarity:
                         <select
@@ -177,8 +146,6 @@ const EditCornea = () => {
                             <option value="clear 3">Clear 3</option>
                         </select>
                     </label>
-                </div>
-                <div className='grid grid-cols-3'>
                     <label>
                         Lens:
                         <select
@@ -193,7 +160,34 @@ const EditCornea = () => {
                             <option value="Lens 3">Lens 3</option>
                         </select>
                     </label>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">
+                    <label>
+                        Position:
+                        <label className="mt-4">
+                            <input
+                                type="radio"
+                                value="left"
+                                className="m-2"
+                                checked={position === 'left'}
+                                onChange={handlePosition}
+                            />
+                            Left
+
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="right"
+                                className="m-2"
+                                checked={position === 'right'}
+                                onChange={handlePosition}
+                            />
+                            Right
+                        </label>
+                    </label>
+                </div>
+                <div className='grid grid-cols-3'>
+
+                    <button className="bg-sky-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">
                         Update
                     </button>
                 </div>

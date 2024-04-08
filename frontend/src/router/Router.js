@@ -17,12 +17,13 @@ import ViewUsers from './../pages/auth/ViewUsers';
 import Edit from "../pages/donor/Edit";
 import EditUser from './../pages/auth/EditUser';
 import StoredCornea from './../pages/corneas/StoredCornea';
-import ViewCornea from '../components/ViewCornea';
+import ViewCornea from '../pages/dashboard/lab/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import ViewDistributed from '../pages/dashboard/lab/ViewDistributed';
 import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
 import ListOfPlege from '../pages/dashboard/lab/ListOfPlege';
+import EvaluatedList from '../pages/dashboard/lab/EvaluatedList';
 //import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
 import EditCornea from '../pages/dashboard/lab/EditCornea';
 import RecordMedicalParticular from '../pages/dashboard/lab/RecordMedicalParticular';
@@ -40,8 +41,6 @@ import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
-
-
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
@@ -51,12 +50,14 @@ import SurgeonDashboard from "../layout/SurgeonLayout";
 import AddRecipient from "../pages/dashboard/surgeon/AddRecipient"
 import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
 import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
-
+import OcularPost from "../pages/dashboard/surgeon/OcularPost";
+import AdverseReaction from "../pages/dashboard/surgeon/AdverseReaction";
+import OcularPostList from "../pages/dashboard/surgeon/OcularPostList";
+import AdverseList from "../pages/dashboard/surgeon/AdverseList";
 //admin
 import AddHospital from "../pages/dashboard/admins/AddHospital";
 import ViewHospital from "../pages/dashboard/admins/ViewHospital";
 import EditHospital from "../pages/dashboard/admins/EditHospital";
-
 //blog
 import CreatePost from "../pages/dashboard/admins/CreatePost";
 import EditPost from "../pages/dashboard/admins/EditPost";
@@ -64,8 +65,8 @@ import IndexPage from "../pages/dashboard/admins/IndexPage";
 import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
 import EditPhysicalExam from "../pages/dashboard/lab/EditPhysicalExam";
+import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
 // import LoginDonor from './../pages/donor/LoginDonor';
-
 const router = createBrowserRouter([
     {
         path: "/",
@@ -142,7 +143,7 @@ const router = createBrowserRouter([
         element: <LabTechnicalDashboard />,
         children: [
             {
-                path: "collectCornea",
+                path: "collectCornea/:id",
                 element: <CollectCornea />,
             },
             {
@@ -162,11 +163,15 @@ const router = createBrowserRouter([
                 element: <DiscardCornea />,
             },
             {
+                path: "evaluatedList",
+                element: <EvaluatedList />,
+            },
+            {
                 path: "storeCornea",
                 element: <StoreCornea />,
             },
             {
-                path: "distributeCornea",
+                path: "distributeCornea/:id",
                 element: <DistributeCornea />,
             },
             {
@@ -269,6 +274,10 @@ const router = createBrowserRouter([
                 path: "posts",
                 element: <IndexPage />,
             },
+            {
+                path: "activate",
+                element: <ActivateAccount />,
+            },
         ],
     },
     {
@@ -276,7 +285,7 @@ const router = createBrowserRouter([
         element: <MedicalDirectorDashboard />,
         children: [
             {
-                path: "",
+                path: "viewTissue",
                 element: <ViewTissue />,
             },
             {
@@ -399,10 +408,26 @@ const router = createBrowserRouter([
                 path: "viewrecipient",
                 element: <ViewRecipient />,
             },
-            // {
-            //     path: "editrecipient/:id",
-            //     element: <EditRecipient />,
-            // },
+            {
+                path: "ocularpost/:id",
+                element: <OcularPost />,
+            },
+            {
+                path: "adverse/:id",
+                element: <AdverseReaction />,
+            },
+            {
+                path: "editrecipient/:id",
+                element: <EditRecipient />,
+            },
+            {
+                path: "ocularpostlist",
+                element: <OcularPostList />,
+            }, {
+                path: "adverselist",
+                element: <AdverseList />,
+            }
+
         ],
     },
 ]);
