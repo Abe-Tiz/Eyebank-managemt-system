@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import 'tailwindcss/tailwind.css';
+
 const ViewDetails = ({ id }) => {
   const [physicalExam, setPhysicalExam] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,24 +24,24 @@ const ViewDetails = ({ id }) => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="p-10 bg-gray-100 rounded shadow mt-10 bg-white w-1/2 mx-auto text-center">Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="p-10 bg-gray-100 rounded shadow mt-10 bg-white w-1/2 mx-auto text-center">{error}</div>;
   }
 
   return (
-    <div className='p-10 bg-gray-100 rounded shadow mt-10 bg-white w-1/2 mx-auto text-center'>
-      <h1>Physical Exam Details</h1>
+    <div className="p-10 bg-gray-100 rounded shadow mt-10 bg-white w-1/2 mx-auto text-center">
+      <h1 className="text-2xl font-bold mb-4">Physical Exam Details</h1>
       {physicalExam && (
         <div>
           <p>Height: {physicalExam.height}</p>
           <p>Weight: {physicalExam.weight}</p>
           <p>Sex: {physicalExam.sex}</p>
           <p>Is Refrigerated: {physicalExam.isRefrigerated ? 'Yes' : 'No'}</p>
-          <h2>Examined</h2>
-          <ul>
+          <h2 className="text-lg font-bold mt-4">Examined</h2>
+          <ul className="list-none ml-8">
             <li>Head: {physicalExam.examined?.head ? 'Yes' : 'No'}</li>
             <li>Mouth: {physicalExam.examined?.mouth ? 'Yes' : 'No'}</li>
             <li>Neck: {physicalExam.examined?.neck ? 'Yes' : 'No'}</li>
@@ -49,8 +51,8 @@ const ViewDetails = ({ id }) => {
             <li>Arteries: {physicalExam.examined?.arteries ? 'Yes' : 'No'}</li>
             <li>Back: {physicalExam.examined?.back ? 'Yes' : 'No'}</li>
           </ul>
-          <h2>High-Risk Examined</h2>
-          <ul>
+          <h2 className="text-lg font-bold mt-4">High-Risk Examined</h2>
+          <ul className="list-none ml-8">
             <li>Sexual: {physicalExam.highRiskexamined?.sexual}</li>
             <li>Anal Intercourse: {physicalExam.highRiskexamined?.analIntercourse}</li>
             <li>Non-Medical: {physicalExam.highRiskexamined?.nonMedical}</li>

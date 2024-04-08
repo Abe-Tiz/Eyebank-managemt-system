@@ -54,7 +54,6 @@ const PhysicalExam = () => {
         highRiskexamined: {
           ...formData.highRiskexamined,
           [name]: value === "evidence" ? "evidence" : "no evidence",
-          // [name]: value === checked ? "yes" : "no",
         },
       }));
     } else {
