@@ -6,12 +6,13 @@ import ButtonComponent from "../../components/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 import LoadingCircle from "./../../components/LoadingCircle";
+import DynamicIcon from "../../components/DynamicIcon";
 
 const LoginDonor = () => {
   const [email, setEmail] = useState();
   const [code, setCode] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [attempts, setAttempts] = useState(0);
+  const [showCode, setSHowCode] = useState(false);
  
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -101,8 +102,8 @@ const LoginDonor = () => {
 
   
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleShowCOde = () => {
+    setSHowCode(!showCode);
   };
 
   const handleCodeChange = (e) => {
@@ -154,19 +155,41 @@ const LoginDonor = () => {
                   {t("donor:ShortCode")}:<span className="text-red-500">*</span>
                 </label>
                 <div className="flex flex-col items-center">
-                  <input
-                    name="code"
-                    type="number"
-                    placeholder={t("donor:PlaceholderShortCode")}
-                    onChange={handleCodeChange}
-                    className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                    autoComplete="off"
-                    required
-                    pattern="[0-9]{4}$"
-                  />
-                  <span className="mt-1 hidden text-sm text-red-400">
+                  <>
+                    <input
+                      name="code"
+                      type={showCode ? "number" : "password"}
+                      placeholder={t("donor:PlaceholderShortCode")}
+                      onChange={handleCodeChange}
+                      className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                      autoComplete="off"
+                      value={code}
+                      // required
+                      // pattern="[0-9]{4}$"
+                    />
+                    <span
+                      className="relative left-32 -top-8"
+                      onClick={handleShowCOde}
+                    >
+                      {showCode ? (
+                        <DynamicIcon
+                          library="io"
+                          iconName="IoMdEye"
+                          className="text-2xl text-gray-600"
+                        />
+                      ) : (
+                        <DynamicIcon
+                          library="io"
+                          iconName="IoMdEyeOff"
+                          className="text-2xl text-gray-600"
+                        />
+                      )}
+                    </span>
+                  </>
+
+                  {/* <span className="mt-1 hidden text-sm text-red-400">
                     {t("login:labelErrorPassword")}
-                  </span>
+                  </span> */}
                 </div>
               </div>
               {isLoading ? (

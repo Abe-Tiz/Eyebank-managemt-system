@@ -22,6 +22,7 @@ const AccidentalRoute = require("./routes/AccidentRoute");
 const BloodRoute = require("./routes/BloodRoute");
 const RequestRoute = require("./routes/RequestRoute");
 const DistributionRoute = require("./routes/DistributionRoute");
+const { scheduleExpirationCheck } = require("./utils/Scheduler.js");
 //const RecipientRoute = require("./routes/RecipientRoute");
 dotenv.config();
 connectDB();
@@ -78,6 +79,9 @@ app.use("/cornea", corneaRoute);
 app.use("/post", postRoutes);
 app.use("/hospital", HospitalRoute);
 app.use("/recipient", RecipientRoute);
+
+//! check the expiration date of the cornea
+scheduleExpirationCheck();
 
 // Notification logic
 const NotifyNewDonors = async () => {

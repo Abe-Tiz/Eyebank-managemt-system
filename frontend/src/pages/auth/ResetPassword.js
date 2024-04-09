@@ -144,7 +144,10 @@ import { FormControl } from "@chakra-ui/form-control";
                       )}
                     </div>
                   </div>
-                  <ButtonComponent title={t("register:resetPasswordButton")} />
+                  <ButtonComponent
+                    customClass="w-64 justify-center  mb-3"
+                    title={t("register:resetPasswordButton")}
+                  />
                 </div>
               </form>
             </div>

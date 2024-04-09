@@ -6,10 +6,12 @@ import ButtonComponent from "../../components/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 import ButtonPrimary from "../../components/ButtonPrimary";
+import DynamicIcon from "../../components/DynamicIcon";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showpassword, setShowpassword] = useState(false);
 
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -163,8 +165,8 @@ const Login = () => {
     }
 
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+    const handleShowPassword = () => {
+      setShowpassword((!showpassword));
     };
 
     const handlePasswordChange = (e) => {
@@ -216,16 +218,35 @@ const Login = () => {
                     <span className="text-red-500">*</span>
                   </label>
                   <div className="flex flex-col items-center">
-                    <input
-                      name="password"
-                      type="password"
-                      placeholder={t("common:passwordPlaceholderLabel")}
-                      onChange={handlePasswordChange}
-                      className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                      autoComplete="off"
-                      required
-                      pattern="[a-zA-Z0-9]{8,}$"
-                    />
+                    <>
+                      <input
+                        name="password"
+                        type={showpassword ? "text" : "password"}
+                        value={password}
+                        onChange={handlePasswordChange}
+                        placeholder={t("common:passwordPlaceholderLabel")}
+                        className="block w-full  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        autoComplete="off"
+                        required
+                        pattern="[a-zA-Z0-9]{8,}$"
+                      />
+                      <span className="relative left-32 -top-8" onClick={handleShowPassword}>
+                        {showpassword ? (
+                          <DynamicIcon
+                            library="io"
+                            iconName="IoMdEye"
+                            className="text-2xl text-gray-600"
+                          />
+                        ) : (
+                          <DynamicIcon
+                            library="io"
+                            iconName="IoMdEyeOff"
+                            className="text-2xl text-gray-600"
+                          />
+                        )}
+                      </span>
+                    </>
+
                     <span className="mt-1 hidden text-sm text-red-400">
                       {t("login:labelErrorPassword")}
                     </span>

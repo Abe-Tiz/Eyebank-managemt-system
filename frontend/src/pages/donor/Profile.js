@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEdit, FaPrint } from "react-icons/fa";
 import ProfileDetail from "./ProfileDetail";
+import DynamicIcon from "../../components/DynamicIcon";
+import LinkButton from "../../components/LinkButton";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({
@@ -73,7 +75,7 @@ const Profile = () => {
   return (
     <div className="container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% min-h-screen flex flex-col items-center justify-center">
       <h2 className="text-4xl font-bold text-gray-800 mt-3">
-        {t('donor:ProfileHeading')}
+        {t("donor:ProfileHeading")}
       </h2>
       <div className="flex bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% md:flex-row flex-col justify-between gap-10 overflow-hidden mx-auto container m-5 p-5 rounded-lg shadow-md">
         {/* Left Section */}
@@ -110,7 +112,6 @@ const Profile = () => {
         {/* Right Section */}
         <div className="w-3/4 p-5 border-l-4">
           <div className="flex flex-col md:flex-row gap-y-4 md:gap-x-8">
-           
             <div className="md:w-1/2">
               <ProfileDetail
                 label={t("login:labelLoginEmail")}
@@ -145,27 +146,37 @@ const Profile = () => {
               />
             </div>
           </div>
-          
+
           {/* Buttons */}
           <div className="flex justify-center gap-16 mt-6">
-
+          
             {/* Update Button */}
-            <Link
-              className="w-32 like-button bg-blue-500 text-white flex justify-center items-center text-center cursor-pointer px-3 py-3 rounded focus:outline-none border border-gray-300 hover:bg-blue-600 shadow-md"
-              to={`/update/${profileData.id}`}
-            >
-              <FaEdit className="mr-2" />
-              {t("common:updateButtonLabel")}
-            </Link>
+            <LinkButton
+              path={`/update/${profileData.id}`}
+              title={t("common:updateButtonLabel")}
+              icon={
+                <DynamicIcon
+                  library="fa"
+                  iconName="FaEdit"
+                  className="text-2xl text-white mr-2"
+                />
+              }
+              customClass="bg-sky-700 border-2 flex justify-center items-center text-center  px-3 py-2 text-2x text-white font-normal mt-3 mr-5  hover:shadow-md"
+            />
 
             {/* Print Button */}
-            <Link
-              className="w-32 like-button bg-orange-500 text-white flex justify-center items-center text-center cursor-pointer px-3 py-3 rounded focus:outline-none border border-gray-300 hover:bg-green-600 shadow-md"
-              to={`/print/${profileData.id}`}
-            >
-              <FaPrint className="mr-2" />
-              {t("common:printButtonLabel")}
-            </Link>
+            <LinkButton
+              path={`/print/${profileData.id}`}
+              title={t("common:printButtonLabel")}
+              icon={
+                <DynamicIcon
+                  library="fa"
+                  iconName="FaPrint"
+                  className="text-2xl text-gray-600 hover:text-white mr-2"
+                />
+              }
+              customClass="bg-gray-300 border-2 flex justify-center items-center text-center border-sky-700 hover:bg-sky-700 px-3 py-2 text-2xl hover:text-white text-gray-700 font-normal mt-3 mr-5"
+            />
           </div>
         </div>
       </div>
