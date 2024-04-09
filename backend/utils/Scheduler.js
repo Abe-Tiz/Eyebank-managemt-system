@@ -1,12 +1,17 @@
 const nodeCron = require("node-cron");
 const Cornea = require("../models/Cornea");
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
 
+const pass = process.env.EMAIL_PASS;
+const user =process.env.EMAIL_USER;
+// console.log("userrrrrrrrr:", pass);
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "abebetizazu157@gmail.com",
-        pass: "gezm fqmn asjl bqxj",
+        user: user,
+        pass: pass,
     },
     tls: {
         rejectUnauthorized: false,
