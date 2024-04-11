@@ -7,7 +7,6 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
 const CustomSidebar = ({ collapsed, name, image }) => {
     const { t } = useTranslation();
     return (
@@ -132,7 +131,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
                                 </Link>
-                                <Link
+                                {/* <Link
                                     to="/labtechnicaldashboard/evaluatedList"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
@@ -141,7 +140,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                 >
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:EvaluatedList")}</span>
-                                </Link>
+                                </Link> */}
                                 <Link
                                     to="/labtechnicaldashboard/discardCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -153,7 +152,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <span className="ml-2"> {t("cornea:discardCorneaLabel")}</span>
                                 </Link>
                                 <Link
-                                    to="/labtechnicaldashboard/storeCornea"
+                                    to="/labtechnicaldashboard/storedCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
                                     data-tooltip-id="user-list"
@@ -172,16 +171,16 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:distributeCorneaLabel")}</span>
                                 </Link> */}
-                                <Link
-                                    to="/labtechnicaldashboard/viewDistributed"
-                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                    // onClick={handleUserList}
-                                    data-tooltip-id="user-list"
-                                    data-tooltip-content="View distribute "
-                                >
-                                    <CiBoxList className="text-2xl" />
-                                    <span className="ml-2"> {t("cornea:viewDistributeLabel")}</span>
-                                </Link>
+                                    <Link
+                                        to="/labtechnicaldashboard/viewDistributed"
+                                        className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                        // onClick={handleUserList}
+                                        data-tooltip-id="user-list"
+                                        data-tooltip-content="View distribute "
+                                    >
+                                        <CiBoxList className="text-2xl" />
+                                        <span className="ml-2"> {t("cornea:viewDistributeLabel")}</span>
+                                    </Link>
                                 <Link
                                     to="/labtechnicaldashboard/viewDonor"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"

@@ -15,7 +15,7 @@ const DistributeCornea = () => {
     const [modeOfTransportation, setModeOfTransportation] = useState('');
     const [typeOfTissue, setTypeOfTissue] = useState('');
     const [approvedBy, setApprovedBy] = useState('');
-    const [nameOfTechnician, setNameOfTechnician] = useState('');
+    //const [nameOfTechnician, setNameOfTechnician] = useState('');
     //for recovery
     const [LotNo, setLot] = useState([])
     const [hospitals, setHospitals] = useState([])
@@ -29,11 +29,40 @@ const DistributeCornea = () => {
     const distri = {
         distributed,
     };
+    const [state, setState] = useState({
+        name: ""
+    })
+    useEffect(() => {
+        fetch("http://127.0.0.1:4000/user/userLogedin", {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem("token"),
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data, "user logged in");
+                setState((prev) => ({
+                    ...prev,
+                    name: data.data.name,
+                }));
 
+                if (data.data === "token expired") {
+                    localStorage.clear();
+                    navigate("/login");
+                }
+            });
+    }, [navigate]);
+    const nameOfTechnician = state.name
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
-
             LotNo,
             hospitalName,
             nameOfSurgeon,
@@ -61,7 +90,6 @@ const DistributeCornea = () => {
         }
     };
     const handleDistribution = async (id) => {
-
         try {
             await axios.put(`http://localhost:4000/cornea/distribute/${id}`, distri);
             //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
@@ -99,13 +127,14 @@ const DistributeCornea = () => {
                 const response = await axios.get(`http://localhost:4000/cornea/getOne/${id}`);
                 const lotlist = response.data;
                 setLot(lotlist.lotNo);
+                setApprovedBy(lotlist.evaluation.evaluater);
+                setTypeOfTissue(lotlist.evaluation.suiatablity);
             } catch (error) {
                 console.log(error);
             }
         };
         fetchLot();
     }, []);
-
     useEffect(() => {
         const fetchApproved = async () => {
             try {
@@ -130,31 +159,18 @@ const DistributeCornea = () => {
 
         fetchlab();
     }, []);
-
     return (
         <div>
-            <h2 className="" style={{ textAlign: 'center', background: "#6af" }}>Welcome to Cornea Distribution Form</h2>
+            <h2 className="text-3xl mb-4 " style={{ textAlign: 'center' }}>Welcome to Cornea Distribution Form</h2>
             <form onSubmit={handleFormSubmit}>
-                <div className="grid grid-cols-2">
-                    {LotNo}
-                    {/* <label>
-                        Lot Number:
-                        <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={lot}
-                            onChange={(e) => setLot(e.target.value)}
-                        />
-                    </label> */}
+                <div className="grid justify-center">
                     <label>
-                        Hospital Name:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-3 block w-full  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={hospitalName}
-                            onChange={(e) => setHospitalName(e.target.value)}
-                        >
+                            onChange={(e) => setHospitalName(e.target.value)}>
                             <option>select hospital Name</option>
                             {hospitals.map((hospital, index) => (
-
                                 <option key={index} value={hospital._id}>
                                     {hospital.hospitalName}
                                 </option>
@@ -162,12 +178,11 @@ const DistributeCornea = () => {
                         </select>
                     </label>
                     <label>
-                        Surgeon Name:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={nameOfSurgeon}
-                            onChange={(e) => setNameOfSurgeon(e.target.value)}
-                        >
+                            onChange={(e) => setNameOfSurgeon(e.target.value)}>
+                            <option>select Surgeon Name</option>
                             {surgeons.map((surgeon, index) => (
                                 <option key={index} value={surgeon._id}>
                                     {surgeon.name}
@@ -176,64 +191,22 @@ const DistributeCornea = () => {
                         </select>
                     </label>
                     <label>
-                        Approved By:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={approvedBy}
-                            onChange={(e) => setApprovedBy(e.target.value)}
-                        >
-                            {approved.map((approve, index) => (
-                                <option key={index} value={approve._id}>
-                                    {approve.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        Lab Technician:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={nameOfTechnician}
-                            onChange={(e) => setNameOfTechnician(e.target.value)}
-                        >
-                            {labTechinician.map((lab, index) => (
-                                <option key={index} value={lab._id}>
-                                    {lab.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        Mode Of Transportation
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={modeOfTransportation}
                             onChange={(e) => setModeOfTransportation(e.target.value)}>
-                            <option value="">Select Size</option>
+                            <option value="" disabled> Mode Of Transportation</option>
                             <option value="Amblunce">Amblunce</option>
                             <option value="Plane">Plane</option>
-                        </select>
-                    </label>
-                    <label>
-                        Type of Tissue:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={typeOfTissue}
-                            onChange={(e) => setTypeOfTissue(e.target.value)}>
-                            <option value="">Select type</option>
-                            <option value="PK">PK</option>
-                            <option value="DSEK">DSEK</option>
-                            <option value="TPK">TPK</option>
                         </select>
                     </label>
                 </div>
                 <div className="text-center mt-4">
                     <button
-                        // onClick={() => handleDistribution({ id })}
                         type="submit"
-                        className="w-1/3 mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600  text-white font-semibold rounded"
+                        className="w-1/3 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600  text-white font-semibold rounded"
                     >
-                        Register Cornea
+                        Distribute Cornea
                     </button>
                     {/* <Td className='text-center ml-3 text-blue-600'>
                         <Button colorScheme='blue' onClick={() => handleCollect(cornea._id)}>Distribute</Button>

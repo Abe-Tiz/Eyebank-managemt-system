@@ -39,34 +39,29 @@ const Viewdistribute = () => {
                 console.error(error);
             }
         };
-
         fetchData();
     }, []);
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
-
     };
-
-
     return (
         <div>
             <TableContainer>
-                <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
-                    List of distribute distribute
+                <Text fontSize='3xl' className='text-center text-black mt-0'>
+                    List of distributed cornea
                 </Text>
-
-                <Table size='sm'>
+                <Table variant='simple'>
                     <Thead>
-                        <Tr>
-                            <Th>Lot No</Th>
-                            <Th> Hospital Name</Th>
-                            <Th>Surgeon Name</Th>
-                            <Th>Mode Of Traporation</Th>
-                            <Th>Approved By</Th>
-                            <Th>distribute By</Th>
-                            <Th>Type of Tissue</Th>
-                            <Th>Distribution Date</Th>
-                            <Th >Operations</Th>
+                        <Tr className='bg-sky-600 text-white'>
+                            <Th className='text-white'>Lot No</Th>
+                            <Th className='text-white' > Hospital Name</Th>
+                            <Th className='text-white'>Surgeon Name</Th>
+                            <Th className='text-white'>Mode Of Traporation</Th>
+                            <Th className='text-white'>Approved By</Th>
+                            <Th className='text-white'>distribute By</Th>
+                            <Th className='text-white'>Type of Tissue</Th>
+                            <Th className='text-white'>Distribution Date</Th>
+                            <Th className='text-white' >Operations</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -76,8 +71,8 @@ const Viewdistribute = () => {
                                 <Td>{distribute.hospitalName.hospitalName}</Td>
                                 <Td>{distribute.nameOfSurgeon.name}</Td>
                                 <Td>{distribute.modeOfTransportation}</Td>
-                                <Td>{distribute.approvedBy.name}</Td>
-                                <Td>{distribute.nameOfTechnician.name}</Td>
+                                <Td>{distribute.approvedBy}</Td>
+                                <Td>{distribute.nameOfTechnician}</Td>
                                 <Td>{distribute.typeOfTissue}</Td>
                                 <Td>
                                     {formatTimestamp(distribute.createdAt)}

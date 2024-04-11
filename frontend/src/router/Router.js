@@ -16,12 +16,12 @@ import Signup from './../pages/auth/Signup';
 import ViewUsers from './../pages/auth/ViewUsers';
 import Edit from "../pages/donor/Edit";
 import EditUser from './../pages/auth/EditUser';
-import StoredCornea from './../pages/corneas/StoredCornea';
 import ViewCornea from '../pages/dashboard/lab/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import ViewDistributed from '../pages/dashboard/lab/ViewDistributed';
-import StoreCornea from '../pages/dashboard/lab/StoreCornea';
+//import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
+import EditDistribute from '../pages/dashboard/lab/EditDistribute';
 import ListOfPlege from '../pages/dashboard/lab/ListOfPlege';
 import EvaluatedList from '../pages/dashboard/lab/EvaluatedList';
 //import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
@@ -41,6 +41,7 @@ import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
+import StoredCornea from '../pages/dashboard/lab/StoredCornea';
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
@@ -166,12 +167,16 @@ const router = createBrowserRouter([
                 element: <EvaluatedList />,
             },
             {
-                path: "storeCornea",
-                element: <StoreCornea />,
+                path: "storedCornea",
+                element: <StoredCornea />,
             },
             {
                 path: "distributeCornea/:id",
                 element: <DistributeCornea />,
+            },
+            {
+                path: "editdistributed/:id",
+                element: <EditDistribute />,
             },
             {
                 path: "viewDistributed",
@@ -239,7 +244,7 @@ const router = createBrowserRouter([
                 element: <EditUser />,
             },
             {
-                path: "storeCornea",
+                path: "storedCornea",
                 element: <StoredCornea />,
             },
             {
