@@ -35,19 +35,91 @@ const PhysicalExam = () => {
     time: "",
   });
 
-  
- 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const [, setErrors] = useState({});
 
-    if (type === "checkbox") {
+  const handleChange = (e) => {
+    const { name, value, type, keyCode } = e.target;
+  
+    if (type === "text") {
+      if (keyCode === 8 && value.length === 0) {
+        // Backspace key is pressed and no character remains, clear the input field
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: null,
+        }));
+        setFormData((formData) => ({
+          ...formData,
+          [name]: "",
+        }));
+      } else if (/^[a-zA-Z]+$/.test(value) || value === "") {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: null,
+        }));
+        setFormData((formData) => ({
+          ...formData,
+          [name]: value,
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: "Only text characters are allowed.",
+        }));
+        // e.target.style.borderColor = "red"; // Apply red border
+        // e.target.placeholder = "Enter only text"; // Change placeholder
+      }
+    } else if (type === "number") {
+      if (keyCode === 8 && value.length === 0) {
+        // Backspace key is pressed and no character remains, clear the input field
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: null,
+        }));
+        setFormData((formData) => ({
+          ...formData,
+          [name]: "",
+        }));
+      } else if (/^\d*$/.test(value) || value === "") {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: null,
+        }));
+        setFormData((formData) => ({
+          ...formData,
+          [name]: value,
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: "Only numeric characters are allowed.",
+        }));
+        // e.target.style.borderColor = "red"; // Apply red border
+        // e.target.placeholder = "Enter only numbers"; // Change placeholder
+      }
+    } else if (type === "checkbox") {
       setFormData((formData) => ({
         ...formData,
         examined: {
           ...formData.examined,
-          [name]: checked,
+          [name]: e.target.checked,
         },
       }));
+    } else if (type === "date") {
+      if (isValidDate(value)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: null,
+        }));
+        setFormData((formData) => ({
+          ...formData,
+          [name]: value,
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: "Invalid date format.",
+        }));
+      }
     } else if (type === "select-one") {
       setFormData((formData) => ({
         ...formData,
@@ -56,14 +128,28 @@ const PhysicalExam = () => {
           [name]: value === "evidence" ? "evidence" : "no evidence",
         },
       }));
-    } else {
-      setFormData((formData) => ({
-        ...formData,
-        [name]: value,
-      }));
     }
   };
-
+  function isValidDate(dateString) {
+    // Check if the dateString matches the expected format (YYYY-MM-DD)
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(dateString)) {
+      return false;
+    }
+  
+    // Parse the date components (year, month, day)
+    const [year, month, day] = dateString.split('-');
+    
+    // Create a new Date object and check if it is a valid date
+    const dateObj = new Date(year, month - 1, day);
+    const isValid = (
+      dateObj.getFullYear() == year &&
+      dateObj.getMonth() + 1 == month &&
+      dateObj.getDate() == day
+    );
+  
+    return isValid;
+  }
   const handleChange1 = (e) => {
     const { name, value } = e.target;
     setFormData((formData) => ({
@@ -256,6 +342,7 @@ const PhysicalExam = () => {
               value={formData.causeOfDeath}
               onChange={handleChange}
               className="w-48 px-3 py-2 border-2 rounded"
+              placeholder="enter cause of deaths"
             />
           </div>
           <div>
@@ -281,6 +368,7 @@ const PhysicalExam = () => {
               name="time"
               value={formData.time}
               onChange={handleChange}
+              placeholder="enter time"
               required
               className="w-48 px-3 py-2 border-2 rounded"
             />
@@ -290,9 +378,10 @@ const PhysicalExam = () => {
               Story:
             </label>
             <textarea
+              // type="text"
               name="story"
               value={formData.story}
-              onChange={handleChange}
+              onChange={handleChange1}
               required
               className="w-full px-3 py-2 border-2 rounded"
             ></textarea>

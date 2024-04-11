@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import 'tailwindcss/tailwind.css';
+// import 'tailwindcss/tailwind.css';
 
-const ViewDetails = ({ id }) => {
+const ViewDetails = ({ examId }) => {
   const [physicalExam, setPhysicalExam] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,7 +10,12 @@ const ViewDetails = ({ id }) => {
   useEffect(() => {
     const fetchPhysicalExam = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/getOne/${id}`);
+        const response = await fetch(`http://localhost:4000/api/getOne/${examId}`);
+
+        if (!response.ok) {
+          throw new Error('Failed to retrieve PhysicalExam');
+        }
+
         const data = await response.json();
         setPhysicalExam(data);
         setLoading(false);
@@ -21,14 +26,18 @@ const ViewDetails = ({ id }) => {
     };
 
     fetchPhysicalExam();
-  }, [id]);
+  }, [examId]);
 
   if (loading) {
-    return <div className="p-10 bg-gray-100 rounded shadow mt-10 bg-white w-1/2 mx-auto text-center">Loading...</div>;
+    return (
+      <div className="p-10 bg-gray-100 rounded shadow mt-10 bg-white w-1/2 mx-auto text-center">Loading...</div>
+    );
   }
 
   if (error) {
-    return <div className="p-10 bg-gray-100 rounded shadow mt-10 bg-white w-1/2 mx-auto text-center">{error}</div>;
+    return (
+      <div className="p-10 bg-gray-100 rounded shadow mt-10 bg-white w-1/2 mx-auto text-center">{error}</div>
+    );
   }
 
   return (
