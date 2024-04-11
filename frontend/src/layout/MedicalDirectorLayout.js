@@ -7,14 +7,17 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
-import MedicalSidebar from "../pages/dashboard/medicalDirector/MedicalSidebar";
+import CustomSidebar from "../pages/dashboard/lab/SideBar";
+
 const { Header, Content } = Layout;
 
 const MedicalDirectorDashboard = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+
     const [state, setState] = useState({
         name: "",
         image: "",
@@ -23,15 +26,16 @@ const MedicalDirectorDashboard = () => {
         collapsed: false,
         role: "",
     });
-
     const handleSearch = () => {
         const sampleList = [
             { id: 1, name: "John Doe" },
             { id: 2, name: "Jane Doe" },
         ];
+
         const results = sampleList.filter((item) =>
             item.name.toLowerCase().includes(searchText.toLowerCase())
         );
+
         setSearchResults(results);
     };
     const handleSearchInputChange = (e) => {
@@ -40,17 +44,14 @@ const MedicalDirectorDashboard = () => {
     const toggleDropdown = () => {
         setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
     };
-
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
     };
-
     //! handle Logout
     const handleLogout = () => {
         localStorage.clear();
         navigate("/login");
     };
-
     //! handle loggedin user
     useEffect(() => {
         fetch("http://127.0.0.1:4000/user/userLogedin", {
@@ -82,35 +83,32 @@ const MedicalDirectorDashboard = () => {
                 }
             });
     }, [navigate]);
-
     return (
         <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
-
-            <MedicalSidebar
+            <CustomSidebar
                 collapsed={state.collapsed}
                 toggleSidebar={toggleSidebar}
                 name={state.name}
                 image={state.image}
                 role={state.role}
             />
-
             <Layout
                 className={`${state.collapsed ? "ml-20" : "ml-64"
                     } transition-all duration-300 ease-in-out flex-grow`}
             >
                 <Header
-                    className="bg-gray-900 p-4 shadow-lg flex justify-between items-center text-white"
+                    className="bg-slate-300 p-4 w-full  flex justify-between items-center text-black "
                     style={{ position: "sticky", top: 0, right: 0 }}
                 >
                     <div className="flex items-center">
                         {state.collapsed ? (
                             <TfiMenuAlt
-                                className="text-2xl text-gray-200 mr-2 cursor-pointer"
+                                className="text-2xl text-black mr-2 cursor-pointer"
                                 onClick={toggleSidebar}
                             />
                         ) : (
                             <GiHamburgerMenu
-                                className="text-2xl text-gray-200 mr-2 cursor-pointer"
+                                className="text-2xl text-black mr-2 cursor-pointer"
                                 onClick={toggleSidebar}
                             />
                         )}
@@ -118,25 +116,24 @@ const MedicalDirectorDashboard = () => {
                             {state.role} {state.name}
                         </span>
                     </div>
-
                     <div className="flex items-center space-x-4">
-                        <input
+                        {/* <input
                             type="text"
                             placeholder="Search"
                             value={searchText}
                             onChange={handleSearchInputChange}
-                            className="border p-2 rounded bg-gray-800 text-white"
-                        />
-                        <button
+                            className="border p-2 rounded bg-white text-black"
+                        /> */}
+                        {/* <button
                             onClick={handleSearch}
-                            className="text-white hover:text-gray-300 transition-all duration-300"
+                            className="text-black hover:text-gray-300 transition-all duration-300"
                         >
                             Search
-                        </button>
+                        </button> */}
 
-                        <Badge count={5} offset={[0, 5]} className="mr-5">
+                        {/* <Badge count={5} offset={[0, 5]} className="mr-5">
                             <BellOutlined className="text-2xl text-blue-500" />
-                        </Badge>
+                        </Badge> */}
                         <div className="relative inline-block">
                             <button
                                 onClick={toggleDropdown}
@@ -176,14 +173,13 @@ const MedicalDirectorDashboard = () => {
                         </div>
                     </div>
                 </Header>
-
-                <Content className="p-4">
-                    <div className="bg-white p-4 rounded shadow w-full">
+                <Content className="">
+                    <div className=" bg-slate-100 shadow py-4 pl-4 rounded w-full">
                         <Outlet />
                     </div>
                 </Content>
-            </Layout>
-        </Layout>
+            </Layout >
+        </Layout >
     );
 };
 

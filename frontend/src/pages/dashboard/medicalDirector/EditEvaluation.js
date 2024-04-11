@@ -89,15 +89,14 @@ const EditEvaluation = () => {
 
     return (
         <div>
-            <h1>{t('Edit Cornea')}</h1>
+            <h1 className="text-2xl font-bold  mb-4" style={{ textAlign: 'center' }}>{t('Edit Evalution')}</h1>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
                     handleSave();
                 }}
             >
-                <div className='grid grid-cols-3'>
-
+                <div className='grid grid-cols-2'>
                     <label>
                         Epitheliam:
                         <select
@@ -112,22 +111,6 @@ const EditEvaluation = () => {
                         </select>
                     </label>
                     <label>
-                        Evaluator:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={evaluater}
-                            onChange={(e) => setEvaluationData({ ...evaluateData, evaluater: e.target.value })}
-                        >
-                            <option value={corneaData.evaluation.evaluater}>{corneaData.evaluation.evaluater}</option>
-                            <option value="awoke">Awoke</option>
-                            <option value="amsalu">Amsalu</option>
-                            <option value="leli">Leli</option>
-                        </select>
-                    </label>
-
-                </div>
-                <div className='grid grid-cols-3'>
-                    <label>
                         Stroma:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
@@ -140,11 +123,12 @@ const EditEvaluation = () => {
                             <option value="black">Black</option>
                         </select>
                     </label>
+                </div>
+                <div className='grid grid-cols-2'>
                     <label>
                         endothelium:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-
                             value={endothelium}
                             onChange={(e) => setEvaluationData({ ...evaluateData, endothelium: e.target.value })}
                         >
@@ -154,9 +138,7 @@ const EditEvaluation = () => {
                             <option value="Status 3">Status 3</option>
                         </select>
                     </label>
-                </div>
-                <div className='grid grid-cols-3'>
-                    <div>
+                    <div className='mt-3'>
                         <label>
                             <label>
                                 Approval:
@@ -217,18 +199,17 @@ const EditEvaluation = () => {
                                     <option value="endothelium">Endothelium</option>
                                     <option value="descement"> Descement</option>
                                     <option value="other">Other</option>
-
                                 </select>
-
-
                             </label>) : (null)
                         }
                     </div>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">
+
+                </div>
+                <div className='text-center '>
+                    <button className="w-1/4 bg-sky-600 hover:bg-blue-700 text-white  font-bold py-2 px-4 mt-5 rounded">
                         Update
                     </button>
                 </div>
-
             </form >
         </div >
     );

@@ -33,7 +33,6 @@ const CollectCornea = () => {
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
-
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -62,7 +61,6 @@ const CollectCornea = () => {
 
         try {
             const response = await axios.post('http://localhost:4000/cornea/create',
-
                 data
             );
             console.log(response.data);
@@ -106,7 +104,6 @@ const CollectCornea = () => {
                 }
             });
     }, [navigate]);
-
     const recoveryTechnical = state.name
     const handlePosition = (event) => {
         setPosition(event.target.value);
@@ -215,7 +212,6 @@ const CollectCornea = () => {
                         </label>
                     </label>
                 </div>
-
                 <div className="text-center mt-4">
                     <button
                         // onClick={handleFormSubmit}
@@ -229,5 +225,4 @@ const CollectCornea = () => {
         </div >
     );
 };
-
 export default CollectCornea;

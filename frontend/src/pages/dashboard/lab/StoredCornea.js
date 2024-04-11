@@ -23,7 +23,7 @@ import {
     TableContainer,
 } from '@chakra-ui/react';
 
-const EvaluatedList = () => {
+const StoredCornea = () => {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
@@ -101,7 +101,7 @@ const EvaluatedList = () => {
                                 .filter(
                                     (cornea) =>
                                         cornea.evaluation &&
-                                        (cornea.evaluation.approval === 'yes')
+                                        (cornea.evaluation.approval === 'yes' && cornea.distributed === false)
                                 )
                                 .map((cornea, index) => (
                                     <Tr key={index}>
@@ -129,4 +129,4 @@ const EvaluatedList = () => {
     );
 };
 
-export default EvaluatedList;
+export default StoredCornea;
