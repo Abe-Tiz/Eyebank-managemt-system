@@ -5,9 +5,9 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 const TableRow = ({ cornea, formatTimestamp, deleteCornea }) => (
   <Tr className="mb-2 text-lg">
-    <Td className="text-lg xl:text-2xl">{cornea.lotNo}</Td>
+    <Td>{cornea.lotNo}</Td>
     <Td>{formatTimestamp(cornea.createdAt)}</Td>
-    <Td className="text-lg xl:text-2xl">{cornea.recoveryTechnical}</Td>
+    <Td>{cornea.recoveryTechnical}</Td>
       <Td>{cornea.position}</Td>
       <Td>{cornea.lens}</Td>
       <Td>{cornea.clarity}</Td>

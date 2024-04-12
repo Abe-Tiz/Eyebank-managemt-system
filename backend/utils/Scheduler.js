@@ -44,7 +44,7 @@ const sendEmailToAdmin = (cornea) => {
 */
 const scheduleExpirationCheck = () => {
     nodeCron.schedule("00 00 * * *", async () => {
-        console.log("Running a task at 4:15 PM");
+        console.log("Running a task at 6:00 PM Every Mid night!!");
         const corneas = await Cornea.find({});
         corneas.forEach(async (cornea) => {
           const createdAtDate = new Date(cornea.createdAt);

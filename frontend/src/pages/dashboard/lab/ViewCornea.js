@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {
-    Tag,
-    TagLabel,
-    TagLeftIcon,
-    TagRightIcon, HStack,
-    TagCloseButton,
-} from '@chakra-ui/react'
-import { Button, ButtonGroup, WrapItem } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer } from '@chakra-ui/react';
 import useSearch from '../../../useHooks/useSearch';
 import SearchComponent from '../../../components/SearchComponent';
@@ -24,9 +14,10 @@ const ViewCornea = () => {
   const { searchTerm, handleChange, data, error } = useSearch("cornea");
   const navigate = useNavigate();
   const [corneas, setCorneas] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-
+  
   // Calculate the total number of pages
   const totalPages = Math.ceil(corneas.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -82,7 +73,6 @@ const ViewCornea = () => {
   };
 
   const renderCornea = searchTerm ? data : currentCorneas;
-  // console.log("cornea:", renderCornea);
   return (
     <div>
       <TableContainer>
@@ -98,24 +88,11 @@ const ViewCornea = () => {
         </div>
         <div>
           <Table variant="simple">
-            {/* <Thead>
-              <Tr className="bg-sky-600 text-white">
-                <Th className="text-white">LotNo</Th>
-                <Th className="text-white">Date</Th>
-                <Th className="text-white"> Technical</Th>
-                <Th className="text-white">Position</Th>
-                <Th className="text-white">Lens</Th>
-                <Th className="text-white">Clarity</Th>
-                <Th className="text-white">Size</Th>
-                <Th className="text-white">Eye Lid</Th>
-                <Th className="text-white">Iris Color</Th>
-                <Th className="text-white">Exiption Date</Th>
-                <Th className="text-white" colSpan={3}>
-                  Operations
-                </Th>
-              </Tr>
-            </Thead> */}
+
+           {/* Table header */}
             <TableHeader />
+
+            {/* Table body */}
             <Tbody>
               {renderCornea.map((cornea, index) => (
                 <TableRow
@@ -129,33 +106,6 @@ const ViewCornea = () => {
           </Table>
 
           {/* Pagination Controls */}
-          {/* <div className="pagination">
-            <ButtonGroup isAttached variant="outline">
-              <button
-                onClick={() => setCurrentPage(currentPage - 1)}
-                className="btn"
-                disabled={currentPage === 1 ? "disabled" : null}
-              >
-                Previous
-              </button>
-              {[...Array(totalPages).keys()].map((number) => (
-                <Button
-                  key={number}
-                  variant={currentPage === number + 1 ? "solid" : "outline"}
-                  onClick={() => paginate(number + 1)}
-                >
-                  {number + 1}
-                </Button>
-              ))}
-              <button
-                onClick={() => setCurrentPage(currentPage + 1)}
-                className="btn"
-                disabled={currentPage === totalPages ? "disabled" : null}
-              >
-                Next
-              </button>
-            </ButtonGroup>
-          </div> */}
           <Pagination
             totalPages={totalPages}
             currentPage={currentPage}
