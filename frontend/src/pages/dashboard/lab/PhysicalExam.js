@@ -39,10 +39,9 @@ const PhysicalExam = () => {
 
   const handleChange = (e) => {
     const { name, value, type, keyCode } = e.target;
-  
+
     if (type === "text") {
       if (keyCode === 8 && value.length === 0) {
-        // Backspace key is pressed and no character remains, clear the input field
         setErrors((prevErrors) => ({
           ...prevErrors,
           [name]: null,
@@ -70,7 +69,6 @@ const PhysicalExam = () => {
       }
     } else if (type === "number") {
       if (keyCode === 8 && value.length === 0) {
-        // Backspace key is pressed and no character remains, clear the input field
         setErrors((prevErrors) => ({
           ...prevErrors,
           [name]: null,
@@ -136,18 +134,17 @@ const PhysicalExam = () => {
     if (!dateRegex.test(dateString)) {
       return false;
     }
-  
+
     // Parse the date components (year, month, day)
-    const [year, month, day] = dateString.split('-');
-    
+    const [year, month, day] = dateString.split("-");
+
     // Create a new Date object and check if it is a valid date
     const dateObj = new Date(year, month - 1, day);
-    const isValid = (
+    const isValid =
       dateObj.getFullYear() == year &&
       dateObj.getMonth() + 1 == month &&
-      dateObj.getDate() == day
-    );
-  
+      dateObj.getDate() == day;
+
     return isValid;
   }
   const handleChange1 = (e) => {
