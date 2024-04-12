@@ -14,76 +14,91 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer } from '@chakra-ui/react';
 import useSearch from '../../../useHooks/useSearch';
 import SearchComponent from '../../../components/SearchComponent';
+import TableHeader from './TableHeader';
+import TableRow from './TableRow';
+import Pagination from '../../../components/Pagination';
 
 const ViewCornea = () => {
-    const [isButtonClicked, setIsButtonClicked] = useState(false);
-    const [fetchedData, setFetchedData] = useState(null);
-    const { searchTerm, handleChange, data, error } = useSearch("cornea");
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [fetchedData, setFetchedData] = useState(null);
+  const { searchTerm, handleChange, data, error } = useSearch("cornea");
+  const navigate = useNavigate();
+  const [corneas, setCorneas] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-    const navigate = useNavigate();
-    const [corneas, setCorneas] = useState([]);
-    function formatTimestamp(timestamp) {
-        const options = {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-        };
-        return new Date(timestamp).toLocaleString('en-US', options);
-    }
-    function formatExiryDate(expiryDate) {
-        const options = {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-        };
-        return new Date(expiryDate).toLocaleString('en-US', options);
-    }
-  
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("http://localhost:4000/cornea/read");
-                const data = response.data;
-                setCorneas(data);
-                // setExpirationDate(new Date(data.expirationDate));
-            } catch (error) {
-                console.error(error);
-            }
-        };
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(corneas.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentCorneas = corneas.slice(indexOfFirstItem, indexOfLastItem);
 
-        fetchData();
-    }, []);
-    const handleEvaluated = async () => {
-        setIsButtonClicked(true);
+  // Function to change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  function formatTimestamp(timestamp) {
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+    return new Date(timestamp).toLocaleString("en-US", options);
+  }
+  function formatExiryDate(expiryDate) {
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+    return new Date(expiryDate).toLocaleString("en-US", options);
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/cornea/read");
+        const data = response.data;
+        // console.log("cornea:", data);
+        setCorneas(data);
+        // setExpirationDate(new Date(data.expirationDate));
+      } catch (error) {
+        console.error(error);
+      }
     };
 
-    const deleteCornea = async (id) => {
-        try {
-            await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
-            setCorneas(corneas.filter((cornea) => cornea._id !== id));
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    fetchData();
+  }, []);
+  const handleEvaluated = async () => {
+    setIsButtonClicked(true);
+  };
 
-    const renderCornea = searchTerm ? data : corneas;
-    // console.log("cornea:", renderCornea);
-    return (
-      <div>
-        <TableContainer>
-          <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-            List of collected cornea
-          </Text>
-          <div className="w-full mt-2 flex justify-end ">
-            {/* search component */}
-            <SearchComponent
-              searchTerm={searchTerm}
-              handleChange={handleChange}
-            />
-          </div>
+  const deleteCornea = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
+      setCorneas(corneas.filter((cornea) => cornea._id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const renderCornea = searchTerm ? data : currentCorneas;
+  // console.log("cornea:", renderCornea);
+  return (
+    <div>
+      <TableContainer>
+        <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+          List of collected cornea
+        </Text>
+        <div className="w-full mt-2 flex justify-end ">
+          {/* search component */}
+          <SearchComponent
+            searchTerm={searchTerm}
+            handleChange={handleChange}
+          />
+        </div>
+        <div>
           <Table variant="simple">
-            <Thead>
+            {/* <Thead>
               <Tr className="bg-sky-600 text-white">
                 <Th className="text-white">LotNo</Th>
                 <Th className="text-white">Date</Th>
@@ -99,44 +114,58 @@ const ViewCornea = () => {
                   Operations
                 </Th>
               </Tr>
-            </Thead>
+            </Thead> */}
+            <TableHeader />
             <Tbody>
               {renderCornea.map((cornea, index) => (
-                <Tr key={index} className="mb-2 text-lg">
-                  <Td className="text-lg xl:text-2xl">{cornea.lotNo}</Td>
-                  <Td className="">{formatTimestamp(cornea.createdAt)}</Td>
-                  <Td>{cornea.recoveryTechnical}</Td>
-                  <Td>{cornea.position}</Td>
-                  <Td>{cornea.lens}</Td>
-                  <Td>{cornea.clarity}</Td>
-                  <Td> {cornea.size}</Td>
-                  <Td> {cornea.eyeLid}</Td>
-                  <Td> {cornea.irisColor}</Td>
-                  <Td> {cornea.expirationDate < 14 ? `${14 - cornea.expirationDate} Left` : "Expired"}</Td>
-                  {/* <Td> {formatExiryDate(cornea.expirationDate)}</Td> */}
-                  <Td className=" text-center ">
-                    <Link
-                      className="text-blue-600"
-                      to={`/labtechnicaldashboard/editcornea/${cornea._id}`}
-                    >
-                      <EditIcon className="text-blue-600" />
-                    </Link>
-                  </Td>{" "}
-                  <Td Td className=" text-center">
-                    <button
-                      onClick={() => deleteCornea(cornea._id)}
-                      className="text-red-600"
-                    >
-                      <DeleteIcon />
-                    </button>
-                  </Td>{" "}
-                </Tr>
+                <TableRow
+                  key={index}
+                  cornea={cornea}
+                  formatTimestamp={formatTimestamp}
+                  deleteCornea={deleteCornea}
+                />
               ))}
             </Tbody>
           </Table>
-        </TableContainer>
-      </div>
-    );
+
+          {/* Pagination Controls */}
+          {/* <div className="pagination">
+            <ButtonGroup isAttached variant="outline">
+              <button
+                onClick={() => setCurrentPage(currentPage - 1)}
+                className="btn"
+                disabled={currentPage === 1 ? "disabled" : null}
+              >
+                Previous
+              </button>
+              {[...Array(totalPages).keys()].map((number) => (
+                <Button
+                  key={number}
+                  variant={currentPage === number + 1 ? "solid" : "outline"}
+                  onClick={() => paginate(number + 1)}
+                >
+                  {number + 1}
+                </Button>
+              ))}
+              <button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                className="btn"
+                disabled={currentPage === totalPages ? "disabled" : null}
+              >
+                Next
+              </button>
+            </ButtonGroup>
+          </div> */}
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            paginate={paginate}
+          />
+        </div>
+      </TableContainer>
+    </div>
+  );
 };
 
 export default ViewCornea;
