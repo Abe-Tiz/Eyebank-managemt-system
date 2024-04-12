@@ -24,7 +24,9 @@ const sendEmailToAdmin = (cornea) => {
       from: "abebetizazu157@gmail.com",
       to: "abebe.tizazu33@gmail.com",
       subject: "Cornea Expiration Notification",
-      text: `The cornea with ID ${cornea._id} is about to expire in ${14 - cornea.expirationDate} day. Please take the necessary action.`,
+      text: `The cornea with ID ${cornea._id} is about to expire in ${
+        14 - cornea.expirationDate
+      } day. Please take the necessary action.`,
     };
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
@@ -45,21 +47,20 @@ const scheduleExpirationCheck = () => {
         console.log("Running a task at 4:15 PM");
         const corneas = await Cornea.find({});
         corneas.forEach(async (cornea) => {
-            const createdAtDate = new Date(cornea.createdAt);
-            const currentDate = new Date();
-            const daysSinceCreation = Math.floor(
-                (currentDate - createdAtDate) / (1000 * 60 * 60 * 24)
+          const createdAtDate = new Date(cornea.createdAt);
+          const currentDate = new Date();
+          const daysSinceCreation = Math.floor(
+            (currentDate - createdAtDate) / (1000 * 60 * 60 * 24)
             );
-            if (cornea.expirationDate < 14) {
-                cornea.expirationDate = daysSinceCreation;
-                await cornea.save();
-                    if (cornea.expirationDate === 6) {
-                        sendEmailToAdmin(cornea);
-                        //   console.log(
-                        //     `Cornea expire date: ${cornea.expirationDate}`
-                        //   );
-                    } 
+             cornea.expirationDate = daysSinceCreation;
+            await cornea.save();
+            console.log(`Cornea expire date all: ${cornea.expirationDate}`);
+            // if (cornea.expirationDate < 14) {
+            if (cornea.expirationDate === 13) {
+              sendEmailToAdmin(cornea);
+              console.log(`Cornea expire date: ${cornea.expirationDate}`);
             }
+            // }
         });
   });
 }

@@ -26,7 +26,7 @@ const corneaSchema = new mongoose.Schema(
       type: String,
     },
     size: {
-      type: Number,
+      type: String,
     },
     irisColor: {
       type: String,
@@ -46,13 +46,9 @@ const corneaSchema = new mongoose.Schema(
         default: false
     },
     expirationDate: {
-      type: Number,
+      type: String,
       default: 0,
     },
-    // expirationDate: {
-    //     type: Date,
-    //     default: expirationDate
-    // },
     evaluation: {
       evaluationDate: {
         type: Date,
