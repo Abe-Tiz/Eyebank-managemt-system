@@ -24,8 +24,11 @@ const CollectCornea = () => {
     const [suiatablity, setSuiatablity] = useState('');
     const [reason, setReason] = useState('');
     const [evaluater, setEvaluater] = useState('');
+    const [collect, seCollect] = useState(true);
+    const collectd = {
+        collect,
+    };
     //for recovery
-
     const { id } = useParams();
     const [state, setState] = useState({
         name: ""
@@ -58,7 +61,7 @@ const CollectCornea = () => {
             reason
         }
         console.log(data);
-
+        handleCollect(id);
         try {
             const response = await axios.post('http://localhost:4000/cornea/create',
                 data
@@ -77,6 +80,14 @@ const CollectCornea = () => {
             console.log(err);
         }
     };
+    const handleCollect = async (id) => {
+        try {
+            await axios.put(`http://localhost:4000/api/collect/${id}`, collectd);
+            //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
+        } catch (error) {
+            console.error("Failed to collect physical exam:", error);
+        }
+    }
     useEffect(() => {
         fetch("http://127.0.0.1:4000/user/userLogedin", {
             method: "POST",
@@ -124,23 +135,37 @@ const CollectCornea = () => {
                         </input>
                     </label>
                     <label>
-                        <input
+                        <select
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="text"
                             value={eyeLid}
                             placeholder="eyeLid"
                             onChange={(e) => setEyeLid(e.target.value)}
-                        />
+                        >
+                            <option value="">Select Eye Lid</option>
+                            <option value="normal">Normal</option>
+                            <option value="edematous">Edematous</option>
+                            <option value="laceration">Laceration</option>
+                            <option value="contusion">Contusion</option>
+                        </select>
                     </label>
                     <label>
                         <select
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={size}
-                            onChange={(e) => setSize(e.target.value)}>
+                            onChange={(e) => {
+                                setSize(e.target.value);
+                            }} >
                             <option value="">Select Size</option>
-                            <option value="3">3 cm</option>
-                            <option value="6">6cm</option>
-                            <option value="9">9cm</option>
+                            <option value="1">1 mm</option>
+                            <option value="2">2 mm</option>
+                            <option value="3 mm">3 mm</option>
+                            <option value="4 mm">4 mm</option>
+                            <option value="5 mm">5 mm</option>
+                            <option value="6 mm">6 mm</option>
+                            <option value="7 mm">7 mm</option>
+                            <option value="8 mm">8 mm</option>
+                            <option value="9 mm">9 mm</option>
                         </select>
                     </label>
                     <label>
@@ -149,8 +174,12 @@ const CollectCornea = () => {
                             value={irisColor}
                             onChange={(e) => setIrisColor(e.target.value)}>
                             <option value="">Select Color</option>
-                            <option value="blue">blue</option>
-                            <option value="black">black</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Brown">Brown</option>
+                            <option value="Green">Green</option>
+                            <option value="Hazel">Hazel</option>
+                            <option value="Gray">Gray</option>
+                            <option value="Other">Other</option>
                         </select>
                     </label>
                     <label>
@@ -158,10 +187,11 @@ const CollectCornea = () => {
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={corneaStatus}
                             onChange={(e) => setCorneaStatus(e.target.value)}>
-                            <option value="">Select  Status</option>
-                            <option value="Status 1">Status 1</option>
-                            <option value="Status 2">Status 2</option>
-                            <option value="Status 3">Status 3</option>
+                            <option value="">Select Status</option>
+                            <option value="Arcus">Arcus</option>
+                            <option value="Defects">Defects</option>
+                            <option value="Exposure">Exposure</option>
+                            <option value="Other">Other</option>
                         </select>
                     </label>
                     <label>
@@ -171,9 +201,9 @@ const CollectCornea = () => {
                             onChange={(e) => setClarity(e.target.value)}
                         >
                             <option value="">Select Clarity</option>
-                            <option value="clear 1">Clarity 1</option>
-                            <option value="clear 2">Clarity 2</option>
-                            <option value="clear 3">Clarity 3</option>
+                            <option value="Clear">Clear</option>
+                            <option value="Cloudy">Cloudy</option>
+                            <option value="Opaque">Opaque</option>
                         </select>
                     </label>
                     <label>
@@ -183,9 +213,9 @@ const CollectCornea = () => {
                             onChange={(e) => setLens(e.target.value)}
                         >
                             <option value="">Select lens</option>
-                            <option value="lens 1">lens 1</option>
-                            <option value="lens 2">lens 2</option>
-                            <option value="lens 3">lens 3</option>
+                            <option value="Phakic">Phakic</option>
+                            <option value="Pseudophakic">Pseudophakic</option>
+                            <option value="Aphakic">Aphakic</option>
                         </select>
                     </label>
                     <label>
@@ -212,7 +242,7 @@ const CollectCornea = () => {
                         </label>
                     </label>
                 </div>
-                <div className="text-center mt-4">
+                <div className="text-center mt-4 mb-2">
                     <button
                         // onClick={handleFormSubmit}
                         type="submit"

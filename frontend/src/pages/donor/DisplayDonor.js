@@ -8,146 +8,143 @@ import SearchComponent from "../../components/SearchComponent";
 import DeleteAlertDialog from './../../components/DeleteAlertDialog';
 import LoadingCircle from "../../components/LoadingCircle";
 
-
 const DisplayDonor = () => {
-  const [donors, setDonors] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
+    const [donors, setDonors] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
 
-  const toast = useToast();
-  const { t } = useTranslation();
-  const cancelRef = useRef();
-
-  const { searchTerm, handleChange, data, error } = useSearch("donor");
-
-// fetch donors
+    const toast = useToast();
+    const { t } = useTranslation();
+    const cancelRef = useRef();
+    const { searchTerm, handleChange, data, error } = useSearch("donor");
+    // fetch donors
     const fetchDonor = async () => {
-      try {
-        const response = await axios.get("http://localhost:4000/donor");
-        const donordata = response.data;
+        try {
+            const response = await axios.get("http://localhost:4000/donor");
+            const donordata = response.data;
 
-        if (donordata && donordata.length > 0) {
-          setLoading(true);
-          setDonors(donordata);
-        } else {
-          toast({
-            title: "Empty Array",
-            description: "Array is empty.",
-            status: "warning",
-            duration: 5000,
-            isClosable: true,
-            position: "top",
-          });
+            if (donordata && donordata.length > 0) {
+                setLoading(true);
+                setDonors(donordata);
+            } else {
+                toast({
+                    title: "Empty Array",
+                    description: "Array is empty.",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top",
+                });
+            }
+        } catch (error) {
+            toast({
+                title: "Error Occurred!",
+                description: error.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
         }
-      } catch (error) {
-        toast({
-          title: "Error Occurred!",
-          description: error.message,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-      }
-  };
-  
-  useEffect(() => {
-    fetchDonor();
-  }, [toast]);
+    };
 
-  const onClose = () => setIsOpen(false);
+    useEffect(() => {
+        fetchDonor();
+    }, [toast]);
 
-  const onOpen = (id) => {
-    setIsOpen(true);
-    setDeleteId(id);
-  };
+    const onClose = () => setIsOpen(false);
 
- 
-// handle delete donor
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`http://localhost:4000/donor/delete/${deleteId}`);
-      setDonors(donors.filter((donor) => donor._id !== deleteId));
-      toast({
-        title: "Donor Deleted",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-    } catch (error) {
-      toast({
-        title: "Error Occurred!",
-        description: error.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
-    } finally {
-      onClose();
-    }
-  };
+    const onOpen = (id) => {
+        setIsOpen(true);
+        setDeleteId(id);
+    };
 
-  // activate donor
-  const handleActivate = async (id) => {
-    try {
-      await axios.put(`http://localhost:4000/donor/activate/${id}`);
-      setDonors(
-        donors.map((donor) =>
-          donor._id === id ? { ...donor, verified: true } : donor
-        )
-      );
-      toast({
-        title: "Donor Activated",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-    } catch (error) {
-      toast({
-        title: "Error Occurred!",
-        description: error.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
-    }
-  };
 
-  return (
-    <>
-      <div className="w-full mt-2 flex justify-end ">
-        {/* search component */}
-        <SearchComponent searchTerm={searchTerm} handleChange={handleChange} />
-      </div>
+    // handle delete donor
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:4000/donor/delete/${deleteId}`);
+            setDonors(donors.filter((donor) => donor._id !== deleteId));
+            toast({
+                title: "Donor Deleted",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+                position: "top",
+            });
+        } catch (error) {
+            toast({
+                title: "Error Occurred!",
+                description: error.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
+        } finally {
+            onClose();
+        }
+    };
 
-      {/* donor table */}
-      {loading ? (
-        <DonorTable
-          donors={donors}
-          handleActivate={handleActivate}
-          onOpen={onOpen}
-          donor={data}
-          searchTerm={searchTerm}
-        />
-      ) : (
-       <LoadingCircle />
-      )}
+    // activate donor
+    const handleActivate = async (id) => {
+        try {
+            await axios.put(`http://localhost:4000/donor/activate/${id}`);
+            setDonors(
+                donors.map((donor) =>
+                    donor._id === id ? { ...donor, verified: true } : donor
+                )
+            );
+            toast({
+                title: "Donor Activated",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+                position: "top",
+            });
+        } catch (error) {
+            toast({
+                title: "Error Occurred!",
+                description: error.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
+        }
+    };
 
-      {/* confirmation alert */}
-      <DeleteAlertDialog
-        isOpen={isOpen}
-        onClose={onClose}
-        cancelRef={cancelRef}
-        handleDelete={handleDelete}
-        t={t}
-      />
-    </>
-  );
+    return (
+        <>
+            <div className="w-full mt-2 flex justify-end ">
+                {/* search component */}
+                <SearchComponent searchTerm={searchTerm} handleChange={handleChange} />
+            </div>
+
+            {/* donor table */}
+            {loading ? (
+                <DonorTable
+                    donors={donors}
+                    handleActivate={handleActivate}
+                    onOpen={onOpen}
+                    donor={data}
+                    searchTerm={searchTerm}
+                />
+            ) : (
+                <LoadingCircle />
+            )}
+
+            {/* confirmation alert */}
+            <DeleteAlertDialog
+                isOpen={isOpen}
+                onClose={onClose}
+                cancelRef={cancelRef}
+                handleDelete={handleDelete}
+                t={t}
+            />
+        </>
+    );
 };
 
 export default DisplayDonor;

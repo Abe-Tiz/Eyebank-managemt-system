@@ -24,7 +24,7 @@ const corneaSchema = new mongoose.Schema({
         type: String,
     },
     size: {
-        type: Number,
+        type: String,
     },
     irisColor: {
         type: String,
