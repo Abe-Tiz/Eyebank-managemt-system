@@ -28,6 +28,7 @@ import EvaluatedList from '../pages/dashboard/lab/EvaluatedList';
 import EditCornea from '../pages/dashboard/lab/EditCornea';
 import RecordMedicalParticular from '../pages/dashboard/lab/RecordMedicalParticular';
 import ScreenDonor from '../pages/dashboard/lab/ScreenDonor';
+import SerologyTest from '../pages/dashboard/lab/SerologyTest';
 import RecordSerology from '../pages/dashboard/lab/RecordSerology';
 import CollectCornea from '../pages/dashboard/lab/CollectCornea';
 import LabTechnicalDashboard from "../layout/LabTechnicalLayout";
@@ -45,6 +46,7 @@ import StoredCornea from '../pages/dashboard/lab/StoredCornea';
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
+import ViewSerology from "../pages/dashboard/lab/ViewSerology";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
@@ -151,6 +153,10 @@ const router = createBrowserRouter([
                 element: <RecordSerology />,
             },
             {
+                path: "viewSerology",
+                element: <ViewSerology />,
+            },
+            {
                 path: "screenDonor",
                 element: <ScreenDonor />,
             },
@@ -161,6 +167,10 @@ const router = createBrowserRouter([
             {
                 path: "discardCornea",
                 element: <DiscardCornea />,
+            },
+            {
+                path: "serologyTest",
+                element: <SerologyTest />,
             },
             {
                 path: "evaluatedList",
