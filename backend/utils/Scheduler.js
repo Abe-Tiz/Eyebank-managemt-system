@@ -54,13 +54,10 @@ const scheduleExpirationCheck = () => {
             );
              cornea.expirationDate = daysSinceCreation;
             await cornea.save();
-            console.log(`Cornea expire date all: ${cornea.expirationDate}`);
-            // if (cornea.expirationDate < 14) {
             if (cornea.expirationDate === 13) {
-              sendEmailToAdmin(cornea);
-              console.log(`Cornea expire date: ${cornea.expirationDate}`);
+                sendEmailToAdmin(cornea);
+                console.log(`Cornea expire date: ${cornea.expirationDate}`);
             }
-            // }
         });
   });
 }

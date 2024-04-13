@@ -66,7 +66,6 @@ const ActivateAccount = () => {
        }
      };
 
-
   return (
     <>
       <div className="signup__container container">

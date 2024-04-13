@@ -46,7 +46,7 @@ const corneaSchema = new mongoose.Schema(
         default: false
     },
     expirationDate: {
-      type: String,
+      type: Number,
       default: 0,
     },
     evaluation: {
