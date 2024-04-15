@@ -100,14 +100,24 @@ const loginUser = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: "User is not found." });
     }
 
-    const passwordMatch = await Bcrypt.compare(password, user.password);
+    if (!user.isActive) {
+      return res
+        .status(403)
+        .json({
+          message:
+            "Your account is deactivated. Please contact Admin to activate.",
+        });
+    }
 
+    const passwordMatch = await Bcrypt.compare(password, user.password);
+    console.log(user);
     if (passwordMatch) {
       if (user.verified) {
         const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
           expiresIn: "1d",
         });
-
+        user.failedLoginAttempts = 0;
+        await user.save();
         res.status(200).json({ status: "ok", data: token, user });
       } else {
         console.log("User not verified");
@@ -115,6 +125,19 @@ const loginUser = asyncHandler(async (req, res) => {
       }
     } else {
       console.log("Password is not matched");
+      user.failedLoginAttempts += 1;
+      await user.save();
+      console.log(user.failedLoginAttempts);
+      if (user.failedLoginAttempts >= 4) {
+        user.isActive = false;
+        await user.save();
+        return res
+          .status(403)
+          .json({
+            message:
+              "Your account is deactivated. Please contact support to activate.",
+          });
+      }
       res.status(500).json({ message: "Password is not matched" });
     }
   } catch (error) {
@@ -122,6 +145,36 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+const activateUser = asyncHandler(async (req, res) => {
+  try {
+    const { email } = req.body;  
+ 
+    const user = await User.findOne({ email });
+  
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    // If the user is already active, return a message
+    if (user.isActive) {
+      return res.status(200).json({ message: "User is already active." });
+    }
+
+    // Activate the user
+    user.isActive = true;
+    user.failedLoginAttempts = 0; 
+    await user.save();
+
+    // Return a success message
+    console.log(user);
+    res.status(200).json({ message: "User account activated successfully." });
+  } catch (error) {
+    console.error("Error in activateUser:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 const getloggedInUser = asyncHandler(async (req, res) => {
   const { token } = req.body;
@@ -279,6 +332,31 @@ const getUserById = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+<<<<<<< HEAD
+=======
+
+
+const getUserByName = asyncHandler(async (req, res) => {
+  try {
+    const { name } = req.body;
+    const user = await User.find(
+      // Search by name starting with the provided string, ignoring case
+      { name: { $regex: new RegExp(`^${name}`, "i") } }
+    ).exec();
+
+    if (user.length === 0) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    console.log(user);
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+>>>>>>> 265a67e584919b909806dfc7d0611f1a4c050ef8
 // Update a donor
 const updateUser = asyncHandler(async (req, res) => {
   try {
@@ -305,8 +383,11 @@ const deleteUser = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Assuming you have a Donor model
-    await User.deleteOne({ _id: id }); // Assuming the donor ID is stored in the "_id" field
+    // Assuming you have a user model
+    await User.deleteOne(
+      { _id: id },
+      { new: true }
+    );  
     res.status(200).json({ message: "User deleted successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -324,4 +405,6 @@ module.exports = {
   getloggedInUser,
   getUserById,
   updateUser,
+  getUserByName,
+  activateUser,
 };

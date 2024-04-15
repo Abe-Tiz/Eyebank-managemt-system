@@ -44,7 +44,14 @@ const ViewTissue = () => {
         setIsButtonClicked(true);
 
     };
-
+    function formatExiryDate(expiryDate) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+        return new Date(expiryDate).toLocaleString('en-US', options);
+    }
     const deleteCornea = async (id) => {
         try {
             await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
@@ -65,6 +72,7 @@ const ViewTissue = () => {
                         <Tr>
 
                             <Th>S.No</Th>
+                            <Th>LotNo</Th>
                             <Th>Date</Th>
                             <Th> Technical</Th>
                             <Th>Position</Th>
@@ -73,6 +81,7 @@ const ViewTissue = () => {
                             <Th>Size</Th>
                             <Th>Eye Lid</Th>
                             <Th>Iris Color</Th>
+                            <Th>Expiry Date</Th>
                             <Th colSpan={3}>Operations</Th>
                         </Tr>
                     </Thead>
@@ -80,6 +89,7 @@ const ViewTissue = () => {
                         {corneas.map((cornea, index) => (
                             <Tr key={index}>
                                 <Td>{index + 1}</Td>
+                                <Td>{cornea.lotNo}</Td>
                                 <Td>
                                     {formatTimestamp(cornea.createdAt)}
                                 </Td>
@@ -90,19 +100,20 @@ const ViewTissue = () => {
                                 <Td>{cornea.size}</Td>
                                 <Td>{cornea.eyeLid}</Td>
                                 <Td>{cornea.irisColor}</Td>
+                                <Td>{formatExiryDate(cornea.expirationDate)}</Td>
                                 <div className='text-center'>
                                     {
-                                        cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
+                                        cornea.evaluation && cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
                                             <Td>
                                                 <Link to={`/medicaldirectordashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link>
                                             </Td>
-
                                         ) : (
-                                            <Td style={{ color: cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>
-                                                {cornea.evaluation.approval}
+                                            <Td style={{ color: cornea.evaluation && cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>
+                                                {cornea.evaluation && cornea.evaluation.approval}
                                             </Td>
                                         )
                                     }
+
                                 </div>
                             </Tr>
                         ))}

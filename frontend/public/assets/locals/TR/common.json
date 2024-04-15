@@ -8,10 +8,12 @@
   "registerButtonLabel": "ምዝገባ",
   "logouttButtonLabel": "ኣውት ኣውት",
   "settingtButtonLabel": "ቅጥዕታት",
-   "dashboardLabel": "ዳሽቦርድ",
+  "dashboardLabel": "ዳሽቦርድ",
   "addDonorLabel": "ለጋሲ ወስኽ",
   "listDonorLabel": "ዝርዝር ለገስቲ",
   "addUserrLabel": "ተጠቃሚ ምውሳኽ",
   "listUserrLabel": "ዝርዝር ተጠቀምቲ",
-  "backButtonLabel": "ዝባን"
+  "backButtonLabel": "ዝባን",
+  "HeroSpan": "ኣዒንቲ",
+  "HeroHeading": "ዓለም ብናይ ካልእ ሰብ ርኣያ"
 }

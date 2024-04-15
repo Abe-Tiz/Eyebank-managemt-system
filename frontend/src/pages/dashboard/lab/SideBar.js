@@ -7,13 +7,11 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
 const CustomSidebar = ({ collapsed, name, image }) => {
     const { t } = useTranslation();
-
     return (
         <div
-            className={`bg-indigo-900 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
+            className={`bg-slate-700 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
                 }`}
         >
             <div className="flex flex-col h-full mt-0 overflow-scroll">
@@ -22,22 +20,12 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                     <div className="flex flex-col items-center">
                         <Link
                             className="text-white p-2 hover:bg-gray-800 rounded"
-                            to="/labtechnicaldashboard/collectCornea"
+                            to="/labtechnicaldashboard"
                             data-tooltip-id="my-dashboard"
                             data-tooltip-content="Collect Cornea"
                         >
                             {/* <BellOutlined className="text-2xl" /> */}
                             <MdSpaceDashboard className="text-2xl" />
-                        </Link>
-
-                        <Link
-                            className="text-white p-2 hover:bg-gray-800 rounded"
-                            to="/labtechnicaldashboard/donorRegistration"
-                            data-tooltip-id="add-donor"
-                            data-tooltip-content="Register Donor"
-                        >
-                            {/* <IoIosPersonAdd className="text-2xl" /> */}
-                            <MdOutlineGroupAdd className="text-2xl" />
                         </Link>
                         <Link
                             className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -47,33 +35,6 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                         >
                             {/* <SettingOutlined className="text-2xl" /> */}
                             <PiUserListBold className="text-2xl" />
-                        </Link>
-                        <Link
-                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                            to="/labtechnicaldashboard/screenDonor"
-                            data-tooltip-id="add-user"
-                            data-tooltip-content="Screen Donor"
-                        >
-                            {/* <SettingOutlined className="text-2xl" /> */}
-                            <IoIosPersonAdd className="text-2xl" />
-                        </Link>
-                        <Link
-                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                            to="/labtechnicaldashboard/recordMedicalParticular"
-                            data-tooltip-id="user-list"
-                            data-tooltip-content="Record Medical Particular"
-                        >
-                            {/* <SettingOutlined className="text-2xl" /> */}
-                            <CiBoxList className="text-2xl" />
-                        </Link>
-                        <Link
-                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                            to="/labtechnicaldashboard/discardCornea"
-                            data-tooltip-id="user-list"
-                            data-tooltip-content="Discard Cornea"
-                        >
-                            {/* <SettingOutlined className="text-2xl" /> */}
-                            <CiBoxList className="text-2xl" />
                         </Link>
                         <Link
                             className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -102,12 +63,20 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                             {/* <SettingOutlined className="text-2xl" /> */}
                             <CiBoxList className="text-2xl" />
                         </Link>
+<<<<<<< HEAD
 
                         <Link
                             className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
                             to="/labtechnicaldashboard/viewRequestCornea"
                             data-tooltip-id="user-list"
                             data-tooltip-content=" View cornea"
+=======
+                        <Link
+                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                            to="/labtechnicaldashboard/viewDonor"
+                            data-tooltip-id="user-list"
+                            data-tooltip-content=" View donor"
+>>>>>>> 265a67e584919b909806dfc7d0611f1a4c050ef8
                         >
                             {/* <SettingOutlined className="text-2xl" /> */}
                             <CiBoxList className="text-2xl" />
@@ -131,7 +100,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
 
                             {/* btn */}
                             <div className="mt-4 flex flex-col items-center">
-                                <Link
+                                {/* <Link
                                     to="/labtechnicaldashboard/collectCornea"
                                     className=" flex gap-2 text-white p-2 hover:bg-gray-800 rounded"
                                     // onClick={handleReport}
@@ -140,38 +109,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                 >
                                     <MdSpaceDashboard className="text-2xl" />
                                     <span className="ml-2 ">{t("cornea:collectCorneaLabel")}</span>
-                                </Link>
-                                <Link
-                                    to="/labtechnicaldashboard/viewCornea"
-                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                    // onClick={handleUserList}
-                                    data-tooltip-id="user-list"
-                                    data-tooltip-content=" view Cornea"
-                                >
-                                    <CiBoxList className="text-2xl" />
-                                    <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
-                                </Link>
-
-                                <Link
-                                    to="/labtechnicaldashboard/recordSerology"
-                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                    // onClick={handleDisplayDonorClick}
-                                    data-tooltip-id="donor-list"
-                                    data-tooltip-content="Record Serology"
-                                >
-                                    <PiUserListBold className="text-2xl" />
-                                    <span className="ml-2">{t("cornea:recordSerologyLabel")}</span>
-                                </Link>
-                                <Link
-                                    to="/labtechnicaldashboard/screenDonor"
-                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                    // onClick={handleAddUser}
-                                    data-tooltip-id="add-user"
-                                    data-tooltip-content="Screen Donor"
-                                >
-                                    <IoIosPersonAdd className="text-2xl" />
-                                    <span className="ml-2">{t("cornea:screenDonorLabel")}</span>
-                                </Link>
+                                </Link> */}
                                 <Link
                                     to="/labtechnicaldashboard/createExams"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -193,6 +131,46 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <span className="ml-2"> {t("cornea:PhysicalExamView")}</span>
                                 </Link>
                                 <Link
+                                    to="/labtechnicaldashboard/viewCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" view Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
+                                </Link>
+                                {/* <Link
+                                    to="/labtechnicaldashboard/evaluatedList"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content="EvaluatedList"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:EvaluatedList")}</span>
+                                </Link> */}
+                                <Link
+                                    to="/labtechnicaldashboard/serologyTest"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" serology test"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:serologytest")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/viewSerology"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" serology test"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:ViewSerology")}</span>
+                                </Link>
+                                <Link
                                     to="/labtechnicaldashboard/discardCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
@@ -203,7 +181,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <span className="ml-2"> {t("cornea:discardCorneaLabel")}</span>
                                 </Link>
                                 <Link
-                                    to="/labtechnicaldashboard/storeCornea"
+                                    to="/labtechnicaldashboard/storedCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
                                     data-tooltip-id="user-list"
@@ -212,7 +190,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:storeCorneaLabel")}</span>
                                 </Link>
-                                <Link
+                                {/* <Link
                                     to="/labtechnicaldashboard/distributeCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
@@ -221,6 +199,26 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                 >
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:distributeCorneaLabel")}</span>
+                                </Link> */}
+                                <Link
+                                    to="/labtechnicaldashboard/viewDistributed"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content="View distribute "
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:viewDistributeLabel")}</span>
+                                </Link>
+                                <Link
+                                    to="/labtechnicaldashboard/viewDonor"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" View Donor"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:viewdonor")}</span>
                                 </Link>
                                 <Link
                                     to="/labtechnicaldashboard/viewRequestCornea"

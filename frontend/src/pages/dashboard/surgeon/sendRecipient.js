@@ -3,18 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
-
-const SendRecipient = () => {
-    const [recipinentname, setRecipientname] = useState("");
+const AddRecipient = () => {
+    const [recipientname, setRecipientname] = useState("");
     const [age, setAge] = useState("");
     const [diagnosis, setDiagnosis] = useState("");
+    const [sex, setSex] = useState("");
     const [surgeons, setSurgeons] = useState([]);
     const [hospitals, setHospitals] = useState([]);
-    const [surgeryType, setSurgeryType] = useState("");
+    const [registerDate, setRegisterDate] = useState("");
     const [address, setAddress] = useState("");
     const [surgeonName, setSurgeonName] = useState("");
     const [hospital, setHospital] = useState("");
-
+    const [surgeryType, setSurgeryType] = useState("");
+    const [phone, setPhone] = useState("");
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
@@ -48,13 +49,16 @@ const SendRecipient = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
-            recipinentname,
+            recipientname,
             age,
             diagnosis,
-            surgeonName,
+            surgeryType,
             address,
             hospital,
-            surgeryType,
+            sex,
+            phone,
+            registerDate,
+
         };
         console.log(data);
         try {
@@ -82,60 +86,72 @@ const SendRecipient = () => {
                 className=""
                 style={{ textAlign: "center", background: "#6af" }}
             >
-                Welcome to Cornea Recovery Form
+                Welcome to Recipient  Registration Form
             </h2>
             <form onSubmit={handleFormSubmit}>
                 <div className="grid grid-cols-2">
                     <label>
-                        Recipient Name:
                         <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={recipinentname}
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            value={recipientname}
+                            placeholder="Recipient Name"
                             onChange={(e) => setRecipientname(e.target.value)}
                         />
                     </label>
                     <label>
-                        Age:
                         <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="number"
                             value={age}
+                            placeholder="Age"
                             onChange={(e) => setAge(e.target.value)}
                         />
                     </label>
+                </div>
+                <div className="grid grid-cols-2">
                     <label>
-                        Surgeon:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={surgeonName}
-                            onChange={(e) => setSurgeonName(e.target.value)}
-                        >
-                            {surgeons.map((surgeon, index) => (
-                                <option key={index} value={surgeon._id}>
-                                    {surgeon.name}
-                                </option>
-                            ))}
-                        </select>
+                        Sex:
+                        <input
+                            type="radio"
+                            id="sex-male"
+                            value="Male"
+                            className="ml-2"
+                            checked={sex === "Male"}
+                            onChange={(e) => setSex(e.target.value)}
+                        />
+                        <label htmlFor="sex-male">Male</label>
+                        <input
+                            type="radio"
+                            id="sex-female"
+                            value="Female"
+                            className="ml-2"
+                            checked={sex === "Female"}
+                            onChange={(e) => setSex(e.target.value)}
+                        />
+                        <label htmlFor="sex-female">Female</label>
                     </label>
                     <label>
-                        Diagnosis:
+                        Phone:
                         <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={diagnosis}
-                            onChange={(e) => setDiagnosis(e.target.value)}
+                            className="form-input  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="number"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                         />
                     </label>
+                </div>
+                <div className="grid grid-cols-2">
                     <label>
-                        Surgery Type:
+                        Surgeon Type:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={surgeryType}
                             onChange={(e) => setSurgeryType(e.target.value)}
                         >
-                            <option value="">Select surgeon type</option>
-                            <option value="hospital 1">hospital 1</option>
-                            <option value="hospital 2">hospital 2</option>
-                            <option value="hospital 3">hospital 3</option>
+                            <option value="">Select Surgeon Type</option>
+                            <option value="PK">PK</option>
+                            <option value="AK">AK</option>
+                            <option value="PKA">PKA</option>
                         </select>
                     </label>
                     <label>
@@ -153,6 +169,8 @@ const SendRecipient = () => {
                             ))}
                         </select>
                     </label>
+                </div>
+                <div className="grid grid-cols-2">
                     <label>
                         Address:
                         <select
@@ -172,12 +190,11 @@ const SendRecipient = () => {
                         type="submit"
                         className="w-1/3 mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded"
                     >
-                        Register Cornea
+                        Add Recipient
                     </button>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 };
-
-export default SendRecipient;
+export default AddRecipient;

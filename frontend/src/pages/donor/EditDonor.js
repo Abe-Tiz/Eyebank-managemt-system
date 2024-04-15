@@ -4,6 +4,8 @@ import axios from "axios";
 import "../../static/styles/donor.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import ButtonPrimary from "../../components/ButtonPrimary";
+import ButtonComponent from "../../components/ButtonComponent";
 
  
 const EditDonor = () => {
@@ -453,15 +455,27 @@ const EditDonor = () => {
               </div>
               <div className="d-flex justify-content-center pt-3 mb-4">
                 <div className="mt-4 flex items-center">
-                  <button
+                  {/* <button
                     onClick={() => navigate(-1)}
                     className="bg-transparent px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5 "
                   >
                     {t("common:backButtonLabel")}
-                  </button>
+                  </button> */}
+                   <ButtonComponent
+                    // onClick={handlePrint}
+                    title={t("common:updateButtonLabel")}
+                    // customClass="print-button"
+                  />
+
                 </div>
                 <div className="mt-4 flex items-center">
-                  <button
+                  <ButtonPrimary
+                    onClick={() => navigate(-1)}
+                    title={t("common:backButtonLabel")}
+                    // customClass="print-button"
+                  />
+
+                  {/* <button
                     type="submit"
                     disabled={!canSubmit}
                     className={`bg-gray-400 px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5    focus:outline-none focus:ring-1 focus:ring-blue-300 ${
@@ -471,7 +485,7 @@ const EditDonor = () => {
                     }`}
                   >
                     {t("common:updateButtonLabel")}
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </form>

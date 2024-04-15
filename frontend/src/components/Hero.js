@@ -1,6 +1,8 @@
 
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import ButtonComponent from "./ButtonComponent";
+import ButtonPrimary from "./ButtonPrimary";
 
 const Hero = () => {
     const { t } = useTranslation();
@@ -21,24 +23,23 @@ const Hero = () => {
           {/* text */}
           <div className="md:w-1/2 space-y-7 px-4">
             <h2 className="md:text-5xl text-[#4A4A4A] text-4xl font-bold md:leading-snug leading-snug">
-              See the world through someone else's{" "}
-              <span className="text-green">Eyes.</span>
+              {t("common:HeroHeading")}{" "}
+              <span className="text-green">{t("common:HeroSpan")}</span>
             </h2>
             <p className="text-[#4A4A4A] text-xl">
               {t("translation:tagLabel")}
             </p>
-            <button
-              onClick={() => navigate("/contact")}
-              className="bg-green hover:bg-gray-400 px-3 py-2 text-2xl text-white font-extrabold mt-5 mr-5  "
-            >
-              {t("translation:homeContact")}
-            </button>
-            <button
-              onClick={() => navigate("/registerDonor")}
-              className="bg-[#4A4A4A] hover:bg-gray-400 px-5 py-2 text-2xl text-white font-extrabold mt-3 mr-5 "
-            >
-              {t("translation:Donor")}
-            </button>
+            <div className="flex justify-around w-auto gap-5">
+              <ButtonComponent
+                onClick={() => navigate("/contact")}
+                title={t("translation:homeContact")}
+              />
+
+              <ButtonPrimary
+                onClick={() => navigate("/registerDonor")}
+                title={t("translation:Donor")}
+              />
+            </div>
           </div>
         </div>
       </div>

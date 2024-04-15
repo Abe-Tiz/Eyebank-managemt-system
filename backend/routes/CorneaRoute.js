@@ -6,5 +6,7 @@ route.get('/read', CorneaController.getCorneas);
 route.get('/getOne/:id', CorneaController.getCornea);
 route.put('/update/:id', CorneaController.editCornea);
 route.put('/evaluate/:id', CorneaController.evaluateCornea);
+route.put('/distribute/:id', CorneaController.distributeCornea);
 route.delete('/delete/:id', CorneaController.deleteCornea);
+route.post('/search', CorneaController.getCorneaBLotnum);
 module.exports = route

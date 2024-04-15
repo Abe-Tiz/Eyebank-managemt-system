@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { IconButton, Button } from "@chakra-ui/react";
+import { ArrowBackIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 const ViewHospital = () => {
     const [hospitals, setHospitals] = useState([]);
 
@@ -14,29 +15,31 @@ const ViewHospital = () => {
 
     const handleDelete = (id) => {
         axios
-            .delete("http://localhost:4000/deleteHospital/" + id)
+            .delete(`http://localhost:4000/hospital/delete/${id}`)
             .then((res) => {
                 console.log(res);
-                window.location.reload();
+                //window.location.reload();
             })
             .catch((err) => console.log(err));
     };
-
     return (
-        <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-            <div className="w-78 bg-white rounded p-3">
-                <Link to="/adminDashboard" className="btn btn-success">
-                    Back
+        <div className="flex justify-center">
+            <div className="w-2/3 rounded p-3">
+                <Link to="/adminDashboard" className="btn btn-success mb-4">
+                    <IconButton
+                        as={Link}
+                        to="/adminDashboard"
+                        colorScheme="success"
+                        aria-label="Back"
+                        icon={<ArrowBackIcon />}
+                        mb={3}
+                    />
                 </Link>
-                <h4 className="text-center text-black"> List of Hospitals</h4>
+                <h4 className="text-center text-black mb-4">List of Hospitals</h4>
 
-                <br />
                 <table className="table table-hover">
-                    {/* <caption>List of Hospitals</caption> */}
                     <thead className="thead-dark">
                         <tr>
-                            {/* <th>Hospital ID</th> */}
-
                             <th>Hospital ID</th>
                             <th>Hospital Name</th>
                             <th>Address</th>
@@ -47,15 +50,23 @@ const ViewHospital = () => {
                         {hospitals.map((hospital) => {
                             return (
                                 <tr key={hospital._id}>
-                                    {/* <td>{hospital.hospitalID}</td> */}
-
                                     <td>{hospital.hospitalId}</td>
                                     <td>{hospital.hospitalName}</td>
                                     <td>{hospital.address}</td>
                                     <td>
-                                        <div className="d-flex gap-2">
-                                            <Link to={`/adminDashboard/edithospital/${hospital._id}`} className="btn btn-success mr-2"> Edit  </Link>
-                                            <button className="btn btn-danger mr-2" onClick={(e) => handleDelete(hospital._id)}> Delete </button>
+                                        <div className="flex gap-2 justify-center">
+                                            <Link
+                                                to={`/ adminDashboard / edithospital / ${hospital._id}`}
+                                                className="btn btn-success"
+                                            >
+                                                <EditIcon />
+                                            </Link>
+                                            <Button
+                                                colorScheme="red"
+                                                onClick={(e) => handleDelete(hospital._id)}
+                                            >
+                                                <DeleteIcon />
+                                            </Button>
                                         </div>
                                     </td>
                                 </tr>
@@ -64,7 +75,7 @@ const ViewHospital = () => {
                     </tbody>
                 </table>
             </div>
-        </div >
+        </div>
     );
 };
 

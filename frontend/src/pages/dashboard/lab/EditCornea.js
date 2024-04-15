@@ -9,7 +9,6 @@ const EditCornea = () => {
     const { id } = useParams();
     const { t } = useTranslation();
     const toast = useToast();
-
     const [corneaData, setCorneaData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
@@ -37,6 +36,8 @@ const EditCornea = () => {
         fetchCorneaData();
     }, [id]);
 
+    const [position, setPosition] = useState('');
+
     const handleFetchError = () => {
         toast({
             title: t('Error'),
@@ -58,6 +59,7 @@ const EditCornea = () => {
                 corneaStatus: cornea.corneaStatus || corneaData.corneaStatus,
                 clarity: cornea.clarity || corneaData.clarity,
                 lens: cornea.lens || corneaData.lens,
+                position: position || corneaData.position,
             });
 
             toast({
@@ -73,6 +75,7 @@ const EditCornea = () => {
             handleSaveError();
         }
     };
+
     const handleSaveError = () => {
         toast({
             title: t('Error'),
@@ -83,35 +86,22 @@ const EditCornea = () => {
         });
     };
 
-    if (isLoading) {
-        return <div>{t('Loading...')}</div>;
-    }
+    const handlePosition = (event) => {
+        setPosition(event.target.value);
+    };
 
-    const { recoveryTechnical, eyeLid, size, irisColor, corneaStatus, clarity, lens } = cornea;
+    const { recoveryTechnical, eyeLid, size, irisColor, clarity, lens } = cornea;
 
     return (
         <div>
-            <h1>{t('Edit Cornea')}</h1>
+            <h1 className="text-2xl font-bold  mb-4" style={{ textAlign: 'center' }}>{t('Edit Cornea')}</h1>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
                     handleSave();
                 }}
             >
-                <div className="grid grid-cols-3">
-                    <label>
-                        Recovery Technical:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={recoveryTechnical}
-                            onChange={(e) => setCornea({ ...cornea, recoveryTechnical: e.target.value })}
-                        >
-                            <option value={corneaData.recoveryTechnical}>{corneaData.recoveryTechnical}</option>
-                            <option value="Technical 1">Technical 1</option>
-                            <option value="Technical 2">Technical 2</option>
-                            <option value="Technical 3">Technical 3</option>
-                        </select>
-                    </label>
+                <div className="grid grid-cols-2">
                     <label>
                         Size:
                         <select
@@ -135,71 +125,60 @@ const EditCornea = () => {
                         />
                     </label>
                 </div>
-                <div className='grid grid-cols-3'>
+                <div className='grid grid-cols-2'>
                     <label>
                         Iris Color:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:borderindigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={irisColor || corneaData.irisColor}
                             onChange={(e) => setCornea({ ...cornea, irisColor: e.target.value })}
                         >
                             <option value={corneaData.irisColor}>{corneaData.irisColor}</option>
                             <option value="blue">Blue</option>
-                            <option value="black">Black</option>
-                        </select>
-                    </label>
-                    <label>
-                        Cornea Status:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-
-                            value={corneaStatus}
-                            onChange={(e) => setCornea({ ...cornea, corneaStatus: e.target.value })}
-                        >
-                            <option value={corneaData.corneaStatus}>{corneaData.corneaStatus}</option>
-                            <option value="Status 1">Status 1</option>
-                            <option value="Status 2">Status 2</option>
-                            <option value="Status 3">Status 3</option>
-
+                            <option value="green">Green</option>
+                            <option value="brown">Brown</option>
                         </select>
                     </label>
                     <label>
                         Clarity:
+                        <input
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="text"
+                            value={clarity || corneaData.clarity}
+                            onChange={(e) => setCornea({ ...cornea, clarity: e.target.value })}
+                        />
+                    </label>
+                </div>
+                <div className='grid grid-cols-2'>
+                    <label>
+                        Lens:
+                        <input
+                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="text"
+                            value={lens || corneaData.lens}
+                            onChange={(e) => setCornea({ ...cornea, lens: e.target.value })}
+                        />
+                    </label>
+                    <label>
+                        Position:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={clarity}
-                            onChange={(e) => setCornea({ ...cornea, clarity: e.target.value })}
+                            value={position || corneaData.position}
+                            onChange={handlePosition}
                         >
-                            <option value={corneaData.clarity}>{corneaData.clarity}</option>
-                            <option value="clear 1">Clear 1</option>
-                            <option value="clear 2">Clear 2</option>
-                            <option value="clear 3">Clear 3</option>
+                            <option value={corneaData.position}>{corneaData.position}</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
                         </select>
                     </label>
                 </div>
-                <div className='grid grid-cols-3'>
-                    <label>
-                        Lens:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={lens || corneaData.lens}
-                            onChange={(e) => setCornea({ ...cornea, lens: e.target.value })}
-                        >
-
-                            <option value={corneaData.lens}>{corneaData.lens}</option>
-                            <option value="Lens 1">Lens 1</option>
-                            <option value="Lens 2">Lens 2</option>
-                            <option value="Lens 3">Lens 3</option>
-                        </select>
-                    </label>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">
+                <div className='text-center '>
+                    <button className="w-1/4 bg-sky-600 hover:bg-blue-700 text-white  font-bold py-2 px-4 mt-5 rounded">
                         Update
                     </button>
                 </div>
-
-            </form >
-        </div >
+            </form>
+        </div>
     );
 };
 

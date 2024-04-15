@@ -97,6 +97,23 @@ const MedicalSidebar = ({
                                 <MdOutlineGroupAdd className="text-2xl" />
                                 <span className="ml-2">{t("Recipient List")}</span>
                             </Link>
+                            <Link
+                                to="/surgondashboard/ocularpostlist"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Ocular post List" >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">{t("Ocular post List")}</span>
+                            </Link>
+                            <Link
+                                to="/surgondashboard/adverselist"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Adverse List" >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">{t("Adverse List")}</span>
+                            </Link>
+
 
                             <Link
                                 to="/surgondashboard/sendRequestCornea"
