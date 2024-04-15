@@ -14,9 +14,8 @@ export default function SendRequestCornea() {
   const [hospitals, setHospitals] = useState([]);
   const [surgeon, setSurgeon] = useState("");
   const [hospital, setHospital] = useState("");
-  const [isApproved, setIsApproved] = useState(false);
   const [descriptionOfRequest, setDescriptionOfRequest] = useState("");
-  const { t } = useTranslation();
+  const [suiatablity, setSuiatablity] = useState("");
 
   useEffect(() => {
     const fetchSurgeons = async () => {
@@ -44,18 +43,6 @@ export default function SendRequestCornea() {
     fetchHospitals();
   }, []);
 
-  const handleSurgeonChange = (value) => {
-    setSurgeon(value);
-  };
-
-  const handleHospitalChange = (value) => {
-    setHospital(value);
-  };
-
-  const handleDescriptionOfRequestChange = (value) => {
-    setDescriptionOfRequest(value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -64,13 +51,14 @@ export default function SendRequestCornea() {
         hospital,
         descriptionOfRequest,
         isApproved: false,
+        suiatablity,
       };
 
       const { data } = await axios.post(
         "http://localhost:4000/requestCornea/send",
         requestCorneaData
       );
-      navigate("/labtechnicaldashboard/viewRequestCornea");
+      navigate("/medicaldirectordashboard/viewRequestedCornea");
       if (data.success) {
         toast.success(data.message);
       } else {
@@ -86,55 +74,68 @@ export default function SendRequestCornea() {
     <>
       <div className="container">
         <div className="login-form ml-1 mt-1 w-3/5">
-          <h3 className="title text-3xl font-bold text-center mb-8 text-blue-600">
-            Send Request
+          <h3 className="title text-3xl font-bold text-center mb-4 text-sky-700">
+            <span className="border-b-4 border-indigo-500">Send Request</span>
           </h3>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-9">
-            <div className="flex justify-center items-center space-x-8">
-              <div className="flex flex-col w-2/5">
-                <Select
-                  className="w-full border-2 border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 italic dark:placeholder-gray-400 text-base"
-                  value={surgeon}
-                  onChange={handleSurgeonChange}
-                  placeholder="Select Surgeon"
-                >
-                  <Option value="" disabled>
-                    Select Surgeon
-                  </Option>
-                  {surgeons.map((surgeon) => (
-                    <Option key={surgeon._id} value={surgeon._id}>
-                      <span className="text-blue-600 font-semibold">
-                        {surgeon.name}
-                      </span>
-                    </Option>
-                  ))}
-                </Select>
-              </div>
+            <label>
+              <select
+                className="form-input mt-2 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={surgeon}
+                onChange={(e) => setSurgeon(e.target.value)}
+              >
+                <option> Select Surgeon </option>
+                {surgeons.map((surgeon) => (
+                  <option
+                    key={surgeon._id}
+                    value={surgeon._id}
+                    className="py-2 px-4 hover:bg-blue-100"
+                  >
+                    <span className="text-blue-600 font-semibold">
+                      {surgeon.name}
+                    </span>
+                  </option>
+                ))}
+              </select>
+            </label>
 
-              <div className="flex flex-col w-2/4">
-                <Select
-                  className="w-full border-2 border-gray-300 dark:border-gray-700 rounded-md  focus:outline-none focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 italic dark:placeholder-gray-400 text-base"
-                  value={hospital}
-                  onChange={handleHospitalChange}
-                  placeholder="Select Hospital"
-                >
-                  <Option value="" disabled>
-                    Select Hospital
-                  </Option>
-                  {hospitals.map((hospital) => (
-                    <Option
-                      key={hospital._id}
-                      value={hospital._id}
-                      className="py-2 px-4 hover:bg-blue-100"
-                    >
-                      <span className="text-blue-600 font-semibold">
-                        {hospital.hospitalName}
-                      </span>
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-            </div>
+            <label>
+              <select
+                className="form-input mt-2 block  w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={hospital}
+                onChange={(e) => setHospital(e.target.value)}
+              >
+                <option>Select hospital</option>
+                {hospitals.map((hospital) => (
+                  <option
+                    key={hospital._id}
+                    value={hospital._id}
+                    className="py-2 px-4 hover:bg-blue-100"
+                  >
+                    <span className="text-blue-600 font-semibold">
+                      {hospital.hospitalName}
+                    </span>
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <select
+                className="form-input mt-2 block  w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={suiatablity}
+                onChange={(e) => setSuiatablity(e.target.value)}
+              >
+                <option value="">Select Suiatablity</option>
+                <option value="PK">PK</option>
+                <option value="EK">EK</option>
+                <option value="ALK">ALK</option>
+                <option value="KLA">KLA</option>
+                <option value="K-Pro">K-Pro</option>
+                <option value="Therapeutic">Therapeutic</option>
+              </select>
+            </label>
+
             <div className="flex flex-col">
               <textarea
                 value={descriptionOfRequest}

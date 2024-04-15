@@ -1,13 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useToast } from "@chakra-ui/react";
+import { useToast,Button } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
+import { DeleteIcon,  } from '@chakra-ui/icons'
 import { Link } from "react-router-dom";
 import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
 
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
+  AlertDialogCloseButton,
+} from '@chakra-ui/react'
 const RequestedCorneas = () => {
   const toast = useToast();
   const [requestedCorneas, setRequestedCorneas] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
+  const navigate = useNavigate();
   useEffect(() => {
     const getAllRequestedCorneas = async () => {
       try {
@@ -23,14 +38,34 @@ const RequestedCorneas = () => {
 
     getAllRequestedCorneas();
   }, []);
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:4000/requestCornea/delete-request/${id}`)
-      .then((res) => {
-        console.log(res);
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
+  // const handleDelete = (id) => {
+  //   axios
+  //     .delete(`http://localhost:4000/requestCornea/delete-request/${id}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //       window.location.reload();
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(
+        `http://localhost:4000/requestCornea/delete-request/${id}`
+      );
+      setRequestedCorneas(
+        requestedCorneas.filter((request) => request._id !== id)
+      );
+      toast({
+        title: "Request deleted successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      navigate("/medicaldirectordashboard/viewRequestedCornea");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleApprove = async (id) => {
@@ -105,18 +140,18 @@ const RequestedCorneas = () => {
                 <td className="px-6 py-4">{request.hospital?.hospitalName}</td>
                 <td className="px-6 py-4">{request.descriptionOfRequest}</td>
                 <td className="px-6 py-4">
-                    {request.isApproved ? (
-                      <div className="flex items-center">
-                        <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                       approved
-                      </div>
-                    ) : (
-                      <div className="flex items-center">
-                        <div className="h-2.5 w-2.5 rounded-full "></div>
-                        waitting
-                      </div>
-                    )}
-                  </td>
+                  {request.isApproved ? (
+                    <div className="flex items-center">
+                      <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                      approved
+                    </div>
+                  ) : (
+                    <div className="flex items-center">
+                      <div className="h-2.5 w-2.5 rounded-full "></div>
+                      waitting
+                    </div>
+                  )}
+                </td>
 
                 <td className="flex px-6 py-4">
                   <Link
@@ -124,15 +159,42 @@ const RequestedCorneas = () => {
                     className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                   >
                     <RiEdit2Line size={20} color="#000" className="mr-2" />
-                    {/* {t("common:updateButtonLabel")} */}
                   </Link>
-                  <button
-                    className="flex items-center bg-transparent border-2 p-1 font-medium text-white dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
-                    onClick={() => handleDelete(request._id)}
+
+                  <Button colorScheme="red" onClick={onOpen}>
+                    <DeleteIcon />
+                  </Button>
+                  <AlertDialog
+                    isOpen={isOpen}
+                    leastDestructiveRef={cancelRef}
+                    onClose={onClose}
                   >
-                    <RiDeleteBin2Line size={20} color="red" className="mr-2" />
-                    {/* {t("common:deleteButtonLabel")} */}
-                  </button>
+                    <AlertDialogOverlay>
+                      <AlertDialogContent>
+                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                          Delete request
+                        </AlertDialogHeader>
+                        <AlertDialogBody>
+                          Are you sure? You can't undo this action afterwards.
+                        </AlertDialogBody>
+                        <AlertDialogFooter>
+                          <Button ref={cancelRef} onClick={onClose}>
+                            Cancel
+                          </Button>
+                          <Button
+                            colorScheme="red"
+                            onClick={() => {
+                              handleDelete(request._id);
+                              onClose();
+                            }}
+                            ml={3}
+                          >
+                            Delete
+                          </Button>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialogOverlay>
+                  </AlertDialog>
                 </td>
               </tr>
             ))}

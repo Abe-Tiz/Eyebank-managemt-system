@@ -3,12 +3,13 @@ const nodemailer = require("nodemailer");
 const asyncHandler = require("express-async-handler");
 exports.createCorneaRequest = async (req, res) => {
   try {
-    const { surgeon, hospital, isApproved, descriptionOfRequest } = req.body;
+    const { surgeon, hospital, isApproved, descriptionOfRequest,suiatablity} = req.body;
     const request = await CorneaRequestModel.create({
       surgeon,
       hospital,
       isApproved,
       descriptionOfRequest,
+      suiatablity
     });
     //configure the email transport
     const transporter = nodemailer.createTransport({
@@ -18,9 +19,6 @@ exports.createCorneaRequest = async (req, res) => {
         pass: "ohkvhybmohzkpjim",
       },
     });
-
-
-
 
     // Define the email content
     const emailContent = `
@@ -32,9 +30,9 @@ exports.createCorneaRequest = async (req, res) => {
   `;
     // Send the email
     const mailOptions = {
-      from: 'teferamollawerkineh@gmail.com',
-      to: 'abebe.tizazu33@gmail.com, abebetizazu157@gmail.com, tefera2111@gmail.com,awoke668@gmail.com',
-      subject: 'New Cornea Request Created',
+      from: "teferamollawerkineh@gmail.com",
+      to: "abebe.tizazu33@gmail.com, abebetizazu157@gmail.com, tefera2111@gmail.com,awoke668@gmail.com",
+      subject: "New Cornea Request Created",
       text: emailContent,
     };
     transporter.sendMail(mailOptions, (error, info) => {

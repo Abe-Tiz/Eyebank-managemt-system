@@ -63,20 +63,12 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                             {/* <SettingOutlined className="text-2xl" /> */}
                             <CiBoxList className="text-2xl" />
                         </Link>
-<<<<<<< HEAD
 
                         <Link
                             className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
                             to="/labtechnicaldashboard/viewRequestCornea"
                             data-tooltip-id="user-list"
                             data-tooltip-content=" View cornea"
-=======
-                        <Link
-                            className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                            to="/labtechnicaldashboard/viewDonor"
-                            data-tooltip-id="user-list"
-                            data-tooltip-content=" View donor"
->>>>>>> 265a67e584919b909806dfc7d0611f1a4c050ef8
                         >
                             {/* <SettingOutlined className="text-2xl" /> */}
                             <CiBoxList className="text-2xl" />
@@ -229,6 +221,27 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                 >
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> requested corneas</span>
+                                </Link>
+                                <Link
+                                    to="/medicaldirectordashboard/SendRequestCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" distribute Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> Send request</span>
+                                </Link>
+
+                                <Link
+                                    to="/medicaldirectordashboard/viewRequestedCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" distribute Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> ViewCorneaRequest</span>
                                 </Link>
 
                             </div>

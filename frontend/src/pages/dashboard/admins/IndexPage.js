@@ -42,9 +42,9 @@ const [users, setUsers] = useState([]);
       <div className="col-md-9">
       
         <h1
-          className="text-4xl text-center font-bold text-gray-800 mb-8 text-purple-700"
+          className="text-4xl text-center font-bold text-gray-800 mb-8 text-sky-700"
           style={{
-            borderBottom: "2px solid purple",
+            borderBottom: "2px solid sky-700",
             letterSpacing: "2px",
             textTransform: "capitalize",
           }}
@@ -67,7 +67,10 @@ const [users, setUsers] = useState([]);
                 <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 font-medium text-gray-700">
                   Summary
                 </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300"></th>
+                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 font-medium text-gray-700">
+                  Action
+                </th>
+                {/* <th className="px-6 py-3 border-b-2 border-gray-300"></th> */}
               </tr>
             </thead>
             <tbody>
@@ -99,7 +102,7 @@ const [users, setUsers] = useState([]);
                     <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-300">
                       <Link
                         to={`/adminDashboard/edit-post/${p.slug}`}
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue focus:border-blue-700 active:bg-blue-700 transition duration-150 ease-in-out"
+                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-sky-700 hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue focus:border-blue-700 active:bg-blue-700 transition duration-150 ease-in-out"
                       >
                         {t("indexPage:Edit")}
                       </Link>

@@ -50,8 +50,8 @@ import ViewSerology from "../pages/dashboard/lab/ViewSerology";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
-import sendRecipient from "../pages/dashboard/surgeon/sendRecipient";
-import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient";
+
+
 import ViewRequestedCornea from "../pages/dashboard/surgeon/ViewCorneaRequest";
 import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
 import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
@@ -59,7 +59,7 @@ import EditRequest from "../pages/dashboard/surgeon/EditRequest";
 
 import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCornea";
 
-import AddRecipient from "../pages/dashboard/surgeon/AddRecipient"
+import AddRecipient from "../pages/dashboard/surgeon/AddRecipient";
 import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
 import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
 import OcularPost from "../pages/dashboard/surgeon/OcularPost";
@@ -77,6 +77,8 @@ import IndexPage from "../pages/dashboard/admins/IndexPage";
 import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
 import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
+
+import StoredCornea from "../pages/corneas/StoredCornea";
 // import LoginDonor from './../pages/donor/LoginDonor';
 const router = createBrowserRouter([
     {
@@ -227,6 +229,10 @@ const router = createBrowserRouter([
                 path: "viewDonor",
                 element: <ListOfPlege />,
             },
+            {
+                path: "viewRequestCornea",
+                element: <ViewRequestedCornea />,
+            }
 
         ],
     },
@@ -316,6 +322,18 @@ const router = createBrowserRouter([
                 path: "editevaluation/:id",
                 element: <EditEvaluation />,
             },
+            {
+              path: "viewRequestedCornea",
+              element: <ViewRequestedCorneaSurgeon/>,
+            },
+            {
+                path: "SendRequestCornea",
+                element: <SendRequestCornea />,
+            },
+            {
+                path: "EditRequest",
+                element: <EditRequest />,
+            }
 
 
         ],

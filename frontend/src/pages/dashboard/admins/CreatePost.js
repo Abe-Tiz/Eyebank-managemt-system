@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import { Select } from "antd";
 import { useTranslation } from "react-i18next";
+import ButtonComponent from "../../../components/ButtonComponent";
 const { Option } = Select;
 export default function CreatePost() {
   const navigate = useNavigate();
@@ -74,9 +75,10 @@ export default function CreatePost() {
       <div className="w-full md:w-2/3 lg:w-1/2 xl:w-1/2 mx-auto bg-white rounded-lg shadow">
         {" "}
         <div className="p-3">
-          <h1 className="text-4xl font-bold text-center py-4 text-purple-700 ">
-            Create Blog
-          </h1>
+        <h3 className="title text-3xl font-bold text-center mb-4 text-sky-700">
+            <span className="border-b-4 border-indigo-500">Create Blog</span>
+          </h3>
+         
           <div className="mb-6 w-full" >
       <select className="form-input w-full" value={user} onChange={handleUserChange}>
         <option value="">Select a user</option>
@@ -88,8 +90,30 @@ export default function CreatePost() {
       </select>
    
     </div>
+    {/* <div className="mb-6 w-full" >
+    <label>
+              <select
+                className="form-input mt-2 block  w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+              >
+                <option>Select a User</option>
+                {users.map((user) => (
+                  <option
+                    key={user._id}
+                    value={user._id}
+                    className="py-2 px-4 hover:bg-blue-100"
+                  >
+                    <span className="text-blue-600 font-semibold">
+                      {user.name}
+                    </span>
+                  </option>
+                ))}
+              </select>
+            </label>
 
-          <div className="mb-6">
+</div> */}
+  <div className="mb-6">
             <input
               type="text"
               value={title}
@@ -140,12 +164,20 @@ export default function CreatePost() {
           </div>
 
           <div className="mb-6">
-            <button
+            {/* <button
               className="bg-blue-500 text-white py-2 px-4 rounded-lg"
               onClick={handlePost}
             >
               Create Blog
-            </button>
+            </button> */}
+
+            
+            <div className="flex justify-center">
+              <ButtonComponent onClick={handlePost}
+                title="Create Blog"
+                className="bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              />
+            </div>
           </div>
         </div>
       </div>

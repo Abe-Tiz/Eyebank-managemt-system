@@ -332,8 +332,6 @@ const getUserById = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-<<<<<<< HEAD
-=======
 
 
 const getUserByName = asyncHandler(async (req, res) => {
@@ -356,7 +354,6 @@ const getUserByName = asyncHandler(async (req, res) => {
   }
 });
 
->>>>>>> 265a67e584919b909806dfc7d0611f1a4c050ef8
 // Update a donor
 const updateUser = asyncHandler(async (req, res) => {
   try {

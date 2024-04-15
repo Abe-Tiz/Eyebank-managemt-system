@@ -17,7 +17,8 @@ const CorneaRequestSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  descriptionOfRequest: String
+  descriptionOfRequest: String,
+  suiatablity:String,
 });
 
 const CorneaRequestModel = mongoose.model('CorneaRequest', CorneaRequestSchema);

@@ -66,12 +66,7 @@ module.exports = {
     getRecipients,
     getRecipient,
     updateRecipient,
-<<<<<<< HEAD
-    deleteRecipient
-}
-=======
     deleteRecipient,
     ocularPost,
     adverseReaction
 }
->>>>>>> 265a67e584919b909806dfc7d0611f1a4c050ef8
