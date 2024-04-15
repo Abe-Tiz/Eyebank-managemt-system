@@ -1,4 +1,6 @@
 const CorneaRequestModel = require("../models/CorneaRequest");
+const nodemailer = require("nodemailer");
+const asyncHandler = require("express-async-handler");
 exports.createCorneaRequest = async (req, res) => {
   try {
     const { surgeon, hospital, isApproved, descriptionOfRequest } = req.body;
@@ -7,6 +9,40 @@ exports.createCorneaRequest = async (req, res) => {
       hospital,
       isApproved,
       descriptionOfRequest,
+    });
+    //configure the email transport
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "teferamollawerkineh@gmail.com",
+        pass: "ohkvhybmohzkpjim",
+      },
+    });
+
+
+
+
+    // Define the email content
+    const emailContent = `
+    New Cornea Request Created:
+    Surgeon: ${surgeon}
+    Hospital: ${hospital}
+    Is Approved: ${isApproved}
+    Description: ${descriptionOfRequest}
+  `;
+    // Send the email
+    const mailOptions = {
+      from: 'teferamollawerkineh@gmail.com',
+      to: 'abebe.tizazu33@gmail.com, abebetizazu157@gmail.com, tefera2111@gmail.com,awoke668@gmail.com',
+      subject: 'New Cornea Request Created',
+      text: emailContent,
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent successfully: " + info.response);
+      }
     });
     res.json(request);
   } catch (err) {
@@ -25,25 +61,35 @@ exports.getCorneaRequestController = async (req, res) => {
   }
 };
 
-exports.getSingleCorneaRequestController = async (req, res) => {
+exports.getSingleCorneaRequestController = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;
-    // const corneaRequest = await CorneaRequestModel.findById(id).exec();
+    const corneaRequest = await CorneaRequestModel.findById(id).exec();
+
+    if (!corneaRequest) {
+      return res.status(404).send({
+        success: false,
+        message: "Cornea request not found",
+      });
+    }
+
+    console.log(corneaRequest);
+    console.log("tefera");
+
     res.status(200).send({
       success: true,
-      message: "Single request Fetched",
+      message: "Single request fetched",
       corneaRequest,
-
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Error while getting single post",
-      error,
+      message: "Error while getting single cornea request",
+      error: error.message,
     });
   }
-};
+});
 
 exports.deleteCorneaRequestController = async (req, res) => {
   try {

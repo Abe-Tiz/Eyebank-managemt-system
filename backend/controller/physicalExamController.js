@@ -1,3 +1,4 @@
+
 const PhysicalExam = require('../models/PhysicalExam');
 // Get all physical exams
 const getAllPhysicalExams = async (req, res) => {

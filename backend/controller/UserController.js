@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
- 
+
 const createUser = asyncHandler(async (req, res) => {
   const { name, email, image, password, role } = req.body;
   try {
@@ -66,28 +66,28 @@ const sendverificationEmail = async (email, verificationToken, route) => {
 };
 
 const getVerification = asyncHandler(async (req, res) => {
-    try {
+  try {
     const token = req.params.tokenId;
 
     const user = User.findOne({ verificationToken: token });
 
     user.then((user) => {
-        if (!user) {
-            return res.status(404).json({ message: "Invalid token" });
-        }
+      if (!user) {
+        return res.status(404).json({ message: "Invalid token" });
+      }
 
-        user.verified = true;
-        user.verificationToken = undefined;
-        console.log(user);
-        User.create(user);
+      user.verified = true;
+      user.verificationToken = undefined;
+      console.log(user);
+      User.create(user);
 
-        res.status(200).json({ message: "Email Verified Successfully" });
+      res.status(200).json({ message: "Email Verified Successfully" });
     });
-    } catch (error) {
-        console.log("error getting token.", error);
+  } catch (error) {
+    console.log("error getting token.", error);
     res.status(500).json({ message: "Email verification failed" });
-    }
-})
+  }
+});
 
 const loginUser = asyncHandler(async (req, res) => {
   try {
@@ -124,30 +124,30 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const getloggedInUser = asyncHandler(async (req, res) => {
-    const { token } = req.body;
-    try {
-      const user = jwt.verify(token, process.env.JWT_SECRET, (err, res) => {
-        if (err) {
-          return "token expired";
-        }
-        return res;
-      });
-      console.log(user);
-      if (user === "token expired") {
-        return res.send({ status: "error", data: "token expired" });
+  const { token } = req.body;
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET, (err, res) => {
+      if (err) {
+        return "token expired";
       }
-
-      const useremail = user.email;
-      User.findOne({ email: useremail })
-        .then((data) => {
-          res.send({ status: "ok", data: data });
-        })
-        .catch((error) => {
-          res.send({ status: "error", data: error });
-        });
-    } catch (error) {
-      res.send({ status: "error", data: error });
+      return res;
+    });
+    console.log(user);
+    if (user === "token expired") {
+      return res.send({ status: "error", data: "token expired" });
     }
+
+    const useremail = user.email;
+    User.findOne({ email: useremail })
+      .then((data) => {
+        res.send({ status: "ok", data: data });
+      })
+      .catch((error) => {
+        res.send({ status: "error", data: error });
+      });
+  } catch (error) {
+    res.send({ status: "error", data: error });
+  }
 });
 
 const forgotPassword = asyncHandler(async (req, res) => {
@@ -155,51 +155,47 @@ const forgotPassword = asyncHandler(async (req, res) => {
   try {
     const user = await User.findOne({ email: email });
     if (user) {
-          if (user.verified) {
-            const token = jwt.sign(
-              { userId: user._id },
-              process.env.JWT_SECRET,
-              {
-                expiresIn: "1d",
-              }
-            );
+      if (user.verified) {
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+          expiresIn: "1d",
+        });
 
-            //! create nodemailer transporter
-            const transporter = nodemailer.createTransport({
-              service: "gmail",
-              auth: {
-                user: "abebetizazu157@gmail.com",
-                pass: "gezm fqmn asjl bqxj",
-              },
-              tls: {
-                rejectUnauthorized: false,
-              },
-            });
+        //! create nodemailer transporter
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "abebetizazu157@gmail.com",
+            pass: "gezm fqmn asjl bqxj",
+          },
+          tls: {
+            rejectUnauthorized: false,
+          },
+        });
 
-            //! compose the email message
-            const mailOption = {
-              from: "abebetizazu157@gmail.com",
-              to: email,
-              subject: "Reset Password Link",
-              text: `http://127.0.0.1:3000/reset_password/${user._id}/${token}`,
-            };
+        //! compose the email message
+        const mailOption = {
+          from: "abebetizazu157@gmail.com",
+          to: email,
+          subject: "Reset Password Link",
+          text: `http://127.0.0.1:3000/reset_password/${user._id}/${token}`,
+        };
 
-            transporter.sendMail(mailOption, function (error, info) {
-              if (error) {
-                console.log(error);
-              } else {
-                return res.send({ Status: "Success" });
-              }
-            });
-
-            res.status(200).json({ user, token });
-            console.log(user);
+        transporter.sendMail(mailOption, function (error, info) {
+          if (error) {
+            console.log(error);
           } else {
-            console.log(
-              "You are not a verified user. Please verify your account first."
-            );
-            res.json({ message: "not verified" });
+            return res.send({ Status: "Success" });
           }
+        });
+
+        res.status(200).json({ user, token });
+        console.log(user);
+      } else {
+        console.log(
+          "You are not a verified user. Please verify your account first."
+        );
+        res.json({ message: "not verified" });
+      }
     } else {
       console.log("User is not found.");
       return res.status(404).json({ message: "User is not found." });
@@ -251,25 +247,26 @@ const resetPassword = asyncHandler(async (req, res) => {
 });
 
 const getUser = asyncHandler(async (req, res) => {
-    try {
+  try {
     User.find()
-        .maxTimeMS(20000)
-        .then((respons) => {
-            // console.log(respons);
-            res.json(respons);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
-    }
+      .maxTimeMS(20000)
+      .then((respons) => {
+        // console.log(respons);
+        res.json(respons);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
+
 
 // displays donor by id
 const getUserById = asyncHandler(async (req, res) => {
   try {
-    const id = req.params.id;;
+    const id = req.params.id;
     const user = await User.findById(id).exec();
 
     if (!user) {
@@ -282,7 +279,6 @@ const getUserById = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 // Update a donor
 const updateUser = asyncHandler(async (req, res) => {
   try {
@@ -291,19 +287,21 @@ const updateUser = asyncHandler(async (req, res) => {
 
     // Assuming you have a Donor model
     const newUser = await User.findByIdAndUpdate(id, {
-      name : name,
-      email : email,
-      role:role
+      name: name,
+      email: email,
+      role: role,
     });
-    const result= newUser.save();
+    const result = newUser.save();
 
-    res.status(200).json({ message: "Donor Updated Successfully.",result:newUser });
+    res
+      .status(200)
+      .json({ message: "Donor Updated Successfully.", result: newUser });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-const deleteUser =  asyncHandler(async (req, res) => {
+const deleteUser = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -327,4 +325,3 @@ module.exports = {
   getUserById,
   updateUser,
 };
-
