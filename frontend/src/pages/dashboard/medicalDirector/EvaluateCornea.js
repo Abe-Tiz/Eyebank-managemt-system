@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@chakra-ui/react';
-
 const EvaluateCornea = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -20,21 +19,12 @@ const EvaluateCornea = () => {
     const [evaluationComment, setEvaluationComment] = useState('');
     const [suiatablity, setSuiatablity] = useState('');
     const [reason, setReason] = useState('');
-    const [evaluater, setEvaluater] = useState({
-        name: ""
-    });
-    const evaluation = {
-        evaluationDate,
-        epitheliam,
-        stroma,
-        endothelium,
-        approval,
-        evaluater,
-        evaluationComment,
-        suiatablity,
-        reason
-    };
 
+    const [state, setState] = useState({
+        name: ""
+    })
+
+    
     useEffect(() => {
         // Fetch cornea data from the server based on the provided ID
         const fetchCorneaData = async () => {
@@ -63,6 +53,17 @@ const EvaluateCornea = () => {
     const handleSave = async () => {
         // Example save functionality
         //console.log(evaluateCornea)
+        const evaluation = {
+            evaluationDate,
+            epitheliam,
+            stroma,
+            endothelium,
+            approval,
+            evaluater,
+            evaluationComment,
+            suiatablity,
+            reason
+        };
         try {
             await axios.put(`http://localhost:4000/cornea/evaluate/${id}`, { evaluation });
             toast({
@@ -87,13 +88,40 @@ const EvaluateCornea = () => {
     const handleApproval = (event) => {
         setApproval(event.target.value);
     }
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:4000/user/userLogedin", {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem("token"),
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data, "user logged in");
+                setState((prev) => ({
+                    ...prev,
+                    name: data.data.name,
+                }));
+                if (data.data === "token expired") {
+                    localStorage.clear();
+                    navigate("/login");
+                }
+            });
+    }, [navigate]);
+    const evaluater = state.name
     if (isLoading) {
         return <div>{t('Loading...')}</div>;
     }
     return (
         <div>
-            <h1>{t('Evaluate Cornea')}</h1>
-
+            <h2 className="text-3xl font-bold text-center my-4">Evaluate Cornea</h2>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -101,15 +129,6 @@ const EvaluateCornea = () => {
                 }}
             >
                 <div className="grid grid-cols-3">
-                    <label>
-                        Evaluation Date:
-                        <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="date"
-                            value={evaluationDate}
-                            onChange={(e) => setEvaluationDate(e.target.value)}
-                        />
-                    </label>
                     <label>
                         endothelium:
                         <input
@@ -138,20 +157,6 @@ const EvaluateCornea = () => {
                             value={epitheliam}
                             onChange={(e) => setEpitheliam(e.target.value)}
                         />
-                    </label>
-                    <label>
-                        Evaluator:
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
-                            value={evaluater}
-                            onChange={(e) => setEvaluater(e.target.value)}
-                        >
-                            <option value="">Select Evaluator</option>
-                            <option value='awoke'>Awoke</option>
-                            <option value="amsalu">Amsalu</option>
-                            <option value="tefera">Tefera</option>
-                        </select>
                     </label>
                     <label>
                         Comment:

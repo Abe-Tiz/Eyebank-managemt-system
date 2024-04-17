@@ -101,11 +101,11 @@ const EditCornea = () => {
                     handleSave();
                 }}
             >
-                <div className="grid grid-cols-2">
+                <div className="grid ml-3 grid-cols-2">
                     <label>
                         Size:
                         <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            className="form-input mt-1  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={size || corneaData.size}
                             onChange={(e) => setCornea({ ...cornea, size: e.target.value })}
                         >
@@ -125,7 +125,7 @@ const EditCornea = () => {
                         />
                     </label>
                 </div>
-                <div className='grid grid-cols-2'>
+                <div className='grid ml-3 grid-cols-2'>
                     <label>
                         Iris Color:
                         <select
@@ -149,7 +149,7 @@ const EditCornea = () => {
                         />
                     </label>
                 </div>
-                <div className='grid grid-cols-2'>
+                <div className='grid ml-3 grid-cols-2'>
                     <label>
                         Lens:
                         <input
@@ -172,8 +172,8 @@ const EditCornea = () => {
                         </select>
                     </label>
                 </div>
-                <div className='text-center '>
-                    <button className="w-1/4 bg-sky-600 hover:bg-blue-700 text-white  font-bold py-2 px-4 mt-5 rounded">
+                <div className='text-center  '>
+                    <button className="w-1/4 mb-3 bg-sky-600 hover:bg-blue-700 text-white  font-bold py-2 px-4 mt-5 rounded">
                         Update
                     </button>
                 </div>

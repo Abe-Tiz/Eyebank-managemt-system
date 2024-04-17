@@ -68,22 +68,22 @@ const ViewTissue = () => {
         <div>
             <div className='text-center mt-3'>
                 <TableContainer>
-                    <Text fontSize='2xl' className='text-center  bg-teal-400 text-white mt-6'>
+                    <Text fontSize='3xl' className='text-center text-black mt-0 mb-4'>
                         <span> List of evaluated cornea </span>
                     </Text>
                     <Table size='sm'>
                         <Thead>
-                            <Tr>
-                                <Th>S.No</Th>
-                                <Th>LotNo</Th>
-                                <Th>Date</Th>
-                                <Th>Evaluater</Th>
-                                <Th>Epitheliam</Th>
-                                <Th>Stroma</Th>
-                                <Th>Endothelium</Th>
-                                <Th>Approval</Th>
-                                <Th>Suiatabl/Reason</Th>
-                                <Th colSpan={3}>Operations</Th>
+                            <Tr className='bg-sky-600 text-white'>
+                                <Th className='text-white'>S.No</Th>
+                                <Th className='text-white'>LotNo</Th>
+                                <Th className='text-white'>Date</Th>
+                                <Th className='text-white'>Evaluater</Th>
+                                <Th className='text-white'>Epitheliam</Th>
+                                <Th className='text-white'>Stroma</Th>
+                                <Th className='text-white'>Endothelium</Th>
+                                <Th className='text-white'>Approval</Th>
+                                <Th className='text-white'>Suiatabl/Reason</Th>
+                                <Th className='text-white' colSpan={2}>Operations</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
