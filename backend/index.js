@@ -8,7 +8,7 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const userRoute = require("./routes/userRoute");
 //const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
-const reportRoute = require("./routes/ReportRoute");
+const ReportRoute = require("./routes/ReportRoute");
 const corneaRoute = require("./routes/CorneaRoute");
 const postRoutes = require("./routes/postRoutes.js");
 const HospitalRoute = require("./routes/HospitalRoute");
@@ -80,7 +80,7 @@ const allowCrossDomain = (req, res, next) => {
 app.use(allowCrossDomain);
 app.use("/user", userRoute);
 app.use("/donor", donorRoute);
-app.use("/report", reportRoute);
+app.use("/report", ReportRoute);
 app.use("/cornea", corneaRoute);
 app.use("/post", postRoutes);
 app.use("/hospital", HospitalRoute);

@@ -21,7 +21,7 @@ i18next
             "common",
             "register",
             "donor",
-            "awareness",
+            "blog",
             "about",
             "contact",
             "cornea",

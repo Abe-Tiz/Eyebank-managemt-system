@@ -101,7 +101,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink to="/blog" onClick={hideNavbar}>
-                {t("translation:Awarness")}
+                {t("translation:Blog")}
               </NavLink>
             </li>
             <li>

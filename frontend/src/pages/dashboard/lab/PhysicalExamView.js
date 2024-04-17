@@ -1,192 +1,150 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button } from "@chakra-ui/react";
-import axios from 'axios';
-const PhysicalExamView = () => {
-    const navigate = useNavigate();
-    const [exams, setExams] = useState([]);
-    const [editExamId, setEditExamId] = useState(null);
-    const [editedHeight, setEditedHeight] = useState("");
-    const [editedWeight, setEditedWeight] = useState("");
-    const [editedSex, setEditedSex] = useState("");
-    const [collect, setCollect] = useState(true);
-    // const { id } = useParams();
-    useEffect(() => {
-        fetchPhysicalExams();
-    }, []);
-    const data = {
-        collect,
-    }
-    const fetchPhysicalExams = async () => {
-        try {
-            const response = await fetch("http://localhost:4000/api/getAll");
-            const data = await response.json();
-            setExams(data);
-        } catch (error) {
-            console.error("Failed to fetch physical exams:", error);
-        }
-    };
-    const handleCollect = async (id) => {
-        try {
-            navigate(`/labtechnicaldashboard/collectCornea/${id}`);
-        } catch (error) {
-            console.error("Failed to collect physical exam:", error);
-        }
-    };
-    const deletePhysicalExam = async (examId) => {
-        try {
-            const response = await fetch(`http://localhost:4001/api/delete/${examId}`, {
-                method: "DELETE",
-            });
-            if (response.ok) {
-                fetchPhysicalExams();
-                alert("Physical exam deleted successfully.");
-            } else {
-                throw new Error("Failed to delete physical exam.");
-            }
-        } catch (error) {
-            console.error("Error deleting physical exam:", error);
-        }
-    };
-    const startEdit = (examId, height, weight, sex) => {
-        setEditExamId(examId);
-        setEditedHeight(height);
-        setEditedWeight(weight);
-        setEditedSex(sex);
-    };
+import { useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { Link } from "@chakra-ui/react";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
-    const cancelEdit = () => {
-        setEditExamId(null);
-        setEditedHeight("");
-        setEditedWeight("");
-        setEditedSex("");
-    };
-    const navigateToDetails = (examId) => {
-        navigate('/getOne/:id', { state: { examId: examId } });
-    };
-    const saveEdit = async (examId) => {
-        try {
-            const response = await fetch(`http://localhost:4000/api/update/${examId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    height: editedHeight,
-                    weight: editedWeight,
-                    sex: editedSex,
-                }),
-            });
-            if (response.ok) {
-                fetchPhysicalExams();
-                setEditExamId(null);
-                setEditedHeight("");
-                setEditedWeight("");
-                setEditedSex("");
-                alert("Physical exam updated successfully.");
-            } else {
-                throw new Error("Failed to update physical exam.");
-            }
-        } catch (error) {
-            console.error("Error updating physical exam:", error);
+const PhysicalExamView = () => {
+  const navigate = useNavigate();
+  const [exams, setExams] = useState([]);
+
+  useEffect(() => {
+    fetchPhysicalExams();
+  }, []);
+
+  const fetchPhysicalExams = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/getAll");
+      const data = await response.json();
+      setExams(data);
+    } catch (error) {
+      console.error("Failed to fetch physical exams:", error);
+    }
+  };
+
+  const deletePhysicalExam = (examId) => {
+    confirmAlert({
+      title: 'Confirm Deletion',
+      message: 'Are you sure you want to delete this physical exam?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => performDelete(examId),
+        },
+        {
+          label: 'No',
+          onClick: () => {},
+        },
+      ],
+    });
+  };
+
+  const performDelete = async (examId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/api/delete/${examId}`,
+        {
+          method: 'DELETE',
         }
-    };
-    return (
-        <div className="container mx-auto">
-            <h2 className="text-2xl font-bold mb-4">Physical Exams</h2>
-            {exams.length === 0 ? (
-                <p>No physical exams found.</p>
-            ) : (
-                <table className="table-auto w-full">
-                    <thead>
-                        <tr>
-                            <th className="px-4 py-2">Height</th>
-                            <th className="px-4 py-2">Weight</th>
-                            <th className="px-4 py-2">Sex</th>
-                            <th className="px-4 py-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {exams
-                            //         filter(
-                            //     (exam) =>
-                            //         // exam.collect &&
-                            //         (exam.collect !== true)
-                            // )
-                            .map((exam) => (
-                                <tr key={exam._id}>
-                                    {editExamId === exam._id ? (
-                                        <>
-                                            <td className="border px-4 py-2">
-                                                <input
-                                                    type="text"
-                                                    value={editedHeight}
-                                                    onChange={(e) => setEditedHeight(e.target.value)}
-                                                />
-                                            </td>
-                                            <td className="border px-4 py-2">
-                                                <input
-                                                    type="text"
-                                                    value={editedWeight}
-                                                    onChange={(e) => setEditedWeight(e.target.value)}
-                                                />
-                                            </td>
-                                            <td className="border px-4 py-2">
-                                                <input
-                                                    type="text"
-                                                    value={editedSex}
-                                                    onChange={(e) => setEditedSex(e.target.value)}
-                                                />
-                                            </td>
-                                            <td className="border px-4 py-2">
-                                                <button
-                                                    className="bg-green-500 text-white font-bold py-2 px-4 rounded mr-2"
-                                                    onClick={() => saveEdit(exam._id)}
-                                                >
-                                                    Save
-                                                </button>
-                                                <button
-                                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                                                    onClick={cancelEdit}
-                                                >
-                                                    Cancel
-                                                </button>
-                                            </td>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <td className="border px-4 py-2">{exam.height}</td>
-                                            <td className="border px-4 py-2">{exam.weight}</td>
-                                            <td className="border px-4 py-2">{exam.sex}</td>
-                                            <td>{exam.collect === true ? (<p className="text-green-500 font-bold">Collected</p>) : (<Button colorScheme='blue' onClick={() => handleCollect(exam._id)}>Collect</Button>)}</td>
-                                            <td className="border px-4 py-2">{""}</td>
-                                            <td className="border px-4 py-2">
-                                                <button
-                                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                                    onClick={() => deletePhysicalExam(exam._id)}
-                                                >
-                                                    Delete
-                                                </button>
-                                                <button
-                                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                                    onClick={() =>
-                                                        startEdit(exam._id, exam.height, exam.weight, exam.sex)
-                                                    }
-                                                >
-                                                    Edit
-                                                </button >
-                                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                                    onClick={() => navigateToDetails(exam._id)}>Go to Details</button>
-                                            </td>
-                                        </>
-                                    )}
-                                </tr>
-                            ))}
-                    </tbody>
-                </table>
-            )
-            }
-        </div >
-    );
+      );
+      if (response.ok) {
+        fetchPhysicalExams();
+        confirmAlert({
+          title: 'Success',
+          message: 'Physical exam deleted successfully.',
+          buttons: [
+            {
+              label: 'OK',
+              onClick: () => {},
+            },
+          ],
+        });
+      } else {
+        throw new Error('Failed to delete physical exam.');
+      }
+    } catch (error) {
+      console.error('Error deleting physical exam:', error);
+    }
+  };
+
+  const navigateToDetails = (examId) => {
+    navigate(`/labtechnicaldashboard/getOne/${examId}`);
+  };
+
+  const navigateToEdit = (examId) => {
+    const exam = exams.find((exam) => exam._id === examId);
+    if (exam) {
+      navigate({
+        pathname: `/labtechnicaldashboard/editExams/${examId}`,
+        state: { exam },
+      });
+    }
+  };
+
+  return (
+    <div className="container mx-auto">
+      <h2 className="text-3xl text-center font-bold mb-4 font-sans bg-blue-500 text-white rounded p-2 h-14">
+        Physical Exam
+      </h2>
+      {exams.length === 0 ? (
+        <p>No physical exams found.</p>
+      ) : (
+        <table className="table-auto w-full">
+  <thead>
+    <tr>
+      <th className="px-2 py-2"><h1 className="font-bold">Height</h1></th>
+      <th className="px-2 py-2"><h1 className="font-bold">Weight</h1></th>
+      <th className="px-2 py-2"><h1 className="font-bold">Sex</h1></th>
+      <th className="px-2 py-2"><h1 className="font-bold">Cause of Death</h1></th>
+      <th className="px-2 py-2"><h1 className="font-bold">Date of Death</h1></th>
+      <th className="px-2 py-2"><h1 className="font-bold">Time of Death</h1></th>
+      <th className="px-8 py-2 col-span-3"><h1 className="font-bold">Actions</h1></th>
+    </tr>
+  </thead>
+  <tbody>
+    {exams.map((exam) => (
+      <tr key={exam._id}>
+        <td className="border px-2 py-2">{exam.height}</td>
+        <td className="border px-2 py-2">{exam.weight}</td>
+        <td className="border px-2 py-2">{exam.sex}</td>
+        <td className="border px-2 py-2">{exam.causeOfDeath}</td>
+        <td className="border px-2 py-2">{exam.dod}</td>
+        <td className="border px-2 py-2">{exam.time}</td>
+        <td className="border px-2 py-2">
+          <td className="border px-2 py-2 text-blue-500">
+            <Link
+              className="text-gray-600 text-xl hover:text-blue-700"
+              onClick={() => navigateToDetails(exam._id)}
+            >
+              <FaEye />
+            </Link>
+          </td>
+          <td className="border px-2 py-2 text-green-500">
+            <Link
+              className="text-green-600 text-xl ml-5 hover:text-green-700"
+              onClick={() => navigateToEdit(exam._id)}
+            >
+              <EditIcon />
+            </Link>
+          </td>
+          <td className="border px-2 py-2 text-red-600">
+            <Link
+              className="text-red-600 text-xl ml-5 hover:text-red-700"
+              onClick={() => deletePhysicalExam(exam._id)}
+            >
+              <DeleteIcon />
+            </Link>
+          </td>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+      )}
+    </div>
+  );
 };
+
 export default PhysicalExamView;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import { useNavigate } from "react-router-dom";
-
+import io from 'socket.io-client';
 const ENDPOINT = "http://localhost:4000"; // Your server endpoint
 const socket = socketIOClient(ENDPOINT);
 
