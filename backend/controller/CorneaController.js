@@ -68,5 +68,30 @@ const distributeCornea = async (req, res) => {
     res.send(cornea);
 };
 
+const getCorneaBLotnum =async (req, res) => {
+    try {
+        const { lotNo } = req.body;
+        const cornea = await Cornea.find({
+            lotNo: { $regex: new RegExp(`^${lotNo}`, "i") },
+        }).exec();
+        if (cornea.length === 0) {
+            return res.status(404).json({ message: "Cornea not found" });
+        }
+        // console.log(cornea);
+        res.status(200).json(cornea);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
 
-module.exports = { createCornea, getCorneas, getCornea, editCornea, deleteCornea, evaluateCornea, distributeCornea };
+module.exports = {
+  createCornea,
+  getCorneas,
+  getCornea,
+  editCornea,
+  deleteCornea,
+  evaluateCornea,
+  distributeCornea,
+  getCorneaBLotnum,
+};

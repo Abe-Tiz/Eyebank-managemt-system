@@ -1,26 +1,25 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const corneaRequestSchema = new mongoose.Schema({
-  surgeonName: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+const CorneaRequestSchema = new Schema({
+  surgeon: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
-  email: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+  hospital: {
+    type: Schema.Types.ObjectId,
+    ref: 'Hospital',
+    required: true
   },
-  hospitalName: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Hospital",
-    required: true,
+
+  isApproved: {
+    type: Boolean,
+    default: false,
   },
-  hospitalLocation: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Location",
-    default: true,
-  },
+  descriptionOfRequest: String,
+  suiatablity:String,
 });
-const CorneaRequest = mongoose.model("CorneaRequest", corneaRequestSchema);
-module.exports = CorneaRequest;
+
+const CorneaRequestModel = mongoose.model('CorneaRequest', CorneaRequestSchema);
+module.exports = CorneaRequestModel;

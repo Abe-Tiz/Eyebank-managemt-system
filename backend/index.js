@@ -8,7 +8,7 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const userRoute = require("./routes/userRoute");
 //const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
-const reportRoute = require("./routes/ReportRoute");
+const ReportRoute = require("./routes/ReportRoute");
 const corneaRoute = require("./routes/CorneaRoute");
 const postRoutes = require("./routes/postRoutes.js");
 const HospitalRoute = require("./routes/HospitalRoute");
@@ -17,12 +17,14 @@ const http = require("http");
 const socketIO = require("socket.io");
 const Donor = require("./models/Donor.js");
 
+const corneaRequest = require("./routes/CorneaRequestRout");
 const physicalExamRoutes = require("./routes/PhysicalExamRoute");
 const AccidentalRoute = require("./routes/AccidentRoute");
 const BloodRoute = require("./routes/BloodRoute");
 const RequestRoute = require("./routes/RequestRoute");
 const DistributionRoute = require("./routes/DistributionRoute");
 const { scheduleExpirationCheck } = require("./utils/Scheduler.js");
+
 //const RecipientRoute = require("./routes/RecipientRoute");
 dotenv.config();
 connectDB();
@@ -74,11 +76,16 @@ const allowCrossDomain = (req, res, next) => {
 app.use(allowCrossDomain);
 app.use("/user", userRoute);
 app.use("/donor", donorRoute);
-app.use("/report", reportRoute);
+app.use("/report", ReportRoute);
 app.use("/cornea", corneaRoute);
 app.use("/post", postRoutes);
 app.use("/hospital", HospitalRoute);
 app.use("/recipient", RecipientRoute);
+app.use('/hospital', HospitalRoute)
+app.use('/recipient', RecipientRoute)
+app.use('/requestCornea',corneaRequest)
+
+
 
 //! check the expiration date of the cornea
 scheduleExpirationCheck();
