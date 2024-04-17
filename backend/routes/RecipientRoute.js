@@ -1,12 +1,20 @@
-const RecipientController = require("../controller/RecipientController");
 const express = require("express");
-const route = express.Router();
-route.post("/create", RecipientController.createRecipient);
-route.get("/read", RecipientController.getRecipients);
-route.get("/getOne/:id", RecipientController.getRecipient);
-route.put("/update/:id", RecipientController.updateRecipient);
-route.put("/ocular/:id", RecipientController.ocularPost);
-route.put("/adverse/:id", RecipientController.adverseReaction);
-route.delete("/delete/:id", RecipientController.deleteRecipient);
+const router = express.Router();
+const {
+    createRecipient,
+    getRecipients,
+    getRecipient,
+    updateRecipient,
+    // ocularPost,
+    // adverseReaction,
+    deleteRecipient
+  } = require("../controller/RecipientController");
+router.post("/create", createRecipient);
+router.get("/read", getRecipients);
+router.get("/getOne/:id", getRecipient);
+router.put("/update/:id", updateRecipient);
+// router.put("/ocular/:id", ocularPost);
+// router.put("/adverse/:id", adverseReaction);
+router.delete("/delete/:id", deleteRecipient);
 
-module.exports = route;
+module.exports = router;

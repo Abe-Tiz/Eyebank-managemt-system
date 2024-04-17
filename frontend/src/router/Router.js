@@ -76,6 +76,7 @@ import EditPost from "../pages/dashboard/admins/EditPost";
 import IndexPage from "../pages/dashboard/admins/IndexPage";
 import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
+import EditPhysicalExam from "../pages/dashboard/lab/EditPhysicalExam";
 import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
 
 import StoredCornea from "../pages/corneas/StoredCornea";
@@ -208,6 +209,10 @@ const router = createBrowserRouter([
                 element: <ViewCornea />,
             },
             {
+                path: "createExams/:id",
+                element: <PhysicalExam />,
+            },
+            {
                 path: "createExams",
                 element: <PhysicalExam />,
             },
@@ -218,8 +223,11 @@ const router = createBrowserRouter([
             {
                 path: "getOne/:id",
                 element: <ViewDetails />,
-                path: "edit-post/:slug",
-                element: <EditPost />,
+                
+            },
+            {
+                path: "editExams/:id",
+                element: <EditPhysicalExam />,
             },
             {
                 path: "posts",
@@ -338,6 +346,98 @@ const router = createBrowserRouter([
 
         ],
     },
+    {
+        path: "/adminDashboard",
+        element: <AdminDashboard />,
+        children: [
+            {
+                path: "",
+                element: <Report />,
+            },
+            {
+                path: "addDoynor",
+                element: <CreateDonor />,
+            },
+            {
+                path: "donorList",
+                element: <DisplayDonor />,
+            },
+            {
+                path: "addUser",
+                element: <Signup />,
+            },
+            {
+                path: "userList",
+                element: <ViewUsers />,
+            },
+            {
+                path: "edit/:id",
+                element: <Edit />,
+            },
+            {
+                path: "edituser/:id",
+                element: <EditUser />,
+            },
+            {
+                path: "storeCornea",
+                element: <StoredCornea />,
+            },
+          
+
+
+        ],
+    },
+    //   {
+    //     path: "/adminDashboard",
+    //     element: <AdminDashboard />,
+    //     children: [
+    //       {
+    //         path: "",
+    //         element: <Report />,
+    //       },
+    //       {
+    //         path: "addDonor",
+    //         element: <CreateDonor />,
+    //       },
+    //       {
+    //         path: "donorList",
+    //         element: <DisplayDonor />,
+    //       },
+    //       {
+    //         path: "addUser",
+    //         element: <Signup />,
+    //       },
+    //       {
+    //         path: "userList",
+    //         element: <ViewUsers />,
+    //       },
+    //       {
+    //         path: "edit/:id",
+    //         element: <Edit />,
+    //       },
+    //       {
+    //         path: "edituser/:id",
+    //         element: <EditUser />,
+    //       },
+    //       {
+    //         path: "storeCornea",
+    //         element: <StoredCornea />,
+    //       },
+    //       {
+    //         path: "create-post",
+    //         element: <CreatePost />,
+    //       },
+    //       {
+    //         path: "edit-post/:slug",
+    //         element: <EditPost />,
+    //       },
+    //       {
+    //         path: "posts",
+    //         element: <IndexPage />,
+    //       },
+    //     ],
+    //   },
+
     {
         path: "/surgondashboard",
         element: <SurgeonDashboard />,
