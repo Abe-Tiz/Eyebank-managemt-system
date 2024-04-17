@@ -6,7 +6,6 @@ import { languages } from "./Languages";
 import { RouterProvider } from 'react-router-dom';
 import router from './router/Router';
   
-
 function App() {
     const currentLanguageCode = cookies.get("i18next") || "en";
     const currentLanguage = languages.find((l) => l.code === currentLanguageCode);

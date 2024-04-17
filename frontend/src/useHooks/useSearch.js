@@ -9,6 +9,7 @@ const useSearch = (searchType) => {
   const fetchData = async () => {
     try {
       let url;
+      let requestData = { name: searchTerm };
       switch (searchType) {
         case "donor":
           url = "http://localhost:4000/donor/search";
@@ -16,14 +17,13 @@ const useSearch = (searchType) => {
         case "user":
           url = "http://localhost:4000/user/search";
           break;
+        case "cornea":
+          url = "http://localhost:4000/cornea/search";
+          requestData = { lotNo: searchTerm }; 
+          break;
         // Add more cases for other search types as needed
-      
       }
-
-      const response = await axios.post(url, {
-        name: searchTerm,
-      });
-
+      const response = await axios.post(url, requestData);
       setData(response.data);
       setError(null);
     } catch (err) {

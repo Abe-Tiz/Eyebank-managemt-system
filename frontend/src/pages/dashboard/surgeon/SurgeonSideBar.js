@@ -46,6 +46,21 @@ const MedicalSidebar = ({
                         >
                             {/* <IoIosPersonAdd className="text-2xl" /> */}
                             <MdOutlineGroupAdd className="text-2xl" />
+
+                            
+                        </Link>
+
+                        <Link
+                            className="text-white p-2 hover:bg-gray-800 rounded"
+                            to="/surgondashboard/sendRequestCornea"
+                            data-tooltip-id="my-dashboard"
+                            data-tooltip-content="Send Cornea"
+
+                        >
+                            {/* <IoIosPersonAdd className="text-2xl" /> */}
+                            <MdOutlineGroupAdd className="text-2xl" />
+
+                            
                         </Link>
 
                     </div>
@@ -99,6 +114,19 @@ const MedicalSidebar = ({
                                 <span className="ml-2">{t("Adverse List")}</span>
                             </Link>
 
+
+                            <Link
+                                to="/surgondashboard/sendRequestCornea"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Send CorneaRequest"
+
+                            // onClick={handleAddDonorClick}
+
+                            >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">Send CorneaRequest</span>
+                            </Link>
 
 
                         </div>

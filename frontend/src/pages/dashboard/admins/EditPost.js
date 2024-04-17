@@ -4,6 +4,7 @@ import axios from "axios";
 import { Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
+import ButtonComponent from "../../../components/ButtonComponent";
 const { Option } = Select;
 
 const UpdatePost = () => {
@@ -83,7 +84,7 @@ const UpdatePost = () => {
       <div className="w-full md:w-4/3 lg:w-1/2 xl:w-1/2 mx-auto bg-white rounded-lg shadow">
         <div className="px-6 py-4">
           <h1
-            className="text-4xl text-center font-bold text-gray-800 mb-8 text-purple-700"
+            className="text-4xl text-center font-bold text-gray-800 mb-8 text-sky-700"
             style={{
               letterSpacing: "2px",
               textTransform: "capitalize",
@@ -173,18 +174,32 @@ const UpdatePost = () => {
               />
             </div>
             <div className="mb-3 flex justify-end">
-              <button
+              {/* <button
                 onClick={handleUpdate}
                 className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
               >
                 Update Post
-              </button>
-              <button
+              </button> */}
+
+              <div className="flex justify-center">
+              <ButtonComponent onClick={handleUpdate}
+                title="Update Post"
+                className="bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              />
+            </div>
+              {/* <button
                 onClick={handleDelete}
                 className="bg-red-500 text-white py-2 px-4 rounded"
               >
                 Delete
-              </button>
+              </button> */}
+
+              <div className="flex justify-center">
+              <ButtonComponent onClick={handleDelete}
+                title="Delete Post"
+                className="bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              />
+            </div>
             </div>
           </div>
         </div>

@@ -46,6 +46,20 @@ const MedicalSidebar = ({
                             <MdOutlineGroupAdd className="text-2xl" />
                         </Link>
 
+                        <Link
+                                to="/medicaldirectordashboard/editRequestCornea/:id"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="request-list"
+                                data-tooltip-content="requested-List"
+
+                            // onClick={handleAddDonorClick}
+
+                            >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                              
+                            </Link>
+
                     </div>
                 ) : (
                     <>
@@ -83,6 +97,47 @@ const MedicalSidebar = ({
                                 <span className="ml-2">{t("Evaluated List")}</span>
                             </Link>
 
+                            {/* <Link
+                                to="/medicaldirectordashboard/editRequestCornea/:id"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Evaluated List"
+
+                            // onClick={handleAddDonorClick}
+
+                            >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">Edit Request</span>
+                            </Link> */}
+
+                            <Link
+                                to="/medicaldirectordashboard/sendRequestCornea"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Evaluated List"
+
+                            // onClick={handleAddDonorClick}
+
+                            >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">Send Request</span>
+                            </Link>
+
+                            <Link
+                                to="/medicaldirectordashboard/viewRequestedCorneaSurgeon"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Evaluated List"
+
+                            // onClick={handleAddDonorClick}
+
+                            >
+                                <CiBoxList className="text-2xl" />
+                                <span className="ml-2">view Request</span>
+                            </Link>
 
                         </div>
                     </>
