@@ -277,6 +277,7 @@ const PhysicalExam = () => {
               checked={formData.isRefrigerated}
               onChange={handleChange}
               className="mr-2"
+              required
             />
             <div className="align-middle">
               <span className="align-middle">Is Refrigerated?</span>
@@ -293,6 +294,7 @@ const PhysicalExam = () => {
                   checked={value}
                   onChange={handleChange}
                   className="mr-2"
+                  required
                 />
                 <span className="align-middle">{key}</span>
               </label>
@@ -316,8 +318,9 @@ const PhysicalExam = () => {
                   value={value}
                   onChange={handleChange}
                   className="ml-2 px-3 py-2 border rounded"
+                  required
                 >
-                  <option value="no evidence">No Evidence</option>
+                  <option value="no evidence">NoEvidence</option>
                   <option value="evidence">Evidence</option>
                 </select>
               </label>
@@ -340,6 +343,7 @@ const PhysicalExam = () => {
               onChange={handleChange}
               className="w-48 px-3 py-2 border-2 rounded"
               placeholder="enter cause of deaths"
+              required
             />
           </div>
           <div>

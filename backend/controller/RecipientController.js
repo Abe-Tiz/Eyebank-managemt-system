@@ -65,6 +65,25 @@ const deleteRecipient = async (req, res) => {
   const recipient = await RecipientModel.findByIdAndDelete(req.params.id);
   res.send(recipient);
 };
+const ocularPost = async (req, res) => {
+  try {
+      const recipient = await RecipientModel.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
+      res.send(recipient);
+  }
+  catch (error) {
+      throw error;
+  }
+
+}
+const adverseReaction = async (req, res) => {
+  try {
+      const recipient = await RecipientModel.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
+      res.send(recipient);
+  }
+  catch (error) {
+      throw error;
+  }
+}
 
 module.exports = {
     createRecipient,
