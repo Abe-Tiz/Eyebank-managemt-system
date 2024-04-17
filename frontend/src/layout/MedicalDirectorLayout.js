@@ -7,7 +7,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
-import CustomSidebar from "../pages/dashboard/lab/SideBar";
+import MedicalSidebar from "../pages/dashboard/medicalDirector/MedicalSidebar";
 
 const { Header, Content } = Layout;
 
@@ -85,7 +85,7 @@ const MedicalDirectorDashboard = () => {
     }, [navigate]);
     return (
         <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
-            <CustomSidebar
+            <MedicalSidebar
                 collapsed={state.collapsed}
                 toggleSidebar={toggleSidebar}
                 name={state.name}
