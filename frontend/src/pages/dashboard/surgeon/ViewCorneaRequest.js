@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from "@chakra-ui/react";
 import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
 
 const RequestedCorneas = () => {
@@ -23,20 +23,11 @@ const RequestedCorneas = () => {
 
     getAllRequestedCorneas();
   }, []);
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:4000/requestCornea/delete-request/${id}`)
-      .then((res) => {
-        console.log(res);
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
-  };
+const navigate = useNavigate();
 
   const handleApprove = async (id) => {
     try {
       await axios.put(`http://localhost:4000/requestCornea/approve/${id}`);
-      // await axios.put(`http://localhost:4000/corneaRequest/approve/${id}`);
       setRequestedCorneas(
         requestedCorneas.map((p) =>
           p._id === id ? { ...p, isApproved: true } : p
@@ -61,6 +52,20 @@ const RequestedCorneas = () => {
     }
   };
 
+
+  
+
+
+
+
+  const handleDistribute = async (id) => {
+    try {
+        navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
+    } catch (error) {
+        console.error("Failed to distribute cornea:", error);
+    }
+};
+
   return (
     <>
       <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -75,7 +80,10 @@ const RequestedCorneas = () => {
                 Hospital
               </th>
               <th scope="col" className="px-6 py-3">
-                Request Description
+                Request 
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Distribute
               </th>
               <th scope="col" className="px-6 py-3">
                 Approve
@@ -104,16 +112,28 @@ const RequestedCorneas = () => {
                 </th>
                 <td className="px-6 py-4">{request.hospital?.hospitalName}</td>
                 <td className="px-6 py-4">{request.descriptionOfRequest}</td>
+                <td>
+  {request.distribute === true ? (
+    <p className="text-green-500 font-bold">Distributed</p>
+  ) : (
+    <Button
+      colorScheme="blue"
+      onClick={() => handleDistribute(request._id, request.suiatablity)}
+    >
+      distribute
+    </Button>
+  )}
+</td>
                 <td className="px-6 py-4">
                   {request.isApproved ? (
-                    <p className="  hover:bg-base-200 text-blue-700 px-4 py-2 rounded font-bold">
+                    <p className="  hover:bg-sky-700 text-blue-700 px-4 py-2 rounded font-bold">
                       {/* {t("common:activeButtonLabel")} */}
                       Approved
                     </p>
                   ) : (
                     <button
                       onClick={() => handleApprove(request._id)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                      className="bg-sky-700 hover:bg-sky-700 text-white px-4 py-2 rounded"
                     >
                       {/* {t("common:activateButtonLabel")} */}
                       Approve

@@ -4,20 +4,20 @@ const router = express.Router();
 
 // Route
 
-router.post("/send", requestController.createCorneaRequest);
+router.post('/send', requestController.createCorneaRequest);
 
 router.put(
-  "/updateRequest/:pid",
+  '/updateRequest/:id',
   requestController.updateCorneaRequestController
 );
-router.get("/getRequest", requestController.getCorneaRequestController);
+router.get('/getRequest', requestController.getCorneaRequestController);
 
-router.get("/getRequest/:pid", requestController.getSingleCorneaRequestController);
+router.get('/getRequest/:id', requestController.getSingleCorneaRequestController);
 router.delete(
-  "/delete-request/:pid",
+  '/delete-request/:pid',
   requestController.deleteCorneaRequestController
 );
-
-router.put("/approve/:id", requestController.approveCorneaRequestController);
+router.put('/distribute/:id', requestController.distributeCorneaRequestById);
+router.put('/approve/:id', requestController.approveCorneaRequestController);
 
 module.exports = router;

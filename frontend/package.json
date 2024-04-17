@@ -83,9 +83,21 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(@chakra-ui|@mui|antd)/)"
+    ]
+  },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1",
     "@tailwindcss/forms": "^0.5.7",
     "autoprefixer": "^10.4.16",
+    "babel-jest": "^29.7.0",
     "daisyui": "^4.7.1",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.5"

@@ -40,6 +40,10 @@ const io = socketIO(server, {
   },
 });
 
+
+
+
+
 // Initialize notification counter
 let notificationCount = 0; 
 

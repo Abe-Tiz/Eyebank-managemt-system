@@ -51,6 +51,7 @@ export default function SendRequestCornea() {
         hospital,
         descriptionOfRequest,
         isApproved: false,
+        distribute: false,
         suiatablity,
       };
 

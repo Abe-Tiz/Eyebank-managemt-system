@@ -22,6 +22,7 @@ const DistributeCornea = () => {
     const [approved, setApprove] = useState([])
     const [labTechinician, setLabTechinician] = useState([])
     const [surgeons, setSurgeons] = useState([])
+    const [suiatablity, setSuiatablity] = useState("")
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
@@ -29,9 +30,39 @@ const DistributeCornea = () => {
     const distri = {
         distributed,
     };
+
+    
     const [state, setState] = useState({
         name: ""
     })
+
+    useEffect(() => {
+        const fetchRequest = async () => {
+          try {
+            if (!id) {
+              toast.error("Id is Undefined", {
+                duration: 5000,
+                position: "top",
+              });
+              return;
+            }
+           
+            const { data } = await axios.get(`http://localhost:4000/requestCornea/getRequest/${id}`);
+           setSuiatablity(data.suiatablity);
+          } catch (error) {
+            toast.error(error.response.data.message, {
+              duration: 5000,
+              position: "top",
+            });
+          }
+        };
+        fetchRequest();
+      }, [id]);
+    
+
+
+
+
     useEffect(() => {
         fetch("http://127.0.0.1:4000/user/userLogedin", {
             method: "POST",
@@ -161,60 +192,79 @@ const DistributeCornea = () => {
     }, []);
     return (
         <div>
-            <h2 className="text-3xl mb-4 " style={{ textAlign: 'center' }}>Welcome to Cornea Distribution Form</h2>
-            <form onSubmit={handleFormSubmit}>
-                <div className="grid justify-center">
-                    <label>
-                        <select
-                            className="form-input mt-3 block w-full  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={hospitalName}
-                            onChange={(e) => setHospitalName(e.target.value)}>
-                            <option>select hospital Name</option>
-                            {hospitals.map((hospital, index) => (
-                                <option key={index} value={hospital._id}>
-                                    {hospital.hospitalName}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        <select
-                            className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={nameOfSurgeon}
-                            onChange={(e) => setNameOfSurgeon(e.target.value)}>
-                            <option>select Surgeon Name</option>
-                            {surgeons.map((surgeon, index) => (
-                                <option key={index} value={surgeon._id}>
-                                    {surgeon.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        <select
-                            className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={modeOfTransportation}
-                            onChange={(e) => setModeOfTransportation(e.target.value)}>
-                            <option value="" disabled> Mode Of Transportation</option>
-                            <option value="Amblunce">Amblunce</option>
-                            <option value="Plane">Plane</option>
-                        </select>
-                    </label>
-                </div>
-                <div className="text-center mt-4">
-                    <button
-                        type="submit"
-                        className="w-1/3 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600  text-white font-semibold rounded"
-                    >
-                        Distribute Cornea
-                    </button>
-                    {/* <Td className='text-center ml-3 text-blue-600'>
-                        <Button colorScheme='blue' onClick={() => handleCollect(cornea._id)}>Distribute</Button>
-                    </Td> */}
-                </div>
-            </form >
-        </div >
-    );
+          <h2 className="text-3xl mb-4" style={{ textAlign: 'center' }}>
+            Welcome to Cornea Distribution Form
+          </h2>
+          <form onSubmit={handleFormSubmit}>
+            <div className="grid justify-center">
+              <label>
+                <select
+                  className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                  value={hospitalName}
+                  onChange={(e) => setHospitalName(e.target.value)}
+                >
+                  <option>select hospital Name</option>
+                  {hospitals.map((hospital, index) => (
+                    <option key={index} value={hospital._id}>
+                      {hospital.hospitalName}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <select
+                  className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                  value={nameOfSurgeon}
+                  onChange={(e) => setNameOfSurgeon(e.target.value)}
+                >
+                  <option>select Surgeon Name</option>
+                  {surgeons.map((surgeon, index) => (
+                    <option key={index} value={surgeon._id}>
+                      {surgeon.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <select
+                  className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                  value={modeOfTransportation}
+                  onChange={(e) => setModeOfTransportation(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Mode Of Transportation
+                  </option>
+                  <option value="Amblunce">Amblunce</option>
+                  <option value="Plane">Plane</option>
+                </select>
+              </label>
+              <label>
+                <select
+                  className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                  value={suiatablity}
+                  onChange={(e) => setSuiatablity(e.target.value)}
+                >
+                  <option value="">Select Suitability</option>
+                  <option value="PK">PK</option>
+                  <option value="EK">EK</option>
+                  <option value="ALK">ALK</option>
+                  <option value="KLA">KLA</option>
+                  <option value="K-Pro">K-Pro</option>
+                  <option value="Therapeutic">Therapeutic</option>
+                </select>
+              </label>
+            </div>
+            <div className="text-center mt-4">
+              <button
+                type="submit"
+                className="w-1/3 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600 text-white font-semibold rounded"
+              >
+                Distribute Cornea
+              </button>
+            </div>
+          </form>
+        </div>
+      );
 };
 
 export default DistributeCornea;

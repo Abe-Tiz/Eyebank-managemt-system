@@ -89,7 +89,7 @@ const Home = () => {
 
               <ButtonComponent
                 title={t("about:readmore")}
-                onClick={() => navigate("/awareness")}
+                onClick={() => navigate("/blog")}
                 customClass="w-32"
               />
             </div>

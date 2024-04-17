@@ -331,7 +331,7 @@ const router = createBrowserRouter([
                 element: <SendRequestCornea />,
             },
             {
-                path: "EditRequest",
+                path: "EditRequest/:id",
                 element: <EditRequest />,
             }
 
