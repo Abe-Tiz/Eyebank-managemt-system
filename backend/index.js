@@ -45,7 +45,7 @@ const io = socketIO(server, {
 
 
 // Initialize notification counter
-let notificationCount = 0; 
+let notificationCount = 0;
 
 io.on("connection", (socket) => {
   console.log("New client connected");
@@ -87,7 +87,7 @@ app.use("/hospital", HospitalRoute);
 app.use("/recipient", RecipientRoute);
 app.use('/hospital', HospitalRoute)
 app.use('/recipient', RecipientRoute)
-app.use('/requestCornea',corneaRequest)
+app.use('/requestCornea', corneaRequest)
 
 
 
@@ -101,10 +101,10 @@ const NotifyNewDonors = async () => {
 
     changeStream.on("change", (data) => {
       if (data.operationType === "insert") {
-        notificationCount++;  
+        notificationCount++;
         io.emit("newDonorNotification", {
           donor: data.fullDocument,
-          count: notificationCount,  
+          count: notificationCount,
         });
       }
     });
@@ -116,7 +116,7 @@ const NotifyNewDonors = async () => {
 // Call NotifyNewDonors when the server starts
 NotifyNewDonors();
 
- 
+
 app.use('/accident', AccidentalRoute)
 app.use('/api', physicalExamRoutes);
 app.use('/blood', BloodRoute)

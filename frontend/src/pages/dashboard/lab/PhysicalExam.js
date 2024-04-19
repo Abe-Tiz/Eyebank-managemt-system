@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
 const PhysicalExam = () => {
+  const toast = useToast();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
+
+
     donor_id: id,
     height: "",
     weight: "",
     sex: "",
-    isRefrigerated: false,
     examined: {
+      isRefrigerated: false,
       head: false,
       mouth: false,
       neck: false,
@@ -50,7 +56,7 @@ const PhysicalExam = () => {
           ...formData,
           [name]: "",
         }));
-      } else if (/^[a-zA-Z]+$/.test(value) || value === "") {
+      } else if (/^[a-zA-Z\s]+$/.test(value) || value === "") { // Updated regex to include whitespace
         setErrors((prevErrors) => ({
           ...prevErrors,
           [name]: null,
@@ -60,13 +66,19 @@ const PhysicalExam = () => {
           [name]: value,
         }));
       } else {
+        toast({
+          title: "Enter only text",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
         setErrors((prevErrors) => ({
           ...prevErrors,
           [name]: "Only text characters are allowed.",
         }));
-        // e.target.style.borderColor = "red"; // Apply red border
-        // e.target.placeholder = "Enter only text"; // Change placeholder
       }
+
     } else if (type === "number") {
       if (keyCode === 8 && value.length === 0) {
         setErrors((prevErrors) => ({
@@ -87,14 +99,20 @@ const PhysicalExam = () => {
           [name]: value,
         }));
       } else {
+        toast({
+          title: "Enter only numbers",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
         setErrors((prevErrors) => ({
           ...prevErrors,
           [name]: "Only numeric characters are allowed.",
         }));
-        // e.target.style.borderColor = "red"; // Apply red border
-        // e.target.placeholder = "Enter only numbers"; // Change placeholder
       }
-    } else if (type === "checkbox") {
+    }
+    else if (type === "checkbox") {
       setFormData((formData) => ({
         ...formData,
         examined: {
@@ -102,7 +120,9 @@ const PhysicalExam = () => {
           [name]: e.target.checked,
         },
       }));
-    } else if (type === "date") {
+    }
+
+    else if (type === "date") {
       if (isValidDate(value)) {
         setErrors((prevErrors) => ({
           ...prevErrors,
@@ -172,8 +192,8 @@ const PhysicalExam = () => {
         height: "",
         weight: "",
         sex: "",
-        isRefrigerated: false,
         examined: {
+          isRefrigerated: false,
           head: false,
           mouth: false,
           neck: false,
@@ -196,9 +216,23 @@ const PhysicalExam = () => {
         story: "",
         time: "",
       });
-      alert("Data entered successfully!");
+      toast({
+        title: "Data Registered successfully",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+      navigate("/labtechnicaldashboard/getAll")
     } catch (error) {
       console.error(error);
+      toast({
+        title: "Error: Data entry failed",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
       alert("Error: Data entry failed.");
     }
   };
@@ -210,7 +244,7 @@ const PhysicalExam = () => {
     >
       <div className="w-full mb-6 mt-0 flex flex-wrap justify-center text-xl">
         <div className="w-full block">
-          <h2 className="text-3xl text-center font-bold mb-4 font-sans bg-blue-500 text-white rounded p-2 h-14">
+          <h2 className="text-3xl text-center font-bold mb-4 font-sans text-black rounded p-2 h-14">
             Create Physical Exam
           </h2>
         </div>
@@ -257,6 +291,9 @@ const PhysicalExam = () => {
             required
             className="w-32 px-3 py-2 border-2 rounded"
           >
+            <option disabled value="">
+              Sex
+            </option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
@@ -269,21 +306,21 @@ const PhysicalExam = () => {
         <h1 className="text-2xl text-center font-bold mb-4 font-san rounded p-2 h-14">
           Examined
         </h1>
-        <div className="mb-4">
-          <label className="flex items-center mx-auto">
-            <input
-              type="checkbox"
-              name="isRefrigerated"
-              checked={formData.isRefrigerated}
-              onChange={handleChange}
-              className="mr-2"
-              required
-            />
-            <div className="align-middle">
-              <span className="align-middle">Is Refrigerated?</span>
-            </div>
-          </label>
-        </div>
+        {/* <div className="mb-4">
+        <label className="flex items-center mx-auto">
+          <input
+            type="checkbox"
+            name="isRefrigerated"
+            checked={formData.isRefrigerated}
+            onChange={handleChange}
+            className="mr-2"
+            required
+          />
+          <div className="align-middle">
+            <span className="align-middle">Is Refrigerated?</span>
+          </div>
+        </label>
+      </div> */}
         <div className="grid grid-cols-4 gap-4 ml-16 font-bold">
           {Object.entries(formData.examined).map(([key, value]) => (
             <div key={key} className="mb-2">
@@ -293,8 +330,7 @@ const PhysicalExam = () => {
                   name={key}
                   checked={value}
                   onChange={handleChange}
-                  className="mr-2"
-                  required
+                  className="mr-2 border-2 border-blue-500"
                 />
                 <span className="align-middle">{key}</span>
               </label>
@@ -317,10 +353,10 @@ const PhysicalExam = () => {
                   name={key}
                   value={value}
                   onChange={handleChange}
-                  className="ml-2 px-3 py-2 border rounded"
+                  className="ml-2 px-3 py-2 border rounded w-48 bg-gray-200 text-gray-700 appearance-none"
                   required
                 >
-                  <option value="no evidence">NoEvidence</option>
+                  <option value="no evidence">No Evidence</option>
                   <option value="evidence">Evidence</option>
                 </select>
               </label>
@@ -365,10 +401,10 @@ const PhysicalExam = () => {
               Time:
             </label>
             <input
-              type="text"
+              type="time"
               name="time"
               value={formData.time}
-              onChange={handleChange}
+              onChange={handleChange1}
               placeholder="enter time"
               required
               className="w-48 px-3 py-2 border-2 rounded"
@@ -391,7 +427,7 @@ const PhysicalExam = () => {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="w-48 px-3 py-2 border-2 rounded bg-blue-600 text-white"
+            className="w-48 px-3 py-2 border-2 rounded bg-blue-600 hover:bg-blue-700 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-700"
           >
             Submit
           </button>
@@ -402,5 +438,3 @@ const PhysicalExam = () => {
 };
 
 export default PhysicalExam;
-
-//complete code

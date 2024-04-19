@@ -212,6 +212,17 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> {t("cornea:viewdonor")}</span>
                                 </Link>
+
+                                <Link
+                                    to="/labtechnicaldashboard/viewDonors"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" View Donor"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> {t("cornea:viewdonors")}</span>
+                                </Link>
                                 <Link
                                     to="/labtechnicaldashboard/viewRequestCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"

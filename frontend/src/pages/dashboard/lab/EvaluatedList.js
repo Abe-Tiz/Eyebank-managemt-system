@@ -120,7 +120,9 @@ const EvaluatedList = () => {
                                             <td>{cornea.distributed === true ? (<p className="text-green-500 font-bold">Distributed</p>) : (<Button colorScheme='blue' onClick={() => handleDistribute(cornea._id)}>Distribute</Button>)}</td>
                                         </Td>
                                     </Tr>
-                                ))}
+                                ))
+                                
+                            }
                         </Tbody>
                     </Table>
                 </TableContainer>

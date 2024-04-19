@@ -85,7 +85,7 @@ const PhysicalExamView = () => {
 
   return (
     <div className="container mx-auto">
-      <h2 className="text-3xl text-center font-bold mb-4 font-sans bg-blue-500 text-white rounded p-2 h-14">
+      <h2 className="text-3xl text-center font-bold mb-4 font-sans text-white rounded p-2 h-14">
         Physical Exam
       </h2>
       {exams.length === 0 ? (
@@ -93,7 +93,7 @@ const PhysicalExamView = () => {
       ) : (
         <table className="table-auto w-full">
   <thead>
-    <tr>
+    <tr className="">
       <th className="px-2 py-2"><h1 className="font-bold">Height</h1></th>
       <th className="px-2 py-2"><h1 className="font-bold">Weight</h1></th>
       <th className="px-2 py-2"><h1 className="font-bold">Sex</h1></th>
