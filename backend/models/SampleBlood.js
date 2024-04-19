@@ -1,22 +1,31 @@
 const mongoose = require("mongoose");
 
-const sampleBloodSchema = new mongoose.Schema({
+const sampleBloodSchema = new mongoose.Schema(
+  {
     bloodType: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    testingStatus: {
-        type: String,
-        required: false,
+    isTested: {
+      type: Boolean,
+      default: false,
     },
-    testingResult: {
-        type: String,
+    tests: {
+      type: Array,
     },
-    technicianName: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    }
-})
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    phId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PhysicalExam",
+    },
+    dob: Date,
+  },
+  {
+    timestamps: true,
+  }
+);
 const SampleBlood = mongoose.model("SampleBlood", sampleBloodSchema);
 module.exports = SampleBlood;

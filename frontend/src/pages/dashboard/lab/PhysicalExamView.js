@@ -22,10 +22,12 @@ const PhysicalExamView = () => {
             const response = await fetch("http://localhost:4000/api/getAll");
             const data = await response.json();
             setExams(data);
+            // console.log(data);
         } catch (error) {
             console.error("Failed to fetch physical exams:", error);
         }
     };
+
     const handleCollect = async (id) => {
         try {
             navigate(`/labtechnicaldashboard/collectCornea/${id}`);
@@ -33,6 +35,7 @@ const PhysicalExamView = () => {
             console.error("Failed to collect physical exam:", error);
         }
     };
+
     const deletePhysicalExam = async (examId) => {
         try {
             const response = await fetch(`http://localhost:4001/api/delete/${examId}`, {
@@ -48,6 +51,7 @@ const PhysicalExamView = () => {
             console.error("Error deleting physical exam:", error);
         }
     };
+
     const startEdit = (examId, height, weight, sex) => {
         setEditExamId(examId);
         setEditedHeight(height);
@@ -61,9 +65,11 @@ const PhysicalExamView = () => {
         setEditedWeight("");
         setEditedSex("");
     };
+
     const navigateToDetails = (examId) => {
         navigate('/getOne/:id', { state: { examId: examId } });
     };
+
     const saveEdit = async (examId) => {
         try {
             const response = await fetch(`http://localhost:4000/api/update/${examId}`, {
@@ -91,6 +97,8 @@ const PhysicalExamView = () => {
             console.error("Error updating physical exam:", error);
         }
     };
+
+    
     return (
         <div className="container mx-auto">
             <h2 className="text-2xl font-bold mb-4">Physical Exams</h2>
@@ -108,11 +116,6 @@ const PhysicalExamView = () => {
                     </thead>
                     <tbody>
                         {exams
-                            //         filter(
-                            //     (exam) =>
-                            //         // exam.collect &&
-                            //         (exam.collect !== true)
-                            // )
                             .map((exam) => (
                                 <tr key={exam._id}>
                                     {editExamId === exam._id ? (
