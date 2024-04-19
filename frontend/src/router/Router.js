@@ -223,7 +223,7 @@ const router = createBrowserRouter([
             {
                 path: "getOne/:id",
                 element: <ViewDetails />,
-                
+
             },
             {
                 path: "editExams/:id",
@@ -331,8 +331,8 @@ const router = createBrowserRouter([
                 element: <EditEvaluation />,
             },
             {
-              path: "viewRequestedCornea",
-              element: <ViewRequestedCorneaSurgeon/>,
+                path: "viewRequestedCornea",
+                element: <ViewRequestedCorneaSurgeon />,
             },
             {
                 path: "SendRequestCornea",
@@ -382,7 +382,7 @@ const router = createBrowserRouter([
                 path: "storeCornea",
                 element: <StoredCornea />,
             },
-          
+
 
 
         ],

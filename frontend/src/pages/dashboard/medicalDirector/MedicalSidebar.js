@@ -47,18 +47,18 @@ const MedicalSidebar = ({
                         </Link>
 
                         <Link
-                                to="/medicaldirectordashboard/editRequestCornea/:id"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="request-list"
-                                data-tooltip-content="requested-List"
+                            to="/medicaldirectordashboard/editRequestCornea/:id"
+                            className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                            // onClick={handleUserList}
+                            data-tooltip-id="request-list"
+                            data-tooltip-content="requested-List"
 
-                            // onClick={handleAddDonorClick}
+                        // onClick={handleAddDonorClick}
 
-                            >
-                                <MdOutlineGroupAdd className="text-2xl" />
-                              
-                            </Link>
+                        >
+                            <MdOutlineGroupAdd className="text-2xl" />
+
+                        </Link>
 
                     </div>
                 ) : (
@@ -124,9 +124,8 @@ const MedicalSidebar = ({
                                 <MdOutlineGroupAdd className="text-2xl" />
                                 <span className="ml-2">Send Request</span>
                             </Link>
-
                             <Link
-                                to="/medicaldirectordashboard/viewRequestedCorneaSurgeon"
+                                to="/medicaldirectordashboard/viewRequestedCornea"
                                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                 // onClick={handleUserList}
                                 data-tooltip-id="user-list"
