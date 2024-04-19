@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../static/styles/BlogDetail.css";
 import { Link } from "react-router-dom";
+import ButtonComponent from "../../components/ButtonComponent";
 
 const BlogDetails = () => {
   const { t } = useTranslation();
@@ -46,16 +47,26 @@ const BlogDetails = () => {
             {post.content}
           </p>
         </div>
-        <div className="flex justify-center py-4">
+      
+
+      <div className="flex justify-center">
+             <ButtonComponent
+                title="Back"
+                onClick={()=>navigate(-1)}
+                customClass="w-16 bg-sky-700 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded"
+              />
+            </div>
+        {/* <div className="flex justify-center py-4">
           <button
             onClick={() => navigate(-1)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            title="Back"
+            className="bg-sky-700 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded"
           >
             Back
-          </button>
+          </button> */}
         </div>
       </div>
-    </div>
+  
   );
 };
 

@@ -17,6 +17,10 @@ const CorneaRequestSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  distribute: {
+    type: Boolean,
+    default: false,
+},
   descriptionOfRequest: String,
   suiatablity:String,
 });

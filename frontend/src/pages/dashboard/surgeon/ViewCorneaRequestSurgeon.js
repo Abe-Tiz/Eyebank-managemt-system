@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useToast,Button } from "@chakra-ui/react";
+import { useToast, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-import { DeleteIcon,  } from '@chakra-ui/icons'
+import { DeleteIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
 
@@ -16,12 +16,12 @@ import {
   AlertDialogOverlay,
   useDisclosure,
   AlertDialogCloseButton,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 const RequestedCorneas = () => {
   const toast = useToast();
   const [requestedCorneas, setRequestedCorneas] = useState([]);
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
   const navigate = useNavigate();
   useEffect(() => {
     const getAllRequestedCorneas = async () => {
@@ -38,16 +38,7 @@ const RequestedCorneas = () => {
 
     getAllRequestedCorneas();
   }, []);
-  // const handleDelete = (id) => {
-  //   axios
-  //     .delete(`http://localhost:4000/requestCornea/delete-request/${id}`)
-  //     .then((res) => {
-  //       console.log(res);
-  //       window.location.reload();
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
+  
   const handleDelete = async (id) => {
     try {
       await axios.delete(
@@ -71,7 +62,6 @@ const RequestedCorneas = () => {
   const handleApprove = async (id) => {
     try {
       await axios.put(`http://localhost:4000/requestCornea/approve/${id}`);
-      // await axios.put(`http://localhost:4000/corneaRequest/approve/${id}`);
       setRequestedCorneas(
         requestedCorneas.map((p) =>
           p._id === id ? { ...p, isApproved: true } : p
@@ -155,7 +145,7 @@ const RequestedCorneas = () => {
 
                 <td className="flex px-6 py-4">
                   <Link
-                    to={`/medicaldirectordashboard/editRequestCornea/${request._id}`}
+                    to={`/medicaldirectordashboard/EditRequest/${request._id}`}
                     className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                   >
                     <RiEdit2Line size={20} color="#000" className="mr-2" />
