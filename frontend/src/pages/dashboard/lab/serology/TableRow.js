@@ -2,7 +2,7 @@
 import React from "react";
 import { Tr, Td, Link } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import DynamicIcon from "../../../components/DynamicIcon";
+import DynamicIcon from "../../../../components/DynamicIcon";
 
 const TableRow = ({ blood, onOpen, deleteCornea }) => (
   <Tr className="mb-2 text-lg">
