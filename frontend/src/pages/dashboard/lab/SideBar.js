@@ -8,9 +8,15 @@ import { Tooltip } from "react-tooltip";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import DynamicIcon from './../../../components/DynamicIcon';
+import { useState } from "react";
+import SideCustome from "../../../components/SideCustome";
 
 const CustomSidebar = ({ collapsed, name, role }) => {
     const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState({
+      serology:false
+  });
+  
     return (
       <div
         className={`bg-slate-700 overflow-auto h-screen fixed text-white transition-all duration-300 ${
@@ -72,8 +78,37 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                 data-tooltip-id="user-list"
                 data-tooltip-content=" View donor"
               >
-                {/* <SettingOutlined className="text-2xl" /> */}
-                <CiBoxList className="text-2xl" />
+                <DynamicIcon
+                  library="ci"
+                  iconName="CiBoxList"
+                  className="text-2xl"
+                />
+              </Link>
+              <Link
+                to="/labtechnicaldashboard/list-serology"
+                className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
+                data-tooltip-id="list-serology"
+                data-tooltip-content=" list serolog"
+              >
+                {/* <CiBoxList className="text-2xl" /> */}
+                <DynamicIcon
+                  library="md"
+                  iconName="MdPlaylistAddCheckCircle"
+                  className="text-2xl"
+                />
+              </Link>
+              <Link
+                to="/labtechnicaldashboard/serology"
+                className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
+                // onClick={handleUserList}
+                data-tooltip-id="user-list"
+                data-tooltip-content=" distribute Cornea"
+              >
+                <DynamicIcon
+                  library="tb"
+                  iconName="TbRibbonHealth"
+                  className="text-2xl"
+                />
               </Link>
             </div>
           ) : (
@@ -147,39 +182,33 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                       Store
                     </span>
                   </Link>
-                  <Link
-                    to="/labtechnicaldashboard/list-serology"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content=" distribute Cornea"
-                  >
-                    {/* <CiBoxList className="text-2xl" /> */}
-                    <DynamicIcon
-                      library="md"
-                      iconName="MdPlaylistAddCheckCircle"
-                      className="text-2xl"
-                    />
-                    <span className="ml-2">List</span>
-                  </Link>
-                  <Link
-                    to="/labtechnicaldashboard/serology"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content=" distribute Cornea"
-                  >
-                    {/* <CiBoxList className="text-2xl" /> */}
-                    <DynamicIcon
-                      library="tb"
-                      iconName="TbRibbonHealth"
-                      className="text-2xl"
-                    />
-                    <span className="ml-2">
-                      serology
-                      {/* {t("cornea:distributeCorneaLabel")} */}
-                    </span>
-                  </Link>
+
+                      {/* for serology */}
+                  <SideCustome
+                    headerProps={{
+                      onClick: () =>
+                        setIsOpen({ ...isOpen, serology: !isOpen.serology }),
+                      iconLibrary: "gi",
+                      iconName: "GiTestTubes",
+                      title: "Serology",
+                      isOpen: isOpen.serology,
+                    }}
+                    subtitleProps={[
+                      {
+                        link: "/labtechnicaldashboard/list-serology",
+                        subtitle: "List",
+                        iconLibrary: "md",
+                        iconName: "MdPlaylistAddCheckCircle",
+                      },
+                      {
+                        link: "/labtechnicaldashboard/serology",
+                        subtitle: "Add",
+                        iconLibrary: "io",
+                        iconName: "IoIosAddCircle",
+                      },
+                    ]}
+                  />
+
                   <Link
                     to="/labtechnicaldashboard/viewDistributed"
                     className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
