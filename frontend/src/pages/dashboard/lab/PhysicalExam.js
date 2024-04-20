@@ -3,13 +3,11 @@ import { useParams } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
-
 const PhysicalExam = () => {
   const toast = useToast();
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-
 
     donor_id: id,
     height: "",
@@ -42,7 +40,19 @@ const PhysicalExam = () => {
   });
 
   const [, setErrors] = useState({});
+  const [donate, setDonate] = useState(true);
+    const donated = {
+        donate,
+    };
 
+ const hanleDonate = async (id) => {
+        try {
+            await fetch(`http://localhost:4000/api/donate/${id}`, donated);
+            //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
+        } catch (error) {
+            console.error("Failed to collect physical exam:", error);
+        }
+    }
   const handleChange = (e) => {
     const { name, value, type, keyCode } = e.target;
 
@@ -235,6 +245,7 @@ const PhysicalExam = () => {
       });
       alert("Error: Data entry failed.");
     }
+ hanleDonate(id)
   };
 
   return (

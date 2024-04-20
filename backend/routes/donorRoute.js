@@ -15,6 +15,7 @@ const {
     resetCode,
     getDonorByName,
     getRecentDonors,
+    donatedDonor
   
 } = require("../controller/DonorController");
 
@@ -35,5 +36,5 @@ router.post('/displayByEmail', getDonorByEmail);
 router.post('/search', getDonorByName);
 router.post("/forgot_code", forgotCode);
 router.post("/reset-code/:id/:token", resetCode); 
- 
+ router.post("/donate/:id",donatedDonor)
 module.exports = router;
