@@ -6,7 +6,7 @@ import DynamicIcon from "../../../../components/DynamicIcon";
 
 const TableRow = ({ blood, onOpen, deleteCornea }) => (
   <Tr className="mb-2 text-lg">
-    <Td>{blood._id}</Td>
+    {/* <Td>{blood._id}</Td> */}
     <Td>{blood.bloodType}</Td>
     <Td>{blood.tests.join(", ")}</Td>
   

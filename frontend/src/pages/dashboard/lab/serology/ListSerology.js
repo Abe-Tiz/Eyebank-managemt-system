@@ -119,7 +119,7 @@ const ListSerology = () => {
               {/* Table header */}
               <Thead>
                 <Tr className="bg-sky-600 text-white">
-                  <Th className="text-white">ID</Th>
+                  {/* <Th className="text-white">ID</Th> */}
                   <Th className="text-white">Blood Type</Th>
                   <Th className="text-white">Tested</Th>
                   <Th className="text-white" colSpan={3}>

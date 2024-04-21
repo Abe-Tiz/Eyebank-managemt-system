@@ -14,7 +14,10 @@ import SideCustome from "../../../components/SideCustome";
 const CustomSidebar = ({ collapsed, name, role }) => {
     const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState({
-      serology:false
+      serology:false,
+      distribut:false,
+      cornea:false,
+      physical:false,
   });
   
     return (
@@ -122,68 +125,34 @@ const CustomSidebar = ({ collapsed, name, role }) => {
 
                 {/* btn */}
                 <div className="w-64- mt-4 flex flex-col justify-center items-center">
-                  <Link
-                    to="/labtechnicaldashboard/createExams"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content="PhysicalExams"
-                  >
-                    <CiBoxList className="text-2xl" />
-                    <span className="ml-2">Physical Add</span>
-                  </Link>
-                  <Link
-                    to="/labtechnicaldashboard/getAll"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content="PhysicalExams"
-                  >
-                    <CiBoxList className="text-2xl" />
-                    <span className="ml-2">
-                      {" "}
-                      {/* {t("cornea:PhysicalExamView")} */}
-                      Physical Exam
-                    </span>
-                  </Link>
-
-                  <Link
-                    to="/labtechnicaldashboard/viewCornea"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content=" view Cornea"
-                  >
-                    <CiBoxList className="text-2xl" />
-                    <span className="ml-2"> {t("cornea:viewCorneaLabel")}</span>
-                  </Link>
-
-                  <Link
-                    to="/labtechnicaldashboard/discardCornea"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content=" discard Cornea"
-                  >
-                    <CiBoxList className="text-2xl" />
-                    <span className="ml-2"> Discared</span>
-                  </Link>
-                  <Link
-                    to="/labtechnicaldashboard/storedCornea"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content=" store Cornea"
-                  >
-                    <CiBoxList className="text-2xl" />
-                    <span className="ml-2">
-                      {" "}
-                      {/* {t("cornea:storeCorneaLabel")} */}
-                      Store
-                    </span>
-                  </Link>
-
-                      {/* for serology */}
+                 
+                    {/* for Physical Examninatiion */}
+                  <SideCustome
+                    headerProps={{
+                      onClick: () =>
+                        setIsOpen({ ...isOpen, physical: !isOpen.physical }),
+                      iconLibrary: "bs",
+                      iconName: "BsFillExplicitFill",
+                      title: "Physical Examin",
+                      isOpen: isOpen.physical,
+                    }}
+                    subtitleProps={[
+                      {
+                        link: "/labtechnicaldashboard/getAll",
+                        subtitle: "View",
+                        iconLibrary: "md",
+                        iconName: "MdPlaylistAddCheckCircle",
+                      },
+                      {
+                        link: "/labtechnicaldashboard/createExams",
+                        subtitle: "Add",
+                        iconLibrary: "md",
+                        iconName: "MdPlaylistAddCircle",
+                      },
+                    ]}
+                    />
+                    
+                  {/* for serology */}
                   <SideCustome
                     headerProps={{
                       onClick: () =>
@@ -209,30 +178,63 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                     ]}
                   />
 
-                  <Link
-                    to="/labtechnicaldashboard/viewDistributed"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content="View distribute "
-                  >
-                    <CiBoxList className="text-2xl" />
-                    <span className="ml-2">
-                      {" "}
-                      {/* {t("cornea:viewDistributeLabel")} */}
-                      Distribution
-                    </span>
-                  </Link>
-                  <Link
-                    to="/labtechnicaldashboard/viewDonor"
-                    className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                    // onClick={handleUserList}
-                    data-tooltip-id="user-list"
-                    data-tooltip-content=" View Donor"
-                  >
-                    <CiBoxList className="text-2xl" />
-                    <span className="ml-2">Donors</span>
-                  </Link>
+                  {/* for distribute */}
+                  <SideCustome
+                    headerProps={{
+                      onClick: () =>
+                        setIsOpen({ ...isOpen, distribut: !isOpen.distribut }),
+                      iconLibrary: "fa",
+                      iconName: "FaHourglassEnd",
+                      title: "Distribution",
+                      isOpen: isOpen.distribut,
+                    }}
+                    subtitleProps={[
+                      {
+                        link: "/labtechnicaldashboard/viewDistributed",
+                        subtitle: "View",
+                        iconLibrary: "md",
+                        iconName: "MdOutlinePreview",
+                      },
+                    ]}
+                  />
+
+                  {/* for cornea */}
+                  <SideCustome
+                    headerProps={{
+                      onClick: () =>
+                        setIsOpen({ ...isOpen, cornea: !isOpen.cornea }),
+                      iconLibrary: "gi",
+                      iconName: "GiMazeCornea",
+                      title: "Cornea",
+                      isOpen: isOpen.cornea,
+                    }}
+                    subtitleProps={[
+                      {
+                        link: "/labtechnicaldashboard/viewDonor",
+                        subtitle: "Donors",
+                        iconLibrary: "md",
+                        iconName: "MdStreetview",
+                      },
+                      {
+                        link: "/labtechnicaldashboard/viewCornea",
+                        subtitle: "View Cornea",
+                        iconLibrary: "fa",
+                        iconName: "FaClipboardList",
+                      },
+                      {
+                        link: "/labtechnicaldashboard/storedCornea",
+                        subtitle: "Store",
+                        iconLibrary: "gr",
+                        iconName: "GrDocumentStore",
+                      },
+                      {
+                        link: "/labtechnicaldashboard/discardCornea",
+                        subtitle: "Discard",
+                        iconLibrary: "md",
+                        iconName: "MdRemoveShoppingCart",
+                      },
+                    ]}
+                  />
                 </div>
               </div>
             </>

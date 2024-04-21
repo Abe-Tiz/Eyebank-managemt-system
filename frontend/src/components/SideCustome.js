@@ -7,15 +7,18 @@ const SideCustome = ({ headerProps, subtitleProps }) => {
     <>
       <div>
         <div
-          className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded cursor-pointer"
+          className="flex gap-2 justify-between w-48  text-white p-2 hover:bg-gray-800 rounded cursor-pointer"
           onClick={headerProps.onClick}
         >
-          <DynamicIcon
-            library={headerProps.iconLibrary}
-            iconName={headerProps.iconName}
-            className="text-2xl"
-          />
-          <span>{headerProps.title}</span>
+          <div className="flex gap-3">
+            <DynamicIcon
+              library={headerProps.iconLibrary}
+              iconName={headerProps.iconName}
+              className="text-2xl"
+            />
+            <span>{headerProps.title}</span>
+          </div>
+
           {headerProps.isOpen ? (
             <DynamicIcon
               library="io"
@@ -38,7 +41,7 @@ const SideCustome = ({ headerProps, subtitleProps }) => {
               <Link
                 key={index}
                 to={item.link}
-                className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
+                className="flex gap-2 w-full text-white p-2 hover:bg-gray-800 rounded"
                 role="menuitem"
                 tabIndex="-1"
                 id={`menu-item-${index}`}

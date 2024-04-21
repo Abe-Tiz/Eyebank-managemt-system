@@ -15,6 +15,8 @@ const { Content } = Layout;
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
+    const [notifications, setNotifications] = useState([]);
+    const [countNotification, setCountNotification] = useState(0);
 
     const [state, setState] = useState({
         name: "",
@@ -28,6 +30,10 @@ const AdminDashboard = () => {
     const [reportData, setReportData] = useState({
         donor: "",
         user: "",
+    });
+    const [numNotification, setNumNotification] = useState({
+      donor: "",
+      user: "",
     });
 
     const [newDonorCount, setNewDonorCount] = useState(0);
@@ -76,6 +82,24 @@ const AdminDashboard = () => {
             console.log("Error : ", error);
         }
     };
+    const notification = async () => {
+        try {
+          const response = await axios.get(
+            " http://localhost:4000/donor/notification"
+          );
+          
+            setNotifications(response.data.notifications);
+            setCountNotification(response.data.numUnverifiedDonors);
+        //   console.log(
+        //     response.data.notifications,
+        //     // response.data.numUnverifiedDonors
+        //   );
+        } catch (error) {
+            console.log("Error : ", error);
+        }
+    };
+
+    // console.log("notification:", notifications, countNotification);
 
     // get notification when new donor registers
     const newDOnorRetrive = () => {
@@ -93,52 +117,47 @@ const AdminDashboard = () => {
         numberDonor();
         getLoggedInUser();
         newDOnorRetrive();
+        notification();
     }, [setReportData, navigate, newDonorCount]);
-
-    const handleSearchInputChange = (e) => {
-        // setSearchText(e.target.value);
-    };
-
-    const toggleDropdown = () => {
-        setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
-    };
 
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
     };
 
-    const [notifications, setNotifications] = useState([]);
+
 
     return (
-        <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
-            {/* side bar section */}
-            <CustomSidebar
-                collapsed={state.collapsed}
-                toggleSidebar={toggleSidebar}
-                name={state.name}
-                image={state.image}
-                role={state.role}
-            />
+      <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
+        {/* side bar section */}
+        <CustomSidebar
+          collapsed={state.collapsed}
+          toggleSidebar={toggleSidebar}
+          name={state.name}
+          image={state.image}
+          role={state.role}
+        />
 
-            <Layout
-                className={`${state.collapsed ? "ml-20" : "ml-64"
-                    }  bg-base-200 transition-all duration-300 ease-in-out flex-grow`}
-            >
-                {/* header componnet  */}
-                <HeaderComponent
-                    state={state}
-                    toggleSidebar={toggleSidebar}
-                    newDonorCount={newDonorCount}
-                />
+        <Layout
+          className={`${
+            state.collapsed ? "ml-20" : "ml-64"
+          }  bg-base-200 transition-all duration-300 ease-in-out flex-grow`}
+        >
+          {/* header componnet  */}
+          <HeaderComponent
+            state={state}
+            toggleSidebar={toggleSidebar}
+            newDonorCount={countNotification}
+            notifications={notifications}
+          />
 
-                {/* content section  */}
-                <Content className="p-4 mt-10">
-                    <div className=" bg-base-200  w-full">
-                        <Outlet />
-                    </div>
-                </Content>
-            </Layout>
+          {/* content section  */}
+          <Content className="p-4 mt-10">
+            <div className=" bg-base-200  w-full">
+              <Outlet />
+            </div>
+          </Content>
         </Layout>
+      </Layout>
     );
 };
 
