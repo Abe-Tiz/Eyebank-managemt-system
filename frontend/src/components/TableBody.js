@@ -53,6 +53,7 @@ const TableBody = ({ donors, donor, handleActivate, onOpen, searchTerm }) => {
             >
               <RiDeleteBin2Line size={20} color="#000" className="mr-2" />
             </button>
+           
           </td>
         </tr>
       ))}

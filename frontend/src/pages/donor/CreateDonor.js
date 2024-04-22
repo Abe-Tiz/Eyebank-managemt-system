@@ -222,7 +222,7 @@ const CreateDonor = () => {
 
   return (
     <>
-      <div class=" relative bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%   min-h-screen flex items-center justify-center md:mt-4">
+      <div className="w-full relative bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%   min-h-screen flex items-center justify-center md:mt-4">
         <div
           className={`absolute top-8 left-16 w-52 h-52 bg-yellow-400 rounded-full opacity-60`}
         ></div>
@@ -530,7 +530,7 @@ const CreateDonor = () => {
                         <span className="label-text">am Voluntore </span>
                         <input
                           type="checkbox"
-                          className="checkbox checkbox-secondary"
+                          className="checkbox checkbox-accent"
                           onChange={handleCheckbox}
                         />
                       </label>
@@ -541,12 +541,7 @@ const CreateDonor = () => {
 
               <div class="d-flex justify-content-center pt-3 mb-4">
                 <div className="mt-4 flex items-center">
-                  {/* <button
-                    onClick={() => window.history.back()}
-                    className=" bg-green px-5 py-2  border-2 hover:bg-transparent text-white hover:text-green font-extrabold text-xl mt-3 mr-5 "
-                  >
-                    {t("common:backButtonLabel")}
-                  </button> */}
+                 
 
                   {/* <ButtonComponent title={t("login:loginTitleLabel")} /> */}
                   <ButtonPrimary
@@ -556,17 +551,7 @@ const CreateDonor = () => {
                 </div>
 
                 <div className="mt-4 flex items-center">
-                  {/* <button
-                    type="submit"
-                    disabled={!canSubmit}
-                    className={`bg-green text-xl px-5 py-2 border-2   hover:bg-gray-600 text-black-700 hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
-                      !canSubmit
-                        ? "disabled:cursor-no-drop disabled:border-1 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
-                        : ""
-                    }`}
-                  >
-                    {t("common:registerButtonLabel")}
-                  </button> */}
+                 
                   <ButtonComponent
                     disabled={!canSubmit}
                     title={t("common:registerButtonLabel")}

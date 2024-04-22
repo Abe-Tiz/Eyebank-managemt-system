@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
-import { useNavigate } from "react-router-dom";
-import io from 'socket.io-client';
-const ENDPOINT = "http://localhost:4000"; // Your server endpoint
-const socket = socketIOClient(ENDPOINT);
+import { Link, useNavigate } from "react-router-dom";
 
 const SingleNotification = ({ notification, onNotificationClick, clicked }) => {
+    
   return (
     <div
       className={`flex items-center p-2 cursor-pointer ${
@@ -13,34 +11,18 @@ const SingleNotification = ({ notification, onNotificationClick, clicked }) => {
       }`}
       onClick={() => onNotificationClick(notification)}
     >
-      <div className="text-gray-600">{notification}</div>
+      <div className="text-gray-600">{notification.donorId.name}  Registered Please Activate.</div>
     </div>
   );
 };
 
-const Notification = () => {
-  const [notifications, setNotifications] = useState([]);
-  const [count, setCount] = useState(0);
+
+const Notification = ({ notifications, newDonorCount }) => {
+
   const [clickedNotification, setClickedNotification] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    socket.on("newDonorNotification", (data) => {
-      setNotifications((prevNotifications) => [
-        ...prevNotifications,
-        data.donor.name,
-      ]);
-      setCount(data.count);
-    });
-
-    return () => {
-      socket.off("newDonorNotification");
-    };
-  }, []);
-
   const handleNotificationClick = (notification) => {
-    socket.emit("resetNotificationCount");
-    setCount((prevCount) => prevCount - 1);
     setClickedNotification(notification);
 
     navigate("/adminDashboard/donorList");
@@ -48,8 +30,9 @@ const Notification = () => {
 
   return (
     <div className="container mx-auto mt-8">
-      {count > 0 ? (
+      {newDonorCount > 0 ? (
         notifications.map((notification, index) => (
+
           <SingleNotification
             key={index}
             notification={notification}
@@ -60,6 +43,10 @@ const Notification = () => {
       ) : (
         <h2>You have no notifications</h2>
       )}
+
+      <div className="btn btn-secondary rounded-lg">
+        <Link to='/adminDashboard/donorList' >Activate</Link>
+      </div>
     </div>
   );
 };

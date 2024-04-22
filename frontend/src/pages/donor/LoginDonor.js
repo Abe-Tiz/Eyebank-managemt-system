@@ -26,79 +26,41 @@ const LoginDonor = () => {
         code,
       });
       const data = response.data;
-      console.log(data)
-      if (data.message === "Not verified") {
+      // console.log(data.message)
+      if (data) {
+        localStorage.setItem("code", data.data.email);
+        localStorage.setItem("loggedIn", true);
         toast({
-          title: "Not Verified",
-          description: "Please Verify Your Account.",
+          title: "Login Succeeded",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+        // setRefreshed(true);
+        navigate("/profile");
+       
+      } else {
+        toast({
+          title: data.message,
           status: "warning",
           duration: 5000,
           isClosable: true,
           position: "top",
         });
-      } else {
-            localStorage.setItem("code", data.data.email);
-            localStorage.setItem("loggedIn", true);
-            toast({
-              title: "Login Succeeded",
-              status: "success",
-              duration: 5000,
-              isClosable: true,
-              position: "top",
-            });
-            // setRefreshed(true);
-            navigate("/profile");  
       }
     } catch (error) {
-      if (error.response) {
-        if (
-          error.response.status === 404 &&
-          error.response.data.message === "User is not found."
-        ) {
-          toast({
-            title: "User Not Found",
-            description: "Please check your email and try again.",
-            status: "warning",
-            duration: 5000,
-            isClosable: true,
-            position: "top",
-          });
-        } else if (
-          error.response.status === 500 &&
-          error.response.data.message === "Password is not matched"
-        ) {
-          toast({
-            title: "Incorrect Password",
-            description: "Please double-check your password.",
-            status: "warning",
-            duration: 5000,
-            isClosable: true,
-            position: "top",
-          });
-        } else if (error.response.data.message === "Not verified") {
-          toast({
-            title: "Not Verified",
-            description: "Please verify your account.",
-            status: "warning",
-            duration: 5000,
-            isClosable: true,
-            position: "top",
-          });
-        }
-      } else {
-        console.log(error.message);
-        toast({
-          title: "Error Occurred!",
-          description: error.message,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-      }
-       
-    }
-  };
+      // console.log(error.response.data.message)
+       toast({
+         title: error.response.data.message,
+         status: "error",
+         duration: 5000,
+         isClosable: true,
+         position: "top",
+       });
+    };
+    
+  }
 
   
 

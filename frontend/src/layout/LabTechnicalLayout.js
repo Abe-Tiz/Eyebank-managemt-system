@@ -133,7 +133,7 @@ const LabTechnicalDashboard = () => {
 
                 {/* content section  */}
                 <Content className="p-4 mt-10">
-                    <div className=" bg-slate-100  shadow  w-full">
+                    <div className=" bg-slate-100  w-full">
                         <Outlet />
                     </div>
                 </Content>

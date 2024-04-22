@@ -1,12 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer } from '@chakra-ui/react';
-import useSearch from '../../../useHooks/useSearch';
-import SearchComponent from '../../../components/SearchComponent';
-import TableHeader from './TableHeader';
-import TableRow from './TableRow';
-import Pagination from '../../../components/Pagination';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Text,
+  TableContainer,
+} from "@chakra-ui/react";
+import useSearch from "../../../useHooks/useSearch";
+import SearchComponent from "../../../components/SearchComponent";
+import TableHeader from "./TableHeader";
+// import TableRow from "./serology/TableRow";
+import Pagination from "../../../components/Pagination";
+import TableRowCornea from "./TableRowCorne";
 
 const ViewCornea = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -17,7 +27,7 @@ const ViewCornea = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  
+
   // Calculate the total number of pages
   const totalPages = Math.ceil(corneas.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -88,14 +98,13 @@ const ViewCornea = () => {
         </div>
         <div>
           <Table variant="simple">
-
-           {/* Table header */}
+            {/* Table header */}
             <TableHeader />
 
             {/* Table body */}
             <Tbody>
               {renderCornea.map((cornea, index) => (
-                <TableRow
+                <TableRowCornea
                   key={index}
                   cornea={cornea}
                   formatTimestamp={formatTimestamp}

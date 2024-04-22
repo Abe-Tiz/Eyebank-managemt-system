@@ -83,7 +83,7 @@ const ListOfPlege = () => {
                                 <Td>{donor.email}</Td>
                                 <Td>{donor.city}</Td>
                                 <Td>{donor.mobile}</Td>
-                                <Td>{<Link to={`/labtechnicaldashboard/createExams/${donor._id}`}>Donate</Link>}</Td>
+                                <Td>{<Link to={`/labtechnicaldashboard/collectCornea/${donor._id}`}>Donat</Link>}</Td>
                             </Tr>
                         ))}
                     </Tbody>

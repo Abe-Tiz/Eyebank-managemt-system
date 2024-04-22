@@ -121,12 +121,8 @@ const EditDonor = () => {
             isClosable: true,
             position: "top",
           });
-          navigate("/viewdonor", {
-            state: {
-              data: res.data.result,
-            },
-          });
-          console.log(res.data.result);
+          navigate("/profile");
+          // console.log(res.data.result);
         }
       })
       .catch((err) => {

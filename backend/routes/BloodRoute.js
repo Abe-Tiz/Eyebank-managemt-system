@@ -1,9 +1,11 @@
-const BloodController = require("../controller/SampleBlood");
+const { createSampleBlood, getSerologyTest, deleteSerology, updateSerology } = require("../controller/SampleBlood");
 const express = require("express");
 const route = express.Router();
-route.post("/create", BloodController.createSampleBlood);
-// route.get("/read", BloodController.GetBlood);
+
+route.post("/create", createSampleBlood);
+route.get("/", getSerologyTest);
 // route.get("/getOne/:id", BloodController.GetBloodById);
-// route.put("/update/:id", BloodController.UpdateBlood);
-// route.delete("/delete/:id", BloodController.DeleteBlood);
-module.exports = route
+route.put("/update/:id", updateSerology);
+route.delete("/delete/:id", deleteSerology);
+
+module.exports = route;
