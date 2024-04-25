@@ -9,7 +9,7 @@ import { Tooltip } from "react-tooltip";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 
-const MedicalSidebar = ({
+const SurgeonSidebar = ({
     collapsed,
     name,
     image,
@@ -113,20 +113,30 @@ const MedicalSidebar = ({
                                 <MdOutlineGroupAdd className="text-2xl" />
                                 <span className="ml-2">{t("Adverse List")}</span>
                             </Link>
-
-
                             <Link
                                 to="/surgondashboard/sendRequestCornea"
                                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
                                 data-tooltip-id="user-list"
-                                data-tooltip-content="Send CorneaRequest"
+                                data-tooltip-content="Evaluated List"
 
                             // onClick={handleAddDonorClick}
 
                             >
                                 <MdOutlineGroupAdd className="text-2xl" />
-                                <span className="ml-2">Send CorneaRequest</span>
+                                <span className="ml-2">Send Request</span>
                             </Link>
+
+                            <Link
+                                    to="/surgondashboard/viewRequestedCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" distribute Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> ViewCorneaRequest</span>
+                                </Link>
 
 
                         </div>
@@ -160,4 +170,4 @@ const MedicalSidebar = ({
     );
 };
 
-export default MedicalSidebar;
+export default SurgeonSidebar;

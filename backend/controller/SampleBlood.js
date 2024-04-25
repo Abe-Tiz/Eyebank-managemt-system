@@ -2,18 +2,6 @@ const SampleBlood = require("../models/SampleBlood");
 const asyncHandler = require("express-async-handler");
 
 const createSampleBlood = asyncHandler(async (req, res) => {
-<<<<<<< HEAD
-    const { donorId, techenicianName, serologyResult, bloodId } = req.body;
-    try {
-        const sampleBlood = await SampleBlood.create({
-            bloodId: bloodId,
-            donorId: donorId,
-            techenicianName: techenicianName,
-            serologyResult: serologyResult
-        })
-        if (sampleBlood) {
-            res.send({ status: "ok", data: sampleBlood })
-=======
     const serology  = req.body;
     try {
         const sampleBlood = await SampleBlood.create(serology);
@@ -21,15 +9,11 @@ const createSampleBlood = asyncHandler(async (req, res) => {
             sampleBlood.isTested = true;
             sampleBlood.save();
             res.status(200).json(sampleBlood)
->>>>>>> 005e14fd49773251350fff56c26f5f273abbeb6b
         }
     } catch (error) {
         res.status(500).json(error)
     }
 })
-<<<<<<< HEAD
-module.exports = { createSampleBlood }
-=======
 
 const getSerologyTest = async (req, res) => {
     try {
@@ -73,4 +57,3 @@ module.exports = {
   deleteSerology,
   updateSerology,
 };
->>>>>>> 005e14fd49773251350fff56c26f5f273abbeb6b

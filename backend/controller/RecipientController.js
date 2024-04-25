@@ -34,14 +34,8 @@ const createRecipient = async (req, res) => {
 // Retrieve all recipients
 const getRecipients = async (req, res) => {
     const recipients = await RecipientModel.find()
-        .populate({
-            path: "surgeonName",
-            select: "name",
-        })
-        .populate({
-            path: "hospital",
-            select: "hospitalName address",
-        });
+        
+       
     res.send(recipients);
 };
 

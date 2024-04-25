@@ -97,47 +97,6 @@ const MedicalSidebar = ({
                             </Link>
 
 
-                              <Link
-                                to="/medicaldirectordashboard/sendRequestCornea"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="user-list"
-                                data-tooltip-content="Evaluated List"
-
-                            // onClick={handleAddDonorClick}
-
-                            >
-                                <MdOutlineGroupAdd className="text-2xl" />
-                                <span className="ml-2">Send Request</span>
-                            </Link>
-
-                            <Link
-                                to="/medicaldirectordashboard/viewRequestedCorneaSurgeon"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="user-list"
-                                data-tooltip-content="Evaluated List"
-
-                            // onClick={handleAddDonorClick}
-
-                            >
-                                <CiBoxList className="text-2xl" />
-                                <span className="ml-2">view Request</span>
-                            </Link>
-
-                            <Link
-                                    to="/medicaldirectordashboard/viewRequestedCornea"
-                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                    // onClick={handleUserList}
-                                    data-tooltip-id="user-list"
-                                    data-tooltip-content=" distribute Cornea"
-                                >
-                                    <CiBoxList className="text-2xl" />
-                                    <span className="ml-2"> ViewCorneaRequest</span>
-                                </Link>
-
-
-
                         </div>
                     </>
                 )}

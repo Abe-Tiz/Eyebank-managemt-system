@@ -252,18 +252,9 @@ const router = createBrowserRouter([
           path: "viewRequestCornea",
           element: <ViewRequestedCornea />,
       },
-        {
-        path: "viewRequestedCornea",
-        element: <ViewRequestedCorneaSurgeon/>,
-      },
-      {
-          path: "SendRequestCornea",
-          element: <SendRequestCornea />,
-      },
-      {
-          path: "EditRequest/:id",
-          element: <EditRequest />,
-      }
+       
+     
+     
     ],
   },
   {
@@ -356,10 +347,7 @@ const router = createBrowserRouter([
               path: "viewRequestedCornea",
               element: <ViewRequestedCorneaSurgeon/>,
             },
-            {
-                path: "SendRequestCornea",
-                element: <SendRequestCornea />,
-            },
+           
             {
                 path: "EditRequest/:id",
                 element: <EditRequest />,
@@ -441,6 +429,18 @@ const router = createBrowserRouter([
         path: "adverselist",
         element: <AdverseList />,
       },
+      {
+        path: "viewRequestedCornea",
+        element: <ViewRequestedCorneaSurgeon/>,
+      },
+      {
+          path: "SendRequestCornea",
+          element: <SendRequestCornea />,
+      },
+      {
+          path: "EditRequest/:id",
+          element: <EditRequest />,
+      }
     ],
   },
 ]);
