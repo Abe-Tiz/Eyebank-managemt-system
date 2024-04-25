@@ -5,6 +5,10 @@ import * as IoIcons from "react-icons/io"; // Ionicons
 import * as PiIcons from "react-icons/pi"; // Ionicons
 import * as CiIcons from "react-icons/ci";  
 import * as VscIcons from "react-icons/vsc";  
+import * as GrcIcons from "react-icons/gr";  
+import * as TbcIcons from "react-icons/tb";  
+import * as GicIcons from "react-icons/gi";  
+import * as BscIcons from "react-icons/bs";  
 
 const iconLibraries = {
   md: MdIcons,
@@ -13,6 +17,10 @@ const iconLibraries = {
   pi: PiIcons,
   ci: CiIcons,
   vsc: VscIcons,
+  gr: GrcIcons,
+  tb: TbcIcons,
+  gi: GicIcons,
+  bs: BscIcons,
 };
 
 const DynamicIcon = ({ library, iconName, className }) => {

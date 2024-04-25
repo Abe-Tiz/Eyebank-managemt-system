@@ -3,16 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import {
     useToast,
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogContent,
-    AlertDialogOverlay,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer } from '@chakra-ui/react';
-import { RiEdit2Line, RiDeleteBin2Line } from "react-icons/ri";
+
 
 const ListOfPlege = () => {
     const [donors, setDonors] = useState([]);
@@ -89,7 +83,7 @@ const ListOfPlege = () => {
                                 <Td>{donor.email}</Td>
                                 <Td>{donor.city}</Td>
                                 <Td>{donor.mobile}</Td>
-                                <Td>{<Link to={`/labtechnicaldashboard/createExams/${donor._id}`}>Donate</Link>}</Td>
+                                <Td>{<Link to={`/labtechnicaldashboard/collectCornea/${donor._id}`}>Donat</Link>}</Td>
                             </Tr>
                         ))}
                     </Tbody>

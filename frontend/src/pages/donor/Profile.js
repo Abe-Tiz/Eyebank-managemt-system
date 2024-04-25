@@ -93,15 +93,15 @@ const Profile = () => {
           </div>
           <div className="flex flex-col gap-3 mt-3">
             <div
-              className={`badge ${
-                profileData.isVolunter ? "badge-secondary" : "badge-accent"
+              className={`p-3 badge ${
+                profileData.isVolunter ? "badge-secondary" : "badge-primary"
               }`}
             >
-              {t("register:LabelsignUpName")}: {profileData.name}
+                {profileData.name}
             </div>
             <div
-              className={`badge ${
-                profileData.isVolunter ? "badge-secondary" : "badge-accent"
+              className={`p-3 badge ${
+                profileData.isVolunter ? "badge-primary" : "badge-secondary"
               }`}
             >
               {profileData.isVolunter ? "Am Volunter" : "Not Volunter"}

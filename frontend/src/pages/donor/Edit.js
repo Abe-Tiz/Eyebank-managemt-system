@@ -4,6 +4,8 @@ import axios from "axios";
 import "../../static/styles/donor.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import ButtonComponent from "../../components/ButtonComponent";
+import ButtonPrimary from './../../components/ButtonPrimary';
 
  
 const Edit = () => {
@@ -431,15 +433,14 @@ const Edit = () => {
               </div>
               <div className="d-flex justify-content-center pt-3 mb-4">
                 <div className="mt-4 flex items-center">
-                  <button
+                  <ButtonPrimary
                     onClick={() => navigate(-1)}
-                    className=" bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 border-2 mr-2"
-                  >
-                    {t("common:backButtonLabel")}
-                  </button>
+                    title={t("common:backButtonLabel")}
+                    // customClass="print-button"
+                  />
                 </div>
                 <div className="mt-4 flex items-center">
-                  <button
+                  {/* <button
                     type="submit"
                     disabled={!canSubmit}
                     className={`bg-orange-500 hover:bg-orange-700 text-white font-bold  py-2 px-4  border-orange-500 border-2  hover:border-orange-700   focus:outline-none focus:ring-1 focus:ring-blue-300 ${
@@ -449,7 +450,12 @@ const Edit = () => {
                     }`}
                   >
                     {t("common:updateButtonLabel")}
-                  </button>
+                  </button> */}
+                  <ButtonComponent
+                    // onClick={handlePrint}
+                    title={t("common:updateButtonLabel")}
+                    // customClass="print-button"
+                  />
                 </div>
               </div>
             </form>

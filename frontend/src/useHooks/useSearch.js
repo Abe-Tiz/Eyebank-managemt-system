@@ -21,6 +21,10 @@ const useSearch = (searchType) => {
           url = "http://localhost:4000/cornea/search";
           requestData = { lotNo: searchTerm }; 
           break;
+        case "blood":
+          url = "http://localhost:4000/blood/search";
+          requestData = { lotNo: searchTerm }; 
+          break;
         // Add more cases for other search types as needed
       }
       const response = await axios.post(url, requestData);

@@ -141,12 +141,12 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
         ) : (
           <>
             {/* user progfile inage */}
-            <img
+            {/* <img
               className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"
               src={image}
               alt="user photo"
-            />
-            <span className="text-lg font-semibold ml-10">{name}</span>
+            /> */}
+            <span className="text-lg font-semibold mt-5 ml-10">{name}</span>
             <span className="text-lg font-semibold ml-10 text-pink-500">
               {role}
             </span>

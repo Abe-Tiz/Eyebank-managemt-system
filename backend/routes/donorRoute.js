@@ -15,12 +15,14 @@ const {
     resetCode,
     getDonorByName,
     getRecentDonors,
+    getNotification,
   
 } = require("../controller/DonorController");
 
 const router = express.Router();
 
 router.get('/', getDonor); 
+router.get("/notification", getNotification); 
 router.post('/register',createDonor); 
 router.put('/update/:id', updateDonor); 
 router.get("/verify/:tokenId", getVerification);

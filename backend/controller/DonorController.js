@@ -11,9 +11,13 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const socketIo = require("socket.io");
+const Notification = require("../models/Notification");
 const server = http.createServer(app);
 const io = socketIo(server);
 
+const pass = process.env.EMAIL_PASS;
+const user = process.env.EMAIL_USER;
+// console.log("userrrrrrrrr:", user);
 let newDonorCount = 0;
 
 const NotifyNewDonors = async () => {
@@ -38,12 +42,6 @@ const NotifyNewDonors = async () => {
     console.log(`error : ${error}`);
   }
 };
-
-//! Initialize Twilio client
-const accountSid = process.env.ACCOUNT_SID;;
-const authToken = process.env.AUTHTOKEN;
-const twilioPhoneNumber = process.env.TWILIO_PHONENUMBER;
-const client = twilio(accountSid, authToken);
  
 //! create donor
 const createDonor = asyncHandler(async (req, res) => {
@@ -86,17 +84,24 @@ const createDonor = asyncHandler(async (req, res) => {
                     isVolunter,
                   });
 
-                  //generate and store the verification token
-                  newDonor.verificationToken = crypto
+                    //generate and store the verification token
+                    newDonor.verificationToken = crypto
                     .randomBytes(20)
-                    .toString("hex");
-
-                  const result = newDonor.save();
-                 
-                    // NotifyNewDonors();
+                        .toString("hex");
                     
-                  console.log("new donor notify:",result);
-                  console.log("Registeriation Successfull", result);
+                    sendEmailToAdmin(newDonor );
+
+                    
+                    // create Notification for new donor registration
+                    Notification.create({
+                      donorId: newDonor._id,
+                      verified: newDonor.verified,
+                      newDonor: 1,
+                    });
+                    // Notification.newDonor += 1;
+                   newDonor.save();
+                 
+                //   console.log("Registeriation Successfull", newDonor);
                   res.status(200).json({
                     message: "Registeriation Successfull",
                     result: newDonor,
@@ -107,6 +112,36 @@ const createDonor = asyncHandler(async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+const getNotification = asyncHandler(async (req, res) => {
+  try {
+    Notification.find()
+      .populate({
+        path: "donorId",
+        match: { verified: false },
+        select: "name email age verified",
+      })
+      .maxTimeMS(20000)
+      .then((respons) => {
+        // Filter out any null results from the population
+        const filteredRespons = respons.filter(
+          (notification) => notification.donorId !== null
+          );
+          const numUnverifiedDonors = filteredRespons.length;
+        res.json({
+          notifications: filteredRespons,
+          numUnverifiedDonors: numUnverifiedDonors,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err.message });
+      });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 
 const loginDonor = asyncHandler(async (req, res) => {
@@ -154,34 +189,38 @@ const getloggedInDonor = asyncHandler(async (req, res) => {
     }
 });
 
-//! send verification
-const sendverificationEmail = async (email, verificationToken, route) => {
-    //create nodemailer transporter
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: "abebetizazu157@gmail.com",
-            pass: "gezm fqmn asjl bqxj",
-        },
-    });
+    /*
+        Send email notification for the 
+        new donor Registration 
+    */ 
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: user,
+      pass: pass,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
 
-    //create nodemailer transporter
-
-
-    //compose the email message
-    const mailOption = {
-        from: "abebetizazu157@gmail.com",
-        to: email,
-        subject: "Email verification",
-        text: `please click the following link to verify your email http://127.0.0.1:4000/donor/verify/${verificationToken}`,
+  // Function to send an email to the admin
+  const sendEmailToAdmin = (newDonor) => {
+    const mailOptions = {
+      from: "abebetizazu157@gmail.com",
+      to: "abebe.tizazu33@gmail.com",
+      subject: "Donor Registration Notification",
+      text: `The New Donor with ID ${newDonor._id} is Registered. Please Activate the donor.`,
     };
-
-    try {
-        await transporter.sendMail(mailOption);
-    } catch (error) {
-        console.log("error sending email", error);
-    }
-};
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent successfully: " + info.response);
+      }
+    });
+  };
+   
 
 //! get verificaton
 const getVerification = asyncHandler(async (req, res) => {
@@ -312,7 +351,7 @@ const getDonor = asyncHandler(async (req, res) => {
         Donor.find()
             .maxTimeMS(20000)
             .then((respons) => {
-                console.log(respons);
+                // console.log(respons);
                 res.json(respons);
             })
             .catch((err) => {
@@ -560,4 +599,5 @@ module.exports = {
   resetCode,
   getDonorByName,
   getRecentDonors,
+  getNotification,
 };
