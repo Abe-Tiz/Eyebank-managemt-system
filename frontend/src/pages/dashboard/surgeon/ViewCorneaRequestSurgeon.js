@@ -23,19 +23,32 @@ const RequestedCorneas = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate();
+
   useEffect(() => {
     const getAllRequestedCorneas = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:4000/requestCornea/getRequest"
+        const surgeonId = localStorage.getItem("surgeonId"); // Retrieve the surgeon ID from local storage
+  
+        const response = await axios.get(
+          "http://localhost:4000/requestCornea/getRequest",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            params: {
+              surgeonId: surgeonId, // Pass the surgeon ID as a query parameter
+            },
+          }
         );
+        
+        const data = response.data;
         setRequestedCorneas(data);
       } catch (error) {
         console.log(error);
-        toast.error("Something Went Wrong");
+       
       }
     };
-
+  
     getAllRequestedCorneas();
   }, []);
   

@@ -61,6 +61,28 @@ exports.getCorneaRequestController = async (req, res) => {
   }
 };
 
+// exports.getCorneaRequestController = async (req, res) => {
+//   try {
+//     const surgeonId = req.params.id;
+
+//     if (!surgeonId) {
+//       return res.status(400).json({ message: "Surgeon ID is required" });
+//     }
+
+//     const corneaRequests = await CorneaRequestModel.find({ surgeon: surgeonId })
+//       .populate("surgeon")
+//       .populate("hospital");
+
+//     res.json(corneaRequests);
+
+//     console.log("corneaRequests:", corneaRequests);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
+
+
 exports.getSingleCorneaRequestController = async (req, res) => {
   try {
     const corneaRequest = await CorneaRequestModel.findById(req.params.id);

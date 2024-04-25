@@ -100,7 +100,9 @@ const Login = () => {
                         });
                         // navigate("/adminDashboard");
                     }
+                    
                 }
+                localStorage.setItem("surgeonId", data.user.id);
             }
         } catch (error) {
             if (error.response) {
