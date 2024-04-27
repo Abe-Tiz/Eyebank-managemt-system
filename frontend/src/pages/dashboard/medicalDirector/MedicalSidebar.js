@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 const MedicalSidebar = ({
     collapsed,
     name,
-    image,
+    role,
+    image
 }) => {
 
     const { t } = useTranslation();
@@ -70,6 +71,7 @@ const MedicalSidebar = ({
                             alt="user photo"
                         />
                         <span className="text-lg font-semibold ml-10">{name}</span>
+                        <span className="text-lg font-semibold ml-10">{role}</span>
                         {/* btn */}
                         <div className="mt-4 flex flex-col items-center">
                             <Link

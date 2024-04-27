@@ -12,10 +12,12 @@ import axios from 'axios'
 import useSearch from "../../../useHooks/useSearch";
 
 const HeaderComponent = ({
+  image,
   state,
   toggleSidebar,
   newDonorCount,
   notifications,
+  type,
 }) => {
   const currentLanguageCode = cookies.get("i18next") || "en";
   const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
@@ -26,8 +28,8 @@ const HeaderComponent = ({
     useSearch();
 
   //! handle Logout
-  const handleLogout = () => {
-    localStorage.clear();
+  const handleLogout = (type) => {
+    localStorage.removeItem(type);
     navigate("/login");
   };
   useEffect(() => {
@@ -114,7 +116,7 @@ const HeaderComponent = ({
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src={state.image} />
+                <img alt="Tailwind CSS Navbar component" src={image} />
               </div>
             </div>
             <ul

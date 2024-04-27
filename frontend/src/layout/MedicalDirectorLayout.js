@@ -8,6 +8,7 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import MedicalSidebar from "../pages/dashboard/medicalDirector/MedicalSidebar";
+import useLoggedInUser from "../useHooks/useLoggedInUser";
 
 const { Header, Content } = Layout;
 
@@ -17,6 +18,7 @@ const MedicalDirectorDashboard = () => {
 
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+     const { user, setUser, getLoggedInUser } = useLoggedInUser("medical");
 
     const [state, setState] = useState({
         name: "",
@@ -49,48 +51,21 @@ const MedicalDirectorDashboard = () => {
     };
     //! handle Logout
     const handleLogout = () => {
-        localStorage.clear();
+        localStorage.removeItem("medical");
         navigate("/login");
     };
     //! handle loggedin user
     useEffect(() => {
-        fetch("http://127.0.0.1:4000/user/userLogedin", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("token"),
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data.data, "user logged in");
-                setState((prev) => ({
-                    ...prev,
-                    name: data.data.name,
-                    image: data.data.image,
-                    role: data.data.role,
-                    isLoggedin: true,
-                }));
-
-                if (data.data === "token expired") {
-                    localStorage.clear();
-                    navigate("/login");
-                }
-            });
+        getLoggedInUser();
     }, [navigate]);
     return (
         <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
             <MedicalSidebar
                 collapsed={state.collapsed}
                 toggleSidebar={toggleSidebar}
-                name={state.name}
-                image={state.image}
-                role={state.role}
+                name={user && user.data.name}
+                role={user && user.data.role}
+                image={user && user.data.image}
             />
             <Layout
                 className={`${state.collapsed ? "ml-20" : "ml-64"

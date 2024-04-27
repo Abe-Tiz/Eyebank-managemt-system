@@ -219,10 +219,10 @@ const router = createBrowserRouter([
         path: "viewCornea",
         element: <ViewCornea />,
       },
-            {
-                path: "createExams/:id",
-                element: <PhysicalExam />,
-            },
+      {
+        path: "createExams/:id",
+        element: <PhysicalExam />,
+      },
       {
         path: "createExams",
         element: <PhysicalExam />,
@@ -234,9 +234,8 @@ const router = createBrowserRouter([
       {
         path: "getOne/:id",
         element: <ViewDetails />,
-                
-            },
-            {
+      },
+      {
         path: "editExams/:id",
         element: <EditPhysicalExam />,
       },
@@ -249,21 +248,21 @@ const router = createBrowserRouter([
         element: <ListOfPlege />,
       },
       {
-          path: "viewRequestCornea",
-          element: <ViewRequestedCornea />,
+        path: "viewRequestCornea",
+        element: <ViewRequestedCornea />,
       },
-        {
+      {
         path: "viewRequestedCornea",
-        element: <ViewRequestedCorneaSurgeon/>,
+        element: <ViewRequestedCorneaSurgeon />,
       },
       {
-          path: "SendRequestCornea",
-          element: <SendRequestCornea />,
+        path: "SendRequestCornea",
+        element: <SendRequestCornea />,
       },
       {
-          path: "EditRequest/:id",
-          element: <EditRequest />,
-      }
+        path: "EditRequest/:id",
+        element: <EditRequest />,
+      },
     ],
   },
   {
@@ -352,62 +351,47 @@ const router = createBrowserRouter([
         path: "editevaluation/:id",
         element: <EditEvaluation />,
       },
-            {
-              path: "viewRequestedCornea",
-              element: <ViewRequestedCorneaSurgeon/>,
-            },
-            {
-                path: "SendRequestCornea",
-                element: <SendRequestCornea />,
-            },
-            {
-                path: "EditRequest/:id",
-                element: <EditRequest />,
-            }
     ],
   },
-    // {
-    //     path: "/adminDashboard",
-    //     element: <AdminDashboard />,
-    //     children: [
-    //         {
-    //             path: "",
-    //             element: <Report />,
-    //         },
-    //         {
-    //             path: "addDoynor",
-    //             element: <CreateDonor />,
-    //         },
-    //         {
-    //             path: "donorList",
-    //             element: <DisplayDonor />,
-    //         },
-    //         {
-    //             path: "addUser",
-    //             element: <Signup />,
-    //         },
-    //         {
-    //             path: "userList",
-    //             element: <ViewUsers />,
-    //         },
-    //         {
-    //             path: "edit/:id",
-    //             element: <Edit />,
-    //         },
-    //         {
-    //             path: "edituser/:id",
-    //             element: <EditUser />,
-    //         },
-    //         {
-    //             path: "storeCornea",
-    //             element: <StoredCornea />,
-    //         },
-          
+  // {
+  //     path: "/adminDashboard",
+  //     element: <AdminDashboard />,
+  //     children: [
+  //         {
+  //             path: "",
+  //             element: <Report />,
+  //         },
+  //         {
+  //             path: "addDoynor",
+  //             element: <CreateDonor />,
+  //         },
+  //         {
+  //             path: "donorList",
+  //             element: <DisplayDonor />,
+  //         },
+  //         {
+  //             path: "addUser",
+  //             element: <Signup />,
+  //         },
+  //         {
+  //             path: "userList",
+  //             element: <ViewUsers />,
+  //         },
+  //         {
+  //             path: "edit/:id",
+  //             element: <Edit />,
+  //         },
+  //         {
+  //             path: "edituser/:id",
+  //             element: <EditUser />,
+  //         },
+  //         {
+  //             path: "storeCornea",
+  //             element: <StoredCornea />,
+  //         },
 
-
-    //     ],
-    // },
-    
+  //     ],
+  // },
 
   {
     path: "/surgondashboard",
@@ -440,6 +424,18 @@ const router = createBrowserRouter([
       {
         path: "adverselist",
         element: <AdverseList />,
+      },
+      {
+        path: "viewRequestedCornea",
+        element: <ViewRequestedCorneaSurgeon />,
+      },
+      {
+        path: "SendRequestCornea",
+        element: <SendRequestCornea />,
+      },
+      {
+        path: "EditRequest/:id",
+        element: <EditRequest />,
       },
     ],
   },

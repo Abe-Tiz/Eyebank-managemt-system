@@ -88,35 +88,6 @@ app.use("/recipient", RecipientRoute);
 app.use('/hospital', HospitalRoute)
 app.use('/recipient', RecipientRoute)
 app.use('/requestCornea',corneaRequest)
-
-
-
-//! check the expiration date of the cornea
-scheduleExpirationCheck();
-
-// Notification logic
-const NotifyNewDonors = async () => {
-  try {
-    const changeStream = Donor.watch();
-
-    changeStream.on("change", (data) => {
-      if (data.operationType === "insert") {
-        notificationCount++;  
-        io.emit("newDonorNotification", {
-          donor: data.fullDocument,
-          count: notificationCount,  
-        });
-      }
-    });
-  } catch (error) {
-    console.log(`error : ${error}`);
-  }
-};
-
-// Call NotifyNewDonors when the server starts
-NotifyNewDonors();
-
- 
 app.use('/accident', AccidentalRoute)
 app.use('/api', physicalExamRoutes);
 app.use('/blood', BloodRoute)
@@ -125,6 +96,35 @@ app.use('/distribution', DistributionRoute);
 //app.use('/recipient', RecipientRoute)
 app.use(notFound);
 app.use(errorHandler);
+
+
+
+//! check the expiration date of the cornea
+scheduleExpirationCheck();
+
+// Notification logic
+// const NotifyNewDonors = async () => {
+//   try {
+//     const changeStream = Donor.watch();
+
+//     changeStream.on("change", (data) => {
+//       if (data.operationType === "insert") {
+//         notificationCount++;  
+//         io.emit("newDonorNotification", {
+//           donor: data.fullDocument,
+//           count: notificationCount,  
+//         });
+//       }
+//     });
+//   } catch (error) {
+//     console.log(`error : ${error}`);
+//   }
+// };
+
+// Call NotifyNewDonors when the server starts
+// NotifyNewDonors();
+
+
 
 //! server port
 server.listen(port, () => {

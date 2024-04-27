@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import DynamicIcon from "./DynamicIcon";
 import { Link } from "react-router-dom";
 
 const SideCustome = ({ headerProps, subtitleProps }) => {
+  
   return (
     <>
       <div>
@@ -36,15 +37,16 @@ const SideCustome = ({ headerProps, subtitleProps }) => {
 
         {/* Dropdown menu, conditional rendering based on isOpen state */}
         {headerProps.isOpen && (
-          <div className="bg-transparent ml-3">
+          <div className="bg-transparent  ml-3">
             {subtitleProps.map((item, index) => (
               <Link
                 key={index}
                 to={item.link}
-                className="flex gap-2 w-full text-white p-2 hover:bg-gray-800 rounded"
+                className={`flex gap-2 w-full text-white p-2 hover:bg-gray-800 rounded`}
                 role="menuitem"
                 tabIndex="-1"
                 id={`menu-item-${index}`}
+                
               >
                 <DynamicIcon
                   library={item.iconLibrary}
