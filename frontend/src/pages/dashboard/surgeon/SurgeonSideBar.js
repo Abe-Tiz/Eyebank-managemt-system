@@ -126,20 +126,18 @@ const SurgeonSidebar = ({
                                 <MdOutlineGroupAdd className="text-2xl" />
                                 <span className="ml-2">Send Request</span>
                             </Link>
-<<<<<<< HEAD
 
                             <Link
-                                    to="/surgondashboard/viewRequestedCornea"
-                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                    // onClick={handleUserList}
-                                    data-tooltip-id="user-list"
-                                    data-tooltip-content=" distribute Cornea"
-                                >
-                                    <CiBoxList className="text-2xl" />
-                                    <span className="ml-2"> ViewCorneaRequest</span>
-                                </Link>
+                                to="/surgondashboard/viewRequestedCornea"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content=" distribute Cornea"
+                            >
+                                <CiBoxList className="text-2xl" />
+                                <span className="ml-2"> ViewCorneaRequest</span>
+                            </Link>
 
-=======
                             <Link
                                 to="/surgondashboard/recordaccident"
                                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -159,7 +157,6 @@ const SurgeonSidebar = ({
                                 <MdOutlineGroupAdd className="text-2xl" />
                                 <span className="ml-2">{t("Accident List")}</span>
                             </Link>
->>>>>>> awoke
 
                         </div>
                     </>

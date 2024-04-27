@@ -3,7 +3,7 @@ import React from "react";
 import { Tr, Td, Link } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
-const TableRow = ({ cornea, formatTimestamp, deleteCornea }) => (
+const TableRowCornea = ({ cornea, formatTimestamp, deleteCornea }) => (
     <Tr className="mb-2 text-lg">
         <Td>{cornea.lotNo}</Td>
         <Td>{formatTimestamp(cornea.createdAt)}</Td>

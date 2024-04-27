@@ -14,9 +14,9 @@ import {
 import useSearch from "../../../useHooks/useSearch";
 import SearchComponent from "../../../components/SearchComponent";
 import TableHeader from "./TableHeader";
-// import TableRow from "./serology/TableRow";
+//import TableRowCornea from "./serology/TableRowCornea";
 import Pagination from "../../../components/Pagination";
-import TableRowCornea from "./TableRowCorne";
+import TableRowCornea from "./TableRowCornea";
 
 const ViewCornea = () => {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -105,7 +105,7 @@ const ViewCornea = () => {
                         {/* Table body */}
                         <Tbody>
                             {renderCornea.map((cornea, index) => (
-                                <TableRow
+                                <TableRowCornea
                                     key={index}
                                     cornea={cornea}
                                     formatTimestamp={formatTimestamp}
