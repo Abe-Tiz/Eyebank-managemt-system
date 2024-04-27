@@ -42,23 +42,21 @@ import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
-
+import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
+import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
 import ViewSerology from "../pages/dashboard/lab/ViewSerology";
+import ApprovedRequest from "../pages/dashboard/lab/ApprovedRequest";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
-
-
 import ViewRequestedCornea from "../pages/dashboard/surgeon/ViewCorneaRequest";
 import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
 import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
 import EditRequest from "../pages/dashboard/surgeon/EditRequest";
-
 import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCornea";
-
 import AddRecipient from "../pages/dashboard/surgeon/AddRecipient";
 import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
 import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
@@ -78,8 +76,11 @@ import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
 import EditPhysicalExam from "../pages/dashboard/lab/EditPhysicalExam";
 import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
+import RecordAccident from "../pages/dashboard/surgeon/RecordAccident";
+import EditAccident from "../pages/dashboard/surgeon/EditAccident";
+import AccidentList from "../pages/dashboard/surgeon/AccidentList";
 
-import StoredCornea from "../pages/corneas/StoredCornea";
+import StoredCornea from "../pages/dashboard/lab/StoredCornea";
 // import LoginDonor from './../pages/donor/LoginDonor';
 const router = createBrowserRouter([
     {
@@ -150,6 +151,7 @@ const router = createBrowserRouter([
                 path: "/update/:id",
                 element: <EditDonor />,
             },
+
         ],
     },
     {
@@ -238,8 +240,8 @@ const router = createBrowserRouter([
                 element: <ListOfPlege />,
             },
             {
-                path: "viewRequestCornea",
-                element: <ViewRequestedCornea />,
+                path: "approvedRequest",
+                element: <ApprovedRequest />,
             }
 
         ],
@@ -276,10 +278,7 @@ const router = createBrowserRouter([
                 path: "edituser/:id",
                 element: <EditUser />,
             },
-            {
-                path: "storedCornea",
-                element: <StoredCornea />,
-            },
+
             {
                 path: "addhospital",
                 element: <AddHospital />,
@@ -331,8 +330,12 @@ const router = createBrowserRouter([
                 element: <EditEvaluation />,
             },
             {
-                path: "viewRequestedCornea",
-                element: <ViewRequestedCorneaSurgeon />,
+                path: "approveRequest",
+                element: <ApproveRequest />,
+            },
+            {
+                path: "approvedList",
+                element: <ApprovedList />,
             },
             {
                 path: "SendRequestCornea",
@@ -378,10 +381,7 @@ const router = createBrowserRouter([
                 path: "edituser/:id",
                 element: <EditUser />,
             },
-            {
-                path: "storeCornea",
-                element: <StoredCornea />,
-            },
+
 
 
 
@@ -465,10 +465,23 @@ const router = createBrowserRouter([
             {
                 path: "ocularpostlist",
                 element: <OcularPostList />,
-            }, {
+            },
+            {
                 path: "adverselist",
                 element: <AdverseList />,
-            }
+            },
+            {
+                path: "recordaccident",
+                element: <RecordAccident />,
+            },
+            {
+                path: "editaccident/:id",
+                element: <EditAccident />,
+            },
+            {
+                path: "viewaccident",
+                element: <AccidentList />,
+            },
 
         ],
     },

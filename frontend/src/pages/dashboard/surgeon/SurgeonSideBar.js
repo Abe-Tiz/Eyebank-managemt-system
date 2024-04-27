@@ -47,7 +47,7 @@ const MedicalSidebar = ({
                             {/* <IoIosPersonAdd className="text-2xl" /> */}
                             <MdOutlineGroupAdd className="text-2xl" />
 
-                            
+
                         </Link>
 
                         <Link
@@ -60,7 +60,7 @@ const MedicalSidebar = ({
                             {/* <IoIosPersonAdd className="text-2xl" /> */}
                             <MdOutlineGroupAdd className="text-2xl" />
 
-                            
+
                         </Link>
 
                     </div>
@@ -127,7 +127,25 @@ const MedicalSidebar = ({
                                 <MdOutlineGroupAdd className="text-2xl" />
                                 <span className="ml-2">Send CorneaRequest</span>
                             </Link>
-
+                            <Link
+                                to="/surgondashboard/recordaccident"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Record accident"
+                            >
+                                <CiBoxList className="text-2xl" />
+                                <span className="ml-2"> {t("Record Accident")}</span>
+                            </Link>
+                            <Link
+                                to="/surgondashboard/viewaccident"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Accidents list"
+                            >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">{t("Accident List")}</span>
+                            </Link>
 
                         </div>
                     </>

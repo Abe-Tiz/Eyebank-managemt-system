@@ -213,16 +213,16 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <span className="ml-2"> {t("cornea:viewdonor")}</span>
                                 </Link>
                                 <Link
-                                    to="/labtechnicaldashboard/viewRequestCornea"
+                                    to="/labtechnicaldashboard/approvedRequest"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
                                     data-tooltip-id="user-list"
                                     data-tooltip-content=" distribute Cornea"
                                 >
                                     <CiBoxList className="text-2xl" />
-                                    <span className="ml-2"> requested corneas</span>
+                                    <span className="ml-2"> ApprovedRequest</span>
                                 </Link>
-                                <Link
+                                {/* <Link
                                     to="/medicaldirectordashboard/SendRequestCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
                                     // onClick={handleUserList}
@@ -232,7 +232,6 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> Send request</span>
                                 </Link>
-
                                 <Link
                                     to="/medicaldirectordashboard/viewRequestedCornea"
                                     className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
@@ -242,7 +241,7 @@ const CustomSidebar = ({ collapsed, name, image }) => {
                                 >
                                     <CiBoxList className="text-2xl" />
                                     <span className="ml-2"> ViewCorneaRequest</span>
-                                </Link>
+                                </Link> */}
 
                             </div>
                         </div>
