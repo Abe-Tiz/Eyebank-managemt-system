@@ -47,7 +47,7 @@ const riskExaminedSchema = new mongoose.Schema({
 
 const physiaclSchema = new mongoose.Schema(
     {
-        donor_id : {
+        donor_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Donor",
             //required: true,
@@ -83,15 +83,19 @@ const physiaclSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-       
+
         technicianName: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-           // required: true,
-        },  
+            // required: true,
+        },
+        collect: {
+            type: Boolean,
+            default: false,
+        }
     },
 
-    
+
     {
         timestamps: true,
     }

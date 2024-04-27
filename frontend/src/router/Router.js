@@ -41,23 +41,21 @@ import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
-
+import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
+import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
 import ViewSerology from "../pages/dashboard/lab/ViewSerology";
+import ApprovedRequest from "../pages/dashboard/lab/ApprovedRequest";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
-
-
 import ViewRequestedCornea from "../pages/dashboard/surgeon/ViewCorneaRequest";
 import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
 import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
 import EditRequest from "../pages/dashboard/surgeon/EditRequest";
-
 import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCornea";
-
 import AddRecipient from "../pages/dashboard/surgeon/AddRecipient";
 import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
 import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
@@ -77,12 +75,18 @@ import BlogPage from "./../pages/blog/BlogPage";
 import BlogDetail from "./../pages/blog/BlogDetail";
 import EditPhysicalExam from "../pages/dashboard/lab/EditPhysicalExam";
 import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
+<<<<<<< HEAD
 import Serology from "../pages/dashboard/lab/serology/Serology";
  import SerologyTest from '../pages/dashboard/lab/serology/SerologyTest';
 import ListSerology from "../pages/dashboard/lab/serology/ListSerology";
 
+=======
+import RecordAccident from "../pages/dashboard/surgeon/RecordAccident";
+import EditAccident from "../pages/dashboard/surgeon/EditAccident";
+import AccidentList from "../pages/dashboard/surgeon/AccidentList";
+>>>>>>> awoke
 
-import StoredCornea from "../pages/corneas/StoredCornea";
+import StoredCornea from "../pages/dashboard/lab/StoredCornea";
 // import LoginDonor from './../pages/donor/LoginDonor';
 const router = createBrowserRouter([
   {
@@ -91,6 +95,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+<<<<<<< HEAD
         element: <Home />,
       },
       {
@@ -219,10 +224,138 @@ const router = createBrowserRouter([
         path: "viewCornea",
         element: <ViewCornea />,
       },
+=======
+        element: <Main />,
+        children: [
+            {
+                path: "/",
+                element: <Home />,
+            },
+            {
+                path: "/forgot-password",
+                element: <ForgotPassword />,
+            },
+            {
+                path: "/forgot-code",
+                element: <ForgotCode />,
+            },
+            {
+                path: "/reset_code/:id/:token",
+                element: <ResetCode />,
+            },
+            {
+                path: "/reset_password/:id/:token",
+                element: <ResetPassword />,
+            },
+            {
+                path: "/about",
+                element: <About />,
+            },
+            {
+                path: "/blog",
+                element: <BlogPage />,
+            },
+            {
+                path: "/blog/:slug",
+                element: <BlogDetail />,
+            },
+            {
+                path: "/contact",
+                element: <Contact />,
+            },
+            {
+                path: "/registerDonor",
+                element: <CreateDonor />,
+            },
+            {
+                path: "/login",
+                element: <Login />,
+            },
+            {
+                path: "/viewdonor",
+                element: <ViewDonor />,
+            },
+            {
+                path: "/profile",
+                element: <Profile />,
+            },
+            {
+                path: "/donor-login",
+                element: <LoginDonor />,
+            },
+            {
+                path: "/print/:id",
+                element: <PrintCard />,
+            },
+            {
+                path: "/update/:id",
+                element: <EditDonor />,
+            },
+
+        ],
+    },
+    {
+        path: "/labtechnicaldashboard",
+        element: <LabTechnicalDashboard />,
+        children: [
+            {
+                path: "collectCornea/:id",
+                element: <CollectCornea />,
+            },
+            {
+                path: "recordSerology",
+                element: <RecordSerology />,
+            },
+            {
+                path: "viewSerology",
+                element: <ViewSerology />,
+            },
+            {
+                path: "screenDonor",
+                element: <ScreenDonor />,
+            },
+            {
+                path: "editcornea/:id",
+                element: <EditCornea />,
+            },
+            {
+                path: "discardCornea",
+                element: <DiscardCornea />,
+            },
+            {
+                path: "serologyTest",
+                element: <SerologyTest />,
+            },
+            {
+                path: "evaluatedList",
+                element: <EvaluatedList />,
+            },
+            {
+                path: "storedCornea",
+                element: <StoredCornea />,
+            },
+            {
+                path: "distributeCornea/:id",
+                element: <DistributeCornea />,
+            },
+            {
+                path: "editdistributed/:id",
+                element: <EditDistribute />,
+            },
+            {
+                path: "viewDistributed",
+                element: <ViewDistributed />,
+            },
+            {
+                path: "viewCornea",
+                element: <ViewCornea />,
+            },
+>>>>>>> awoke
             {
                 path: "createExams/:id",
                 element: <PhysicalExam />,
             },
+<<<<<<< HEAD
       {
         path: "createExams",
         element: <PhysicalExam />,
@@ -343,18 +476,185 @@ const router = createBrowserRouter([
         path: "editevaluation/:id",
         element: <EditEvaluation />,
       },
+=======
             {
-              path: "viewRequestedCornea",
-              element: <ViewRequestedCorneaSurgeon/>,
+                path: "createExams",
+                element: <PhysicalExam />,
+            },
+            {
+                path: "getAll",
+                element: <PhysicalExamView />,
+            },
+            {
+                path: "getOne/:id",
+                element: <ViewDetails />,
+
+            },
+            {
+                path: "editExams/:id",
+                element: <EditPhysicalExam />,
+            },
+            {
+                path: "posts",
+                element: <IndexPage />,
+            },
+            {
+                path: "viewDonor",
+                element: <ListOfPlege />,
+            },
+            {
+                path: "approvedRequest",
+                element: <ApprovedRequest />,
+            }
+
+        ],
+    },
+    {
+        path: "/adminDashboard",
+        element: <AdminDashboard />,
+        children: [
+            {
+                path: "",
+                element: <Report />,
+            },
+            {
+                path: "addDonor",
+                element: <CreateDonor />,
+            },
+            {
+                path: "donorList",
+                element: <DisplayDonor />,
+            },
+            {
+                path: "addUser",
+                element: <Signup />,
+            },
+            {
+                path: "userList",
+                element: <ViewUsers />,
+            },
+            {
+                path: "edit/:id",
+                element: <Edit />,
+            },
+            {
+                path: "edituser/:id",
+                element: <EditUser />,
+            },
+
+            {
+                path: "addhospital",
+                element: <AddHospital />,
+            },
+            {
+                path: "viewhospital",
+                element: <ViewHospital />,
+            },
+            {
+                path: "edithospital/:id",
+                element: <EditHospital />,
+            },
+            {
+                path: "create-post",
+                element: <CreatePost />,
+            },
+            {
+                path: "edit-post/:slug",
+                element: <EditPost />,
+            },
+            {
+                path: "posts",
+                element: <IndexPage />,
+            },
+            {
+                path: "activate",
+                element: <ActivateAccount />,
+            },
+        ],
+    },
+    {
+        path: "/medicaldirectordashboard",
+        element: <MedicalDirectorDashboard />,
+        children: [
+            {
+                path: "viewTissue",
+                element: <ViewTissue />,
+            },
+            {
+                path: "evaluatecornea/:id",
+                element: <EvaluateCornea />,
+            },
+            {
+                path: "evaluatedlist",
+                element: <EvaluateList />,
+            },
+            {
+                path: "editevaluation/:id",
+                element: <EditEvaluation />,
+            },
+>>>>>>> awoke
+            {
+                path: "approveRequest",
+                element: <ApproveRequest />,
+            },
+            {
+                path: "approvedList",
+                element: <ApprovedList />,
             },
            
             {
                 path: "EditRequest/:id",
                 element: <EditRequest />,
             }
+<<<<<<< HEAD
     ],
   },
     // {
+=======
+
+
+        ],
+    },
+    {
+        path: "/adminDashboard",
+        element: <AdminDashboard />,
+        children: [
+            {
+                path: "",
+                element: <Report />,
+            },
+            {
+                path: "addDoynor",
+                element: <CreateDonor />,
+            },
+            {
+                path: "donorList",
+                element: <DisplayDonor />,
+            },
+            {
+                path: "addUser",
+                element: <Signup />,
+            },
+            {
+                path: "userList",
+                element: <ViewUsers />,
+            },
+            {
+                path: "edit/:id",
+                element: <Edit />,
+            },
+            {
+                path: "edituser/:id",
+                element: <EditUser />,
+            },
+
+
+
+
+        ],
+    },
+    //   {
+>>>>>>> awoke
     //     path: "/adminDashboard",
     //     element: <AdminDashboard />,
     //     children: [
@@ -397,6 +697,7 @@ const router = createBrowserRouter([
     // },
     
 
+<<<<<<< HEAD
   {
     path: "/surgondashboard",
     element: <SurgeonDashboard />,
@@ -443,6 +744,55 @@ const router = createBrowserRouter([
       }
     ],
   },
+=======
+    {
+        path: "/surgondashboard",
+        element: <SurgeonDashboard />,
+        children: [
+            {
+                path: "addrecipient",
+                element: <AddRecipient />,
+            },
+            {
+                path: "viewrecipient",
+                element: <ViewRecipient />,
+            },
+            {
+                path: "ocularpost/:id",
+                element: <OcularPost />,
+            },
+            {
+                path: "adverse/:id",
+                element: <AdverseReaction />,
+            },
+            {
+                path: "editrecipient/:id",
+                element: <EditRecipient />,
+            },
+            {
+                path: "ocularpostlist",
+                element: <OcularPostList />,
+            },
+            {
+                path: "adverselist",
+                element: <AdverseList />,
+            },
+            {
+                path: "recordaccident",
+                element: <RecordAccident />,
+            },
+            {
+                path: "editaccident/:id",
+                element: <EditAccident />,
+            },
+            {
+                path: "viewaccident",
+                element: <AccidentList />,
+            },
+
+        ],
+    },
+>>>>>>> awoke
 ]);
 
 export default router;
