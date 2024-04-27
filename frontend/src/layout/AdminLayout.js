@@ -3,7 +3,7 @@ import { Layout } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import CustomSidebar from "./../components/CustomeSider";
+import CustomSidebar from "../components/CustomeSidebar";
 
 import socketIOClient from "socket.io-client";
 import HeaderComponent from "../pages/dashboard/admins/HeaderComponent";
