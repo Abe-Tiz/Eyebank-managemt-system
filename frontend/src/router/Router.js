@@ -51,13 +51,14 @@ import ViewSerology from "../pages/dashboard/lab/ViewSerology";
 import SurgeonDashboard from "../layout/SurgeonLayout";
 
 
-import ViewRequestedCornea from "../pages/dashboard/surgeon/ViewCorneaRequest";
+import ViewRequestedCornea from "../pages/dashboard/lab/ApprovedRequest";
 import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
 import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
 import EditRequest from "../pages/dashboard/surgeon/EditRequest";
 
 import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCornea";
-
+import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
+import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import AddRecipient from "../pages/dashboard/surgeon/AddRecipient";
 import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
 import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
@@ -80,8 +81,6 @@ import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
 import Serology from "../pages/dashboard/lab/serology/Serology";
  import SerologyTest from '../pages/dashboard/lab/serology/SerologyTest';
 import ListSerology from "../pages/dashboard/lab/serology/ListSerology";
-
-
 import StoredCornea from "../pages/corneas/StoredCornea";
 // import LoginDonor from './../pages/donor/LoginDonor';
 const router = createBrowserRouter([
@@ -327,33 +326,39 @@ const router = createBrowserRouter([
     path: "/medicaldirectordashboard",
     element: <MedicalDirectorDashboard />,
     children: [
-      {
-        path: "viewTissue",
-        element: <ViewTissue />,
-      },
-      {
-        path: "evaluatecornea/:id",
-        element: <EvaluateCornea />,
-      },
-      {
-        path: "evaluatedlist",
-        element: <EvaluateList />,
-      },
-      {
-        path: "editevaluation/:id",
-        element: <EditEvaluation />,
-      },
-            {
-              path: "viewRequestedCornea",
-              element: <ViewRequestedCorneaSurgeon/>,
-            },
-           
-            {
-                path: "EditRequest/:id",
-                element: <EditRequest />,
-            }
+        {
+            path: "viewTissue",
+            element: <ViewTissue />,
+        },
+        {
+            path: "evaluatecornea/:id",
+            element: <EvaluateCornea />,
+        },
+        {
+            path: "evaluatedlist",
+            element: <EvaluateList />,
+        },
+        {
+            path: "editevaluation/:id",
+            element: <EditEvaluation />,
+        },
+        {
+            path: "approveRequest",
+            element: <ApproveRequest />,
+        },
+        {
+            path: "approvedList",
+            element: <ApprovedList />,
+        },
+
+        {
+            path: "EditRequest/:id",
+            element: <EditRequest />,
+        }
+
+
     ],
-  },
+},
     // {
     //     path: "/adminDashboard",
     //     element: <AdminDashboard />,

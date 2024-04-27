@@ -14,7 +14,7 @@ const RequestedCorneas = () => {
     const getAllRequestedCorneas = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/requestCornea/getRequest"
+          "http://localhost:4000/requestCornea/getRequests"
         );
         setRequestedCorneas(data);
       } catch (error) {

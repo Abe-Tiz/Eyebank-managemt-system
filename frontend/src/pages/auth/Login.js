@@ -51,6 +51,7 @@ const Login = () => {
                     }
                     else if (data.user.role === "doctor") {
                         localStorage.setItem("token", data.data);
+                        localStorage.setItem("surgeonId", data.user._id);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -91,6 +92,7 @@ const Login = () => {
                     else {
                         localStorage.setItem("token", data.data);
                         localStorage.setItem("loggedIn", true);
+                        localStorage.setItem("surgeonId", data.data);
                         toast({
                             title: "Login Succeeded",
                             status: "success",
@@ -102,7 +104,7 @@ const Login = () => {
                     }
                     
                 }
-                localStorage.setItem("surgeonId", data.user.id);
+                
             }
         } catch (error) {
             if (error.response) {

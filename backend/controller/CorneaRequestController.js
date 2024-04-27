@@ -49,10 +49,22 @@ exports.createCorneaRequest = async (req, res) => {
     res.json(err);
   }
 };
-
 exports.getCorneaRequestController = async (req, res) => {
   try {
-    const corneaRequests = await CorneaRequestModel.find({})
+    const { surgeonId } = req.query; // Retrieve the surgeon ID from the query parameter
+    const corneaRequests = await CorneaRequestModel.find({ surgeon: surgeonId })
+      .populate("surgeon")
+      .populate("hospital");
+    res.json(corneaRequests);
+  } catch (err) {
+    res.status(500).json({ error: "An error occurred while retrieving cornea requests." });
+  }
+};
+
+
+exports.getCorneasRequestController = async (req, res) => {
+  try {
+   const corneaRequests = await CorneaRequestModel.find({})
       .populate("surgeon")
       .populate("hospital");
     res.json(corneaRequests);
@@ -60,27 +72,6 @@ exports.getCorneaRequestController = async (req, res) => {
     res.json(err);
   }
 };
-
-// exports.getCorneaRequestController = async (req, res) => {
-//   try {
-//     const surgeonId = req.params.id;
-
-//     if (!surgeonId) {
-//       return res.status(400).json({ message: "Surgeon ID is required" });
-//     }
-
-//     const corneaRequests = await CorneaRequestModel.find({ surgeon: surgeonId })
-//       .populate("surgeon")
-//       .populate("hospital");
-
-//     res.json(corneaRequests);
-
-//     console.log("corneaRequests:", corneaRequests);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
 
 
 exports.getSingleCorneaRequestController = async (req, res) => {
