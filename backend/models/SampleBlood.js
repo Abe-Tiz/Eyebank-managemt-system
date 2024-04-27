@@ -17,11 +17,11 @@ const sampleBloodSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    phId: {
+    cornId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "PhysicalExam",
+      ref: "Cornea",
     },
-    dob: Date,
+    // dob: Date,
   },
   {
     timestamps: true,

@@ -13,14 +13,14 @@ import SideCustome from "../../../components/SideCustome";
 
 const CustomSidebar = ({ collapsed, name, role }) => {
     const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState({
-      serology:false,
-      distribut:false,
-      cornea:false,
-      physical:false,
-      request:false,
-  });
-  
+    const [isOpen, setIsOpen] = useState({
+        serology: false,
+        distribut: false,
+        cornea: false,
+        physical: false,
+        request: false,
+    });
+
     return (
       <div
         className={`bg-slate-700 overflow-auto h-screen fixed text-white transition-all duration-300 ${
@@ -29,7 +29,6 @@ const CustomSidebar = ({ collapsed, name, role }) => {
       >
         <div className="flex flex-col h-full mt-0 overflow-scroll">
           {collapsed ? (
-            // collapsed btn
             <div className="flex flex-col items-center">
               <Link
                 className="text-white p-2 hover:bg-gray-800 rounded"
@@ -76,44 +75,14 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                 {/* <SettingOutlined className="text-2xl" /> */}
                 <CiBoxList className="text-2xl" />
               </Link>
-
               <Link
                 className="text-white p-2 mt-2 hover:bg-gray-800 rounded"
                 to="/labtechnicaldashboard/viewRequestCornea"
                 data-tooltip-id="user-list"
                 data-tooltip-content=" View cornea"
               >
-                <DynamicIcon
-                  library="ci"
-                  iconName="CiBoxList"
-                  className="text-2xl"
-                />
-              </Link>
-              <Link
-                to="/labtechnicaldashboard/list-serology"
-                className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                data-tooltip-id="list-serology"
-                data-tooltip-content=" list serolog"
-              >
-                {/* <CiBoxList className="text-2xl" /> */}
-                <DynamicIcon
-                  library="md"
-                  iconName="MdPlaylistAddCheckCircle"
-                  className="text-2xl"
-                />
-              </Link>
-              <Link
-                to="/labtechnicaldashboard/serology"
-                className="flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                // onClick={handleUserList}
-                data-tooltip-id="user-list"
-                data-tooltip-content=" distribute Cornea"
-              >
-                <DynamicIcon
-                  library="tb"
-                  iconName="TbRibbonHealth"
-                  className="text-2xl"
-                />
+                {/* <SettingOutlined className="text-2xl" /> */}
+                <CiBoxList className="text-2xl" />
               </Link>
             </div>
           ) : (
@@ -152,7 +121,7 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                       },
                     ]}
                   />
-     
+
                   {/* for serology */}
                   <SideCustome
                     headerProps={{
@@ -171,7 +140,8 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                         iconName: "MdPlaylistAddCheckCircle",
                       },
                       {
-                        link: "/labtechnicaldashboard/serology",
+                        // link: "/labtechnicaldashboard/serology",
+                        link: "/labtechnicaldashboard/cornea-serology",
                         subtitle: "Add",
                         iconLibrary: "io",
                         iconName: "IoIosAddCircle",
@@ -217,7 +187,7 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                         iconName: "MdStreetview",
                       },
                       {
-                        link: "/labtechnicaldashboard/viewCornea",
+                        link: "/labtechnicaldashboard/ViewCornea",
                         subtitle: "View Cornea",
                         iconLibrary: "fa",
                         iconName: "FaClipboardList",
@@ -253,8 +223,6 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                         iconLibrary: "md",
                         iconName: "MdStreetview",
                       },
-                     
-                      
                     ]}
                   />
                 </div>
@@ -262,7 +230,6 @@ const CustomSidebar = ({ collapsed, name, role }) => {
             </>
           )}
         </div>
-
         {/* tooltips */}
         <Tooltip
           id="my-dashboard"
@@ -286,6 +253,5 @@ const CustomSidebar = ({ collapsed, name, role }) => {
         />
       </div>
     );
-};
-
+}
 export default CustomSidebar;

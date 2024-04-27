@@ -86,37 +86,48 @@ const ViewTissue = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {corneas.map((cornea, index) => (
-                            <Tr key={index}>
-                                <Td>{index + 1}</Td>
-                                <Td>{cornea.lotNo}</Td>
-                                <Td>
-                                    {formatTimestamp(cornea.createdAt)}
-                                </Td>
-                                <Td>{cornea.recoveryTechnical}</Td>
-                                <Td>{cornea.position}</Td>
-                                <Td>{cornea.lens}</Td>
-                                <Td>{cornea.clarity}</Td>
-                                <Td>{cornea.size}</Td>
-                                <Td>{cornea.eyeLid}</Td>
-                                <Td>{cornea.irisColor}</Td>
-                                <Td>{formatExiryDate(cornea.expirationDate)}</Td>
-                                <div className='text-center'>
-                                    {
-                                        cornea.evaluation && cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
-                                            <Td>
-                                                <Link to={`/medicaldirectordashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link>
-                                            </Td>
-                                        ) : (
-                                            <Td style={{ color: cornea.evaluation && cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>
-                                                {cornea.evaluation && cornea.evaluation.approval}
-                                            </Td>
-                                        )
-                                    }
+                        {corneas
+                            .filter(
+                                (cornea) =>
+                                    cornea.evaluation &&
+                                    (cornea.evaluation.approval !== 'yes')
+                            )
+                            .filter(
+                                (cornea) =>
+                                    cornea.evaluation &&
+                                    (cornea.evaluation.approval !== 'no')
+                            )
+                            .map((cornea, index) => (
+                                <Tr key={index}>
+                                    <Td>{index + 1}</Td>
+                                    <Td>{cornea.lotNo}</Td>
+                                    <Td>
+                                        {formatTimestamp(cornea.createdAt)}
+                                    </Td>
+                                    <Td>{cornea.recoveryTechnical}</Td>
+                                    <Td>{cornea.position}</Td>
+                                    <Td>{cornea.lens}</Td>
+                                    <Td>{cornea.clarity}</Td>
+                                    <Td>{cornea.size}</Td>
+                                    <Td>{cornea.eyeLid}</Td>
+                                    <Td>{cornea.irisColor}</Td>
+                                    <Td>{formatExiryDate(cornea.expirationDate)}</Td>
+                                    <div className='text-center'>
+                                        {
+                                            cornea.evaluation && cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
+                                                <Td>
+                                                    <Link to={`/medicaldirectordashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link>
+                                                </Td>
+                                            ) : (
+                                                <Td style={{ color: cornea.evaluation && cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>
+                                                    {cornea.evaluation && cornea.evaluation.approval}
+                                                </Td>
+                                            )
+                                        }
 
-                                </div>
-                            </Tr>
-                        ))}
+                                    </div>
+                                </Tr>
+                            ))}
                     </Tbody>
                 </Table>
             </TableContainer>

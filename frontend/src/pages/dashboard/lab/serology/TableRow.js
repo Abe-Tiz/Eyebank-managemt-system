@@ -9,13 +9,7 @@ const TableRow = ({ blood, onOpen, deleteCornea }) => (
     {/* <Td>{blood._id}</Td> */}
     <Td>{blood.bloodType}</Td>
     <Td>{blood.tests.join(", ")}</Td>
-  
-
-    {/* <Td className="text-center">
-      <Link to={`/labtechnicaldashboard/editcornea/${blood._id}`}>
-        <EditIcon />
-      </Link>
-    </Td> */}
+   
     <Td className="text-center">
       <button onClick={() => onOpen(blood._id)}>
         <DynamicIcon library="md" iconName="MdDelete" className="text-2xl text-red-400" />

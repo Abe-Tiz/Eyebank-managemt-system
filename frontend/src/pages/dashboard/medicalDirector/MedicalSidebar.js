@@ -14,9 +14,7 @@ const MedicalSidebar = ({
     role,
     image
 }) => {
-
     const { t } = useTranslation();
-
     return (
         <div
             className={`bg-indigo-900 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
@@ -47,18 +45,18 @@ const MedicalSidebar = ({
                         </Link>
 
                         <Link
-                                to="/medicaldirectordashboard/editRequestCornea/:id"
-                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                                // onClick={handleUserList}
-                                data-tooltip-id="request-list"
-                                data-tooltip-content="requested-List"
+                            to="/medicaldirectordashboard/editRequestCornea/:id"
+                            className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                            // onClick={handleUserList}
+                            data-tooltip-id="request-list"
+                            data-tooltip-content="requested-List"
 
-                            // onClick={handleAddDonorClick}
+                        // onClick={handleAddDonorClick}
 
-                            >
-                                <MdOutlineGroupAdd className="text-2xl" />
-                              
-                            </Link>
+                        >
+                            <MdOutlineGroupAdd className="text-2xl" />
+
+                        </Link>
 
                     </div>
                 ) : (
@@ -97,15 +95,33 @@ const MedicalSidebar = ({
                                 <MdOutlineGroupAdd className="text-2xl" />
                                 <span className="ml-2">{t("Evaluated List")}</span>
                             </Link>
+                            <Link
+                                to="/medicaldirectordashboard/approveRequest"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Evaluated List"
 
+                            // onClick={handleAddDonorClick}
 
+                            >
+                                <CiBoxList className="text-2xl" />
+                                <span className="ml-2">view Request</span>
+                            </Link>
+                            <Link
+                                to="/medicaldirectordashboard/approvedList"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Approved List"
+                            >
+                                <CiBoxList className="text-2xl" />
+                                <span className="ml-2">ApprovedList</span>
+                            </Link>
                         </div>
                     </>
                 )}
             </div>
-
-
-            {/* tooltips */}
             <Tooltip
                 id="my-dashboard"
                 style={{ backgroundColor: "#940B92", color: "#fff" }}

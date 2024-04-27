@@ -104,9 +104,9 @@ const handleOtherInputChange = (event) => {
     const data = {
       bloodType,
       userId,
-      phId:id,
+      cornId:id,
       tests,
-      dob: selectedDate,
+      // dob: selectedDate,
     };
     console.log(data);
     try {
@@ -164,7 +164,7 @@ const handleOtherInputChange = (event) => {
             </div>
           </div>
 
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <label
               htmlFor="sex"
               className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
@@ -182,12 +182,12 @@ const handleOtherInputChange = (event) => {
                 value={selectedDate}
                 onChange={handleDateChange}
               />
-              {/* Date of birth validation message */}
+           
               {!validateDateOfBirth(selectedDate) && (
                 <span className="text-red-500">please pick date of birth</span>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex gap-3 flex-wrap md:mr-4 mt-2">

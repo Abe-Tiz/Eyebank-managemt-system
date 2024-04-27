@@ -1,15 +1,22 @@
+const Cornea = require("../models/Cornea");
 const SampleBlood = require("../models/SampleBlood");
 const asyncHandler = require("express-async-handler");
 
 const createSampleBlood = asyncHandler(async (req, res) => {
-    const serology  = req.body;
+    const serology = req.body;
+    const id = req.body.cornId;
+    
+   
     try {
-        const sampleBlood = await SampleBlood.create(serology);
-        if (sampleBlood) {
-            sampleBlood.isTested = true;
-            sampleBlood.save();
-            res.status(200).json(sampleBlood)
-        }
+      const sampleBlood = await SampleBlood.create(serology);
+      const cornea = await Cornea.findById(id); // Use findById instead of find
+
+      console.log("before cornea:", cornea);
+
+      cornea.isTested = true;
+        await cornea.save();
+        console.log("after cornea:", cornea);
+      res.status(200).json(sampleBlood);
     } catch (error) {
         res.status(500).json(error)
     }
