@@ -15,7 +15,7 @@ const createSampleBlood = asyncHandler(async (req, res) => {
 
       cornea.isTested = true;
         await cornea.save();
-        console.log("after cornea:", cornea);
+        // console.log("after cornea:", cornea);
       res.status(200).json(sampleBlood);
     } catch (error) {
         res.status(500).json(error)
