@@ -9,30 +9,25 @@ const useLoggedInUser = (type) => {
   const getLoggedInUser = useCallback(async () => {
     try {
       let token = null;
-      // if (type === "admin") {
-      //   token = localStorage.getItem("admin");
-      // } else {
-      //   token = localStorage.getItem("users");
+    
+      // switch(type){
+      //   case "admin":
+      //     token = localStorage.getItem("admin");
+      //     break;
+      //   case "lab":
+      //     token = localStorage.getItem("lab");
+      //     break;
+      //   case "medical":
+      //     token = localStorage.getItem("medical");
+      //     break;
+      //   case "doctor":
+      //     token = localStorage.getItem("doctor");
+      //     break;
       // }
-
-      switch(type){
-        case "admin":
-          token = localStorage.getItem("admin");
-          break;
-        case "lab":
-          token = localStorage.getItem("lab");
-          break;
-        case "medical":
-          token = localStorage.getItem("medical");
-          break;
-        case "doctor":
-          token = localStorage.getItem("doctor");
-          break;
-      }
       const response = await axios.post(
         "http://127.0.0.1:4000/user/userLogedin",
         {
-          token: token,
+          token: localStorage.getItem(type),
         }
       );
       if (response.data.status === "ok") {

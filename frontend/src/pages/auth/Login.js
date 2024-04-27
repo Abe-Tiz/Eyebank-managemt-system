@@ -36,7 +36,7 @@ const Login = () => {
             } else {
                 if (data.status === "ok") {
                     if (data.user.role === "admin") {
-                        localStorage.setItem("admin", data.data);
+                        localStorage.setItem("token", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -49,7 +49,7 @@ const Login = () => {
                         navigate("/adminDashboard");
                     }
                     else if (data.user.role === "doctor") {
-                        localStorage.setItem("doctor", data.data);
+                        localStorage.setItem("token", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -62,7 +62,7 @@ const Login = () => {
                         navigate("/surgondashboard");
                     }
                     else if (data.user.role === "lab Techinician") {
-                        localStorage.setItem("lab", data.data);
+                        localStorage.setItem("token", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -75,7 +75,7 @@ const Login = () => {
                         navigate("/labtechnicaldashboard");
                     }
                     else if (data.user.role === "medical Director") {
-                        localStorage.setItem("medical", data.data);
+                        localStorage.setItem("token", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -87,19 +87,8 @@ const Login = () => {
                         // setRefreshed(true);
                         navigate("/medicaldirectordashboard");
                     }
-                    // else {
-                    //     localStorage.setItem("token", data.data);
-                    //     localStorage.setItem("loggedIn", true);
-                    //     toast({
-                    //         title: "Login Succeeded",
-                    //         status: "success",
-                    //         duration: 5000,
-                    //         isClosable: true,
-                    //         position: "top",
-                    //     });
-                    //     // navigate("/adminDashboard");
-                    // }
                 }
+                localStorage.setItem("surgeonId", data.user.id);
             }
         } catch (error) {
             if (error.response) {
@@ -150,15 +139,15 @@ const Login = () => {
                   });
                 }
             } else {
-                // console.log(error.message);
-                toast({
-                    title: "Error Occurred!",
-                    description: error.message,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "top",
-                });
+              // console.log(error.message);
+              toast({
+                title: "Error Occurred!",
+                description: error.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+              });
             }
         }
     }

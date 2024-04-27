@@ -23,19 +23,32 @@ const RequestedCorneas = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate();
+
   useEffect(() => {
     const getAllRequestedCorneas = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:4000/requestCornea/getRequest"
+        const surgeonId = localStorage.getItem("surgeonId"); // Retrieve the surgeon ID from local storage
+  
+        const response = await axios.get(
+          "http://localhost:4000/requestCornea/getRequest",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            params: {
+              surgeonId: surgeonId, // Pass the surgeon ID as a query parameter
+            },
+          }
         );
+        
+        const data = response.data;
         setRequestedCorneas(data);
       } catch (error) {
         console.log(error);
-        toast.error("Something Went Wrong");
+       
       }
     };
-
+  
     getAllRequestedCorneas();
   }, []);
   
@@ -53,7 +66,7 @@ const RequestedCorneas = () => {
         duration: 3000,
         isClosable: true,
       });
-      navigate("/medicaldirectordashboard/viewRequestedCornea");
+      navigate("/surgondashboard/viewRequestedCornea");
     } catch (error) {
       console.error(error);
     }
@@ -145,7 +158,7 @@ const RequestedCorneas = () => {
 
                 <td className="flex px-6 py-4">
                   <Link
-                    to={`/medicaldirectordashboard/EditRequest/${request._id}`}
+                    to={`/surgondashboard/EditRequest/${request._id}`}
                     className="flex items-center bg-transparent border-2 p-1  mr-5 font-medium text-white dark:text-blue-500 hover:bg-orange-700 hover:border-orange-700"
                   >
                     <RiEdit2Line size={20} color="#000" className="mr-2" />

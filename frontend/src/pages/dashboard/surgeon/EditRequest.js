@@ -59,7 +59,7 @@ const EditRequest = () => {
         duration: 5000,
         position: "top",
       });
-      navigate("/medicaldirectordashboard/viewRequestedCornea");
+      navigate("/surgondashboard/viewRequestedCornea");
     } catch (error) {
       toast.error(error.response.data.message, {
         duration: 5000,

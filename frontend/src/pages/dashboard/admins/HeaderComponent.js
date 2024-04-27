@@ -28,7 +28,7 @@ const HeaderComponent = ({
     useSearch();
 
   //! handle Logout
-  const handleLogout = (type) => {
+  const handleLogout = () => {
     localStorage.removeItem(type);
     navigate("/login");
   };

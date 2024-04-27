@@ -251,18 +251,9 @@ const router = createBrowserRouter([
         path: "viewRequestCornea",
         element: <ViewRequestedCornea />,
       },
-      {
-        path: "viewRequestedCornea",
-        element: <ViewRequestedCorneaSurgeon />,
-      },
-      {
-        path: "SendRequestCornea",
-        element: <SendRequestCornea />,
-      },
-      {
-        path: "EditRequest/:id",
-        element: <EditRequest />,
-      },
+       
+     
+     
     ],
   },
   {
@@ -351,48 +342,17 @@ const router = createBrowserRouter([
         path: "editevaluation/:id",
         element: <EditEvaluation />,
       },
+            {
+              path: "viewRequestedCornea",
+              element: <ViewRequestedCorneaSurgeon/>,
+            },
+           
+            {
+                path: "EditRequest/:id",
+                element: <EditRequest />,
+            }
     ],
   },
-  // {
-  //     path: "/adminDashboard",
-  //     element: <AdminDashboard />,
-  //     children: [
-  //         {
-  //             path: "",
-  //             element: <Report />,
-  //         },
-  //         {
-  //             path: "addDoynor",
-  //             element: <CreateDonor />,
-  //         },
-  //         {
-  //             path: "donorList",
-  //             element: <DisplayDonor />,
-  //         },
-  //         {
-  //             path: "addUser",
-  //             element: <Signup />,
-  //         },
-  //         {
-  //             path: "userList",
-  //             element: <ViewUsers />,
-  //         },
-  //         {
-  //             path: "edit/:id",
-  //             element: <Edit />,
-  //         },
-  //         {
-  //             path: "edituser/:id",
-  //             element: <EditUser />,
-  //         },
-  //         {
-  //             path: "storeCornea",
-  //             element: <StoredCornea />,
-  //         },
-
-  //     ],
-  // },
-
   {
     path: "/surgondashboard",
     element: <SurgeonDashboard />,
@@ -427,16 +387,16 @@ const router = createBrowserRouter([
       },
       {
         path: "viewRequestedCornea",
-        element: <ViewRequestedCorneaSurgeon />,
+        element: <ViewRequestedCorneaSurgeon/>,
       },
       {
-        path: "SendRequestCornea",
-        element: <SendRequestCornea />,
+          path: "SendRequestCornea",
+          element: <SendRequestCornea />,
       },
       {
-        path: "EditRequest/:id",
-        element: <EditRequest />,
-      },
+          path: "EditRequest/:id",
+          element: <EditRequest />,
+      }
     ],
   },
 ]);

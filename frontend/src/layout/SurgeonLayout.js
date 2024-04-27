@@ -16,7 +16,7 @@ const SurgeonDashboard = () => {
     const { t } = useTranslation();
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-     const { user, setUser, getLoggedInUser } = useLoggedInUser("doctor");
+     const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
     const [state, setState] = useState({
         name: "",
         image: "",

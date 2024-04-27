@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     const [notifications, setNotifications] = useState([]);
   const [countNotification, setCountNotification] = useState(0);
   
-   const { user, setUser, getLoggedInUser } = useLoggedInUser("admin");
+   const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
 
     const [state, setState] = useState({
         name: "",

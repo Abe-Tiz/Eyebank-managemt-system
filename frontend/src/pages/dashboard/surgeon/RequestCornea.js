@@ -59,7 +59,7 @@ export default function SendRequestCornea() {
         "http://localhost:4000/requestCornea/send",
         requestCorneaData
       );
-      navigate("/medicaldirectordashboard/viewRequestedCornea");
+      navigate("/surgondashboard/viewRequestedCornea");
       if (data.success) {
         toast.success(data.message);
       } else {

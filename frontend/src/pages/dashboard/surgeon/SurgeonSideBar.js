@@ -9,7 +9,7 @@ import { Tooltip } from "react-tooltip";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 
-const MedicalSidebar = ({
+const SurgeonSidebar = ({
     collapsed,
     name,
     image,
@@ -83,56 +83,59 @@ const MedicalSidebar = ({
                   data-tooltip-id="user-list"
                   data-tooltip-content="Recipient List"
 
-                  // onClick={handleAddDonorClick}
-                >
-                  <MdOutlineGroupAdd className="text-2xl" />
-                  <span className="ml-2">{t("Recipient List")}</span>
-                </Link>
-                <Link
-                  to="/surgondashboard/ocularpostlist"
-                  className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                  data-tooltip-id="user-list"
-                  data-tooltip-content="Ocular post List"
-                >
-                  <MdOutlineGroupAdd className="text-2xl" />
-                  <span className="ml-2">{t("Ocular post List")}</span>
-                </Link>
-                <Link
-                  to="/surgondashboard/adverselist"
-                  className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                  data-tooltip-id="user-list"
-                  data-tooltip-content="Adverse List"
-                >
-                  <MdOutlineGroupAdd className="text-2xl" />
-                  <span className="ml-2">{t("Adverse List")}</span>
-                </Link>
+                            // onClick={handleAddDonorClick}
 
-                <Link
-                  to="/surgondashboard/sendRequestCornea"
-                  className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                  data-tooltip-id="user-list"
-                  data-tooltip-content="Send CorneaRequest"
+                            >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">{t("Recipient List")}</span>
+                            </Link>
+                            <Link
+                                to="/surgondashboard/ocularpostlist"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Ocular post List" >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">{t("Ocular post List")}</span>
+                            </Link>
+                            <Link
+                                to="/surgondashboard/adverselist"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Adverse List" >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">{t("Adverse List")}</span>
+                            </Link>
+                            <Link
+                                to="/surgondashboard/sendRequestCornea"
+                                className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                // onClick={handleUserList}
+                                data-tooltip-id="user-list"
+                                data-tooltip-content="Evaluated List"
 
-                  // onClick={handleAddDonorClick}
-                >
-                  <MdOutlineGroupAdd className="text-2xl" />
-                  <span className="ml-2">Send CorneaRequest</span>
-                </Link>
-                <Link
-                  to="/surgondashboard/viewRequestedCornea"
-                  className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                  data-tooltip-id="user-list"
-                  data-tooltip-content="Send CorneaRequest"
+                            // onClick={handleAddDonorClick}
 
-                  // onClick={handleAddDonorClick}
-                >
-                  <MdOutlineGroupAdd className="text-2xl" />
-                  <span className="ml-2">View</span>
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
+                            >
+                                <MdOutlineGroupAdd className="text-2xl" />
+                                <span className="ml-2">Send Request</span>
+                            </Link>
+
+                            <Link
+                                    to="/surgondashboard/viewRequestedCornea"
+                                    className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                                    // onClick={handleUserList}
+                                    data-tooltip-id="user-list"
+                                    data-tooltip-content=" distribute Cornea"
+                                >
+                                    <CiBoxList className="text-2xl" />
+                                    <span className="ml-2"> ViewCorneaRequest</span>
+                                </Link>
+
+
+                        </div>
+                    </>
+                )}
+            </div>
+
 
         {/* tooltips */}
         <Tooltip
@@ -159,4 +162,4 @@ const MedicalSidebar = ({
     );
 };
 
-export default MedicalSidebar;
+export default SurgeonSidebar;

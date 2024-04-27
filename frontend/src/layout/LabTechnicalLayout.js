@@ -26,7 +26,7 @@ const LabTechnicalDashboard = () => {
         role: "",
     });
 
-     const { user, setUser, getLoggedInUser } = useLoggedInUser("lab");
+     const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
 
     const [reportData, setReportData] = useState({
         donor: "",

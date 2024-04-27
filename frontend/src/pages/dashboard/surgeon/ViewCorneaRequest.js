@@ -4,10 +4,12 @@ import { useToast } from "@chakra-ui/react";
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@chakra-ui/react";
 import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
-
+import useSearch from "../../../useHooks/useSearch";
+import SearchComponent  from "../../../components/SearchComponent";
 const RequestedCorneas = () => {
   const toast = useToast();
   const [requestedCorneas, setRequestedCorneas] = useState([]);
+  const { searchTerm, data, handleChange } = useSearch("request");
   useEffect(() => {
     const getAllRequestedCorneas = async () => {
       try {
@@ -65,9 +67,15 @@ const navigate = useNavigate();
         console.error("Failed to distribute cornea:", error);
     }
 };
+const renderRequest = searchTerm ? data : requestedCorneas;
 
   return (
     <>
+    <div className="w-full mt-2 flex justify-end ">
+        {/* search component */}
+        <SearchComponent searchTerm={searchTerm} handleChange={handleChange} />
+      </div>
+
       <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-blue-200 dark:bg-gray-700 dark:text-gray-400">
@@ -94,8 +102,8 @@ const navigate = useNavigate();
             </tr>
           </thead>
           <tbody>
-            {requestedCorneas.map((request) => (
-              <tr
+          {renderRequest.map((request) => (
+            <tr
                 key={request.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >

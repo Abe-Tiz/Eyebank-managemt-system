@@ -18,7 +18,7 @@ const MedicalDirectorDashboard = () => {
 
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-     const { user, setUser, getLoggedInUser } = useLoggedInUser("medical");
+     const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
 
     const [state, setState] = useState({
         name: "",
