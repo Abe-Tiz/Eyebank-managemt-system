@@ -38,6 +38,11 @@ const RecipientSchema = new mongoose.Schema({
         ref: "Hospital",
         //required: true,
     },
+    surgeonName: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+
     ocularPost: {
         dateOfSurgry: {
             type: Date,

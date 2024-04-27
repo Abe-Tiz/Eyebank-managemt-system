@@ -41,11 +41,13 @@ import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
-
+import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
+import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
 import ViewSerology from "../pages/dashboard/lab/ViewSerology";
+import ApprovedRequest from "../pages/dashboard/lab/ApprovedRequest";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
@@ -55,7 +57,6 @@ import ViewRequestedCornea from "../pages/dashboard/lab/ApprovedRequest";
 import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
 import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
 import EditRequest from "../pages/dashboard/surgeon/EditRequest";
-
 import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCornea";
 import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
 import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
@@ -79,375 +80,415 @@ import BlogDetail from "./../pages/blog/BlogDetail";
 import EditPhysicalExam from "../pages/dashboard/lab/EditPhysicalExam";
 import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
 import Serology from "../pages/dashboard/lab/serology/Serology";
- import SerologyTest from '../pages/dashboard/lab/serology/SerologyTest';
+import SerologyTest from '../pages/dashboard/lab/serology/SerologyTest';
 import ListSerology from "../pages/dashboard/lab/serology/ListSerology";
-import StoredCornea from "../pages/corneas/StoredCornea";
+
+import RecordAccident from "../pages/dashboard/surgeon/RecordAccident";
+import EditAccident from "../pages/dashboard/surgeon/EditAccident";
+import AccidentList from "../pages/dashboard/surgeon/AccidentList";
+
+import StoredCornea from "../pages/dashboard/lab/StoredCornea";
 // import LoginDonor from './../pages/donor/LoginDonor';
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Main />,
-    children: [
-      {
+    {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/forgot-password",
-        element: <ForgotPassword />,
-      },
-      {
-        path: "/forgot-code",
-        element: <ForgotCode />,
-      },
-      {
-        path: "/reset_code/:id/:token",
-        element: <ResetCode />,
-      },
-      {
-        path: "/reset_password/:id/:token",
-        element: <ResetPassword />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/blog",
-        element: <BlogPage />,
-      },
-      {
-        path: "/blog/:slug",
-        element: <BlogDetail />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/registerDonor",
-        element: <CreateDonor />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/viewdonor",
-        element: <ViewDonor />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/donor-login",
-        element: <LoginDonor />,
-      },
-      {
-        path: "/print/:id",
-        element: <PrintCard />,
-      },
-      {
-        path: "/update/:id",
-        element: <EditDonor />,
-      },
-    ],
-  },
-  {
-    path: "/labtechnicaldashboard",
-    element: <LabTechnicalDashboard />,
-    children: [
-      {
-        path: "collectCornea/:id",
-        element: <CollectCornea />,
-      },
-      {
-        path: "recordSerology",
-        element: <RecordSerology />,
-      },
-      {
-        path: "viewSerology",
-        element: <ViewSerology />,
-      },
-      {
-        path: "screenDonor",
-        element: <ScreenDonor />,
-      },
-      {
-        path: "editcornea/:id",
-        element: <EditCornea />,
-      },
-      {
-        path: "discardCornea",
-        element: <DiscardCornea />,
-      },
-      {
-        path: "serology/:id",
-        element: <SerologyTest />,
-      },
-      {
-        path: "serology",
-        element: <Serology />,
-      },
-      {
-        path: "list-serology",
-        element: <ListSerology />,
-      },
-      {
-        path: "evaluatedList",
-        element: <EvaluatedList />,
-      },
-      {
-        path: "storedCornea",
-        element: <StoredCornea />,
-      },
-      {
-        path: "distributeCornea/:id",
-        element: <DistributeCornea />,
-      },
-      {
-        path: "editdistributed/:id",
-        element: <EditDistribute />,
-      },
-      {
-        path: "viewDistributed",
-        element: <ViewDistributed />,
-      },
-      {
-        path: "viewCornea",
-        element: <ViewCornea />,
-      },
+        element: <Main />,
+        children: [
             {
-                path: "createExams/:id",
-                element: <PhysicalExam />,
-            },
-      {
-        path: "createExams",
-        element: <PhysicalExam />,
-      },
-      {
-        path: "getAll",
-        element: <PhysicalExamView />,
-      },
-      {
-        path: "getOne/:id",
-        element: <ViewDetails />,
-                
+                path: "/",
+                element: <Main />,
+                children: [
+                    {
+                        path: "/",
+                        element: <Home />,
+                    },
+                    {
+                        path: "/forgot-password",
+                        element: <ForgotPassword />,
+                    },
+                    {
+                        path: "/forgot-code",
+                        element: <ForgotCode />,
+                    },
+                    {
+                        path: "/reset_code/:id/:token",
+                        element: <ResetCode />,
+                    },
+                    {
+                        path: "/reset_password/:id/:token",
+                        element: <ResetPassword />,
+                    },
+                    {
+                        path: "/about",
+                        element: <About />,
+                    },
+                    {
+                        path: "/blog",
+                        element: <BlogPage />,
+                    },
+                    {
+                        path: "/blog/:slug",
+                        element: <BlogDetail />,
+                    },
+                    {
+                        path: "/contact",
+                        element: <Contact />,
+                    },
+                    {
+                        path: "/registerDonor",
+                        element: <CreateDonor />,
+                    },
+                    {
+                        path: "/login",
+                        element: <Login />,
+                    },
+                    {
+                        path: "/viewdonor",
+                        element: <ViewDonor />,
+                    },
+                    {
+                        path: "/profile",
+                        element: <Profile />,
+                    },
+                    {
+                        path: "/donor-login",
+                        element: <LoginDonor />,
+                    },
+                    {
+                        path: "/print/:id",
+                        element: <PrintCard />,
+                    },
+                    {
+                        path: "/update/:id",
+                        element: <EditDonor />,
+                    },
+
+                ],
             },
             {
-        path: "editExams/:id",
-        element: <EditPhysicalExam />,
-      },
-      {
-        path: "posts",
-        element: <IndexPage />,
-      },
-      {
-        path: "viewDonor",
-        element: <ListOfPlege />,
-      },
-      {
-          path: "viewRequestCornea",
-          element: <ViewRequestedCornea />,
-      },
-       
-     
-     
-    ],
-  },
-  {
-    path: "/adminDashboard",
-    element: <AdminDashboard />,
-    children: [
-      {
-        path: "",
-        element: <Report />,
-      },
-      {
-        path: "addDonor",
-        element: <CreateDonor />,
-      },
-      {
-        path: "donorList",
-        element: <DisplayDonor />,
-      },
-      {
-        path: "addUser",
-        element: <Signup />,
-      },
-      {
-        path: "userList",
-        element: <ViewUsers />,
-      },
-      {
-        path: "edit/:id",
-        element: <Edit />,
-      },
-      {
-        path: "edituser/:id",
-        element: <EditUser />,
-      },
-      {
-        path: "storedCornea",
-        element: <StoredCornea />,
-      },
-      {
-        path: "addhospital",
-        element: <AddHospital />,
-      },
-      {
-        path: "viewhospital",
-        element: <ViewHospital />,
-      },
-      {
-        path: "edithospital/:id",
-        element: <EditHospital />,
-      },
-      {
-        path: "create-post",
-        element: <CreatePost />,
-      },
-      {
-        path: "edit-post/:slug",
-        element: <EditPost />,
-      },
-      {
-        path: "posts",
-        element: <IndexPage />,
-      },
-      {
-        path: "activate",
-        element: <ActivateAccount />,
-      },
-    ],
-  },
-  {
-    path: "/medicaldirectordashboard",
-    element: <MedicalDirectorDashboard />,
-    children: [
-        {
-            path: "viewTissue",
-            element: <ViewTissue />,
-        },
-        {
-            path: "evaluatecornea/:id",
-            element: <EvaluateCornea />,
-        },
-        {
-            path: "evaluatedlist",
-            element: <EvaluateList />,
-        },
-        {
-            path: "editevaluation/:id",
-            element: <EditEvaluation />,
-        },
-        {
-            path: "approveRequest",
-            element: <ApproveRequest />,
-        },
-        {
-            path: "approvedList",
-            element: <ApprovedList />,
-        },
+                path: "/labtechnicaldashboard",
+                element: <LabTechnicalDashboard />,
+                children: [
+                    {
+                        path: "collectCornea/:id",
+                        element: <CollectCornea />,
+                    },
+                    {
+                        path: "recordSerology",
+                        element: <RecordSerology />,
+                    },
+                    {
+                        path: "viewSerology",
+                        element: <ViewSerology />,
+                    },
+                    {
+                        path: "screenDonor",
+                        element: <ScreenDonor />,
+                    },
+                    {
+                        path: "editcornea/:id",
+                        element: <EditCornea />,
+                    },
+                    {
+                        path: "discardCornea",
+                        element: <DiscardCornea />,
+                    },
+                    {
+                        path: "serologyTest",
+                        element: <SerologyTest />,
+                    },
+                    {
+                        path: "evaluatedList",
+                        element: <EvaluatedList />,
+                    },
+                    {
+                        path: "storedCornea",
+                        element: <StoredCornea />,
+                    },
+                    {
+                        path: "distributeCornea/:id",
+                        element: <DistributeCornea />,
+                    },
+                    {
+                        path: "editdistributed/:id",
+                        element: <EditDistribute />,
+                    },
+                    {
+                        path: "viewDistributed",
+                        element: <ViewDistributed />,
+                    },
+                    {
+                        path: "viewCornea",
+                        element: <ViewCornea />,
+                    },
+                    {
+                        path: "createExams/:id",
+                        element: <PhysicalExam />,
+                    },
+                    {
+                        path: "createExams",
+                        element: <PhysicalExam />,
+                    },
+                    {
+                        path: "getAll",
+                        element: <PhysicalExamView />,
+                    },
+                    {
+                        path: "getOne/:id",
+                        element: <ViewDetails />,
 
-        {
-            path: "EditRequest/:id",
-            element: <EditRequest />,
-        }
+                    },
+                    {
+                        path: "editExams/:id",
+                        element: <EditPhysicalExam />,
+                    },
+                    {
+                        path: "posts",
+                        element: <IndexPage />,
+                    },
+                    {
+                        path: "viewDonor",
+                        element: <ListOfPlege />,
+                    },
+                    {
+                        path: "approvedRequest",
+                        element: <ApprovedRequest />,
+                    }
+
+                ],
+            },
+            {
+                path: "/adminDashboard",
+                element: <AdminDashboard />,
+                children: [
+                    {
+                        path: "",
+                        element: <Report />,
+                    },
+                    {
+                        path: "addDonor",
+                        element: <CreateDonor />,
+                    },
+                    {
+                        path: "donorList",
+                        element: <DisplayDonor />,
+                    },
+                    {
+                        path: "addUser",
+                        element: <Signup />,
+                    },
+                    {
+                        path: "userList",
+                        element: <ViewUsers />,
+                    },
+                    {
+                        path: "edit/:id",
+                        element: <Edit />,
+                    },
+                    {
+                        path: "edituser/:id",
+                        element: <EditUser />,
+                    },
+
+                    {
+                        path: "addhospital",
+                        element: <AddHospital />,
+                    },
+                    {
+                        path: "viewhospital",
+                        element: <ViewHospital />,
+                    },
+                    {
+                        path: "edithospital/:id",
+                        element: <EditHospital />,
+                    },
+                    {
+                        path: "create-post",
+                        element: <CreatePost />,
+                    },
+                    {
+                        path: "edit-post/:slug",
+                        element: <EditPost />,
+                    },
+                    {
+                        path: "posts",
+                        element: <IndexPage />,
+                    },
+                    {
+                        path: "activate",
+                        element: <ActivateAccount />,
+                    },
+                ],
+            },
+            {
+                path: "/medicaldirectordashboard",
+                element: <MedicalDirectorDashboard />,
+                children: [
+                    {
+                        path: "viewTissue",
+                        element: <ViewTissue />,
+                    },
+                    {
+                        path: "evaluatecornea/:id",
+                        element: <EvaluateCornea />,
+                    },
+                    {
+                        path: "evaluatedlist",
+                        element: <EvaluateList />,
+                    },
+                    {
+                        path: "editevaluation/:id",
+                        element: <EditEvaluation />,
+                    },
+                    {
+                        path: "approveRequest",
+                        element: <ApproveRequest />,
+                    },
+                    {
+                        path: "approvedList",
+                        element: <ApprovedList />,
+                    },
+
+                    {
+                        path: "EditRequest/:id",
+                        element: <EditRequest />,
+                    }
 
 
-    ],
-},
-    // {
-    //     path: "/adminDashboard",
-    //     element: <AdminDashboard />,
-    //     children: [
-    //         {
-    //             path: "",
-    //             element: <Report />,
-    //         },
-    //         {
-    //             path: "addDoynor",
-    //             element: <CreateDonor />,
-    //         },
-    //         {
-    //             path: "donorList",
-    //             element: <DisplayDonor />,
-    //         },
-    //         {
-    //             path: "addUser",
-    //             element: <Signup />,
-    //         },
-    //         {
-    //             path: "userList",
-    //             element: <ViewUsers />,
-    //         },
-    //         {
-    //             path: "edit/:id",
-    //             element: <Edit />,
-    //         },
-    //         {
-    //             path: "edituser/:id",
-    //             element: <EditUser />,
-    //         },
-    //         {
-    //             path: "storeCornea",
-    //             element: <StoredCornea />,
-    //         },
-          
+                ],
+            },
+            {
+                path: "/adminDashboard",
+                element: <AdminDashboard />,
+                children: [
+                    {
+                        path: "",
+                        element: <Report />,
+                    },
+                    {
+                        path: "addDoynor",
+                        element: <CreateDonor />,
+                    },
+                    {
+                        path: "donorList",
+                        element: <DisplayDonor />,
+                    },
+                    {
+                        path: "addUser",
+                        element: <Signup />,
+                    },
+                    {
+                        path: "userList",
+                        element: <ViewUsers />,
+                    },
+                    {
+                        path: "edit/:id",
+                        element: <Edit />,
+                    },
+                    {
+                        path: "edituser/:id",
+                        element: <EditUser />,
+                    },
 
 
-    //     ],
-    // },
-    
 
-  {
-    path: "/surgondashboard",
-    element: <SurgeonDashboard />,
-    children: [
-      {
-        path: "addrecipient",
-        element: <AddRecipient />,
-      },
-      {
-        path: "viewrecipient",
-        element: <ViewRecipient />,
-      },
-      {
-        path: "ocularpost/:id",
-        element: <OcularPost />,
-      },
-      {
-        path: "adverse/:id",
-        element: <AdverseReaction />,
-      },
-      {
-        path: "editrecipient/:id",
-        element: <EditRecipient />,
-      },
-      {
-        path: "ocularpostlist",
-        element: <OcularPostList />,
-      },
-      {
-        path: "adverselist",
-        element: <AdverseList />,
-      },
-      {
-        path: "viewRequestedCornea",
-        element: <ViewRequestedCorneaSurgeon/>,
-      },
-      {
-          path: "SendRequestCornea",
-          element: <SendRequestCornea />,
-      },
-      {
-          path: "EditRequest/:id",
-          element: <EditRequest />,
-      }
-    ],
-  },
+
+                ],
+            },
+            {
+                path: "/surgondashboard",
+                element: <SurgeonDashboard />,
+                children: [
+                    {
+                        path: "addrecipient",
+                        element: <AddRecipient />,
+                    },
+                    {
+                        path: "viewrecipient",
+                        element: <ViewRecipient />,
+                    },
+                    {
+                        path: "ocularpost/:id",
+                        element: <OcularPost />,
+                    },
+                    {
+                        path: "adverse/:id",
+                        element: <AdverseReaction />,
+                    },
+                    {
+                        path: "editrecipient/:id",
+                        element: <EditRecipient />,
+                    },
+                    {
+                        path: "ocularpostlist",
+                        element: <OcularPostList />,
+                    },
+                    {
+                        path: "adverselist",
+                        element: <AdverseList />,
+                    },
+                    {
+                        path: "viewRequestedCornea",
+                        element: <ViewRequestedCorneaSurgeon />,
+                    },
+                    {
+                        path: "SendRequestCornea",
+                        element: <SendRequestCornea />,
+                    },
+                    {
+                        path: "EditRequest/:id",
+                        element: <EditRequest />,
+                    }
+                ],
+            },
+            {
+                path: "/surgondashboard",
+                element: <SurgeonDashboard />,
+                children: [
+                    {
+                        path: "addrecipient",
+                        element: <AddRecipient />,
+                    },
+                    {
+                        path: "viewrecipient",
+                        element: <ViewRecipient />,
+                    },
+                    {
+                        path: "ocularpost/:id",
+                        element: <OcularPost />,
+                    },
+                    {
+                        path: "adverse/:id",
+                        element: <AdverseReaction />,
+                    },
+                    {
+                        path: "editrecipient/:id",
+                        element: <EditRecipient />,
+                    },
+                    {
+                        path: "ocularpostlist",
+                        element: <OcularPostList />,
+                    },
+                    {
+                        path: "adverselist",
+                        element: <AdverseList />,
+                    },
+                    {
+                        path: "recordaccident",
+                        element: <RecordAccident />,
+                    },
+                    {
+                        path: "editaccident/:id",
+                        element: <EditAccident />,
+                    },
+                    {
+                        path: "viewaccident",
+                        element: <AccidentList />,
+                    },
+
+                ],
+            },
+        ]
+    }
 ]);
-
 export default router;
