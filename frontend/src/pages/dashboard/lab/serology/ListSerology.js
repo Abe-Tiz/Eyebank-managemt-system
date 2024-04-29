@@ -64,9 +64,9 @@ const ListSerology = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:4000/blood");
-        const data = response.data;
-        // console.log("cornea:", data);
-        setBlood(data);
+        const samplData = response.data;
+        // console.log("sample::", data);
+        setBlood(samplData);
         // setExpirationDate(new Date(data.expirationDate));
       } catch (error) {
         console.error(error);
@@ -99,13 +99,13 @@ const ListSerology = () => {
 
   const renderCornea = searchTerm ? data : currentCorneas;
 
-  console.log("blood:", blood);
+  // console.log("serached:::", data);
   return (
     <>
       <div>
         <TableContainer>
           <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-            List of collected cornea
+            List of Tested Results
           </Text>
           <div className="w-full mt-2 flex justify-end ">
             {/* search component */}
@@ -121,6 +121,10 @@ const ListSerology = () => {
                 <Tr className="bg-sky-600 text-white">
                   {/* <Th className="text-white">ID</Th> */}
                   <Th className="text-white">Blood Type</Th>
+                  <Th className="text-white">Position</Th>
+                  <Th className="text-white">Status</Th>
+                  <Th className="text-white">Eye Lid</Th>
+                  <Th className="text-white">Lot Number</Th>
                   <Th className="text-white">Tested</Th>
                   <Th className="text-white" colSpan={3}>
                     Action

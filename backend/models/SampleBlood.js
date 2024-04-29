@@ -6,10 +6,10 @@ const sampleBloodSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    isTested: {
-      type: Boolean,
-      default: false,
-    },
+    // isTested: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     tests: {
       type: Array,
     },

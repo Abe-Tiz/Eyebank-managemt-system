@@ -34,7 +34,7 @@ const createCornea = async (req, res) => {
 };
 
 const getCorneas = async (req, res) => {
-    const corneas = await Cornea.find();
+    const corneas = await Cornea.find({expirationDate:{$lt:14}});
     res.send(corneas);
 };
 

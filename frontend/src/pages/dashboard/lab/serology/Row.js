@@ -7,20 +7,17 @@ import { Link } from "react-router-dom";
 const Row = ({ cornea }) => (
   <Tr className="mb-2 text-lg">
     <Td>{cornea.lotNo}</Td>
-    {/* <Td>{formatTimestamp(cornea.createdAt)}</Td> */}
-    {/* <Td>{cornea.recoveryTechnical}</Td> */}
     <Td>{cornea.position}</Td>
-    {/* <Td>{cornea.lens}</Td> */}
     <Td>{cornea.clarity}</Td>
     <Td> {cornea.size}</Td>
     <Td> {cornea.eyeLid}</Td>
     <Td> {cornea.irisColor}</Td>
-    <Td>
+    {/* <Td>
       {" "}
       {cornea.expirationDate < 14
         ? `${14 - cornea.expirationDate} Day Left`
         : "Expired"}
-    </Td>
+    </Td> */}
     <Td>
       <Link
         to={`/labtechnicaldashboard/serology/${cornea._id}`}

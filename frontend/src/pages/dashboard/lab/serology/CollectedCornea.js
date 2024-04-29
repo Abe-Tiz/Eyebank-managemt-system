@@ -37,31 +37,14 @@ const CollectedCornea = () => {
   // Function to change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  function formatTimestamp(timestamp) {
-    const options = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-    return new Date(timestamp).toLocaleString("en-US", options);
-  }
-  function formatExiryDate(expiryDate) {
-    const options = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-    return new Date(expiryDate).toLocaleString("en-US", options);
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:4000/cornea/read");
-        const data = response.data;
-       
+        const cornData = response.data;
+
         // setCorneas(data);
-        const filteredCorneas = data.filter(
+        const filteredCorneas = cornData.filter(
           (cornea) => cornea.isTested !== true && cornea.expirationDate !== 14
         );
         //  console.log("cornea:", filteredCorneas);
@@ -73,22 +56,10 @@ const CollectedCornea = () => {
 
     fetchData();
   }, []);
-  const handleEvaluated = async () => {
-    setIsButtonClicked(true);
-  };
 
-  const deleteCornea = async (id) => {
-    try {
-      await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
-      setCorneas(corneas.filter((cornea) => cornea._id !== id));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  // const editcornea = async (id) => {
-  //     navigate(`/labtechnicaldashboard/editcornea/${id}`);
-  // };
   const renderCornea = searchTerm ? data : currentCorneas;
+  const notTestCornes = renderCornea.filter((item) => item.isTested !== true);
+  //  console.log("searched:", notTestCornes);
   return (
     <div>
       <TableContainer>
@@ -105,10 +76,23 @@ const CollectedCornea = () => {
         <div>
           <Table variant="simple">
             {/* Table header */}
-            <TableHeader />
+            <Thead>
+              <Tr className="bg-sky-600 text-white">
+                <Th className="text-white">LotNo</Th>
+                <Th className="text-white">Position</Th>
+                <Th className="text-white">Clarity</Th>
+                <Th className="text-white">size</Th>
+                <Th className="text-white">Eye Lid</Th>
+                <Th className="text-white">Iris COlor</Th>
+                {/* <Th className="text-white">Iris COlor</Th> */}
+                <Th className="text-white" colSpan={3}>
+                  Operations
+                </Th>
+              </Tr>
+            </Thead>
             {/* Table body */}
             <Tbody>
-              {renderCornea.map((cornea, index) => (
+              {notTestCornes.map((cornea, index) => (
                 <Row
                   key={index}
                   cornea={cornea}
