@@ -41,18 +41,18 @@ const PhysicalExam = () => {
 
   const [, setErrors] = useState({});
   const [donate, setDonate] = useState(true);
-    const donated = {
-        donate,
-    };
+  const donated = {
+    donate,
+  };
 
- const hanleDonate = async (id) => {
-        try {
-            await fetch(`http://localhost:4000/api/donate/${id}`, donated);
-            //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
-        } catch (error) {
-            console.error("Failed to collect physical exam:", error);
-        }
+  const hanleDonate = async (id) => {
+    try {
+      await fetch(`http://localhost:4000/donor/donate/${id}`, donated);
+      //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
+    } catch (error) {
+      console.error("Failed to collect physical exam:", error);
     }
+  }
   const handleChange = (e) => {
     const { name, value, type, keyCode } = e.target;
 
@@ -89,7 +89,9 @@ const PhysicalExam = () => {
         }));
       }
 
-    } else if (type === "number") {
+
+
+    }else if (type === "number") {
       if (keyCode === 8 && value.length === 0) {
         setErrors((prevErrors) => ({
           ...prevErrors,
@@ -109,6 +111,10 @@ const PhysicalExam = () => {
           [name]: value,
         }));
       } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: "Only numeric characters are allowed.",
+        }));
         toast({
           title: "Enter only numbers",
           status: "warning",
@@ -116,12 +122,10 @@ const PhysicalExam = () => {
           isClosable: true,
           position: "top",
         });
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: "Only numeric characters are allowed.",
-        }));
       }
     }
+
+
     else if (type === "checkbox") {
       setFormData((formData) => ({
         ...formData,
@@ -238,14 +242,13 @@ const PhysicalExam = () => {
       console.error(error);
       toast({
         title: "Error: Data entry failed",
-        status: "success",
+        status: "warning",
         duration: 5000,
         isClosable: true,
         position: "top",
       });
-      alert("Error: Data entry failed.");
     }
- hanleDonate(id)
+    hanleDonate(id)
   };
 
   return (
@@ -261,7 +264,7 @@ const PhysicalExam = () => {
         </div>
 
         <div className="mb-4 mx-8">
-          <label className="mb-2 font-bold" htmlFor="height">
+          <label className="mb-2" htmlFor="height">
             Height:
           </label>
           <input
@@ -276,7 +279,7 @@ const PhysicalExam = () => {
         </div>
 
         <div className="mb-4 mx-8">
-          <label className="mb-2 font-bold" htmlFor="weight">
+          <label className="mb-2" htmlFor="weight">
             Weight:
           </label>
           <input
@@ -291,7 +294,7 @@ const PhysicalExam = () => {
         </div>
 
         <div className="mb-4 mx-8">
-          <label className="mb-2 font-bold" htmlFor="sex">
+          <label className="mb-2" htmlFor="sex">
             Sex:
           </label>
           <select
@@ -302,9 +305,7 @@ const PhysicalExam = () => {
             required
             className="w-32 px-3 py-2 border-2 rounded"
           >
-            <option disabled value="">
-              Sex
-            </option>
+            <option disabled value="">Sex</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
@@ -332,7 +333,7 @@ const PhysicalExam = () => {
           </div>
         </label>
       </div> */}
-        <div className="grid grid-cols-4 gap-4 ml-16 font-bold">
+        <div className="grid grid-cols-4 gap-4 ml-16">
           {Object.entries(formData.examined).map(([key, value]) => (
             <div key={key} className="mb-2">
               <label className="flex items-center mx-auto">
@@ -355,16 +356,16 @@ const PhysicalExam = () => {
         <h3 className="text-2xl text-center font-bold mb-4 font-san rounded p-2 h-14">
           High Risk Examined
         </h3>
-        <div className="grid grid-cols-3 gap-4 ml-16 font-bold">
+        <div className="grid grid-cols-3 gap-4 ml-16">
           {Object.entries(formData.highRiskexamined).map(([key, value]) => (
             <div key={key} className="mb-2">
-              <label className="flex items-center">
+              <label className="flex items-center justify-end">
                 {key}:
                 <select
                   name={key}
                   value={value}
                   onChange={handleChange}
-                  className="ml-2 px-3 py-2 border rounded w-48 bg-gray-200 text-gray-700 appearance-none"
+                  className="ml-2 px-3 py-2 bordered border-blue-700 rounded w-48 appearance-none"
                   required
                 >
                   <option value="no evidence">No Evidence</option>
@@ -380,7 +381,7 @@ const PhysicalExam = () => {
       <div className="w-full mb-4 text-xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 ml-6">
           <div className="mb-4">
-            <label className="block mb-2 font-bold" htmlFor="causeOfDeath">
+            <label className="block mb-2" htmlFor="causeOfDeath">
               Cause of Death:
             </label>
             <input
@@ -394,7 +395,7 @@ const PhysicalExam = () => {
             />
           </div>
           <div>
-            <label className="block mb-2 font-bold" htmlFor="dod">
+            <label className="block mb-2" htmlFor="dod">
               Date of Death:
             </label>
             <input
@@ -408,7 +409,7 @@ const PhysicalExam = () => {
           </div>
 
           <div>
-            <label className="block mb-2 font-bold" htmlFor="time">
+            <label className="block mb-2" htmlFor="time">
               Time:
             </label>
             <input
@@ -422,11 +423,11 @@ const PhysicalExam = () => {
             />
           </div>
           <div>
-            <label className="block mb-2 font-bold" htmlFor="story">
+            <label className="block mb-2" htmlFor="story">
               Story:
             </label>
             <textarea
-              // type="text"
+              // type="string"
               name="story"
               value={formData.story}
               onChange={handleChange1}

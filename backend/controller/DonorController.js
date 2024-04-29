@@ -528,12 +528,10 @@ const verifyCode = async (req, res) => {
     }
 };
 
-//////////
-const donatedDonor=async(req,res)=>{
+const donatedDonor = async(req,res)=>{
 const Donor= await Donor.findOneAndUpdate({_id:req.params.id},{$set:req.body})
 res.send(Donor)
 }
-//////////
 
 const getRecentDonors = async (req, res) => {
   try {

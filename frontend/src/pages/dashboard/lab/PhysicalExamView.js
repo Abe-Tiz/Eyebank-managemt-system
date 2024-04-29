@@ -5,11 +5,23 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "@chakra-ui/react";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useDisclosure } from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/react";
+import {
+  Button,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+} from '@chakra-ui/react'
 
 const PhysicalExamView = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
-
+  const toast=useToast() 
   useEffect(() => {
     fetchPhysicalExams();
   }, []);
@@ -25,6 +37,47 @@ const PhysicalExamView = () => {
   };
 
   const deletePhysicalExam = (examId) => {
+    //////////
+    // function AlertDialogExample() {
+    //   const { isOpen, onOpen, onClose } = useDisclosure()
+    //   const cancelRef = React.useRef()
+    
+    //   return (
+    //     <>
+    //       <Button colorScheme='red' onClick={onOpen}>
+    //         Delete Customer
+    //       </Button>
+    
+    //       <AlertDialog
+    //         isOpen={isOpen}
+    //         leastDestructiveRef={cancelRef}
+    //         onClose={onClose}
+    //       >
+    //         <AlertDialogOverlay>
+    //           <AlertDialogContent>
+    //             <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+    //               Delete Customer
+    //             </AlertDialogHeader>
+    
+    //             <AlertDialogBody>
+    //               Are you sure? You can't undo this action afterwards.
+    //             </AlertDialogBody>
+    
+    //             <AlertDialogFooter>
+    //               <Button ref={cancelRef} onClick={onClose}>
+    //                 Cancel
+    //               </Button>
+    //               <Button colorScheme='red' onClick={() => performDelete(examId)} ml={3}>
+    //                 Delete
+    //               </Button>
+    //             </AlertDialogFooter>
+    //           </AlertDialogContent>
+    //         </AlertDialogOverlay>
+    //       </AlertDialog>
+    //     </>
+    //   )
+    // }
+
     confirmAlert({
       title: 'Confirm Deletion',
       message: 'Are you sure you want to delete this physical exam?',
@@ -51,16 +104,15 @@ const PhysicalExamView = () => {
       );
       if (response.ok) {
         fetchPhysicalExams();
-        confirmAlert({
-          title: 'Success',
-          message: 'Physical exam deleted successfully.',
-          buttons: [
-            {
-              label: 'OK',
-              onClick: () => {},
-            },
-          ],
-        });
+        toast({
+          title:"Physical exam deleted successfully.",
+          status:"success",
+          duration:3000,
+          isClosable:true,
+          position:"top",
+
+        })
+        // alert('Physical exam deleted successfully.');
       } else {
         throw new Error('Failed to delete physical exam.');
       }

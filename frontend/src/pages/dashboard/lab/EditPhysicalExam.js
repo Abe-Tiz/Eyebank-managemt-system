@@ -48,7 +48,7 @@ const EditPhysicalExam = () => {
       [e.target.name]: e.target.value,
     }));
   };
- 
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,13 +98,16 @@ const EditPhysicalExam = () => {
         </div>
         <div className="mb-4">
           <label className="block mb-2">{t('Sex')}</label>
-          <input
+          <select
             className="w-full border border-gray-300 rounded-md p-2"
-            type="text"
             name="sex"
             value={exam.sex}
             onChange={handleChange}
-          />
+          >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
         </div>
         <div className="mb-4">
           <label className="block mb-2">{t('Cause of Death')}</label>
@@ -117,15 +120,15 @@ const EditPhysicalExam = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-2">{t('Date of Death')}</label>
-          <input
-            className="w-full border border-gray-300 rounded-md p-2"
-            type="Date"
-            name="dateofdeath"
-            value={exam.dateofdeath}
-            onChange={handleChange}
-          />
-        </div>
+  <label className="block mb-2">{t('Date of Death')}</label>
+  <input
+    className="w-full border border-gray-300 rounded-md p-2"
+    type="date"
+    name="dateofdeath"
+    value={exam.dateofdeath || ''}
+    onChange={handleChange}
+  />
+</div>
         <div className="mb-4">
           <label className="block mb-2">{t('Time')}</label>
           <input
@@ -136,7 +139,7 @@ const EditPhysicalExam = () => {
             onChange={handleChange}
           />
         </div>
-        <button 
+        <button
           className="bg-blue-500 text-white px-4 py-2 rounded-md"
           type="submit"
         >
