@@ -19,5 +19,6 @@ router.delete(
 );
 router.put('/distribute/:id', requestController.distributeCorneaRequestById);
 router.put('/approve/:id', requestController.approveCorneaRequestController);
+router.put('/distributed/:id', requestController.distributedCorneaController);
 
 module.exports = router;

@@ -388,7 +388,7 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                                     }}
                                     subtitleProps={[
                                         {
-                                            link: "/labtechnicaldashboard/viewRequestCornea",
+                                            link: "/labtechnicaldashboard/approvedRequest",
                                             subtitle: "View Request",
                                             iconLibrary: "md",
                                             iconName: "MdStreetview",

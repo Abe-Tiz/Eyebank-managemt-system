@@ -41,8 +41,8 @@ import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
-import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
-import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
+// import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
+// import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
@@ -57,7 +57,6 @@ import ViewRequestedCornea from "../pages/dashboard/lab/ApprovedRequest";
 import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
 import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
 import EditRequest from "../pages/dashboard/surgeon/EditRequest";
-import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCornea";
 import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
 import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import AddRecipient from "../pages/dashboard/surgeon/AddRecipient";
@@ -92,7 +91,7 @@ import StoredCornea from "../pages/dashboard/lab/StoredCornea";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Main />,
+        
         children: [
             {
                 path: "/",

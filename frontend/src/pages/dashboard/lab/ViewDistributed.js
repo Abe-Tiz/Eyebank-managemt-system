@@ -53,27 +53,24 @@ const Viewdistribute = () => {
                 <Table variant='simple'>
                     <Thead>
                         <Tr className='bg-sky-600 text-white'>
-                            <Th className='text-white'>Lot No</Th>
-                            <Th className='text-white' > Hospital Name</Th>
+                            <Th className='text-white' >No</Th>
+                           <Th className='text-white' > Hospital Name</Th>
                             <Th className='text-white'>Surgeon Name</Th>
                             <Th className='text-white'>Mode Of Traporation</Th>
-                            <Th className='text-white'>Approved By</Th>
-                            <Th className='text-white'>distribute By</Th>
-                            <Th className='text-white'>Type of Tissue</Th>
-                            <Th className='text-white'>Distribution Date</Th>
+                            <Th className='text-white'>Suitability</Th>
+                           <Th className='text-white'>Distribution Date</Th>
                             <Th className='text-white' >Operations</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {distributed.map((distribute, index) => (
+
+                    {distributed.map((distribute, index) => (
                             <Tr key={index}>
-                                <Td>{distribute.LotNo}</Td>
-                                <Td>{distribute.hospitalName.hospitalName}</Td>
-                                <Td>{distribute.nameOfSurgeon.name}</Td>
+                                <Td>{index + 1}</Td>
+                                <Td>{distribute.hospitalName}</Td>
+                                <Td>{distribute.name}</Td>
                                 <Td>{distribute.modeOfTransportation}</Td>
-                                <Td>{distribute.approvedBy}</Td>
-                                <Td>{distribute.nameOfTechnician}</Td>
-                                <Td>{distribute.typeOfTissue}</Td>
+                                <Td>{distribute.suiatablity}</Td>
                                 <Td>
                                     {formatTimestamp(distribute.createdAt)}
                                 </Td>

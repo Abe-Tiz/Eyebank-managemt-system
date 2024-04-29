@@ -1,18 +1,21 @@
+const Cornea = require('../models/Cornea');
 const Distribution = require('../models/CorneaDistribution');
 const createDistribution = async (req, res) => {
-    const { hospitalName, nameOfSurgeon, modeOfTransportation, typeOfTissue, approvedBy, nameOfTechnician, LotNo } = req.body;
+    const { hospitalName, name, modeOfTransportation, suiatablity } = req.body;
     try {
         const distribution = await Distribution.create({
-            LotNo: LotNo,
+            
             hospitalName: hospitalName,
-            nameOfSurgeon: nameOfSurgeon,
+            name: name,
             modeOfTransportation: modeOfTransportation,
-            typeOfTissue: typeOfTissue,
-
-            approvedBy: approvedBy,
-            nameOfTechnician: nameOfTechnician
+            suiatablity:suiatablity
+    
         })
+        // distributed
+
+        
         if (distribution) {
+            
             res.send({ status: "ok", data: distribution })
         }
     } catch (error) {
@@ -21,26 +24,7 @@ const createDistribution = async (req, res) => {
 }
 const getDistributeds = async (req, res) => {
     const distribute = await Distribution.find()
-        .populate({
-            path: "LotNo",
-            select: "_id"
-        })
-        .populate({
-            path: "hospitalName",
-            select: "hospitalName"
-        })
-        .populate({
-            path: 'nameOfSurgeon',
-            select: 'name'
-        })
-        .populate({
-            path: 'approvedBy',
-            select: 'name'
-        })
-        .populate({
-            path: 'nameOfTechnician',
-            select: 'name'
-        })
+       
     res.send(distribute);
 };
 
