@@ -42,7 +42,7 @@ import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
 import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
-import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
+// import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
@@ -51,11 +51,15 @@ import ApprovedRequest from "../pages/dashboard/lab/ApprovedRequest";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
-import ViewRequestedCornea from "../pages/dashboard/surgeon/ViewCorneaRequest";
+
+
+import ViewRequestedCornea from "../pages/dashboard/lab/ApprovedRequest";
 import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
 import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
 import EditRequest from "../pages/dashboard/surgeon/EditRequest";
 import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCornea";
+// import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
+import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import AddRecipient from "../pages/dashboard/surgeon/AddRecipient";
 import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
 import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";

@@ -108,7 +108,7 @@ const handleOtherInputChange = (event) => {
       tests,
       // dob: selectedDate,
     };
-    console.log(data);
+    // console.log(data);
     try {
       const response = await axios.post(
         "http://localhost:4000/blood/create",
@@ -163,31 +163,6 @@ const handleOtherInputChange = (event) => {
               )}
             </div>
           </div>
-
-          {/* <div className="mt-4">
-            <label
-              htmlFor="sex"
-              className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Date of Birth:
-              <span class="text-red-500">*</span>
-            </label>
-            <div className="flex flex-col items-start">
-              <input
-                name="birthdate"
-                className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block"
-                type="date"
-                autoComplete="off"
-                required
-                value={selectedDate}
-                onChange={handleDateChange}
-              />
-           
-              {!validateDateOfBirth(selectedDate) && (
-                <span className="text-red-500">please pick date of birth</span>
-              )}
-            </div>
-          </div> */}
         </div>
 
         <div className="flex gap-3 flex-wrap md:mr-4 mt-2">

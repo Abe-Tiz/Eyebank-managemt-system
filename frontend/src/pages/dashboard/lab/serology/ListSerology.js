@@ -19,12 +19,14 @@ import { Th } from "@chakra-ui/react";
 import DeleteAlertDialog from "../../../../components/DeleteAlertDialog";
 import { useTranslation } from "react-i18next";
 import LoadingCircle from "./../../../../components/LoadingCircle";
+import NotFound from "../../../../components/NotFound";
 
 const ListSerology = () => {
   const { searchTerm, handleChange, data, error } = useSearch("blood");
   const navigate = useNavigate();
   const [blood, setBlood] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [deleteId, setDeleteId] = useState(null);
 
   const toast = useToast();
@@ -67,7 +69,7 @@ const ListSerology = () => {
         const samplData = response.data;
         // console.log("sample::", data);
         setBlood(samplData);
-        // setExpirationDate(new Date(data.expirationDate));
+        setLoading(false)
       } catch (error) {
         console.error(error);
       }
@@ -102,73 +104,77 @@ const ListSerology = () => {
   // console.log("serached:::", data);
   return (
     <>
-      <div>
-        <TableContainer>
-          <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-            List of Tested Results
-          </Text>
-          <div className="w-full mt-2 flex justify-end ">
-            {/* search component */}
-            <SearchComponent
-              searchTerm={searchTerm}
-              handleChange={handleChange}
-            />
-          </div>
-          <div>
-            <Table variant="simple">
-              {/* Table header */}
-              <Thead>
-                <Tr className="bg-sky-600 text-white">
-                  {/* <Th className="text-white">ID</Th> */}
-                  <Th className="text-white">Blood Type</Th>
-                  <Th className="text-white">Position</Th>
-                  <Th className="text-white">Status</Th>
-                  <Th className="text-white">Eye Lid</Th>
-                  <Th className="text-white">Lot Number</Th>
-                  <Th className="text-white">Tested</Th>
-                  <Th className="text-white" colSpan={3}>
-                    Action
-                  </Th>
-                </Tr>
-              </Thead>
+      {loading ? (
+        <LoadingCircle />
+      ) : (
+        <div>
+          <TableContainer>
+            <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+              List of Tested Results
+            </Text>
+            <div className="w-full mt-2 flex justify-end ">
+              {/* search component */}
+              <SearchComponent
+                searchTerm={searchTerm}
+                handleChange={handleChange}
+              />
+            </div>
+            <div>
+              <Table variant="simple">
+                {/* Table header */}
+                <Thead>
+                  <Tr className="bg-sky-600 text-white">
+                    {/* <Th className="text-white">ID</Th> */}
+                    <Th className="text-white">Blood Type</Th>
+                    <Th className="text-white">Position</Th>
+                    <Th className="text-white">Status</Th>
+                    <Th className="text-white">Eye Lid</Th>
+                    <Th className="text-white">Lot Number</Th>
+                    <Th className="text-white">Tested</Th>
+                    <Th className="text-white" colSpan={3}>
+                      Action
+                    </Th>
+                  </Tr>
+                </Thead>
 
-              {/* Table body */}
-              <Tbody>
-                {renderCornea ? (
-                  renderCornea.map((blood, index) => (
-                    <TableRow
-                      key={index}
-                      blood={blood}
-                      formatTimestamp={formatTimestamp}
-                      // deleteCornea={deleteSerology}
-                      onOpen={onOpen}
-                    />
-                  ))
-                ) : (
-                  <LoadingCircle />
-                )}
-              </Tbody>
-            </Table>
+                {/* Table body */}
+                <Tbody>
+                  {renderCornea ? (
+                    renderCornea.map((blood, index) => (
+                      <TableRow
+                        key={index}
+                        blood={blood}
+                        formatTimestamp={formatTimestamp}
+                        // deleteCornea={deleteSerology}
+                        onOpen={onOpen}
+                      />
+                    ))
+                  ) : (
+                    <NotFound />
+                  )}
+                </Tbody>
+              </Table>
 
-            {/* Pagination Controls */}
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              paginate={paginate}
-            />
-          </div>
-        </TableContainer>
+              {/* Pagination Controls */}
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                paginate={paginate}
+              />
+            </div>
+          </TableContainer>
 
-        {/* confirmation alert */}
-        <DeleteAlertDialog
-          isOpen={isOpen}
-          onClose={onClose}
-          cancelRef={cancelRef}
-          handleDelete={deleteSerology}
-          t={t}
-        />
-      </div>
+          {/* confirmation alert */}
+          <DeleteAlertDialog
+            isOpen={isOpen}
+            onClose={onClose}
+            cancelRef={cancelRef}
+            handleDelete={deleteSerology}
+            t={t}
+          />
+        </div>
+      )}
     </>
   );
 };

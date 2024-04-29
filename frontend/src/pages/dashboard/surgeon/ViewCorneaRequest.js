@@ -7,51 +7,58 @@ import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
 import useSearch from "../../../useHooks/useSearch";
 import SearchComponent from "../../../components/SearchComponent";
 const RequestedCorneas = () => {
-    const toast = useToast();
-    const [requestedCorneas, setRequestedCorneas] = useState([]);
-    useEffect(() => {
-        const getAllRequestedCorneas = async () => {
-            try {
-                const { data } = await axios.get(
-                    "http://localhost:4000/requestCornea/getRequest"
-                );
-                setRequestedCorneas(data);
-            } catch (error) {
-                console.log(error);
-                toast.error("Something Went Wrong");
-            }
-        };
-
-        getAllRequestedCorneas();
-    }, []);
-    const navigate = useNavigate();
-
-    const handleApprove = async (id) => {
-        try {
-            await axios.put(`http://localhost:4000/requestCornea/approve/${id}`);
-            setRequestedCorneas(
-                requestedCorneas.map((p) =>
-                    p._id === id ? { ...p, isApproved: true } : p
-                )
-            );
-            toast({
-                title: "Requste Approved",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
-                position: "top",
-            });
-        } catch (error) {
-            toast({
-                title: "Error Occurred!",
-                description: error.message,
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-                position: "top",
-            });
-        }
+  const toast = useToast();
+  const [requestedCorneas, setRequestedCorneas] = useState([]);
+  const { searchTerm, data, handleChange } = useSearch("request");
+  useEffect(() => {
+    const getAllRequestedCorneas = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:4000/requestCornea/getRequests"
+        );
+        setRequestedCorneas(data);
+      } catch (error) {
+        console.log(error);
+        toast.error("Something Went Wrong");
+      }
     };
+
+    getAllRequestedCorneas();
+  }, []);
+const navigate = useNavigate();
+
+  const handleApprove = async (id) => {
+    try {
+      await axios.put(`http://localhost:4000/requestCornea/approve/${id}`);
+      setRequestedCorneas(
+        requestedCorneas.map((p) =>
+          p._id === id ? { ...p, isApproved: true } : p
+        )
+      );
+      toast({
+        title: "Requste Approved",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    } catch (error) {
+      toast({
+        title: "Error Occurred!",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  };
+
+
+  
+
+
+
 
     const handleDistribute = async (id) => {
         try {

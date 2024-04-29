@@ -17,18 +17,21 @@ export default function SendRequestCornea() {
   const [descriptionOfRequest, setDescriptionOfRequest] = useState("");
   const [suiatablity, setSuiatablity] = useState("");
 
-  useEffect(() => {
-    const fetchSurgeons = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:4000/user");
-        setSurgeons(data);
-      } catch (error) {
-        console.error("Error fetching surgeons:", error);
-      }
-    };
-
-    fetchSurgeons();
-  }, []);
+    useEffect(() => {
+      const fetchSurgeons = async () => {
+        try {
+          const { data } = await axios.get("http://localhost:4000/user");
+          setSurgeons(data);
+          // const surgeonId = localStorage.getItem("surgeonId");
+          // console.log("tefera:",surgeonId)
+       
+        } catch (error) {
+          console.error("Error fetching surgeons:", error);
+        }
+      };
+  
+      fetchSurgeons();
+    }, []);
 
   useEffect(() => {
     const fetchHospitals = async () => {
@@ -79,13 +82,13 @@ export default function SendRequestCornea() {
             <span className="border-b-4 border-indigo-500">Send Request</span>
           </h3>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-9">
-            <label>
+          <label>
               <select
-                className="form-input mt-2 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                className="form-input mt-2 block  w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                 value={surgeon}
                 onChange={(e) => setSurgeon(e.target.value)}
               >
-                <option> Select Surgeon </option>
+                <option>Select Surgeon</option>
                 {surgeons.map((surgeon) => (
                   <option
                     key={surgeon._id}

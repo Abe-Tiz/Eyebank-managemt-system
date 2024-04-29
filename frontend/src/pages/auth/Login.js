@@ -50,6 +50,7 @@ const Login = () => {
                     }
                     else if (data.user.role === "doctor") {
                         localStorage.setItem("token", data.data);
+                        localStorage.setItem("surgeonId", data.user._id);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -88,7 +89,7 @@ const Login = () => {
                         navigate("/medicaldirectordashboard");
                     }
                 }
-                localStorage.setItem("surgeonId", data.user.id);
+                
             }
         } catch (error) {
             if (error.response) {

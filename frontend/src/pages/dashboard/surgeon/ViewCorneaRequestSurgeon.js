@@ -20,6 +20,7 @@ import {
 const RequestedCorneas = () => {
   const toast = useToast();
   const [requestedCorneas, setRequestedCorneas] = useState([]);
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate();
@@ -40,18 +41,16 @@ const RequestedCorneas = () => {
             },
           }
         );
-        
+  
         const data = response.data;
         setRequestedCorneas(data);
       } catch (error) {
-        console.log(error);
-       
+        console.error(error);
       }
     };
   
     getAllRequestedCorneas();
   }, []);
-  
   const handleDelete = async (id) => {
     try {
       await axios.delete(

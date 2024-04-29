@@ -12,7 +12,7 @@ const ApprovedList = () => {
         const getAllRequestedCorneas = async () => {
             try {
                 const { data } = await axios.get(
-                    "http://localhost:4000/requestCornea/getRequest"
+                    "http://localhost:4000/requestCornea/getRequests"
                 );
                 setRequestedCorneas(data);
             } catch (error) {
@@ -50,15 +50,8 @@ const ApprovedList = () => {
                 position: "top",
             });
         }
-    };
-
-
-
-
-
-
-
-    const handleDistribute = async (id) => {
+    }
+     const handleDistribute = async (id) => {
         try {
             navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
         } catch (error) {
@@ -95,53 +88,52 @@ const ApprovedList = () => {
                     </thead>
                     <tbody>
                         {
-
                             requestedCorneas
-                                .filter((request) => request.isApproved === true)
-                                .map((request) => (
-                                    <tr
-                                        key={request.id}
-                                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                            .filter((request) => request.isApproved === true)
+                            .map((request) => (
+                                <tr
+                                    key={request.id}
+                                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                >
+                                    <th
+                                        scope="row"
+                                        className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                                     >
-                                        <th
-                                            scope="row"
-                                            className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            <div className="ps-3">
-                                                <div className="text-base font-semibold">
-                                                    {" "}
-                                                    {request.surgeon?.name}
-                                                </div>
+                                        <div className="ps-3">
+                                            <div className="text-base font-semibold">
+                                                {" "}
+                                                {request.surgeon?.name}
                                             </div>
-                                        </th>
-                                        <td className="px-6 py-4">{request.hospital?.hospitalName}</td>
-                                        <td className="px-6 py-4">{request.descriptionOfRequest}</td>
-                                        {/* <td>
-                                    {request.distribute === true ? (
-                                    
-                                        <p className="text-green-500 font-bold">Distributed</p>
-                                    ) : (
-                                        <Button
-                                            colorScheme="blue"
-                                            onClick={() => handleDistribute(request._id, request.suiatablity)}
-                                        >
-                                            distribute
-                                        </Button>
-                                    )}
-                                </td> */}
-                                        <td className="px-6 py-4">
-                                            <p className="  text-blue-700 px-4 py-2 rounded font-bold">
-                                                {/* {t("common:activeButtonLabel")} */}
-                                                Approved
-                                            </p>
-                                        </td>
-                                    </tr>
-                                ))}
-                    </tbody>
-                </table>
-            </div>
-        </>
-    );
+                                        </div>
+                                    </th>
+                                    <td className="px-6 py-4">{request.hospital?.hospitalName}</td>
+                                    <td className="px-6 py-4">{request.descriptionOfRequest}</td>
+                                    {/* <td>
+                                {request.distribute === true ? (
+                                
+                                    <p className="text-green-500 font-bold">Distributed</p>
+                                ) : (
+                                    <Button
+                                        colorScheme="blue"
+                                        onClick={() => handleDistribute(request._id, request.suiatablity)}
+                                    >
+                                        distribute
+                                    </Button>
+                                )}
+                            </td> */}
+                                    <td className="px-6 py-4">
+                                        <p className="  text-blue-700 px-4 py-2 rounded font-bold">
+                                            {/* {t("common:activeButtonLabel")} */}
+                                            Approved
+                                        </p>
+                                    </td>
+                                </tr>
+                            ))}
+                </tbody>
+            </table>
+        </div>
+    </>
+);
 };
 
 export default ApprovedList;

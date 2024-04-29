@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
@@ -12,7 +13,7 @@ const ApprovedRequest = () => {
         const getAllRequestedCorneas = async () => {
             try {
                 const { data } = await axios.get(
-                    "http://localhost:4000/requestCornea/getRequest"
+                    "http://localhost:4000/requestCornea/getRequests"
                 );
                 setRequestedCorneas(data);
             } catch (error) {
@@ -27,7 +28,7 @@ const ApprovedRequest = () => {
 
     // const handleApprove = async (id) => {
     //     try {
-    //         await axios.put(`http://localhost:4000/requestCornea/approve/${id}`);
+    //         await axios.put(http://localhost:4000/requestCornea/approve/${id});
     //         setRequestedCorneas(
     //             requestedCorneas.map((p) =>
     //                 p._id === id ? { ...p, isApproved: true } : p
@@ -58,6 +59,8 @@ const ApprovedRequest = () => {
                 suiatablity: suiatablity,
             };
             const queryString = new URLSearchParams(params).toString();
+
+
             const url = `/labtechnicaldashboard/distributeCornea/${id}?${queryString}`;
             navigate(url);
         } catch (error) {
@@ -87,7 +90,8 @@ const ApprovedRequest = () => {
                                 Distribute
                             </th>
 
-                            {/* <th scope="col" className="px-6 py-3">
+
+{/* <th scope="col" className="px-6 py-3">
                 Action
               </th> */}
                         </tr>

@@ -17,10 +17,13 @@ import TableHeader from "../TableHeader";
 import TableRowCornea from "../TableRowCornea";
 import Pagination from "../../../../components/Pagination";
 import Row from "./Row";
+import NotFound from "../../../../components/NotFound";
+import LoadingCircle from "../../../../components/LoadingCircle";
+// import NotFound from './../../../../components/NotFound';
 
 const CollectedCornea = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const [fetchedData, setFetchedData] = useState(null);
+   const [loading, setLoading] = useState(true);
   const { searchTerm, handleChange, data, error } = useSearch("cornea");
   const navigate = useNavigate();
   const [corneas, setCorneas] = useState([]);
@@ -42,13 +45,12 @@ const CollectedCornea = () => {
       try {
         const response = await axios.get("http://localhost:4000/cornea/read");
         const cornData = response.data;
-
         // setCorneas(data);
         const filteredCorneas = cornData.filter(
           (cornea) => cornea.isTested !== true && cornea.expirationDate !== 14
         );
-        //  console.log("cornea:", filteredCorneas);
         setCorneas(filteredCorneas);
+        setLoading(false)
       } catch (error) {
         console.error(error);
       }
@@ -59,7 +61,7 @@ const CollectedCornea = () => {
 
   const renderCornea = searchTerm ? data : currentCorneas;
   const notTestCornes = renderCornea.filter((item) => item.isTested !== true);
-  //  console.log("searched:", notTestCornes);
+   console.log("searched:", notTestCornes);
   return (
     <div>
       <TableContainer>
@@ -74,42 +76,48 @@ const CollectedCornea = () => {
           />
         </div>
         <div>
-          <Table variant="simple">
-            {/* Table header */}
-            <Thead>
-              <Tr className="bg-sky-600 text-white">
-                <Th className="text-white">LotNo</Th>
-                <Th className="text-white">Position</Th>
-                <Th className="text-white">Clarity</Th>
-                <Th className="text-white">size</Th>
-                <Th className="text-white">Eye Lid</Th>
-                <Th className="text-white">Iris COlor</Th>
-                {/* <Th className="text-white">Iris COlor</Th> */}
-                <Th className="text-white" colSpan={3}>
-                  Operations
-                </Th>
-              </Tr>
-            </Thead>
-            {/* Table body */}
-            <Tbody>
-              {notTestCornes.map((cornea, index) => (
-                <Row
-                  key={index}
-                  cornea={cornea}
-                  // formatTimestamp={formatTimestamp}
-                  // deleteCornea={deleteCornea}
-                  // editcornea={editcornea}
-                />
-              ))}
-            </Tbody>
-          </Table>
-          {/* Pagination Controls */}
-          <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            paginate={paginate}
-          />
+          {!loading ? (
+            <>
+              <Table variant="simple">
+                {/* Table header */}
+                <Thead>
+                  <Tr className="bg-sky-600 text-white">
+                    <Th className="text-white">LotNo</Th>
+                    <Th className="text-white">Position</Th>
+                    <Th className="text-white">Clarity</Th>
+                    <Th className="text-white">size</Th>
+                    <Th className="text-white">Eye Lid</Th>
+                    <Th className="text-white">Iris COlor</Th>
+                    {/* <Th className="text-white">Iris COlor</Th> */}
+                    <Th className="text-white" colSpan={3}>
+                      Operations
+                    </Th>
+                  </Tr>
+                </Thead>
+                {/* Table body */}
+                <Tbody>
+                  {notTestCornes ? notTestCornes.map((cornea, index) => (
+                    <Row
+                      key={index}
+                      cornea={cornea}
+                    />
+                  ))
+                    : (
+                      <NotFound />
+                )}
+                </Tbody>
+              </Table>
+              {/* Pagination Controls */}
+             {!notTestCornes &&  <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                paginate={paginate}
+              />}
+            </>
+          ) : (
+            <LoadingCircle />
+          )}
         </div>
       </TableContainer>
     </div>
