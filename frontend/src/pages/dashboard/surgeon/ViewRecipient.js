@@ -14,6 +14,13 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer } from '@chakra-ui/react';
 
 const ViewTissue = () => {
+    const [isOpen, setIsOpen] = useState({
+        serology: false,
+        distribut: false,
+        cornea: false,
+        physical: false,
+        request: false,
+    });
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
@@ -57,29 +64,26 @@ const ViewTissue = () => {
     return (
         <div>
             <TableContainer>
-                <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
+                {/* <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
                     List of Recipients
-                </Text>
-                <Table size='sm'>
+                </Text> */}
+                <Table variant='simple'>
                     <Thead>
-                        <Tr>
-
+                        <Tr className="bg-gray-200 ">
                             <Th>S.No</Th>
-                            <Th>LotNo</Th>
                             <Th> Register Date</Th>
                             <Th> Recipinent Name</Th>
                             <Th>Age</Th>
                             <Th>Sex</Th>
                             <Th>Address</Th>
                             <Th>Surgery Type</Th>
-                            <Th colSpan={4}>Operations</Th>
+                            <Th className='text-center' colSpan={4}>Operations</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
                         {recipient.map((recipent, index) => (
-                            <Tr key={index}>
+                            <Tr key={index} className="mb-2 text-lg">
                                 <Td>{index + 1}</Td>
-                                <Td>{recipent._id}</Td>
                                 <Td>
                                     {formatTimestamp(recipent.createdAt)}
                                 </Td>
@@ -88,17 +92,24 @@ const ViewTissue = () => {
                                 <Td>{recipent.sex}</Td>
                                 <Td>{recipent.address}</Td>
                                 <Td>{recipent.surgeryType}</Td>
-                                <Td>
-                                    <Link to={`/surgondashboard/ocularpost/${recipent._id}`}>Ocular Post</Link>
+                                <Td >
+                                    <Button colorScheme='telegram'>
+                                        <Link to={`/surgondashboard/ocularpost/${recipent._id}`}>Ocular Post</Link>
+                                    </Button>
                                 </Td>
-                                <Td>
-                                    <Link to={`/surgondashboard/adverse/${recipent._id}`}>Adverse</Link>
+                                <Td >
+                                    <Button colorScheme='orange'>
+                                        <Link to={`/surgondashboard/adverse/${recipent._id}`}>Adverse</Link>
+                                    </Button>
                                 </Td>
-                                <Td>
-                                    <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>Edit</Link>
+                                <Td className="text-blue-600">
+                                    <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>
+                                        <EditIcon /></Link>
                                 </Td>
-                                <Td className='text-red-600'>
-                                    <button onClick={() => deleteRecipient(recipent._id)}>Delete</button>
+                                <Td >
+                                    <button className="text-red-600" onClick={() => deleteRecipient(recipent._id)}>
+                                        <DeleteIcon />
+                                    </button>
                                 </Td>
 
                             </Tr>

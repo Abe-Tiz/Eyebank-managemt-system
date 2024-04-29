@@ -78,9 +78,9 @@ const ViewCornea = () => {
     return (
         <div>
             <TableContainer>
-                <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+                {/* <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
                     List of collected cornea
-                </Text>
+                </Text> */}
                 <div className="w-full mt-2 flex justify-end ">
                     {/* search component */}
                     <SearchComponent

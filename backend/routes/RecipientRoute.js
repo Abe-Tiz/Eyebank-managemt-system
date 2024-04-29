@@ -5,16 +5,16 @@ const {
     getRecipients,
     getRecipient,
     updateRecipient,
-    // ocularPost,
-    // adverseReaction,
+    ocularPost,
+    adverseReaction,
     deleteRecipient
-  } = require("../controller/RecipientController");
+} = require("../controller/RecipientController");
 router.post("/create", createRecipient);
 router.get("/read", getRecipients);
 router.get("/getOne/:id", getRecipient);
 router.put("/update/:id", updateRecipient);
-// router.put("/ocular/:id", ocularPost);
-// router.put("/adverse/:id", adverseReaction);
+router.put("/ocular/:id", ocularPost);
+router.put("/adverse/:id", adverseReaction);
 router.delete("/delete/:id", deleteRecipient);
 
 module.exports = router;

@@ -60,8 +60,10 @@ import doctorRequestedCornea from "../pages/dashboard/surgeon/doctorRequestedCor
 import AddRecipient from "../pages/dashboard/surgeon/AddRecipient";
 import ViewRecipient from "../pages/dashboard/surgeon/ViewRecipient"
 import EditRecipient from "../pages/dashboard/surgeon/EditRecipient";
-import OcularPost from "../pages/dashboard/surgeon/OcularPost";
-import AdverseReaction from "../pages/dashboard/surgeon/AdverseReaction";
+import EditOcularPost from "../pages/dashboard/surgeon/EditOcularPost";
+import EditAdverse from "../pages/dashboard/surgeon/EditAdverse";
+import AddOcularPost from "../pages/dashboard/surgeon/AddOcularPost";
+import AddAdverse from "../pages/dashboard/surgeon/AddAdverse";
 import OcularPostList from "../pages/dashboard/surgeon/OcularPostList";
 import AdverseList from "../pages/dashboard/surgeon/AdverseList";
 //admin
@@ -452,15 +454,23 @@ const router = createBrowserRouter([
             },
             {
                 path: "ocularpost/:id",
-                element: <OcularPost />,
+                element: <AddOcularPost />,
             },
             {
                 path: "adverse/:id",
-                element: <AdverseReaction />,
+                element: <AddAdverse />,
             },
             {
                 path: "editrecipient/:id",
                 element: <EditRecipient />,
+            },
+            {
+                path: "editocular/:id",
+                element: <EditOcularPost />,
+            },
+            {
+                path: "editadverse/:id",
+                element: <EditAdverse />,
             },
             {
                 path: "ocularpostlist",

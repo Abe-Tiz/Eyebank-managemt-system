@@ -11,7 +11,7 @@ import LanguageSelector from './LanguageSelector';
 import axios from 'axios'
 import useSearch from "../../../useHooks/useSearch";
 
-const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
+const HeaderComponent = ({ state, toggleSidebar, newDonorCount, name, role }) => {
     const currentLanguageCode = cookies.get("i18next") || "en";
     const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -33,7 +33,7 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
     };
     return (
         <div
-            className={`bg-indigo-200 p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${state.collapsed ? ` w-11/12 ml-8` : `w-4/5`
+            className={`bg-blue-100 p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${state.collapsed ? ` w-11/12 ml-8` : `w-4/5`
                 }`}
         >
             <div className="flex items-center">
@@ -52,8 +52,15 @@ const HeaderComponent = ({ state, toggleSidebar, newDonorCount }) => {
                 }
                 {/* language selector */}
                 <LanguageSelector />
+
             </div>
-            <div className="bg-indigo-200 flex items-center justify-center space-x-4">
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <span className="text-2xl font-semibold  text-sky-600">
+                    {role}
+                </span>
+                <span className="text-2xl font-semibold ml-5  text-sky-600">{name}</span>
+            </div>
+            <div className="bg-white-200 flex items-center justify-center space-x-4">
                 <div className="flex-none gap-2">
                     {/* notification section  */}
                     <div className="dropdown dropdown-end">

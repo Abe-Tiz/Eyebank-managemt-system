@@ -28,14 +28,14 @@ const OcularPostList = () => {
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
     const [recipient, setRecipent] = useState([]);
-    // function formatTimestamp(timestamp) {
-    //     const options = {
-    //         year: 'numeric',
-    //         month: 'short',
-    //         day: 'numeric',
-    //     };
-    //     return new Date(timestamp).toLocaleString('en-US', options);
-    // }
+    function formatTimestamp(timestamp) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+        return new Date(timestamp).toLocaleString('en-US', options);
+    }
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -53,18 +53,25 @@ const OcularPostList = () => {
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
+    // const deleteOcular = async (id) => {
+    //     try {
+    //         await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
+    //         setCorneas(corneas.filter((cornea) => cornea._id !== id));
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
     return (
         <div>
-            <div className='text-center mt-3'>
+            <div className='text-center'>
                 <TableContainer>
-                    <Text fontSize='2xl' className='text-center  bg-teal-400 text-white mt-6'>
-                        <span> List of Adverse Transplantation </span>
-                    </Text>
-                    <Table size='sm'>
+                    {/* <Text fontSize='2xl' className='text-center  mb-5 mt-6'>
+                        <span className='font-bold'> List of Adverse Transplantation </span>
+                    </Text> */}
+                    <Table variant='simple'>
                         <Thead>
-                            <Tr>
+                            <Tr className="bg-gray-200 ">
                                 <Th>S.No</Th>
-                                <Th>Lot Number</Th>
                                 <Th>Date Of Post</Th>
                                 <Th>Surgeon Name</Th>
                                 <Th>Hospital</Th>
@@ -81,10 +88,11 @@ const OcularPostList = () => {
                                 //         (cornea.adverse.sugeonName === 'awokedejenie')
                                 // )
                                 .map((cornea, index) => (
-                                    <Tr key={index}>
+                                    <Tr key={index} className="mb-2 text-lg" >
                                         <Td>{index + 1}</Td>
-                                        {/* <Td>{formatTimestamp(cornea.adverse.dateOfDiagnosis)}</Td> */}
-                                        {/* <Td>{cornea.adverse.adverseReation}</Td> */}
+                                        <Td>{formatTimestamp(cornea.createdAt)}</Td>
+                                        <Td>{cornea.recipientname}</Td>
+                                        <Td>{cornea.surgeonName}</Td>
                                         <Td>{cornea.ocularPost.surgeryType}</Td>
                                         <Td>{cornea.ocularPost.ocularOperativeEye}</Td>
                                         <Td>{cornea.ocularPost.ocularNonOperativeEye}</Td>
@@ -93,6 +101,11 @@ const OcularPostList = () => {
                                                 <EditIcon />
                                             </Link>
                                         </Td>
+                                        {/* <Td className="text-center">
+                                            <button className="text-red-600" onClick={() => deleteCornea(cornea._id)}>
+                                                <DeleteIcon />
+                                            </button>
+                                        </Td> */}
                                     </Tr>
                                 ))}
                         </Tbody>

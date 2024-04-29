@@ -1,4 +1,4 @@
-
+import { useState } from "react"
 import { IoIosPersonAdd } from "react-icons/io";
 import { MdOutlineGroupAdd } from "react-icons/md";
 import { MdSpaceDashboard } from "react-icons/md";
@@ -8,18 +8,25 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
-
+import DynamicIcon from './../../../components/DynamicIcon';
+import SideCustome from "../../../components/SideCustome";
 const MedicalSidebar = ({
     collapsed,
     name,
+    role,
     image,
 }) => {
 
     const { t } = useTranslation();
-
+    const [isOpen, setIsOpen] = useState({
+        recipient: false,
+        report: false,
+        accedent: false,
+        request: false,
+    });
     return (
         <div
-            className={`bg-indigo-900 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
+            className={`bg-slate-700 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
                 }`}
         >
             <div className="flex flex-col h-full mt-0 overflow-scroll">
@@ -72,9 +79,38 @@ const MedicalSidebar = ({
                             src={image}
                             alt="user photo"
                         />
-                        <span className="text-lg font-semibold ml-10">{name}</span>
+                        {/* <span className="text-2xl font-semibold mt-10 ml-10 text-pink-500">
+                            {role}
+                        </span>
+                        <span className="text-2xl font-semibold  ml-10">{name}</span> */}
                         {/* btn */}
                         <div className="mt-4 flex flex-col items-center">
+
+                            {/* <SideCustome
+                                headerProps={{
+                                    onClick: () =>
+                                        setIsOpen({ ...isOpen, physical: !isOpen.physical }),
+                                    iconLibrary: "bs",
+                                    iconName: "BsFillExplicitFill",
+                                    title: "Recipient",
+                                    isOpen: isOpen.recipient,
+                                }}
+                                subtitleProps={[
+                                    {
+                                        link: "/surgondashboard/addrecipient",
+                                        subtitle: "Add",
+                                        iconLibrary: "md",
+                                        iconName: "MdPlaylistAddCircle",
+                                    },
+                                    {
+                                        link: "/surgondashboard/viewrecipient",
+                                        subtitle: "View",
+                                        iconLibrary: "md",
+                                        iconName: "MdPlaylistAddCheckCircle",
+                                    },
+
+                                ]}
+                            /> */}
                             <Link
                                 to="/surgondashboard/addrecipient"
                                 className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"

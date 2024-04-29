@@ -1,7 +1,8 @@
 // TableRow.js
 import React from "react";
-import { Tr, Td, Link } from "@chakra-ui/react";
+import { Tr, Td } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 const TableRow = ({ cornea, formatTimestamp, deleteCornea }) => (
     <Tr className="mb-2 text-lg">
@@ -20,13 +21,13 @@ const TableRow = ({ cornea, formatTimestamp, deleteCornea }) => (
                 ? `${14 - cornea.expirationDate} Day Left`
                 : "Expired"}
         </Td>
-        <Td className=" text-center " >
-            <Link className='text-blue-600' to={`/labtechnicaldashboard/editcornea/${cornea._id}`}>
-                <EditIcon className="text-blue-600" />
+        <Td className="text-blue-600" >
+            <Link to={`/labtechnicaldashboard/editcornea/${cornea._id}`}>
+                <EditIcon />
             </Link>
         </Td > {" "}
         <Td className="text-center">
-            <button onClick={() => deleteCornea(cornea._id)}>
+            <button className="text-red-600" onClick={() => deleteCornea(cornea._id)}>
                 <DeleteIcon />
             </button>
         </Td>
