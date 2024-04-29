@@ -55,11 +55,7 @@ const Serology = () => {
                           className="w-auto rounded-lg  flex items-center text-white bg-sky-700 border-2 p-3 font-medium dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
                           to={`/labtechnicaldashboard/serology/${exam._id}`}
                         >
-                          {/* <DynamicIcon
-                            library="gr"
-                            iconName="GrTest"
-                            className="text-2xl"
-                          />{" "} */}
+                         
                           Add
                         </Link>
                       </td>

@@ -4,39 +4,29 @@ import { Tr, Td } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 
-const TableRowCornea = ({ cornea, formatTimestamp, deleteCornea }) => (
+const Row = ({ cornea }) => (
   <Tr className="mb-2 text-lg">
     <Td>{cornea.lotNo}</Td>
-    <Td>{formatTimestamp(cornea.createdAt)}</Td>
-    <Td>{cornea.recoveryTechnical}</Td>
     <Td>{cornea.position}</Td>
-    <Td>{cornea.lens}</Td>
     <Td>{cornea.clarity}</Td>
     <Td> {cornea.size}</Td>
     <Td> {cornea.eyeLid}</Td>
     <Td> {cornea.irisColor}</Td>
-    <Td>
+    {/* <Td>
       {" "}
       {cornea.expirationDate < 14
         ? `${14 - cornea.expirationDate} Day Left`
         : "Expired"}
-    </Td>
-    <Td className=" text-center ">
+    </Td> */}
+    <Td>
       <Link
-        className="text-blue-600"
-        to={`/labtechnicaldashboard/editcornea/${cornea._id}`}
-      >
-        <EditIcon className="text-blue-600" />
-      </Link>
-      {/* <Link
-        className="text-blue-600"
         to={`/labtechnicaldashboard/serology/${cornea._id}`}
+        // className=" flex items-center text-white bg-sky-700 border-2 p-3 font-medium dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
       >
         Test
-      </Link> */}
-    </Td> 
-    
+      </Link>
+    </Td>
   </Tr>
 );
 
-export default TableRowCornea;
+export default Row;

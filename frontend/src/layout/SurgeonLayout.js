@@ -8,6 +8,7 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import SurgeonSidebar from "../pages/dashboard/surgeon/SurgeonSideBar";
+import useLoggedInUser from "../useHooks/useLoggedInUser";
 const { Header, Content } = Layout;
 
 const SurgeonDashboard = () => {
@@ -15,6 +16,7 @@ const SurgeonDashboard = () => {
     const { t } = useTranslation();
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+     const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
     const [state, setState] = useState({
         name: "",
         image: "",
@@ -47,40 +49,13 @@ const SurgeonDashboard = () => {
 
     //! handle Logout
     const handleLogout = () => {
-        localStorage.clear();
+        localStorage.removeItem("doctor");
         navigate("/login");
     };
 
     //! handle loggedin user
     useEffect(() => {
-        fetch("http://127.0.0.1:4000/user/userLogedin", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("token"),
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data.data, "user logged in");
-                setState((prev) => ({
-                    ...prev,
-                    name: data.data.name,
-                    image: data.data.image,
-                    role: data.data.role,
-                    isLoggedin: true,
-                }));
-
-                if (data.data === "token expired") {
-                    localStorage.clear();
-                    navigate("/login");
-                }
-            });
+      getLoggedInUser();
     }, [navigate]);
 
     return (
@@ -89,9 +64,9 @@ const SurgeonDashboard = () => {
             <SurgeonSidebar
                 collapsed={state.collapsed}
                 toggleSidebar={toggleSidebar}
-                name={state.name}
-                image={state.image}
-                role={state.role}
+                name={user && user.data.name}
+                image={user && user.data.image}
+                role={user && user.data.role}
             />
 
             <Layout
@@ -145,7 +120,7 @@ const SurgeonDashboard = () => {
                             >
                                 <img
                                     className="w-8 h-8 rounded-full"
-                                    src={state.image}
+                                    src={user && user.data.image}
                                     alt="user photo"
                                 />
                             </button>

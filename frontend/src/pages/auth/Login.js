@@ -12,7 +12,6 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showpassword, setShowpassword] = useState(false);
-
     const navigate = useNavigate();
     const { t } = useTranslation();
     const toast = useToast();
@@ -89,20 +88,6 @@ const Login = () => {
                         // setRefreshed(true);
                         navigate("/medicaldirectordashboard");
                     }
-                    else {
-                        localStorage.setItem("token", data.data);
-                        localStorage.setItem("loggedIn", true);
-                        localStorage.setItem("surgeonId", data.data);
-                        toast({
-                            title: "Login Succeeded",
-                            status: "success",
-                            duration: 5000,
-                            isClosable: true,
-                            position: "top",
-                        });
-                        // navigate("/adminDashboard");
-                    }
-                    
                 }
                 
             }
@@ -155,15 +140,15 @@ const Login = () => {
                   });
                 }
             } else {
-                // console.log(error.message);
-                toast({
-                    title: "Error Occurred!",
-                    description: error.message,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "top",
-                });
+              // console.log(error.message);
+              toast({
+                title: "Error Occurred!",
+                description: error.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+              });
             }
         }
     }

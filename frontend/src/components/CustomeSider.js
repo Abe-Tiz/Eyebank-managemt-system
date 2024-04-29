@@ -10,9 +10,20 @@ import { Link } from "react-router-dom";
 import { IoCreate } from "react-icons/io5";
 import { MdVisibility } from "react-icons/md";
 import DynamicIcon from "./DynamicIcon";
+import SideCustome from "./SideCustome";
+import { useState } from "react";
 
 const CustomSidebar = ({ collapsed, name, image,role }) => {
   const { t } = useTranslation();
+    const [isOpen, setIsOpen] = useState({
+      user:false,
+      donor:false,
+      hospital:false,
+      blog:false,
+      dashboard:false,
+      active:false,
+  });
+
 
   return (
     <div
@@ -141,11 +152,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
         ) : (
           <>
             {/* user progfile inage */}
-            {/* <img
-              className="w-28 h-25 rounded-full mb-2 ml-10 mt-5"
-              src={image}
-              alt="user photo"
-            /> */}
+
             <span className="text-lg font-semibold mt-5 ml-10">{name}</span>
             <span className="text-lg font-semibold ml-10 text-pink-500">
               {role}
@@ -153,139 +160,122 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
 
             {/* btn */}
             <div className="w-64- mt-4 flex flex-col justify-center items-center">
-              <Link
-                to="/adminDashboard"
-                className=" flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                // onClick={handleReport}
-                data-tooltip-id="my-dashboard"
-                data-tooltip-content="Dashboard"
-              >
-                <DynamicIcon
-                  library="md"
-                  iconName="MdSpaceDashboard"
-                  className="text-2xl"
-                />
-                <span className="ml-2">{t("common:dashboardLabel")}</span>
-              </Link>
-              <Link
-                to="/adminDashboard/addDonor"
-                className=" flex gap-2 w-36 text-white p-2 hover:bg-gray-800 rounded"
-                // onClick={handleAddDonorClick}
+              <SideCustome
+                headerProps={{
+                  onClick: () =>
+                    setIsOpen({ ...isOpen, dashboard: !isOpen.dashboard }),
+                  iconLibrary: "md",
+                  iconName: "MdSpaceDashboard",
+                  title: t("common:dashboardLabel"),
+                  isOpen: isOpen.dashboard,
+                }}
+                subtitleProps={[
+                  {
+                    link: "/adminDashboard",
+                    subtitle: t("common:dashboardLabel"),
+                    iconLibrary: "md",
+                    iconName: "MdSpaceDashboard",
+                  },
+                ]}
+              />
 
-                data-tooltip-id="add-donor"
-                data-tooltip-content="Add Donor"
-              >
-                <DynamicIcon
-                  library="md"
-                  iconName="MdOutlineGroupAdd"
-                  className="text-2xl"
-                />
-                <span className="ml-2">{t("common:addDonorLabel")}</span>
-              </Link>
-              <Link
-                to="/adminDashboard/donorList"
-                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                // onClick={handleDisplayDonorClick}
-                data-tooltip-id="donor-list"
-                data-tooltip-content="Donor List"
-              >
-                {/* <PiUserListBold className="text-2xl" /> */}
-                <DynamicIcon
-                  library="pi"
-                  iconName="PiUserListBold"
-                  className="text-2xl"
-                />
-                <span className="ml-2">{t("common:listDonorLabel")}</span>
-              </Link>
-              <Link
-                to="/adminDashboard/addUser"
-                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                // onClick={handleAddUser}
-                data-tooltip-id="add-user"
-                data-tooltip-content="Add User"
-              >
-                {/* <IoIosPersonAdd className="text-2xl" /> */}
-                <DynamicIcon
-                  library="io"
-                  iconName="IoIosPersonAdd"
-                  className="text-2xl"
-                />
-                <span className="ml-2">{t("common:addUserrLabel")}</span>
-              </Link>
-              <Link
-                to="/adminDashboard/userList"
-                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                // onClick={handleUserList}
-                data-tooltip-id="user-list"
-                data-tooltip-content="User List"
-              >
-                {/* <CiBoxList className="text-2xl" /> */}
-                <DynamicIcon
-                  library="ci"
-                  iconName="CiBoxList"
-                  className="text-2xl"
-                />
-                <span className="ml-2"> {t("common:listUserrLabel")}</span>
-              </Link>
-              <Link
-                to="/adminDashboard/activate"
-                className="flex w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                // onClick={handleUserList}
-                data-tooltip-id="activate-account"
-                data-tooltip-content="Activate User"
-              >
-                {/* <CiBoxList className="text-2xl" /> */}
-                <DynamicIcon
-                  library="vsc"
-                  iconName="VscActivateBreakpoints"
-                  className="text-2xl"
-                />
-                <span className="ml-2"> Activate Account</span>
-              </Link>
-              <Link
-                to="/adminDashboard/addhospital"
-                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                data-tooltip-id="user-list"
-                data-tooltip-content="Add Hospital"
-              >
-                {/* <CiBoxList className="text-2xl" /> */}
-                <DynamicIcon
-                  library="ci"
-                  iconName="CiHospital1"
-                  className="text-2xl"
-                />
-                <span className="ml-2"> Add Hospital</span>
-              </Link>
+              <SideCustome
+                headerProps={{
+                  onClick: () => setIsOpen({ ...isOpen, donor: !isOpen.donor }),
+                  iconLibrary: "bs",
+                  iconName: "BsFillExplicitFill",
+                  title: "Donor",
+                  isOpen: isOpen.donor,
+                }}
+                subtitleProps={[
+                  {
+                    link: "/adminDashboard/addDonor",
+                    subtitle: t("common:addDonorLabel"),
+                    iconLibrary: "md",
+                    iconName: "MdOutlineGroupAdd",
+                  },
+                  {
+                    link: "/adminDashboard/donorList",
+                    subtitle: t("common:listDonorLabel"),
+                    iconLibrary: "pi",
+                    iconName: "PiUserListBold",
 
-              <Link
-                to="/adminDashboard/create-post"
-                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                data-tooltip-id="popular-posts"
-                data-tooltip-content="Store Cornea"
-              >
-                {/* <IoCreate className="text-2xl" /> */}
+                  },
+                ]}
+              />
 
-                <DynamicIcon
-                  library="md"
-                  iconName="MdVisibility"
-                  className="text-2xl"
-                />
-                <span className="ml-2"> Create Blog</span>
-              </Link>
-              <Link
-                to="/adminDashboard/posts"
-                className="flex gap-2 w-36 text-white p-2 mt-2 hover:bg-gray-800 rounded"
-                data-tooltip-id="popular-posts"
-                data-tooltip-content="Store Cornea"
-              >
-                {/* <MdVisibility className="text-2xl" /> */}
-                <DynamicIcon
-                  library="fa"
-                  iconName="FaBookOpen"
-                  className="text-2xl"
-                />
-                <span className="ml-2"> Blog List</span>
-              </Link>
+              <SideCustome
+                headerProps={{
+                  onClick: () => setIsOpen({ ...isOpen, user: !isOpen.user }),
+                  iconLibrary: "bs",
+                  iconName: "BsFillExplicitFill",
+                  title: "User",
+                  isOpen: isOpen.user,
+                }}
+                subtitleProps={[
+                  {
+                    link: "/adminDashboard/addUser",
+                    subtitle: t("common:addUserrLabel"),
+                    iconLibrary: "io",
+                    iconName: "IoIosPersonAdd",
+                  },
+                  {
+                    link: "/adminDashboard/userList",
+                    subtitle: t("common:listUserrLabel"),
+                    iconLibrary: "ci",
+                    iconName: "CiBoxList",
+                  },
+                  {
+                    link: "/adminDashboard/activate",
+                    subtitle: "Activate Account",
+                    iconLibrary: "vsc",
+                    iconName: "VscActivateBreakpoints",
+                  },
+                ]}
+              />
+
+              <SideCustome
+                headerProps={{
+                  onClick: () => setIsOpen({ ...isOpen, blog: !isOpen.blog }),
+                  iconLibrary: "bs",
+                  iconName: "BsFillExplicitFill",
+                  title: "Blog",
+                  isOpen: isOpen.blog,
+                }}
+                subtitleProps={[
+                  {
+                    link: "/adminDashboard/create-post",
+                    subtitle: "Create Blog",
+                    iconLibrary: "md",
+                    iconName: "MdVisibility",
+                  },
+                  {
+                    link: "/adminDashboard/posts",
+                    subtitle: " Blog List",
+                    iconLibrary: "fa",
+                    iconName: "FaBookOpen",
+                  },
+                ]}
+              />
+
+              <SideCustome
+                headerProps={{
+                  onClick: () =>
+                    setIsOpen({ ...isOpen, hospital: !isOpen.hospital }),
+                  iconLibrary: "bs",
+                  iconName: "BsFillExplicitFill",
+                  title: "Hospital",
+                  isOpen: isOpen.hospital,
+                }}
+                subtitleProps={[
+                  {
+                    link: "/adminDashboard/addhospital",
+                    subtitle: "Add Hospital",
+                    iconLibrary: "ci",
+                    iconName: "CiHospital1",
+                  },
+                ]}
+              />
             </div>
           </>
         )}

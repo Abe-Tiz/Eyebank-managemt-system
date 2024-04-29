@@ -60,7 +60,8 @@ const ViewCornea = () => {
                 const response = await axios.get("http://localhost:4000/cornea/read");
                 const data = response.data;
                 // console.log("cornea:", data);
-                setCorneas(data);
+                const filteredCornea = data.filter((cornea) => cornea.expirationDate !== 14)
+                setCorneas(filteredCornea);
                 // setExpirationDate(new Date(data.expirationDate));
             } catch (error) {
                 console.error(error);
@@ -76,7 +77,11 @@ const ViewCornea = () => {
     const deleteCornea = async (id) => {
         try {
             await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
-            setCorneas(corneas.filter((cornea) => cornea._id !== id));
+            setCorneas(
+              corneas.filter(
+                (cornea) => cornea._id !== id 
+              )
+            );
         } catch (error) {
             console.error(error);
         }

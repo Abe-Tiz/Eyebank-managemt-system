@@ -11,7 +11,8 @@ import { Link } from "react-router-dom";
 const MedicalSidebar = ({
     collapsed,
     name,
-    image,
+    role,
+    image
 }) => {
     const { t } = useTranslation();
     return (
@@ -49,6 +50,11 @@ const MedicalSidebar = ({
                             // onClick={handleUserList}
                             data-tooltip-id="request-list"
                             data-tooltip-content="requested-List"
+                            // to="/medicaldirectordashboard/editRequestCornea/:id"
+                            // className="flex gap-2 text-white p-2 mt-2 hover:bg-gray-800 rounded"
+                            // // onClick={handleUserList}
+                            // data-tooltip-id="request-list"
+                            // data-tooltip-content="requested-List"
 
                         // onClick={handleAddDonorClick}
 
@@ -56,6 +62,10 @@ const MedicalSidebar = ({
                             <MdOutlineGroupAdd className="text-2xl" />
 
                         </Link>
+                        {/* >
+                            <MdOutlineGroupAdd className="text-2xl" />
+
+                        </Link> */}
 
                     </div>
                 ) : (
@@ -67,6 +77,7 @@ const MedicalSidebar = ({
                             alt="user photo"
                         />
                         <span className="text-lg font-semibold ml-10">{name}</span>
+                        <span className="text-lg font-semibold ml-10">{role}</span>
                         {/* btn */}
                         <div className="mt-4 flex flex-col items-center">
                             <Link

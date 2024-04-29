@@ -11,7 +11,7 @@ const PhysicalExamView = () => {
     const navigate = useNavigate();
     const [exams, setExams] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => {  
         fetchPhysicalExams();
     }, []);
     const [collect, setcollect] = useState(true);

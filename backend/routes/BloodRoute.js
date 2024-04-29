@@ -1,4 +1,4 @@
-const { createSampleBlood, getSerologyTest, deleteSerology, updateSerology } = require("../controller/SampleBlood");
+const { createSampleBlood, getSerologyTest, deleteSerology, updateSerology, getSampleByLotnum } = require("../controller/SampleBlood");
 const express = require("express");
 const route = express.Router();
 
@@ -7,5 +7,6 @@ route.get("/", getSerologyTest);
 // route.get("/getOne/:id", BloodController.GetBloodById);
 route.put("/update/:id", updateSerology);
 route.delete("/delete/:id", deleteSerology);
+route.post("/search", getSampleByLotnum);
 
 module.exports = route;

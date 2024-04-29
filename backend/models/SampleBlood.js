@@ -6,10 +6,10 @@ const sampleBloodSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    isTested: {
-      type: Boolean,
-      default: false,
-    },
+    // isTested: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     tests: {
       type: Array,
     },
@@ -17,11 +17,11 @@ const sampleBloodSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    phId: {
+    cornId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "PhysicalExam",
+      ref: "Cornea",
     },
-    dob: Date,
+    // dob: Date,
   },
   {
     timestamps: true,

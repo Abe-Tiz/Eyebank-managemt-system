@@ -4,7 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
-const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const { notFound, errorHandler, checkLoginValidation } = require("./middleware/errorMiddleware");
 const userRoute = require("./routes/userRoute");
 //const contactRoute = require("./routes/contactRoute");
 const donorRoute = require("./routes/donorRoute");
@@ -127,6 +127,35 @@ app.use('/distribution', DistributionRoute);
 //app.use('/recipient', RecipientRoute)
 app.use(notFound);
 app.use(errorHandler);
+
+
+
+//! check the expiration date of the cornea
+scheduleExpirationCheck();
+
+// Notification logic
+// const NotifyNewDonors = async () => {
+//   try {
+//     const changeStream = Donor.watch();
+
+//     changeStream.on("change", (data) => {
+//       if (data.operationType === "insert") {
+//         notificationCount++;  
+//         io.emit("newDonorNotification", {
+//           donor: data.fullDocument,
+//           count: notificationCount,  
+//         });
+//       }
+//     });
+//   } catch (error) {
+//     console.log(`error : ${error}`);
+//   }
+// };
+
+// Call NotifyNewDonors when the server starts
+// NotifyNewDonors();
+
+
 
 //! server port
 server.listen(port, () => {

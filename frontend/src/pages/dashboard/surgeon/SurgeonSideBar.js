@@ -164,28 +164,28 @@ const SurgeonSidebar = ({
             </div>
 
 
-            {/* tooltips */}
-            <Tooltip
-                id="my-dashboard"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="add-donor"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="donor-list"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="add-user"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="user-list"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-        </div>
+        {/* tooltips */}
+        <Tooltip
+          id="my-dashboard"
+          style={{ backgroundColor: "#940B92", color: "#fff" }}
+        />
+        <Tooltip
+          id="add-donor"
+          style={{ backgroundColor: "#940B92", color: "#fff" }}
+        />
+        <Tooltip
+          id="donor-list"
+          style={{ backgroundColor: "#940B92", color: "#fff" }}
+        />
+        <Tooltip
+          id="add-user"
+          style={{ backgroundColor: "#940B92", color: "#fff" }}
+        />
+        <Tooltip
+          id="user-list"
+          style={{ backgroundColor: "#940B92", color: "#fff" }}
+        />
+      </div>
     );
 };
 
