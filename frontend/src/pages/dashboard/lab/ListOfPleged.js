@@ -64,11 +64,6 @@ const ListOfPlege = () => {
     setDeleteId(id);
   };
 
-  // Filter donors who have donated
-//   const donatedDonors = donors.filter((donor) => donatedDonors.includes(donor._id));
-
-  const donatedDonors = donors.filter(donor => donor.donated);
-
   return (
     <div>
       <TableContainer>
@@ -87,22 +82,24 @@ const ListOfPlege = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {donatedDonors.map((donor, index) => (
-              <Tr key={index}>
-                <Td>{index + 1}</Td>
-                <Td>{donor.name}</Td>
-                <Td>{donor.email}</Td>
-                <Td>{donor.city}</Td>
-                <Td>{donor.mobile}</Td>
-                <Td>
-                  {donor.donated ? (
-                    <span>Donated</span>
-                  ) : (
-                    <Link to={`/labtechnicaldashboard/createExams/${donor._id}`}>Donate</Link>
-                  )}
-                </Td>
-              </Tr>
-            ))}
+            {donors.filter((donor) => donor.donate === true)
+
+              .map((donor, index) => (
+                <Tr key={index}>
+                  <Td>{index + 1}</Td>
+                  <Td>{donor.name}</Td>
+                  <Td>{donor.email}</Td>
+                  <Td>{donor.city}</Td>
+                  <Td>{donor.mobile}</Td>
+                  <Td>
+                    {donor.donate === true ? (
+                      <span>Donated</span>
+                    ) : (
+                      <Link to={`/labtechnicaldashboard/createExams/${donor._id}`}>Donate</Link>
+                    )}
+                  </Td>
+                </Tr>
+              ))}
           </Tbody>
         </Table>
       </TableContainer>

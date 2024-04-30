@@ -33,7 +33,6 @@ const ListOfPlege = () => {
                     setLoading(true);
                     setDonors(donordata);
                 } else {
-                    // console.log("Array is empty.");
                     toast({
                         title: "Empty Array",
                         description: "Array is empty.",
@@ -82,7 +81,9 @@ const ListOfPlege = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {donors.map((donor, index) => (
+                        {donors.filter((donor)=>(donor.verified===true) && donor.donate===false)
+                        
+                        .map((donor, index) => (
                             <Tr key={index}>
                                 <Td>{index + 1}</Td>
                                 <Td>{donor.name}</Td>

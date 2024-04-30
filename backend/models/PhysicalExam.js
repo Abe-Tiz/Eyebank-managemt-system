@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 // high risk examined for donor
 const examinedSchema = new mongoose.Schema({
+    isRefrigerated: { type: Boolean, default: false,},
     head: { type: Boolean, default: false },
     mouth: { type: Boolean, default: false },
     neck: { type: Boolean, default: false },
@@ -64,10 +65,7 @@ const physiaclSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        isRefrigerated: {
-            type: Boolean,
-            default: false,
-        },
+        
         examined: [examinedSchema],
         highRiskexamined: [riskExaminedSchema],
         causeOfDeath: String,
