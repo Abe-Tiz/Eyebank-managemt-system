@@ -1,32 +1,23 @@
 const mongoose = require("mongoose");
 const DistributionSchema = new mongoose.Schema({
-    LotNo: {
-        type: String,
-        //required: true,
-    },
+  
     hospitalName: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Hospital"
+        type:String,
+        required:true
     },
-    nameOfSurgeon: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+    name: {
+        type:String,
+        required: true
     },
     modeOfTransportation: {
         type: String,
         //required: true,
     },
-    typeOfTissue: {
-        type: String
+    suiatablity: {
+        type: String,
+        //required: true,
     },
-
-    approvedBy: {
-        type: String
-    },
-    nameOfTechnician: {
-        type: String
-    }
-
+ 
 }, {
     timestamps: true
 }

@@ -106,7 +106,7 @@ const RequestedCorneas = () => {
             {" "}
             <tr>
               <th scope="col" className="px-6 py-3">
-                Surgeon
+              No
               </th>
               <th scope="col" className="px-6 py-3">
                 Hospital
@@ -123,7 +123,7 @@ const RequestedCorneas = () => {
             </tr>
           </thead>
           <tbody>
-            {requestedCorneas.map((request) => (
+            {requestedCorneas.map((request, index) => (
               <tr
                 key={request.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -135,8 +135,10 @@ const RequestedCorneas = () => {
                   <div className="ps-3">
                     <div className="text-base font-semibold">
                       {" "}
-                      {request.surgeon?.name}
+                      {index +1}
+                      {/* {request.surgeon?.name} */}
                     </div>
+                    
                   </div>
                 </th>
                 <td className="px-6 py-4">{request.hospital?.hospitalName}</td>

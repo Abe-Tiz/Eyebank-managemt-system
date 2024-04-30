@@ -57,7 +57,6 @@ const MedicalSidebar = ({
                             // data-tooltip-content="requested-List"
 
                         // onClick={handleAddDonorClick}
-                        // onClick={handleAddDonorClick}
 
                         >
                             <MdOutlineGroupAdd className="text-2xl" />

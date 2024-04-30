@@ -60,9 +60,9 @@ const navigate = useNavigate();
 
 
 
-    const handleDistribute = async (id) => {
+    const handleDistribute = async (suiatablity) => {
         try {
-            navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
+            navigate(`/labtechnicaldashboard/distributeCornea/${suiatablity}`);
         } catch (error) {
             console.error("Failed to distribute cornea:", error);
         }
@@ -120,7 +120,7 @@ const navigate = useNavigate();
                                     ) : (
                                         <Button
                                             colorScheme="blue"
-                                            onClick={() => handleDistribute(request._id, request.suiatablity)}
+                                            onClick={() => handleDistribute(request.suiatablity)}
                                         >
                                             distribute
                                         </Button>

@@ -76,7 +76,9 @@ exports.getCorneasRequestController = async (req, res) => {
 
 exports.getSingleCorneaRequestController = async (req, res) => {
   try {
-    const corneaRequest = await CorneaRequestModel.findById(req.params.id);
+    const corneaRequest = await CorneaRequestModel.findById(req.params.id)
+    .populate("surgeon","name")
+    .populate("hospital","hospitalName");
     
     if (corneaRequest) {
       res.status(200).json(corneaRequest);
@@ -162,5 +164,27 @@ exports.updateCorneaRequestController = async (req, res) => {
       .json({ message: "request Updated Successfully.", result: newRequest });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+exports.distributedCorneaController = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Find the donor by ID and update their verified status
+    const distributed = await CorneaRequestModel.findByIdAndUpdate(
+      id,
+      { distribute: true },
+      { new: true }
+    );
+
+    if (!distributed) {
+      return res.status(404).json({ message: "distributed is not found" });
+    }
+
+    res.status(200).json({ message: "distributed successfully", distributed });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };

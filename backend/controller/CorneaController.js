@@ -38,6 +38,15 @@ const getCorneas = async (req, res) => {
     res.send(corneas);
 };
 
+const getStoredCornea = async (req, res) => {
+    const { id } = req.query;
+    const corneas = await Cornea.find({ suiatablity: id }); 
+    console.log("tefera");
+    console.log(corneas);
+    res.send(corneas);
+  };
+
+
 const getCornea = async (req, res) => {
     const cornea = await Cornea.findById(req.params.id);
     res.send(cornea);
@@ -68,6 +77,30 @@ const distributeCornea = async (req, res) => {
     res.send(cornea);
 };
 
+const distributedCorneaController = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      // Find the donor by ID and update their verified status
+      const distributed = await Cornea.findByIdAndUpdate(
+        id,
+        { distributed: true },
+        { new: true }
+      );
+  
+      if (!distributed) {
+        return res.status(404).json({ message: "distributed is not found" });
+      }
+  
+      res.status(200).json({ message: "distributed successfully", distributed });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
+  
+
+
 const getCorneaBLotnum =async (req, res) => {
     try {
         const { lotNo } = req.body;
@@ -94,4 +127,6 @@ module.exports = {
   evaluateCornea,
   distributeCornea,
   getCorneaBLotnum,
+  getStoredCornea,
+  distributedCorneaController,
 };
