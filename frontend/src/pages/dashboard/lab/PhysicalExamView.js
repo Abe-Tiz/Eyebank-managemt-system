@@ -6,10 +6,22 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "@chakra-ui/react";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useDisclosure } from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/react";
+import {
+  Button,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+} from '@chakra-ui/react'
 
 const PhysicalExamView = () => {
-    const navigate = useNavigate();
-    const [exams, setExams] = useState([]);
+    // const navigate = useNavigate();
+    // const [exams, setExams] = useState([]);
 
     useEffect(() => {  
         fetchPhysicalExams();
@@ -26,6 +38,12 @@ const PhysicalExamView = () => {
             console.error("Failed to collect physical exam:", error);
         }
     };
+  const navigate = useNavigate();
+  const [exams, setExams] = useState([]);
+  const toast=useToast() 
+  useEffect(() => {
+    fetchPhysicalExams();
+  }, []);
 
     const fetchPhysicalExams = async () => {
         try {
@@ -37,50 +55,50 @@ const PhysicalExamView = () => {
         }
     };
 
-    const deletePhysicalExam = (examId) => {
-        confirmAlert({
-            title: 'Confirm Deletion',
-            message: 'Are you sure you want to delete this physical exam?',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => performDelete(examId),
-                },
-                {
-                    label: 'No',
-                    onClick: () => { },
-                },
-            ],
-        });
-    };
+  const deletePhysicalExam = (examId) => {
+   
+    confirmAlert({
+      title: 'Confirm Deletion',
+      message: 'Are you sure you want to delete this physical exam?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => performDelete(examId),
+        },
+        {
+          label: 'No',
+          onClick: () => {},
+        },
+      ],
+    });
+  };
 
-    const performDelete = async (examId) => {
-        try {
-            const response = await fetch(
-                `http://localhost:4000/api/delete/${examId}`,
-                {
-                    method: 'DELETE',
-                }
-            );
-            if (response.ok) {
-                fetchPhysicalExams();
-                confirmAlert({
-                    title: 'Success',
-                    message: 'Physical exam deleted successfully.',
-                    buttons: [
-                        {
-                            label: 'OK',
-                            onClick: () => { },
-                        },
-                    ],
-                });
-            } else {
-                throw new Error('Failed to delete physical exam.');
-            }
-        } catch (error) {
-            console.error('Error deleting physical exam:', error);
+  const performDelete = async (examId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/api/delete/${examId}`,
+        {
+          method: 'DELETE',
         }
-    };
+      );
+      if (response.ok) {
+        fetchPhysicalExams();
+        toast({
+          title:"Physical exam deleted successfully.",
+          status:"success",
+          duration:3000,
+          isClosable:true,
+          position:"top",
+
+        })
+        // alert('Physical exam deleted successfully.');
+      } else {
+        throw new Error('Failed to delete physical exam.');
+      }
+    } catch (error) {
+      console.error('Error deleting physical exam:', error);
+    }
+  };
 
     const navigateToDetails = (examId) => {
         navigate(`/labtechnicaldashboard/getOne/${examId}`);
