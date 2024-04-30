@@ -138,9 +138,7 @@ const EditAccident = () => {
                             value={accident.category || accidentData.category}
                             onChange={(e) => setAccident({ ...accident, category: e.target.value })}
                         />
-
                     </label>
-
                     <label>
                         Error Type
                         <input

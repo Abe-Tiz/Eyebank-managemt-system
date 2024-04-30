@@ -12,14 +12,25 @@ const AddRecipient = () => {
     const [hospitals, setHospitals] = useState([]);
     const [registerDate, setRegisterDate] = useState("");
     const [address, setAddress] = useState("");
-    const [surgeonName, setSurgeonName] = useState("");
     const [hospital, setHospital] = useState("");
     const [surgeryType, setSurgeryType] = useState("");
     const [phone, setPhone] = useState("");
+    //for ocurar and adverse reaction 
+    const [dateOfSurgry, setDateOfSurgry] = useState("");
+    const [ocularOperativeEye, setOcularOperativeEye] = useState("");
+    const [ocularNonOperativeEye, setOcularNonOperativeEye] = useState("");
+    const [dateOfadverse, setDateOfadverse] = useState("");
+    const [adverseReaction, setAdvererReaction] = useState("");
+    //for probablity
+    const [probablityCase, setProbablityCase] = useState("");
+    const [donorTissue, setDonorTissue] = useState("");
+    const [patient, setPatient] = useState("");
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
-
+    const [state, setState] = useState({
+        name: ""
+    })
     useEffect(() => {
         const fetchSurgeon = async () => {
             try {
@@ -32,7 +43,6 @@ const AddRecipient = () => {
 
         fetchSurgeon();
     }, []);
-
     useEffect(() => {
         const fetchHospitalData = async () => {
             try {
@@ -45,7 +55,6 @@ const AddRecipient = () => {
 
         fetchHospitalData();
     }, []);
-
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -58,6 +67,16 @@ const AddRecipient = () => {
             sex,
             phone,
             registerDate,
+            surgeonName,
+            dateOfSurgry,
+            surgeryType,
+            ocularOperativeEye,
+            ocularNonOperativeEye,
+            dateOfadverse,
+            adverseReaction,
+            probablityCase,
+            donorTissue,
+            patient,
 
         };
         console.log(data);
@@ -79,15 +98,37 @@ const AddRecipient = () => {
             console.log(err);
         }
     };
+    useEffect(() => {
+        fetch("http://127.0.0.1:4000/user/userLogedin", {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem("token"),
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data, "user logged in");
+                setState((prev) => ({
+                    ...prev,
+                    name: data.data.name,
+                }));
 
+                if (data.data === "token expired") {
+                    localStorage.clear();
+                    navigate("/login");
+                }
+            });
+    }, [navigate]);
+    const surgeonName = state.name
     return (
         <div>
-            <h2
-                className=""
-                style={{ textAlign: "center", background: "#6af" }}
-            >
-                Welcome to Recipient  Registration Form
-            </h2>
+            <h2 className="text-3xl mb-3 " style={{ textAlign: 'center' }}>Recipient Registration Form</h2>
             <form onSubmit={handleFormSubmit}>
                 <div className="grid grid-cols-2">
                     <label>
@@ -108,7 +149,7 @@ const AddRecipient = () => {
                         />
                     </label>
                 </div>
-                <div className="grid grid-cols-2">
+                <div className="grid mt-3 grid-cols-2">
                     <label>
                         Sex:
                         <input
@@ -131,18 +172,17 @@ const AddRecipient = () => {
                         <label htmlFor="sex-female">Female</label>
                     </label>
                     <label>
-                        Phone:
                         <input
                             className="form-input  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="number"
+                            placeholder="Phone"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                         />
                     </label>
                 </div>
-                <div className="grid grid-cols-2">
+                <div className="grid mt-3 grid-cols-2">
                     <label>
-                        Surgeon Type:
                         <select
                             className="form-input  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={surgeryType}
@@ -155,7 +195,6 @@ const AddRecipient = () => {
                         </select>
                     </label>
                     <label>
-                        Hospitals:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={hospital}
@@ -170,25 +209,24 @@ const AddRecipient = () => {
                         </select>
                     </label>
                 </div>
-                <div className="grid grid-cols-2">
+                <div className="grid mt-3 grid-cols-2">
                     <label>
-                        Address:
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                         >
                             <option value="">Select Address</option>
-                            <option value="hospital 1">hospital 1</option>
-                            <option value="hospital 2">hospital 2</option>
-                            <option value="hospital 3">hospital 3</option>
+                            <option value="Addis Ababa">Addis Ababa</option>
+                            <option value="Oromia">Oromia</option>
+                            <option value="Amhara">Amhara</option>
+                            <option value="Tigray">Tigray</option>
+                            <option value="Benshangul">Benshangul</option>
                         </select>
                     </label>
-                </div>
-                <div className="text-center mt-4">
                     <button
                         type="submit"
-                        className="w-1/3 mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded"
+                        className="w-1/3 mr-4 py-2 px-4 border bg-sky-600  text-white font-semibold rounded"
                     >
                         Add Recipient
                     </button>

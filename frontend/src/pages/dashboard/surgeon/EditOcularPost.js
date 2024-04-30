@@ -4,14 +4,14 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@chakra-ui/react';
 
-const EditEvaluation = () => {
+const EditOcularPost = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { t } = useTranslation();
     const toast = useToast();
-    const [corneaData, setCorneaData] = useState({});
+    // Example state variables
+    const [ocularPostData, osetOcularPostData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-
 
     const [evaluateData, setEvaluationData] = useState({
         epitheliam: "",
@@ -26,10 +26,10 @@ const EditEvaluation = () => {
 
     useEffect(() => {
         // Fetch cornea data from the server based on the provided ID
-        const fetchCorneaData = async () => {
+        const fetchocularPostData = async () => {
             try {
                 const response = await axios.get(`http://localhost:4000/cornea/getOne/${id}`);
-                setCorneaData(response.data);
+                osetOcularPostData(response.data);
                 setIsLoading(false);
             } catch (error) {
                 // Handle error
@@ -44,20 +44,20 @@ const EditEvaluation = () => {
             }
         };
 
-        fetchCorneaData();
+        fetchocularPostData();
     }, [id, t, toast]);
     const handleSave = async () => {
         // Example save functionality
         try {
             console.log(evaluateData);
             await axios.put(`http://localhost:4000/cornea/update/${id}`, {
-                epitheliam: evaluateData.epitheliam || corneaData.evaluation.epitheliam,
-                stroma: evaluateData.stroma || corneaData.evaluation.stroma,
-                endothelium: evaluateData.endothelium || corneaData.evaluation.endothelium,
-                evaluater: evaluateData.evaluater || corneaData.evaluation.evaluater,
-                approval: evaluateData.approval || corneaData.evaluation.approval,
-                suiatablity: evaluateData.suiatablity || corneaData.evaluation.suiatablity,
-                reason: evaluateData.reason || corneaData.evaluation.reason,
+                epitheliam: evaluateData.epitheliam || ocularPostData.evaluation.epitheliam,
+                stroma: evaluateData.stroma || ocularPostData.evaluation.stroma,
+                endothelium: evaluateData.endothelium || ocularPostData.evaluation.endothelium,
+                evaluater: evaluateData.evaluater || ocularPostData.evaluation.evaluater,
+                approval: evaluateData.approval || ocularPostData.evaluation.approval,
+                suiatablity: evaluateData.suiatablity || ocularPostData.evaluation.suiatablity,
+                reason: evaluateData.reason || ocularPostData.evaluation.reason,
 
             });
             console.log(epitheliam)
@@ -102,7 +102,7 @@ const EditEvaluation = () => {
                             value={epitheliam}
                             onChange={(e) => setEvaluationData({ ...evaluateData, epitheliam: e.target.value })}
                         >
-                            <option value={corneaData.evaluation.epitheliam}>{corneaData.evaluation.epitheliam}</option>
+                            <option value={ocularPostData.evaluation.epitheliam}>{ocularPostData.evaluation.epitheliam}</option>
                             <option value="3">3 cm</option>
                             <option value="6">6 cm</option>
                             <option value="9">9 cm</option>
@@ -116,7 +116,7 @@ const EditEvaluation = () => {
                             value={stroma}
                             onChange={(e) => setEvaluationData({ ...evaluateData, stroma: e.target.value })}
                         >
-                            <option value={corneaData.evaluation.stroma}>{corneaData.evaluation.stroma}</option>
+                            <option value={ocularPostData.evaluation.stroma}>{ocularPostData.evaluation.stroma}</option>
                             <option value="blue">Blue</option>
                             <option value="black">Black</option>
                         </select>
@@ -130,7 +130,7 @@ const EditEvaluation = () => {
                             value={endothelium}
                             onChange={(e) => setEvaluationData({ ...evaluateData, endothelium: e.target.value })}
                         >
-                            <option value={corneaData.evaluation.endothelium}>{corneaData.evaluation.endothelium}</option>
+                            <option value={ocularPostData.evaluation.endothelium}>{ocularPostData.evaluation.endothelium}</option>
                             <option value="Status 1">Status 1</option>
                             <option value="Status 2">Status 2</option>
                             <option value="Status 3">Status 3</option>
@@ -170,7 +170,7 @@ const EditEvaluation = () => {
                                     value={suiatablity}
                                     onChange={(e) => setEvaluationData({ ...evaluateData, suiatablity: e.target.value })}
                                 >
-                                    <option value={corneaData.evaluation.suiatablity}>{corneaData.evaluation.suiatablity}</option>
+                                    <option value={ocularPostData.evaluation.suiatablity}>{ocularPostData.evaluation.suiatablity}</option>
                                     <option value="PK">PK</option>
                                     <option value="EK">EK</option>
                                     <option value="ALK">ALK</option>
@@ -191,7 +191,7 @@ const EditEvaluation = () => {
                                     value={reason}
                                     onChange={(e) => setEvaluationData({ ...evaluateData, reason: e.target.value })}
                                 >
-                                    <option value={corneaData.evaluation.reason}>{corneaData.evaluation.reason}</option>
+                                    <option value={ocularPostData.evaluation.reason}>{ocularPostData.evaluation.reason}</option>
                                     <option value="epitheliam">Epitheliam</option>
                                     <option value="stroma">Stroma</option>
                                     <option value="endothelium">Endothelium</option>
@@ -213,4 +213,4 @@ const EditEvaluation = () => {
     );
 };
 
-export default EditEvaluation;
+export default EditOcularPost;

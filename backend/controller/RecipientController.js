@@ -5,23 +5,43 @@ const mongoose = require("mongoose");
 
 const createRecipient = async (req, res) => {
     const {
-        recipientName,
-        recipientId,
+        recipientname,
         age,
-        registrationDate,
         diagnosis,
-        surgeonName,
+        surgeryType,
+        address,
         hospital,
+        sex,
+        phone,
+        registerDate,
+        surgeonName,
     } = req.body;
     try {
         const recipient = await RecipientModel.create({
-            recipientName: recipientName,
-            recipientId: recipientId,
-            age: age,
-            registrationDate: registrationDate,
-            diagnosis: diagnosis,
-            surgeonName: surgeonName,
-            hospital: hospital,
+            recipientname,
+            age,
+            diagnosis,
+            surgeryType,
+            address,
+            hospital,
+            sex,
+            phone,
+            registerDate,
+            surgeonName,
+            ocularPost: {
+                ocularPost: req.body.ocularPost,
+                dateOfSurgry: req.body.dateOfSurgry,
+                surgeryType: req.body.surgeryType,
+                ocularOperativeEye: req.body.ocularOperativeEye,
+                ocularNonOperativeEye: req.body.ocularNonOperativeEye,
+            },
+            adverse: {
+                adversePost: req.body.adversePost,
+                adverseReaction: req.body.adverseReaction,
+                probablityCase: req.body.probablityCase,
+                donorTissue: req.body.donorTissue,
+                dateOfadverse: req.body.dateOfadverse,
+            }
         });
         if (recipient) {
             res.status(200).json({ recipient });
@@ -85,5 +105,6 @@ module.exports = {
     getRecipient,
     updateRecipient,
     deleteRecipient,
-  
+    ocularPost,
+    adverseReaction
 }

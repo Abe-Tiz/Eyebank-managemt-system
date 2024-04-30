@@ -51,47 +51,67 @@ const AdverseList = () => {
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
-
+    function formatTimestamp(timestamp) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+        return new Date(timestamp).toLocaleString('en-US', options);
+    }
+    // const deleteAdverse = async (id) => {
+    //     try {
+    //         await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
+    //         setCorneas(corneas.filter((cornea) => cornea._id !== id));
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
     return (
         <div>
-            <div className='text-center mt-3'>
+            <div className='text-center'>
                 <TableContainer>
-                    <Text fontSize='2xl' className='text-center  bg-teal-400 text-white mt-6'>
+                    {/* <Text fontSize='2xl' className='text-center  bg-teal-400 text-white mt-6'>
                         <span> List of Adverse Transplantation </span>
-                    </Text>
-                    <Table size='sm'>
+                    </Text> */}
+                    <Table variant='simple'>
                         <Thead>
-                            <Tr>
+                            <Tr className="bg-gray-200 mx-0">
                                 <Th>S.No</Th>
                                 <Th>Date Of Diagnosis</Th>
                                 <Th>Adverse Reation</Th>
                                 <Th>Probablity of Case</Th>
                                 <Th>Donor Tissue</Th>
                                 <Th>Patient</Th>
-                                <Th >Operations</Th>
+                                <Th>Operations</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
                             {recipient
-                                // .filter(
-                                //     (cornea) =>
-                                //         cornea.adverse &&
-                                //         (cornea.adverse.sugeonName === 'awokedejenie')
-                                // )
+                                .filter(
+                                    (cornea) =>
+                                        cornea.adverse &&
+                                        (cornea.adverse.adversePost === true)
+                                )
                                 .map((cornea, index) => (
-                                    <Tr key={index}>
+                                    <Tr key={index} className="mb-2 text-lg">
                                         <Td>{index + 1}</Td>
-                                        {/* <Td>{formatTimestamp(cornea.adverse.dateOfDiagnosis)}</Td> */}
-                                        {/* <Td>{cornea.adverse.adverseReation}</Td> */}
+                                        <Td>{formatTimestamp(cornea.adverse.dateOfadverse)}</Td>
+                                        <Td>{cornea.adverse.adverseReaction}</Td>
                                         <Td>{cornea.adverse.probablityCase}</Td>
                                         <Td>{cornea.adverse.donorTissue}</Td>
-                                        <Td>{cornea.adverse.patient}</Td>
+                                        <Td>{cornea.recipientname}</Td>
 
                                         <Td className='text-center ml-3 text-blue-600'>
-                                            <Link to={`/medicaldirectordashboard/editevaluation/${cornea._id}`}>
+                                            <Link to={`/surgondashboard/editadverse/${cornea._id}`}>
                                                 <EditIcon />
                                             </Link>
                                         </Td>
+                                        {/* <Td className='text-center ml-3 text-blue-600'>
+                                            <Link to={`//${cornea._id}`}>
+                                                <DeleteIcon />
+                                            </Link>
+                                        </Td> */}
                                     </Tr>
                                 ))}
                         </Tbody>
