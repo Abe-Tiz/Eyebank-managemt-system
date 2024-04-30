@@ -3,8 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast, Text } from '@chakra-ui/react';
-
-
 const AddOcularPost = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -14,50 +12,18 @@ const AddOcularPost = () => {
     const [surgeryType, setSurgeryType] = useState('');
     const [ocularOperativeEye, setOcularOperativeEye] = useState('');
     const [ocularNonOperativeEye, setOcularNonOperativeEye] = useState('');
-    const ocularPost = {
+    const [ocularPost, setOcularPost] = useState(true);
+    const ocularPostData = {
         dateOfSurgery,
         surgeryType,
         ocularOperativeEye,
-        ocularNonOperativeEye
-
+        ocularNonOperativeEye,
+        ocularPost
     };
-    // useEffect(() => {
-    //     // Fetch cornea data from the server based on the provided ID
-    //     const fetchRecipientData = async () => {
-    //         try {
-    //             const response = await axios.get(`http://localhost:4000/recipient/getOne/${id}`);
-    //             setReciepentdata(response.data);
-    //         } catch (error) {
-    //             // Handle error
-    //             toast({
-    //                 title: t('Error'),
-    //                 description: t('Failed to fetch cornea data.'),
-    //                 status: 'error',
-    //                 duration: 5000,
-    //                 isClosable: true,
-    //             });
-
-    //         }
-    //     };
-    //     fetchRecipientData();
-    // }, [id, t, toast]);
-    // useEffect(() => {
-    //     const fetchHospitalData = async () => {
-    //         try {
-    //             const response = await axios.get("http://localhost:4000/hospital/read");
-    //             setHospitals(response.data);
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     };
-
-    //     fetchHospitalData();
-    // }, []);
     const handleSave = async () => {
-        // Example save functionality
-        console.log(ocularPost);
+        console.log(ocularPostData);
         try {
-            await axios.put(`http://localhost:4000/recipient/ocular/${id}`, { ocularPost });
+            await axios.put(`http://localhost:4000/recipient/ocular/${id}`, { ocularPostData });
             toast({
                 title: t('Success'),
                 description: t('Ocular post saved successfully.'),
@@ -65,7 +31,7 @@ const AddOcularPost = () => {
                 duration: 5000,
                 isClosable: true,
             });
-            navigate('/surgondashboard/viewrecipient');
+            navigate('/surgondashboard/ocularpostlist');
         } catch (error) {
             // Handle error
             toast({
@@ -77,6 +43,7 @@ const AddOcularPost = () => {
             });
         }
     };
+    console.log(ocularPost)
     return (
         <div>
             <h2 className="text-3xl mb-5 " style={{ textAlign: 'center' }}>Ocular Post Form</h2>
@@ -89,11 +56,9 @@ const AddOcularPost = () => {
             >
                 <div className="grid grid-cols-2">
                     <label>
-
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="text"
-
                             value={surgeryType}
                             onChange={(e) => setSurgeryType(e.target.value)}
                         >

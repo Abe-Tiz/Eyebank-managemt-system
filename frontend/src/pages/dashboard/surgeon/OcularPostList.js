@@ -82,11 +82,11 @@ const OcularPostList = () => {
                         </Thead>
                         <Tbody>
                             {recipient
-                                // .filter(
-                                //     (cornea) =>
-                                //         cornea.adverse &&
-                                //         (cornea.adverse.sugeonName === 'awokedejenie')
-                                // )
+                                .filter(
+                                    (cornea) =>
+                                        cornea.ocularPost &&
+                                        (cornea.ocularPost.ocularPost === true)
+                                )
                                 .map((cornea, index) => (
                                     <Tr key={index} className="mb-2 text-lg" >
                                         <Td>{index + 1}</Td>
