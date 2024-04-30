@@ -53,7 +53,7 @@ const RequestedCorneas = () => {
     <div className="row dashboard">
       <div className="col-md-9">
         <h1
-          className="text-4xl text-center font-bold text-gray-800 mb-8 text-purple-700"
+          className="text-4xl text-center font-bold text-gray-800 mb-8"
           style={{
             borderBottom: "2px solid purple",
             letterSpacing: "2px",
