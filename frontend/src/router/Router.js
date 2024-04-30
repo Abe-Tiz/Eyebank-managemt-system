@@ -410,7 +410,16 @@ const router = createBrowserRouter([
         element: <ViewRequestedCorneaSurgeon />,
         
       },
-
+      {
+        path: "approvedList",
+        element: <ApprovedList/>,
+        
+      },
+      {
+        path: "approveRequest",
+        element: <ApproveRequest/>,
+        
+      },
        
     ],
   },
