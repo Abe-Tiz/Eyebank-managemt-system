@@ -11,6 +11,7 @@ exports.createCorneaRequest = async (req, res) => {
       suiatablity,
       distribute
     });
+    
     //configure the email transport
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -19,8 +20,7 @@ exports.createCorneaRequest = async (req, res) => {
         pass: "ohkvhybmohzkpjim",
       },
     });
-
-    // Define the email content
+    
     const emailContent = `
     New Cornea Request Created:
     Surgeon: ${surgeon}
@@ -30,13 +30,14 @@ exports.createCorneaRequest = async (req, res) => {
     Suiatablity: ${suiatablity}
     Distribute: ${distribute}
   `;
-    // Send the email
+    
     const mailOptions = {
       from: "teferamollawerkineh@gmail.com",
       to: "tefera2111@gmail.com,awoke668@gmail.com",
       subject: "New Cornea Request Created",
       text: emailContent,
     };
+
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
@@ -49,6 +50,7 @@ exports.createCorneaRequest = async (req, res) => {
     res.json(err);
   }
 };
+
 exports.getCorneaRequestController = async (req, res) => {
   try {
     const { surgeonId } = req.query; // Retrieve the surgeon ID from the query parameter
@@ -61,10 +63,9 @@ exports.getCorneaRequestController = async (req, res) => {
   }
 };
 
-
 exports.getCorneasRequestController = async (req, res) => {
   try {
-   const corneaRequests = await CorneaRequestModel.find({})
+   const corneaRequests = await CorneaRequestModel.find({isGetCornea: false})
       .populate("surgeon")
       .populate("hospital");
     res.json(corneaRequests);
@@ -72,7 +73,6 @@ exports.getCorneasRequestController = async (req, res) => {
     res.json(err);
   }
 };
-
 
 exports.getSingleCorneaRequestController = async (req, res) => {
   try {
@@ -125,7 +125,6 @@ exports.distributeCorneaRequestById = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
 
 exports.approveCorneaRequestController = async (req, res) => {
   const { id } = req.params;

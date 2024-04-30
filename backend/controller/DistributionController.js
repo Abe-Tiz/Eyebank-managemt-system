@@ -1,21 +1,20 @@
 const Cornea = require('../models/Cornea');
 const Distribution = require('../models/CorneaDistribution');
+const CorneaRequestModel = require('../models/CorneaRequest');
+
 const createDistribution = async (req, res) => {
-    const { hospitalName, name, modeOfTransportation, suiatablity } = req.body;
+    const { hospitalName, name, modeOfTransportation,id, suiatablity, } = req.body;
     try {
-        const distribution = await Distribution.create({
-            
+        const distribution = await Distribution.create({ 
             hospitalName: hospitalName,
             name: name,
             modeOfTransportation: modeOfTransportation,
             suiatablity:suiatablity
-    
         })
-        // distributed
-
-        
-        if (distribution) {
-            
+        const requestedCornea = await CorneaRequestModel.findById(id);
+        requestedCornea.isGetCornea = true;
+        requestedCornea.save();
+        if (distribution) {  
             res.send({ status: "ok", data: distribution })
         }
     } catch (error) {
@@ -23,8 +22,7 @@ const createDistribution = async (req, res) => {
     }
 }
 const getDistributeds = async (req, res) => {
-    const distribute = await Distribution.find()
-       
+    const distribute = await Distribution.find() 
     res.send(distribute);
 };
 
@@ -32,10 +30,12 @@ const getDistributed = async (req, res) => {
     const distribute = await Distribution.findById(req.params.id);
     res.send(distribute);
 };
+
 const editDistributed = async (req, res) => {
     const distribute = await Distribution.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.send(distribute);
 };
+
 const deleteDistributed = async (req, res) => {
     try {
         const { id } = req.params;

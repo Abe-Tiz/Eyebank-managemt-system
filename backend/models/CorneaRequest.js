@@ -17,7 +17,7 @@ const CorneaRequestSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  distribute: {
+  isGetCornea: {
     type: Boolean,
     default: false,
 },

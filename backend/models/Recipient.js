@@ -4,10 +4,6 @@ const RecipientSchema = new mongoose.Schema({
         type: String,
         // required: true,
     },
-    recipinentId: {
-        type: String,
-        //required: true,
-    },
     age: {
         type: Number,
         //required: true,
@@ -26,9 +22,6 @@ const RecipientSchema = new mongoose.Schema({
     surgeryType: {
         type: String
     },
-    surgeonType: {
-        type: String
-    },
     registerDate: {
         type: Date,
         default: Date.now
@@ -39,11 +32,14 @@ const RecipientSchema = new mongoose.Schema({
         //required: true,
     },
     surgeonName: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String
     },
 
     ocularPost: {
+        ocularPost: {
+            type: Boolean,
+            default: false
+        },
         dateOfSurgry: {
             type: Date,
             default: Date.now
@@ -59,11 +55,15 @@ const RecipientSchema = new mongoose.Schema({
         }
     },
     adverse: {
+        adversePost: {
+            type: Boolean,
+            default: false
+        },
         dateOfadverse: {
             type: Date,
             default: Date.now
         },
-        advererReaction: {
+        adverseReaction: {
             type: String
         },
         probablityCase: {
@@ -72,9 +72,7 @@ const RecipientSchema = new mongoose.Schema({
         donorTissue: {
             type: String
         },
-        patient: {
-            type: String
-        },
+
     },
 },
     {
