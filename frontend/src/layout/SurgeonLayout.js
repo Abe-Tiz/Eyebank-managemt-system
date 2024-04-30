@@ -54,9 +54,35 @@ const SurgeonDashboard = () => {
         navigate("/login");
     };
 
-    //! handle loggedin user
     useEffect(() => {
-        getLoggedInUser();
+        fetch("http://127.0.0.1:4000/user/userLogedin", {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem("token"),
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data, "user logged in");
+                setState((prev) => ({
+                    ...prev,
+                    name: data.data.name,
+                    image: data.data.image,
+                    role: data.data.role,
+                    isLoggedin: true,
+                }));
+
+                if (data.data === "token expired") {
+                    localStorage.clear();
+                    navigate("/login");
+                }
+            });
     }, [navigate]);
 
     return (
