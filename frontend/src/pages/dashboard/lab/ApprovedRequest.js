@@ -21,7 +21,6 @@ const ApprovedRequest = () => {
         toast.error("Something Went Wrong");
       }
     };
-
     getAllRequestedCorneas();
   }, []);
 
@@ -110,15 +109,13 @@ const ApprovedRequest = () => {
               </th> */}
             </tr>
           </thead>
-          <tbody>{requestedCorneas
-  .filter((request) => {
-    const matchingCornea = corneas.find(
-      (cornea) => cornea.distributed === false
-    );
-    return request.distribute === false &&
-      request.isApproved === true &&
-      matchingCornea;
-  })
+          <tbody>
+            {requestedCorneas
+              .filter((request) => {
+                return (
+                  request.distribute === false && request.isApproved === true
+                );
+              })
               .map((request, index) => (
                 <tr
                   key={index}
