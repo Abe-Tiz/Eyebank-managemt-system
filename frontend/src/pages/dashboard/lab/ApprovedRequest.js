@@ -21,9 +21,10 @@ const ApprovedRequest = () => {
         toast.error("Something Went Wrong");
       }
     };
+
     getAllRequestedCorneas();
   }, []);
-
+  console.log(requestedCorneas);
   //retrive all the possible cornea lists
   useEffect(() => {
     const getAllCorneas = async () => {
@@ -110,48 +111,40 @@ const ApprovedRequest = () => {
             </tr>
           </thead>
           <tbody>
-            {requestedCorneas
-              .filter((request) => {
-                return (
-                  request.distribute === false && request.isApproved === true
-                );
-              })
-              .map((request, index) => (
-                <tr
-                  key={index}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            {requestedCorneas.map((request, index) => (
+              <tr
+                key={index}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
+                <th
+                  scope="row"
+                  className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <th
-                    scope="row"
-                    className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    <div className="ps-3">
-                      <div className="text-base font-semibold">
-                        {request.surgeon?.name}
-                      </div>
+                  <div className="ps-3">
+                    <div className="text-base font-semibold">
+                      {request.surgeon?.name}
                     </div>
-                  </th>
-                  <td className="px-6 py-4">
-                    {request.hospital?.hospitalName}
-                  </td>
-                  <td className="px-6 py-4">{request.suiatablity}</td>
-                  <td className="px-6 py-4">{request.descriptionOfRequest}</td>
-                  <td>
-                    {request.distribute === true ? (
-                      <p className="text-green-500 font-bold">Distributed</p>
-                    ) : (
-                      <Button
-                        colorScheme="blue"
-                        onClick={() =>
-                          handleDistribute(request._id, request.suiatablity)
-                        }
-                      >
-                        distribute
-                      </Button>
-                    )}
-                  </td>
-                </tr>
-              ))}
+                  </div>
+                </th>
+                <td className="px-6 py-4">{request.hospital?.hospitalName}</td>
+                <td className="px-6 py-4">{request.suiatablity}</td>
+                <td className="px-6 py-4">{request.descriptionOfRequest}</td>
+                <td>
+                  {request.distribute === true ? (
+                    <p className="text-green-500 font-bold">Distributed</p>
+                  ) : (
+                    <Button
+                      colorScheme="blue"
+                      onClick={() =>
+                        handleDistribute(request._id, request.suiatablity)
+                      }
+                    >
+                      distribute
+                    </Button>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

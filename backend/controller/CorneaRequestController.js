@@ -65,9 +65,12 @@ exports.getCorneaRequestController = async (req, res) => {
 
 exports.getCorneasRequestController = async (req, res) => {
   try {
-   const corneaRequests = await CorneaRequestModel.find({isGetCornea: false})
-      .populate("surgeon")
-      .populate("hospital");
+   const corneaRequests = await CorneaRequestModel.find({
+     isGetCornea: false,
+     isApproved: true
+   })
+     .populate("surgeon")
+     .populate("hospital");
     res.json(corneaRequests);
   } catch (err) {
     res.json(err);
