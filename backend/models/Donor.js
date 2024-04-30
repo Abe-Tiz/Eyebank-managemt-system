@@ -51,6 +51,10 @@ const donorSchema = new mongoose.Schema(
     verificationCode: {
       type: String,
     },
+    donate:{
+      type:Boolean,
+      default:false
+    }
   },
   {
     timestamps: true,
