@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 const TableRowCornea = ({ cornea, formatTimestamp, deleteCornea }) => (
   <Tr className="mb-2 text-lg">
     <Td>{cornea.lotNo}</Td>
-    <Td>{formatTimestamp(cornea.createdAt)}</Td>
+    {/* <Td>{formatTimestamp(cornea.createdAt)}</Td> */}
     <Td>{cornea.recoveryTechnical}</Td>
     <Td>{cornea.position}</Td>
-    <Td>{cornea.lens}</Td>
-    <Td>{cornea.clarity}</Td>
+    <Td>{cornea.evaluation.suiatablity}</Td>
+    {/* <Td>{cornea.clarity}</Td>
     <Td> {cornea.size}</Td>
-    <Td> {cornea.eyeLid}</Td>
+    <Td> {cornea.eyeLid}</Td> */}
     <Td> {cornea.irisColor}</Td>
     <Td>
       {" "}
@@ -34,8 +34,7 @@ const TableRowCornea = ({ cornea, formatTimestamp, deleteCornea }) => (
       >
         Test
       </Link> */}
-    </Td> 
-    
+    </Td>
   </Tr>
 );
 

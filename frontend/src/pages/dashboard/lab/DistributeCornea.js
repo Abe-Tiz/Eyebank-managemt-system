@@ -42,7 +42,7 @@ const DistributeCornea = () => {
     getAllRequestedCorneas();
   }, []);
 
-
+    // console.log("id:",id)
 
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const DistributeCornea = () => {
         const { data } = await axios.get(
           `http://localhost:4000/requestCornea/getRequest/${id}`
         );
-        console.log("id:",data._id)
+        // console.log("id:",data._id)
 
         setHospitalName(data.hospital.hospitalName);
         setName(data.surgeon.name);
@@ -108,10 +108,12 @@ const DistributeCornea = () => {
       name,
       modeOfTransportation,
       suiatablity:suiatablity,
-      hospitalName
+      hospitalName,
+      id
+      
     };
-    console.log(data);
-    handleDistribution(id);
+    // console.log(data);
+    // handleDistribution(id);
     try {
       const response = await axios.post(
         "http://localhost:4000/distribution/create",
@@ -157,7 +159,7 @@ const DistributeCornea = () => {
   
         const data = response.data;
          const filteredCornea = data.filter((cornea) => cornea.evaluation.approval === "yes" && cornea.evaluation.suiatablity === suiatablity);
-         console.log("tt:",filteredCornea);
+        //  console.log("tt:",filteredCornea);
 
         setCorneas(filteredCornea);
        

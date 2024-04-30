@@ -6,13 +6,13 @@ const TableHeader = () => (
     <Thead>
         <Tr className="bg-gray-200 ">
             <Th >LotNo</Th>
-            <Th >Date</Th>
+            {/* <Th >Date</Th> */}
             <Th >Technical</Th>
             <Th >Position</Th>
-            <Th >Lens</Th>
-            <Th >Clarity</Th>
+            <Th >Suitablity</Th>
+            {/* <Th >Clarity</Th>
             <Th >Size</Th>
-            <Th >Eye Lid</Th>
+            <Th >Eye Lid</Th> */}
             <Th >Iris Color</Th>
             <Th >Expiration Date</Th>
             <Th colSpan={3}>
