@@ -75,10 +75,10 @@ const CollectedCornea = () => {
             handleChange={handleChange}
           />
         </div>
-        <div>
+        <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
           {!loading ? (
             <>
-              <Table variant="simple">
+              <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 {/* Table header */}
                 <Thead>
                   <Tr className="bg-sky-600 text-white">
@@ -96,24 +96,24 @@ const CollectedCornea = () => {
                 </Thead>
                 {/* Table body */}
                 <Tbody>
-                  {notTestCornes ? notTestCornes.map((cornea, index) => (
-                    <Row
-                      key={index}
-                      cornea={cornea}
-                    />
-                  ))
-                    : (
-                      <NotFound />
-                )}
+                  {notTestCornes ? (
+                    notTestCornes.map((cornea, index) => (
+                      <Row key={index} cornea={cornea} />
+                    ))
+                  ) : (
+                    <NotFound />
+                  )}
                 </Tbody>
               </Table>
               {/* Pagination Controls */}
-             {!notTestCornes &&  <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                paginate={paginate}
-              />}
+              {notTestCornes && (
+                <Pagination
+                  totalPages={totalPages}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  paginate={paginate}
+                />
+              )}
             </>
           ) : (
             <LoadingCircle />

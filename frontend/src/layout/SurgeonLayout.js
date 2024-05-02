@@ -27,22 +27,22 @@ const SurgeonDashboard = () => {
         role: "",
     });
 
-    const handleSearch = () => {
-        const sampleList = [
-            { id: 1, name: "John Doe" },
-            { id: 2, name: "Jane Doe" },
-        ];
-        const results = sampleList.filter((item) =>
-            item.name.toLowerCase().includes(searchText.toLowerCase())
-        );
-        setSearchResults(results);
-    };
-    const handleSearchInputChange = (e) => {
-        setSearchText(e.target.value);
-    };
-    const toggleDropdown = () => {
-        setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
-    };
+    // const handleSearch = () => {
+    //     const sampleList = [
+    //         { id: 1, name: "John Doe" },
+    //         { id: 2, name: "Jane Doe" },
+    //     ];
+    //     const results = sampleList.filter((item) =>
+    //         item.name.toLowerCase().includes(searchText.toLowerCase())
+    //     );
+    //     setSearchResults(results);
+    // };
+    // const handleSearchInputChange = (e) => {
+    //     setSearchText(e.target.value);
+    // };
+    // const toggleDropdown = () => {
+    //     setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
+    // };
 
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));

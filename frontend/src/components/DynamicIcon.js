@@ -9,6 +9,7 @@ import * as GrcIcons from "react-icons/gr";
 import * as TbcIcons from "react-icons/tb";  
 import * as GicIcons from "react-icons/gi";  
 import * as BscIcons from "react-icons/bs";  
+import * as BicIcons from "react-icons/bi";  
 
 const iconLibraries = {
   md: MdIcons,
@@ -21,6 +22,7 @@ const iconLibraries = {
   tb: TbcIcons,
   gi: GicIcons,
   bs: BscIcons,
+  bi: BicIcons,
 };
 
 const DynamicIcon = ({ library, iconName, className }) => {

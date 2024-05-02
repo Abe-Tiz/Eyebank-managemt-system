@@ -9,8 +9,8 @@ import socketIOClient from "socket.io-client";
 import HeaderComponent from "../pages/dashboard/admins/HeaderComponent";
 import useLoggedInUser from "../useHooks/useLoggedInUser";
 
-const ENDPOINT = "http://localhost:4000"; // Your server endpoint
-const socket = socketIOClient(ENDPOINT);
+// const ENDPOINT = "http://localhost:4000"; // Your server endpoint
+// const socket = socketIOClient(ENDPOINT);
 
 const { Content } = Layout;
 
@@ -115,7 +115,11 @@ const AdminDashboard = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
     };
 
-
+ //! handle Logout
+    // const handleLogout = () => {
+    //     localStorage.removeItem("admin");
+    //     navigate("/login");
+    // };
 
     return (
       <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
@@ -140,7 +144,7 @@ const AdminDashboard = () => {
             toggleSidebar={toggleSidebar}
             newDonorCount={countNotification}
             notifications={notifications}
-            type="admin"
+            // role="admin"
           />
 
           {/* content section  */}

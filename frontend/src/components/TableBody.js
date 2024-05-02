@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { RiEdit2Line, RiDeleteBin2Line } from "react-icons/ri";
 import useSearch from "../useHooks/useSearch";
 
-const TableBody = ({ donors, donor, handleActivate, onOpen, searchTerm }) => {
-  const renderDonors = searchTerm ? donor : donors;
+const TableBody = ({ donors, donor, handleActivate, onOpen, searchTerm,currentCorneas }) => {
+  const renderDonors = searchTerm ? donor : currentCorneas;
   // console.log("search term", searchTerm);
-  console.log("donor", renderDonors);
+  // console.log("donor", renderDonors);
 
   return (
     <tbody>

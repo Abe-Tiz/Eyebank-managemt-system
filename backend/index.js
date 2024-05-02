@@ -101,25 +101,25 @@ const NotifyNewDonors = async () => {
     try {
         const changeStream = Donor.watch();
 
-        changeStream.on("change", (data) => {
-            if (data.operationType === "insert") {
-                notificationCount++;
-                io.emit("newDonorNotification", {
-                    donor: data.fullDocument,
-                    count: notificationCount,
-                });
-            }
+    changeStream.on("change", (data) => {
+      if (data.operationType === "insert") {
+        notificationCount++;  
+        io.emit("newDonorNotification", {
+          donor: data.fullDocument,
+          count: notificationCount,  
         });
-    } catch (error) {
-        console.log(`error : ${error}`);
-    }
+      }
+    });
+  } catch (error) {
+    console.log(`error : ${error}`);
+  }
 };
 
 // Call NotifyNewDonors when the server starts
 NotifyNewDonors();
 
 
-// app.use('/accident', AccidentalRoute)
+app.use('/accident', AccidentalRoute)
 app.use('/api', physicalExamRoutes);
 app.use('/blood', BloodRoute)
 app.use('/request', RequestRoute);

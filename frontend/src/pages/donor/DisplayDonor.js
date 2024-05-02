@@ -18,6 +18,18 @@ const DisplayDonor = () => {
     const { t } = useTranslation();
     const cancelRef = useRef();
     const { searchTerm, handleChange, data, error } = useSearch("donor");
+
+     const [currentPage, setCurrentPage] = useState(1);
+      const itemsPerPage = 5;
+
+      // Calculate the total number of pages
+      const totalPages = Math.ceil(donors.length / itemsPerPage);
+      const indexOfLastItem = currentPage * itemsPerPage;
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+      const currentCorneas = donors.slice(indexOfFirstItem, indexOfLastItem);
+
+      // Function to change page
+      const paginate = (pageNumber) => setCurrentPage(pageNumber);
     // fetch donors
     const fetchDonor = async () => {
         try {
@@ -130,6 +142,12 @@ const DisplayDonor = () => {
                     onOpen={onOpen}
                     donor={data}
                     searchTerm={searchTerm}
+
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    paginate={paginate}
+                    currentCorneas={currentCorneas}
                 />
             ) : (
                 <LoadingCircle />

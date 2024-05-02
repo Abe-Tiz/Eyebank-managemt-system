@@ -12,16 +12,10 @@ const Row = ({ cornea }) => (
     <Td> {cornea.size}</Td>
     <Td> {cornea.eyeLid}</Td>
     <Td> {cornea.irisColor}</Td>
-    {/* <Td>
-      {" "}
-      {cornea.expirationDate < 14
-        ? `${14 - cornea.expirationDate} Day Left`
-        : "Expired"}
-    </Td> */}
     <Td>
       <Link
-        to={`/labtechnicaldashboard/serology/${cornea._id}`}
-        // className=" flex items-center text-white bg-sky-700 border-2 p-3 font-medium dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
+        to={`/labtechnicaldashboard/test-serology/${cornea._id}`}
+        className=" flex items-center text-white bg-sky-700 border-2 rounded-lg p-3 font-medium dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
       >
         Test
       </Link>

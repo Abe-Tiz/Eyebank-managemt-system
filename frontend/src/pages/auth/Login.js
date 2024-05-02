@@ -89,7 +89,6 @@ const Login = () => {
                         navigate("/medicaldirectordashboard");
                     }
                 }
-                
             }
         } catch (error) {
             if (error.response) {

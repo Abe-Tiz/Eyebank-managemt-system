@@ -17,7 +17,7 @@ const HeaderComponent = ({
     toggleSidebar,
     newDonorCount,
     notifications,
-    type,
+    role,
 }) => {
     const currentLanguageCode = cookies.get("i18next") || "en";
     const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
@@ -27,11 +27,7 @@ const HeaderComponent = ({
     const { searchTerm, handleChange, donor, error, getDonorByName } =
         useSearch();
 
-    //! handle Logout
-    const handleLogout = () => {
-        localStorage.removeItem(type);
-        navigate("/login");
-    };
+   
     useEffect(() => {
         document.title = t("app_title");
     }, [currentLanguage, t]);
@@ -39,6 +35,14 @@ const HeaderComponent = ({
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
+
+     //! handle Logout
+    const handleLogout = () => {
+        // console.log("role:", role);
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
+   
     return (
         <div
             className={`bg-indigo-200 p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${state.collapsed ? ` w-11/12 ml-8` : `w-4/5`
@@ -126,7 +130,7 @@ const HeaderComponent = ({
                                 <a> Setting</a>
                             </li>
                             <li>
-                                <a onClick={handleLogout}>{t("common:logouttButtonLabel")}</a>
+                                <a onClick={ handleLogout}>{t("common:logouttButtonLabel")}</a>
                             </li>
                         </ul>
                     </div>

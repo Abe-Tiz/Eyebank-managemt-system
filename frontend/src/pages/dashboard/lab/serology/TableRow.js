@@ -4,7 +4,7 @@ import { Tr, Td, Link } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import DynamicIcon from "../../../../components/DynamicIcon";
 
-const TableRow = ({ blood, onOpen, deleteCornea }) => (
+const TableRow = ({ blood, onOpen }) => (
   <Tr className="mb-2 text-lg">
     {/* <Td>{blood._id}</Td> */}
     <Td>{blood.bloodType}</Td>
