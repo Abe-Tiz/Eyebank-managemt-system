@@ -15,7 +15,7 @@ const Row = ({ cornea }) => (
     <Td>
       <Link
         to={`/labtechnicaldashboard/test-serology/${cornea._id}`}
-        className=" flex items-center text-white bg-sky-700 border-2 rounded-lg p-3 font-medium dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
+        className=" flex items-center text-white bg-sky-700 border-2 rounded p-3 font-medium dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
       >
         Test
       </Link>
