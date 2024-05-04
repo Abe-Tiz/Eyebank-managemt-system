@@ -92,6 +92,7 @@ import AccidentList from "../pages/dashboard/surgeon/AccidentList";
 
 import StoredCornea from "../pages/dashboard/lab/StoredCornea";
 import CollectedCornea from "../pages/dashboard/lab/serology/CollectedCornea";
+import Cornea from "../pages/reports/Cornea";
 // import LoginDonor from './../pages/donor/LoginDonor';
 const router = createBrowserRouter([
   {
@@ -168,6 +169,10 @@ const router = createBrowserRouter([
     path: "/labtechnicaldashboard",
     element: <LabTechnicalDashboard />,
     children: [
+      {
+        path: "",
+        element: <Cornea />,
+      },
       {
         path: "collectCornea/:id",
         element: <CollectCornea />,

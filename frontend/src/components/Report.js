@@ -3,6 +3,7 @@ import Chart from "chart.js/auto";
 import axios from 'axios';
 import ReportCard from './ReportCard';
 import RecentDonor from "../pages/donor/RecentDonor";
+import Cornea from "../pages/reports/Cornea";
 // import RecentDonor from './../pages/donor/RecentDonor';
 
     const Report = () => {
@@ -154,6 +155,7 @@ import RecentDonor from "../pages/donor/RecentDonor";
           </div>
           <RecentDonor />
         </div>
+       
       </div>
     );
 };

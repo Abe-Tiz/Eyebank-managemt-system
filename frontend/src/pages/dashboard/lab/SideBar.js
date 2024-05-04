@@ -96,6 +96,24 @@ const CustomSidebar = ({ collapsed, name, role }) => {
 
                 {/* btn */}
                 <div className="w-64- mt-4 flex flex-col justify-center items-center">
+                  <SideCustome
+                    headerProps={{
+                      onClick: () =>
+                        setIsOpen({ ...isOpen, dashboard: !isOpen.dashboard }),
+                      iconLibrary: "md",
+                      iconName: "MdSpaceDashboard",
+                      title: t("common:dashboardLabel"),
+                      isOpen: isOpen.dashboard,
+                    }}
+                    subtitleProps={[
+                      {
+                        link: "/labtechnicaldashboard",
+                        subtitle: t("common:dashboardLabel"),
+                        iconLibrary: "md",
+                        iconName: "MdSpaceDashboard",
+                      },
+                    ]}
+                  />
                   {/* for Physical Examninatiion */}
                   <SideCustome
                     headerProps={{
