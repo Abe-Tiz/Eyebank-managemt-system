@@ -97,7 +97,7 @@ const ViewTissue = () => {
                                     (cornea.evaluation.approval !== 'no')
                             )
                             .map((cornea, index) => (
-                                <Tr key={index}>
+                                <Tr key={index} className="mb-2 text-lg">
                                     <Td>{index + 1}</Td>
                                     <Td>{cornea.lotNo}</Td>
                                     <Td>
@@ -114,8 +114,10 @@ const ViewTissue = () => {
                                     <div className='text-center'>
                                         {
                                             cornea.evaluation && cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
+
                                                 <Td>
-                                                    <Link to={`/medicaldirectordashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link>
+                                                    <Button colorScheme='telegram'>
+                                                        <Link className=' bg-sky-600' to={`/medicaldirectordashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link></Button>
                                                 </Td>
                                             ) : (
                                                 <Td style={{ color: cornea.evaluation && cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>
