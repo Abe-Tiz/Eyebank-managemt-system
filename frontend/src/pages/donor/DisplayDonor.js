@@ -142,7 +142,6 @@ const DisplayDonor = () => {
                     onOpen={onOpen}
                     donor={data}
                     searchTerm={searchTerm}
-
                     totalPages={totalPages}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}

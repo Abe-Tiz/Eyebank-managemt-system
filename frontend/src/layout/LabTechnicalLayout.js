@@ -24,7 +24,7 @@ const LabTechnicalDashboard = () => {
         role: "",
     });
 
-     const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
+     const { user, setUser, getLoggedInUser } = useLoggedInUser("lab");
 
     const [reportData, setReportData] = useState({
         donor: "",
@@ -96,7 +96,7 @@ const LabTechnicalDashboard = () => {
             image={user && user.data.image}
             toggleSidebar={toggleSidebar}
             newDonorCount={newDonorCount}
-            // role="lab"
+            role="lab"
           />
 
           {/* content section  */}

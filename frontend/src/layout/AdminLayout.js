@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     const [notifications, setNotifications] = useState([]);
   const [countNotification, setCountNotification] = useState(0);
   
-   const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
+   const { user, setUser, getLoggedInUser } = useLoggedInUser("admin");
 
     const [state, setState] = useState({
         name: "",
@@ -40,39 +40,7 @@ const AdminDashboard = () => {
     });
 
     const [newDonorCount, setNewDonorCount] = useState(0);
-
-  // const getLoggedInUser = async () => {
-               
-  //       fetch("http://127.0.0.1:4000/user/userLogedin", {
-  //           method: "POST",
-  //           crossDomain: true,
-  //           headers: {
-  //               "Content-Type": "application/json",
-  //               Accept: "application/json",
-  //               "Access-Control-Allow-Origin": "*",
-  //           },
-  //           body: JSON.stringify({
-  //               token: localStorage.getItem("token"),
-  //           }),
-  //       })
-  //           .then((res) => res.json())
-  //           .then((data) => {
-  //               console.log(data.data, "user logged in");
-  //               setState((prev) => ({
-  //                   ...prev,
-  //                   name: data.data.name,
-  //                   image: data.data.image,
-  //                   role: data.data.role,
-  //                   isLoggedin: true,
-  //               }));
-
-  //               if (data.data === "token expired") {
-  //                   localStorage.clear();
-  //                   navigate("/login");
-  //               }
-  //           });
-  //   };
-
+  
     const numberDonor = async () => {
         try {
             const response = await axios.get("http://localhost:4000/report");
@@ -144,7 +112,7 @@ const AdminDashboard = () => {
             toggleSidebar={toggleSidebar}
             newDonorCount={countNotification}
             notifications={notifications}
-            // role="admin"
+            role="admin"
           />
 
           {/* content section  */}

@@ -19,6 +19,7 @@ import Pagination from "../../../../components/Pagination";
 import Row from "./Row";
 import NotFound from "../../../../components/NotFound";
 import LoadingCircle from "../../../../components/LoadingCircle";
+import CommonTablHeader from "./CommonTablHeader";
 // import NotFound from './../../../../components/NotFound';
 
 const CollectedCornea = () => {
@@ -61,14 +62,14 @@ const CollectedCornea = () => {
 
   const renderCornea = searchTerm ? data : currentCorneas;
   const notTestCornes = renderCornea.filter((item) => item.isTested !== true);
-   console.log("searched:", notTestCornes);
+  //  console.log("searched:", notTestCornes);
   return (
     <div>
       <TableContainer>
-        <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-          List of collected cornea
-        </Text>
-        <div className="w-full mt-2 flex justify-end ">
+        <div className="w-full mt-2 flex justify-between ">
+          <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+            List of collected cornea
+          </Text>
           {/* search component */}
           <SearchComponent
             searchTerm={searchTerm}
@@ -80,22 +81,17 @@ const CollectedCornea = () => {
             <>
               <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 {/* Table header */}
-                <Thead>
-                  <Tr className="bg-sky-600 text-white">
-                    <Th className="text-white">LotNo</Th>
-                    <Th className="text-white">Position</Th>
-                    <Th className="text-white">Clarity</Th>
-                    <Th className="text-white">size</Th>
-                    <Th className="text-white">Eye Lid</Th>
-                    <Th className="text-white">Iris COlor</Th>
-                    {/* <Th className="text-white">Iris COlor</Th> */}
-                    <Th className="text-white" colSpan={3}>
-                      Operations
-                    </Th>
-                  </Tr>
-                </Thead>
+                <CommonTablHeader
+                  first="LotNo"
+                  second="Position"
+                  third="Clarity"
+                  forth="Size"
+                  fifth="Eye Lid"
+                  six="Iris Color"
+                  seven="Action"
+                />
                 {/* Table body */}
-                <Tbody>
+                <tbody>
                   {notTestCornes ? (
                     notTestCornes.map((cornea, index) => (
                       <Row key={index} cornea={cornea} />
@@ -103,7 +99,7 @@ const CollectedCornea = () => {
                   ) : (
                     <NotFound />
                   )}
-                </Tbody>
+                </tbody>
               </Table>
               {/* Pagination Controls */}
               {notTestCornes && (

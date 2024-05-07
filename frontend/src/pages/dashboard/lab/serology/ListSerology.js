@@ -20,6 +20,7 @@ import DeleteAlertDialog from "../../../../components/DeleteAlertDialog";
 import { useTranslation } from "react-i18next";
 import LoadingCircle from "./../../../../components/LoadingCircle";
 import NotFound from "../../../../components/NotFound";
+import CommonTablHeader from "./CommonTablHeader";
 
 const ListSerology = () => {
   const { searchTerm, handleChange, data, error } = useSearch("blood");
@@ -109,10 +110,10 @@ const ListSerology = () => {
       ) : (
         <div>
           <TableContainer>
-            <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-              List of Tested Results
-            </Text>
-            <div className="w-full mt-2 flex justify-end ">
+            <div className="w-full mt-2 flex justify-between ">
+              <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+                List of Tested Results
+              </Text>
               {/* search component */}
               <SearchComponent
                 searchTerm={searchTerm}
@@ -121,21 +122,17 @@ const ListSerology = () => {
             </div>
             <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
               <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                           
                 {/* Table header */}
-                <Thead>
-                  <Tr className="bg-sky-600 text-white">
-                    {/* <Th className="text-white">ID</Th> */}
-                    <Th className="text-white">Blood Type</Th>
-                    <Th className="text-white">Position</Th>
-                    <Th className="text-white">Status</Th>
-                    <Th className="text-white">Eye Lid</Th>
-                    <Th className="text-white">Lot Number</Th>
-                    <Th className="text-white">Tested</Th>
-                    <Th className="text-white" colSpan={3}>
-                      Action
-                    </Th>
-                  </Tr>
-                </Thead>
+                <CommonTablHeader
+                  first="Blood Type"
+                  second="Position"
+                  third="Status"
+                  forth="Eye Lid"
+                  fifth="Lot No"
+                  six="Tested"
+                  seven="Action"
+                />
 
                 {/* Table body */}
                 <Tbody>

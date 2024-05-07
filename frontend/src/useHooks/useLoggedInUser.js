@@ -10,24 +10,24 @@ const useLoggedInUser = (type) => {
     try {
       let token = null;
     
-      // switch(type){
-      //   case "admin":
-      //     token = localStorage.getItem("admin");
-      //     break;
-      //   case "lab":
-      //     token = localStorage.getItem("lab");
-      //     break;
-      //   case "medical":
-      //     token = localStorage.getItem("medical");
-      //     break;
-      //   case "doctor":
-      //     token = localStorage.getItem("doctor");
-      //     break;
-      // }
+      switch(type){
+        case "admin":
+          token = localStorage.getItem("admin");
+          break;
+        case "lab":
+          token = localStorage.getItem("lab");
+          break;
+        case "medical":
+          token = localStorage.getItem("medical");
+          break;
+        case "doctor":
+          token = localStorage.getItem("doctor");
+          break;
+      }
       const response = await axios.post(
         "http://127.0.0.1:4000/user/userLogedin",
         {
-          token: localStorage.getItem(type),
+          token: token,
         }
       );
       if (response.data.status === "ok") {

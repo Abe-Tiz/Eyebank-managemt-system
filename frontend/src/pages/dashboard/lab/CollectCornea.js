@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-//import "../../static/styles/cornea.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import useLoggedInUser from "../../../useHooks/useLoggedInUser";
+
 const CollectCornea = () => {
     const dateOfRecovery = Date.now();
     const [position, setPosition] = useState('');
@@ -24,9 +25,12 @@ const CollectCornea = () => {
     const [reason, setReason] = useState('');
     const [evaluater, setEvaluater] = useState('');
     const [collect, seCollect] = useState(true);
+
+    const { user, setUser, getLoggedInUser } = useLoggedInUser("lab");
     const collectd = {
         collect,
     };
+
     //for recovery
     const { id } = useParams();
     const [state, setState] = useState({
@@ -35,6 +39,7 @@ const CollectCornea = () => {
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -87,34 +92,8 @@ const CollectCornea = () => {
             console.error("Failed to collect physical exam:", error);
         }
     }
-    useEffect(() => {
-        fetch("http://127.0.0.1:4000/user/userLogedin", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("token"),
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data.data, "user logged in");
-                setState((prev) => ({
-                    ...prev,
-                    name: data.data.name,
-                }));
-
-                if (data.data === "token expired") {
-                    localStorage.clear();
-                    navigate("/login");
-                }
-            });
-    }, [navigate]);
-    const recoveryTechnical = state.name
+   
+    const recoveryTechnical = user && user.data.name
     const handlePosition = (event) => {
         setPosition(event.target.value);
     };

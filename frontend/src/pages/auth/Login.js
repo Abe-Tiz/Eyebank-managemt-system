@@ -36,7 +36,7 @@ const Login = () => {
             } else {
                 if (data.status === "ok") {
                     if (data.user.role === "admin") {
-                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("admin", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -49,7 +49,7 @@ const Login = () => {
                         navigate("/adminDashboard");
                     }
                     else if (data.user.role === "doctor") {
-                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("doctor", data.data);
                         localStorage.setItem("surgeonId", data.user._id);
                         localStorage.setItem("loggedIn", true);
                         toast({
@@ -63,7 +63,7 @@ const Login = () => {
                         navigate("/surgondashboard");
                     }
                     else if (data.user.role === "lab Techinician") {
-                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("lab", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -76,7 +76,7 @@ const Login = () => {
                         navigate("/labtechnicaldashboard");
                     }
                     else if (data.user.role === "medical Director") {
-                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("medical", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -87,6 +87,18 @@ const Login = () => {
                         });
                         // setRefreshed(true);
                         navigate("/medicaldirectordashboard");
+                    } else {
+                      // localStorage.setItem("medical", data.data);
+                      // localStorage.setItem("loggedIn", true);
+                      toast({
+                        title: "Please Try The Autherized  User",
+                        status: "warning",
+                        duration: 5000,
+                        isClosable: true,
+                        position: "top",
+                      });
+                      // setRefreshed(true);
+                      // navigate("/medicaldirectordashboard");
                     }
                 }
             }

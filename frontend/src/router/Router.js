@@ -83,7 +83,7 @@ import BlogDetail from "./../pages/blog/BlogDetail";
 import EditPhysicalExam from "../pages/dashboard/lab/EditPhysicalExam";
 import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
 import Serology from "../pages/dashboard/lab/serology/Serology";
-import SerologyTest from '../pages/dashboard/lab/serology/SerologyTest';
+// import SerologyTest from '../pages/dashboard/lab/serology/SerologyTest';
 import ListSerology from "../pages/dashboard/lab/serology/ListSerology";
 
 import RecordAccident from "../pages/dashboard/surgeon/RecordAccident";
@@ -93,6 +93,8 @@ import AccidentList from "../pages/dashboard/surgeon/AccidentList";
 import StoredCornea from "../pages/dashboard/lab/StoredCornea";
 import CollectedCornea from "../pages/dashboard/lab/serology/CollectedCornea";
 import Cornea from "../pages/reports/Cornea";
+// import Collected from "../pages/dashboard/lab/serology/Collected";
+import Test from "../pages/dashboard/lab/serology/Test";
 // import LoginDonor from './../pages/donor/LoginDonor';
 const router = createBrowserRouter([
   {
@@ -198,12 +200,16 @@ const router = createBrowserRouter([
         element: <EditCornea />,
       },
       {
+        path: "editcornea/:id",
+        element: <EditCornea />,
+      },
+      {
         path: "discardCornea",
         element: <DiscardCornea />,
       },
       {
-        path: "test-serology/:id",
-        element: <SerologyTest />,
+        path: "testserology/:id",
+        element: <Test />,
       },
       {
         path: "serology",
@@ -457,6 +463,5 @@ const router = createBrowserRouter([
       },
     ],
   },
- 
 ]);
 export default router;

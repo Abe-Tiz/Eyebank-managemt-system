@@ -37,9 +37,9 @@ const HeaderComponent = ({
     };
 
      //! handle Logout
-    const handleLogout = () => {
+    const handleLogout = (role) => {
         // console.log("role:", role);
-        localStorage.removeItem("token");
+        localStorage.removeItem(role);
         navigate("/login");
     };
    
@@ -130,7 +130,7 @@ const HeaderComponent = ({
                                 <a> Setting</a>
                             </li>
                             <li>
-                                <a onClick={ handleLogout}>{t("common:logouttButtonLabel")}</a>
+                                <a onClick={() => handleLogout(role)}>{t("common:logouttButtonLabel")}</a>
                             </li>
                         </ul>
                     </div>

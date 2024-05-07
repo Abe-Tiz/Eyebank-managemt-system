@@ -11,7 +11,7 @@ const Cornea = () => {
     cornea: 0,
     evaluted: 0,
   });
-
+  
   // number of corneas
   const CorneaCount = async () => {
     try {
@@ -24,7 +24,7 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
-
+  
   // number of cornea
   const CollectedCornea = async () => {
     try {
@@ -40,7 +40,7 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
-
+  
   // number of donor
   const numberOfEvalutedCornea = async () => {
     try {
@@ -56,7 +56,7 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
-
+  
   // number of donor
   const numberDonor = async () => {
     try {
@@ -79,7 +79,7 @@ const Cornea = () => {
       numberOfEvalutedCornea();
       numberDonor();
   }, [corneaReport]);
-
+  
   // {
   //     corneaReport.map((item) => console.log(`month:${item.month},count:${item.count}`))
   //  }
@@ -87,7 +87,7 @@ const Cornea = () => {
     month: item.month,
     count: item.count,
   }));
-
+  
   const data = [
     { category: "cornea", number: reportData.cornea },
     { category: "evaluted", number: reportData.evaluted },
@@ -95,7 +95,7 @@ const Cornea = () => {
     // { category: "ready", number: 5 },
     { category: "pledeged", number: reportData.pledge },
   ];
-
+  
   return (
     <div className="p-4">
       <div className="flex flex-wrap -mx-2">
