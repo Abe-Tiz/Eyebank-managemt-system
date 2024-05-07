@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+//import "../../static/styles/cornea.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 import useLoggedInUser from "../../../useHooks/useLoggedInUser";

@@ -94,124 +94,128 @@ const Test = () => {
   };
   return (
     <>
-      <div className="mt-[-2] items-center">
+      <div className="mt-[-2]  items-center">
         <h2 className="text-3xl ">Welcome to Serology Test Form</h2>
         <form onSubmit={handleFormSubmit}>
-          <div className="flex   gap-3 flex-wrap md:mr-4">
-            <div className="mt-4">
-              <label
-                htmlFor="blood"
-                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Blood Type:
-                <span className="text-red-500">*</span>
-              </label>
-              <div className="flex flex-col items-start">
-                <select
-                  name="blood"
-                  className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block"
-                  value={bloodType}
-                  onChange={(e) => setBloodType(e.target.value)}
-                  required
+          <div className="flex gap-10">
+            <div className="flex   gap-3 flex-wrap md:mr-4">
+              <div className="mt-4">
+                <label
+                  htmlFor="blood"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  <option value="">-- Select Blood type --</option>
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                  <option value="O">O</option>
-                  <option value="AB">AB</option>
-                </select>
-                {/* Blood type validation message */}
-                {!validateBloodType(bloodType) && (
-                  <span className="text-red-500">please Select blood type</span>
-                )}
+                  Blood Type:
+                  <span className="text-red-500">*</span>
+                </label>
+                <div className="flex flex-col items-start">
+                  <select
+                    name="blood"
+                    className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block"
+                    value={bloodType}
+                    onChange={(e) => setBloodType(e.target.value)}
+                    required
+                  >
+                    <option value="">-- Select Blood type --</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="O">O</option>
+                    <option value="AB">AB</option>
+                  </select>
+                  {/* Blood type validation message */}
+                  {!validateBloodType(bloodType) && (
+                    <span className="text-red-500">
+                      please Select blood type
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex gap-3 flex-wrap md:mr-4 mt-2">
-            <div className="mt-4 flex gap-5">
-              <label
-                htmlFor="sex"
-                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Test Done:
-                <span className="text-red-500">*</span>
-              </label>
-              <div className="flex flex-col md:flex-row md:gap-5 gap-0">
-                <div className="flex flex-col items-start">
-                  <label className="label cursor-pointer gap-3">
-                    <input
-                      type="checkbox"
-                      name="hiv"
-                      checked={tests.hiv}
-                      onChange={handleCheckboxChange}
-                      className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
-                    />
-                    HIV
-                  </label>
-                  <label className="label cursor-pointer gap-3">
-                    <input
-                      type="checkbox"
-                      name="hepatitisB"
-                      checked={tests.hepatitisB}
-                      onChange={handleCheckboxChange}
-                      className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
-                    />
-                    HepatitisB
-                  </label>
-                  <label className="label cursor-pointer gap-3">
-                    <input
-                      type="checkbox"
-                      name="hepatitisC"
-                      checked={tests.hepatitisC}
-                      onChange={handleCheckboxChange}
-                      className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
-                    />
-                    HepatitisC
-                  </label>
-                </div>
-                <div className="flex flex-col items-start ">
-                  <label className="label cursor-pointer gap-3">
-                    <input
-                      type="checkbox"
-                      name="syphilis"
-                      checked={tests.syphilis}
-                      onChange={handleCheckboxChange}
-                      className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
-                    />
-                    Syphilis
-                  </label>
-                  <label className="label cursor-pointer gap-3">
-                    <input
-                      type="checkbox"
-                      name="vdrl"
-                      checked={tests.vdrl}
-                      onChange={handleCheckboxChange}
-                      className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
-                    />
-                    VDRL
-                  </label>
+            <div className="flex gap-3 flex-wrap md:mr-4 mt-2">
+              <div className="mt-4 flex gap-5">
+                <label
+                  htmlFor="sex"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Test Done:
+                  <span className="text-red-500">*</span>
+                </label>
+                <div className="flex flex-col md:flex-row md:gap-5 gap-0">
+                  <div className="flex flex-col items-start">
+                    <label className="label cursor-pointer gap-3">
+                      <input
+                        type="checkbox"
+                        name="hiv"
+                        checked={tests.hiv}
+                        onChange={handleCheckboxChange}
+                        className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
+                      />
+                      HIV
+                    </label>
+                    <label className="label cursor-pointer gap-3">
+                      <input
+                        type="checkbox"
+                        name="hepatitisB"
+                        checked={tests.hepatitisB}
+                        onChange={handleCheckboxChange}
+                        className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
+                      />
+                      HepatitisB
+                    </label>
+                    <label className="label cursor-pointer gap-3">
+                      <input
+                        type="checkbox"
+                        name="hepatitisC"
+                        checked={tests.hepatitisC}
+                        onChange={handleCheckboxChange}
+                        className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
+                      />
+                      HepatitisC
+                    </label>
+                  </div>
+                  <div className="flex flex-col items-start ">
+                    <label className="label cursor-pointer gap-3">
+                      <input
+                        type="checkbox"
+                        name="syphilis"
+                        checked={tests.syphilis}
+                        onChange={handleCheckboxChange}
+                        className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
+                      />
+                      Syphilis
+                    </label>
+                    <label className="label cursor-pointer gap-3">
+                      <input
+                        type="checkbox"
+                        name="vdrl"
+                        checked={tests.vdrl}
+                        onChange={handleCheckboxChange}
+                        className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
+                      />
+                      VDRL
+                    </label>
 
-                  <label className="label cursor-pointer gap-3">
-                    <input
-                      type="checkbox"
-                      name="other"
-                      checked={tests.other}
-                      onChange={handleCheckboxChange}
-                      className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
-                    />
-                    Other
-                  </label>
-                  {isOtherChecked && (
-                    <input
-                      name="otherTestInput"
-                      id="otherTestInput"
-                      placeholder="Enter other test"
-                      value={otherTestValue}
-                      onChange={handleOtherInputChange}
-                      className="-mt-[50px] ml-[100px] block w-auto  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                    />
-                  )}
+                    <label className="label cursor-pointer gap-3">
+                      <input
+                        type="checkbox"
+                        name="other"
+                        checked={tests.other}
+                        onChange={handleCheckboxChange}
+                        className="checkbox [--chkbg:oklch(var(--a))] [--chkfg:oklch(var(--p))]"
+                      />
+                      Other
+                    </label>
+                    {isOtherChecked && (
+                      <input
+                        name="otherTestInput"
+                        id="otherTestInput"
+                        placeholder="Enter other test"
+                        value={otherTestValue}
+                        onChange={handleOtherInputChange}
+                        className="-mt-[50px] ml-[100px] block w-auto  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

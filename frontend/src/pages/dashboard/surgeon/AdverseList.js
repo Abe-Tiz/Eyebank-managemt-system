@@ -79,6 +79,7 @@ const AdverseList = () => {
                             <Tr className="bg-gray-200 mx-0">
                                 <Th>S.No</Th>
                                 <Th>Date Of Diagnosis</Th>
+                                <Th>Lot No</Th>
                                 <Th>Adverse Reation</Th>
                                 <Th>Probablity of Case</Th>
                                 <Th>Donor Tissue</Th>
@@ -97,6 +98,7 @@ const AdverseList = () => {
                                     <Tr key={index} className="mb-2 text-lg">
                                         <Td>{index + 1}</Td>
                                         <Td>{formatTimestamp(cornea.adverse.dateOfadverse)}</Td>
+                                        <Td>{cornea.adverse.lotNo}</Td>
                                         <Td>{cornea.adverse.adverseReaction}</Td>
                                         <Td>{cornea.adverse.probablityCase}</Td>
                                         <Td>{cornea.adverse.donorTissue}</Td>

@@ -83,7 +83,6 @@ import BlogDetail from "./../pages/blog/BlogDetail";
 import EditPhysicalExam from "../pages/dashboard/lab/EditPhysicalExam";
 import ActivateAccount from "../pages/dashboard/admins/ActivateAccount";
 import Serology from "../pages/dashboard/lab/serology/Serology";
-// import SerologyTest from '../pages/dashboard/lab/serology/SerologyTest';
 import ListSerology from "../pages/dashboard/lab/serology/ListSerology";
 
 import RecordAccident from "../pages/dashboard/surgeon/RecordAccident";
@@ -96,6 +95,11 @@ import Cornea from "../pages/reports/Cornea";
 // import Collected from "../pages/dashboard/lab/serology/Collected";
 import Test from "../pages/dashboard/lab/serology/Test";
 // import LoginDonor from './../pages/donor/LoginDonor';
+import EditDistribute from './../pages/dashboard/lab/EditDistribute';
+// import Test from './../pages/dashboard/lab/serology/Test';
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -200,10 +204,6 @@ const router = createBrowserRouter([
         element: <EditCornea />,
       },
       {
-        path: "editcornea/:id",
-        element: <EditCornea />,
-      },
-      {
         path: "discardCornea",
         element: <DiscardCornea />,
       },
@@ -224,12 +224,16 @@ const router = createBrowserRouter([
         element: <EvaluatedList />,
       },
       {
-        path: "storeCornea",
+        path: "storedCornea",
         element: <StoredCornea />,
       },
       {
         path: "distributeCornea/:id",
         element: <DistributeCornea />,
+      },
+      {
+        path: "editdistributed/:id",
+        element: <EditDistribute />,
       },
       {
         path: "viewDistributed",
@@ -268,10 +272,6 @@ const router = createBrowserRouter([
         element: <ListOfPlege />,
       },
       {
-        path: "viewDonors",
-        element: <ListOfPleged />,
-      },
-      {
         path: "viewRequestCornea",
         element: <ViewRequestedCornea />,
       },
@@ -282,10 +282,6 @@ const router = createBrowserRouter([
       {
         path: "approvedRequest",
         element: <ApprovedRequest />,
-      },
-      {
-        path: "approvedList",
-        element: <ApprovedList />,
       },
     ],
   },
@@ -322,7 +318,7 @@ const router = createBrowserRouter([
         element: <EditUser />,
       },
       {
-        path: "storeCornea",
+        path: "storedCornea",
         element: <StoredCornea />,
       },
       {
@@ -426,7 +422,7 @@ const router = createBrowserRouter([
     element: <MedicalDirectorDashboard />,
     children: [
       {
-        path: " ",
+        path: "",
         element: <ViewTissue />,
       },
       {

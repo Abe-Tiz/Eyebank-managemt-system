@@ -77,7 +77,7 @@ const AdminDashboard = () => {
         notification();
     }, [setReportData, navigate, newDonorCount]);
   
-  // console.log("logggggg:",user.data);
+  console.log("logggggg:",user);
 
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));

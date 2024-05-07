@@ -12,20 +12,22 @@ import axios from 'axios'
 import useSearch from "../../../useHooks/useSearch";
 
 const HeaderComponent = ({
-    image,
     state,
     toggleSidebar,
     newDonorCount,
-    notifications,
+    name,
     role,
+    image,
+    notifications,
+   
 }) => {
     const currentLanguageCode = cookies.get("i18next") || "en";
     const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const { searchTerm, handleChange, donor, error, getDonorByName } =
-        useSearch();
+    // const { searchTerm, handleChange, donor, error, getDonorByName } =
+    //     useSearch();
 
    
     useEffect(() => {
@@ -42,10 +44,12 @@ const HeaderComponent = ({
         localStorage.removeItem(role);
         navigate("/login");
     };
+
+    // console.log("image:",image)
    
     return (
         <div
-            className={`bg-indigo-200 p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${state.collapsed ? ` w-11/12 ml-8` : `w-4/5`
+            className={`bg-base-200  p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${state.collapsed ? ` w-11/12 ml-8` : `w-4/5`
                 }`}
         >
             <div className="flex items-center">
@@ -63,7 +67,13 @@ const HeaderComponent = ({
                 {/* language selector */}
                 <LanguageSelector />
             </div>
-            <div className="bg-indigo-200 flex items-center justify-center space-x-4">
+            {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <span className="text-2xl font-semibold  text-sky-600">
+                    {role}
+                </span>
+                <span className="text-2xl font-semibold ml-5  text-sky-600">{name}</span>
+            </div> */}
+            <div className=" flex items-center justify-center space-x-4">
                 <div className="flex-none gap-2">
                     {/* notification section  */}
                     <div className="dropdown dropdown-end">
@@ -119,7 +129,7 @@ const HeaderComponent = ({
                             className="btn btn-ghost btn-circle avatar"
                         >
                             <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src={image} />
+                                <img alt="image" src={image} />
                             </div>
                         </div>
                         <ul

@@ -25,8 +25,6 @@ const BloodRoute = require("./routes/BloodRoute");
 const RequestRoute = require("./routes/RequestRoute");
 const DistributionRoute = require("./routes/DistributionRoute");
 const { scheduleExpirationCheck } = require("./utils/Scheduler.js");
-
-//const RecipientRoute = require("./routes/RecipientRoute");
 dotenv.config();
 connectDB();
 
