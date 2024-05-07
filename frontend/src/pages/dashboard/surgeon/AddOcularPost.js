@@ -10,6 +10,7 @@ const AddOcularPost = () => {
     const toast = useToast();
     const [dateOfSurgery, setDateOfSurgery] = useState('');
     const [lotNo, setLotNo] = useState('');
+    const [lotNoData, setLotNoData] = useState([]);
     const [ocularOperativeEye, setOcularOperativeEye] = useState('');
     const [ocularNonOperativeEye, setOcularNonOperativeEye] = useState('');
     const [Post, setOcularPost] = useState(true);
@@ -20,6 +21,20 @@ const AddOcularPost = () => {
         ocularNonOperativeEye,
         Post
     };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("http://localhost:4000/cornea/read");
+                const data = response.data;
+                setLotNoData(data);
+                console.log(data)
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, []);
     const handleSave = async () => {
         console.log(ocularPost);
         try {
@@ -47,60 +62,55 @@ const AddOcularPost = () => {
     return (
         <div>
             <h2 className="text-3xl mb-5 " style={{ textAlign: 'center' }}>Ocular Post Form</h2>
-
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
                     handleSave();
                 }}
             >
-                <div className="grid grid-cols-2">
-                    <label>
-                        <select
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
-                            value={lotNo}
-                            onChange={(e) => setLotNo(e.target.value)}
-                        >
-                            <option value="">  Select Lot No</option>
-                            <option value="AK">AK</option>
-                            <option value="PK">PK</option>
-                            <option value="PKA">PKA</option>
-                        </select>
-                    </label>
-                    <label htmlFor="date">
-                        <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="date"
-                            id="date"
-                            placeholder="Date of Surgery"
-                            value={dateOfSurgery}
-                            onChange={(e) => setDateOfSurgery(e.target.value)}
-                            required
-                        />
-                    </label>
-                </div>
-                <div className="grid grid-cols-2">
-                    <label>
 
-                        <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
-                            placeholder="Ocular Operative Eye"
-                            value={ocularOperativeEye}
-                            onChange={(e) => setOcularOperativeEye(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        <input
-                            className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
-                            placeholder='Ocular Non Operative Eye'
-                            value={ocularNonOperativeEye}
-                            onChange={(e) => setOcularNonOperativeEye(e.target.value)}
-                        />
-                    </label>
-                </div>
+                <label className=" ml-16 px-12 block">
+                    <select
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        value={lotNo}
+                        onChange={(e) => setLotNo(e.target.value)}
+                    >
+                        {lotNoData.map((lot, index) => (
+                            <option key={index} value={lot.lotNo}>
+                                {lot.lotNo}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <label htmlFor="date" className=" ml-16 px-12 block">
+                    <input
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        type="date"
+                        id="date"
+                        placeholder="Date of Surgery"
+                        value={dateOfSurgery}
+                        onChange={(e) => setDateOfSurgery(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className=" ml-16 px-12 block">
+                    <input
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        type="text"
+                        placeholder="Ocular Operative Eye"
+                        value={ocularOperativeEye}
+                        onChange={(e) => setOcularOperativeEye(e.target.value)}
+                    />
+                </label>
+                <label className=" ml-16 px-12 block">
+                    <input
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        type="text"
+                        placeholder='Ocular Non Operative Eye'
+                        value={ocularNonOperativeEye}
+                        onChange={(e) => setOcularNonOperativeEye(e.target.value)}
+                    />
+                </label>
                 <button className=" bg-sky-600 text-center ml-40 hover:bg-teal-700 focus:outline-none text-white px-4 py-2 mt-2 rounded-md" type="submit">Send Ocular</button>
             </form >
         </div >

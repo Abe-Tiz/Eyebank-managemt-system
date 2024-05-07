@@ -1,27 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast, Text } from '@chakra-ui/react';
-
 const AddAdverse = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { t } = useTranslation();
     const toast = useToast();
     const [dateOfadverse, setdateOfadverse] = useState('');
+    const [lotNo, setLotNo] = useState('');
+    const [lotNoData, setLotNoData] = useState([]);
     const [adverseReaction, setAdverseReaction] = useState('');
     const [probablityCase, setProbablityCase] = useState('');
     const [donorTissue, setDonorTissue] = useState('');
     const [adversePost, setAdversePost] = useState(true);
     const adverse = {
         dateOfadverse,
+        lotNo,
         adverseReaction,
         probablityCase,
         donorTissue,
         adversePost,
     };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("http://localhost:4000/cornea/read");
+                const data = response.data;
+                setLotNoData(data);
+                console.log(data)
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
+        fetchData();
+    }, []);
     const handleSave = async () => {
         console.log(adverse);
         try {
@@ -64,6 +79,20 @@ const AddAdverse = () => {
                         value={dateOfadverse}
                         onChange={(e) => setdateOfadverse(e.target.value)}
                     />
+                </label>
+                <label className=" ml-16 px-12 block">
+                    <select
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        value={lotNo}
+                        onChange={(e) => setLotNo(e.target.value)}
+                    >
+                        <option>Select Lot Number</option>
+                        {lotNoData.map((lot, index) => (
+                            <option key={index} value={lot.lotNo}>
+                                {lot.lotNo}
+                            </option>
+                        ))}
+                    </select>
                 </label>
                 <label className=" ml-16 px-12 block">
                     <input

@@ -73,6 +73,7 @@ const OcularPostList = () => {
                             <Tr className="bg-gray-200 ">
                                 <Th>S.No</Th>
                                 <Th>Date Of Post</Th>
+                                <Th>Lot No</Th>
                                 <Th>Recipient</Th>
                                 <Th>Surgeon Name</Th>
                                 <Th>Hospital</Th>
@@ -92,6 +93,7 @@ const OcularPostList = () => {
                                     <Tr key={index} className="mb-2 text-lg" >
                                         <Td>{index + 1}</Td>
                                         <Td>{formatTimestamp(cornea.createdAt)}</Td>
+                                        <Td>{cornea.ocularPost.lotNo}</Td>
                                         <Td>{cornea.recipientname}</Td>
                                         <Td>{cornea.surgeonName}</Td>
                                         <Td>{cornea.hospital.name}</Td>

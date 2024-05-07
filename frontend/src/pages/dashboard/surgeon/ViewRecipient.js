@@ -44,14 +44,11 @@ const ViewTissue = () => {
                 console.error(error);
             }
         };
-
         fetchData();
     }, []);
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
-
     };
-
     const deleteRecipient = async (id) => {
         try {
             await axios.delete(`http://localhost:4000/recipient/delete/${id}`);

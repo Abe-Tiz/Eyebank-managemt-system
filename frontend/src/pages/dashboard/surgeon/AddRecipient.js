@@ -71,6 +71,7 @@ const AddRecipient = () => {
             surgeonName,
             dateOfSurgry,
             lotNo,
+            lotNo,
             ocularOperativeEye,
             ocularNonOperativeEye,
             dateOfadverse,

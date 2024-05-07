@@ -37,6 +37,7 @@ const createRecipient = async (req, res) => {
             },
             adverse: {
                 adversePost: req.body.adversePost,
+                lotNo: req.body.lotNo,
                 adverseReaction: req.body.adverseReaction,
                 probablityCase: req.body.probablityCase,
                 donorTissue: req.body.donorTissue,
