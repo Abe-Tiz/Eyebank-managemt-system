@@ -11,7 +11,6 @@ import { Outlet } from "react-router-dom";
 import SurgeonSidebar from "../pages/dashboard/surgeon/SurgeonSideBar";
 import useLoggedInUser from "../useHooks/useLoggedInUser";
 const { Header, Content } = Layout;
-
 const SurgeonDashboard = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -112,7 +111,6 @@ const SurgeonDashboard = () => {
                     </div>
                 </Content>
             </Layout>
-
         </Layout >
     );
 };

@@ -9,21 +9,21 @@ const AddOcularPost = () => {
     const { t } = useTranslation();
     const toast = useToast();
     const [dateOfSurgery, setDateOfSurgery] = useState('');
-    const [surgeryType, setSurgeryType] = useState('');
+    const [lotNo, setLotNo] = useState('');
     const [ocularOperativeEye, setOcularOperativeEye] = useState('');
     const [ocularNonOperativeEye, setOcularNonOperativeEye] = useState('');
-    const [ocularPost, setOcularPost] = useState(true);
-    const ocularPostData = {
+    const [Post, setOcularPost] = useState(true);
+    const ocularPost = {
         dateOfSurgery,
-        surgeryType,
+        lotNo,
         ocularOperativeEye,
         ocularNonOperativeEye,
-        ocularPost
+        Post
     };
     const handleSave = async () => {
-        console.log(ocularPostData);
+        console.log(ocularPost);
         try {
-            await axios.put(`http://localhost:4000/recipient/ocular/${id}`, { ocularPostData });
+            await axios.put(`http://localhost:4000/recipient/ocular/${id}`, { ocularPost });
             toast({
                 title: t('Success'),
                 description: t('Ocular post saved successfully.'),
@@ -43,7 +43,7 @@ const AddOcularPost = () => {
             });
         }
     };
-    console.log(ocularPost)
+    console.log(Post)
     return (
         <div>
             <h2 className="text-3xl mb-5 " style={{ textAlign: 'center' }}>Ocular Post Form</h2>
@@ -59,10 +59,10 @@ const AddOcularPost = () => {
                         <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="text"
-                            value={surgeryType}
-                            onChange={(e) => setSurgeryType(e.target.value)}
+                            value={lotNo}
+                            onChange={(e) => setLotNo(e.target.value)}
                         >
-                            <option value="">  surgery Type</option>
+                            <option value="">  Select Lot No</option>
                             <option value="AK">AK</option>
                             <option value="PK">PK</option>
                             <option value="PKA">PKA</option>

@@ -29,9 +29,9 @@ const createRecipient = async (req, res) => {
             registerDate,
             surgeonName,
             ocularPost: {
-                ocularPost: req.body.ocularPost,
+                Post: req.body.Post,
                 dateOfSurgry: req.body.dateOfSurgry,
-                surgeryType: req.body.surgeryType,
+                lotNo: req.body.lotNo,
                 ocularOperativeEye: req.body.ocularOperativeEye,
                 ocularNonOperativeEye: req.body.ocularNonOperativeEye,
             },
@@ -54,8 +54,8 @@ const createRecipient = async (req, res) => {
 // Retrieve all recipients
 const getRecipients = async (req, res) => {
     const recipients = await RecipientModel.find()
-        
-       
+
+
     res.send(recipients);
 };
 

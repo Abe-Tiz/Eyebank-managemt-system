@@ -25,8 +25,6 @@ const BloodRoute = require("./routes/BloodRoute");
 const RequestRoute = require("./routes/RequestRoute");
 const DistributionRoute = require("./routes/DistributionRoute");
 const { scheduleExpirationCheck } = require("./utils/Scheduler.js");
-
-//const RecipientRoute = require("./routes/RecipientRoute");
 dotenv.config();
 connectDB();
 
@@ -119,7 +117,7 @@ const NotifyNewDonors = async () => {
 NotifyNewDonors();
 
 
-// app.use('/accident', AccidentalRoute)
+app.use('/accident', AccidentalRoute)
 app.use('/api', physicalExamRoutes);
 app.use('/blood', BloodRoute)
 app.use('/request', RequestRoute);

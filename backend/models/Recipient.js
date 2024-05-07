@@ -36,7 +36,7 @@ const RecipientSchema = new mongoose.Schema({
     },
 
     ocularPost: {
-        ocularPost: {
+        Post: {
             type: Boolean,
             default: false
         },
@@ -44,7 +44,7 @@ const RecipientSchema = new mongoose.Schema({
             type: Date,
             default: Date.now
         },
-        surgeryType: {
+        lotNo: {
             type: String
         },
         ocularOperativeEye: {

@@ -73,6 +73,7 @@ const OcularPostList = () => {
                             <Tr className="bg-gray-200 ">
                                 <Th>S.No</Th>
                                 <Th>Date Of Post</Th>
+                                <Th>Recipient</Th>
                                 <Th>Surgeon Name</Th>
                                 <Th>Hospital</Th>
                                 <Th>Operation Eye</Th>
@@ -85,7 +86,7 @@ const OcularPostList = () => {
                                 .filter(
                                     (cornea) =>
                                         cornea.ocularPost &&
-                                        (cornea.ocularPost.ocularPost === true)
+                                        (cornea.ocularPost.Post === true)
                                 )
                                 .map((cornea, index) => (
                                     <Tr key={index} className="mb-2 text-lg" >
@@ -93,11 +94,12 @@ const OcularPostList = () => {
                                         <Td>{formatTimestamp(cornea.createdAt)}</Td>
                                         <Td>{cornea.recipientname}</Td>
                                         <Td>{cornea.surgeonName}</Td>
+                                        <Td>{cornea.hospital.name}</Td>
                                         <Td>{cornea.ocularPost.surgeryType}</Td>
                                         <Td>{cornea.ocularPost.ocularOperativeEye}</Td>
                                         <Td>{cornea.ocularPost.ocularNonOperativeEye}</Td>
                                         <Td className='text-center ml-3 text-blue-600'>
-                                            <Link to={`/medicaldirectordashboard/editevaluation/${cornea._id}`}>
+                                            <Link to={`/surgondashboard/editocular/${cornea._id}`}>
                                                 <EditIcon />
                                             </Link>
                                         </Td>
