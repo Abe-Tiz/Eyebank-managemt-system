@@ -1,8 +1,8 @@
 
 import React from "react";
-import { Pie } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
-const PieChart = ({ data }) => {
+const BarGraph = ({ data }) => {
   const chartData = {
     labels: data.map((monthData) => monthData.month),
     datasets: [
@@ -24,11 +24,11 @@ const PieChart = ({ data }) => {
   };
 
   return (
-    <div className="p-10 w-auto">
+    <div className="mt-8 w-3/4">
       {/* <h2>Corneas Registered by Month</h2> */}
-      <Pie data={chartData} />
+      <Bar data={chartData} />
     </div>
   );
 };
 
-export default PieChart;
+export default BarGraph;

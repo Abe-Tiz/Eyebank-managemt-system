@@ -1,8 +1,8 @@
  
 import React ,{useEffect, useState}from 'react';
 import axios from 'axios';
-import PieChart from '../../graphs/PieChart';
 import ReportCard from '../../components/ReportCard';
+import BarGraph from '../../graphs/BarGraph';
  
 const Cornea = () => {
   const [corneaReport, setCorneaReport] = useState([]);
@@ -64,7 +64,7 @@ const Cornea = () => {
 
       setReportData((prevReportData) => ({
         ...prevReportData,
-        donor: response.data,
+        pledge: response.data,
       }));
 
       console.log(response.data);
@@ -91,10 +91,9 @@ const Cornea = () => {
   const data = [
     { category: "cornea", number: reportData.cornea },
     { category: "evaluted", number: reportData.evaluted },
-    { category: "stored", number: 15 },
-    { category: "ready", number: 5 },
+    // { category: "stored", number: 15 },
+    // { category: "ready", number: 5 },
     { category: "pledeged", number: reportData.pledge },
-    // { category: "donor", number: 21 },
   ];
 
   return (
@@ -109,7 +108,7 @@ const Cornea = () => {
         ))}
       </div>
       <div>
-        <PieChart data={corneaData} />
+        <BarGraph data={corneaData} />
       </div>
     </div>
   );
