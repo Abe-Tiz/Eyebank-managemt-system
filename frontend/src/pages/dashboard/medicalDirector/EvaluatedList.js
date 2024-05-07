@@ -66,26 +66,26 @@ const ViewTissue = () => {
 
     return (
         <div>
-            <div className='text-center mt-3'>
+            <div className='text-center mt-1'>
                 <TableContainer>
-                    <Text fontSize='3xl' className='text-center text-black mt-0 mb-4'>
+                    {/* <Text fontSize='3xl' className='text-center text-black mt-0 mb-4'>
                         <span> List of evaluated cornea </span>
-                    </Text>
-                    <Table size='sm'>
+                    </Text> */}
+                    <Table variant='simple'>
                         <Thead>
-                            <Tr className='bg-sky-600 text-white'>
-                                <Th className='text-white'>S.No</Th>
-                                <Th className='text-white'>LotNo</Th>
-                                <Th className='text-white'>Date</Th>
-                                <Th className='text-white'>Evaluater</Th>
-                                <Th className='text-white'>Epitheliam</Th>
-                                <Th className='text-white'>Stroma</Th>
-                                <Th className='text-white'>Endothelium</Th>
-                                <Th className='text-white'>Approval</Th>
-                                <Th className='text-white'>Suiatabl/Reason</Th>
-                                <Th className='text-white' colSpan={2}>Operations</Th>
-                            </Tr>
-                        </Thead>
+                            <Tr className="bg-gray-200 ">
+                                <Th >S.No</Th>
+                                <Th >LotNo</Th>
+                                <Th >Date</Th>
+                                <Th >Evaluater</Th>
+                                <Th >Epitheliam</Th>
+                                <Th >Stroma</Th>
+                                <Th >Endothelium</Th>
+                                <Th >Approval</Th>
+                                <Th >Suiatabl/Reason</Th>
+                                <Th colSpan={2}>Operations</Th>
+                            </Tr >
+                        </Thead >
                         <Tbody>
                             {corneas
                                 .filter(
@@ -122,9 +122,9 @@ const ViewTissue = () => {
                                     </Tr>
                                 ))}
                         </Tbody>
-                    </Table>
-                </TableContainer>
-            </div>
+                    </Table >
+                </TableContainer >
+            </div >
         </div >
     );
 };
