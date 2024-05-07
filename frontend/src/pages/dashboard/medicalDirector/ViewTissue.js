@@ -64,13 +64,12 @@ const ViewTissue = () => {
     return (
         <div>
             <TableContainer>
-                <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
+                {/* <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
                     List of collected cornea
-                </Text>
-                <Table size='sm'>
+                </Text> */}
+                <Table variant='simple'>
                     <Thead>
-                        <Tr>
-
+                        <Tr className="bg-gray-200 ">
                             <Th>S.No</Th>
                             <Th>LotNo</Th>
                             <Th>Date</Th>
