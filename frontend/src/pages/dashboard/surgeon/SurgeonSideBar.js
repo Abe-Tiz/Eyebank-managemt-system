@@ -61,14 +61,10 @@ const SurgeonSidebar = ({
                             to="/surgondashboard/sendRequestCornea"
                             data-tooltip-id="my-dashboard"
                             data-tooltip-content="Send Cornea"
-
                         >
                             {/* <IoIosPersonAdd className="text-2xl" /> */}
                             <MdOutlineGroupAdd className="text-2xl" />
-
-
                         </Link>
-
                     </div>
                 ) : (
                     <>

@@ -11,7 +11,6 @@ import { Outlet } from "react-router-dom";
 import SurgeonSidebar from "../pages/dashboard/surgeon/SurgeonSideBar";
 import useLoggedInUser from "../useHooks/useLoggedInUser";
 const { Header, Content } = Layout;
-
 const SurgeonDashboard = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -54,9 +53,35 @@ const SurgeonDashboard = () => {
         navigate("/login");
     };
 
-    //! handle loggedin user
     useEffect(() => {
-        getLoggedInUser();
+        fetch("http://127.0.0.1:4000/user/userLogedin", {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem("token"),
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data, "user logged in");
+                setState((prev) => ({
+                    ...prev,
+                    name: data.data.name,
+                    image: data.data.image,
+                    role: data.data.role,
+                    isLoggedin: true,
+                }));
+
+                if (data.data === "token expired") {
+                    localStorage.clear();
+                    navigate("/login");
+                }
+            });
     }, [navigate]);
 
     return (
@@ -79,72 +104,13 @@ const SurgeonDashboard = () => {
                     role={state.role}
                     state={state}
                     toggleSidebar={toggleSidebar}
-                // newDonorCount={newDonorCount}
                 />
-
-                <div className="flex items-center space-x-4">
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        value={searchText}
-                        onChange={handleSearchInputChange}
-                        className="border p-2 rounded bg-gray-800 text-white"
-                    />
-                    <button
-                        onClick={handleSearch}
-                        className="text-white hover:text-gray-300 transition-all duration-300"
-                    >
-                        Search
-                    </button>
-
-                    <Badge count={5} offset={[0, 5]} className="mr-5">
-                        <BellOutlined className="text-2xl text-blue-500" />
-                    </Badge>
-                    <div className="relative inline-block">
-                        <button
-                            onClick={toggleDropdown}
-                            className="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
-                            type="button"
-                        >
-                            <img
-                                className="w-8 h-8 rounded-full"
-                                src={user && user.data.image}
-                                alt="user photo"
-                            />
-                        </button>
-
-                        {state.isDropdownOpen && (
-                            <div className="absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                                <ul className="py-2 text-sm text-gray-700">
-                                    <li>
-                                        <Link
-                                            to="/settings"
-                                            className="block px-4 py-2 hover:bg-gray-100"
-                                        >
-                                            <SettingOutlined className="text-2xl text-blue-500" />{" "}
-                                            {t("common:settingButtonLabel")}
-                                        </Link>
-                                    </li>
-                                </ul>
-                                <div className="py-2">
-                                    <button
-                                        onClick={handleLogout}
-                                        className="ml-5 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    >
-                                        {t("common:logouttButtonLabel")}
-                                    </button>
-                                </div>
-                            </div>
-                        )}
+                <Content className="p-4">
+                    <div className="bg-slate-100  p-4">
+                        <Outlet />
                     </div>
-                </div>
+                </Content>
             </Layout>
-
-            <Content className="p-4 mt-10">
-                <div className="bg-slate-100  w-full">
-                    <Outlet />
-                </div>
-            </Content>
         </Layout >
     );
 };

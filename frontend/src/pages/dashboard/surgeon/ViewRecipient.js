@@ -44,14 +44,11 @@ const ViewTissue = () => {
                 console.error(error);
             }
         };
-
         fetchData();
     }, []);
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
-
     };
-
     const deleteRecipient = async (id) => {
         try {
             await axios.delete(`http://localhost:4000/recipient/delete/${id}`);
@@ -75,6 +72,7 @@ const ViewTissue = () => {
                             <Th> Recipinent Name</Th>
                             <Th>Age</Th>
                             <Th>Sex</Th>
+                            <Th>Phone</Th>
                             <Th>Address</Th>
                             <Th>Surgery Type</Th>
                             <Th className='text-center' colSpan={4}>Operations</Th>
@@ -90,6 +88,7 @@ const ViewTissue = () => {
                                 <Td>{recipent.recipientname}</Td>
                                 <Td>{recipent.age}</Td>
                                 <Td>{recipent.sex}</Td>
+                                <Td>{recipent.phone}</Td>
                                 <Td>{recipent.address}</Td>
                                 <Td>{recipent.surgeryType}</Td>
                                 <Td >
