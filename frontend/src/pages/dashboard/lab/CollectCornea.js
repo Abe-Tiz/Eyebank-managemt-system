@@ -93,8 +93,8 @@ const CollectCornea = () => {
             console.error("Failed to collect physical exam:", error);
         }
     }
-   
-    const recoveryTechnical = user && user.data.name
+
+    const recoveryTechnical = user && user.data._id;
     const handlePosition = (event) => {
         setPosition(event.target.value);
     };

@@ -16,7 +16,8 @@ const corneaSchema = new mongoose.Schema(
             default: Date.now,
         },
         recoveryTechnical: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
         },
         position: {
             type: String,

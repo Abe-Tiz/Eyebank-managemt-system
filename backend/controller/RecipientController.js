@@ -54,12 +54,16 @@ const createRecipient = async (req, res) => {
 
 // Retrieve all recipients
 const getRecipients = async (req, res) => {
-    const recipients = await RecipientModel.find()
-
-
-    res.send(recipients);
+    try {
+        const { surgeonId } = req.query; // Retrieve the surgeon ID from the query parameter
+        const recipents = await RecipientModel.find({ surgeonName: surgeonId })
+            .populate("surgeonName")
+            .populate("hospital");
+        res.json(recipents);
+    } catch (err) {
+        res.status(500).json({ error: "An error occurred while retrieving recipents." });
+    }
 };
-
 // Retrieve a recipient by id
 const getRecipient = async (req, res) => {
     const recipient = await RecipientModel.findById(req.params.id);

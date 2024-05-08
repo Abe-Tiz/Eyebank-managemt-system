@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import useLoggedInUser from "../../../useHooks/useLoggedInUser";
 const AddRecipient = () => {
     const [recipientname, setRecipientname] = useState("");
     const [age, setAge] = useState("");
@@ -29,9 +30,8 @@ const AddRecipient = () => {
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
-    const [state, setState] = useState({
-        name: ""
-    })
+    const { user, setUser, getLoggedInUser } = useLoggedInUser("doctor");
+
     useEffect(() => {
         const fetchSurgeon = async () => {
             try {
@@ -68,7 +68,7 @@ const AddRecipient = () => {
             sex,
             phone,
             registerDate,
-            surgeonName,
+            surgeonName: user && user.data._id,
             dateOfSurgry,
             lotNo,
             lotNo,
@@ -100,34 +100,6 @@ const AddRecipient = () => {
             console.log(err);
         }
     };
-    useEffect(() => {
-        fetch("http://127.0.0.1:4000/user/userLogedin", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("token"),
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data.data, "user logged in");
-                setState((prev) => ({
-                    ...prev,
-                    name: data.data.name,
-                }));
-
-                if (data.data === "token expired") {
-                    localStorage.clear();
-                    navigate("/login");
-                }
-            });
-    }, [navigate]);
-    const surgeonName = state.name
     return (
         <div>
             <h2 className="text-3xl mb-3 " style={{ textAlign: 'center' }}>Recipient Registration Form</h2>
