@@ -34,8 +34,14 @@ const createCornea = async (req, res) => {
 };
 
 const getCorneas = async (req, res) => {
-    const corneas = await Cornea.find({ expirationDate: { $lt: 14 } });
-    res.send(corneas);
+    try {
+        const corneas = await Cornea.find({ expirationDate: { $lt: 14 } })
+            .populate({ path: "recoveryTechnical" });
+        res.send(corneas);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error retrieving corneas");
+    }
 };
 
 const getStoredCornea = async (req, res) => {
@@ -47,7 +53,7 @@ const getStoredCornea = async (req, res) => {
 };
 
 const getCornea = async (req, res) => {
-    const cornea = await Cornea.findById(req.params.id);
+    const cornea = await Cornea.findById(req.params.id)
     res.send(cornea);
 };
 

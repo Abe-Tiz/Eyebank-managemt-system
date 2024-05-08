@@ -32,9 +32,9 @@ const RecipientSchema = new mongoose.Schema({
         //required: true,
     },
     surgeonName: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     },
-
     ocularPost: {
         Post: {
             type: Boolean,

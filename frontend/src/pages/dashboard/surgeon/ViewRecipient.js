@@ -34,18 +34,44 @@ const ViewTissue = () => {
 
         return new Date(timestamp).toLocaleString('en-US', options);
     }
+
     useEffect(() => {
-        const fetchData = async () => {
+        const getAllRecipients = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/recipient/read");
+                const surgeonId = localStorage.getItem("surgeonId"); // Retrieve the surgeon ID from local storage
+                const response = await axios.get(
+                    "http://localhost:4000/recipient/read",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                        params: {
+                            surgeonId: surgeonId, // Pass the surgeon ID as a query parameter
+                        },
+                    }
+                );
                 const data = response.data;
                 setRecipient(data);
+                console.log(surgeonId);
             } catch (error) {
                 console.error(error);
             }
         };
-        fetchData();
+        getAllRecipients();
     }, []);
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get("http://localhost:4000/recipient/read");
+    //             const data = response.data;
+    //             setRecipient(data);
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     };
+    //     fetchData();
+    // }, []);
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };

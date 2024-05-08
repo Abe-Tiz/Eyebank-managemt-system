@@ -24,7 +24,6 @@ const ViewCornea = () => {
     const { searchTerm, handleChange, data, error } = useSearch("cornea");
     const navigate = useNavigate();
     const [corneas, setCorneas] = useState([]);
-
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 6;
 
@@ -62,6 +61,7 @@ const ViewCornea = () => {
                 // console.log("cornea:", data);
                 const filteredCornea = data.filter((cornea) => cornea.expirationDate !== 14)
                 setCorneas(filteredCornea);
+                console.log("cornea:", filteredCornea);
                 // setExpirationDate(new Date(data.expirationDate));
             } catch (error) {
                 console.error(error);
@@ -78,9 +78,9 @@ const ViewCornea = () => {
         try {
             await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
             setCorneas(
-              corneas.filter(
-                (cornea) => cornea._id !== id 
-              )
+                corneas.filter(
+                    (cornea) => cornea._id !== id
+                )
             );
         } catch (error) {
             console.error(error);
@@ -91,45 +91,45 @@ const ViewCornea = () => {
     // };
     const renderCornea = searchTerm ? data : currentCorneas;
     return (
-      <div>
-        <TableContainer>
-          <div className="w-full mt-2 flex justify-between ">
-            <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-              List of Collected Cornea
-            </Text>
-            {/* search component */}
-            <SearchComponent
-              searchTerm={searchTerm}
-              handleChange={handleChange}
-            />
-          </div>
-          <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
-            <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              {/* Table header */}
-              <TableHeader />
-              {/* Table body */}
-              <Tbody>
-                {renderCornea.map((cornea, index) => (
-                  <TableRowCornea
-                    key={index}
-                    cornea={cornea}
-                    formatTimestamp={formatTimestamp}
-                    deleteCornea={deleteCornea}
-                    // editcornea={editcornea}
-                  />
-                ))}
-              </Tbody>
-            </Table>
-            {/* Pagination Controls */}
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              paginate={paginate}
-            />
-          </div>
-        </TableContainer>
-      </div>
+        <div>
+            <TableContainer>
+                <div className="w-full mt-2 flex justify-between ">
+                    <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+                        List of Collected Cornea
+                    </Text>
+                    {/* search component */}
+                    <SearchComponent
+                        searchTerm={searchTerm}
+                        handleChange={handleChange}
+                    />
+                </div>
+                <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        {/* Table header */}
+                        <TableHeader />
+                        {/* Table body */}
+                        <Tbody>
+                            {renderCornea.map((cornea, index) => (
+                                <TableRowCornea
+                                    key={index}
+                                    cornea={cornea}
+                                    formatTimestamp={formatTimestamp}
+                                    deleteCornea={deleteCornea}
+                                // editcornea={editcornea}
+                                />
+                            ))}
+                        </Tbody>
+                    </Table>
+                    {/* Pagination Controls */}
+                    <Pagination
+                        totalPages={totalPages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        paginate={paginate}
+                    />
+                </div>
+            </TableContainer>
+        </div>
     );
 };
 
