@@ -89,7 +89,7 @@ const ApproveRequest = () => {
           </thead>
           <tbody>
             {requestedCorneas
-              .filter((request) => request.isApproved === false)
+              .filter((request) => request.isApproved === false )
               .map((request) => (
                 <tr
                   key={request.id}

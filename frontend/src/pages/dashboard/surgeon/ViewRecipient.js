@@ -35,9 +35,21 @@ const ViewTissue = () => {
         return new Date(timestamp).toLocaleString('en-US', options);
     }
     useEffect(() => {
+        const surgeonId= localStorage.getItem("surgeonId");
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/recipient/read");
+                const response = await axios.get("http://localhost:4000/recipient/read",
+                    {
+                     headers:{
+                        Autherization: `Bearer ${localStorage.getItem("token")}`,
+                     },
+                     params:{
+                        surgeonId:surgeonId,
+                     },
+                    }
+                    
+                  
+                );
                 const data = response.data;
                 setRecipient(data);
             } catch (error) {

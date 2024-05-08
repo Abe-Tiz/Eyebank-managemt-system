@@ -25,22 +25,7 @@ const ApprovedRequest = () => {
     getAllRequestedCorneas();
   }, []);
 
-  //retrive all the possible cornea lists
-  useEffect(() => {
-    const getAllCorneas = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:4000/cornea/read");
-        setCorneas(data);
-      } catch (error) {
-        console.log(error);
-        toast.error("Something Went Wrong");
-      }
-    };
-
-    getAllCorneas();
-  }, []);
-
-  const navigate = useNavigate();
+ const navigate = useNavigate();
 
   // const handleApprove = async (id) => {
   //     try {
@@ -110,16 +95,10 @@ const ApprovedRequest = () => {
               </th> */}
             </tr>
           </thead>
-          <tbody>{requestedCorneas
-  .filter((request) => {
-    const matchingCornea = corneas.find(
-      (cornea) => cornea.distributed === false
-    );
-    return request.distribute === false &&
-      request.isApproved === true &&
-      matchingCornea;
-  })
-              .map((request, index) => (
+
+       <tbody>{requestedCorneas
+  .filter((request) => (request.isGetCornea === false && request.isApproved === true ))
+  .map((request, index) => (
                 <tr
                   key={index}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"

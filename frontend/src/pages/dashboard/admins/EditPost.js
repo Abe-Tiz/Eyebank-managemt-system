@@ -5,6 +5,7 @@ import { Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import ButtonComponent from "../../../components/ButtonComponent";
+import { Button } from "@chakra-ui/react";
 const { Option } = Select;
 
 const UpdatePost = () => {
@@ -174,12 +175,7 @@ const UpdatePost = () => {
               />
             </div>
             <div className="mb-3 flex justify-end">
-              {/* <button
-                onClick={handleUpdate}
-                className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
-              >
-                Update Post
-              </button> */}
+             
 
               <div className="flex justify-center">
               <ButtonComponent onClick={handleUpdate}
@@ -187,17 +183,11 @@ const UpdatePost = () => {
                 className="bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               />
             </div>
-              {/* <button
-                onClick={handleDelete}
-                className="bg-red-500 text-white py-2 px-4 rounded"
-              >
-                Delete
-              </button> */}
-
+          
               <div className="flex justify-center">
               <ButtonComponent onClick={handleDelete}
                 title="Delete Post"
-                className="bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                customClass="bg-red-600 hover:bg-red-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               />
             </div>
             </div>

@@ -53,6 +53,7 @@ const createRecipient = async (req, res) => {
 
 // Retrieve all recipients
 const getRecipients = async (req, res) => {
+    // const {surgeonId } = req.query;
     const recipients = await RecipientModel.find()
         
        

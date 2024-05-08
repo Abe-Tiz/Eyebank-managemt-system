@@ -138,13 +138,14 @@ const SurgeonDashboard = () => {
                         )}
                     </div>
                 </div>
-            </Layout>
-
-            <Content className="p-4 mt-10">
+                <Content className="p-4 mt-10">
                 <div className="bg-slate-100  w-full">
                     <Outlet />
                 </div>
             </Content>
+            </Layout>
+
+          
         </Layout >
     );
 };
