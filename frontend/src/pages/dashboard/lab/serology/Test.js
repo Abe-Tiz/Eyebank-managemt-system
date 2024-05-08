@@ -12,7 +12,7 @@ const Test = () => {
       const [selectedDate, setSelectedDate] = useState("");
       const [tests, setTests] = useState([]);
       const [otherTestValue, setOtherTestValue] = useState("");
-    const [isOtherChecked, setIsOtherChecked] = useState(false);
+      const [isOtherChecked, setIsOtherChecked] = useState(false);
         const { user, setUser, getLoggedInUser } = useLoggedInUser("lab");
 
       const { id } = useParams();

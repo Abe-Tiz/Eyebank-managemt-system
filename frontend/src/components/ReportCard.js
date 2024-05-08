@@ -19,22 +19,27 @@ const ReportCard = ({ category, number }) => {
     case "evaluted":
       icon = <CheckCircleOutlined />;
       color = "bg-green";
-      title = "Evaluated Cornea";
+      title = "Total Evaluated Cornea";
       break;
-    case "stored":
+    case "serology":
       icon = <DatabaseOutlined />;
       color = "bg-blue-500";
-      title = "Stored Cornea";
+      title = "Total Serology Tested Cornea";
       break;
-    case "ready":
+    case "physicalExamined":
       icon = <GiftOutlined />;
       color = "bg-yellow-500";
-      title = "Ready for Distribution";
+      title = "Total Physical Examined";
       break;
     case "pledeged":
       icon = <MedicineBoxOutlined />;
       color = "bg-purple-500";
-      title = "Pledged People";
+      title = "Total Pledged People";
+      break;
+    case "distributed":
+      icon = <MedicineBoxOutlined />;
+      color = "bg-blue-900";
+      title = "Total Distributed Cornea";
       break;
     default:
       icon = null;

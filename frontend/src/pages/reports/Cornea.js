@@ -6,10 +6,15 @@ import BarGraph from '../../graphs/BarGraph';
  
 const Cornea = () => {
   const [corneaReport, setCorneaReport] = useState([]);
+  const [distributedReport, setDistributedReport] = useState([]);
+  const [pledgedReport, setPledgedReport] = useState([]);
   const [reportData, setReportData] = useState({
     pledge: 0,
     cornea: 0,
     evaluted: 0,
+    serology:0,
+    physical: 0,
+    distributed:0
   });
   
   // number of corneas
@@ -20,6 +25,31 @@ const Cornea = () => {
       );
       // console.log("cornea report", response.data);
       setCorneaReport(response.data);
+    } catch (error) {
+      console.log("Error : ", error);
+    }
+  };
+  // number of corneas
+  const distributedCorneaInMonth = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/report/distributed-month"
+      );
+      // console.log("cornea distribute:d",response.data);
+      setDistributedReport(response.data);
+    } catch (error) {
+      console.log("Error : ", error);
+    }
+  };
+
+  // number of corneas
+  const pledgedCorneaInMonth = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/report/pledge-month"
+      );
+      // console.log("cornea pledged report:", response.data);
+      setPledgedReport(response.data);
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -35,7 +65,54 @@ const Cornea = () => {
         cornea: response.data,
       }));
 
-      console.log(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.log("Error : ", error);
+    }
+  };
+  // number of Tested cornea
+  const serologytestedCornea = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/report/serology");
+
+      setReportData((prevReportData) => ({
+        ...prevReportData,
+        serology: response.data,
+      }));
+
+      // console.log(response.data);
+    } catch (error) {
+      console.log("Error : ", error);
+    }
+  };
+
+  const physicalExamined = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/report/physical");
+
+      setReportData((prevReportData) => ({
+        ...prevReportData,
+        physical: response.data,
+      }));
+
+      // console.log(response.data);
+    } catch (error) {
+      console.log("Error : ", error);
+    }
+  };
+
+  const distributedCornea = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/report/distributed"
+      );
+
+      setReportData((prevReportData) => ({
+        ...prevReportData,
+        distributed: response.data,
+      }));
+
+      // console.log(response.data);
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -51,7 +128,7 @@ const Cornea = () => {
         evaluted: response.data,
       }));
 
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -76,14 +153,26 @@ const Cornea = () => {
   useEffect(() => {
     CorneaCount();
     CollectedCornea();
-      numberOfEvalutedCornea();
-      numberDonor();
+    numberOfEvalutedCornea();
+    numberDonor();
+    serologytestedCornea();
+    physicalExamined();
+    distributedCornea();
+    pledgedCorneaInMonth();
+    distributedCorneaInMonth();
   }, [corneaReport]);
-  
-  // {
-  //     corneaReport.map((item) => console.log(`month:${item.month},count:${item.count}`))
-  //  }
+ 
   const corneaData = corneaReport.map((item) => ({
+    month: item.month,
+    count: item.count,
+  }));
+
+  const distributedCorneaData = distributedReport.map((item) => ({
+    month: item.month,
+    count: item.count,
+  }));
+
+  const pledgedCorneaData = pledgedReport.map((item) => ({
     month: item.month,
     count: item.count,
   }));
@@ -91,9 +180,10 @@ const Cornea = () => {
   const data = [
     { category: "cornea", number: reportData.cornea },
     { category: "evaluted", number: reportData.evaluted },
-    // { category: "stored", number: 15 },
-    // { category: "ready", number: 5 },
+    { category: "serology", number: reportData.serology },
+    { category: "physicalExamined", number: reportData.physical },
     { category: "pledeged", number: reportData.pledge },
+    { category: "distributed", number: reportData.distributed },
   ];
   
   return (
@@ -108,7 +198,7 @@ const Cornea = () => {
         ))}
       </div>
       <div>
-        <BarGraph data={corneaData} />
+        <BarGraph data={corneaData} distrData={distributedCorneaData} pledData={ pledgedCorneaData} />
       </div>
     </div>
   );
