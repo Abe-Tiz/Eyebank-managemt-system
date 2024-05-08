@@ -96,7 +96,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      console.log("User is not found.");
+      // console.log("User is not found.");
       return res.status(404).json({ message: "User is not found." });
     }
 
@@ -110,7 +110,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     const passwordMatch = await Bcrypt.compare(password, user.password);
-    console.log(user);
+    // console.log(user);
     if (passwordMatch) {
       if (user.verified) {
         const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
@@ -120,14 +120,14 @@ const loginUser = asyncHandler(async (req, res) => {
         await user.save();
         res.status(200).json({ status: "ok", data: token, user });
       } else {
-        console.log("User not verified");
+        // console.log("User not verified");
         res.json({ message: "Not verified" });
       }
     } else {
-      console.log("Password is not matched");
+      // console.log("Password is not matched");
       user.failedLoginAttempts += 1;
       await user.save();
-      console.log(user.failedLoginAttempts);
+      // console.log(user.failedLoginAttempts);
       if (user.failedLoginAttempts >= 4) {
         user.isActive = false;
         await user.save();
@@ -141,7 +141,7 @@ const loginUser = asyncHandler(async (req, res) => {
       res.status(500).json({ message: "Password is not matched" });
     }
   } catch (error) {
-    console.error("Error in loginUser:", error);
+    // console.error("Error in loginUser:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -185,7 +185,7 @@ const getloggedInUser = asyncHandler(async (req, res) => {
       }
       return res;
     });
-    console.log(user);
+    // console.log(user);
     if (user === "token expired") {
       return res.send({ status: "error", data: "token expired" });
     }

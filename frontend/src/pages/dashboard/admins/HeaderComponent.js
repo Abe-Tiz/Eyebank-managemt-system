@@ -19,7 +19,7 @@ const HeaderComponent = ({
     role,
     image,
     notifications,
-    type,
+   
 }) => {
     const currentLanguageCode = cookies.get("i18next") || "en";
     const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
@@ -29,11 +29,7 @@ const HeaderComponent = ({
     // const { searchTerm, handleChange, donor, error, getDonorByName } =
     //     useSearch();
 
-    //! handle Logout
-    const handleLogout = () => {
-        localStorage.removeItem(type);
-        navigate("/login");
-    };
+   
     useEffect(() => {
         document.title = t("app_title");
     }, [currentLanguage, t]);
@@ -41,9 +37,19 @@ const HeaderComponent = ({
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
+
+     //! handle Logout
+    const handleLogout = (role) => {
+        // console.log("role:", role);
+        localStorage.removeItem(role);
+        navigate("/login");
+    };
+
+    // console.log("image:",image)
+   
     return (
         <div
-            className={`p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${state.collapsed ? ` w-11/12 ml-8` : `w-4/5`
+            className={`bg-base-200  p-2 flex justify-between text-center items-center fixed z-50  md:pr-5 pr-10  ${state.collapsed ? ` w-11/12 ml-8` : `w-4/5`
                 }`}
         >
             <div className="flex items-center">
@@ -61,13 +67,13 @@ const HeaderComponent = ({
                 {/* language selector */}
                 <LanguageSelector />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <span className="text-2xl font-semibold  text-sky-600">
                     {role}
                 </span>
                 <span className="text-2xl font-semibold ml-5  text-sky-600">{name}</span>
-            </div>
-            <div className="bg-red-500 flex items-center justify-center space-x-4">
+            </div> */}
+            <div className=" flex items-center justify-center space-x-4">
                 <div className="flex-none gap-2">
                     {/* notification section  */}
                     <div className="dropdown dropdown-end">
@@ -134,7 +140,7 @@ const HeaderComponent = ({
                                 <a> Setting</a>
                             </li>
                             <li>
-                                <a onClick={handleLogout}>{t("common:logouttButtonLabel")}</a>
+                                <a onClick={() => handleLogout(role)}>{t("common:logouttButtonLabel")}</a>
                             </li>
                         </ul>
                     </div>

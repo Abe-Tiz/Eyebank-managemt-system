@@ -16,7 +16,7 @@ const SurgeonDashboard = () => {
     const { t } = useTranslation();
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
+    const { user, setUser, getLoggedInUser } = useLoggedInUser("doctor");
     const [state, setState] = useState({
         name: "",
         image: "",
@@ -26,22 +26,22 @@ const SurgeonDashboard = () => {
         role: "",
     });
 
-    const handleSearch = () => {
-        const sampleList = [
-            { id: 1, name: "John Doe" },
-            { id: 2, name: "Jane Doe" },
-        ];
-        const results = sampleList.filter((item) =>
-            item.name.toLowerCase().includes(searchText.toLowerCase())
-        );
-        setSearchResults(results);
-    };
-    const handleSearchInputChange = (e) => {
-        setSearchText(e.target.value);
-    };
-    const toggleDropdown = () => {
-        setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
-    };
+    // const handleSearch = () => {
+    //     const sampleList = [
+    //         { id: 1, name: "John Doe" },
+    //         { id: 2, name: "Jane Doe" },
+    //     ];
+    //     const results = sampleList.filter((item) =>
+    //         item.name.toLowerCase().includes(searchText.toLowerCase())
+    //     );
+    //     setSearchResults(results);
+    // };
+    // const handleSearchInputChange = (e) => {
+    //     setSearchText(e.target.value);
+    // };
+    // const toggleDropdown = () => {
+    //     setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
+    // };
 
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
@@ -53,65 +53,66 @@ const SurgeonDashboard = () => {
         navigate("/login");
     };
 
-    useEffect(() => {
-        fetch("http://127.0.0.1:4000/user/userLogedin", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("token"),
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data.data, "user logged in");
-                setState((prev) => ({
-                    ...prev,
-                    name: data.data.name,
-                    image: data.data.image,
-                    role: data.data.role,
-                    isLoggedin: true,
-                }));
+    // useEffect(() => {
+    //     fetch("http://127.0.0.1:4000/user/userLogedin", {
+    //         method: "POST",
+    //         crossDomain: true,
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Accept: "application/json",
+    //             "Access-Control-Allow-Origin": "*",
+    //         },
+    //         body: JSON.stringify({
+    //             token: localStorage.getItem("token"),
+    //         }),
+    //     })
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             console.log(data.data, "user logged in");
+    //             setState((prev) => ({
+    //                 ...prev,
+    //                 name: data.data.name,
+    //                 image: data.data.image,
+    //                 role: data.data.role,
+    //                 isLoggedin: true,
+    //             }));
 
-                if (data.data === "token expired") {
-                    localStorage.clear();
-                    navigate("/login");
-                }
-            });
-    }, [navigate]);
+    //             if (data.data === "token expired") {
+    //                 localStorage.clear();
+    //                 navigate("/login");
+    //             }
+    //         });
+    // }, [navigate]);
 
     return (
-        <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
+      <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1  ">
+        <SurgeonSidebar
+          collapsed={state.collapsed}
+          toggleSidebar={toggleSidebar}
+          name={user && user.data.name}
+          image={user && user.data.image}
+          role={user && user.data.role}
+        />
 
-            <SurgeonSidebar
-                collapsed={state.collapsed}
-                toggleSidebar={toggleSidebar}
-                name={user && user.data.name}
-                image={user && user.data.image}
-                role={user && user.data.role}
-            />
-
-            <Layout
-                className={`${state.collapsed ? "ml-20" : "ml-64"
-                    } transition-all duration-300 ease-in-out flex-grow`}
-            >
-                <HeaderComponent
-                    name={state.name}
-                    role={state.role}
-                    state={state}
-                    toggleSidebar={toggleSidebar}
-                />
-                <Content className="p-4">
-                    <div className="bg-slate-100  p-4">
-                        <Outlet />
-                    </div>
-                </Content>
-            </Layout>
-        </Layout >
+        <Layout
+          className={`${
+            state.collapsed ? "ml-20" : "ml-64"
+          }  bg-base-200 transition-all duration-300 ease-in-out flex-grow`}
+        >
+          <HeaderComponent
+            name={state.name}
+            role={state.role}
+            state={state}
+            toggleSidebar={toggleSidebar}
+            // newDonorCount={newDonorCount}
+          />
+          <Content className="p-4 mt-1">
+            <div className=" bg-slate-100  w-full">
+              <Outlet />
+            </div>
+          </Content>
+        </Layout>
+      </Layout>
     );
 };
 

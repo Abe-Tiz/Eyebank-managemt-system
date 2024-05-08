@@ -199,7 +199,6 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
                     subtitle: t("common:listDonorLabel"),
                     iconLibrary: "pi",
                     iconName: "PiUserListBold",
-
                   },
                 ]}
               />

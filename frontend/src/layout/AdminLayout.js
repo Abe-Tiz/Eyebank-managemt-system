@@ -9,8 +9,8 @@ import socketIOClient from "socket.io-client";
 import HeaderComponent from "../pages/dashboard/admins/HeaderComponent";
 import useLoggedInUser from "../useHooks/useLoggedInUser";
 
-const ENDPOINT = "http://localhost:4000"; // Your server endpoint
-const socket = socketIOClient(ENDPOINT);
+// const ENDPOINT = "http://localhost:4000"; // Your server endpoint
+// const socket = socketIOClient(ENDPOINT);
 
 const { Content } = Layout;
 
@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     const [notifications, setNotifications] = useState([]);
   const [countNotification, setCountNotification] = useState(0);
   
-   const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
+   const { user, setUser, getLoggedInUser } = useLoggedInUser("admin");
 
     const [state, setState] = useState({
         name: "",
@@ -40,39 +40,7 @@ const AdminDashboard = () => {
     });
 
     const [newDonorCount, setNewDonorCount] = useState(0);
-
-  // const getLoggedInUser = async () => {
-               
-  //       fetch("http://127.0.0.1:4000/user/userLogedin", {
-  //           method: "POST",
-  //           crossDomain: true,
-  //           headers: {
-  //               "Content-Type": "application/json",
-  //               Accept: "application/json",
-  //               "Access-Control-Allow-Origin": "*",
-  //           },
-  //           body: JSON.stringify({
-  //               token: localStorage.getItem("token"),
-  //           }),
-  //       })
-  //           .then((res) => res.json())
-  //           .then((data) => {
-  //               console.log(data.data, "user logged in");
-  //               setState((prev) => ({
-  //                   ...prev,
-  //                   name: data.data.name,
-  //                   image: data.data.image,
-  //                   role: data.data.role,
-  //                   isLoggedin: true,
-  //               }));
-
-  //               if (data.data === "token expired") {
-  //                   localStorage.clear();
-  //                   navigate("/login");
-  //               }
-  //           });
-  //   };
-
+  
     const numberDonor = async () => {
         try {
             const response = await axios.get("http://localhost:4000/report");
@@ -109,13 +77,17 @@ const AdminDashboard = () => {
         notification();
     }, [setReportData, navigate, newDonorCount]);
   
-  // console.log("logggggg:",user.data);
+  console.log("logggggg:",user);
 
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
     };
 
-
+ //! handle Logout
+    // const handleLogout = () => {
+    //     localStorage.removeItem("admin");
+    //     navigate("/login");
+    // };
 
     return (
       <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
@@ -140,7 +112,7 @@ const AdminDashboard = () => {
             toggleSidebar={toggleSidebar}
             newDonorCount={countNotification}
             notifications={notifications}
-            type="admin"
+            role="admin"
           />
 
           {/* content section  */}

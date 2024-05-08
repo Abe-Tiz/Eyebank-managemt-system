@@ -5,7 +5,7 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 
 const TableRowCornea = ({ cornea, formatTimestamp, deleteCornea }) => (
-  <Tr className="mb-2 text-lg">
+  <Tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
     <Td>{cornea.lotNo}</Td>
     {/* <Td>{formatTimestamp(cornea.createdAt)}</Td> */}
     <Td>{cornea.recoveryTechnical}</Td>
