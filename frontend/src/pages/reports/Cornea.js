@@ -1,4 +1,3 @@
- 
 import React ,{useEffect, useState}from 'react';
 import axios from 'axios';
 import ReportCard from '../../components/ReportCard';
@@ -29,6 +28,7 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
+
   // number of corneas
   const distributedCorneaInMonth = async () => {
     try {
@@ -70,6 +70,7 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
+
   // number of Tested cornea
   const serologytestedCornea = async () => {
     try {
@@ -162,16 +163,19 @@ const Cornea = () => {
     distributedCorneaInMonth();
   }, [corneaReport]);
  
+  // collected cornea
   const corneaData = corneaReport.map((item) => ({
     month: item.month,
     count: item.count,
   }));
 
+  // distributed cornea
   const distributedCorneaData = distributedReport.map((item) => ({
     month: item.month,
     count: item.count,
   }));
 
+  // pledged people
   const pledgedCorneaData = pledgedReport.map((item) => ({
     month: item.month,
     count: item.count,
