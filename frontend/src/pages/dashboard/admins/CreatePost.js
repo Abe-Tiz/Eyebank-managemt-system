@@ -13,36 +13,16 @@ export default function CreatePost() {
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [photo, setPhoto] = useState(null);
-  const [user, setUser] = useState("");
-  const [users, setUsers] = useState([]);
 
   const [photoUrl, setPhotoUrl] = useState(null);
   const { t } = useTranslation();
-
-  
-  
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:4000/user");
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  const handleUserChange = (event) => {
-    setUser(event.target.value);
-  };
+  const adminId = localStorage.getItem("adminId");
 
   const handlePost = async (e) => {
     e.preventDefault();
     try {
       const postData = new FormData();
-      postData.append("author", user);
+      postData.append("author", adminId);
       postData.append("title", title);
       postData.append("summary", summary);
       postData.append("photo", photo);
@@ -75,45 +55,11 @@ export default function CreatePost() {
       <div className="w-full md:w-2/3 lg:w-1/2 xl:w-1/2 mx-auto bg-white rounded-lg shadow">
         {" "}
         <div className="p-3">
-        <h3 className="title text-3xl font-bold text-center mb-4 text-sky-700">
+          <h3 className="title text-3xl font-bold text-center mb-4 text-sky-700">
             <span className="border-b-4 border-indigo-500">Create Blog</span>
           </h3>
-         
-          <div className="mb-6 w-full" >
-      <select className="form-input w-full" value={user} onChange={handleUserChange}>
-        <option value="">Select a user</option>
-        {users.map((user) => (
-          <option key={user._id} value={user._id}>
-            {user.name}
-          </option>
-        ))}
-      </select>
-   
-    </div>
-    {/* <div className="mb-6 w-full" >
-    <label>
-              <select
-                className="form-input mt-2 block  w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                value={user}
-                onChange={(e) => setUser(e.target.value)}
-              >
-                <option>Select a User</option>
-                {users.map((user) => (
-                  <option
-                    key={user._id}
-                    value={user._id}
-                    className="py-2 px-4 hover:bg-blue-100"
-                  >
-                    <span className="text-blue-600 font-semibold">
-                      {user.name}
-                    </span>
-                  </option>
-                ))}
-              </select>
-            </label>
 
-</div> */}
-  <div className="mb-6">
+          <div className="mb-6">
             <input
               type="text"
               value={title}
@@ -164,16 +110,9 @@ export default function CreatePost() {
           </div>
 
           <div className="mb-6">
-            {/* <button
-              className="bg-blue-500 text-white py-2 px-4 rounded-lg"
-              onClick={handlePost}
-            >
-              Create Blog
-            </button> */}
-
-            
             <div className="flex justify-center">
-              <ButtonComponent onClick={handlePost}
+              <ButtonComponent
+                onClick={handlePost}
                 title="Create Blog"
                 className="bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               />

@@ -36,6 +36,8 @@ const Login = () => {
             } else {
                 if (data.status === "ok") {
                     if (data.user.role === "admin") {
+                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("adminId", data.user._id);
                         localStorage.setItem("admin", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
@@ -51,6 +53,7 @@ const Login = () => {
                     else if (data.user.role === "doctor") {
                         localStorage.setItem("doctor", data.data);
                         localStorage.setItem("surgeonId", data.user._id);
+                        localStorage.setItem("surgeonName", data.user.name);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -59,6 +62,9 @@ const Login = () => {
                             isClosable: true,
                             position: "top",
                         });
+                        console.log(data.user._id);
+                        console.log("tefisha");
+                        console.log(data.user.name);
                         // setRefreshed(true);
                         navigate("/surgondashboard");
                     }
