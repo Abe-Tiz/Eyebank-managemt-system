@@ -55,7 +55,7 @@ const EditAdverseData = () => {
                 duration: 5000,
                 isClosable: true,
             });
-            navigate('/surgondashboard/adverseDatalist');
+            navigate('/surgondashboard/adverselist');
         } catch (error) {
             toast({
                 title: t('Error'),
@@ -66,13 +66,10 @@ const EditAdverseData = () => {
             });
         }
     };
-
     const { dateOfadverse, adverseDataReaction, probabilityCase, donorTissue } = adverseReactionData;
-
     if (isLoading) {
         return <div>{t('Loading...')}</div>;
     }
-
     return (
         <div>
             <h1 className="text-2xl font-bold mb-4" style={{ textAlign: 'center' }}>
@@ -133,5 +130,4 @@ const EditAdverseData = () => {
         </div>
     );
 };
-
 export default EditAdverseData;

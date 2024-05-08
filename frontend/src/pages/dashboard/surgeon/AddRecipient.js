@@ -21,6 +21,7 @@ const AddRecipient = () => {
     const [ocularNonOperativeEye, setOcularNonOperativeEye] = useState("");
     const [dateOfadverse, setDateOfadverse] = useState("");
     const [adverseReaction, setAdvererReaction] = useState("");
+    const [lotNo, setLotNo] = useState("");
     //for probablity
     const [probablityCase, setProbablityCase] = useState("");
     const [donorTissue, setDonorTissue] = useState("");
@@ -69,7 +70,8 @@ const AddRecipient = () => {
             registerDate,
             surgeonName,
             dateOfSurgry,
-            surgeryType,
+            lotNo,
+            lotNo,
             ocularOperativeEye,
             ocularNonOperativeEye,
             dateOfadverse,

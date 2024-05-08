@@ -29,14 +29,15 @@ const createRecipient = async (req, res) => {
             registerDate,
             surgeonName,
             ocularPost: {
-                ocularPost: req.body.ocularPost,
+                Post: req.body.Post,
                 dateOfSurgry: req.body.dateOfSurgry,
-                surgeryType: req.body.surgeryType,
+                lotNo: req.body.lotNo,
                 ocularOperativeEye: req.body.ocularOperativeEye,
                 ocularNonOperativeEye: req.body.ocularNonOperativeEye,
             },
             adverse: {
                 adversePost: req.body.adversePost,
+                lotNo: req.body.lotNo,
                 adverseReaction: req.body.adverseReaction,
                 probablityCase: req.body.probablityCase,
                 donorTissue: req.body.donorTissue,
@@ -55,8 +56,8 @@ const createRecipient = async (req, res) => {
 const getRecipients = async (req, res) => {
     // const {surgeonId } = req.query;
     const recipients = await RecipientModel.find()
-        
-       
+
+
     res.send(recipients);
 };
 

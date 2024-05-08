@@ -64,13 +64,12 @@ const ViewTissue = () => {
     return (
         <div>
             <TableContainer>
-                <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
+                {/* <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
                     List of collected cornea
-                </Text>
-                <Table size='sm'>
+                </Text> */}
+                <Table variant='simple'>
                     <Thead>
-                        <Tr>
-
+                        <Tr className="bg-gray-200 ">
                             <Th>S.No</Th>
                             <Th>LotNo</Th>
                             <Th>Date</Th>
@@ -98,7 +97,7 @@ const ViewTissue = () => {
                                     (cornea.evaluation.approval !== 'no')
                             )
                             .map((cornea, index) => (
-                                <Tr key={index}>
+                                <Tr key={index} className="mb-2 text-lg">
                                     <Td>{index + 1}</Td>
                                     <Td>{cornea.lotNo}</Td>
                                     <Td>
@@ -115,8 +114,10 @@ const ViewTissue = () => {
                                     <div className='text-center'>
                                         {
                                             cornea.evaluation && cornea.evaluation.approval !== 'yes' && cornea.evaluation.approval !== 'no' ? (
+
                                                 <Td>
-                                                    <Link to={`/medicaldirectordashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link>
+                                                    <Button colorScheme='telegram'>
+                                                        <Link className=' bg-sky-600' to={`/medicaldirectordashboard/evaluatecornea/${cornea._id}`}>Evaluate</Link></Button>
                                                 </Td>
                                             ) : (
                                                 <Td style={{ color: cornea.evaluation && cornea.evaluation.approval === 'yes' ? 'green' : 'red' }}>

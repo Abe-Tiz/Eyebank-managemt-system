@@ -9,7 +9,7 @@ const RecentDonor = () => {
       .get("http://localhost:4000/donor/recentDonors")
       .then((response) => {
           setDonors(response.data);
-          console.log("recent donor:",response.data);
+          // console.log("recent donor:",response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
