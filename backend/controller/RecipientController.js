@@ -103,6 +103,22 @@ const adverseReaction = async (req, res) => {
         throw error;
     }
 }
+const SearchRecipient = async (req, res) => {
+    try {
+        const { recipientname } = req.body;
+        const recipent = await RecipientModel.find({
+            recipientname: { $regex: new RegExp(`^${recipientname}`, "i") },
+        }).exec();
+        if (recipent.length === 0) {
+            return res.status(404).json({ message: "Recipient not found" });
+        }
+        // console.log(cornea);
+        res.status(200).json(recipent);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
 
 module.exports = {
     createRecipient,
@@ -111,5 +127,6 @@ module.exports = {
     updateRecipient,
     deleteRecipient,
     ocularPost,
-    adverseReaction
+    adverseReaction,
+    SearchRecipient
 }

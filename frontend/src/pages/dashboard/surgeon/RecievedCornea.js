@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +8,7 @@ const RecievedCornea = () => {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const navigate = useNavigate();
     const [distributed, setdistribute] = useState([]);
-    const surgeonName= localStorage.getItem("surgeonName");
+    const surgeonName = localStorage.getItem("surgeonName");
 
     function formatTimestamp(timestamp) {
         const options = {
@@ -20,10 +19,10 @@ const RecievedCornea = () => {
 
         return new Date(timestamp).toLocaleString('en-US', options);
     }
-   
+
     useEffect(() => {
         const fetchData = async () => {
-          const surgeonName= localStorage.getItem("surgeonName");
+            const surgeonName = localStorage.getItem("surgeonName");
             try {
                 const response = await axios.get("http://localhost:4000/distribution/read");
                 const data = response.data;
@@ -34,7 +33,7 @@ const RecievedCornea = () => {
         };
         fetchData();
     }, []);
-   
+
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
@@ -48,31 +47,31 @@ const RecievedCornea = () => {
                     <Thead>
                         <Tr className='bg-sky-600 text-white'>
                             <Th className='text-white' >No</Th>
-                           <Th className='text-white' > Hospital Name</Th>
-                           <Th className='text-white'>Mode Of Traporation</Th>
+                            <Th className='text-white' > Hospital Name</Th>
+                            <Th className='text-white'>Mode Of Traporation</Th>
                             <Th className='text-white'>Suitability</Th>
                             {/* <Th className='text-white'>Surgeon</Th> */}
-                           <Th className='text-white'>Distribution Date</Th>
-                            
+                            <Th className='text-white'>Distribution Date</Th>
+
                         </Tr>
                     </Thead>
                     <Tbody>
 
-                    {distributed
-                    .filter((distribute)=>distribute.name === surgeonName )
-                    .map((distribute, index) => (
-                            <Tr key={index}>
-                                <Td>{index + 1}</Td>
-                                <Td>{distribute.hospitalName}</Td>
-                                <Td>{distribute.modeOfTransportation}</Td>
-                                <Td>{distribute.suiatablity}</Td>
-                                {/* <Td>{distribute.name}</Td> */}
-                                <Td>
-                                    {formatTimestamp(distribute.createdAt)}
-                                </Td>
-                               
-                            </Tr>
-                        ))}
+                        {distributed
+                            .filter((distribute) => distribute.name === surgeonName)
+                            .map((distribute, index) => (
+                                <Tr key={index}>
+                                    <Td>{index + 1}</Td>
+                                    <Td>{distribute.hospitalName}</Td>
+                                    <Td>{distribute.modeOfTransportation}</Td>
+                                    <Td>{distribute.suiatablity}</Td>
+                                    {/* <Td>{distribute.name}</Td> */}
+                                    <Td>
+                                        {formatTimestamp(distribute.createdAt)}
+                                    </Td>
+
+                                </Tr>
+                            ))}
                     </Tbody>
                 </Table>
             </TableContainer>

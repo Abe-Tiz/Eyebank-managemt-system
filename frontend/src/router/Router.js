@@ -201,10 +201,6 @@ const router = createBrowserRouter([
                 element: <DiscardCornea />,
             },
             {
-                path: "serology/:id",
-                element: <SerologyTest />,
-            },
-            {
                 path: "serology",
                 element: <Serology />,
             },
@@ -247,7 +243,7 @@ const router = createBrowserRouter([
             {
                 path: "getOne/:id",
                 element: <ViewDetails />,
-                
+
             },
             {
                 path: "editExams/:id",
@@ -264,9 +260,9 @@ const router = createBrowserRouter([
             {
                 path: "viewDonors",
                 element: <ListOfPleged />,
-            },            
+            },
             {
-               path: "viewRequestCornea",
+                path: "viewRequestCornea",
                 element: <ViewRequestedCornea />,
             },
             {
@@ -410,8 +406,8 @@ const router = createBrowserRouter([
                 element: <AccidentList />,
             },
             {
-              path:"recievedCornea",
-              element:<RecievedCornea/>  
+                path: "recievedCornea",
+                element: <RecievedCornea />
             }
         ],
     },
@@ -420,7 +416,7 @@ const router = createBrowserRouter([
         element: <MedicalDirectorDashboard />,
         children: [
             {
-                path: " ",
+                path: "viewTissue",
                 element: <ViewTissue />,
             },
             {

@@ -39,9 +39,9 @@ const SurgeonDashboard = () => {
     // const handleSearchInputChange = (e) => {
     //     setSearchText(e.target.value);
     // };
-    // const toggleDropdown = () => {
-    //     setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
-    // };
+    const toggleDropdown = () => {
+        setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
+    };
 
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
@@ -108,19 +108,7 @@ const SurgeonDashboard = () => {
                 />
 
                 <div className="flex items-center space-x-4">
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        value={searchText}
-                        onChange={handleSearchInputChange}
-                        className="border p-2 rounded bg-gray-800 text-white"
-                    />
-                    <button
-                        onClick={handleSearch}
-                        className="text-white hover:text-gray-300 transition-all duration-300"
-                    >
-                        Search
-                    </button>
+
 
                     <Badge count={5} offset={[0, 5]} className="mr-5">
                         <BellOutlined className="text-2xl text-blue-500" />
@@ -164,13 +152,13 @@ const SurgeonDashboard = () => {
                     </div>
                 </div>
                 <Content className="p-4 mt-10">
-                <div className="bg-slate-100  w-full">
-                    <Outlet />
-                </div>
-            </Content>
+                    <div className="bg-slate-100  w-full">
+                        <Outlet />
+                    </div>
+                </Content>
             </Layout>
 
-          
+
         </Layout >
     );
 };

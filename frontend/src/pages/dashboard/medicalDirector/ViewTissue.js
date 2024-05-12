@@ -33,6 +33,7 @@ const ViewTissue = () => {
                 const response = await axios.get("http://localhost:4000/cornea/read");
                 const data = response.data;
                 setCorneas(data);
+                console.log("awoke " + corneas)
             } catch (error) {
                 console.error(error);
             }
@@ -125,7 +126,6 @@ const ViewTissue = () => {
                                                 </Td>
                                             )
                                         }
-
                                     </div>
                                 </Tr>
                             ))}

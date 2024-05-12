@@ -5,15 +5,28 @@ import {
     Tag,
     TagLabel,
     TagLeftIcon,
-    TagRightIcon, HStack,
+    TagRightIcon,
+    HStack,
     TagCloseButton,
-} from '@chakra-ui/react'
-import { Button, ButtonGroup, WrapItem } from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import { Button, Box, Flex, ButtonGroup, WrapItem } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer } from '@chakra-ui/react';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    Text,
+    TableContainer,
+} from '@chakra-ui/react';
+import Pagination from '../../../components/Pagination';
+import useSearch from '../../../useHooks/useSearch';
+import SearchComponent from '../../../components/SearchComponent';
 
-const ViewTissue = () => {
+const ViewRecipient = () => {
     const [isOpen, setIsOpen] = useState({
         serology: false,
         distribut: false,
@@ -25,6 +38,20 @@ const ViewTissue = () => {
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
     const [recipient, setRecipient] = useState([]);
+    const { searchTerm, handleChange, data, error } = useSearch('recipient');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(recipient.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentRecipients = recipient.slice(
+        indexOfFirstItem,
+        indexOfLastItem
+    );
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     function formatTimestamp(timestamp) {
         const options = {
             year: 'numeric',
@@ -38,12 +65,14 @@ const ViewTissue = () => {
     useEffect(() => {
         const getAllRecipients = async () => {
             try {
-                const surgeonId = localStorage.getItem("surgeonId"); // Retrieve the surgeon ID from local storage
+                const surgeonId = localStorage.getItem('surgeonId'); // Retrieve the surgeon ID from local storage
                 const response = await axios.get(
-                    "http://localhost:4000/recipient/read",
+                    'http://localhost:4000/recipient/read',
                     {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                            Authorization: `Bearer ${localStorage.getItem(
+                                'token'
+                            )}`,
                         },
                         params: {
                             surgeonId: surgeonId, // Pass the surgeon ID as a query parameter
@@ -60,29 +89,23 @@ const ViewTissue = () => {
         getAllRecipients();
     }, []);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get("http://localhost:4000/recipient/read");
-    //             const data = response.data;
-    //             setRecipient(data);
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
+
     const deleteRecipient = async (id) => {
         try {
-            await axios.delete(`http://localhost:4000/recipient/delete/${id}`);
-            setRecipient(recipient.filter((recipent) => recipent._id !== id));
+            await axios.delete(`http://localhost:4000/recipient/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            setRecipient(recipient.filter((recipient) => recipient._id !== id));
         } catch (error) {
             console.error(error);
         }
     };
+    const renderRecipient = searchTerm ? data : currentRecipients;
 
     return (
         <div>
@@ -90,60 +113,75 @@ const ViewTissue = () => {
                 {/* <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
                     List of Recipients
                 </Text> */}
-                <Table variant='simple'>
+                <Flex justify="flex-end" position="fixed" top={10} right={0} p={4}>
+                    <Box mr={15}>
+                        <SearchComponent searchTerm={searchTerm} handleChange={handleChange} />
+                    </Box>
+                </Flex>
+                <Table className='mt-8' variant='simple'>
                     <Thead>
-                        <Tr className="bg-gray-200 ">
+                        <Tr className='bg-gray-200 '>
                             <Th>S.No</Th>
-                            <Th> Register Date</Th>
-                            <Th> Recipinent Name</Th>
+                            <Th>Register Date</Th>
+                            <Th>Recipient Name</Th>
                             <Th>Age</Th>
                             <Th>Sex</Th>
                             <Th>Phone</Th>
                             <Th>Address</Th>
                             <Th>Surgery Type</Th>
-                            <Th className='text-center' colSpan={4}>Operations</Th>
+                            <Th className='text-center' colSpan={4}>
+                                Operations
+                            </Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {recipient.map((recipent, index) => (
-                            <Tr key={index} className="mb-2 text-lg">
+                        {renderRecipient.map((recipent, index) => (
+                            <Tr key={index} className='mb-2 text-lg'>
                                 <Td>{index + 1}</Td>
-                                <Td>
-                                    {formatTimestamp(recipent.createdAt)}
-                                </Td>
+                                <Td>{formatTimestamp(recipent.createdAt)}</Td>
                                 <Td>{recipent.recipientname}</Td>
                                 <Td>{recipent.age}</Td>
                                 <Td>{recipent.sex}</Td>
                                 <Td>{recipent.phone}</Td>
                                 <Td>{recipent.address}</Td>
                                 <Td>{recipent.surgeryType}</Td>
-                                <Td >
-                                    <Button colorScheme='telegram'>
-                                        <Link to={`/surgondashboard/ocularpost/${recipent._id}`}>Ocular Post</Link>
+                                <Td>
+                                    <Button colorScheme="telegram">
+                                        <Link to={`/surgondashboard/ocularpost/${recipent._id}`}>
+                                            Ocular Post
+                                        </Link>
                                     </Button>
                                 </Td>
-                                <Td >
-                                    <Button colorScheme='orange'>
-                                        <Link to={`/surgondashboard/adverse/${recipent._id}`}>Adverse</Link>
+                                <Td>
+                                    <Button colorScheme="orange">
+                                        <Link to={`/surgondashboard/adverse/${recipent._id}`}>
+                                            Adverse
+                                        </Link>
                                     </Button>
                                 </Td>
                                 <Td className="text-blue-600">
                                     <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>
-                                        <EditIcon /></Link>
+                                        <EditIcon />
+                                    </Link>
                                 </Td>
-                                <Td >
+                                <Td>
                                     <button className="text-red-600" onClick={() => deleteRecipient(recipent._id)}>
                                         <DeleteIcon />
                                     </button>
                                 </Td>
-
                             </Tr>
                         ))}
                     </Tbody>
                 </Table>
+                <Pagination
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    paginate={paginate}
+                />
             </TableContainer>
-        </div >
+        </div>
     );
 };
 
-export default ViewTissue;
+export default ViewRecipient;
