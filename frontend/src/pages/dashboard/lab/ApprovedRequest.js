@@ -24,23 +24,8 @@ const ApprovedRequest = () => {
 
     getAllRequestedCorneas();
   }, []);
-  console.log(requestedCorneas);
-  //retrive all the possible cornea lists
-  useEffect(() => {
-    const getAllCorneas = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:4000/cornea/read");
-        setCorneas(data);
-      } catch (error) {
-        console.log(error);
-        toast.error("Something Went Wrong");
-      }
-    };
 
-    getAllCorneas();
-  }, []);
-
-  const navigate = useNavigate();
+ const navigate = useNavigate();
 
   // const handleApprove = async (id) => {
   //     try {
@@ -110,41 +95,45 @@ const ApprovedRequest = () => {
               </th> */}
             </tr>
           </thead>
-          <tbody>
-            {requestedCorneas.map((request, index) => (
-              <tr
-                key={index}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <th
-                  scope="row"
-                  className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+
+       <tbody>{requestedCorneas
+  .filter((request) => (request.isGetCornea === false && request.isApproved === true ))
+  .map((request, index) => (
+                <tr
+                  key={index}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
-                  <div className="ps-3">
-                    <div className="text-base font-semibold">
-                      {request.surgeon?.name}
+                  <th
+                    scope="row"
+                    className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    <div className="ps-3">
+                      <div className="text-base font-semibold">
+                        {request.surgeon?.name}
+                      </div>
                     </div>
-                  </div>
-                </th>
-                <td className="px-6 py-4">{request.hospital?.hospitalName}</td>
-                <td className="px-6 py-4">{request.suiatablity}</td>
-                <td className="px-6 py-4">{request.descriptionOfRequest}</td>
-                <td>
-                  {request.distribute === true ? (
-                    <p className="text-green-500 font-bold">Distributed</p>
-                  ) : (
-                    <Button
-                      colorScheme="blue"
-                      onClick={() =>
-                        handleDistribute(request._id, request.suiatablity)
-                      }
-                    >
-                      distribute
-                    </Button>
-                  )}
-                </td>
-              </tr>
-            ))}
+                  </th>
+                  <td className="px-6 py-4">
+                    {request.hospital?.hospitalName}
+                  </td>
+                  <td className="px-6 py-4">{request.suiatablity}</td>
+                  <td className="px-6 py-4">{request.descriptionOfRequest}</td>
+                  <td>
+                    {request.distribute === true ? (
+                      <p className="text-green-500 font-bold">Distributed</p>
+                    ) : (
+                      <Button
+                        colorScheme="blue"
+                        onClick={() =>
+                          handleDistribute(request._id, request.suiatablity)
+                        }
+                      >
+                        distribute
+                      </Button>
+                    )}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
