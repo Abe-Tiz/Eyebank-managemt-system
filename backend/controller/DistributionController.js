@@ -3,18 +3,18 @@ const Distribution = require('../models/CorneaDistribution');
 const CorneaRequestModel = require('../models/CorneaRequest');
 
 const createDistribution = async (req, res) => {
-    const { hospitalName, name, modeOfTransportation,id, suiatablity, } = req.body;
+    const { hospitalName, name, modeOfTransportation, id, suiatablity, } = req.body;
     try {
-        const distribution = await Distribution.create({ 
+        const distribution = await Distribution.create({
             hospitalName: hospitalName,
             name: name,
             modeOfTransportation: modeOfTransportation,
-            suiatablity:suiatablity
+            suiatablity: suiatablity
         })
         const requestedCornea = await CorneaRequestModel.findById(id);
         requestedCornea.isGetCornea = true;
         requestedCornea.save();
-        if (distribution) {  
+        if (distribution) {
             res.send({ status: "ok", data: distribution })
         }
     } catch (error) {
@@ -22,13 +22,29 @@ const createDistribution = async (req, res) => {
     }
 }
 const getDistributeds = async (req, res) => {
-    const distribute = await Distribution.find() 
+    const distribute = await Distribution.find()
     res.send(distribute);
 };
 
 const getDistributed = async (req, res) => {
     const distribute = await Distribution.findById(req.params.id);
     res.send(distribute);
+};
+const getEachDistributed = async (req, res) => {
+    try {
+        const { surgeonName } = req.query; // Retrieve the surgeon name from the query parameter
+        const distributions = await Distribution.find({ name: surgeonName }).populate(
+            "corneaId"
+        );
+
+        const lotNos = distributions.map((distribution) => ({
+            lotNo: distribution.corneaId.lotNo,
+        }));
+
+        res.json(lotNos);
+    } catch (err) {
+        res.status(500).json({ error: "An error occurred while retrieving recipents." });
+    }
 };
 
 const editDistributed = async (req, res) => {
@@ -46,4 +62,4 @@ const deleteDistributed = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-module.exports = { createDistribution, getDistributeds, getDistributed, editDistributed, deleteDistributed }
+module.exports = { createDistribution, getDistributeds, getDistributed, getEachDistributed, editDistributed, deleteDistributed }
