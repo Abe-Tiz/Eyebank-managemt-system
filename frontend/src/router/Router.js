@@ -93,6 +93,7 @@ import AccidentList from "../pages/dashboard/surgeon/AccidentList";
 
 import StoredCornea from "../pages/dashboard/lab/StoredCornea";
 import CollectedCornea from "../pages/dashboard/lab/serology/CollectedCornea";
+import SerologyTest from "../pages/dashboard/lab/serology/Serology";
 import Cornea from "../pages/reports/Cornea";
 // import Collected from "../pages/dashboard/lab/serology/Collected";
 import Test from "../pages/dashboard/lab/serology/Test";
