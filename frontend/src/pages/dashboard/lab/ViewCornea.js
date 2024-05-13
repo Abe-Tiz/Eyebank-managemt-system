@@ -78,9 +78,9 @@ const ViewCornea = () => {
         try {
             await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
             setCorneas(
-              corneas.filter(
-                (cornea) => cornea._id !== id 
-              )
+                corneas.filter(
+                    (cornea) => cornea._id !== id
+                )
             );
         } catch (error) {
             console.error(error);
@@ -109,7 +109,12 @@ const ViewCornea = () => {
                         <TableHeader />
                         {/* Table body */}
                         <Tbody>
-                            {renderCornea.map((cornea, index) => (
+                            {renderCornea
+                            // .filter(
+                            //    (cornea) =>
+                            //         (cornea.collect === true)
+                            // )
+                            .map((cornea, index) => (
                                 <TableRowCornea
                                     key={index}
                                     cornea={cornea}

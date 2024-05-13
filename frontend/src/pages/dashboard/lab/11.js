@@ -10,15 +10,17 @@ import { Link } from "react-router-dom";
 import DynamicIcon from './../../../components/DynamicIcon';
 import { useState } from "react";
 import SideCustome from "../../../components/SideCustome";
+import Accident from "../../../../../backend/models/Accident";
+import Recipient from "../../../../../backend/models/Recipient";
 
 const CustomSidebar = ({ collapsed, name, role }) => {
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState({
-        serology: false,
-        distribut: false,
+        Accident: false,
+        Adverse: false,
+        Ocular: false,
+        Recipient: false,
         cornea: false,
-        physical: false,
-        request: false,
     });
 
     return (
