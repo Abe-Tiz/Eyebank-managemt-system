@@ -25,20 +25,6 @@ const SurgeonDashboard = () => {
         collapsed: false,
         role: "",
     });
-
-    // const handleSearch = () => {
-    //     const sampleList = [
-    //         { id: 1, name: "John Doe" },
-    //         { id: 2, name: "Jane Doe" },
-    //     ];
-    //     const results = sampleList.filter((item) =>
-    //         item.name.toLowerCase().includes(searchText.toLowerCase())
-    //     );
-    //     setSearchResults(results);
-    // };
-    // const handleSearchInputChange = (e) => {
-    //     setSearchText(e.target.value);
-    // };
     const toggleDropdown = () => {
         setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
     };
@@ -53,40 +39,8 @@ const SurgeonDashboard = () => {
         navigate("/login");
     };
 
-    // useEffect(() => {
-    //     fetch("http://127.0.0.1:4000/user/userLogedin", {
-    //         method: "POST",
-    //         crossDomain: true,
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             Accept: "application/json",
-    //             "Access-Control-Allow-Origin": "*",
-    //         },
-    //         body: JSON.stringify({
-    //             token: localStorage.getItem("token"),
-    //         }),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log(data.data, "user logged in");
-    //             setState((prev) => ({
-    //                 ...prev,
-    //                 name: data.data.name,
-    //                 image: data.data.image,
-    //                 role: data.data.role,
-    //                 isLoggedin: true,
-    //             }));
-
-    //             if (data.data === "token expired") {
-    //                 localStorage.clear();
-    //                 navigate("/login");
-    //             }
-    //         });
-    // }, [navigate]);
-
     return (
-        <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
-
+        <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1  ">
             <SurgeonSidebar
                 collapsed={state.collapsed}
                 toggleSidebar={toggleSidebar}
@@ -157,8 +111,6 @@ const SurgeonDashboard = () => {
                     </div>
                 </Content>
             </Layout>
-
-
         </Layout >
     );
 };

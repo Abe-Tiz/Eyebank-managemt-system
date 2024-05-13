@@ -13,9 +13,29 @@ const EditPhysicalExam = () => {
     height: '',
     weight: '',
     sex: '',
+    examined: {
+      isRefrigerated: false,
+      head: false,
+      mouth: false,
+      neck: false,
+      arms: false,
+      abdomen: false,
+      genitals: false,
+      arteries: false,
+      back: false,
+    },
+    highRiskexamined: {
+      sexual: "no evidence",
+      analInterCourse: "no evidence",
+      NonMedical: "no evidence",
+      oralThrush: "no evidence",
+      Blue: "no evidence",
+      enlargedLiver: "no evidence",
+    },
     causeOfDeath: '',
     dateofdeath: '',
     time: '',
+
   });
 
   useEffect(() => {
@@ -48,6 +68,17 @@ const EditPhysicalExam = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const handleChange1=(e)=>{
+    const { name, value, type, keyCode } = e.target;
+
+  setFormData((formData) => ({
+    ...formData,
+    examined: {
+      ...formData.examined,
+      [name]: e.target.checked,
+    },
+  }));
+};
 
 
   const handleSubmit = async (e) => {
@@ -109,6 +140,19 @@ const EditPhysicalExam = () => {
             <option value="other">Other</option>
           </select>
         </div>
+
+        <div className="mb-4">
+          <label className="block mb-2">{t('isRefrigerated')}</label>
+          <input
+            className="w-full border border-gray-300 rounded-md p-2"
+            type="text"
+            name="causeOfDeath"
+            value={exam.examined?.isRefrigerated? 'yes':'no'}
+            onChange={handleChange1}
+          />
+        </div>
+        
+
         <div className="mb-4">
           <label className="block mb-2">{t('Cause of Death')}</label>
           <input
@@ -119,16 +163,17 @@ const EditPhysicalExam = () => {
             onChange={handleChange}
           />
         </div>
+
         <div className="mb-4">
-  <label className="block mb-2">{t('Date of Death')}</label>
-  <input
-    className="w-full border border-gray-300 rounded-md p-2"
-    type="date"
-    name="dateofdeath"
-    value={exam.dateofdeath || ''}
-    onChange={handleChange}
-  />
-</div>
+          <label className="block mb-2">{t('Date of Death')}</label>
+          <input
+            className="w-full border border-gray-300 rounded-md p-2"
+            type="date"
+            name="dateofdeath"
+            value={exam.dateofdeath || ''}
+            onChange={handleChange}
+          />
+        </div>
         <div className="mb-4">
           <label className="block mb-2">{t('Time')}</label>
           <input
