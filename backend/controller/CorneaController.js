@@ -122,6 +122,10 @@ const getCorneaBLotnum = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 };
+// const collectedCornea = async(req,res)=>{
+//     const collect= await collect.findOneAndUpdate({_id:req.params.id},{$set:req.body})
+//     res.send(collect)
+//     }
 
 module.exports = {
     createCornea,

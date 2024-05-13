@@ -109,7 +109,12 @@ const ViewCornea = () => {
                         <TableHeader />
                         {/* Table body */}
                         <Tbody>
-                            {renderCornea.map((cornea, index) => (
+                            {renderCornea
+                            // .filter(
+                            //    (cornea) =>
+                            //         (cornea.collect === true)
+                            // )
+                            .map((cornea, index) => (
                                 <TableRowCornea
                                     key={index}
                                     cornea={cornea}
