@@ -412,7 +412,7 @@ const router = createBrowserRouter([
         element: <MedicalDirectorDashboard />,
         children: [
             {
-                path: " ",
+                path: "ViewTissue",
                 element: <ViewTissue />,
             },
             {
