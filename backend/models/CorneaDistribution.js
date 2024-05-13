@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const DistributionSchema = new mongoose.Schema({
-  
     hospitalName: {
-        type:String,
-        required:true
+        type: String,
+        required: true
     },
     name: {
-        type:String,
+        type: String,
         required: true
     },
     modeOfTransportation: {
@@ -17,7 +16,7 @@ const DistributionSchema = new mongoose.Schema({
         type: String,
         //required: true,
     },
- 
+
 }, {
     timestamps: true
 }
