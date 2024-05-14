@@ -1,5 +1,6 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+// import ReportTable from "../pages/reports/ReportTable";
 
 const months = [
   "January",
@@ -73,7 +74,9 @@ const BarGraph = ({ data, distrData, pledData }) => {
 
   return (
     <div className="mt-8 w-full">
-      <p className="text-black font-serif  text-2xl font-normal mb-2">Report for each month Activity</p>
+      <p className="text-black font-serif  text-2xl font-normal mb-2">
+        Report for each month Activity
+      </p>
       <Bar data={chartData} options={options} />
     </div>
   );

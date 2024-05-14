@@ -8,7 +8,8 @@ const {
         getPhysicalExaminedCount,
         getDistributedCorneaCount, 
         getDistributedCorneaByMonth, 
-        getPledgeByMonth
+        getPledgeByMonth,
+        // getCorneaByMonthManualy
     } = require('../controller/ReportController');
 const route = express.Router();
 
@@ -18,6 +19,7 @@ route.get('/', getDonorCount);
 route.get('/cornea', getCorneaCount);
 route.get("/evaluted", getEvalutedCorneaCount);
 route.get("/cornea-month", getCorneaByMonth);
+// route.post("/cornea-month/report", getCorneaByMonthManualy);
 route.get("/serology", getTestedCount);
 route.get("/physical", getPhysicalExaminedCount);
 route.get("/distributed", getDistributedCorneaCount);

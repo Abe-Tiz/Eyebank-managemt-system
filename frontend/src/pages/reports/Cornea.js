@@ -2,6 +2,7 @@ import React ,{useEffect, useState}from 'react';
 import axios from 'axios';
 import ReportCard from '../../components/ReportCard';
 import BarGraph from '../../graphs/BarGraph';
+import ReportTable from './ReportTable';
  
 const Cornea = () => {
   const [corneaReport, setCorneaReport] = useState([]);
@@ -11,11 +12,12 @@ const Cornea = () => {
     pledge: 0,
     cornea: 0,
     evaluted: 0,
-    serology:0,
+    serology: 0,
     physical: 0,
-    distributed:0
+    distributed: 0,
   });
-  
+  const [showReportTable, setShowReportTable] = useState(false);
+
   // number of corneas
   const CorneaCount = async () => {
     try {
@@ -54,7 +56,7 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
-  
+
   // number of cornea
   const CollectedCornea = async () => {
     try {
@@ -118,7 +120,7 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
-  
+
   // number of donor
   const numberOfEvalutedCornea = async () => {
     try {
@@ -134,7 +136,7 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
-  
+
   // number of donor
   const numberDonor = async () => {
     try {
@@ -149,8 +151,8 @@ const Cornea = () => {
     } catch (error) {
       console.log("Error : ", error);
     }
-    };
-    
+  };
+
   useEffect(() => {
     CorneaCount();
     CollectedCornea();
@@ -162,7 +164,22 @@ const Cornea = () => {
     pledgedCorneaInMonth();
     distributedCorneaInMonth();
   }, [corneaReport]);
- 
+
+  // Function to toggle the ReportTable visibility
+  const toggleReportTable = () => {
+    setShowReportTable((prevShow) => !prevShow);
+  };
+
+  // Function to handle the printing of the ReportTable
+  const printReport = () => {
+    const printContent = document.getElementById('reportTable').innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    document.body.innerHTML = printContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+  };
+
   // collected cornea
   const corneaData = corneaReport.map((item) => ({
     month: item.month,
@@ -180,7 +197,7 @@ const Cornea = () => {
     month: item.month,
     count: item.count,
   }));
-  
+
   const data = [
     { category: "cornea", number: reportData.cornea },
     { category: "evaluted", number: reportData.evaluted },
@@ -189,7 +206,7 @@ const Cornea = () => {
     { category: "pledeged", number: reportData.pledge },
     { category: "distributed", number: reportData.distributed },
   ];
-  
+
   return (
     <div className="p-4">
       <div className="flex flex-wrap -mx-2">
@@ -202,7 +219,33 @@ const Cornea = () => {
         ))}
       </div>
       <div>
-        <BarGraph data={corneaData} distrData={distributedCorneaData} pledData={ pledgedCorneaData} />
+        {/* Button to toggle the ReportTable */}
+        <button onClick={toggleReportTable} className="btn">
+          {showReportTable ? "Hide Report" : "Show Report"}
+        </button>
+        
+        <BarGraph
+          data={corneaData}
+          distrData={distributedCorneaData}
+          pledData={pledgedCorneaData}
+        />
+
+        {/* Conditional rendering of the ReportTable based on showReportTable state */}
+        {showReportTable && (
+          <>
+            <button onClick={printReport} className="btn">
+              Print Report
+            </button>
+
+            <div id="reportTable">
+              <ReportTable
+                data={corneaData}
+                distrData={distributedCorneaData}
+                pledData={pledgedCorneaData}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
