@@ -329,10 +329,10 @@ const router = createBrowserRouter([
         path: "viewhospital",
         element: <ViewHospital />,
       },
-      {
-        path: "edithospital/:id",
-        element: <EditHospital />,
-      },
+      // {
+      //   path: "edithospital/:id",
+      //   element: <EditHospital />,
+      // },
       {
         path: "create-post",
         element: <CreatePost />,
@@ -348,6 +348,10 @@ const router = createBrowserRouter([
       {
         path: "activate",
         element: <ActivateAccount />,
+      },
+      {
+        path: "edit-hospital/:id",
+        element: <EditHospital />,
       },
     ],
   },

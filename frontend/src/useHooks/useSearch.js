@@ -19,11 +19,15 @@ const useSearch = (searchType) => {
           break;
         case "cornea":
           url = "http://localhost:4000/cornea/search";
-          requestData = { lotNo: searchTerm }; 
+          requestData = { lotNo: searchTerm };
           break;
         case "blood":
           url = "http://localhost:4000/blood/search";
-          requestData = { lotNo: searchTerm }; 
+          requestData = { lotNo: searchTerm };
+          break;
+        case "hospital":
+          url = "http://localhost:4000/hospital/search";
+          requestData = { hospitalName: searchTerm };
           break;
         // Add more cases for other search types as needed
       }
