@@ -34,9 +34,6 @@ const ReportTable = ({ data, distrData, pledData }) => {
 
   return (
     <div className="mt-8 w-full">
-      <p className="text-black font-serif text-2xl font-normal mb-2">
-        Report for each month Activity
-      </p>
       <table className="table-auto">
         <thead className="bg-blue-300 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400 ">
           <tr>

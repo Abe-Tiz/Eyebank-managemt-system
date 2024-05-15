@@ -73,10 +73,7 @@ const BarGraph = ({ data, distrData, pledData }) => {
   };
 
   return (
-    <div className="mt-8 w-full">
-      <p className="text-black font-serif  text-2xl font-normal mb-2">
-        Report for each month Activity
-      </p>
+    <div className="mt-8 w-full md:w-auto md:text-5xl ">
       <Bar data={chartData} options={options} />
     </div>
   );

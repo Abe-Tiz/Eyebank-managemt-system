@@ -7,29 +7,40 @@ import {
 } from "@ant-design/icons";
 import { Card } from "antd";
 
-const ReportCard = ({ category, number }) => {
+const CorneaCard = ({ category, number }) => {
   let icon, color, title;
 
   switch (category) {
-
     case "cornea":
       icon = <DeleteOutlined />;
       color = "bg-blue-500";
       title = "Total No Cornea";
       break;
-    
-    case "user":
-      icon = <DatabaseOutlined />;
-      color = "bg-yellow-500";
-      title = "Total Number Staff";
+    case "evaluted":
+      icon = <CheckCircleOutlined />;
+      color = "bg-green";
+      title = "Total Evaluated Cornea";
       break;
-    
+    case "serology":
+      icon = <DatabaseOutlined />;
+      color = "bg-blue-500";
+      title = "Total Serology Tested Cornea";
+      break;
+    case "physicalExamined":
+      icon = <GiftOutlined />;
+      color = "bg-yellow-500";
+      title = "Total Physical Examined";
+      break;
     case "pledeged":
       icon = <MedicineBoxOutlined />;
       color = "bg-purple-500";
       title = "Total Pledged People";
       break;
-    
+    case "distributed":
+      icon = <MedicineBoxOutlined />;
+      color = "bg-blue-900";
+      title = "Total Distributed Cornea";
+      break;
     default:
       icon = null;
       color = "bg-gray-500";
@@ -56,4 +67,4 @@ const ReportCard = ({ category, number }) => {
   );
 };
 
-export default ReportCard;
+export default CorneaCard;

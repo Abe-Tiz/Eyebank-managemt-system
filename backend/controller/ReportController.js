@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Donor = require("../models/Donor");
 const Cornea = require("../models/Cornea");
+const User = require("../models/User");
 const CorneaRequestModel = require("../models/CorneaRequest");
 const SampleBlood = require("../models/SampleBlood");
 const PhysicalExam = require("../models/PhysicalExam");
@@ -14,6 +15,16 @@ const getDonorCount = asyncHandler(async (req, res) => {
       // const count = await Donor.countDocuments();
       // console.log(totalDonorsCount);
     res.status(200).json(totalDonorsCount);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+// get total number of Active Users
+const getUserCount = asyncHandler(async (req, res) => {
+  try {
+    const totalUsersCount = await User.estimatedDocumentCount();
+    res.status(200).json(totalUsersCount);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -205,4 +216,5 @@ module.exports = {
   getDistributedCorneaCount,
   getDistributedCorneaByMonth,
   getPledgeByMonth,
+  getUserCount,
 };

@@ -3,6 +3,8 @@ import axios from 'axios';
 import ReportCard from '../../components/ReportCard';
 import BarGraph from '../../graphs/BarGraph';
 import ReportTable from './ReportTable';
+import ButtonPrimary from '../../components/ButtonPrimary';
+import CorneaCard from './CorneaCard';
  
 const Cornea = () => {
   const [corneaReport, setCorneaReport] = useState([]);
@@ -208,34 +210,46 @@ const Cornea = () => {
   ];
 
   return (
-    <div className="p-4">
+    <div className="p-4 flex flex-col">
       <div className="flex flex-wrap -mx-2">
         {data.map((item, index) => (
-          <ReportCard
+          <CorneaCard
             key={index}
             category={item.category}
             number={item.number}
           />
         ))}
       </div>
-      <div>
-        {/* Button to toggle the ReportTable */}
-        <button onClick={toggleReportTable} className="btn">
-          {showReportTable ? "Hide Report" : "Show Report"}
-        </button>
-        
-        <BarGraph
-          data={corneaData}
-          distrData={distributedCorneaData}
-          pledData={pledgedCorneaData}
-        />
+
+      <div className="flex flex-col">
+        <div className="flex justify-start gap-2 items-center text-center">
+          <p className="text-sky-700">
+            Do you Want Cornea Report In Table Fomrate ?{" "}
+          </p>
+          <button
+            onClick={toggleReportTable}
+            className="  text-sky-700 border-1 border-sky-700 px-3 hover:border-sky-700 bg-gray-300 hover:bg-sky-700  hover:text-white  "
+          >
+            {showReportTable ? "Hide" : "Show"}
+          </button>
+        </div>
+        <div>
+          <BarGraph
+            data={corneaData}
+            distrData={distributedCorneaData}
+            pledData={pledgedCorneaData}
+          />
+        </div>
 
         {/* Conditional rendering of the ReportTable based on showReportTable state */}
         {showReportTable && (
           <>
-            <button onClick={printReport} className="btn">
-              Print Report
-            </button>
+            <div className="flex justify-between w-full ">
+              <p className="font-serif font-normal text-sky-700  mt-10 ">
+                Report for each month Activity In Table Format and Print If You
+                want.{" "}
+              </p>
+            </div>
 
             <div id="reportTable">
               <ReportTable
@@ -244,6 +258,7 @@ const Cornea = () => {
                 pledData={pledgedCorneaData}
               />
             </div>
+            <ButtonPrimary onClick={printReport} title=" Print" />
           </>
         )}
       </div>
