@@ -5,7 +5,9 @@ const User = require("../models/User");
 const CorneaRequestModel = require("../models/CorneaRequest");
 const SampleBlood = require("../models/SampleBlood");
 const PhysicalExam = require("../models/PhysicalExam");
+const StoredCornea = require("../models/StoredCornea");
 const moment = require("moment");
+const Distribution = require("../models/CorneaDistribution");
 
 // get total number of pledged
 const getDonorCount = asyncHandler(async (req, res) => {
@@ -131,9 +133,7 @@ const getEvalutedCorneaCount = asyncHandler(async (req, res) => {
 // get total distributed cornea
 const getDistributedCorneaCount = asyncHandler(async (req, res) => {
   try {
-    const distrbutedCorneas = await Cornea.countDocuments({
-      distributed: true,
-    });
+    const distrbutedCorneas = await Distribution.countDocuments({ });
     res.status(200).json(distrbutedCorneas);
   } catch (error) {
     console.error("Error:", error);
@@ -144,10 +144,10 @@ const getDistributedCorneaCount = asyncHandler(async (req, res) => {
 // get distributed cornea in month
 const getDistributedCorneaByMonth = asyncHandler(async (req, res) => {
   try {
-    const corneaData = await Cornea.aggregate([
-      {
-        $match: { distributed: true },
-      },
+    const corneaData = await Distribution.aggregate([
+      // {
+      //   $match: { isDistributed: true },
+      // },
       {
         $project: {
           month: { $month: "$createdAt" },
