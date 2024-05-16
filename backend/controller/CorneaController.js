@@ -34,21 +34,26 @@ const createCornea = async (req, res) => {
 };
 
 const getCorneas = async (req, res) => {
-    const corneas = await Cornea.find({expirationDate:{$lt:14}});
-    res.send(corneas);
+    try {
+        const corneas = await Cornea.find({ expirationDate: { $lt: 14 } })
+            .populate({ path: "recoveryTechnical" });
+        res.send(corneas);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error retrieving corneas");
+    }
 };
 
 const getStoredCornea = async (req, res) => {
     const { id } = req.query;
-    const corneas = await Cornea.find({ suiatablity: id }); 
+    const corneas = await Cornea.find({ suiatablity: id });
     console.log("tefera");
     console.log(corneas);
     res.send(corneas);
-  };
-
+};
 
 const getCornea = async (req, res) => {
-    const cornea = await Cornea.findById(req.params.id);
+    const cornea = await Cornea.findById(req.params.id)
     res.send(cornea);
 };
 
@@ -79,29 +84,29 @@ const distributeCornea = async (req, res) => {
 
 const distributedCorneaController = async (req, res) => {
     const { id } = req.params;
-  
+
     try {
-      // Find the donor by ID and update their verified status
-      const distributed = await Cornea.findByIdAndUpdate(
-        id,
-        { distributed: true },
-        { new: true }
-      );
-  
-      if (!distributed) {
-        return res.status(404).json({ message: "distributed is not found" });
-      }
-  
-      res.status(200).json({ message: "distributed successfully", distributed });
+        // Find the donor by ID and update their verified status
+        const distributed = await Cornea.findByIdAndUpdate(
+            id,
+            { distributed: true },
+            { new: true }
+        );
+
+        if (!distributed) {
+            return res.status(404).json({ message: "distributed is not found" });
+        }
+
+        res.status(200).json({ message: "distributed successfully", distributed });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Internal server error" });
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
     }
-  };
-  
+};
 
 
-const getCorneaBLotnum =async (req, res) => {
+
+const getCorneaBLotnum = async (req, res) => {
     try {
         const { lotNo } = req.body;
         const cornea = await Cornea.find({
@@ -117,16 +122,20 @@ const getCorneaBLotnum =async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 };
+// const collectedCornea = async(req,res)=>{
+//     const collect= await collect.findOneAndUpdate({_id:req.params.id},{$set:req.body})
+//     res.send(collect)
+//     }
 
 module.exports = {
-  createCornea,
-  getCorneas,
-  getCornea,
-  editCornea,
-  deleteCornea,
-  evaluateCornea,
-  distributeCornea,
-  getCorneaBLotnum,
-  getStoredCornea,
-  distributedCorneaController,
+    createCornea,
+    getCorneas,
+    getCornea,
+    editCornea,
+    deleteCornea,
+    evaluateCornea,
+    distributeCornea,
+    getCorneaBLotnum,
+    getStoredCornea,
+    distributedCorneaController,
 };

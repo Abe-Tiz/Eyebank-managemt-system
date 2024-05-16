@@ -21,20 +21,33 @@ const AddOcularPost = () => {
         ocularNonOperativeEye,
         Post
     };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/cornea/read");
+                const surgeonName = localStorage.getItem('surgeonName'); // Retrieve the surgeon ID from local storage
+                const response = await axios.get('http://localhost:4000/distribution/eachsurgeon',
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                                'token'
+                            )}`,
+                        },
+                        params: {
+                            surgeonName: surgeonName, // Pass the surgeon ID as a query parameter
+                        },
+                    }
+                );
                 const data = response.data;
                 setLotNoData(data);
-                console.log(data)
+                console.log(surgeonName);
             } catch (error) {
                 console.error(error);
             }
         };
-
         fetchData();
     }, []);
+
     const handleSave = async () => {
         console.log(ocularPost);
         try {
