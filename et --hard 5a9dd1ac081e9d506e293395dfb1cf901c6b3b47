@@ -1,0 +1,30 @@
+[33m5a9dd1a[m[33m ([m[1;36mHEAD -> [m[1;32mamsalu[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/amsalu[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{0}: checkout: moving from amsalu to amsalu
+[33m5a9dd1a[m[33m ([m[1;36mHEAD -> [m[1;32mamsalu[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/amsalu[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{1}: reset: moving to 5a9dd1ac081e9d506e293395dfb1cf901c6b3b47
+[33m5a9dd1a[m[33m ([m[1;36mHEAD -> [m[1;32mamsalu[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/amsalu[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{2}: reset: moving to 5a9dd1ac081e9d506e293395dfb1cf901c6b3b47
+[33m5a9dd1a[m[33m ([m[1;36mHEAD -> [m[1;32mamsalu[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/amsalu[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{3}: checkout: moving from main to amsalu
+[33m5a9dd1a[m[33m ([m[1;36mHEAD -> [m[1;32mamsalu[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/amsalu[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{4}: checkout: moving from amsalu to main
+[33m5a9dd1a[m[33m ([m[1;36mHEAD -> [m[1;32mamsalu[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/amsalu[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{5}: pull origin main: Fast-forward
+[33ma36b4a5[m HEAD@{6}: checkout: moving from main to amsalu
+[33m5a9dd1a[m[33m ([m[1;36mHEAD -> [m[1;32mamsalu[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/amsalu[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{7}: commit (merge): added physical
+[33m7738f27[m HEAD@{8}: commit: Commit message
+[33m7dd0e98[m HEAD@{9}: pull origin main: Fast-forward
+[33m9170178[m HEAD@{10}: checkout: moving from amsalu to main
+[33ma36b4a5[m HEAD@{11}: commit: amsalu
+[33m485e4a4[m HEAD@{12}: checkout: moving from main to amsalu
+[33m9170178[m HEAD@{13}: reset: moving to HEAD
+[33m9170178[m HEAD@{14}: reset: moving to HEAD
+[33m9170178[m HEAD@{15}: reset: moving to HEAD~9
+[33m8455f82[m HEAD@{16}: reset: moving to 8455f8296d1f41e096dfe6c61116b790babac31b
+[33m8455f82[m HEAD@{17}: commit: Committing changes
+[33md0070bb[m HEAD@{18}: reset: moving to HEAD
+[33md0070bb[m HEAD@{19}: checkout: moving from amsalu to main
+[33m485e4a4[m HEAD@{20}: checkout: moving from main to amsalu
+[33md0070bb[m HEAD@{21}: commit: Committing changes to backend/index.js
+[33m4498d89[m HEAD@{22}: commit (merge): Merge branch 'amsalu'
+[33mdf09596[m HEAD@{23}: checkout: moving from amsalu to main
+[33m485e4a4[m HEAD@{24}: checkout: moving from main to amsalu
+[33mdf09596[m HEAD@{25}: reset: moving to HEAD
+[33mdf09596[m HEAD@{26}: pull origin main: Merge made by the 'ort' strategy.
+[33me92c354[m HEAD@{27}: reset: moving to HEAD
+[33me92c354[m HEAD@{28}: checkout: moving from amsalu to main
+[33m485e4a4[m HEAD@{29}: commit: amsalu

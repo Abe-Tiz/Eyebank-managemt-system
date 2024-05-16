@@ -54,12 +54,16 @@ const createRecipient = async (req, res) => {
 
 // Retrieve all recipients
 const getRecipients = async (req, res) => {
-    const recipients = await RecipientModel.find()
-
-
-    res.send(recipients);
+    try {
+        const { surgeonId } = req.query; // Retrieve the surgeon ID from the query parameter
+        const recipents = await RecipientModel.find({ surgeonName: surgeonId })
+            .populate("surgeonName")
+            .populate("hospital");
+        res.json(recipents);
+    } catch (err) {
+        res.status(500).json({ error: "An error occurred while retrieving recipents." });
+    }
 };
-
 // Retrieve a recipient by id
 const getRecipient = async (req, res) => {
     const recipient = await RecipientModel.findById(req.params.id);
@@ -99,6 +103,22 @@ const adverseReaction = async (req, res) => {
         throw error;
     }
 }
+const SearchRecipient = async (req, res) => {
+    try {
+        const { recipientname } = req.body;
+        const recipent = await RecipientModel.find({
+            recipientname: { $regex: new RegExp(`^${recipientname}`, "i") },
+        }).exec();
+        if (recipent.length === 0) {
+            return res.status(404).json({ message: "Recipient not found" });
+        }
+        // console.log(cornea);
+        res.status(200).json(recipent);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
 
 module.exports = {
     createRecipient,
@@ -107,5 +127,6 @@ module.exports = {
     updateRecipient,
     deleteRecipient,
     ocularPost,
-    adverseReaction
+    adverseReaction,
+    SearchRecipient
 }

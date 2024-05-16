@@ -48,7 +48,7 @@ import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
 import ViewDetails from "../pages/dashboard/lab/ViewDetails";
 import ViewSerology from "../pages/dashboard/lab/ViewSerology";
-import ApprovedRequest from "../pages/dashboard/lab/ApprovedRequest";
+import ApprovedRequest from "../pages/dashboard/medicalDirector/ApprovedList";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
@@ -70,6 +70,8 @@ import AddOcularPost from "../pages/dashboard/surgeon/AddOcularPost";
 import AddAdverse from "../pages/dashboard/surgeon/AddAdverse";
 import OcularPostList from "../pages/dashboard/surgeon/OcularPostList";
 import AdverseList from "../pages/dashboard/surgeon/AdverseList";
+import RecievedCornea from "../pages/dashboard/surgeon/RecievedCornea";
+
 //admin
 import AddHospital from "../pages/dashboard/admins/AddHospital";
 import ViewHospital from "../pages/dashboard/admins/ViewHospital";
@@ -91,14 +93,12 @@ import AccidentList from "../pages/dashboard/surgeon/AccidentList";
 
 import StoredCornea from "../pages/dashboard/lab/StoredCornea";
 import CollectedCornea from "../pages/dashboard/lab/serology/CollectedCornea";
+import SerologyTest from "../pages/dashboard/lab/serology/Serology";
 import Cornea from "../pages/reports/Cornea";
 // import Collected from "../pages/dashboard/lab/serology/Collected";
 import Test from "../pages/dashboard/lab/serology/Test";
 // import LoginDonor from './../pages/donor/LoginDonor';
 import EditDistribute from './../pages/dashboard/lab/EditDistribute';
-// import Test from './../pages/dashboard/lab/serology/Test';
-
-
 
 const router = createBrowserRouter([
   {
@@ -275,10 +275,10 @@ const router = createBrowserRouter([
         path: "viewRequestCornea",
         element: <ViewRequestedCornea />,
       },
-      {
-        path: "viewDonor",
-        element: <ListOfPlege />,
-      },
+      // {
+      //   path: "viewDonor",
+      //   element: <ListOfPlege />,
+      // },
       {
         path: "approvedRequest",
         element: <ApprovedRequest />,
@@ -418,6 +418,10 @@ const router = createBrowserRouter([
       {
         path: "viewaccident",
         element: <AccidentList />,
+      },
+      {
+        path: "recievedCornea",
+        element: <RecievedCornea />,
       },
     ],
   },

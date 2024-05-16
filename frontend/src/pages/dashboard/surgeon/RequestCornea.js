@@ -10,28 +10,11 @@ const { Option } = Select;
 
 export default function SendRequestCornea() {
   const navigate = useNavigate();
-  const [surgeons, setSurgeons] = useState([]);
   const [hospitals, setHospitals] = useState([]);
-  const [surgeon, setSurgeon] = useState("");
   const [hospital, setHospital] = useState("");
   const [descriptionOfRequest, setDescriptionOfRequest] = useState("");
   const [suiatablity, setSuiatablity] = useState("");
 
-    useEffect(() => {
-      const fetchSurgeons = async () => {
-        try {
-          const { data } = await axios.get("http://localhost:4000/user");
-          setSurgeons(data);
-          // const surgeonId = localStorage.getItem("surgeonId");
-          // console.log("tefera:",surgeonId)
-       
-        } catch (error) {
-          console.error("Error fetching surgeons:", error);
-        }
-      };
-  
-      fetchSurgeons();
-    }, []);
 
   useEffect(() => {
     const fetchHospitals = async () => {
@@ -48,9 +31,10 @@ export default function SendRequestCornea() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const surgeonId = localStorage.getItem('surgeonId');
     try {
       const requestCorneaData = {
-        surgeon,
+        surgeon: surgeonId,
         hospital,
         descriptionOfRequest,
         isApproved: false,
@@ -82,26 +66,7 @@ export default function SendRequestCornea() {
             <span className="border-b-4 border-indigo-500">Send Request</span>
           </h3>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-9">
-          <label>
-              <select
-                className="form-input mt-2 block  w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                value={surgeon}
-                onChange={(e) => setSurgeon(e.target.value)}
-              >
-                <option>Select Surgeon</option>
-                {surgeons.map((surgeon) => (
-                  <option
-                    key={surgeon._id}
-                    value={surgeon._id}
-                    className="py-2 px-4 hover:bg-blue-100"
-                  >
-                    <span className="text-blue-600 font-semibold">
-                      {surgeon.name}
-                    </span>
-                  </option>
-                ))}
-              </select>
-            </label>
+  
 
             <label>
               <select
@@ -139,7 +104,7 @@ export default function SendRequestCornea() {
                 <option value="Therapeutic">Therapeutic</option>
               </select>
             </label>
-
+      
             <div className="flex flex-col">
               <textarea
                 value={descriptionOfRequest}

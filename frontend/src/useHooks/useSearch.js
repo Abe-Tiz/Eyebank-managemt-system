@@ -2,9 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 
 const useSearch = (searchType) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [data, setData] = useState([]);
+    const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -29,7 +29,10 @@ const useSearch = (searchType) => {
           url = "http://localhost:4000/hospital/search";
           requestData = { hospitalName: searchTerm };
           break;
-        // Add more cases for other search types as needed
+        case "recipient":
+          url = "http://localhost:4000/recipient/search";
+          requestData = { recipientname: searchTerm };
+          break;
       }
       const response = await axios.post(url, requestData);
       setData(response.data);
@@ -39,22 +42,22 @@ const useSearch = (searchType) => {
       setData([]);
     }
   };
+  
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
 
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
+        if (e.target.value) {
+            fetchData();
+        }
+    };
 
-    if (e.target.value) {
-      fetchData();
-    }
-  };
-
-  return {
-    searchTerm,
-    setSearchTerm,
-    data,
-    error,
-    handleChange,
-  };
+    return {
+        searchTerm,
+        setSearchTerm,
+        data,
+        error,
+        handleChange,
+    };
 };
 
 export default useSearch;

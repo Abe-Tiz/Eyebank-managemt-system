@@ -7,7 +7,8 @@ const {
     updateRecipient,
     ocularPost,
     adverseReaction,
-    deleteRecipient
+    deleteRecipient,
+    SearchRecipient
 } = require("../controller/RecipientController");
 router.post("/create", createRecipient);
 router.get("/read", getRecipients);
@@ -16,5 +17,6 @@ router.put("/update/:id", updateRecipient);
 router.put("/ocular/:id", ocularPost);
 router.put("/adverse/:id", adverseReaction);
 router.delete("/delete/:id", deleteRecipient);
+router.post("/search", SearchRecipient);
 
 module.exports = router;
