@@ -1,7 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import SearchComponent from "../../../components/SearchComponent";
+import useSearch from "../../../useHooks/useSearch";
 import { useNavigate } from 'react-router-dom';
+import Pagination from "../../../components/Pagination";
 import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer } from '@chakra-ui/react';
 
 const RecievedCornea = () => {
@@ -37,12 +40,22 @@ const RecievedCornea = () => {
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
+    const renderDistributed = searchTerm ? data : distributed;
+    // Function to change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
         <div>
             <TableContainer>
-                <Text fontSize='3xl' className='text-center text-black mt-0'>
-                    Recieved Cornea
-                </Text>
+            <div className="w-full mt-10 flex justify-between ">
+              <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+                 Recieved Corneas
+              </Text>
+              {/* search component */}
+              <SearchComponent
+                searchTerm={searchTerm}
+                handleChange={handleChange}
+              />
+            </div>
                 <Table variant='simple'>
                     <Thead>
                         <Tr className='bg-sky-600 text-white'>
@@ -74,6 +87,12 @@ const RecievedCornea = () => {
                             ))}
                     </Tbody>
                 </Table>
+                <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                paginate={paginate}
+              />
             </TableContainer>
         </div >
     );

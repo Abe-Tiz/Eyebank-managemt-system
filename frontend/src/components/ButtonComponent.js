@@ -1,6 +1,6 @@
 import React from 'react'
 import '../static/styles/button.css'
-import Colors from './../config/Colors';
+
 const ButtonComponent = ({
     title,
     onClick,
