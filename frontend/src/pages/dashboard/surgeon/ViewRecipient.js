@@ -88,11 +88,9 @@ const ViewRecipient = () => {
         };
         getAllRecipients();
     }, []);
-
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
-
     const deleteRecipient = async (id) => {
         try {
             await axios.delete(`http://localhost:4000/recipient/delete/${id}`, {
@@ -106,7 +104,6 @@ const ViewRecipient = () => {
         }
     };
     const renderRecipient = searchTerm ? data : currentRecipients;
-
     return (
         <div>
             <TableContainer>
