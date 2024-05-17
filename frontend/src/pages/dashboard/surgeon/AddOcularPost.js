@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast, Text } from '@chakra-ui/react';
+import ButtonComponent from '../../../components/ButtonComponent';
 const AddOcularPost = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -22,7 +23,6 @@ const AddOcularPost = () => {
         ocularNonOperativeEye,
         Post
     };
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -41,8 +41,8 @@ const AddOcularPost = () => {
                 );
                 const data = response.data;
                 setLotNoData(data);
-                //console.log(surgeonName);
-                // console.log("dist:", data);
+                console.log(surgeonName);
+                console.log("dist:", data);
             } catch (error) {
                 console.error(error);
             }
@@ -51,7 +51,7 @@ const AddOcularPost = () => {
     }, []);
 
     const handleSave = async () => {
-        console.log(ocularPost);
+        // console.log(ocularPost);
         try {
             await axios.put(`http://localhost:4000/recipient/ocular/${id}`, { ocularPost });
             toast({
@@ -90,9 +90,10 @@ const AddOcularPost = () => {
                         value={lotNo}
                         onChange={(e) => setLotNo(e.target.value)}
                     >
+                        <option value=''>Select lotNo</option>
                         {lotNoData.map((lot, index) => (
-                            <option key={index} value={lot.lotNo}>
-                                {lot.lotNo}
+                            <option key={index} value={lot.corneaId}>
+                                {lot.corneaId.lotNo}
                             </option>
                         ))}
                     </select>
@@ -126,7 +127,9 @@ const AddOcularPost = () => {
                         onChange={(e) => setOcularNonOperativeEye(e.target.value)}
                     />
                 </label>
-                <button className=" bg-sky-600 text-center ml-40 hover:bg-teal-700 focus:outline-none text-white px-4 py-2 mt-2 rounded-md" type="submit">Send Ocular</button>
+                <div className="text-center mt-4 mb-2">
+                    <ButtonComponent label="Submit" title={"Send Ocural Post"} type="submit" />
+                </div>
             </form >
         </div >
     );

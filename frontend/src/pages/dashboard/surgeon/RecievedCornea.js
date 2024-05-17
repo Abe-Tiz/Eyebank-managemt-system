@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchComponent from "../../../components/SearchComponent";
@@ -12,6 +11,19 @@ const RecievedCornea = () => {
     const navigate = useNavigate();
     const [distributed, setdistribute] = useState([]);
     const surgeonName = localStorage.getItem("surgeonName");
+    const { searchTerm, handleChange, data, error } = useSearch("distributed");
+
+
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(distributed.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentCorneas = distributed.slice(indexOfFirstItem, indexOfLastItem);
+
 
     function formatTimestamp(timestamp) {
         const options = {
@@ -46,16 +58,16 @@ const RecievedCornea = () => {
     return (
         <div>
             <TableContainer>
-            <div className="w-full mt-10 flex justify-between ">
-              <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-                 Recieved Corneas
-              </Text>
-              {/* search component */}
-              <SearchComponent
-                searchTerm={searchTerm}
-                handleChange={handleChange}
-              />
-            </div>
+                <div className="w-full mt-10 flex justify-between ">
+                    <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+                        Recieved Corneas
+                    </Text>
+                    {/* search component */}
+                    <SearchComponent
+                        searchTerm={searchTerm}
+                        handleChange={handleChange}
+                    />
+                </div>
                 <Table variant='simple'>
                     <Thead>
                         <Tr className='bg-sky-600 text-white'>
@@ -70,7 +82,8 @@ const RecievedCornea = () => {
                     </Thead>
                     <Tbody>
 
-                        {distributed
+                        Tefera Is, [5/17/2024 11:05 AM]
+                        {renderDistributed
                             .filter((distribute) => distribute.name === surgeonName)
                             .map((distribute, index) => (
                                 <Tr key={index}>
@@ -88,11 +101,11 @@ const RecievedCornea = () => {
                     </Tbody>
                 </Table>
                 <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                paginate={paginate}
-              />
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    paginate={paginate}
+                />
             </TableContainer>
         </div >
     );

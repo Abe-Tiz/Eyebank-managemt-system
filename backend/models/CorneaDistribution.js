@@ -17,7 +17,10 @@ const DistributionSchema = new mongoose.Schema({
         type: String,
         //required: true,
     },
-
+    corneaId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Cornea",
+    }
 }, {
     timestamps: true
 }

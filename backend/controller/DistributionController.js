@@ -24,7 +24,6 @@ const getDistributeds = async (req, res) => {
     const distribute = await Distribution.find()
     res.send(distribute);
 };
-
 const getDistributed = async (req, res) => {
     const distribute = await Distribution.findById(req.params.id);
     res.send(distribute);
@@ -33,14 +32,9 @@ const getEachDistributed = async (req, res) => {
     try {
         const { surgeonName } = req.query; // Retrieve the surgeon name from the query parameter
         const distributions = await Distribution.find({ name: surgeonName })
-            .populate(
-                {
-                    path: "corneaId",
-                    select: "lotNo _id",
-
-                }
-            );
+            .populate("corneaId");
         console.log("LOT:", distributions)
+        console.log(surgeonName)
         res.json(distributions);
     } catch (err) {
         res.status(500).json({ error: "An error occurred while retrieving recipents." });

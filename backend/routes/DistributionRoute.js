@@ -7,6 +7,6 @@ route.get("/eachsurgeon", DistributionController.getEachDistributed);
 route.get("/getOne/:id", DistributionController.getDistributed);
 route.put("/update/:id", DistributionController.editDistributed);
 route.delete("/delete/:id", DistributionController.deleteDistributed);
-route.post('/search', DistributionController.getCorneaBLotnum);
+// route.post('/search', DistributionController.getCorneaBLotnum);
 
 module.exports = route
