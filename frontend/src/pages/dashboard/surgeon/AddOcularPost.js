@@ -14,6 +14,7 @@ const AddOcularPost = () => {
     const [ocularOperativeEye, setOcularOperativeEye] = useState('');
     const [ocularNonOperativeEye, setOcularNonOperativeEye] = useState('');
     const [Post, setOcularPost] = useState(true);
+
     const ocularPost = {
         dateOfSurgery,
         lotNo,
@@ -40,7 +41,8 @@ const AddOcularPost = () => {
                 );
                 const data = response.data;
                 setLotNoData(data);
-                console.log(surgeonName);
+                //console.log(surgeonName);
+                // console.log("dist:", data);
             } catch (error) {
                 console.error(error);
             }
@@ -71,7 +73,7 @@ const AddOcularPost = () => {
             });
         }
     };
-    console.log(Post)
+    // console.log(Post)
     return (
         <div>
             <h2 className="text-3xl mb-5 " style={{ textAlign: 'center' }}>Ocular Post Form</h2>

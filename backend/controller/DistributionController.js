@@ -1,7 +1,6 @@
 const Cornea = require('../models/Cornea');
 const Distribution = require('../models/CorneaDistribution');
 const CorneaRequestModel = require('../models/CorneaRequest');
-
 const createDistribution = async (req, res) => {
     const { hospitalName, name, modeOfTransportation, id, suiatablity, } = req.body;
     try {
@@ -33,25 +32,24 @@ const getDistributed = async (req, res) => {
 const getEachDistributed = async (req, res) => {
     try {
         const { surgeonName } = req.query; // Retrieve the surgeon name from the query parameter
-        const distributions = await Distribution.find({ name: surgeonName }).populate(
-            "corneaId"
-        );
+        const distributions = await Distribution.find({ name: surgeonName })
+            .populate(
+                {
+                    path: "corneaId",
+                    select: "lotNo _id",
 
-        const lotNos = distributions.map((distribution) => ({
-            lotNo: distribution.corneaId.lotNo,
-        }));
-
-        res.json(lotNos);
+                }
+            );
+        console.log("LOT:", distributions)
+        res.json(distributions);
     } catch (err) {
         res.status(500).json({ error: "An error occurred while retrieving recipents." });
     }
 };
-
 const editDistributed = async (req, res) => {
     const distribute = await Distribution.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.send(distribute);
 };
-
 const deleteDistributed = async (req, res) => {
     try {
         const { id } = req.params;

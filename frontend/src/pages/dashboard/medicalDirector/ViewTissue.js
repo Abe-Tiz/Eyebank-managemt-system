@@ -33,7 +33,6 @@ const ViewTissue = () => {
                 const response = await axios.get("http://localhost:4000/cornea/read");
                 const data = response.data;
                 setCorneas(data);
-                console.log("awoke " + corneas)
             } catch (error) {
                 console.error(error);
             }
@@ -92,11 +91,11 @@ const ViewTissue = () => {
                                     cornea.evaluation &&
                                     (cornea.evaluation.approval !== 'yes')
                             )
-                            .filter(
-                                (cornea) =>
-                                    cornea.evaluation &&
-                                    (cornea.evaluation.approval !== 'no')
-                            )
+                            // .filter(
+                            //     (cornea) =>
+                            //         cornea.evaluation &&
+                            //         (cornea.evaluation.approval !== 'no')
+                            // )
                             .map((cornea, index) => (
                                 <Tr key={index} className="mb-2 text-lg">
                                     <Td>{index + 1}</Td>
