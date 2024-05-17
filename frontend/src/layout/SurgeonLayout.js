@@ -25,93 +25,44 @@ const SurgeonDashboard = () => {
         collapsed: false,
         role: "",
     });
-    const toggleDropdown = () => {
-        setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
-    };
+
+    // const toggleDropdown = () => {
+    //     setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
+    // };
 
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
     };
-
-    //! handle Logout
-    const handleLogout = () => {
-        localStorage.removeItem("doctor");
-        navigate("/login");
-    };
-
+  
     return (
-        <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1  ">
-            <SurgeonSidebar
-                collapsed={state.collapsed}
-                toggleSidebar={toggleSidebar}
-                name={user && user.data.name}
-                image={user && user.data.image}
-                role={user && user.data.role}
-            />
+      <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1  ">
+        <SurgeonSidebar
+          collapsed={state.collapsed}
+          toggleSidebar={toggleSidebar}
+          name={user && user.data.name}
+          image={user && user.data.image}
+          role={user && user.data.role}
+        />
 
-            <Layout
-                className={`${state.collapsed ? "ml-20" : "ml-64"
-                    } transition-all duration-300 ease-in-out flex-grow`}
-            >
-                <HeaderComponent
-                    name={state.name}
-                    role={state.role}
-                    state={state}
-                    toggleSidebar={toggleSidebar}
-                // newDonorCount={newDonorCount}
-                />
-
-                <div className="flex items-center space-x-4">
-
-
-                    <Badge count={5} offset={[0, 5]} className="mr-5">
-                        <BellOutlined className="text-2xl text-blue-500" />
-                    </Badge>
-                    <div className="relative inline-block">
-                        <button
-                            onClick={toggleDropdown}
-                            className="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
-                            type="button"
-                        >
-                            <img
-                                className="w-8 h-8 rounded-full"
-                                src={user && user.data.image}
-                                alt="user photo"
-                            />
-                        </button>
-
-                        {state.isDropdownOpen && (
-                            <div className="absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                                <ul className="py-2 text-sm text-gray-700">
-                                    <li>
-                                        <Link
-                                            to="/settings"
-                                            className="block px-4 py-2 hover:bg-gray-100"
-                                        >
-                                            <SettingOutlined className="text-2xl text-blue-500" />{" "}
-                                            {t("common:settingButtonLabel")}
-                                        </Link>
-                                    </li>
-                                </ul>
-                                <div className="py-2">
-                                    <button
-                                        onClick={handleLogout}
-                                        className="ml-5 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    >
-                                        {t("common:logouttButtonLabel")}
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <Content className="p-4 mt-10">
-                    <div className="bg-slate-100  w-full">
-                        <Outlet />
-                    </div>
-                </Content>
-            </Layout>
-        </Layout >
+        <Layout
+          className={`${
+            state.collapsed ? "ml-20" : "ml-64"
+          } transition-all duration-300 ease-in-out flex-grow`}
+        >
+          <HeaderComponent
+            name={user && user.data.name}
+            role="doctor"
+            state={state}
+            toggleSidebar={toggleSidebar}
+            image={user && user.data.image}
+          />
+          <Content className="p-4 mt-10">
+            <div className="bg-slate-100  w-full">
+                <Outlet />
+            </div>
+          </Content>
+        </Layout>
+      </Layout>
     );
 };
 

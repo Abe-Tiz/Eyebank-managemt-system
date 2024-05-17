@@ -1,5 +1,6 @@
  
 import React, { useState } from "react";
+import DynamicIcon from '../../../components/DynamicIcon';
 
 const ConfirmationModal = ({ id, handleDelete }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,11 +20,8 @@ const ConfirmationModal = ({ id, handleDelete }) => {
 
   return (
     <div>
-      <button
-        onClick={openModal}
-        className="bg-red-500 text-white px-4 py-2 rounded"
-      >
-        Delete
+      <button onClick={openModal} className="btn text-red-400 px-4 py-2 rounded">
+        <DynamicIcon library="md" iconName="MdDelete" className="text-2xl" />
       </button>
 
       {isOpen && (

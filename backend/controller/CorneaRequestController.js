@@ -19,6 +19,9 @@ exports.createCorneaRequest = async (req, res) => {
         user: "teferamollawerkineh@gmail.com",
         pass: "ohkvhybmohzkpjim",
       },
+      tls: {
+        rejectUnauthorized: false,
+      },
     });
     
     const emailContent = `

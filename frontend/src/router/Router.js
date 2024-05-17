@@ -275,10 +275,10 @@ const router = createBrowserRouter([
         path: "viewRequestCornea",
         element: <ViewRequestedCornea />,
       },
-      // {
-      //   path: "viewDonor",
-      //   element: <ListOfPlege />,
-      // },
+      {
+        path: "approvedList",
+        element: <ApprovedList />,
+      },
       {
         path: "approvedRequest",
         element: <ApprovedRequest />,

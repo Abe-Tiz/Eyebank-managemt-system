@@ -4,14 +4,15 @@ import axios from "axios";
 import "../../static/styles/donor.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
-import InputField from "../../components/InputField";
 import ButtonPrimary from "../../components/ButtonPrimary";
 import ButtonComponent from "../../components/ButtonComponent";
+import InputField from "../../components/InputField";
 
 const initialState = {
   name: "",
   email: "",
   age: "",
+  dob: "",
   sex: " ",
   city: "",
   subcity: "",
@@ -69,25 +70,38 @@ const subcitiesInEthiopia = {
 };
 
 const CreateDonor = () => {
-  const [formData, setFormData] = useState(initialState);
-  const [isName, setIsName] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [isValidAge, setIsValidAge] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  const [selectedSubcity, setSelectedSubcity] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
   const toast = useToast();
 
+  const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  age: "",
+  dob: "",
+  sex: "",
+  city: "",
+  subcity: "",
+  kebele: "",
+  HNumber: "",
+  mobile: "",
+  isVolunteer: false,
+  });
+  
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    // if (/^[a-zA-Z ]+$/.test(value)) { }
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
   const imagePath = process.env.PUBLIC_URL + "/images/eye2.png";
-
-  // Disable submit button until all fields are filled in
-  const canSubmit = Object.values(formData).every(Boolean);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const payload = {
       ...formData,
     };
@@ -97,9 +111,7 @@ const CreateDonor = () => {
       .then((res) => {
         if (
           !formData.name ||
-          !formData.email ||
-          !formData.sex ||
-          !formData.age
+          !formData.email 
         ) {
           toast({
             title: "Please Fill all the Fields",
@@ -116,18 +128,7 @@ const CreateDonor = () => {
             isClosable: true,
             position: "top",
           });
-
-          // console.log(res.data.result);
-          // navigate("/viewdonor", {
-          //   state: {
-          //     data: res.data.result,
-          //   },
-          // });
-
-          // Clear the form data after successful registration
           setFormData(initialState);
-          setIsName(false);
-          setIsMobile(false);
         }
       })
       .catch((err) => {
@@ -140,110 +141,33 @@ const CreateDonor = () => {
           position: "top",
         });
       });
-  };
-
-  const handleName = (e) => {
-    setFormData({ ...formData, name: e.target.value });
-  };
-
-  const handleAge = (e) => {
-    setFormData({ ...formData, age: e.target.value });
-  };
-
-  // const handleSubcity = (e) => {
-  //   setFormData({ ...formData, subcity: e.target.value });
-  // };
-
-  const handleCity = (e) => {
-    setSelectedCity(e.target.value);
-    setFormData({ ...formData, city: e.target.value, subcity: "" });
-  };
-
-  const handleSubcity = (e) => {
-    setSelectedSubcity(e.target.value);
-    setFormData({ ...formData, subcity: e.target.value });
-  };
-
-  const handleKebele = (e) => {
-    setFormData({ ...formData, kebele: e.target.value });
-  };
-
-  const handleHouseNumber = (e) => {
-    setFormData({ ...formData, HNumber: e.target.value });
-    setIsName(true);
-  };
-
-  const handleMobile = (e) => {
-    setFormData({ ...formData, mobile: e.target.value });
-    setIsMobile(true);
-  };
-
-  // const handleCity = (e) => {
-  //   setFormData({ ...formData, city: e.target.value });
-  // };
-
-  const handleSex = (e) => {
-    setFormData({ ...formData, sex: e.target.value });
-  };
-
-  const handleEmail = (e) => {
-    setFormData({ ...formData, email: e.target.value });
-  };
-
-  const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
-  };
-
+  }; 
   const handleCheckbox = (e) => {
     setFormData({ ...formData, isVolunter: e.target.checked });
   };
 
   useEffect(() => {
-    if (selectedDate) {
-      const birthdate = new Date(selectedDate);
+    if (formData.dob) {
+     
+      const birthdate = new Date(formData.dob);
       const currentDate = new Date();
       const ageInMilliseconds = currentDate - birthdate;
       const ageInYears = Math.floor(
         ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000)
       );
-
-      if (ageInYears < 2 || ageInYears > 80) {
+ console.log("dob:",ageInYears)
+      if (ageInYears < 18 || ageInYears > 80) {
         setIsValidAge(true);
       } else {
         setIsValidAge(false);
-        setFormData({ ...formData, age: ageInYears.toString() });
-        console.log(formData.age, "Years");
       }
     }
-  }, [selectedDate]);
-
-  // Size of the circles
-  const circleSize = 32;
+  }, [formData.dob]);
 
   return (
     <>
       <div className="w-full relative bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%   min-h-screen flex items-center justify-center md:mt-4">
-        <div
-          className={`absolute top-8 left-16 w-52 h-52 bg-yellow-400 rounded-full opacity-60`}
-        ></div>
-        <div
-          className={`absolute bottom-10 right-16 w-52 h-52 bg-orange-500 rounded-full opacity-60`}
-        ></div>
-
         <div class="bg-transparent rounded-md overflow-hidden shadow-md p-6 mx-auto w-4/5 relative">
-          <div
-            className={`absolute top-10 left-10 w-64 h-64 bg-indigo-400 rounded-full opacity-30`}
-          ></div>
-          <div
-            className={`absolute -top-10 -right-10 w-${circleSize} h-${circleSize} bg-purple-600 rounded-full opacity-30`}
-          ></div>
-          <div
-            className={`absolute -bottom-10 -left-10 w-${circleSize} h-${circleSize} bg-pink-400 rounded-full opacity-30`}
-          ></div>
-          <div
-            className={`absolute -bottom-10 -right-10 w-${circleSize} h-${circleSize} bg-blue-400 rounded-full opacity-30`}
-          ></div>
-
           <div className="flex flex-col md:flex-row mt-6">
             <div className="flex justify-center mb-4 md:mb-0">
               <img
@@ -275,82 +199,66 @@ const CreateDonor = () => {
                       <span class="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
-                      {/* <input
+                      <input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder={t("common:namePlaceholderLabel")}
+                        pattern="[a-zA-Z ]{6,}"
                         className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        name="name"
                         type="text"
-                        pattern="[a-zA-Z ]{6,}"
+                        autoComplete="off"
                         required
-                        placeholder={t("common:namePlaceholderLabel")}
-                        onChange={handleName}
-                      /> */}
-
-                      {/*   */}
-                      <InputField
-                        name="name"
-                        type="text"
-                        placeholder={t("common:namePlaceholderLabel")}
-                        onChange={handleName}
-                        pattern="[a-zA-Z ]{6,}"
                       />
 
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("register:LabelFullNameError")}
                       </span>
                     </div>
+
                   </div>
-                  {isName && (
-                    <div className="mt-4">
-                      <label
-                        htmlFor="age"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        {t("donor:donorAge")}
-                        <span class="text-red-500">*</span>
-                      </label>
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="birthdate"
-                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          type="date"
-                          autoComplete="off"
-                          required
-                          value={selectedDate}
-                          onChange={handleDateChange}
-                        />
+                  <div className="mt-4">
+                    <label
+                      htmlFor="age"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorAge")}
+                      <span class="text-red-500">*</span>
+                    </label>
 
-                        {isValidAge && (
-                          <div className="warning text-danger">
-                            {t("donor:donorAgeError")}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {isMobile && (
-                    <div className="mt-4">
-                      <label
-                        htmlFor="sex"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        {t("donor:donorSex")}
-                        <span class="text-red-500">*</span>
-                      </label>
-                      <select
-                        name="sex"
-                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        onChange={handleSex}
-                      >
-                        <option value="">{t("donor:placeHolderSex")}</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
-                      <span className="mt-1 hidden text-sm text-red-400">
-                        {t("donor:donorSexError")}
-                      </span>
-                    </div>
-                  )}
+                    <InputField
+                      name="dob"
+                      type="date"
+                      value={formData.dob}
+                      onChange={handleInputChange}
+                      isValidAge={isValidAge}
+                      placeholder={t("common:namePlaceholderLabel")}
+                      errorMessage="Invalid age. Must be 18 or older."
+                    />
+                   
+                  </div>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="sex"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorSex")}
+                      <span class="text-red-500">*</span>
+                    </label>
+                    <select
+                      name="sex"
+                      className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                      value={formData.sex}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">{t("donor:placeHolderSex")}</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                    <span className="mt-1 hidden text-sm text-red-400">
+                      {t("donor:donorSexError")}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="flex flex-column justify-item-start  md:mr-4">
@@ -364,10 +272,14 @@ const CreateDonor = () => {
                     </label>
                     <div className="flex flex-col items-start">
                       <select
-                        name="city"
+                        // name="city"
                         className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        onChange={handleCity}
-                        value={selectedCity}
+                        // onChange={handleCity}
+                        // value={selectedCity
+
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
                       >
                         <option value="">{t("donor:placeHolderCity")}</option>
                         {citiesInEthiopia.map((city) => (
@@ -375,74 +287,85 @@ const CreateDonor = () => {
                             {city}
                           </option>
                         ))}
+                        {/* {citiesInEthiopia.map((city) => (
+                          <option key={city} value={city}>
+                            {city}
+                          </option>
+                        ))} */}
                       </select>
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("donor:donorCityError")}
                       </span>
                     </div>
                   </div>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="subcity"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorSubCity")}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <div className="flex flex-col items-start">
+                      <select
+                        // name="subcity"
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        // onChange={handleSubcity}
+                        // value={selectedSubcity}
 
-                  {selectedCity && isName && (
-                    <div className="mt-4">
-                      <label
-                        htmlFor="subcity"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                        name="subcity"
+                        value={formData.subcity}
+                        onChange={handleInputChange}
                       >
-                        {t("donor:donorSubCity")}
-                        <span className="text-red-500">*</span>
-                      </label>
-                      <div className="flex flex-col items-start">
-                        <select
-                          name="subcity"
-                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          onChange={handleSubcity}
-                          value={selectedSubcity}
-                        >
-                          <option value="">
-                            {t("donor:placeHolderSubcity")}
-                          </option>
-                          {subcitiesInEthiopia[selectedCity].map((subcity) => (
+                        <option value="">
+                          {t("donor:placeHolderSubcity")}
+                        </option>
+
+                        {formData.city &&
+                          subcitiesInEthiopia[formData.city].map((subcity) => (
                             <option key={subcity} value={subcity}>
                               {subcity}
                             </option>
                           ))}
-                        </select>
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          {t("donor:donorSubCityError")}
-                        </span>
-                      </div>
+                        {/* {subcitiesInEthiopia[selectedCity].map((subcity) => (
+                            <option key={subcity} value={subcity}>
+                              {subcity}
+                            </option>
+                          ))} */}
+                      </select>
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("donor:donorSubCityError")}
+                      </span>
                     </div>
-                  )}
+                  </div>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="kebele"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorKebele")}
+                      <span class="text-red-500">*</span>
+                    </label>
 
-                  {isMobile && (
-                    <div className="mt-4">
-                      <label
-                        htmlFor="kebele"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        {t("donor:donorKebele")}
-                        <span class="text-red-500">*</span>
-                      </label>
-
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="kebele"
-                          type="text"
-                          pattern="[0-9a-zA-Z ]{2,}"
-                          required
-                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          placeholder={t("donor:placeHolderKebele")}
-                          onChange={handleKebele}
-                        />
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          {t("donor:donorKebeleError")}
-                        </span>
-                      </div>
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="kebele"
+                        type="text"
+                        pattern="[0-9a-zA-Z ]{2,}"
+                        required
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        placeholder={t("donor:placeHolderKebele")}
+                        value={formData.kebele}
+                        onChange={handleInputChange}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("donor:donorKebeleError")}
+                      </span>
                     </div>
-                  )}
+                  </div>
                 </div>
 
-                <div className="flex flex-column justify-item-start ">
+                <div className="flex flex-column justify-item-start  md:mr-4">
                   <div className="mt-4">
                     <label
                       htmlFor="hno"
@@ -453,96 +376,89 @@ const CreateDonor = () => {
                     </label>
                     <div className="flex flex-col items-start">
                       <input
-                        name="houseNumber"
+                        name="HNumber"
                         type="numeric"
                         className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        autoComplete="off"
+                        // autoComplete="off"
                         required
                         pattern="[0-9]{2,12}"
                         placeholder={t("donor:placeHolderHNo")}
-                        onChange={handleHouseNumber}
+                        value={formData.HNumber}
+                        onChange={handleInputChange}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("donor:donorHnoError")}
                       </span>
                     </div>
                   </div>
-                  {isName && (
-                    <div className="mt-4">
-                      <label
-                        htmlFor="mobile"
-                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        {t("donor:donorMobile")}
-                        <span class="text-red-500">*</span>
-                      </label>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="mobile"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("donor:donorMobile")}
+                      <span class="text-red-500">*</span>
+                    </label>
 
-                      <div className="flex flex-col items-start">
-                        <input
-                          name="mobile"
-                          type="numeric"
-                          className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                          autoComplete="off"
-                          required
-                          pattern="[0-9]{10}"
-                          placeholder={t("donor:placeHolderMobile")}
-                          onChange={handleMobile}
-                        />
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="mobile"
+                        type="numeric"
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        // autoComplete="off"
+                        required
+                        pattern="[0-9]{10}"
+                        placeholder={t("donor:placeHolderMobile")}
+                        value={formData.mobile}
+                        onChange={handleInputChange}
+                      />
 
-                        <span className="mt-1 hidden text-sm text-red-400">
-                          {t("donor:donorMobileError")}
-                        </span>
-                      </div>
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("donor:donorMobileError")}
+                      </span>
                     </div>
-                  )}
-                  {/* </div> */}
+                  </div>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {t("login:labelLoginEmail")}
+                      <span class="text-red-500">*</span>
+                    </label>
 
-                  {isMobile && (
-                    <>
-                      <div className="mt-4">
-                        <label
-                          htmlFor="email"
-                          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          {t("login:labelLoginEmail")}
-                          <span class="text-red-500">*</span>
-                        </label>
+                    <div className="flex flex-col items-start">
+                      <input
+                        name="email"
+                        type="email"
+                        className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
+                        autoComplete="off"
+                        required
+                        pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        placeholder={t("common:emailPlaceholderLabel")}
+                        value={formData.email}
+                        onChange={handleInputChange}
+                      />
+                      <span className="mt-1 hidden text-sm text-red-400">
+                        {t("login:labelErrorEmail")}
+                      </span>
+                    </div>
+                  </div>
 
-                        <div className="flex flex-col items-start">
-                          <input
-                            name="email"
-                            type="email"
-                            className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                            autoComplete="off"
-                            required
-                            pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            placeholder={t("common:emailPlaceholderLabel")}
-                            onChange={handleEmail}
-                          />
-                          <span className="mt-1 hidden text-sm text-red-400">
-                            {t("login:labelErrorEmail")}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* checkbox */}
-                      <label className="cursor-pointer label">
-                        <span className="label-text">am Voluntore </span>
-                        <input
-                          type="checkbox"
-                          className="checkbox checkbox-accent"
-                          onChange={handleCheckbox}
-                        />
-                      </label>
-                    </>
-                  )}
+                  {/* checkbox */}
+                  <label className="cursor-pointer label">
+                    <span className="label-text">am Voluntore </span>
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-accent"
+                      onChange={handleCheckbox}
+                    />
+                  </label>
                 </div>
               </div>
 
               <div class="d-flex justify-content-center pt-3 mb-4">
                 <div className="mt-4 flex items-center">
-                 
-
                   {/* <ButtonComponent title={t("login:loginTitleLabel")} /> */}
                   <ButtonPrimary
                     onClick={() => window.history.back()}
@@ -551,14 +467,14 @@ const CreateDonor = () => {
                 </div>
 
                 <div className="mt-4 flex items-center">
-                 
                   <ButtonComponent
-                    disabled={!canSubmit}
+                    // disabled={!canSubmit}
                     title={t("common:registerButtonLabel")}
-                    canSubmit={!canSubmit}
+                    // canSubmit={!canSubmit}
                   />
                 </div>
               </div>
+
               <div className="mt-4 flex items-center justify-center">
                 <Link to="/donor-login" className="block ml-3 text-blue-500">
                   {t("donor:HavePledge")}? {t("login:loginTitleLabel")}

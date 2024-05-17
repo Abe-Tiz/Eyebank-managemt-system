@@ -61,11 +61,12 @@ const getSampleByLotnum = async (req, res) => {
 const deleteSerology = async (req, res) => {
     try {
         const {id} = req.params;
-        const response = await SampleBlood.deleteOne(
+         await SampleBlood.deleteOne(
             { _id: id },
             { new: true }
-        );
-        res.status(200).json(response);
+      );
+    
+      res.status(200).json("deleted successfully");
     } catch (error) {
         res.status(500).json(error);
     }

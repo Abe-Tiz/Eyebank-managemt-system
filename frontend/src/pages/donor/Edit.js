@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 import ButtonComponent from "../../components/ButtonComponent";
 import ButtonPrimary from './../../components/ButtonPrimary';
-
  
 const Edit = () => {
   const [name, setName] = useState("");
@@ -43,7 +42,8 @@ const Edit = () => {
   };
   const canSubmit = Object.values(allData).every(Boolean);
 
-  useEffect(() =>{
+
+
     const fetchDonor = async () => {
         try {
           if (!id) {
@@ -64,7 +64,7 @@ const Edit = () => {
           // Update state variables with the fetched data
           setName(donorData.name);
           setEmail(donorData.email);
-          setAge(donorData.age);
+          setAge(donorData.dob);
           setSex(donorData.sex);
           setCity(donorData.city);
           setSubcity(donorData.subcity);
@@ -81,11 +81,14 @@ const Edit = () => {
             position: "top",
             });
         } 
-    }
+  }
+  
+  useEffect(() =>{
       fetchDonor();
-  },[])
+          
+  },[age])
 
-    
+   
   const handleSubmit = (e) => {
     e.preventDefault();
 

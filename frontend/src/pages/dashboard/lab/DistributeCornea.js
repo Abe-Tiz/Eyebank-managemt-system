@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import useLoggedInUser from './../../../useHooks/useLoggedInUser';
 const DistributeCornea = () => {
   
   const { id } = useParams();
@@ -15,7 +16,8 @@ const DistributeCornea = () => {
   const { t } = useTranslation();
   const [distributed, setdistribute] = useState(true);
  const [requestedCorneas, setRequestedCorneas] = useState([]);
-  const [suiatablity, setSuiatablity]=useState("");
+  const [suiatablity, setSuiatablity] = useState("");
+       const { user, setUser, getLoggedInUser } = useLoggedInUser("doctor");
 
   const distri = {
     distributed,
@@ -45,67 +47,76 @@ const DistributeCornea = () => {
     // console.log("id:",id)
 
 
-  useEffect(() => {
-    const fetchRequest = async () => {
-      try {
-        if (!id) {
-          toast.error("Id is Undefined", {
-            duration: 5000,
-            position: "top",
-          });
-          return;
-        }
-
-        const { data } = await axios.get(
-          `http://localhost:4000/requestCornea/getRequest/${id}`
-        );
-        // console.log("id:",data._id)
-
-        setHospitalName(data.hospital.hospitalName);
-        setName(data.surgeon.name);
-        setSuiatablity(data.suiatablity);
-      } catch (error) {
-        toast.error(error.response.data.message, {
+useEffect(() => {
+  const fetchRequest = async () => {
+    try {
+      if (!id) {
+        toast.error("Id is Undefined", {
           duration: 5000,
           position: "top",
         });
+        return;
       }
-    };
-    fetchRequest();
-  }, [id]);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:4000/user/userLogedin", {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        token: localStorage.getItem("token"),
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data, "user logged in");
-        setState((prev) => ({
-          ...prev,
-          name: data.data.name,
-        }));
+      const response = await axios.get(
+        `http://localhost:4000/requestCornea/getRequest/${id}`
+      );
+      console.log("Response data:", response.data);
 
-        if (data.data === "token expired") {
-          localStorage.clear();
-          navigate("/login");
+      // Using optional chaining to safely access nested properties
+      setHospitalName(response.data?.hospital?.hospitalName);
+      setName(response.data?.surgeon?.name);
+      setSuiatablity(response.data?.suiatablity);
+    } catch (error) {
+      // Logging the error to the console and showing a toast message
+      console.error(error);
+      toast.error(
+        error.response?.data?.message || "An unexpected error occurred",
+        {
+          duration: 5000,
+          position: "top",
         }
-      });
-  }, [navigate]);
+      );
+    }
+  };
+  fetchRequest();
+}, [id]);
+
+
+  // console.log("doctor:",user)
+
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:4000/user/userLogedin", {
+  //     method: "POST",
+  //     crossDomain: true,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //     body: JSON.stringify({
+  //       token: localStorage.getItem("token"),
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data.data, "user logged in");
+  //       setState((prev) => ({
+  //         ...prev,
+  //         name: data.data.name,
+  //       }));
+
+  //       if (data.data === "token expired") {
+  //         localStorage.clear();
+  //         navigate("/login");
+  //       }
+  //     });
+  // }, [navigate]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const data = {
-      name,
+       name,
       modeOfTransportation,
       suiatablity:suiatablity,
       hospitalName,

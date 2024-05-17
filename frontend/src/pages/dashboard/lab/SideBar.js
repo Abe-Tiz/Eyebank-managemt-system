@@ -23,8 +23,9 @@ const CustomSidebar = ({ collapsed, name, role }) => {
 
   return (
     <div
-      className={`bg-slate-700 overflow-auto h-screen fixed text-white transition-all duration-300 ${collapsed ? "w-20" : "w-64"
-        }`}
+      className={`bg-slate-700 overflow-auto h-screen fixed text-white transition-all duration-300 ${
+        collapsed ? "w-20" : "w-64"
+      }`}
     >
       <div className="flex flex-col h-full mt-0 overflow-scroll">
         {collapsed ? (
@@ -241,7 +242,7 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                       iconName: "MdStreetview",
                     },
                     {
-                      link: "/labtechnicaldashboard/approvedList",
+                      link: "/labtechnicaldashboard/approvedRequest",
                       subtitle: "Approved Request",
                       iconLibrary: "md",
                       iconName: "MdStreetview",

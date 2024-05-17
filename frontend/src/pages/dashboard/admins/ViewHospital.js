@@ -6,6 +6,7 @@ import { ArrowBackIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import ConfirmationModal from "./ConfirmationModal";
 import SearchComponent from "../../../components/SearchComponent";
 import useSearch from "../../../useHooks/useSearch";
+import DynamicIcon from "../../../components/DynamicIcon";
 const ViewHospital = () => {
     const [hospitals, setHospitals] = useState([]);
   const { searchTerm, handleChange, data, error } = useSearch("hospital");
@@ -71,9 +72,13 @@ const ViewHospital = () => {
                       <div className="flex gap-2 justify-center">
                         <Link
                           to={`/adminDashboard/edit-hospital/${hospital._id}`}
-                          className="btn btn-success"
+                          className="btn"
                         >
-                          <EditIcon />
+                          <DynamicIcon
+                            library="fa"
+                            iconName="FaEdit"
+                            className="text-2xl"
+                          />
                         </Link>
                         <ConfirmationModal
                           id={hospital._id}
