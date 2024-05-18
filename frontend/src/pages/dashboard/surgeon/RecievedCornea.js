@@ -55,52 +55,57 @@ const RecievedCornea = () => {
     // Function to change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
-      <div>
-        <TableContainer>
-          <div className="w-full mt-10 flex justify-between ">
-            <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-              Recieved Corneas
-            </Text>
-            {/* search component */}
-            <SearchComponent
-              searchTerm={searchTerm}
-              handleChange={handleChange}
-            />
-          </div>
-          <Table variant="simple">
-            <Thead>
-              <Tr className="bg-sky-600 text-white">
-                <Th className="text-white">No</Th>
-                <Th className="text-white"> Hospital Name</Th>
-                <Th className="text-white">Mode Of Traporation</Th>
-                <Th className="text-white">Suitability</Th>
-                {/* <Th className='text-white'>Surgeon</Th> */}
-                <Th className="text-white">Distribution Date</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {renderDistributed
-                .filter((distribute) => distribute.name === surgeonName)
-                .map((distribute, index) => (
-                  <Tr key={index}>
-                    <Td>{index + 1}</Td>
-                    <Td>{distribute.hospitalName}</Td>
-                    <Td>{distribute.modeOfTransportation}</Td>
-                    <Td>{distribute.suiatablity}</Td>
-                    {/* <Td>{distribute.name}</Td> */}
-                    <Td>{formatTimestamp(distribute.createdAt)}</Td>
-                  </Tr>
-                ))}
-            </Tbody>
-          </Table>
-          <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            paginate={paginate}
-          />
-        </TableContainer>
-      </div>
+        <div>
+            <TableContainer>
+            <div className="w-full mt-10 flex justify-between ">
+              <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+                 Recieved Corneas
+              </Text>
+              {/* search component */}
+              <SearchComponent
+                searchTerm={searchTerm}
+                handleChange={handleChange}
+              />
+            </div>
+                <Table variant='simple'>
+                    <Thead>
+                        <Tr className='bg-sky-600 text-white'>
+                            <Th className='text-white' >No</Th>
+                            <Th className='text-white' > Hospital Name</Th>
+                            <Th className='text-white'>Mode Of Traporation</Th>
+                            <Th className='text-white'>Suitability</Th>
+                            {/* <Th className='text-white'>Surgeon</Th> */}
+                            <Th className='text-white'>Distribution Date</Th>
+
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+
+                        {distributed
+                            .filter((distribute) => distribute.name === surgeonName)
+                            .map((distribute, index) => (
+                                <Tr key={index}>
+                                    <Td>{index + 1}</Td>
+                                    <Td>{distribute.hospitalName}</Td>
+                                    <Td>{distribute.modeOfTransportation}</Td>
+                                    <Td>{distribute.suiatablity}</Td>
+                                    {/* <Td>{distribute.name}</Td> */}
+                                    <Td>
+                                        {formatTimestamp(distribute.createdAt)}
+                                    </Td>
+
+                                </Tr>
+                            ))}
+                    </Tbody>
+                </Table>
+                <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                paginate={paginate}
+              />
+            </TableContainer>
+        </div >
     );
 };
 

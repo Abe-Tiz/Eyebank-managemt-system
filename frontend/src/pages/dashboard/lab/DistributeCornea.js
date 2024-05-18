@@ -65,7 +65,7 @@ const DistributeCornea = () => {
         `http://localhost:4000/requestCornea/getRequest/${id}`
       );
       console.log("Response data:", response.data);
-        setRequest(data);
+        setRequest(response.data);
       // Using optional chaining to safely access nested properties
       setHospitalName(response.data?.hospital?.hospitalName);
       setName(response.data?.surgeon?.name);
