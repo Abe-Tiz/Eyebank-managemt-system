@@ -112,7 +112,6 @@ const ViewUsers = () => {
               status="Status"
               action={t("donor:donorAction")}
             />
-
             <tbody>
               {renderUser.map((user) => (
                 <tr

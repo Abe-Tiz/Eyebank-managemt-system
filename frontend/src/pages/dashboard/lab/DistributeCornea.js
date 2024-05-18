@@ -5,9 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 import useLoggedInUser from './../../../useHooks/useLoggedInUser';
 const DistributeCornea = () => {
-  
   const { id } = useParams();
- const [hospitalName, setHospitalName] = useState("");
+  const [hospitalName, setHospitalName] = useState("");
   const [name, setName] = useState("");
   const [modeOfTransportation, setModeOfTransportation] = useState("");
   const navigate = useNavigate();
@@ -15,9 +14,14 @@ const DistributeCornea = () => {
   const [corneas, setCorneas] = useState([]);
   const { t } = useTranslation();
   const [distributed, setdistribute] = useState(true);
- const [requestedCorneas, setRequestedCorneas] = useState([]);
-  const [suiatablity, setSuiatablity] = useState("");
+//  const [requestedCorneas, setRequestedCorneas] = useState([]);
+  // const [suiatablity, setSuiatablity] = useState("");
        const { user, setUser, getLoggedInUser } = useLoggedInUser("doctor");
+  const [requestedCorneas, setRequestedCorneas] = useState([]);
+  const [suiatablity, setSuiatablity] = useState("");
+  const [request, setRequest] = useState("");
+  const [corneaId, setCorneaId] = useState("");
+  const [corneaLot, setCorneaLot] = useState("");
 
   const distri = {
     distributed,
@@ -33,7 +37,7 @@ const DistributeCornea = () => {
         const { data } = await axios.get(
           "http://localhost:4000/requestCornea/getRequests"
         );
-  
+
         setRequestedCorneas(data);
       } catch (error) {
         console.log(error);
@@ -44,25 +48,24 @@ const DistributeCornea = () => {
     getAllRequestedCorneas();
   }, []);
 
-    // console.log("id:",id)
+  // console.log("id:",id)
 
-
-useEffect(() => {
-  const fetchRequest = async () => {
-    try {
-      if (!id) {
-        toast.error("Id is Undefined", {
-          duration: 5000,
-          position: "top",
-        });
-        return;
-      }
+  useEffect(() => {
+    const fetchRequest = async () => {
+      try {
+        if (!id) {
+          toast.error("Id is Undefined", {
+            duration: 5000,
+            position: "top",
+          });
+          return;
+        }
 
       const response = await axios.get(
         `http://localhost:4000/requestCornea/getRequest/${id}`
       );
       console.log("Response data:", response.data);
-
+        setRequest(data);
       // Using optional chaining to safely access nested properties
       setHospitalName(response.data?.hospital?.hospitalName);
       setName(response.data?.surgeon?.name);
@@ -118,10 +121,10 @@ useEffect(() => {
     const data = {
        name,
       modeOfTransportation,
-      suiatablity:suiatablity,
+      corneaId,
       hospitalName,
-      id
-      
+      corneaLot,
+      id,
     };
     // console.log(data);
     // handleDistribution(id);
@@ -130,7 +133,7 @@ useEffect(() => {
         "http://localhost:4000/distribution/create",
         data
       );
-      console.log("dist:",response.data);
+      console.log("dist:", response.data);
       toast({
         title: "Data Registerd successfully",
         status: "success",
@@ -152,45 +155,40 @@ useEffect(() => {
     }
   };
 
-  
- 
   useEffect(() => {
     const getAllStoredCorneas = async () => {
-  
       try {
         const params = {
-            suiatablity: suiatablity, 
+          suiatablity: suiatablity,
         };
         const queryString = new URLSearchParams(params).toString();
-//   console.log(queryString);
-  
-        const response = await axios.get(
-          `http://localhost:4000/cornea/read`
-        );
-  
+        //   console.log(queryString);
+
+        const response = await axios.get(`http://localhost:4000/cornea/read`);
+
         const data = response.data;
-         const filteredCornea = data.filter((cornea) => cornea.evaluation.approval === "yes" && cornea.evaluation.suiatablity === suiatablity);
-        //  console.log("tt:",filteredCornea);
+        const filteredCornea = data.filter(
+          (cornea) =>
+            cornea.evaluation.approval === "yes" &&
+            cornea.evaluation.suiatablity === request.suiatablity
+        );
+
+        console.log("tt:", filteredCornea);
 
         setCorneas(filteredCornea);
-       
       } catch (error) {
         console.error(error);
       }
     };
-  
+
     getAllStoredCorneas();
   }, [suiatablity]); // Use 'suitability' as the dependency
-
   const handleDistribute = async (id) => {
     try {
       await axios.put(`http://localhost:4000/cornea/distributed/${id}`);
-     
+
       setCorneas(
-        corneas.map((p) =>
-          p._id === id ? { ...p, distributed: true } : p
-        )
-      
+        corneas.map((p) => (p._id === id ? { ...p, distributed: true } : p))
       );
       toast({
         title: "Cornea Distributed",
@@ -210,8 +208,8 @@ useEffect(() => {
       });
     }
   };
-
-
+console.log("waw",corneas)
+  console.log("ta", corneaId);
 
   return (
     <div>
@@ -222,18 +220,17 @@ useEffect(() => {
         <div className="grid justify-center">
           <label>
             <input
-                type="text"
-                value={hospitalName}
-                className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-             />
-            
+              type="text"
+              value={hospitalName}
+              className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+            />
           </label>
           <label>
-          <input
-                type="text"
-                value={name}
-                className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-             />
+            <input
+              type="text"
+              value={name}
+              className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+            />
           </label>
           <label>
             <select
@@ -249,29 +246,46 @@ useEffect(() => {
             </select>
           </label>
           <label>
-  <select
-    onChange={(e) => setSuiatablity(e.target.value)}
-    className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-  >
-    {corneas.map((cornea, index) => (
-      <option value={cornea._id} key={index}>
-        {cornea.evaluation.suiatablity}
-      </option>
-    ))}
-  </select>
-</label>
+            <select
+              className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+              value={corneaId}
+              onChange={(e) => setCorneaId(e.target.value)}
+            >
+              <option value="">Select seriablitiy</option>
+              {corneas.map((cornea) => (
+                <option key={cornea._id} value={cornea._id}>
+                  {cornea.evaluation.suiatablity}
+                </option>
+              ))}
+            </select>
+          </label>
 
-<div className="text-center mt-4">
-{corneas.map((cornea, index) => (
-  <button
-    onClick={() => handleDistribute(cornea._id)}
-    type="submit"
-    className="w-1/2 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600 text-white font-semibold rounded"
-  >
-    Distribute
-  </button>
-))}
-</div>
+          <label>
+            <select
+              className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+              value={corneaLot}
+              onChange={(e) => setCorneaLot(e.target.value)}
+            >
+              <option value="">Select lotNo</option>
+              {corneas.map((cornea) => (
+                <option key={cornea._id} value={cornea._id}>
+                  {cornea.lotNo}
+                </option>
+              ))}
+            </select>
+          </label> 
+
+          <div className="text-center mt-4">
+            {corneas.map((cornea, index) => (
+              <button
+                onClick={() => handleDistribute(cornea._id)}
+                type="submit"
+                className="w-1/2 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600 text-white font-semibold rounded"
+              >
+                Distribute
+              </button>
+            ))}
+          </div>
         </div>
       </form>
     </div>

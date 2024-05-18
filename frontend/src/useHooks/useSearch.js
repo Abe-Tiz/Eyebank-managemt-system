@@ -33,6 +33,20 @@ const useSearch = (searchType) => {
           url = "http://localhost:4000/recipient/search";
           requestData = { recipientname: searchTerm };
           break;
+          case "blood":
+          url = "http://localhost:4000/blood/search";
+          requestData = { lotNo: searchTerm }; 
+          break;
+          case "requestedCorneas":
+            url = "http://localhost:4000/requestCornea/search";
+            requestData = { descriptionOfRequest: searchTerm }; 
+            break;
+            case "distributed":
+              url = "http://localhost:4000/distribution/search";
+              requestData = { hospitalName: searchTerm }; 
+              break;
+            
+        // Add more cases for other search types as needed
       }
       const response = await axios.post(url, requestData);
       setData(response.data);

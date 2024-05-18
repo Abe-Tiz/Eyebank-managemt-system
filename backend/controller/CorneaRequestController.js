@@ -193,3 +193,20 @@ exports.distributedCorneaController = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+exports.getCorneaBLotnum =async (req, res) => {
+  try {
+      const { descriptionOfRequest } = req.body;
+      const cornea = await CorneaRequestModel.find({
+        descriptionOfRequest: { $regex: new RegExp(`^${descriptionOfRequest}`, "i") },
+      }).exec();
+      if (cornea.length === 0) {
+          return res.status(404).json({ message: "Cornea not found" });
+      }
+      // console.log(cornea);
+      res.status(200).json(cornea);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+};
