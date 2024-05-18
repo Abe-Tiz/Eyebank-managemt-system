@@ -155,7 +155,7 @@ const CreateDonor = () => {
       const ageInYears = Math.floor(
         ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000)
       );
- console.log("dob:",ageInYears)
+//  console.log("dob:",ageInYears)
       if (ageInYears < 18 || ageInYears > 80) {
         setIsValidAge(true);
       } else {
@@ -204,7 +204,7 @@ const CreateDonor = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder={t("common:namePlaceholderLabel")}
-                        pattern="[a-zA-Z ]{6,}"
+                        pattern="[a-zA-Z\u1200-\u137F ]{6,}"
                         className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         type="text"
                         autoComplete="off"
@@ -215,7 +215,6 @@ const CreateDonor = () => {
                         {t("register:LabelFullNameError")}
                       </span>
                     </div>
-
                   </div>
                   <div className="mt-4">
                     <label
@@ -235,7 +234,6 @@ const CreateDonor = () => {
                       placeholder={t("common:namePlaceholderLabel")}
                       errorMessage="Invalid age. Must be 18 or older."
                     />
-                   
                   </div>
                   <div className="mt-4">
                     <label
@@ -351,7 +349,7 @@ const CreateDonor = () => {
                       <input
                         name="kebele"
                         type="text"
-                        pattern="[0-9a-zA-Z ]{2,}"
+                        pattern="[0-9a-zA-Z\u1200-\u137F  ]{2,}"
                         required
                         className="border-2 border-gray-300 p-2 hover:bg-gray-200 w-full md:w-60 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         placeholder={t("donor:placeHolderKebele")}

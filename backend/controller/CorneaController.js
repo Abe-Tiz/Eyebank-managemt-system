@@ -36,7 +36,8 @@ const createCornea = async (req, res) => {
 const getCorneas = async (req, res) => {
     try {
         const corneas = await Cornea.find({ expirationDate: { $lt: 14 } })
-            .populate({ path: "recoveryTechnical" });
+            .populate({ path: "recoveryTechnical" })
+            // .populate({ path: "recoveryTechnical" });
         res.send(corneas);
     } catch (error) {
         console.error(error);

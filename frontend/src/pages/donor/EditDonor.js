@@ -59,12 +59,16 @@ const EditDonor = () => {
 
           const res = await axios.get(`http://localhost:4000/donor/${id}`);
           const donorData = res.data;
-          console.log(donorData);
+          // console.log(donorData);
 
           // Update state variables with the fetched data
           setName(donorData.name);
           setEmail(donorData.email);
-          setAge(donorData.age);
+
+          const dob = new Date(donorData.dob);
+          const localDob = dob.toLocaleDateString()
+          // console.log("dob:",localDob)
+          setAge(localDob);
           setSex(donorData.sex);
           setCity(donorData.city);
           setSubcity(donorData.subcity);
@@ -226,21 +230,21 @@ const EditDonor = () => {
                       htmlFor="age"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      {t("donor:AgeDonor")}
+                      {t("donor:donorAge")}
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="flex flex-col items-start">
                       <input
-                        name="age"
+                        name="dob"
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        type="numeric"
+                        type="text"
                         value={age}
                         autoComplete="off"
                         required
-                        pattern="[2-9]|[1-7][0-9]|80"
-                        placeholder="Enter Your Age"
+                        // pattern="[2-9]|[1-7][0-9]|80"
+                        // placeholder="YYYY-MM-DD"
                         onChange={handleAge}
-                        readOnly
+                        // readOnly
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("donor:donorAgeError")}
@@ -457,12 +461,11 @@ const EditDonor = () => {
                   >
                     {t("common:backButtonLabel")}
                   </button> */}
-                   <ButtonComponent
+                  <ButtonComponent
                     // onClick={handlePrint}
                     title={t("common:updateButtonLabel")}
                     // customClass="print-button"
                   />
-
                 </div>
                 <div className="mt-4 flex items-center">
                   <ButtonPrimary
@@ -470,18 +473,7 @@ const EditDonor = () => {
                     title={t("common:backButtonLabel")}
                     // customClass="print-button"
                   />
-
-                  {/* <button
-                    type="submit"
-                    disabled={!canSubmit}
-                    className={`bg-gray-400 px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5    focus:outline-none focus:ring-1 focus:ring-blue-300 ${
-                      !canSubmit
-                        ? "disabled:cursor-no-drop disabled:border-2 disabled:bg-gradient-to-br disabled:from-gray-100 disabled:to-gray-300 disabled:text-gray-400 group-invalid:pointer-events-none group-invalid:bg-gradient-to-br group-invalid:from-gray-100 group-invalid:to-gray-300 group-invalid:text-gray-400 group-invalid:opacity-80"
-                        : ""
-                    }`}
-                  >
-                    {t("common:updateButtonLabel")}
-                  </button> */}
+                 
                 </div>
               </div>
             </form>
