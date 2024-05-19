@@ -91,14 +91,7 @@ const StoredCornea = () => {
                   <Th className="text-white">LotNo</Th>
                   <Th className="text-white">Date</Th>
                   <Th className="text-white">Evaluater</Th>
-                  {/* <Th>Epitheliam</Th>
-                                <Th>Stroma</Th>
-                                <Th>Endothelium</Th>
-                                <Th>Approval</Th> */}
                   <Th className="text-white">Suiatablity</Th>
-                  <Th className="text-white" colSpan={1}>
-                    Operations
-                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -116,27 +109,7 @@ const StoredCornea = () => {
                         {formatTimestamp(cornea.evaluation.evaluationDate)}
                       </Td>
                       <Td>{cornea.evaluation.evaluater}</Td>
-                      {/* <Td>{cornea.evaluation.epitheliam}</Td>
-                                        <Td>{cornea.evaluation.stroma}</Td>
-                                        <Td>{cornea.evaluation.endothelium}</Td> */}
-                      {/* <Td>{cornea.evaluation.approval}</Td> */}
                       <Td>{cornea.evaluation.suiatablity}</Td>
-                      <Td className="text-center ml-3 text-blue-600">
-                        <td>
-                          {cornea.distributed === true ? (
-                            <p className="text-green-500 font-bold">
-                              Distributed
-                            </p>
-                          ) : (
-                            <Button
-                              colorScheme="blue"
-                              onClick={() => handleDistribute(cornea._id)}
-                            >
-                              Distribute
-                            </Button>
-                          )}
-                        </td>
-                      </Td>
                     </Tr>
                   ))}
               </Tbody>

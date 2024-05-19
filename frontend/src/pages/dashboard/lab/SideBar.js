@@ -241,12 +241,6 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                                             iconLibrary: "md",
                                             iconName: "MdStreetview",
                                         },
-                                        {
-                                            link: "/labtechnicaldashboard/approvedList",
-                                            subtitle: "Approved Request",
-                                            iconLibrary: "md",
-                                            iconName: "MdStreetview",
-                                        },
                                     ]}
                                 />
                             </div>

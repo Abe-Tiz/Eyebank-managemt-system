@@ -59,6 +59,7 @@ const getRecipients = async (req, res) => {
             .populate("surgeonName")
             .populate("hospital");
         res.json(recipents);
+        console.log(surgeonName);
     } catch (err) {
         res.status(500).json({ error: "An error occurred while retrieving recipents." });
     }

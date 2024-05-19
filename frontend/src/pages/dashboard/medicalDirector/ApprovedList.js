@@ -15,6 +15,7 @@ const ApprovedList = () => {
                     "http://localhost:4000/requestCornea/getRequests"
                 );
                 setRequestedCorneas(data.data);
+                // console.log("aproved::::",data)
             } catch (error) {
                 console.log(error);
                 toast.error("Something Went Wrong");

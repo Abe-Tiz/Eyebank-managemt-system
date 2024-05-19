@@ -74,15 +74,15 @@ const ViewTissue = () => {
                     <Table variant='simple'>
                         <Thead>
                             <Tr className="bg-gray-200 ">
-                                <Th >S.No</Th>
+                                {/* <Th >S.No</Th> */}
                                 <Th >LotNo</Th>
-                                <Th >Date</Th>
+                                {/* <Th >Date</Th> */}
                                 <Th >Evaluater</Th>
                                 <Th >Epitheliam</Th>
-                                <Th >Stroma</Th>
+                                {/* <Th >Stroma</Th> */}
                                 <Th >Endothelium</Th>
-                                <Th >Approval</Th>
-                                <Th >Suiatabl/Reason</Th>
+                                {/* <Th >Approval</Th> */}
+                                {/* <Th >Suiatabl/Reason</Th> */}
                                 <Th colSpan={2}>Operations</Th>
                             </Tr >
                         </Thead >
@@ -95,19 +95,19 @@ const ViewTissue = () => {
                                 )
                                 .map((cornea, index) => (
                                     <Tr key={index}>
-                                        <Td>{index + 1}</Td>
+                                        {/* <Td>{index + 1}</Td> */}
                                         <Td>{cornea.lotNo}</Td>
-                                        <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td>
+                                        {/* <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td> */}
                                         <Td>{cornea.evaluation.evaluater}</Td>
                                         <Td>{cornea.evaluation.epitheliam}</Td>
-                                        <Td>{cornea.evaluation.stroma}</Td>
+                                        {/* <Td>{cornea.evaluation.stroma}</Td> */}
                                         <Td>{cornea.evaluation.endothelium}</Td>
-                                        <Td>{cornea.evaluation.approval}</Td>
-                                        <Td>
+                                        {/* <Td>{cornea.evaluation.approval}</Td> */}
+                                        {/* <Td>
                                             {cornea.evaluation.approval === 'yes'
                                                 ? cornea.evaluation.suiatablity
                                                 : cornea.evaluation.reason}
-                                        </Td>
+                                        </Td> */}
 
                                         <Td className='text-center ml-3 text-blue-600'>
                                             <Link to={`/medicaldirectordashboard/editevaluation/${cornea._id}`}>

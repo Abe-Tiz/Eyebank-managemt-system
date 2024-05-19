@@ -42,8 +42,7 @@ const getEachDistributed = async (req, res) => {
             .populate(
                 {
                     path: "corneaId",
-                    select: "lotNo _id",
-
+                    select: "lotNo",
                 }
             );
         console.log("LOT:", distributions)
