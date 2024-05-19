@@ -77,6 +77,10 @@ const evaluateCornea = async (req, res) => {
     const cornea = await Cornea.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.send(cornea);
 };
+const DiscardCornea = async (req, res) => {
+    const cornea = await Cornea.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
+    res.send(cornea);
+};
 const distributeCornea = async (req, res) => {
     const cornea = await Cornea.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.send(cornea);
@@ -138,4 +142,5 @@ module.exports = {
     getCorneaBLotnum,
     getStoredCornea,
     distributedCorneaController,
+    DiscardCornea,
 };

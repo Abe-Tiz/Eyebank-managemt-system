@@ -95,8 +95,13 @@ const corneaSchema = new mongoose.Schema(
                 // enum: ['epitheliam', 'stroma', 'endothelium', 'descement', 'other']
             },
         },
+        // discard: {
+        //     reason: {
+        //         type: String,
+        //         default: "none"
+        //     }
+        // }
     },
-
     { timestamps: true }
 );
 const Cornea = mongoose.model('Cornea', corneaSchema);
