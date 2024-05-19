@@ -26,7 +26,7 @@ import Pagination from '../../../components/Pagination';
 import useSearch from '../../../useHooks/useSearch';
 import SearchComponent from '../../../components/SearchComponent';
 
-const ViewRecipient = () => {
+const OcularPost = () => {
     const [isOpen, setIsOpen] = useState({
         serology: false,
         distribut: false,
@@ -134,7 +134,7 @@ const ViewRecipient = () => {
                     <Tbody>
                         {renderRecipient
                             .filter((recipent) =>
-                                (recipent.adverse.adversePost === false) || (recipent.ocularPost.Post === false))
+                                (recipent.ocularPost.Post === false))
                             .map((recipent, index) => (
                                 <Tr key={index} className='mb-2 text-lg'>
                                     <Td>{index + 1}</Td>
@@ -145,6 +145,13 @@ const ViewRecipient = () => {
                                     <Td>{recipent.phone}</Td>
                                     <Td>{recipent.address}</Td>
                                     <Td>{recipent.surgeryType}</Td>
+                                    <Td> <Button colorScheme="telegram">
+                                        <Link to={`/surgondashboard/ocularpost/${recipent._id}`}>
+                                            Ocular Post
+                                        </Link>
+                                    </Button>
+                                    </Td>
+
                                     <Td className="text-blue-600">
                                         <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>
                                             <EditIcon />
@@ -170,4 +177,4 @@ const ViewRecipient = () => {
     );
 };
 
-export default ViewRecipient;
+export default OcularPost;
