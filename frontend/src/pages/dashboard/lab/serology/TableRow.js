@@ -10,6 +10,7 @@ const TableRow = ({ blood, onOpen }) => (
     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
   >
     {/* <Td>{blood._id}</Td> */}
+    {/* <Td>{blood.userId.name}</Td> */}
     <Td>{blood.bloodType}</Td>
     <Td>{blood.cornId.position}</Td>
     <Td>{blood.cornId.corneaStatus}</Td>

@@ -268,8 +268,14 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
                 }}
                 subtitleProps={[
                   {
+                    link: "/adminDashboard/viewhospital",
+                    subtitle: "List",
+                    iconLibrary: "ci",
+                    iconName: "CiHospital1",
+                  },
+                  {
                     link: "/adminDashboard/addhospital",
-                    subtitle: "Add Hospital",
+                    subtitle: "Add",
                     iconLibrary: "ci",
                     iconName: "CiHospital1",
                   },

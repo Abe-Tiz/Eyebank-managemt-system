@@ -8,12 +8,12 @@ import ButtonComponent from './../../../../components/ButtonComponent';
 import useLoggedInUser from '../../../../useHooks/useLoggedInUser';
 
 const Test = () => {
-    const [bloodType, setBloodType] = useState("");
-    const [selectedDate, setSelectedDate] = useState("");
-    const [tests, setTests] = useState([]);
-    const [otherTestValue, setOtherTestValue] = useState("");
-    const [isOtherChecked, setIsOtherChecked] = useState(false);
-    const { user, setUser, getLoggedInUser } = useLoggedInUser("lab");
+      const [bloodType, setBloodType] = useState("");
+      const [selectedDate, setSelectedDate] = useState("");
+      const [tests, setTests] = useState([]);
+      const [otherTestValue, setOtherTestValue] = useState("");
+      const [isOtherChecked, setIsOtherChecked] = useState(false);
+        const { user, setUser, getLoggedInUser } = useLoggedInUser("lab");
 
     const { id } = useParams();
     const [userId, setUserId] = useState("");

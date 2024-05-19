@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast, Text } from '@chakra-ui/react';
+import ButtonComponent from '../../../components/ButtonComponent';
+
 const AddAdverse = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -26,17 +28,30 @@ const AddAdverse = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/cornea/read");
+                const surgeonName = localStorage.getItem('surgeonName'); // Retrieve the surgeon ID from local storage
+                const response = await axios.get('http://localhost:4000/distribution/eachsurgeon',
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                                'token'
+                            )}`,
+                        },
+                        params: {
+                            surgeonName: surgeonName, // Pass the surgeon ID as a query parameter
+                        },
+                    }
+                );
                 const data = response.data;
                 setLotNoData(data);
-                console.log(data)
+                console.log(surgeonName);
+                console.log("dist:", data);
             } catch (error) {
                 console.error(error);
             }
         };
-
         fetchData();
     }, []);
+
     const handleSave = async () => {
         console.log(adverse);
         try {
@@ -86,10 +101,11 @@ const AddAdverse = () => {
                         value={lotNo}
                         onChange={(e) => setLotNo(e.target.value)}
                     >
-                        <option>Select Lot Number</option>
+                        <option value=''>Select lotNo</option>
                         {lotNoData.map((lot, index) => (
-                            <option key={index} value={lot.lotNo}>
-                                {lot.lotNo}
+
+                            <option key={index} value={lot.corneaId}>
+                                {lot.corneaId.lotNo}
                             </option>
                         ))}
                     </select>
@@ -122,7 +138,9 @@ const AddAdverse = () => {
                         onChange={(e) => setDonorTissue(e.target.value)}
                     />
                 </label>
-                <button className=" bg-sky-600 text-center ml-40 hover:bg-teal-700 focus:outline-none text-white px-4 py-2 mt-2 rounded-md" type="submit">Send Adverse</button>
+                <div className="text-center mt-4 mb-2">
+                    <ButtonComponent label="Submit" title={"Send Adverse"} type="submit" />
+                </div>
             </form >
         </>
     );

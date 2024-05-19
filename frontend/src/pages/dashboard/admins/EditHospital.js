@@ -4,7 +4,7 @@ import axios from "axios";
 
 const EditHospital = () => {
     const { id } = useParams();
-    const [hospitalId, setHospitalId] = useState();
+    const [type, setType] = useState();
     const [hospitalName, setHospitalName] = useState();
     const [address, setAddress] = useState();
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ const EditHospital = () => {
             .get(`http://localhost:4000/hospital/getOne/${id}`)
             .then((result) => {
                 console.log(result);
-                setHospitalId(result.data.hospitalId);
+                setType(result.data.type);
                 setHospitalName(result.data.hospitalName);
                 setAddress(result.data.address);
             })
@@ -25,7 +25,7 @@ const EditHospital = () => {
         e.preventDefault();
         axios
             .put(`http://localhost:4000/hospital/update/${id}`, {
-                hospitalId,
+                type,
                 hospitalName,
                 address,
             })
@@ -43,13 +43,13 @@ const EditHospital = () => {
                     <h2 className="text-center text-3xl">Update Hospital</h2>
 
                     <div className="mb-4">
-                        <label htmlFor="hospitalID">Hospital ID</label>
+                        <label htmlFor="hospitalID">Hospital Type</label>
                         <input
                             type="text"
-                            id="hospitalID"
+                            id="type"
                             className="form-input mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={hospitalId}
-                            onChange={(e) => setHospitalId(e.target.value)}
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
                             required
                         />
                     </div>
@@ -77,7 +77,7 @@ const EditHospital = () => {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-warning">Edit</button>
+                    <button type="submit" className="btn btn-warning">Update</button>
                 </form>
             </div>
         </div>

@@ -125,6 +125,7 @@ const ListSerology = () => {
                            
                 {/* Table header */}
                 <CommonTablHeader
+                  // eight="Name"
                   first="Blood Type"
                   second="Position"
                   third="Status"

@@ -51,39 +51,41 @@ const Viewdistribute = () => {
                     List of distributed cornea
                 </Text>
                 <Table variant='simple'>
-                    <Thead>
-                        <Tr className='bg-sky-600 text-white'>
-                            <Th className='text-white' >No</Th>
-                           <Th className='text-white' > Hospital Name</Th>
-                            <Th className='text-white'>Surgeon Name</Th>
-                            <Th className='text-white'>Mode Of Traporation</Th>
-                            <Th className='text-white'>Suitability</Th>
-                           <Th className='text-white'>Distribution Date</Th>
-                            <Th className='text-white' >Operations</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-
-                    {distributed.map((distribute, index) => (
-                            <Tr key={index}>
-                                <Td>{index + 1}</Td>
-                                <Td>{distribute.hospitalName}</Td>
-                                <Td>{distribute.name}</Td>
-                                <Td>{distribute.modeOfTransportation}</Td>
-                                <Td>{distribute.suiatablity}</Td>
-                                <Td>
-                                    {formatTimestamp(distribute.createdAt)}
-                                </Td>
-                                <Td className='text-center ml-3 text-blue-600'>
-                                    <Link to={`/labtechnicaldashboard/editdistributed/${distribute._id}`}>
-                                        <EditIcon />
-                                    </Link>
-                                </Td>
-                            </Tr>
-                        ))}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+  <Thead>
+    <Tr className='bg-sky-600 text-white'>
+      <Th className='text-white'>No</Th>
+      <Th className='text-white'>Hospital Name</Th>
+      <Th className='text-white'>Surgeon Name</Th>
+      <Th className='text-white'>Mode Of Transportation</Th>
+      {/* <Th className='text-white'>Lot No</Th> */}
+      <Th className='text-white'>Suitability</Th>
+      <Th className='text-white'>Distribution Date</Th>
+      <Th className='text-white'>Operations</Th>
+    </Tr>
+  </Thead>
+  <Tbody>
+ 
+    {distributed.map((distribution, index) => (
+      <Tr key={index}>
+        <Td>{index + 1}</Td>
+        <Td>{distribution.hospitalName}</Td>
+        <Td>{distribution.name}</Td>
+        <Td>{distribution.modeOfTransportation}</Td>
+        {/* <Td>
+          {distribution.corneaId?.lotNo} </Td>  */}
+        <Td>
+          {distribution.corneaId?.evaluation?.suiatablity}
+        </Td>
+        <Td>{formatTimestamp(distribution.createdAt)}</Td>
+        <Td className='text-center ml-3 text-blue-600'>
+          <Link to={`/labtechnicaldashboard/editdistributed/${distribution._id}`}>
+            <EditIcon />
+          </Link>
+        </Td>
+      </Tr>
+    ))}
+  </Tbody>
+</Table>   </TableContainer>
         </div >
     );
 };

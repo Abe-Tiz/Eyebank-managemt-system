@@ -60,7 +60,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* information section */}
+     
         <div className=" bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
           <h1 className=" text-4xl font-bold text-center mt-1 font-sans ">
             {t("mracleTitle")}
@@ -80,13 +80,7 @@ const Home = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              {/* <button
-                className="bg-green hover:bg-gray-400 px-5 py-2 text-2xl text-white font-extrabold mt-3 mr-5  "
-                onClick={() => navigate("/awareness")}
-              >
-                {t("about:readmore")}
-              </button> */}
-
+              
               <ButtonComponent
                 title={t("about:readmore")}
                 onClick={() => navigate("/blog")}

@@ -132,42 +132,44 @@ const ViewRecipient = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {renderRecipient.map((recipent, index) => (
-                            <Tr key={index} className='mb-2 text-lg'>
-                                <Td>{index + 1}</Td>
-                                <Td>{formatTimestamp(recipent.createdAt)}</Td>
-                                <Td>{recipent.recipientname}</Td>
-                                <Td>{recipent.age}</Td>
-                                <Td>{recipent.sex}</Td>
-                                <Td>{recipent.phone}</Td>
-                                <Td>{recipent.address}</Td>
-                                <Td>{recipent.surgeryType}</Td>
-                                <Td>
-                                    <Button colorScheme="telegram">
+                        {renderRecipient
+                            .filter((recipent) =>
+                                (recipent.adverse.adversePost === false) || (recipent.ocularPost.Post === false))
+                            .map((recipent, index) => (
+                                <Tr key={index} className='mb-2 text-lg'>
+                                    <Td>{index + 1}</Td>
+                                    <Td>{formatTimestamp(recipent.createdAt)}</Td>
+                                    <Td>{recipent.recipientname}</Td>
+                                    <Td>{recipent.age}</Td>
+                                    <Td>{recipent.sex}</Td>
+                                    <Td>{recipent.phone}</Td>
+                                    <Td>{recipent.address}</Td>
+                                    <Td>{recipent.surgeryType}</Td>
+                                    <Td> {recipent.ocularPost.Post === true ? (<p className='text-green-600'>Done</p>) : (<Button colorScheme="telegram">
                                         <Link to={`/surgondashboard/ocularpost/${recipent._id}`}>
                                             Ocular Post
                                         </Link>
-                                    </Button>
-                                </Td>
-                                <Td>
-                                    <Button colorScheme="orange">
-                                        <Link to={`/surgondashboard/adverse/${recipent._id}`}>
-                                            Adverse
+                                    </Button>)}
+                                    </Td>
+                                    <Td>
+                                        {recipent.adverse.adversePost === true ? (<p className='text-green-600'>Done</p>) : (<Button colorScheme="telegram">
+                                            <Link to={`/surgondashboard/adverse/${recipent._id}`}>
+                                                Adverse
+                                            </Link>
+                                        </Button>)}
+                                    </Td>
+                                    <Td className="text-blue-600">
+                                        <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>
+                                            <EditIcon />
                                         </Link>
-                                    </Button>
-                                </Td>
-                                <Td className="text-blue-600">
-                                    <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>
-                                        <EditIcon />
-                                    </Link>
-                                </Td>
-                                <Td>
-                                    <button className="text-red-600" onClick={() => deleteRecipient(recipent._id)}>
-                                        <DeleteIcon />
-                                    </button>
-                                </Td>
-                            </Tr>
-                        ))}
+                                    </Td>
+                                    <Td>
+                                        <button className="text-red-600" onClick={() => deleteRecipient(recipent._id)}>
+                                            <DeleteIcon />
+                                        </button>
+                                    </Td>
+                                </Tr>
+                            ))}
                     </Tbody>
                 </Table>
                 <Pagination
