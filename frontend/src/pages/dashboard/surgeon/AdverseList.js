@@ -120,7 +120,7 @@ const AdverseList = () => {
                 </Flex>
                 <Table className='mt-8' variant='simple'>
                     <Thead>
-                        <Tr className="bg-gray-200 mx-0">
+                        <Tr className="bg-blue-300 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                             <Th>S.No</Th>
                             <Th>Date Of Diagnosis</Th>
                             <Th>Lot No</Th>
