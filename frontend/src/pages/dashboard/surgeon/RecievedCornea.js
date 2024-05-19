@@ -30,7 +30,6 @@ const RecievedCornea = () => {
             month: 'short',
             day: 'numeric',
         };
-
         return new Date(timestamp).toLocaleString('en-US', options);
     }
 
