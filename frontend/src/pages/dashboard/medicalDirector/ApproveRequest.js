@@ -11,10 +11,11 @@ const ApproveRequest = () => {
   useEffect(() => {
     const getAllRequestedCorneas = async () => {
       try {
-        const { data } = await axios.get(
+        const data = await axios.get(
           "http://localhost:4000/requestCornea/getRequests"
         );
-        setRequestedCorneas(data);
+        console.log("getttt:",data.data)
+        setRequestedCorneas(data.data);
       } catch (error) {
         console.log(error);
         toast.error("Something Went Wrong");
@@ -89,7 +90,7 @@ const ApproveRequest = () => {
           </thead>
           <tbody>
             {requestedCorneas
-              .filter((request) => request.isApproved === false )
+              .filter((request) => request.isApproved === false)
               .map((request) => (
                 <tr
                   key={request.id}

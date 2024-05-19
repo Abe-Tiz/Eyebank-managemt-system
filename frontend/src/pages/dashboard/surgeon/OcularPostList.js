@@ -60,26 +60,27 @@ const ViewPostList = () => {
         };
         return new Date(timestamp).toLocaleString('en-US', options);
     }
+
+    const surgeonName = localStorage.getItem("surgeonName"); 
+    // console.log("surgenkkkkkkkk:", surgeonName);
     useEffect(() => {
         const getAllRecipients = async () => {
             try {
-                const surgeonName = localStorage.getItem('surgeonName'); // Retrieve the surgeon ID from local storage
+              // Retrieve the surgeon ID from local storage
                 const response = await axios.get(
-                    'http://localhost:4000/recipient/read',
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem(
-                                'token'
-                            )}`,
-                        },
-                        params: {
-                            surgeonName: surgeonName, // Pass the surgeon ID as a query parameter
-                        },
-                    }
+                  "http://localhost:4000/recipient/read",
+                //   {
+                //     headers: {
+                //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+                //     },
+                //     params: {
+                //       surgeonName: surgeonName, // Pass the surgeon ID as a query parameter
+                //     },
+                //   }
                 );
                 const data = response.data;
                 setRecipient(data);
-                console.log(surgeonName);
+                // console.log("ocular:",data);
             } catch (error) {
                 console.error(error);
             }
@@ -104,68 +105,68 @@ const ViewPostList = () => {
     const renderRecipient = searchTerm ? data : currentRecipients;
 
     return (
-        <div>
-            <TableContainer>
-                {/* <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
+      <div>
+        <TableContainer>
+          {/* <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
                     List of Recipients
                 </Text> */}
-                <Flex justify="flex-end" position="fixed" top={10} right={0} p={4}>
-                    <Box mr={15}>
-                        <SearchComponent searchTerm={searchTerm} handleChange={handleChange} />
-                    </Box>
-                </Flex>
-                <Table className='mt-8' variant='simple'>
-                    <Thead>
-                        <Tr className="bg-blue-300 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
-                            <Th>S.No</Th>
-                            <Th>Date Of Post</Th>
-                            <Th>Lot No</Th>
-                            <Th>Recipient</Th>
-                            <Th>Surgeon Name</Th>
-                            <Th>Hospital</Th>
-                            <Th>Operation Eye</Th>
-                            <Th>Non Operation Eye</Th>
-                            <Th >Operations</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {renderRecipient
-                            .filter(
-                                (cornea) =>
-                                    cornea.ocularPost &&
-                                    (cornea.ocularPost.Post === true)
-                            )
-                            .map((cornea, index) => (
-                                <Tr key={index} className="mb-2 text-lg" >
-                                    <Td>{index + 1}</Td>
-                                    <Td>{formatTimestamp(cornea.createdAt)}</Td>
-                                    <Td>{cornea.ocularPost.lotNo}</Td>
-                                    <Td>{cornea.recipientname}</Td>
-                                    <Td>{cornea.surgeonName.name}</Td>
-                                    <Td>{cornea.hospital.hospitalName}</Td>                                    <Td>{cornea.ocularPost.ocularOperativeEye}</Td>
-                                    <Td>{cornea.ocularPost.ocularNonOperativeEye}</Td>
-                                    <Td className='text-center ml-3 text-blue-600'>
-                                        <Link to={`/surgondashboard/editocular/${cornea._id}`}>
-                                            <EditIcon />
-                                        </Link>
-                                    </Td>
-                                    {/* <Td className='text-center ml-3 text-blue-600'>
-                                        <Link to={`/surgondashboard/editocular/${cornea._id}`}>
-                                            <EditIcon />
-                                        </Link>
-                                    </Td> */}
-                                </Tr>
-                            ))}
-                    </Tbody>
-                </Table>
-                <Pagination
-                    totalPages={totalPages}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    paginate={paginate}
-                />
-            </TableContainer >
-        </div >
+          <Flex justify="flex-end" position="fixed" top={10} right={0} p={4}>
+            <Box mr={15}>
+              <SearchComponent
+                searchTerm={searchTerm}
+                handleChange={handleChange}
+              />
+            </Box>
+          </Flex>
+          <Table className="mt-8" variant="simple">
+            <Thead>
+              <Tr className="bg-blue-300 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                <Th>S.No</Th>
+                <Th>Date Of Post</Th>
+                <Th>Lot No</Th>
+                <Th>Recipient</Th>
+                <Th>Surgeon Name</Th>
+                <Th>Hospital</Th>
+                <Th>Operation Eye</Th>
+                <Th>Non Operation Eye</Th>
+                <Th>Operations</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {renderRecipient
+                .filter(
+                  (cornea) =>
+                    cornea.ocularPost &&
+                    cornea.ocularPost.Post === true &&
+                    cornea?.surgeonName?.name === surgeonName
+                )
+                .map((cornea, index) => (
+                  <Tr key={index} className="mb-2 text-lg">
+                    <Td>{index + 1}</Td>
+                    <Td>{formatTimestamp(cornea.createdAt)}</Td>
+                    <Td>{cornea.ocularPost.lotNo}</Td>
+                    <Td>{cornea.recipientname}</Td>
+                    <Td>{cornea?.surgeonName?.name}</Td>
+                    <Td>{cornea.hospital?.hospitalName}</Td>{" "}
+                    <Td>{cornea.ocularPost.ocularOperativeEye}</Td>
+                    <Td>{cornea.ocularPost.ocularNonOperativeEye}</Td>
+                    <Td className="text-center ml-3 text-blue-600">
+                      <Link to={`/surgondashboard/editocular/${cornea._id}`}>
+                        <EditIcon />
+                      </Link>
+                    </Td>
+                  </Tr>
+                ))}
+            </Tbody>
+          </Table>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            paginate={paginate}
+          />
+        </TableContainer>
+      </div>
     );
 };
 

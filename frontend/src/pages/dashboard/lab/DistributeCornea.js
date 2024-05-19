@@ -123,10 +123,10 @@ const DistributeCornea = () => {
       modeOfTransportation,
       corneaId,
       hospitalName,
-      corneaLot,
+      // corneaLot,
       id,
     };
-    // console.log(data);
+    console.log("iddddd:",id);
     // handleDistribution(id);
     try {
       const response = await axios.post(
@@ -260,7 +260,7 @@ console.log("waw",corneas)
             </select>
           </label>
 
-          <label>
+          {/* <label>
             <select
               className="form-input mt-3 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
               value={corneaLot}
@@ -273,18 +273,18 @@ console.log("waw",corneas)
                 </option>
               ))}
             </select>
-          </label> 
+          </label>  */}
 
           <div className="text-center mt-4">
-            {corneas.map((cornea, index) => (
+            {/* {corneas.map((cornea, index) => ( */}
               <button
-                onClick={() => handleDistribute(cornea._id)}
+                // onClick={() => handleDistribute(cornea._id)}
                 type="submit"
                 className="w-1/2 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600 text-white font-semibold rounded"
               >
                 Distribute
               </button>
-            ))}
+            {/* ))} */}
           </div>
         </div>
       </form>

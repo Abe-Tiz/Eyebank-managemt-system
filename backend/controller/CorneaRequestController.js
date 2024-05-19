@@ -70,7 +70,7 @@ exports.getCorneasRequestController = async (req, res) => {
     try {
         const corneaRequests = await CorneaRequestModel.find({
             isGetCornea: false,
-            isApproved: true
+            // isApproved: false
         })
             .populate("surgeon")
             .populate("hospital");

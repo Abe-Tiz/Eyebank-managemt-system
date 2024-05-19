@@ -242,10 +242,7 @@ const Edit = () => {
                         value={age}
                         autoComplete="off"
                         required
-                        // pattern="[2-9]|[1-7][0-9]|80"
-                        // placeholder="YYYY-MM-DD"
                         onChange={handleAge}
-                        // readOnly
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("donor:donorAgeError")}
@@ -267,29 +264,14 @@ const Edit = () => {
                         name="sex"
                         type="text"
                         value={sex}
-                        // pattern="[a-zA-Z ]{2,}"
                         required
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        // placeholder="Enter Your Sex"
                         onChange={handleSex}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
                         {t("donor:donorSexError")}
                       </span>
                     </div>
-
-                    {/* <select
-                      name="sex"
-                      className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60"
-                      onChange={handleSex}
-                    >
-                      <option value="">Select Sex</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select>
-                    <span className="mt-1 hidden text-sm text-red-400">
-                      you must select the sex
-                    </span> */}
                   </div>
                 </div>
 
@@ -311,7 +293,6 @@ const Edit = () => {
                         pattern="[0-9a-zA-Z ]{2,}"
                         required
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                        // placeholder="Enter Your City"
                         onChange={handleCity}
                       />
                       <span className="mt-1 hidden text-sm text-red-400">
@@ -334,15 +315,12 @@ const Edit = () => {
                         name="subcity"
                         type="text"
                         value={subcity}
-                        // pattern="[0-9a-zA-Z ]"
                         required
                         className="border-2 border-gray-300  p-2 hover:bg-gray-200 w-60  [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
                         placeholder="Enter Sub City"
                         onChange={handleSubcity}
                       />
-                      {/* <span className="mt-1 hidden text-sm text-red-400">
-                        subcity must be  characters  
-                      </span> */}
+                   
                     </div>
                   </div>
 
@@ -456,23 +434,14 @@ const Edit = () => {
               </div>
               <div className="d-flex justify-content-center pt-3 mb-4">
                 <div className="mt-4 flex items-center">
-                  {/* <button
-                    onClick={() => navigate(-1)}
-                    className="bg-transparent px-5 py-2 text-2xl border-2 border-gray-700  hover:bg-gray-600 text-black hover:text-white hover:font-extrabold font-extrabold mt-3 mr-5 "
-                  >
-                    {t("common:backButtonLabel")}
-                  </button> */}
                   <ButtonComponent
-                    // onClick={handlePrint}
                     title={t("common:updateButtonLabel")}
-                    // customClass="print-button"
                   />
                 </div>
                 <div className="mt-4 flex items-center">
                   <ButtonPrimary
                     onClick={() => navigate(-1)}
                     title={t("common:backButtonLabel")}
-                    // customClass="print-button"
                   />
                 </div>
               </div>

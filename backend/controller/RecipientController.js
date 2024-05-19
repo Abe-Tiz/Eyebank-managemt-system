@@ -91,6 +91,16 @@ const ocularPost = async (req, res) => {
     }
 
 }
+const GetocularPost = async (req, res) => {
+    try {
+        const ocular = await RecipientModel.find();
+        res.send(ocular);
+    }
+    catch (error) {
+        throw error;
+    }
+
+}
 const adverseReaction = async (req, res) => {
     try {
         const recipient = await RecipientModel.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
@@ -118,12 +128,13 @@ const SearchRecipient = async (req, res) => {
 };
 
 module.exports = {
-    createRecipient,
-    getRecipients,
-    getRecipient,
-    updateRecipient,
-    deleteRecipient,
-    ocularPost,
-    adverseReaction,
-    SearchRecipient
-}
+  createRecipient,
+  getRecipients,
+  getRecipient,
+  updateRecipient,
+  deleteRecipient,
+  ocularPost,
+  adverseReaction,
+  SearchRecipient,
+  GetocularPost,
+};

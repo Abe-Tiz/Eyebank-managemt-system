@@ -99,6 +99,8 @@ import Cornea from "../pages/reports/Cornea";
 import Test from "../pages/dashboard/lab/serology/Test";
 // import LoginDonor from './../pages/donor/LoginDonor';
 import EditDistribute from './../pages/dashboard/lab/EditDistribute';
+import OcularPostReport from "../pages/dashboard/medicalDirector/OcularPostReport";
+// import OcularPostReport from './../pages/dashboard/medicalDirector/OcularPostReport';
 
 const router = createBrowserRouter([
     {
@@ -468,6 +470,10 @@ const router = createBrowserRouter([
             {
                 path: "EditRequest/:id",
                 element: <EditRequest />,
+            },
+            {
+                path: "ocular-report",
+                element: <OcularPostReport />,
             },
         ],
     },
