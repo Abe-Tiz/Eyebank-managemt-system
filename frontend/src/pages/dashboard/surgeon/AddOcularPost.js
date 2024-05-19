@@ -128,7 +128,7 @@ const AddOcularPost = () => {
                     />
                 </label>
                 <div className="text-center mt-4 mb-2">
-                    <ButtonComponent label="Submit" title={"Send Ocural Post"} type="submit" />
+                    <ButtonComponent label="Submit" title={"Send Ocural"} type="submit" />
                 </div>
             </form >
         </div >
