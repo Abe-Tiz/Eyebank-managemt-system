@@ -17,6 +17,7 @@ const getAllPhysicalExams = async (req, res) => {
 const createPhysicalExam = async (req, res) => {
     try {
         const {
+            exam_id,
             donor_id,
             height,
             weight,
@@ -32,6 +33,7 @@ const createPhysicalExam = async (req, res) => {
         } = req.body;
 
         const physicalExam = new PhysicalExam({
+            exam_id,
             donor_id,
             height,
             weight,
@@ -69,6 +71,7 @@ const getPhysicalExamById = async (req, res) => {
 const updatePhysicalExamById = async (req, res) => {
     try {
         const {
+            exam_id,
             height,
             weight,
             sex,
@@ -85,6 +88,7 @@ const updatePhysicalExamById = async (req, res) => {
         if (!physicalExam) {
             return res.status(404).json({ error: 'Physical exam not found' });
         }
+        physicalExam.height = exam_id;
         physicalExam.height = height;
         physicalExam.weight = weight;
         physicalExam.sex = sex;

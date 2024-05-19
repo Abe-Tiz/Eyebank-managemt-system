@@ -9,6 +9,7 @@ const EditPhysicalExam = () => {
   const { id } = useParams();
   const { t } = useTranslation();
   const toast = useToast();
+  const [,setFormData]=useState('')
   const [exam, setExam] = useState({
     height: '',
     weight: '',

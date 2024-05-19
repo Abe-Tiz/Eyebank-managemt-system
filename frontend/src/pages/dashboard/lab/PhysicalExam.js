@@ -7,8 +7,10 @@ const PhysicalExam = () => {
   const toast = useToast();
   const { id } = useParams();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  // const [isDuplicateId, ] = useState(false);
 
+  const [formData, setFormData] = useState({
+    exam_id:"",   
     donor_id: id,
     height: "",
     weight: "",
@@ -266,6 +268,7 @@ const PhysicalExam = () => {
     hanleDonate(id)
 
   };
+  
 
   return (
     <form
@@ -278,7 +281,25 @@ const PhysicalExam = () => {
             Create Physical Exam
           </h2>
         </div>
-        <div className="grid grid-cols-3 gap-4 ml-16">
+        <div className="grid grid-cols-4 gap-4 ml-16">
+        <div className="mb-4 mx-8">
+            <div className="ml-10">
+              <label className="mb-2" htmlFor="exam_id">
+                Exam_ID:
+              </label>
+            </div>
+            <input
+              type="String"
+              name="exam_id"
+              value={formData.exam_id}
+              onChange={handleChange1}
+              placeholder="enter id"
+              required
+              className="w-32 px-3 py-2 border-2 rounded"
+            />
+            
+          </div>
+          
           <div className="mb-4 mx-8">
             <div className="ml-10">
               <label className="mb-2" htmlFor="height">

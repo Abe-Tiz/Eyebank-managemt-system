@@ -48,6 +48,10 @@ const riskExaminedSchema = new mongoose.Schema({
 
 const physiaclSchema = new mongoose.Schema(
     {
+        exam_id: {
+            type: String,
+            required: true,
+        },
         donor_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Donor",
@@ -57,6 +61,7 @@ const physiaclSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+
         weight: {
             type: Number,
             required: true,
