@@ -24,8 +24,8 @@ import ViewDistributed from '../pages/dashboard/lab/ViewDistributed';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
 import ExamedList from '../pages/dashboard/lab/ExamedList';
 import ListOfPleged from '../pages/dashboard/lab/ListOfPleged';
-import EvaluatedList from '../pages/dashboard/lab/EvaluatedList';
-//import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
+// import EvaluatedList from '../pages/dashboard/lab/EvaluatedList';
+// import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
 import EditCornea from '../pages/dashboard/lab/EditCornea';
 import RecordMedicalParticular from '../pages/dashboard/lab/RecordMedicalParticular';
 import ScreenDonor from '../pages/dashboard/lab/ScreenDonor';
@@ -40,7 +40,8 @@ import ForgotCode from './../pages/donor/ForgotCode';
 import ResetCode from './../pages/donor/ResetCode';
 import ViewTissue from "../pages/dashboard/medicalDirector/ViewTissue";
 import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
-import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
+import EvaluatedList from "../pages/dashboard/medicalDirector/EvaluatedList";
+import DiscardedList from "../pages/dashboard/medicalDirector/DiscardedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
 import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
 import MedicalReport from "../pages/dashboard/medicalDirector/MedicalReport";
@@ -70,6 +71,8 @@ import AddAdverse from "../pages/dashboard/surgeon/AddAdverse";
 import OcularPostList from "../pages/dashboard/surgeon/OcularPostList";
 import AdverseList from "../pages/dashboard/surgeon/AdverseList";
 import RecievedCornea from "../pages/dashboard/surgeon/RecievedCornea";
+import Adverse from "../pages/dashboard/surgeon/Adverse";
+import OcularPost from "../pages/dashboard/surgeon/OcularPost";
 
 //admin
 import AddHospital from "../pages/dashboard/admins/AddHospital";
@@ -218,9 +221,13 @@ const router = createBrowserRouter([
                 path: "list-serology",
                 element: <ListSerology />,
             },
+            // {
+            //     path: "evaluatedList",
+            //     element: <EvaluateList />,
+            // },
             {
-                path: "evaluatedList",
-                element: <EvaluatedList />,
+                path: "discardedlist",
+                element: <DiscardedList />,
             },
             {
                 path: "storedCornea",
@@ -367,6 +374,14 @@ const router = createBrowserRouter([
                 element: <ViewRecipient />,
             },
             {
+                path: "ocularpost",
+                element: <OcularPost />,
+            },
+            {
+                path: "adverse",
+                element: <Adverse />,
+            },
+            {
                 path: "ocularpost/:id",
                 element: <AddOcularPost />,
             },
@@ -438,11 +453,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "evaluatecornea/:id",
-                element: <EvaluateCornea />,
+                element: <ViewTissue />,
             },
             {
                 path: "evaluatedlist",
-                element: <EvaluateList />,
+                element: <EvaluatedList />,
+            },
+            {
+                path: "discardedlist",
+                element: <DiscardedList />,
             },
             {
                 path: "editevaluation/:id",

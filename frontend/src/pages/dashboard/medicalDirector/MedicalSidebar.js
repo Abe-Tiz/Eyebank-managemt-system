@@ -158,6 +158,12 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
                                             iconLibrary: "md",
                                             iconName: "MdStreetview",
                                         },
+                                        {
+                                            link: "/medicaldirectordashboard/discardedlist",
+                                            subtitle: "Discarded List",
+                                            iconLibrary: "md",
+                                            iconName: "MdStreetview",
+                                        },
 
                                     ]}
                                 />

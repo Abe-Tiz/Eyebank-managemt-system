@@ -23,7 +23,7 @@ import {
     TableContainer,
 } from '@chakra-ui/react';
 
-const EvaluatedList = () => {
+const DiscardedList = () => {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [fetchedData, setFetchedData] = useState(null);
     const navigate = useNavigate();
@@ -78,11 +78,8 @@ const EvaluatedList = () => {
                                 <Th >LotNo</Th>
                                 <Th >Date</Th>
                                 <Th >Evaluater</Th>
-                                <Th >Epitheliam</Th>
-                                <Th >Stroma</Th>
-                                <Th >Endothelium</Th>
                                 <Th >Approval</Th>
-                                <Th >Suiatabl</Th>
+                                <Th >Reason</Th>
                                 <Th colSpan={2}>Operations</Th>
                             </Tr >
                         </Thead >
@@ -91,7 +88,7 @@ const EvaluatedList = () => {
                                 .filter(
                                     (cornea) =>
                                         cornea.evaluation &&
-                                        (cornea.evaluation.approval === 'yes')
+                                        (cornea.evaluation.approval === 'no')
                                 )
                                 .map((cornea, index) => (
                                     <Tr key={index}>
@@ -99,14 +96,10 @@ const EvaluatedList = () => {
                                         <Td>{cornea.lotNo}</Td>
                                         <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td>
                                         <Td>{cornea.evaluation.evaluater}</Td>
-                                        <Td>{cornea.evaluation.epitheliam}</Td>
-                                        <Td>{cornea.evaluation.stroma}</Td>
-                                        <Td>{cornea.evaluation.endothelium}</Td>
                                         <Td>{cornea.evaluation.approval}</Td>
                                         <Td>
-                                            {
-                                                cornea.evaluation.suiatablity
-                                            }
+
+                                            {cornea.evaluation.reason}
                                         </Td>
 
                                         <Td className='text-center ml-3 text-blue-600'>
@@ -129,4 +122,4 @@ const EvaluatedList = () => {
     );
 };
 
-export default EvaluatedList;
+export default DiscardedList;

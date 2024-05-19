@@ -166,6 +166,12 @@ const SurgeonSidebar = ({ collapsed, name, image, role }) => {
 
                                 subtitleProps={[
                                     {
+                                        link: "/surgondashboard/ocularpost",
+                                        subtitle: "Add Ocural ",
+                                        iconLibrary: "io",
+                                        iconName: "IoIosPersonAdd",
+                                    },
+                                    {
                                         link: "/surgondashboard/ocularpostlist",
                                         subtitle: "Ocular Postlist",
                                         iconLibrary: "io",
@@ -185,6 +191,12 @@ const SurgeonSidebar = ({ collapsed, name, image, role }) => {
                                     isOpen: isOpen.adverse,
                                 }}
                                 subtitleProps={[
+                                    {
+                                        link: "/surgondashboard/adverse",
+                                        subtitle: "Add Adverse",
+                                        iconLibrary: "md",
+                                        iconName: "MdVisibility",
+                                    },
                                     {
                                         link: "/surgondashboard/adverselist",
                                         subtitle: "adverse list",
