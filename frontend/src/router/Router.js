@@ -22,7 +22,7 @@ import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import ViewDistributed from '../pages/dashboard/lab/ViewDistributed';
 // import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
-import ListOfPlege from '../pages/dashboard/lab/ListOfPlege';
+import ExamedList from '../pages/dashboard/lab/ExamedList';
 import ListOfPleged from '../pages/dashboard/lab/ListOfPleged';
 import EvaluatedList from '../pages/dashboard/lab/EvaluatedList';
 //import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
@@ -268,8 +268,8 @@ const router = createBrowserRouter([
                 element: <IndexPage />,
             },
             {
-                path: "viewDonor",
-                element: <ListOfPlege />,
+                path: "examlist",
+                element: <ExamedList />,
             },
             {
                 path: "viewRequestCornea",

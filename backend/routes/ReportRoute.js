@@ -1,17 +1,17 @@
 const express = require('express');
 const {
-        getDonorCount,
-        getCorneaCount,
-        getEvalutedCorneaCount,
-        getCorneaByMonth,
-        getTestedCount, 
-        getPhysicalExaminedCount,
-        getDistributedCorneaCount, 
-        getDistributedCorneaByMonth, 
-        getPledgeByMonth,
-        getUserCount,
-        // getCorneaByMonthManualy
-    } = require('../controller/ReportController');
+    getDonorCount,
+    getCorneaCount,
+    getEvalutedCorneaCount,
+    getCorneaByMonth,
+    getTestedCount,
+    getPhysicalExaminedCount,
+    getDistributedCorneaCount,
+    getDistributedCorneaByMonth,
+    getPledgeByMonth,
+    getUserCount,
+    // getCorneaByMonthManualy
+} = require('../controller/ReportController');
 const route = express.Router();
 
 

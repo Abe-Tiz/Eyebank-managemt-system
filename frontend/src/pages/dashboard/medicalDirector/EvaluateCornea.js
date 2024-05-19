@@ -75,7 +75,7 @@ const EvaluateCornea = () => {
                 duration: 5000,
                 isClosable: true,
             });
-            navigate('/medicaldirectordashboard/viewTissue');
+            navigate('/medicaldirectordashboard/evaluatedlist');
         } catch (error) {
             // Handle error
             toast({
