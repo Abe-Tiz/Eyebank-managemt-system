@@ -51,12 +51,11 @@ const createRecipient = async (req, res) => {
         throw error;
     }
 };
-
 // Retrieve all recipients
 const getRecipients = async (req, res) => {
     try {
-        const { surgeonId } = req.query; // Retrieve the surgeon ID from the query parameter
-        const recipents = await RecipientModel.find({ surgeonName: surgeonId })
+        const { surgeonName } = req.query; // Retrieve the surgeon ID from the query parameter
+        const recipents = await RecipientModel.find({ name: surgeonName })
             .populate("surgeonName")
             .populate("hospital");
         res.json(recipents);
@@ -69,7 +68,6 @@ const getRecipient = async (req, res) => {
     const recipient = await RecipientModel.findById(req.params.id);
     res.send(recipient);
 };
-
 // Update a recipient
 const updateRecipient = async (req, res) => {
     const recipient = await RecipientModel.findOneAndUpdate(
@@ -78,7 +76,6 @@ const updateRecipient = async (req, res) => {
     );
     res.send(recipient);
 };
-
 // Delete a recipient
 const deleteRecipient = async (req, res) => {
     const recipient = await RecipientModel.findByIdAndDelete(req.params.id);

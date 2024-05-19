@@ -35,12 +35,12 @@
 //                             data-tooltip-id="my-dashboard"
 //                             data-tooltip-content="View Cornea"
 
-                            
+
 
 
 //                         >
 
-                            
+
 //                             <MdSpaceDashboard className="text-2xl" />
 //                         </Link>
 
@@ -195,7 +195,7 @@ import { useToast } from '@chakra-ui/react';
 
 const MedicalSidebar = ({ collapsed, name, role }) => {
     const { t } = useTranslation();
-    const {toast}=useToast()
+    const { toast } = useToast()
 
     const [isOpen, setIsOpen] = useState({
         approvedList: false,
@@ -304,8 +304,8 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
                                             iconLibrary: "md",
                                             iconName: "MdPlaylistAddCheckCircle",
                                         },
-                                       
-                                        
+
+
                                     ]}
                                 />
 
@@ -326,8 +326,8 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
                                             iconLibrary: "md",
                                             iconName: "MdPlaylistAddCheckCircle",
                                         },
-                                        
-                                       
+
+
                                     ]}
                                 />
 
@@ -363,12 +363,12 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
                                     }}
                                     subtitleProps={[
                                         {
-                                            link: "/medicaldirectordashboard/evaluatecornea",
+                                            link: "/medicaldirectordashboard/viewTissue",
                                             subtitle: "evaluatecornea",
                                             iconLibrary: "md",
                                             iconName: "MdStreetview",
                                         },
-                                        
+
                                     ]}
                                 />
                                 {/* for request cornea */}

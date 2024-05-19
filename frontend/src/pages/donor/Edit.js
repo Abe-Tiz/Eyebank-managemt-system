@@ -215,7 +215,7 @@ const Edit = () => {
                         name="name"
                         type="text"
                         value={name}
-                        pattern="[0-9a-zA-Z ]{6,}"
+                        pattern="[a-zA-Z\u1200-\u137F ]{6,}"
                         required
                         placeholder={t("common:namePlaceholderLabel")}
                         onChange={handleName}

@@ -33,7 +33,7 @@ const getHospitalByName = asyncHandler(async (req, res) => {
         if (response.length === 0) {
             return res.status(404).json({ message: "Hospital not found" });
         }
-        
+
         res.status(200).json(response);
     } catch (error) {
         console.error(error);
@@ -52,10 +52,10 @@ const DeleteHospital = async (req, res) => {
     res.send("deleted successfully");
 }
 module.exports = {
-  CreatHospital,
-  GetHospital,
-  GetHospitalById,
-  UpdateHospital,
-  DeleteHospital,
-  getHospitalByName,
+    CreatHospital,
+    GetHospital,
+    GetHospitalById,
+    UpdateHospital,
+    DeleteHospital,
+    getHospitalByName,
 };

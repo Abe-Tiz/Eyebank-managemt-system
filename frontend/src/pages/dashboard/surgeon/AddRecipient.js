@@ -4,6 +4,8 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
 import useLoggedInUser from "../../../useHooks/useLoggedInUser";
+import ButtonComponent from '../../../components/ButtonComponent';
+
 const AddRecipient = () => {
     const [recipientname, setRecipientname] = useState("");
     const [age, setAge] = useState("");
@@ -198,12 +200,9 @@ const AddRecipient = () => {
                             <option value="Benshangul">Benshangul</option>
                         </select>
                     </label>
-                    <button
-                        type="submit"
-                        className="w-1/3 mr-4 py-2 px-4 border bg-sky-600  text-white font-semibold rounded"
-                    >
-                        Add Recipient
-                    </button>
+                    <div className="text-center mt-4 mb-2">
+                        <ButtonComponent label="Submit" title={"Register Recipient"} type="submit" />
+                    </div>
                 </div>
             </form >
         </div >

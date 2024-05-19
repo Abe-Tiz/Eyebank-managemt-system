@@ -58,14 +58,12 @@ const ViewPostList = () => {
             month: 'short',
             day: 'numeric',
         };
-
         return new Date(timestamp).toLocaleString('en-US', options);
     }
-
     useEffect(() => {
         const getAllRecipients = async () => {
             try {
-                const surgeonId = localStorage.getItem('surgeonId'); // Retrieve the surgeon ID from local storage
+                const surgeonName = localStorage.getItem('surgeonName'); // Retrieve the surgeon ID from local storage
                 const response = await axios.get(
                     'http://localhost:4000/recipient/read',
                     {
@@ -75,24 +73,22 @@ const ViewPostList = () => {
                             )}`,
                         },
                         params: {
-                            surgeonId: surgeonId, // Pass the surgeon ID as a query parameter
+                            surgeonName: surgeonName, // Pass the surgeon ID as a query parameter
                         },
                     }
                 );
                 const data = response.data;
                 setRecipient(data);
-                console.log(surgeonId);
+                console.log(surgeonName);
             } catch (error) {
                 console.error(error);
             }
         };
         getAllRecipients();
     }, []);
-
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
-
     const deleteRecipient = async (id) => {
         try {
             await axios.delete(`http://localhost:4000/recipient/delete/${id}`, {
@@ -120,7 +116,7 @@ const ViewPostList = () => {
                 </Flex>
                 <Table className='mt-8' variant='simple'>
                     <Thead>
-                        <Tr className='bg-gray-200 '>
+                        <Tr className="bg-blue-300 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                             <Th>S.No</Th>
                             <Th>Date Of Post</Th>
                             <Th>Lot No</Th>

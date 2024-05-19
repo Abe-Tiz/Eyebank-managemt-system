@@ -166,8 +166,8 @@ const CreateDonor = () => {
 
   return (
     <>
-      <div className="w-full relative bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100%   min-h-screen flex items-center justify-center md:mt-4">
-        <div class="bg-transparent rounded-md overflow-hidden shadow-md p-6 mx-auto w-4/5 relative">
+      <div className="w-full relative bg-gradient-to-r from-[#FAFAFA] from-0% to-[#fcfcfcd5] t0-100%   min-h-screen flex flex-col items-center justify-center md:mt-4">
+        {/* <div class=" bg-base-200 rounded-md overflow-hidden p-6 mx-auto w-full items-center relative"> */}
           <div className="flex flex-col md:flex-row mt-6">
             <div className="flex justify-center mb-4 md:mb-0">
               <img
@@ -480,7 +480,7 @@ const CreateDonor = () => {
               </div>
             </form>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </>
   );

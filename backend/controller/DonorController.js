@@ -98,7 +98,7 @@ const createDonor = asyncHandler(async (req, res) => {
                     // create Notification for new donor registration
                     Notification.create({
                       donorId: newDonor._id,
-                    //   verified: newDonor.verified,
+                      verified: newDonor.verified,
                       newDonor: 1,
                     });
                     // Notification.newDonor += 1;
