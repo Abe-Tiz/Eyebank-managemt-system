@@ -200,8 +200,8 @@ const AddRecipient = () => {
                             <option value="Benshangul">Benshangul</option>
                         </select>
                     </label>
-                    <div className="text-center mt-4 mb-2">
-                        <ButtonComponent label="Submit" title={"Register Recipient"} type="submit" />
+                    <div className=" text-center mt-4 mb-2">
+                        <ButtonComponent label="Submit" title={"Register "} type="submit" />
                     </div>
                 </div>
             </form >

@@ -43,6 +43,7 @@ import EvaluateCornea from "../pages/dashboard/medicalDirector/EvaluateCornea";
 import EvaluateList from "../pages/dashboard/medicalDirector/EvaluatedList";
 import EditEvaluation from "../pages/dashboard/medicalDirector/EditEvaluation";
 import ApproveRequest from "../pages/dashboard/medicalDirector/ApproveRequest";
+import MedicalReport from "../pages/dashboard/medicalDirector/MedicalReport";
 // import ApprovedList from "../pages/dashboard/medicalDirector/ApprovedList";
 import PhysicalExam from "../pages/dashboard/lab/PhysicalExam";
 import PhysicalExamView from "../pages/dashboard/lab/PhysicalExamView";
@@ -52,8 +53,6 @@ import ApprovedRequest from "../pages/dashboard/medicalDirector/ApprovedList";
 // import EditPage from "../sections/labTech/EditPage";
 //surgeon
 import SurgeonDashboard from "../layout/SurgeonLayout";
-
-
 import ViewRequestedCornea from "../pages/dashboard/lab/ApprovedRequest";
 import ViewRequestedCorneaSurgeon from "../pages/dashboard/surgeon/ViewCorneaRequestSurgeon";
 import SendRequestCornea from "../pages/dashboard/surgeon/RequestCornea";
@@ -431,7 +430,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "",
-                element: "",
+                element: <MedicalReport />,
             },
             {
                 path: "viewTissue",
