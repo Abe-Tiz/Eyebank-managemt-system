@@ -16,15 +16,6 @@ const ExamedList = () => {
     }, []);
     const [collect, setcollect] = useState(true);
 
-
-    function formatTimestamp(timestamp) {
-        const options = {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-        };
-        return new Date(timestamp).toLocaleString("en-US", options);
-    }
     const handleCollect = async (id) => {
         try {
             await axios.put(`http://localhost:4000/api/collect/${id}`);
@@ -111,13 +102,12 @@ const ExamedList = () => {
 
     return (
         <Box p={6}>
-
             {exams.length === 0 ? (
                 <Heading as="h3" size="lg" textAlign="center">No physical exams found.</Heading>
             ) : (
-                <Table variant="simple" colorScheme="gray">
+                <Table variant="striped" colorScheme="gray">
                     <Thead>
-                        <Tr className="bg-blue-300 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                        <Tr className="bg-blue-300">
                             <Th>Height</Th>
                             <Th>Weight</Th>
                             <Th>Sex</Th>
@@ -135,16 +125,15 @@ const ExamedList = () => {
                             )
                             .map((exam, index) => (
                                 <Tr key={index}>
-                                    {/* <ChakraTd>{index + 1}</ChakraTd> */}
                                     <ChakraTd>{exam.height}</ChakraTd>
                                     <ChakraTd>{exam.weight}</ChakraTd>
                                     <ChakraTd>{exam.sex}</ChakraTd>
                                     <ChakraTd>{exam.causeOfDeath}</ChakraTd>
-                                    <ChakraTd>{formatTimestamp(exam.dod)}</ChakraTd>
+                                    <ChakraTd>{exam.dod}</ChakraTd>
                                     <ChakraTd>{exam.time}</ChakraTd>
                                     <ChakraTd>
                                         <Flex justify="center" gap={2}>
-                                            <Button colorScheme='telegram' onClick={() => handleCollect(exam._id)}>
+                                            <Button colorScheme="blue" onClick={() => handleCollect(exam._id)}>
                                                 Collect
                                             </Button>
                                         </Flex>
