@@ -21,7 +21,7 @@ import ViewCornea from '../pages/dashboard/lab/ViewCornea';
 import DistributeCornea from '../pages/dashboard/lab/DistributeCornea';
 import ViewDistributed from '../pages/dashboard/lab/ViewDistributed';
 // import StoreCornea from '../pages/dashboard/lab/StoreCornea';
-import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
+// import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
 import ExamedList from '../pages/dashboard/lab/ExamedList';
 import ListOfPleged from '../pages/dashboard/lab/ListOfPleged';
 import EvaluatedList from '../pages/dashboard/lab/EvaluatedList';
@@ -100,6 +100,7 @@ import Test from "../pages/dashboard/lab/serology/Test";
 import EditDistribute from './../pages/dashboard/lab/EditDistribute';
 import OcularPostReport from "../pages/dashboard/medicalDirector/OcularPostReport";
 // import OcularPostReport from './../pages/dashboard/medicalDirector/OcularPostReport';
+import DiscardCornea from './../pages/dashboard/lab/discard/DiscardCornea';
 
 const router = createBrowserRouter([
   {

@@ -37,10 +37,20 @@ const getUserCount = asyncHandler(async (req, res) => {
 const getCorneaCount = asyncHandler(async (req, res) => {
     try {
         const totalCorneaCount = await Cornea.estimatedDocumentCount();
-
-        // const count = await Donor.countDocuments();
-        // console.log(totalCorneaCount);
         res.status(200).json(totalCorneaCount);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+// get total number of stored cornea
+const getStoredCorneaCount = asyncHandler(async (req, res) => {
+    try {
+        const stored = await Cornea.estimatedDocumentCount({
+            distributed: true,
+            expirationDate: { $lt: 14 },
+        });
+        res.status(200).json(stored);
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ error: "Internal server error" });
@@ -207,14 +217,15 @@ const getPhysicalExaminedCount = asyncHandler(async (req, res) => {
 
 // exports the modules
 module.exports = {
-    getDonorCount,
-    getCorneaCount,
-    getEvalutedCorneaCount,
-    getCorneaByMonth,
-    getTestedCount,
-    getPhysicalExaminedCount,
-    getDistributedCorneaCount,
-    getDistributedCorneaByMonth,
-    getPledgeByMonth,
-    getUserCount,
+  getDonorCount,
+  getCorneaCount,
+  getEvalutedCorneaCount,
+  getCorneaByMonth,
+  getTestedCount,
+  getPhysicalExaminedCount,
+  getDistributedCorneaCount,
+  getDistributedCorneaByMonth,
+  getPledgeByMonth,
+  getUserCount,
+  getStoredCorneaCount,
 };

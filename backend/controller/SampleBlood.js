@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 
 const createSampleBlood = asyncHandler(async (req, res) => {
     const serology = req.body;
-    const id = req.body.cornId;
+  const id = req.body.cornId;
     try {
         const sampleBlood = await SampleBlood.create(serology);
         const cornea = await Cornea.findById(id);  
@@ -15,10 +15,24 @@ const createSampleBlood = asyncHandler(async (req, res) => {
         res.status(500).json(error)
     }
 })
+const discard = asyncHandler(async (req, res) => {
+    const { reason, cornId } = req.body;
+    try {
+        const discarded = await SampleBlood.create({ reason, cornId });
+        const cornea = await Cornea.findById(cornId);  
+        cornea.isTested = false;
+        cornea.isDiscarded = true;
+        cornea.reason = reason;
+        await cornea.save();
+        res.status(200).json({ discarded, cornea });
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 const getSerologyTest = async (req, res) => {
     try {
-        const serology = await SampleBlood.find({})
+        const serology = await SampleBlood.find({reason:null})
           .populate({ path: "userId", select: "name email" })
           .populate({
             path: "cornId",
@@ -81,9 +95,10 @@ const updateSerology = async (req, res) => {
  }
 
 module.exports = {
-    createSampleBlood,
-    getSerologyTest,
-    deleteSerology,
-    updateSerology,
-    getSampleByLotnum,
+  createSampleBlood,
+  getSerologyTest,
+  deleteSerology,
+  updateSerology,
+  getSampleByLotnum,
+  discard,
 };

@@ -25,6 +25,7 @@ const createCornea = async (req, res) => {
             evaluater: req.body.evaluater
         }
     });
+    
     try {
         const createdCornea = await cornea.save(); // Add await here
         res.send({ status: "ok", data: createdCornea });

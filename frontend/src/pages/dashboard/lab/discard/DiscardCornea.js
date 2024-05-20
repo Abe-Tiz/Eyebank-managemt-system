@@ -13,18 +13,17 @@ import {
 } from "@chakra-ui/react";
 import useSearch from "../../../../useHooks/useSearch";
 import SearchComponent from "../../../../components/SearchComponent";
-import TableHeader from "../TableHeader";
-import TableRowCornea from "../TableRowCornea";
-import Pagination from "../../../../components/Pagination";
-import Row from "./Row";
+import CommonTablHeader from "../serology/CommonTablHeader";
+import Row from "../serology/Row";
 import NotFound from "../../../../components/NotFound";
+import Pagination from "../../../../components/Pagination";
 import LoadingCircle from "../../../../components/LoadingCircle";
-import CommonTablHeader from "./CommonTablHeader";
-// import NotFound from './../../../../components/NotFound';
+import DiscardRow from "./DiscardRow";
 
-const CollectedCornea = () => {
+
+const DiscardCornea = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const { searchTerm, handleChange, data, error } = useSearch("cornea");
   const navigate = useNavigate();
   const [corneas, setCorneas] = useState([]);
@@ -48,12 +47,10 @@ const CollectedCornea = () => {
         const cornData = response.data;
         const filteredCorneas = cornData.filter(
           (cornea) =>
-            cornea.isTested !== true &&
-            cornea.expirationDate !== 14 &&
-            cornea.isDiscarded !== true
+            cornea.isDiscarded === true
         );
         setCorneas(filteredCorneas);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -63,8 +60,8 @@ const CollectedCornea = () => {
   }, []);
 
   const renderCornea = searchTerm ? data : currentCorneas;
-  const notTestCornes = renderCornea.filter((item) => item.isTested !== true);
-  //  console.log("searched:", notTestCornes);
+ 
+   console.log("discarded:", renderCornea);
   return (
     <div>
       <TableContainer>
@@ -89,14 +86,13 @@ const CollectedCornea = () => {
                   third="Clarity"
                   forth="Size"
                   fifth="Eye Lid"
-                  six="Iris Color"
-                  seven="Action"
+                  six="Reason"
                 />
                 {/* Table body */}
                 <tbody>
-                  {notTestCornes ? (
-                    notTestCornes.map((cornea, index) => (
-                      <Row key={index} cornea={cornea} />
+                  {renderCornea ? (
+                    renderCornea.map((cornea, index) => (
+                      <DiscardRow key={index} cornea={cornea} />
                     ))
                   ) : (
                     <NotFound />
@@ -104,7 +100,7 @@ const CollectedCornea = () => {
                 </tbody>
               </Table>
               {/* Pagination Controls */}
-              {notTestCornes && (
+              {renderCornea && (
                 <Pagination
                   totalPages={totalPages}
                   currentPage={currentPage}
@@ -122,4 +118,4 @@ const CollectedCornea = () => {
   );
 };
 
-export default CollectedCornea;
+export default DiscardCornea;
