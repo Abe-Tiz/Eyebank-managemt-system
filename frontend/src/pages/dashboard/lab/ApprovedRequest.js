@@ -16,6 +16,7 @@ const ApprovedRequest = () => {
           "http://localhost:4000/requestCornea/getRequests"
         );
         setRequestedCorneas(data);
+        // console.log("dataaaa:",data);
       } catch (error) {
         console.log(error);
         toast.error("Something Went Wrong");
@@ -26,34 +27,7 @@ const ApprovedRequest = () => {
   }, []);
 
  const navigate = useNavigate();
-
-  // const handleApprove = async (id) => {
-  //     try {
-  //         await axios.put(http://localhost:4000/requestCornea/approve/${id});
-  //         setRequestedCorneas(
-  //             requestedCorneas.map((p) =>
-  //                 p._id === id ? { ...p, isApproved: true } : p
-  //             )
-  //         );
-  //         toast({
-  //             title: "Requste Approved",
-  //             status: "success",
-  //             duration: 3000,
-  //             isClosable: true,
-  //             position: "top",
-  //         });
-  //     } catch (error) {
-  //         toast({
-  //             title: "Error Occurred!",
-  //             description: error.message,
-  //             status: "error",
-  //             duration: 5000,
-  //             isClosable: true,
-  //             position: "top",
-  //         });
-  //     }
-  // };
-
+ 
   const handleDistribute = async (id, suiatablity) => {
     try {
       const params = {

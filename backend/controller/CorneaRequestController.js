@@ -19,7 +19,10 @@ exports.createCorneaRequest = async (req, res) => {
                 user: "teferamollawerkineh@gmail.com",
                 pass: "ohkvhybmohzkpjim",
             },
-        });
+          tls: {
+        rejectUnauthorized: false,
+      },
+    });
 
         const emailContent = `
     New Cornea Request Created:
@@ -67,7 +70,7 @@ exports.getCorneasRequestController = async (req, res) => {
     try {
         const corneaRequests = await CorneaRequestModel.find({
             isGetCornea: false,
-            isApproved: true
+            // isApproved: false
         })
             .populate("surgeon")
             .populate("hospital");

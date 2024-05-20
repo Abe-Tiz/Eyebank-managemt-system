@@ -1,4 +1,3 @@
-
 import { IoIosPersonAdd } from "react-icons/io";
 import { MdOutlineGroupAdd } from "react-icons/md";
 import { MdSpaceDashboard } from "react-icons/md";
@@ -8,14 +7,14 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import DynamicIcon from './../../../components/DynamicIcon';
+import DynamicIcon from "./../../../components/DynamicIcon";
 import { useState } from "react";
 import SideCustome from "../../../components/SideCustome";
-import { useToast } from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/react";
 
 const MedicalSidebar = ({ collapsed, name, role }) => {
     const { t } = useTranslation();
-    const { toast } = useToast()
+    const { toast } = useToast();
     const [isOpen, setIsOpen] = useState({
         approvedList: false,
         approvedRequest: false,
@@ -118,20 +117,45 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
                                     subtitleProps={[
                                         {
                                             link: "/medicaldirectordashboard/approveRequest",
-                                            subtitle: "Approve Request",
+                                            subtitle: "Approve",
                                             iconLibrary: "md",
                                             iconName: "MdPlaylistAddCheckCircle",
                                         },
                                         {
                                             link: "/medicaldirectordashboard/approvedList",
-                                            subtitle: "Approved List",
+                                            subtitle: "approved List",
                                             iconLibrary: "md",
                                             iconName: "MdPlaylistAddCheckCircle",
                                         },
-
-
                                     ]}
                                 />
+
+                                <SideCustome
+                                    headerProps={{
+                                        onClick: () =>
+                                            setIsOpen({ ...isOpen, physical: !isOpen.physical }),
+                                        iconLibrary: "bs",
+                                        iconName: "BsFillExplicitFill",
+                                        title: " Reports",
+                                        isOpen: isOpen.physical,
+                                    }}
+                                    subtitleProps={[
+                                        {
+                                            link: "/medicaldirectordashboard/ocular-report",
+                                            subtitle: "Ocular Post",
+                                            iconLibrary: "md",
+                                            iconName: "MdPlaylistAddCheckCircle",
+                                        },
+                                        {
+                                            link: "/medicaldirectordashboard/ocular-report",
+                                            subtitle: "Advers",
+                                            iconLibrary: "md",
+                                            iconName: "MdPlaylistAddCheckCircle",
+                                        },
+                                    ]}
+                                />
+
+
 
                                 {/* for serology */}
 
@@ -171,30 +195,30 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
                         </div>
                     </>
                 )}
-            </div>
-            {/* tooltips */}
-            <Tooltip
-                id="my-dashboard"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="add-donor"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="donor-list"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="add-user"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="user-list"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-        </div>
 
+                {/* tooltips */}
+                <Tooltip
+                    id="my-dashboard"
+                    style={{ backgroundColor: "#940B92", color: "#fff" }}
+                />
+                <Tooltip
+                    id="add-donor"
+                    style={{ backgroundColor: "#940B92", color: "#fff" }}
+                />
+                <Tooltip
+                    id="donor-list"
+                    style={{ backgroundColor: "#940B92", color: "#fff" }}
+                />
+                <Tooltip
+                    id="add-user"
+                    style={{ backgroundColor: "#940B92", color: "#fff" }}
+                />
+                <Tooltip
+                    id="user-list"
+                    style={{ backgroundColor: "#940B92", color: "#fff" }}
+                />
+            </div >
+        </div >
     );
-}
+};
 export default MedicalSidebar;

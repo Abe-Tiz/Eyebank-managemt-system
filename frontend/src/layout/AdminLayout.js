@@ -90,7 +90,7 @@ const AdminDashboard = () => {
     // };
 
     return (
-      <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
+      <Layout className=" bg-base-100 min-h-screen w-full grid  md:grid-cols-1 ">
         {/* side bar section */}
         <CustomSidebar
           collapsed={state.collapsed}
@@ -103,7 +103,7 @@ const AdminDashboard = () => {
         <Layout
           className={`${
             state.collapsed ? "ml-20" : "ml-64"
-          }  bg-base-200 transition-all duration-300 ease-in-out flex-grow`}
+          }  bg-base-100 transition-all duration-300 ease-in-out flex-grow`}
         >
           {/* header componnet  */}
           <HeaderComponent
@@ -117,7 +117,7 @@ const AdminDashboard = () => {
 
           {/* content section  */}
           <Content className="p-4 mt-10">
-            <div className=" bg-base-200  w-full">
+            <div className=" bg-base-100  w-full">
               <Outlet />
             </div>
           </Content>

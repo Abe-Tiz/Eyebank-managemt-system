@@ -75,57 +75,48 @@ const StoredCornea = () => {
     };
 
     return (
-        <div>
-            <div className='text-center mt-0'>
-                <TableContainer>
-                    <Text fontSize='2xl' className='text-center font-bold text-black mt-0'>
-                        <span> List of evaluated cornea </span>
-                    </Text>
-                    <Table variant='simple'>
-                        <Thead>
-                            <Tr className='bg-sky-600 text-white'>
-                                <Th className='text-white'>S.No</Th>
-                                <Th className='text-white'>LotNo</Th>
-                                <Th className='text-white'>Date</Th>
-                                <Th className='text-white'>Evaluater</Th>
-                                {/* <Th>Epitheliam</Th>
-                                <Th>Stroma</Th>
-                                <Th>Endothelium</Th>
-                                <Th>Approval</Th> */}
-                                <Th className='text-white'>Suiatablity</Th>
-                                <Th className='text-white' colSpan={1}>Operations</Th>
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            {corneas
-                                .filter(
-                                    (cornea) =>
-                                        cornea.evaluation &&
-                                        (cornea.evaluation.approval === 'yes' && cornea.distributed === false)
-                                )
-                                .map((cornea, index) => (
-                                    <Tr key={index}>
-                                        <Td>{index + 1}</Td>
-                                        <Td>{cornea.lotNo}</Td>
-                                        <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td>
-                                        <Td>{cornea.evaluation.evaluater}</Td>
-                                        {/* <Td>{cornea.evaluation.epitheliam}</Td>
-                                        <Td>{cornea.evaluation.stroma}</Td>
-                                        <Td>{cornea.evaluation.endothelium}</Td> */}
-                                        {/* <Td>{cornea.evaluation.approval}</Td> */}
-                                        <Td>
-                                            {cornea.evaluation.suiatablity}
-                                        </Td>
-                                        <Td className='text-center ml-3 text-blue-600'>
-                                            <td>{cornea.distributed === true ? (<p className="text-green-500 font-bold">Distributed</p>) : (<Button colorScheme='blue' onClick={() => handleDistribute(cornea._id)}>Distribute</Button>)}</td>
-                                        </Td>
-                                    </Tr>
-                                ))}
-                        </Tbody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </div >
+      <div>
+        <div className="text-center mt-0">
+          <TableContainer>
+            <Text
+              fontSize="2xl"
+              className="text-center font-bold text-black mt-0"
+            >
+              <span> List of evaluated cornea </span>
+            </Text>
+            <Table variant="simple">
+              <Thead>
+                <Tr className="bg-sky-600 text-white">
+                  <Th className="text-white">S.No</Th>
+                  <Th className="text-white">LotNo</Th>
+                  <Th className="text-white">Date</Th>
+                  <Th className="text-white">Evaluater</Th>
+                  <Th className="text-white">Suiatablity</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {corneas
+                  .filter(
+                    (cornea) =>
+                      cornea.evaluation.approval === "yes" &&
+                      cornea.distributed === false
+                  )
+                  .map((cornea, index) => (
+                    <Tr key={index}>
+                      <Td>{index + 1}</Td>
+                      <Td>{cornea.lotNo}</Td>
+                      <Td>
+                        {formatTimestamp(cornea.evaluation.evaluationDate)}
+                      </Td>
+                      <Td>{cornea.evaluation.evaluater}</Td>
+                      <Td>{cornea.evaluation.suiatablity}</Td>
+                    </Tr>
+                  ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </div>
+      </div>
     );
 };
 

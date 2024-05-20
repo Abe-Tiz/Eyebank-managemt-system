@@ -3,10 +3,11 @@ import { Layout } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import MedicalSidebar from "../pages/dashboard/medicalDirector/MedicalSidebar";
+// import MedicalSidebar from "../pages/dashboard/medicalDirector/MedicalSidebar";
 import socketIOClient from "socket.io-client";
 import HeaderComponent from "../pages/dashboard/admins/HeaderComponent";
 import useLoggedInUser from "../useHooks/useLoggedInUser";
+import MedicalSidebar from '../pages/dashboard/medicalDirector/MedicalSidebar';
 
 
 
@@ -95,7 +96,7 @@ const MedicalDirectorDashboard = () => {
                     image={user && user.data.image}
                     toggleSidebar={toggleSidebar}
                     newDonorCount={newDonorCount}
-                    role="medicalDirector"
+                    role="medical"
                 />
 
                 {/* content section  */}

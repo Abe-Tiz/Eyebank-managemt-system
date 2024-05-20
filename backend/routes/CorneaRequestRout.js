@@ -11,7 +11,7 @@ router.put(
     requestController.updateCorneaRequestController
 );
 router.get('/getRequest', requestController.getCorneaRequestController);
-router.get('/getRequests', requestController.getCorneaRequestController);
+router.get("/getRequests", requestController.getCorneasRequestController);
 router.get('/getRequest/:id', requestController.getSingleCorneaRequestController);
 router.delete(
     '/delete-request/:pid',

@@ -1,18 +1,24 @@
 const Cornea = require('../models/Cornea');
 const Distribution = require('../models/CorneaDistribution');
 const CorneaRequestModel = require('../models/CorneaRequest');
+
 const createDistribution = async (req, res) => {
-    const { hospitalName, name, modeOfTransportation, id, suiatablity, } = req.body;
+    const { hospitalName, name, modeOfTransportation, id, corneaId, } = req.body;
     try {
         const distribution = await Distribution.create({
             hospitalName: hospitalName,
             name: name,
             modeOfTransportation: modeOfTransportation,
-            suiatablity: suiatablity
+            corneaId: corneaId
         })
         const requestedCornea = await CorneaRequestModel.findById(id);
         requestedCornea.isGetCornea = true;
         requestedCornea.save();
+
+        const cornea = await Cornea.findById(corneaId);
+        cornea.distributed = true;
+        cornea.save();
+
         if (distribution) {
             res.send({ status: "ok", data: distribution })
         }

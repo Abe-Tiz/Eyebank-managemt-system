@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ButtonComponent from "../../../components/ButtonComponent";
 
 const AddHospital = () => {
     const [hospitalName, setHospitalName] = useState();
@@ -38,15 +39,15 @@ const AddHospital = () => {
                 placeholder="Enter hospital name"
                 value={hospitalName}
                 onChange={(e) => setHospitalName(e.target.value)}
-                            required
-                            autoComplete="true"
+                required
+                autoComplete="true"
               />
             </div>
             <div className="mb-2">
               <label className="block">Type</label>
               <select
                 onChange={(e) => setType(e.target.value)}
-                className="border border-gray-300 rounded-md p-2"
+                className="form-input mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
               >
                 <option value="government">Government</option>
                 <option value="private">Private</option>
@@ -60,13 +61,15 @@ const AddHospital = () => {
                 placeholder="Enter address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                            required
-                            autoComplete="true"
-                            autoCorrect="true"
+                required
+                autoComplete="true"
+                autoCorrect="true"
               />
             </div>
-
-            <button className="btn ml-6 w-50 btn-success">Submit</button>
+            <ButtonComponent
+              customClass="w-64 justify-center  mb-3"
+              title="Save"
+            />
           </form>
         </div>
       </div>

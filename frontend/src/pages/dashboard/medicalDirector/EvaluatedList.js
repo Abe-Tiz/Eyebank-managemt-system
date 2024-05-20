@@ -74,12 +74,12 @@ const EvaluatedList = () => {
                     <Table variant='simple'>
                         <Thead>
                             <Tr className="bg-gray-200 ">
-                                <Th >S.No</Th>
+                                {/* <Th >S.No</Th> */}
                                 <Th >LotNo</Th>
-                                <Th >Date</Th>
+                                {/* <Th >Date</Th> */}
                                 <Th >Evaluater</Th>
                                 <Th >Epitheliam</Th>
-                                <Th >Stroma</Th>
+                                {/* <Th >Stroma</Th> */}
                                 <Th >Endothelium</Th>
                                 <Th >Approval</Th>
                                 <Th >Suiatabl</Th>
@@ -95,12 +95,12 @@ const EvaluatedList = () => {
                                 )
                                 .map((cornea, index) => (
                                     <Tr key={index}>
-                                        <Td>{index + 1}</Td>
+                                        {/* <Td>{index + 1}</Td> */}
                                         <Td>{cornea.lotNo}</Td>
-                                        <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td>
+                                        {/* <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td> */}
                                         <Td>{cornea.evaluation.evaluater}</Td>
                                         <Td>{cornea.evaluation.epitheliam}</Td>
-                                        <Td>{cornea.evaluation.stroma}</Td>
+                                        {/* <Td>{cornea.evaluation.stroma}</Td> */}
                                         <Td>{cornea.evaluation.endothelium}</Td>
                                         <Td>{cornea.evaluation.approval}</Td>
                                         <Td>
@@ -119,9 +119,9 @@ const EvaluatedList = () => {
                                                 <DeleteIcon />
                                             </button>
                                         </Td>
-                                    </Tr>
+                                    </Tr >
                                 ))}
-                        </Tbody>
+                        </Tbody >
                     </Table >
                 </TableContainer >
             </div >

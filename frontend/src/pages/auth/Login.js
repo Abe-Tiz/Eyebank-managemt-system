@@ -36,7 +36,7 @@ const Login = () => {
             } else {
                 if (data.status === "ok") {
                     if (data.user.role === "admin") {
-                        localStorage.setItem("token", data.data);
+                        // localStorage.setItem("token", data.data);
                         localStorage.setItem("adminId", data.user._id);
                         localStorage.setItem("admin", data.data);
                         localStorage.setItem("loggedIn", true);
@@ -55,6 +55,7 @@ const Login = () => {
                         localStorage.setItem("surgeonId", data.user._id);
                         localStorage.setItem("surgeonName", data.user.name);
                         localStorage.setItem("loggedIn", true);
+                        localStorage.setItem("token", data.data);
                         toast({
                             title: "Login Succeeded",
                             status: "success",

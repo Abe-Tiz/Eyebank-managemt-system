@@ -46,8 +46,10 @@ const UpdateHospital = async (req, res) => {
     res.send(hospital);
 }
 const DeleteHospital = async (req, res) => {
-    const hospital = await HospitalModel.findByIdAndDelete(req.params.id);
-    res.send(hospital);
+    await HospitalModel.findByIdAndDelete(req.params.id, {
+         new:true
+     });
+    res.send("deleted successfully");
 }
 module.exports = {
     CreatHospital,

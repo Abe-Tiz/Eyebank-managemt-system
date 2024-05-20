@@ -11,10 +11,11 @@ const ApprovedList = () => {
     useEffect(() => {
         const getAllRequestedCorneas = async () => {
             try {
-                const { data } = await axios.get(
+                const  data  = await axios.get(
                     "http://localhost:4000/requestCornea/getRequests"
                 );
-                setRequestedCorneas(data);
+                setRequestedCorneas(data.data);
+                // console.log("aproved::::",data)
             } catch (error) {
                 console.log(error);
                 toast.error("Something Went Wrong");

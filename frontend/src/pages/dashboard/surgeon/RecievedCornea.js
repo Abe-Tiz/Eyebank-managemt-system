@@ -31,7 +31,6 @@ const RecievedCornea = () => {
             month: 'short',
             day: 'numeric',
         };
-
         return new Date(timestamp).toLocaleString('en-US', options);
     }
 
@@ -52,7 +51,7 @@ const RecievedCornea = () => {
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
-    const renderDistributed = searchTerm ? data : distributed;
+    const renderDistributed = searchTerm ? data : currentCorneas;
     // Function to change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (

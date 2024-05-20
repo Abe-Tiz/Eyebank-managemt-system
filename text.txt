@@ -1,0 +1,1 @@
+serology test if clicked negetve else posetive and reason popup
