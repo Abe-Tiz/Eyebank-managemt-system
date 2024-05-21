@@ -101,6 +101,7 @@ import EditDistribute from './../pages/dashboard/lab/EditDistribute';
 import OcularPostReport from "../pages/dashboard/medicalDirector/OcularPostReport";
 // import OcularPostReport from './../pages/dashboard/medicalDirector/OcularPostReport';
 import DiscardCornea from './../pages/dashboard/lab/discard/DiscardCornea';
+import UserProfile from "../pages/auth/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -285,6 +286,11 @@ const router = createBrowserRouter([
         path: "approvedRequest",
         element: <ApprovedRequest />,
       },
+      // profile pass same with passed local storage variable name
+      {
+        path: "lab",
+        element: <UserProfile />,
+      },
     ],
   },
   {
@@ -354,6 +360,10 @@ const router = createBrowserRouter([
       {
         path: "edit-hospital/:id",
         element: <EditHospital />,
+      },
+      {
+        path: "admin",
+        element: <UserProfile />,
       },
     ],
   },
@@ -425,6 +435,10 @@ const router = createBrowserRouter([
         path: "recievedCornea",
         element: <RecievedCornea />,
       },
+      {
+        path: "doctor",
+        element: <UserProfile />,
+      },
     ],
   },
   {
@@ -478,6 +492,10 @@ const router = createBrowserRouter([
       {
         path: "ocular-report",
         element: <OcularPostReport />,
+      },
+      {
+        path: "medical",
+        element: <UserProfile />,
       },
     ],
   },

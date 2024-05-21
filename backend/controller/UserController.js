@@ -316,7 +316,7 @@ const getUser = asyncHandler(async (req, res) => {
 });
 
 
-// displays donor by id
+// displays user by id
 const getUserById = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;
@@ -325,6 +325,33 @@ const getUserById = asyncHandler(async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// change profile  image and password
+const getUserByIdAndChangePassWord = asyncHandler(async (req, res) => {
+  try {
+    const { image, oldPassword, password, userId } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    // Compare the old password with the password stored in the database
+    const isMatch = await Bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "password does not match!" });
+    }
+    // Update the image field and password
+    user.image = image;
+    const hashedPassword = await Bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+
+    await user.save();
 
     res.status(200).json(user);
   } catch (error) {
@@ -404,4 +431,5 @@ module.exports = {
   updateUser,
   getUserByName,
   activateUser,
+  getUserByIdAndChangePassWord,
 };

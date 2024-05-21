@@ -77,36 +77,38 @@ const MedicalDirectorDashboard = () => {
     // };
 
     return (
-        <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
-            {/* side bar section */}
-            <MedicalSidebar
-                collapsed={state.collapsed}
-                toggleSidebar={toggleSidebar}
-                name={user && user.data.name}
-                role={user && user.data.role}
-            />
+      <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
+        {/* side bar section */}
+        <MedicalSidebar
+          collapsed={state.collapsed}
+          toggleSidebar={toggleSidebar}
+          name={user && user.data.name}
+          role={user && user.data.role}
+        />
 
-            <Layout
-                className={`${state.collapsed ? "ml-20" : "ml-64"
-                    }  bg-base-200 transition-all duration-300 ease-in-out flex-grow`}
-            >
-                {/* header componnet  */}
-                <HeaderComponent
-                    state={state}
-                    image={user && user.data.image}
-                    toggleSidebar={toggleSidebar}
-                    newDonorCount={newDonorCount}
-                    role="medical"
-                />
+        <Layout
+          className={`${
+            state.collapsed ? "ml-20" : "ml-64"
+          }  bg-base-200 transition-all duration-300 ease-in-out flex-grow`}
+        >
+          {/* header componnet  */}
+          <HeaderComponent
+            state={state}
+            image={user && user.data.image}
+            toggleSidebar={toggleSidebar}
+            newDonorCount={newDonorCount}
+            role="medical"
+            route="MedicalDirectorDashboard"
+          />
 
-                {/* content section  */}
-                <Content className="p-4 mt-10">
-                    <div className=" bg-slate-100  w-full">
-                        <Outlet />
-                    </div>
-                </Content>
-            </Layout>
+          {/* content section  */}
+          <Content className="p-4 mt-10">
+            <div className=" bg-slate-100  w-full">
+              <Outlet />
+            </div>
+          </Content>
         </Layout>
+      </Layout>
     );
 };
 

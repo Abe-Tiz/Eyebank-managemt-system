@@ -31,23 +31,12 @@
     // Function to handle checkbox changes
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
-        if (name === "other") {
-        setIsOtherChecked(checked);
-        if (checked) {
-            setTests((prevTests) => [...prevTests, otherTestValue]);
-        } else {
-            setTests((prevTests) =>
-            prevTests.filter((test) => test !== otherTestValue)
-            );
-        }
-        } else {
         setTests((prevTests) => {
             if (checked && !prevTests.includes(name)) {
-            return [...prevTests, name];
+            return [...prevTests, `${name}  Negative`];
             }
             return prevTests.filter((test) => test !== name);
         });
-        }
     };
     //  function to handle other input field
     const handleOtherInputChange = (event) => {
@@ -229,7 +218,8 @@
                     placeholder="Enter Failled Reason"
                     onChange={handleOtherInputChange}
                     className="-mt-[50px] ml-[100px] block w-auto  border-2 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 valid:[&:not(:placeholder-shown)]:border-green-500"
-                />
+                            />
+                            
                 </div>
             )}
 

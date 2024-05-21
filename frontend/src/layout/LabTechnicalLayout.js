@@ -97,6 +97,7 @@ const LabTechnicalDashboard = () => {
             toggleSidebar={toggleSidebar}
             newDonorCount={newDonorCount}
             role="lab"
+            route="LabTechnicalDashboard"
           />
 
           {/* content section  */}

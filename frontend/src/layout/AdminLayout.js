@@ -97,7 +97,6 @@ const AdminDashboard = () => {
           toggleSidebar={toggleSidebar}
           name={user && user.data.name}
           role={user && user.data.role}
-          
         />
 
         <Layout
@@ -113,6 +112,7 @@ const AdminDashboard = () => {
             newDonorCount={countNotification}
             notifications={notifications}
             role="admin"
+            route="AdminDashboard"
           />
 
           {/* content section  */}

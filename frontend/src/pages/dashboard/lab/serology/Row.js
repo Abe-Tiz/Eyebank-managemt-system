@@ -11,7 +11,7 @@ const Row = ({ cornea }) => (
     <Td>{cornea.clarity}</Td>
     <Td> {cornea.size}</Td>
     <Td> {cornea.eyeLid}</Td>
-    <Td> {cornea.reason}</Td>
+    <Td> {cornea.irisColor}</Td>
 
     <Td className=" text-center ">
       <Link

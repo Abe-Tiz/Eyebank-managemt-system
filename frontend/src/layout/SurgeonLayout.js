@@ -55,6 +55,7 @@ const SurgeonDashboard = () => {
             state={state}
             toggleSidebar={toggleSidebar}
             image={user && user.data.image}
+            route="SurgeonDashboard"
           />
           <Content className="p-4 mt-10">
             <div className="bg-slate-100  w-full">
