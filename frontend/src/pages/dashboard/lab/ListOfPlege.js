@@ -84,7 +84,7 @@ const ListOfPlege = () => {
                                 <Td>{donor.email}</Td>
                                 <Td>{donor.city}</Td>
                                 <Td>{donor.mobile}</Td>
-                                <Td>{<Link to={`/labtechnicaldashboard/createExams/${donor._id}`}>donate</Link>}</Td>
+                                <Td>{<Link to={`/labtechnicaldashboard/createExams/${donor._id}`} className="w-48 px-3 py-2 border-2 rounded bg-blue-600 hover:bg-blue-700 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-700">donate</Link>}</Td>
                             </Tr>
                         ))}
                     </Tbody>
