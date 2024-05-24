@@ -117,7 +117,18 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                                             iconLibrary: "md",
                                             iconName: "MdPlaylistAddCircle",
                                         },
-                                       
+                                       {
+                                            link: "/labtechnicaldashboard/viewDonor",
+                                            subtitle: "Pledges",
+                                            iconLibrary: "md",
+                                            iconName: "MdStreetview",
+                                        },
+                                        {
+                                            link: "/labtechnicaldashboard/viewDonors",
+                                            subtitle: "Donated",
+                                            iconLibrary: "md",
+                                            iconName: "MdPlaylistAddCircle",
+                                        },
                                         
                                     ]}
                                 />
@@ -180,18 +191,7 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                                         isOpen: isOpen.cornea,
                                     }}
                                     subtitleProps={[
-                                        {
-                                            link: "/labtechnicaldashboard/viewDonor",
-                                            subtitle: "Donors",
-                                            iconLibrary: "md",
-                                            iconName: "MdStreetview",
-                                        },
-                                        {
-                                            link: "/labtechnicaldashboard/viewDonors",
-                                            subtitle: "Donated",
-                                            iconLibrary: "md",
-                                            iconName: "MdPlaylistAddCircle",
-                                        },
+                                        
                                         {
                                             link: "/labtechnicaldashboard/ViewCornea",
                                             subtitle: "View Cornea",
