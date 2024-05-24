@@ -131,9 +131,21 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                       iconLibrary: "md",
                       iconName: "MdPlaylistAddCheckCircle",
                     },
+                    // {
+                    //   link: "/labtechnicaldashboard/createExams",
+                    //   subtitle: "Add",
+                    //   iconLibrary: "md",
+                    //   iconName: "MdPlaylistAddCircle",
+                    // },
                     {
-                      link: "/labtechnicaldashboard/createExams",
-                      subtitle: "Add",
+                      link: "/labtechnicaldashboard/viewDonor",
+                      subtitle: "Examine",
+                      iconLibrary: "md",
+                      iconName: "MdStreetview",
+                    },
+                    {
+                      link: "/labtechnicaldashboard/examined-donor",
+                      subtitle: "Examined Donor",
                       iconLibrary: "md",
                       iconName: "MdPlaylistAddCircle",
                     },

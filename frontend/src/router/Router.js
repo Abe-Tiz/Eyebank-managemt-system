@@ -23,7 +23,7 @@ import ViewDistributed from '../pages/dashboard/lab/ViewDistributed';
 // import StoreCornea from '../pages/dashboard/lab/StoreCornea';
 // import DiscardCornea from '../pages/dashboard/lab/DiscardCornea';
 import ExamedList from '../pages/dashboard/lab/ExamedList';
-import ListOfPleged from '../pages/dashboard/lab/ListOfPleged';
+// import ListOfPleged from '../pages/dashboard/lab/ListOfPleged';
 // import EvaluatedList from '../pages/dashboard/lab/EvaluatedList';
 // import EvaluateCornea from '../pages/dashboard/lab/EvaluateCornea';
 import EditCornea from '../pages/dashboard/lab/EditCornea';
@@ -107,6 +107,9 @@ import DiscardCornea from './../pages/dashboard/lab/discard/DiscardCornea';
 import UserProfile from "../pages/auth/UserProfile";
 import ReportMedical from "../pages/reports/medical/ReportMedical";
 // import Report from '../pages/reports/medical/Report';
+import ListOfPleged from '../pages/dashboard/lab/ListOfPleged';
+import ExaminedDonor from "../pages/dashboard/lab/physical/ExaminedDonor";
+import ViewExamined from './../pages/dashboard/lab/physical/ViewExamined';
 
 const router = createBrowserRouter([
   {
@@ -263,9 +266,13 @@ const router = createBrowserRouter([
         path: "createExams",
         element: <PhysicalExam />,
       },
+    //   {
+    //     path: "getAll",
+    //     element: <PhysicalExamView />,
+    //   },
       {
         path: "getAll",
-        element: <PhysicalExamView />,
+        element: <ViewExamined />,
       },
       {
         path: "getOne/:id",
@@ -287,10 +294,14 @@ const router = createBrowserRouter([
         path: "viewRequestCornea",
         element: <ViewRequestedCornea />,
       },
-      // {
-      //   path: "viewDonor",
-      //   element: <ListOfPlege />,
-      // },
+      {
+        path: "viewDonor",
+        element: <ListOfPleged />,
+      },
+      {
+        path: "examined-donor",
+        element: <ExaminedDonor />,
+      },
       {
         path: "approvedRequest",
         element: <ApprovedRequest />,
