@@ -26,7 +26,7 @@ import Pagination from '../../../components/Pagination';
 import useSearch from '../../../useHooks/useSearch';
 import SearchComponent from '../../../components/SearchComponent';
 
-const ViewRecipient = () => {
+const Adverse = () => {
     const [isOpen, setIsOpen] = useState({
         serology: false,
         distribut: false,
@@ -134,7 +134,7 @@ const ViewRecipient = () => {
                     <Tbody>
                         {renderRecipient
                             .filter((recipent) =>
-                                (recipent.adverse.adversePost === false) || (recipent.ocularPost.Post === false))
+                                (recipent.adverse.adversePost === false))
                             .map((recipent, index) => (
                                 <Tr key={index} className='mb-2 text-lg'>
                                     <Td>{index + 1}</Td>
@@ -145,16 +145,15 @@ const ViewRecipient = () => {
                                     <Td>{recipent.phone}</Td>
                                     <Td>{recipent.address}</Td>
                                     <Td>{recipent.surgeryType}</Td>
-                                    <Td className="text-blue-600">
-                                        <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>
-                                            <EditIcon />
-                                        </Link>
-                                    </Td>
                                     <Td>
-                                        <button className="text-red-600" onClick={() => deleteRecipient(recipent._id)}>
-                                            <DeleteIcon />
-                                        </button>
+                                        <Button colorScheme="telegram">
+                                            <Link to={`/surgondashboard/adverse/${recipent._id}`}>
+                                                Adverse
+                                            </Link>
+                                        </Button>
                                     </Td>
+
+
                                 </Tr>
                             ))}
                     </Tbody>
@@ -170,4 +169,4 @@ const ViewRecipient = () => {
     );
 };
 
-export default ViewRecipient;
+export default Adverse;

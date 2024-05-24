@@ -9,8 +9,6 @@
     import DynamicIcon from "../../components/DynamicIcon";
 
     const UserProfile = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
     const [image, setImage] = useState("");
     const [imageLoading, setImageLoading] = useState(false);
     const [password, setPassword] = useState("");
@@ -101,8 +99,8 @@
             position: "top",
             });
             localStorage.setItem("userInfo", JSON.stringify(data));
-            navigate("/adminDashboard/userList");
-            console.log(res);
+            // navigate("/adminDashboard/userList");
+            // console.log(res);
             // }
         })
         .catch((err) => {

@@ -26,7 +26,7 @@ import Pagination from '../../../components/Pagination';
 import useSearch from '../../../useHooks/useSearch';
 import SearchComponent from '../../../components/SearchComponent';
 
-const ViewRecipient = () => {
+const AdverseReport = () => {
     const [isOpen, setIsOpen] = useState({
         serology: false,
         distribut: false,
@@ -88,9 +88,11 @@ const ViewRecipient = () => {
         };
         getAllRecipients();
     }, []);
+
     const handleEvaluated = async () => {
         setIsButtonClicked(true);
     };
+
     const deleteRecipient = async (id) => {
         try {
             await axios.delete(`http://localhost:4000/recipient/delete/${id}`, {
@@ -104,13 +106,14 @@ const ViewRecipient = () => {
         }
     };
     const renderRecipient = searchTerm ? data : currentRecipients;
+
     return (
         <div>
             <TableContainer>
                 {/* <Text fontSize='3xl' className='text-center bg-teal-600 text-white mt-0'>
                     List of Recipients
                 </Text> */}
-                <Flex justify="flex-end" position="fixed" top={10} right={0} p={4}>
+                <Flex justify="flex-end" mb={3} position="fixed" top={10} right={0} p={4}>
                     <Box mr={15}>
                         <SearchComponent searchTerm={searchTerm} handleChange={handleChange} />
                     </Box>
@@ -119,42 +122,35 @@ const ViewRecipient = () => {
                     <Thead>
                         <Tr className="bg-blue-300 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                             <Th>S.No</Th>
-                            <Th>Register Date</Th>
-                            <Th>Recipient Name</Th>
-                            <Th>Age</Th>
-                            <Th>Sex</Th>
-                            <Th>Phone</Th>
-                            <Th>Address</Th>
-                            <Th>Surgery Type</Th>
-                            <Th className='text-center' colSpan={4}>
-                                Operations
-                            </Th>
+                            <Th>Date Of Diagnosis</Th>
+                            <Th>Lot No</Th>
+                            <Th>Adverse Reation</Th>
+                            <Th>Probablity of Case</Th>
+                            <Th>Donor Tissue</Th>
+                            <Th>Patient</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
                         {renderRecipient
-                            .filter((recipent) =>
-                                (recipent.adverse.adversePost === false) || (recipent.ocularPost.Post === false))
-                            .map((recipent, index) => (
-                                <Tr key={index} className='mb-2 text-lg'>
+                            .filter(
+                                (cornea) =>
+                                    cornea.adverse &&
+                                    (cornea.adverse.adversePost === true)
+                            )
+                            .map((cornea, index) => (
+                                <Tr key={index} className="mb-2 text-lg">
                                     <Td>{index + 1}</Td>
-                                    <Td>{formatTimestamp(recipent.createdAt)}</Td>
-                                    <Td>{recipent.recipientname}</Td>
-                                    <Td>{recipent.age}</Td>
-                                    <Td>{recipent.sex}</Td>
-                                    <Td>{recipent.phone}</Td>
-                                    <Td>{recipent.address}</Td>
-                                    <Td>{recipent.surgeryType}</Td>
-                                    <Td className="text-blue-600">
-                                        <Link to={`/surgondashboard/editrecipient/${recipent._id}`}>
+                                    <Td>{formatTimestamp(cornea.adverse.dateOfadverse)}</Td>
+                                    <Td>{cornea.adverse.lotNo}</Td>
+                                    <Td>{cornea.adverse.adverseReaction}</Td>
+                                    <Td>{cornea.adverse.probablityCase}</Td>
+                                    <Td>{cornea.adverse.donorTissue}</Td>
+                                    <Td>{cornea.recipientname}</Td>
+                                    {/* <Td className='text-center ml-3 text-blue-600'>
+                                        <Link to={`/surgondashboard/editocular/${cornea._id}`}>
                                             <EditIcon />
                                         </Link>
-                                    </Td>
-                                    <Td>
-                                        <button className="text-red-600" onClick={() => deleteRecipient(recipent._id)}>
-                                            <DeleteIcon />
-                                        </button>
-                                    </Td>
+                                    </Td> */}
                                 </Tr>
                             ))}
                     </Tbody>
@@ -165,9 +161,9 @@ const ViewRecipient = () => {
                     setCurrentPage={setCurrentPage}
                     paginate={paginate}
                 />
-            </TableContainer>
-        </div>
+            </TableContainer >
+        </div >
     );
 };
 
-export default ViewRecipient;
+export default AdverseReport;

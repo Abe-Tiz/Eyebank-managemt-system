@@ -10,6 +10,10 @@ const {
   getDistributedCorneaByMonth,
   getPledgeByMonth,
   getUserCount,
+    getRequesCount,
+    getOcularPost,
+    getAdverseReaction,
+    getDiscarded,
   getStoredCorneaCount,
   getTransplantedCorneaByMonth,
   getTransplantedCorneaCount,
@@ -28,6 +32,11 @@ route.get("/distributed", getDistributedCorneaCount);
 route.get("/distributed-month", getDistributedCorneaByMonth);
 route.get("/pledge-month", getPledgeByMonth);
 route.get("/user", getUserCount);
+route.get("/approved", getRequesCount);
+route.get("/ocular", getOcularPost);
+route.get("/adverse", getAdverseReaction);
+route.get("/discarded", getDiscarded);
+
 route.get("/stored", getStoredCorneaCount);
 route.get("/transplanted", getTransplantedCorneaByMonth);
 route.get("/transplant-total", getTransplantedCorneaCount);

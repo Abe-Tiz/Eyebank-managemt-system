@@ -8,7 +8,9 @@ import ButtonComponent from '../../../components/ButtonComponent';
 
 const AddRecipient = () => {
     const [recipientname, setRecipientname] = useState("");
+    const [recipientNameWarning, setRecipientNameWarning] = useState("");
     const [age, setAge] = useState("");
+    const [ageWarning, setAgeWarning] = useState("");
     const [diagnosis, setDiagnosis] = useState("");
     const [sex, setSex] = useState("");
     const [surgeons, setSurgeons] = useState([]);
@@ -18,6 +20,7 @@ const AddRecipient = () => {
     const [hospital, setHospital] = useState("");
     const [surgeryType, setSurgeryType] = useState("");
     const [phone, setPhone] = useState("");
+    const [phoneWarning, setPhoneWarning] = useState("");
     //for ocurar and adverse reaction 
     const [dateOfSurgry, setDateOfSurgry] = useState("");
     const [ocularOperativeEye, setOcularOperativeEye] = useState("");
@@ -111,18 +114,45 @@ const AddRecipient = () => {
                         <input
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={recipientname}
+                            pattern="^[a-zA-Z\u1200-\u137F ]{6,}$"
+                            type="text"
                             placeholder="Recipient Name"
-                            onChange={(e) => setRecipientname(e.target.value)}
+                            title="Please enter a name without numbers"
+                            onChange={(e) => {
+                                if (/\d/.test(e.target.value)) {
+                                    setRecipientNameWarning("Please enter a name without numbers");
+                                } else {
+                                    setRecipientNameWarning("");
+                                    setRecipientname(e.target.value);
+                                }
+                            }}
                         />
+                        {recipientNameWarning && (
+                            <div className="text-red-500 mt-2">{recipientNameWarning}</div>
+                        )}
                     </label>
                     <label>
                         <input
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="number"
-                            value={age}
+                            value={age || ""}
                             placeholder="Age"
-                            onChange={(e) => setAge(e.target.value)}
+                            min="1"
+                            max="120"
+                            title="Please enter a valid age (1-120)"
+                            onChange={(e) => {
+                                const value = parseInt(e.target.value, 10);
+                                if (isNaN(value) || value < 1 || value > 120) {
+                                    setAgeWarning("Please enter a valid age (1-120)");
+                                } else {
+                                    setAgeWarning("");
+                                    setAge(value);
+                                }
+                            }}
                         />
+                        {ageWarning && (
+                            <div className="text-red-500 mt-2">{ageWarning}</div>
+                        )}
                     </label>
                 </div>
                 <div className="grid mt-3 grid-cols-2">
@@ -149,12 +179,26 @@ const AddRecipient = () => {
                     </label>
                     <label>
                         <input
-                            className="form-input  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="number"
+                            className="form-input block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="tel"
                             placeholder="Phone"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            value={phone || ""}
+                            pattern="^\d{10,13}$"
+                            title="Please enter a valid phone number (10 digits)"
+                            onInput={(e) => {
+                                const inputValue = e.target.value.replace(/\D/g, "");
+                                if (inputValue.length > 13) {
+                                    setPhoneWarning("Please enter a valid phone number (10-13 digits)");
+                                    setPhone(inputValue.slice(0, 13));
+                                } else {
+                                    setPhoneWarning("");
+                                    setPhone(inputValue);
+                                }
+                            }}
                         />
+                        {phoneWarning && (
+                            <div className="text-red-500 mt-2">{phoneWarning}</div>
+                        )}
                     </label>
                 </div>
                 <div className="grid mt-3 grid-cols-2">

@@ -16,6 +16,10 @@ const AddAdverse = () => {
     const [adverseReaction, setAdverseReaction] = useState('');
     const [probablityCase, setProbablityCase] = useState('');
     const [donorTissue, setDonorTissue] = useState('');
+    const [donorTissueError, setDonorTissueError] = useState('');
+    const [adverseReactionError, setAdverseReactionError] = useState('');
+    const [probabilityCaseError, setProbabilityCaseError] = useState('');
+
     const [adversePost, setAdversePost] = useState(true);
     const adverse = {
         dateOfadverse,
@@ -110,24 +114,49 @@ const AddAdverse = () => {
                         ))}
                     </select>
                 </label>
-                <label className=" ml-16 px-12 block">
+                <label className="ml-16 px-12 block">
                     <input
                         className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                         type="text"
                         placeholder="Adverse Reaction"
                         value={adverseReaction}
-                        onChange={(e) => setAdverseReaction(e.target.value)}
+                        pattern="^[a-zA-Z\s]+$"
+                        title="Please enter only text"
+                        onChange={(e) => {
+                            if (/^[a-zA-Z\s]+$/.test(e.target.value)) {
+                                setAdverseReaction(e.target.value);
+                                setAdverseReactionError("");
+                            } else {
+                                setAdverseReaction(adverseReaction);
+                                setAdverseReactionError("Please enter only text");
+                            }
+                        }}
                     />
+                    {adverseReactionError && (
+                        <div className="text-red-500 mt-2">{adverseReactionError}</div>
+                    )}
                 </label>
-                <label className=" ml-16 px-12 block">
-
+                <label className="ml-16 px-12 block">
                     <input
                         className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                         type="text"
-                        placeholder="Probablity Case"
+                        placeholder="Probability Case"
                         value={probablityCase}
-                        onChange={(e) => setProbablityCase(e.target.value)}
+                        pattern="^[a-zA-Z\s]+$"
+                        title="Please enter only text"
+                        onChange={(e) => {
+                            if (/^[a-zA-Z\s]+$/.test(e.target.value)) {
+                                setProbablityCase(e.target.value);
+                                setProbabilityCaseError("");
+                            } else {
+                                setProbablityCase(probablityCase);
+                                setProbabilityCaseError("Please enter only text");
+                            }
+                        }}
                     />
+                    {probabilityCaseError && (
+                        <div className="text-red-500 mt-2">{probabilityCaseError}</div>
+                    )}
                 </label>
                 <label className="ml-16 px-12 block">
                     <input
@@ -135,8 +164,21 @@ const AddAdverse = () => {
                         type="text"
                         placeholder="Donor Tissue"
                         value={donorTissue}
-                        onChange={(e) => setDonorTissue(e.target.value)}
+                        pattern="^[a-zA-Z\s]+$"
+                        title="Please enter only text"
+                        onChange={(e) => {
+                            if (/^[a-zA-Z\s]+$/.test(e.target.value)) {
+                                setDonorTissue(e.target.value);
+                                setDonorTissueError("");
+                            } else {
+                                setDonorTissue(donorTissue);
+                                setDonorTissueError("Please enter only text");
+                            }
+                        }}
                     />
+                    {donorTissueError && (
+                        <div className="text-red-500 mt-2">{donorTissueError}</div>
+                    )}
                 </label>
                 <div className="text-center mt-4 mb-2">
                     <ButtonComponent label="Submit" title={"Send Adverse"} type="submit" />

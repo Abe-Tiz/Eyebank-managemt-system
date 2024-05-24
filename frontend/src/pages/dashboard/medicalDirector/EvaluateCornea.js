@@ -104,33 +104,49 @@ const EvaluateCornea = () => {
             >
                 <div className="grid grid-cols-2">
                     <label>
-                        endothelium:
-                        <input
+                        Endothelium:
+                        <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
                             value={endothelium}
                             onChange={(e) => setEndothelium(e.target.value)}
-                        />
+                        >
+                            <option value="">Select endothelium</option>
+                            <option value="normal">Normal</option>
+                            <option value="edema">Edema</option>
+                            <option value="guttata">Guttata</option>
+                            <option value="other">Other</option>
+                        </select>
                     </label>
                     <label>
-                        stroma:
-                        <input
+                        Stroma:
+                        <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
                             value={stroma}
                             onChange={(e) => setStroma(e.target.value)}
-                        />
+                        >
+                            <option value="">Select stroma</option>
+                            <option value="normal">Normal</option>
+                            <option value="edema">Corneal edema</option>
+                            <option value="degeneration">Degeneration</option>
+                            <option value="scarring">Scarring</option>
+                            <option value="keratoconus">Keratoconus</option>
+                        </select>
                     </label>
                 </div>
                 <div className="grid grid-cols-2">
                     <label>
-                        epitheliam:
-                        <input
+                        Epithelium:
+                        <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
                             value={epitheliam}
                             onChange={(e) => setEpitheliam(e.target.value)}
-                        />
+                        >
+                            <option value="">Select epithelium</option>
+                            <option value="normal">Normal</option>
+                            <option value="irregularity">Irregularity</option>
+                            <option value="erosion">Erosion</option>
+                            <option value="other">Other</option>
+                        </select>
                     </label>
                     <label>
                         Comment:

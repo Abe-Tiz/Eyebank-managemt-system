@@ -272,14 +272,14 @@ const Cornea = () => {
             {showReportTable ? "Hide" : "Show"}
           </button>
         </div>
-        <>
-          <BarGraph
-            data={corneaData}
-            distrData={distributedCorneaData}
-            pledData={pledgedCorneaData}
-            transplantedData={transplanteddCorneaData}
-          />
-        </>
+
+        <BarGraph
+          data={corneaData}
+          distrData={distributedCorneaData}
+          pledData={pledgedCorneaData}
+          transplantedData={transplanteddCorneaData}
+        />
+        
 
         {/* Conditional rendering of the ReportTable based on showReportTable state */}
         {showReportTable && (
