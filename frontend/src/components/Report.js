@@ -24,7 +24,7 @@ import Cornea from "../pages/reports/Cornea";
                donor: response.data,
              }));
 
-             console.log(response.data);
+            //  console.log(response.data);
            } catch (error) {
              console.log("Error : ", error);
            }
@@ -56,7 +56,7 @@ import Cornea from "../pages/reports/Cornea";
                evaluted: response.data,
              }));
 
-             console.log(response.data);
+            //  console.log(response.data);
            } catch (error) {
              console.log("Error : ", error);
            }
@@ -72,7 +72,7 @@ import Cornea from "../pages/reports/Cornea";
                cornea: response.data,
              }));
 
-             console.log(response.data);
+            //  console.log(response.data);
            } catch (error) {
              console.log("Error : ", error);
            }

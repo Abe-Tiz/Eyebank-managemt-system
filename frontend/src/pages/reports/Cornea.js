@@ -163,7 +163,7 @@ const Cornea = () => {
         pledge: response.data,
       }));
 
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -272,14 +272,14 @@ const Cornea = () => {
             {showReportTable ? "Hide" : "Show"}
           </button>
         </div>
-        <div>
+        <>
           <BarGraph
             data={corneaData}
             distrData={distributedCorneaData}
             pledData={pledgedCorneaData}
             transplantedData={transplanteddCorneaData}
           />
-        </div>
+        </>
 
         {/* Conditional rendering of the ReportTable based on showReportTable state */}
         {showReportTable && (
