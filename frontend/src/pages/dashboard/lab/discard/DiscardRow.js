@@ -14,15 +14,6 @@ const DiscardRow = ({ cornea }) => (
     <Td> {cornea.size}</Td>
     <Td> {cornea.eyeLid}</Td>
     <Td> {cornea.reason}</Td>
-
-    {/* <Td className=" text-center ">
-      <Link
-        className="text-blue-600"
-        to={`/labtechnicaldashboard/testserology/${cornea._id}`}
-      >
-        Test
-      </Link>
-    </Td> */}
   </Tr>
 );
 

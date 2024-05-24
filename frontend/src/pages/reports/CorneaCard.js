@@ -41,6 +41,11 @@ const CorneaCard = ({ category, number }) => {
             color = "bg-blue-900";
             title = "Total Distributed Cornea";
             break;
+        case "translanted":
+            icon = <MedicineBoxOutlined />;
+            color = "bg-yellow-900";
+            title = "Total Transplanted Cornea";
+            break;
         default:
             icon = null;
             color = "bg-gray-500";

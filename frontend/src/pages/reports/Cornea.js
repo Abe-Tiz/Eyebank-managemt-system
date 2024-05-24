@@ -10,6 +10,7 @@ const Cornea = () => {
   const [corneaReport, setCorneaReport] = useState([]);
   const [distributedReport, setDistributedReport] = useState([]);
   const [pledgedReport, setPledgedReport] = useState([]);
+  const [transplantedReport, setTransplantedReport] = useState([]);
   const [reportData, setReportData] = useState({
     pledge: 0,
     cornea: 0,
@@ -17,6 +18,7 @@ const Cornea = () => {
     serology: 0,
     physical: 0,
     distributed: 0,
+    translanted:0
   });
   const [showReportTable, setShowReportTable] = useState(false);
 
@@ -46,6 +48,18 @@ const Cornea = () => {
     }
   };
 
+  // number of corneas
+  const transplantedCorneaInMonth = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/report/transplanted"
+      );
+      // console.log("cornea pledged report:", response.data);
+      setTransplantedReport(response.data);
+    } catch (error) {
+      console.log("Error : ", error);
+    }
+  };
   // number of corneas
   const pledgedCorneaInMonth = async () => {
     try {
@@ -154,6 +168,23 @@ const Cornea = () => {
       console.log("Error : ", error);
     }
   };
+  // number of Transplanted cornea per month
+  const numberTransplantedCorn = async () => {
+    try {
+      const response = await axios.get(
+        "  http://localhost:4000/report/transplant-total"
+      );
+
+      setReportData((prevReportData) => ({
+        ...prevReportData,
+            translanted: response.data,
+      }));
+
+      // console.log(response.data);
+    } catch (error) {
+      console.log("Error : ", error);
+    }
+  };
 
   useEffect(() => {
     CorneaCount();
@@ -165,6 +196,8 @@ const Cornea = () => {
     distributedCornea();
     pledgedCorneaInMonth();
     distributedCorneaInMonth();
+    transplantedCorneaInMonth();
+    numberTransplantedCorn();
   }, [corneaReport]);
 
   // Function to toggle the ReportTable visibility
@@ -199,6 +232,11 @@ const Cornea = () => {
     month: item.month,
     count: item.count,
   }));
+  // pledged people
+  const transplanteddCorneaData = transplantedReport.map((item) => ({
+    month: item.month,
+    count: item.count,
+  }));
 
   const data = [
     { category: "cornea", number: reportData.cornea },
@@ -207,6 +245,7 @@ const Cornea = () => {
     { category: "physicalExamined", number: reportData.physical },
     { category: "pledeged", number: reportData.pledge },
     { category: "distributed", number: reportData.distributed },
+    { category: "translanted", number: reportData.translanted },
   ];
 
   return (
@@ -238,6 +277,7 @@ const Cornea = () => {
             data={corneaData}
             distrData={distributedCorneaData}
             pledData={pledgedCorneaData}
+            transplantedData={transplanteddCorneaData}
           />
         </div>
 
@@ -256,6 +296,7 @@ const Cornea = () => {
                 data={corneaData}
                 distrData={distributedCorneaData}
                 pledData={pledgedCorneaData}
+                 transplantedData={transplanteddCorneaData}
               />
             </div>
             <ButtonPrimary onClick={printReport} title=" Print" />

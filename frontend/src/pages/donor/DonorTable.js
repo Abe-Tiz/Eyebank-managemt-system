@@ -28,7 +28,7 @@ const DonorTable = ({
           name={t("register:LabelsignUpName")}
           city={t("donor:donorCity")}
           mobile={t("donor:donorMobile")}
-          status="Status"
+          status={t("donor:statusLabel")}
           action={t("donor:donorAction")}
         />
 

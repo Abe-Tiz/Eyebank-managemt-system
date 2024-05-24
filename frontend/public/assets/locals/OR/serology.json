@@ -1,0 +1,25 @@
+{
+  "titleSerology": " Tarree korniyaa walitti qabame",
+  "lotnumber": "Lakki",
+  "position": "Gita hojii",
+  "clarity": "Ifa ta'uu",
+  "size": "Hamma ga'u",
+  "eyelid": "Ija Ijaa",
+  "iriscolor": "Halluu Iris",
+
+  "testedTitle": "Tarree Bu'aa Qormaatame",
+  "bloodtype": "Gosa Dhiigaa",
+  "tested": "Qormaatame",
+
+  "test": "Qormaata",
+  "failled": "Ni Failed",
+  "testTitle": "Qormaata Raawwatame",
+  "hiv": "HIV",
+  "hepatitusb": "Dhukkuba tiruu B",
+  "syphilis": "Dhukkuba Siifiilisii",
+  "hepatitusc": "Dhukkuba tiruu C",
+  "reason": "Sababa",
+  "discardTitle": "Tarree korniyaa gatame",
+  "reasonplaceholder": "Sababni Kufe Galchi",
+  "save": "Qusachuu"
+}

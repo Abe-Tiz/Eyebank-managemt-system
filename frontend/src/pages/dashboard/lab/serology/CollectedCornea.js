@@ -20,6 +20,7 @@ import Row from "./Row";
 import NotFound from "../../../../components/NotFound";
 import LoadingCircle from "../../../../components/LoadingCircle";
 import CommonTablHeader from "./CommonTablHeader";
+import { useTranslation } from "react-i18next";
 // import NotFound from './../../../../components/NotFound';
 
 const CollectedCornea = () => {
@@ -28,6 +29,7 @@ const CollectedCornea = () => {
   const { searchTerm, handleChange, data, error } = useSearch("cornea");
   const navigate = useNavigate();
   const [corneas, setCorneas] = useState([]);
+  const {t} = useTranslation()
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -69,8 +71,8 @@ const CollectedCornea = () => {
     <div>
       <TableContainer>
         <div className="w-full mt-2 flex justify-between ">
-          <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-            List of collected cornea
+          <Text fontSize="xl" className="text-center text-black mt-0 mb-4">
+            {t("serology:titleSerology")}
           </Text>
           {/* search component */}
           <SearchComponent
@@ -84,13 +86,13 @@ const CollectedCornea = () => {
               <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 {/* Table header */}
                 <CommonTablHeader
-                  first="LotNo"
-                  second="Position"
-                  third="Clarity"
-                  forth="Size"
-                  fifth="Eye Lid"
-                  six="Iris Color"
-                  seven="Action"
+                  first={t("serology:lotnumber")}
+                  second={t("serology:position")}
+                  third={t("serology:clarity")}
+                  forth={t("serology:size")}
+                  fifth={t("serology:eyelid")}
+                  six={t("serology:iriscolor")}
+                  seven={t("donor:donorAction")}
                 />
                 {/* Table body */}
                 <tbody>

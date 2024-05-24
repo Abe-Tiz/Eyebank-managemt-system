@@ -1,0 +1,26 @@
+{
+    "titleSerology":" List of collected cornea",
+    "lotnumber":"Lot No",
+    "position":"Position",
+    "clarity":"Clarity",
+    "size":"Size",
+    "eyelid":"Eye Lid",
+    "iriscolor":"Iris Color",
+
+    "testedTitle":"List of Tested Results",
+    "bloodtype":"Blood Type",
+    "tested":"Tested",
+
+    "test":"Test",
+    "failled":"Is Failled",
+    "testTitle":"Test Done",
+    "hiv":"HIV",
+    "hepatitusb":"HepatitisB",
+    "syphilis":"Syphilis",
+    "hepatitusc":"HepatitisC",
+    "reason":"Reason",
+    "discardTitle":"List of discarded cornea",
+    "reasonplaceholder":"Enter Failled Reason",
+    "save":"Save"
+
+}

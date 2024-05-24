@@ -17,11 +17,10 @@ const months = [
   "December",
 ];
 
-const BarGraph = ({ data, distrData, pledData }) => {
-
+const BarGraph = ({ data, distrData, pledData, transplantedData }) => {
   // Create a function to map the counts to the corresponding month
   const mapCountsToMonths = (dataArray) => {
-    let countsByMonth = new Array(12).fill(0);  
+    let countsByMonth = new Array(12).fill(0);
     dataArray.forEach((monthData) => {
       const monthIndex = months.indexOf(monthData.month);
       if (monthIndex !== -1) {
@@ -30,7 +29,6 @@ const BarGraph = ({ data, distrData, pledData }) => {
     });
     return countsByMonth;
   };
-  
 
   const chartData = {
     labels: months,
@@ -41,7 +39,7 @@ const BarGraph = ({ data, distrData, pledData }) => {
         backgroundColor: "rgba(54, 162, 235, 0.6)",
         borderColor: "rgba(255, 255, 255, 1)",
         borderWidth: 1,
-        width:10,
+        width: 10,
       },
       {
         label: "Distributed Corneas",
@@ -54,6 +52,13 @@ const BarGraph = ({ data, distrData, pledData }) => {
         label: "Pledged Corneas",
         data: mapCountsToMonths(pledData),
         backgroundColor: "rgba(153, 102, 255, 0.6)",
+        borderColor: "rgba(255, 255, 255, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: "Transplanted Corneas",
+        data: mapCountsToMonths(transplantedData),
+        backgroundColor: "rgba(15, 102, 255, 0.6)",
         borderColor: "rgba(255, 255, 255, 1)",
         borderWidth: 1,
       },

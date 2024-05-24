@@ -39,5 +39,10 @@
     "ShortCode": " Short Code",
     "PlaceholderShortCode": "Enter Short Codee",
     "donorAction": "Action",
-    "ProfileHeading": "Visit Your Information"
+    "ProfileHeading": "Visit Your Information",
+    "statusLabel":"Status",
+    "searchLabel":"Search",
+    "activeLabel":"Active",
+    "roleLabel":"Role",
+    "pendingLabel":"Pending"
 }

@@ -108,8 +108,8 @@ const ViewUsers = () => {
             <TableHeader
               name={t("register:LabelsignUpName")}
               city={t("login:labelLoginEmail")}
-              mobile={t("donor:userstatus")}
-              status="Status"
+              mobile={t("donor:statusLabel")}
+              status={t("donor:roleLabel")}
               action={t("donor:donorAction")}
             />
             <tbody>
@@ -142,7 +142,7 @@ const ViewUsers = () => {
                         {t("donor:pendingStatus")}
                       </div>
                     )}
-                  </td>  
+                  </td>
                   <td className="px-6 py-4">{user.role}</td>
                   <td className="flex px-6 py-4">
                     <Link

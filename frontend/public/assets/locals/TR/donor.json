@@ -35,9 +35,14 @@
   "labelDonorCardBottom": "ንዕላማ ባንኪ ዓይኒ ኢትዮጵያ ጥራሕ ዝውዕል",
   "deleteTitleDonor": "ለጋሲ ምድምሳስ",
   "deleteCancelDonor": "ሰርዝ",
-  "deleteSubtitleDonor": " ነዚ ለጋሲ ክትድምስሶ ከም እትደሊ ርግጸኛ ዲኻ ? እዚ ተግባር እዚ ክምለስ ኣይክእልን እዩ።",
+  "deleteSubtitleDonor": "ነዚ ለጋሲ ክትድምስሶ ከም እትደሊ ርግጸኛ ዲኻ ? እዚ ተግባር እዚ ክምለስ ኣይክእልን እዩ።",
   "ProfileHeading": "ሓበሬታኹም ምብጻሕ",
   "HavePledge": "ቃል ኣቲኻ ዲኻ",
   "ShortCode": " ሓጺር ኮድ",
-  "PlaceholderShortCode": "ሓጺር ኮድ ኣእቱ"
+  "PlaceholderShortCode": "ሓጺር ኮድ ኣእቱ",
+  "statusLabel": "ኩነታት",
+  "searchLabel": "ምድላይ",
+  "activeLabel": "ንቑሕ",
+  "roleLabel": "ግደ",
+  "pendingLabel": "ኣብ ከይዲ"
 }

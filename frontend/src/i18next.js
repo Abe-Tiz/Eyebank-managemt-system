@@ -25,6 +25,7 @@ i18next
             "about",
             "contact",
             "cornea",
+            "serology"
         ],
         backend: {
             loadPath: "/assets/locals/{{lng}}/{{ns}}.json", //

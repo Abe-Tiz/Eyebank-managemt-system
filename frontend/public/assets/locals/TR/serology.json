@@ -1,0 +1,25 @@
+{
+  "titleSerology": "ዝርዝር ናይ ዝተኣከቡ ኮርኒያ",
+  "lotnumber": "አይኮንን",
+  "position": "ቦታ",
+  "clarity": "ንጹርነት",
+  "size": "ግዝፊ",
+  "eyelid": "ሽፋን ዓይኒ",
+  "iriscolor": "ኢሪስ ሕብሪ",
+
+  "testedTitle": "ዝርዝር ዝተፈተኑ ውፅኢታት",
+  "bloodtype": "ዓይነት ደም",
+  "tested": "ተፈቲኑ",
+
+  "test": "ቤተ-ፈተነ",
+  "failled": "ፈሺሉ",
+  "testTitle": "ፈተና ተፈጺሙ",
+  "hiv": "ኤች ኣይ ቪ",
+  "hepatitusb": "ሄፓታይተስ ቢ",
+  "syphilis": "ሕማም ፍንጣጣ",
+  "hepatitusc": "ሄፓታይተስ ሲ",
+  "reason": "ምኽንያት",
+  "discardTitle": "ዝርዝር ናይ ዝተደርበዩ ኮርኒያ",
+  "reasonplaceholder": "ዝፈሸለ ምኽንያት ኣእትዉ",
+  "save": "ምቑጣብ"
+}

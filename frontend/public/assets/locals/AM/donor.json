@@ -39,5 +39,10 @@
   "ProfileHeading": "መረጃዎን ይጎብኙ",
   "HavePledge": "ቃል ገብተሃል",
   "ShortCode": "አጭር ኮድ",
-  "PlaceholderShortCode": "አጭር ኮድ ያስገቡ"
+  "PlaceholderShortCode": "አጭር ኮድ ያስገቡ",
+  "statusLabel": "ሁኔታ",
+  "searchLabel": "ፈልግ",
+  "activeLabel": "ንቁ",
+  "roleLabel": "ሚና",
+  "pendingLabel": "በመጠባበቅ ላይ"
 }

@@ -112,7 +112,7 @@ const ListSerology = () => {
           <TableContainer>
             <div className="w-full mt-2 flex justify-between ">
               <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-                List of Tested Results
+                {t("serology:testedTitle")}
               </Text>
               {/* search component */}
               <SearchComponent
@@ -122,17 +122,16 @@ const ListSerology = () => {
             </div>
             <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
               <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                           
                 {/* Table header */}
                 <CommonTablHeader
                   // eight="Name"
-                  first="Blood Type"
-                  second="Position"
-                  third="Status"
-                  forth="Eye Lid"
-                  fifth="Lot No"
-                  six="Tested"
-                  seven="Action"
+                  first={t("serology:bloodtype")}
+                  second={t("serology:position")}
+                  third={t("donor:statusLabel")}
+                  forth={t("serology:eyelid")}
+                  fifth={t("serology:lotnumber")}
+                  six={t("serology:tested")}
+                  seven={t("donor:donorAction")}
                 />
 
                 {/* Table body */}

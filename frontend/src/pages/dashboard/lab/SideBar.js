@@ -94,182 +94,188 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                 {role}
               </span>
 
-                            {/* btn */}
-                            <div className="w-64- mt-4 flex flex-col justify-center items-center">
-                                <SideCustome
-                                    headerProps={{
-                                        onClick: () =>
-                                            setIsOpen({ ...isOpen, dashboard: !isOpen.dashboard }),
-                                        iconLibrary: "md",
-                                        iconName: "MdSpaceDashboard",
-                                        title: t("common:dashboardLabel"),
-                                        isOpen: isOpen.dashboard,
-                                    }}
-                                    subtitleProps={[
-                                        {
-                                            link: "/labtechnicaldashboard",
-                                            subtitle: t("common:dashboardLabel"),
-                                            iconLibrary: "md",
-                                            iconName: "MdSpaceDashboard",
-                                        },
-                                    ]}
-                                />
-                                {/* for Physical Examninatiion */}
-                                <SideCustome
-                                    headerProps={{
-                                        onClick: () =>
-                                            setIsOpen({ ...isOpen, physical: !isOpen.physical }),
-                                        iconLibrary: "bs",
-                                        iconName: "BsFillExplicitFill",
-                                        title: "Physical Examin",
-                                        isOpen: isOpen.physical,
-                                    }}
-                                    subtitleProps={[
-                                        {
-                                            link: "/labtechnicaldashboard/getAll",
-                                            subtitle: "View",
-                                            iconLibrary: "md",
-                                            iconName: "MdPlaylistAddCheckCircle",
-                                        },
-                                        {
-                                            link: "/labtechnicaldashboard/createExams",
-                                            subtitle: "Add",
-                                            iconLibrary: "md",
-                                            iconName: "MdPlaylistAddCircle",
-                                        },
-                                    ]}
-                                />
+              {/* btn */}
+              <div className="w-64- mt-4 flex flex-col justify-center items-center">
+                <SideCustome
+                  headerProps={{
+                    onClick: () =>
+                      setIsOpen({ ...isOpen, dashboard: !isOpen.dashboard }),
+                    iconLibrary: "md",
+                    iconName: "MdSpaceDashboard",
+                    title: t("common:dashboardLabel"),
+                    isOpen: isOpen.dashboard,
+                  }}
+                  subtitleProps={[
+                    {
+                      link: "/labtechnicaldashboard",
+                      subtitle: t("common:dashboardLabel"),
+                      iconLibrary: "md",
+                      iconName: "MdSpaceDashboard",
+                    },
+                  ]}
+                />
+                {/* for Physical Examninatiion */}
+                <SideCustome
+                  headerProps={{
+                    onClick: () =>
+                      setIsOpen({ ...isOpen, physical: !isOpen.physical }),
+                    iconLibrary: "bs",
+                    iconName: "BsFillExplicitFill",
+                    title: "Physical Examin",
+                    isOpen: isOpen.physical,
+                  }}
+                  subtitleProps={[
+                    {
+                      link: "/labtechnicaldashboard/getAll",
+                      subtitle: "View",
+                      iconLibrary: "md",
+                      iconName: "MdPlaylistAddCheckCircle",
+                    },
+                    {
+                      link: "/labtechnicaldashboard/createExams",
+                      subtitle: "Add",
+                      iconLibrary: "md",
+                      iconName: "MdPlaylistAddCircle",
+                    },
+                  ]}
+                />
 
-                                {/* for serology */}
-                                <SideCustome
-                                    headerProps={{
-                                        onClick: () =>
-                                            setIsOpen({ ...isOpen, serology: !isOpen.serology }),
-                                        iconLibrary: "gi",
-                                        iconName: "GiTestTubes",
-                                        title: "Serology",
-                                        isOpen: isOpen.serology,
-                                    }}
-                                    subtitleProps={[
-                                        {
-                                            link: "/labtechnicaldashboard/list-serology",
-                                            subtitle: "List",
-                                            iconLibrary: "md",
-                                            iconName: "MdPlaylistAddCheckCircle",
-                                        },
-                                        {
-                                            // link: "/labtechnicaldashboard/serology",
-                                            link: "/labtechnicaldashboard/cornea-serology",
-                                            subtitle: "Add",
-                                            iconLibrary: "io",
-                                            iconName: "IoIosAddCircle",
-                                        },
-                                    ]}
-                                />
+                {/* for serology */}
+                <SideCustome
+                  headerProps={{
+                    onClick: () =>
+                      setIsOpen({ ...isOpen, serology: !isOpen.serology }),
+                    iconLibrary: "gi",
+                    iconName: "GiTestTubes",
+                    title: "Serology",
+                    isOpen: isOpen.serology,
+                  }}
+                  subtitleProps={[
+                    {
+                      link: "/labtechnicaldashboard/list-serology",
+                      subtitle: "List",
+                      iconLibrary: "md",
+                      iconName: "MdPlaylistAddCheckCircle",
+                    },
+                    {
+                      // link: "/labtechnicaldashboard/serology",
+                      link: "/labtechnicaldashboard/cornea-serology",
+                      subtitle: "Add",
+                      iconLibrary: "io",
+                      iconName: "IoIosAddCircle",
+                    },
+                  ]}
+                />
 
-                                {/* for distribute */}
-                                <SideCustome
-                                    headerProps={{
-                                        onClick: () =>
-                                            setIsOpen({ ...isOpen, distribut: !isOpen.distribut }),
-                                        iconLibrary: "fa",
-                                        iconName: "FaHourglassEnd",
-                                        title: "Distribution",
-                                        isOpen: isOpen.distribut,
-                                    }}
-                                    subtitleProps={[
-                                        {
-                                            link: "/labtechnicaldashboard/viewDistributed",
-                                            subtitle: "View",
-                                            iconLibrary: "md",
-                                            iconName: "MdOutlinePreview",
-                                        },
-                                    ]}
-                                />
+                {/* for distribute */}
+                <SideCustome
+                  headerProps={{
+                    onClick: () =>
+                      setIsOpen({ ...isOpen, distribut: !isOpen.distribut }),
+                    iconLibrary: "fa",
+                    iconName: "FaHourglassEnd",
+                    title: "Distribution",
+                    isOpen: isOpen.distribut,
+                  }}
+                  subtitleProps={[
+                    {
+                      link: "/labtechnicaldashboard/viewRequestCornea",
+                      subtitle: "Distribute",
+                      iconLibrary: "md",
+                      iconName: "MdStreetview",
+                    },
+                    {
+                      link: "/labtechnicaldashboard/viewDistributed",
+                      subtitle: "View",
+                      iconLibrary: "md",
+                      iconName: "MdOutlinePreview",
+                    },
+                  ]}
+                />
 
-                                {/* for cornea */}
-                                <SideCustome
-                                    headerProps={{
-                                        onClick: () =>
-                                            setIsOpen({ ...isOpen, cornea: !isOpen.cornea }),
-                                        iconLibrary: "gi",
-                                        iconName: "GiMazeCornea",
-                                        title: "Cornea",
-                                        isOpen: isOpen.cornea,
-                                    }}
-                                    subtitleProps={[
-                                        {
-                                            link: "/labtechnicaldashboard/examlist",
-                                            subtitle: "Examed List",
-                                            iconLibrary: "md",
-                                            iconName: "MdPlaylistAddCheckCircle",
-                                        },
-                                        {
-                                            link: "/labtechnicaldashboard/ViewCornea",
-                                            subtitle: "View Cornea",
-                                            iconLibrary: "fa",
-                                            iconName: "FaClipboardList",
-                                        },
-                                        {
-                                            link: "/labtechnicaldashboard/storedCornea",
-                                            subtitle: "Store",
-                                            iconLibrary: "gr",
-                                            iconName: "GrDocumentStore",
-                                        },
-                                        {
-                                            link: "/labtechnicaldashboard/discardCornea",
-                                            subtitle: "Discard",
-                                            iconLibrary: "md",
-                                            iconName: "MdRemoveShoppingCart",
-                                        },
-                                    ]}
-                                />
-                                {/* for request cornea */}
-                                <SideCustome
-                                    headerProps={{
-                                        onClick: () =>
-                                            setIsOpen({ ...isOpen, request: !isOpen.request }),
-                                        iconLibrary: "gi",
-                                        iconName: "GiMazeCornea",
-                                        title: "Request",
-                                        isOpen: isOpen.request,
-                                    }}
-                                    subtitleProps={[
-                                        {
-                                            link: "/labtechnicaldashboard/viewRequestCornea",
-                                            subtitle: "View Request",
-                                            iconLibrary: "md",
-                                            iconName: "MdStreetview",
-                                        },
-                                    ]}
-                                />
-                            </div>
-                        </div>
-                    </>
-                )}
+                {/* for cornea */}
+                <SideCustome
+                  headerProps={{
+                    onClick: () =>
+                      setIsOpen({ ...isOpen, cornea: !isOpen.cornea }),
+                    iconLibrary: "gi",
+                    iconName: "GiMazeCornea",
+                    title: "Cornea",
+                    isOpen: isOpen.cornea,
+                  }}
+                  subtitleProps={[
+                    {
+                      link: "/labtechnicaldashboard/examlist",
+                      subtitle: "Collect",
+                      iconLibrary: "md",
+                      iconName: "MdPlaylistAddCheckCircle",
+                    },
+                    {
+                      link: "/labtechnicaldashboard/ViewCornea",
+                      subtitle: "View",
+                      iconLibrary: "fa",
+                      iconName: "FaClipboardList",
+                    },
+                    {
+                      link: "/labtechnicaldashboard/storedCornea",
+                      subtitle: "Storeed",
+                      iconLibrary: "gr",
+                      iconName: "GrDocumentStore",
+                    },
+                    {
+                      link: "/labtechnicaldashboard/discardCornea",
+                      subtitle: "Discarded",
+                      iconLibrary: "md",
+                      iconName: "MdRemoveShoppingCart",
+                    },
+                  ]}
+                />
+                {/* for request cornea */}
+                {/* <SideCustome
+                  headerProps={{
+                    onClick: () =>
+                      setIsOpen({ ...isOpen, request: !isOpen.request }),
+                    iconLibrary: "gi",
+                    iconName: "GiMazeCornea",
+                    title: "Request",
+                    isOpen: isOpen.request,
+                  }}
+                  subtitleProps={[
+                    {
+                      link: "/labtechnicaldashboard/viewRequestCornea",
+                      subtitle: "View Request",
+                      iconLibrary: "md",
+                      iconName: "MdStreetview",
+                    },
+                  ]}
+                /> */}
+              </div>
             </div>
-            {/* tooltips */}
-            <Tooltip
-                id="my-dashboard"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="add-donor"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="donor-list"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="add-user"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-            <Tooltip
-                id="user-list"
-                style={{ backgroundColor: "#940B92", color: "#fff" }}
-            />
-        </div>
-    );
+          </>
+        )}
+      </div>
+      {/* tooltips */}
+      <Tooltip
+        id="my-dashboard"
+        style={{ backgroundColor: "#940B92", color: "#fff" }}
+      />
+      <Tooltip
+        id="add-donor"
+        style={{ backgroundColor: "#940B92", color: "#fff" }}
+      />
+      <Tooltip
+        id="donor-list"
+        style={{ backgroundColor: "#940B92", color: "#fff" }}
+      />
+      <Tooltip
+        id="add-user"
+        style={{ backgroundColor: "#940B92", color: "#fff" }}
+      />
+      <Tooltip
+        id="user-list"
+        style={{ backgroundColor: "#940B92", color: "#fff" }}
+      />
+    </div>
+  );
 }
 export default CustomSidebar;

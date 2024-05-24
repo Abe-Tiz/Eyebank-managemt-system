@@ -19,6 +19,7 @@ import NotFound from "../../../../components/NotFound";
 import Pagination from "../../../../components/Pagination";
 import LoadingCircle from "../../../../components/LoadingCircle";
 import DiscardRow from "./DiscardRow";
+import { useTranslation } from 'react-i18next';
 
 
 const DiscardCornea = () => {
@@ -30,6 +31,7 @@ const DiscardCornea = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+  const { t } = useTranslation();
 
   // Calculate the total number of pages
   const totalPages = Math.ceil(corneas.length / itemsPerPage);
@@ -61,13 +63,14 @@ const DiscardCornea = () => {
 
   const renderCornea = searchTerm ? data : currentCorneas;
  
-   console.log("discarded:", renderCornea);
+  //  console.log("discarded:", renderCornea);
   return (
     <div>
       <TableContainer>
         <div className="w-full mt-2 flex justify-between ">
           <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
-            List of collected cornea
+            
+            {t("serology:discardTitle")}
           </Text>
           {/* search component */}
           <SearchComponent
@@ -81,12 +84,12 @@ const DiscardCornea = () => {
               <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 {/* Table header */}
                 <CommonTablHeader
-                  first="LotNo"
-                  second="Position"
-                  third="Clarity"
-                  forth="Size"
-                  fifth="Eye Lid"
-                  six="Reason"
+                  first={t("serology:lotnumber")}
+                  second={t("serology:position")}
+                  third={t("serology:clarity")}
+                  forth={t("serology:size")}
+                  fifth={t("serology:eyelid")}
+                  six={t("serology:reason")}
                 />
                 {/* Table body */}
                 <tbody>

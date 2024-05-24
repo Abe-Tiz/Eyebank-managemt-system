@@ -8,6 +8,7 @@ const PhysicalExam = require("../models/PhysicalExam");
 const StoredCornea = require("../models/StoredCornea");
 const moment = require("moment");
 const Distribution = require("../models/CorneaDistribution");
+const RecipientModel = require("../models/Recipient");
 
 // get total number of pledged
 const getDonorCount = asyncHandler(async (req, res) => {
@@ -125,6 +126,44 @@ const getCorneaByMonth = asyncHandler(async (req, res) => {
 
 });
 
+// transplanted corneas with in month
+const getTransplantedCorneaByMonth = asyncHandler(async (req, res) => {
+    try {
+        const corneaData = await RecipientModel.aggregate([
+          {
+            $project: {
+              month: { $month: "$createdAt" },
+              "ocularPost.Post": 1,
+            },
+          },
+          {
+            $match: { "ocularPost.Post": true },
+          },
+          {
+            $group: {
+              _id: "$month",
+              count: { $sum: 1 },
+            },
+          },
+          {
+            $sort: { _id: 1 },
+          },
+        ]);
+
+        const formattedCorneaData = corneaData.map((monthData) => {
+            const monthName = moment()
+                .month(monthData._id - 1)
+                .format("MMMM");
+            return { month: monthName, count: monthData.count };
+        });
+
+        res.status(200).json(formattedCorneaData);
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
+});
+
 // get total evaluted cornea
 const getEvalutedCorneaCount = asyncHandler(async (req, res) => {
     try {
@@ -134,6 +173,19 @@ const getEvalutedCorneaCount = asyncHandler(async (req, res) => {
         });
         // console.log(approvedCorneas);
         res.status(200).json(approvedCorneas);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+// total transplanted corneas
+const getTransplantedCorneaCount = asyncHandler(async (req, res) => {
+    try {
+        const respo = await RecipientModel.countDocuments({
+            "ocularPost.Post": true,
+        });
+        res.status(200).json(respo);
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ error: "Internal server error" });
@@ -228,4 +280,6 @@ module.exports = {
   getPledgeByMonth,
   getUserCount,
   getStoredCorneaCount,
+  getTransplantedCorneaByMonth,
+  getTransplantedCorneaCount,
 };
