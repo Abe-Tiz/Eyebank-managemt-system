@@ -147,15 +147,13 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
                                             iconName: "MdPlaylistAddCheckCircle",
                                         },
                                         {
-                                            link: "/medicaldirectordashboard/ocular-report",
-                                            subtitle: "Advers",
+                                            link: "/medicaldirectordashboard/adverse_report",
+                                            subtitle: "Adverse",
                                             iconLibrary: "md",
                                             iconName: "MdPlaylistAddCheckCircle",
                                         },
                                     ]}
                                 />
-
-
 
                                 {/* for serology */}
 

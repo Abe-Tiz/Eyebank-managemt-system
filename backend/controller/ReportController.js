@@ -3,6 +3,7 @@ const Donor = require("../models/Donor");
 const Cornea = require("../models/Cornea");
 const User = require("../models/User");
 const CorneaRequestModel = require("../models/CorneaRequest");
+const RecipientModel = require("../models/Recipient");
 const SampleBlood = require("../models/SampleBlood");
 const PhysicalExam = require("../models/PhysicalExam");
 const StoredCornea = require("../models/StoredCornea");
@@ -204,7 +205,55 @@ const getPhysicalExaminedCount = asyncHandler(async (req, res) => {
     }
 });
 
+const getRequesCount = asyncHandler(async (req, res) => {
+    try {
+        const totalCount = await CorneaRequestModel.estimatedDocumentCount({ isApproved: true });
 
+        // const count = await Donor.countDocuments();
+        // console.log(totalDonorsCount);
+        res.status(200).json(totalCount);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+const getOcularPost = asyncHandler(async (req, res) => {
+    try {
+        const totalCount = await RecipientModel.estimatedDocumentCount({ Post: true });
+
+        // const count = await Donor.countDocuments();
+        // console.log(totalDonorsCount);
+        res.status(200).json(totalCount);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+const getAdverseReaction = asyncHandler(async (req, res) => {
+    try {
+        const totalCount = await RecipientModel.estimatedDocumentCount({ adversePost: true });
+
+        // const count = await Donor.countDocuments();
+        // console.log(totalDonorsCount);
+        res.status(200).json(totalCount);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+const getDiscarded = asyncHandler(async (req, res) => {
+    try {
+        // count aproval corneas 
+        const approvedCorneas = await Cornea.countDocuments({
+            "evaluation.approval": "no",
+        });
+        // console.log(approvedCorneas);
+        res.status(200).json(approvedCorneas);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 // exports the modules
 module.exports = {
     getDonorCount,
@@ -217,4 +266,8 @@ module.exports = {
     getDistributedCorneaByMonth,
     getPledgeByMonth,
     getUserCount,
+    getRequesCount,
+    getOcularPost,
+    getAdverseReaction,
+    getDiscarded
 };

@@ -10,6 +10,10 @@ const {
     getDistributedCorneaByMonth,
     getPledgeByMonth,
     getUserCount,
+    getRequesCount,
+    getOcularPost,
+    getAdverseReaction,
+    getDiscarded
     // getCorneaByMonthManualy
 } = require('../controller/ReportController');
 const route = express.Router();
@@ -27,5 +31,10 @@ route.get("/distributed", getDistributedCorneaCount);
 route.get("/distributed-month", getDistributedCorneaByMonth);
 route.get("/pledge-month", getPledgeByMonth);
 route.get("/user", getUserCount);
+route.get("/approved", getRequesCount);
+route.get("/ocular", getOcularPost);
+route.get("/adverse", getAdverseReaction);
+route.get("/discarded", getDiscarded);
+
 
 module.exports = route;

@@ -13,6 +13,8 @@ const AddOcularPost = () => {
     const [lotNo, setLotNo] = useState('');
     const [lotNoData, setLotNoData] = useState([]);
     const [ocularOperativeEye, setOcularOperativeEye] = useState('');
+    const [ocularOperativeEyeError, setOcularOperativeEyeError] = useState('');
+    const [ocularNonOperativeEyeError, setOcularNonOperativeEyeError] = useState('');
     const [ocularNonOperativeEye, setOcularNonOperativeEye] = useState('');
     const [Post, setOcularPost] = useState(true);
 
@@ -75,68 +77,95 @@ const AddOcularPost = () => {
     };
     // console.log(Post)
     return (
-      <div>
-        <h2 className="text-3xl mb-5 " style={{ textAlign: "center" }}>
-          Ocular Post Form
-        </h2>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSave();
-          }}
-        >
-          <label className=" ml-16 px-12 block">
-            <select
-              className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-              value={lotNo}
-              onChange={(e) => setLotNo(e.target.value)}
+        <div>
+            <h2 className="text-3xl mb-5 " style={{ textAlign: "center" }}>
+                Ocular Post Form
+            </h2>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSave();
+                }}
             >
-              <option value="">Select lotNo</option>
-              {lotNoData.map((lot, index) => (
-                <option key={index} value={lot?.corneaId?.lotNo}>
-                  {lot?.corneaId?.lotNo}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label htmlFor="date" className=" ml-16 px-12 block">
-            <input
-              className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-              type="date"
-              id="date"
-              placeholder="Date of Surgery"
-              value={dateOfSurgery}
-              onChange={(e) => setDateOfSurgery(e.target.value)}
-              required
-            />
-          </label>
-          <label className=" ml-16 px-12 block">
-            <input
-              className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-              type="text"
-              placeholder="Ocular Operative Eye"
-              value={ocularOperativeEye}
-              onChange={(e) => setOcularOperativeEye(e.target.value)}
-            />
-          </label>
-          <label className=" ml-16 px-12 block">
-            <input
-              className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-              type="text"
-              placeholder="Ocular Non Operative Eye"
-              value={ocularNonOperativeEye}
-              onChange={(e) => setOcularNonOperativeEye(e.target.value)}
-            />
-          </label>
-          <div className="text-center mt-4 mb-2">
-            <ButtonComponent
-              label="Submit"
-              title={"Send Ocural Post"}
-              type="submit"
-            />
-          </div>
-        </form>
-      </div>
+                <label className=" ml-16 px-12 block">
+                    <select
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        value={lotNo}
+                        onChange={(e) => setLotNo(e.target.value)}
+                    >
+                        <option value="">Select lotNo</option>
+                        {lotNoData.map((lot, index) => (
+                            <option key={index} value={lot?.corneaId?.lotNo}>
+                                {lot?.corneaId?.lotNo}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <label htmlFor="date" className=" ml-16 px-12 block">
+                    <input
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        type="date"
+                        id="date"
+                        placeholder="Date of Surgery"
+                        value={dateOfSurgery}
+                        onChange={(e) => setDateOfSurgery(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className="ml-16 px-12 block">
+                    <input
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        type="text"
+                        placeholder="Ocular Operative Eye"
+                        value={ocularOperativeEye}
+                        pattern="^[a-zA-Z\s]+$"
+                        title="Please enter only text"
+                        onChange={(e) => {
+                            if (/^[a-zA-Z\s]+$/.test(e.target.value)) {
+                                setOcularOperativeEye(e.target.value);
+                                setOcularOperativeEyeError("");
+                            } else {
+                                setOcularOperativeEye(ocularOperativeEye);
+                                setOcularOperativeEyeError("Please enter only text");
+                            }
+                        }}
+                    />
+                    {ocularOperativeEyeError && (
+                        <div className="text-red-500 mt-2">{ocularOperativeEyeError}</div>
+                    )}
+                </label>
+                <label className="ml-16 px-12 block">
+                    <input
+                        className="form-input mt-3 block w-3/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        type="text"
+                        placeholder="Ocular Non Operative Eye"
+                        value={ocularNonOperativeEye}
+                        pattern="^[a-zA-Z\s]+$"
+                        title="Please enter only text"
+                        onChange={(e) => {
+                            if (/^[a-zA-Z\s]+$/.test(e.target.value)) {
+                                setOcularNonOperativeEye(e.target.value);
+                                setOcularNonOperativeEyeError("");
+                            } else {
+                                setOcularNonOperativeEye(ocularNonOperativeEye);
+                                setOcularNonOperativeEyeError("Please enter only text");
+                            }
+                        }}
+                    />
+                    {ocularNonOperativeEyeError && (
+                        <div className="text-red-500 mt-2">{ocularNonOperativeEyeError}</div>
+                    )}
+                </label>
+
+                <div className="text-center mt-4 mb-2">
+                    <ButtonComponent
+                        label="Submit"
+                        title={"Send Ocural"}
+                        type="submit"
+                    />
+                </div>
+            </form>
+        </div>
     );
 };
 
