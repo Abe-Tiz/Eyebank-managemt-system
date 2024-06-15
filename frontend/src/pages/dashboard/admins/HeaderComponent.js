@@ -74,8 +74,10 @@ const HeaderComponent = ({
         </div>
         <div className=" flex items-center justify-center space-x-4">
           <div className="flex-none gap-2">
+            
             {/* notification section  */}
-            <div className="dropdown dropdown-end">
+            {
+              role==='admin' && <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
                 role="button"
@@ -118,7 +120,8 @@ const HeaderComponent = ({
                   notifications={notifications}
                 />
               </div>
-            </div>
+              </div>
+            }
 
             {/* profile section */}
             <div className="dropdown dropdown-end ">

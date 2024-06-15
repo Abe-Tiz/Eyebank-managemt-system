@@ -108,8 +108,7 @@ const loginUser = asyncHandler(async (req, res) => {
             "Your account is deactivated. Please contact Admin to activate.",
         });
     }
-
-    const passwordMatch = await Bcrypt.compare(password, user.password);
+  const passwordMatch = await Bcrypt.compare(password, user.password);
     // console.log(user);
     if (passwordMatch) {
       if (user.verified) {
