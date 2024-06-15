@@ -34,15 +34,20 @@ const CollectCornea = () => {
         collect,
     };
 
-    const currentDate = new Date();
-    const day = currentDate.getDate(); // Get the current day (1-31)
-    const month = currentDate.getMonth() + 1; // Get the current month (0-11, add 1 to get 1-12)
-    const year = currentDate.getFullYear(); // Get the current year (4 digits)
+  const currentDate = new Date();
+  const day = currentDate.getDate(); // Get the current day (1-31)
+  const month = currentDate.getMonth() + 1; // Get the current month (0-11, add 1 to get 1-12)
+  const year = currentDate.getFullYear(); // Get the current year (4 digits)
+  const hours = currentDate.getHours(); // Get the current hour (0-23)
+  const minutes = currentDate.getMinutes(); // Get the current minute (0-59)
+  const seconds = currentDate.getSeconds(); // Get the current second (0-59)
 
-    const generateLotNumber = (direction) => {
-    const formattedDate = `${day}/${month}/${year.toString().slice(2)}`;
+  const generateLotNumber = (direction) => {
+    const formattedDate = `${day}/${month}/${year
+      .toString()
+      .slice(2)} ${hours}:${minutes}:${seconds}`;
     return `${formattedDate}${direction.toUpperCase()}`;
-    };
+  };
 
     //for recovery
     const { id } = useParams();
