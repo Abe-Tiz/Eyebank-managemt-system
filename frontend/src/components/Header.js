@@ -16,7 +16,7 @@ const Navbar = () => {
   const currentLanguageCode = cookies.get("i18next") || "en";
   const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
 
-  const imagePath = process.env.PUBLIC_URL + "/images/log_ebms.jpg";
+  const imagePath = process.env.PUBLIC_URL + "/images/logo.jpg";
 
   const { t } = useTranslation();
 
@@ -70,11 +70,11 @@ const Navbar = () => {
           {/* <Brand style={{ width: "50px", height: "50px", marginTop: "-30px",backgroundColor:"white",borderRadius:"50%"}} /> */}
           <img
             style={{
-                            width: "50px",
+                            width: "150px",
                             height: "50px",
               marginTop: "-30px",
-              backgroundColor: "white",
-              borderRadius: "50%",
+              // backgroundColor: "white",
+              // borderRadius: "50%",
             }}
             src={imagePath}
             alt="Profile Image"
