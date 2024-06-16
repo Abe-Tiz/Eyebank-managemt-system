@@ -45,7 +45,7 @@ const CollectCornea = () => {
   const generateLotNumber = (direction) => {
     const formattedDate = `${day}/${month}/${year
       .toString()
-      .slice(2)} ${hours}:${minutes}:${seconds}`;
+      .slice(2)}/${hours}:${minutes}:${seconds}`;
     return `${formattedDate}${direction.toUpperCase()}`;
   };
 
