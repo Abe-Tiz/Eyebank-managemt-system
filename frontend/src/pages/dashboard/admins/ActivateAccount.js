@@ -24,7 +24,7 @@ const ActivateAccount = () => {
             toast({
               title:data.message,
               //    description: error.response.message,
-              status: "warning",
+              status: "success",
               duration: 5000,
               isClosable: true,
               position: "top",

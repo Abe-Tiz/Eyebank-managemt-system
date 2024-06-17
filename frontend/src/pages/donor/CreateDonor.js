@@ -122,7 +122,7 @@ const CreateDonor = () => {
           });
         } else {
           toast({
-            title: "Registration succeeded.",
+            title: "Registration succeeded. we will send password on your email, cheeck your email.",
             status: "success",
             duration: 5000,
             isClosable: true,

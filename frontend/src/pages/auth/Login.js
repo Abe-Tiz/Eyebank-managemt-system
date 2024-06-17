@@ -63,9 +63,9 @@ const Login = () => {
                             isClosable: true,
                             position: "top",
                         });
-                        console.log(data.user._id);
-                        console.log("tefisha");
-                        console.log(data.user.name);
+                        // console.log(data.user._id);
+                        // console.log("tefisha");
+                        // console.log(data.user.name);
                         // setRefreshed(true);
                         navigate("/surgondashboard");
                     }

@@ -67,21 +67,19 @@ const RecievedCornea = () => {
                         handleChange={handleChange}
                     />
                 </div>
-                <Table variant='simple'>
+                <Table >
                     <Thead>
-                        <Tr className='bg-sky-600 text-white'>
-                            <Th className='text-white' >No</Th>
-                            <Th className='text-white' > Hospital Name</Th>
-                            <Th className='text-white'>Mode Of Traporation</Th>
-                            <Th className='text-white'>Suitability</Th>
-                            {/* <Th className='text-white'>Surgeon</Th> */}
-                            <Th className='text-white'>Distribution Date</Th>
+                        <Tr className='bg-blue-300 '>
+                            <Th  >No</Th>
+                            <Th  > Hospital Name</Th>
+                            <Th >Mode Of Traporation</Th>
+                            {/* <Th >Suitability</Th> */}
+                            {/* <Th >Surgeon</Th> */}
+                            <Th >Distribution Date</Th>
 
                         </Tr>
                     </Thead>
                     <Tbody>
-
-                        Tefera Is, [5/17/2024 11:05 AM]
                         {renderDistributed
                             .filter((distribute) => distribute.name === surgeonName)
                             .map((distribute, index) => (
@@ -89,7 +87,7 @@ const RecievedCornea = () => {
                                     <Td>{index + 1}</Td>
                                     <Td>{distribute.hospitalName}</Td>
                                     <Td>{distribute.modeOfTransportation}</Td>
-                                    <Td>{distribute.suiatablity}</Td>
+                                    {/* <Td>{distribute.suiatablity}</Td> */}
                                     {/* <Td>{distribute.name}</Td> */}
                                     <Td>
                                         {formatTimestamp(distribute.createdAt)}
