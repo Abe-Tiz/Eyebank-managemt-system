@@ -110,6 +110,7 @@ import ReportMedical from "../pages/reports/medical/ReportMedical";
 import ListOfPleged from '../pages/dashboard/lab/ListOfPleged';
 import ExaminedDonor from "../pages/dashboard/lab/physical/ExaminedDonor";
 import ViewExamined from './../pages/dashboard/lab/physical/ViewExamined';
+import ReportDoctor from './../pages/reports/doctor/ReportDoctor';
 
 const router = createBrowserRouter([
   {
@@ -266,10 +267,10 @@ const router = createBrowserRouter([
         path: "createExams",
         element: <PhysicalExam />,
       },
-    //   {
-    //     path: "getAll",
-    //     element: <PhysicalExamView />,
-    //   },
+      //   {
+      //     path: "getAll",
+      //     element: <PhysicalExamView />,
+      //   },
       {
         path: "getAll",
         element: <ViewExamined />,
@@ -310,6 +311,14 @@ const router = createBrowserRouter([
       {
         path: "lab",
         element: <UserProfile />,
+      },
+      {
+        path: "addDonor",
+        element: <CreateDonor />,
+      },
+      {
+        path: "donorList",
+        element: <DisplayDonor />,
       },
     ],
   },
@@ -391,6 +400,10 @@ const router = createBrowserRouter([
     path: "/surgondashboard",
     element: <SurgeonDashboard />,
     children: [
+      {
+        path: "",
+        element: <ReportDoctor />,
+      },
       {
         path: "addrecipient",
         element: <AddRecipient />,
@@ -488,6 +501,14 @@ const router = createBrowserRouter([
       {
         path: "evaluatedlist",
         element: <EvaluatedList />,
+      },
+      {
+        path: "addhospital",
+        element: <AddHospital />,
+      },
+      {
+        path: "viewhospital",
+        element: <ViewHospital />,
       },
       {
         path: "discardedlist",

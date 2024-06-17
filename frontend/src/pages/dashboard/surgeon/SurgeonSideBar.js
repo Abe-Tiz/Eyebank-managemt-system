@@ -239,7 +239,7 @@ const SurgeonSidebar = ({ collapsed, name, image, role }) => {
                             />
 
 
-                            <SideCustome
+                            {/* <SideCustome
                                 headerProps={{
                                     onClick: () =>
                                         setIsOpen({ ...isOpen, accident: !isOpen.accident }),
@@ -263,7 +263,7 @@ const SurgeonSidebar = ({ collapsed, name, image, role }) => {
                                     },
 
                                 ]}
-                            />
+                            /> */}
                         </div>
                     </>
                 )}

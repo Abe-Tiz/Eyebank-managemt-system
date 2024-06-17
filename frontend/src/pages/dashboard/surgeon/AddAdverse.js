@@ -40,8 +40,6 @@ const AddAdverse = () => {
         );
         const data = response.data;
         setOcular(data);
-        // console.log(data.name);
-        // Update the lotNoData state with the relevant data from the ocular array
         const lotData = data.filter((item) => item.Post === true);
       } catch (error) {
         console.error(error);
@@ -75,13 +73,10 @@ const AddAdverse = () => {
 
     fetchData();
   }, []);
-
-  //  console.log("iddd:",lotNoDataadversed);
+  
   const sss = ocular.map((oc) => oc.adverse);
   const advers = sss.map((advers) => advers.lotNo);
-  // console.log("lottt:", ocular);
-  // console.log("lo:", advers);
-
+ 
   const handleSave = async () => {
     // console.log(adverse);
     try {
@@ -106,13 +101,7 @@ const AddAdverse = () => {
       });
     }
   };
-
-  // const [lotNoDataadversed, setLotNoDatAdversed] = useState([]);
-  //   if (lotNoDataadversed === lotNoData) {
-  //       const adversed = lotNoData;
-  // }
-  // const adversed = lotNoData === lotNoDataadversed ? lotNoDataadversed : "";
-  // console.log("idddddd:",adversed)
+ 
   return (
     <>
       <Text fontSize="3xl" className="ml-16 px-16 block">
@@ -140,13 +129,6 @@ const AddAdverse = () => {
             onChange={(e) => setLotNo(e.target.value)}
           >
             <option value="">{t("recepient:SelectlotNo")}</option>
-            {/* {lotNoData
-              .filter((lot) => lot?.corneaId?.lotNo)
-              .map((lot, index) => (
-                <option key={index} value={lot?.corneaId?.lotNo}>
-                  {lot?.corneaId?.lotNo}
-                </option>
-              ))} */}
             {lotNoData
               .filter((lot) => lot?.corneaId?.lotNo)
               .map((lot, index) => {
@@ -158,7 +140,7 @@ const AddAdverse = () => {
                     </option>
                   );
                 } else {
-                  return null; // Skip rendering the option if the lot number is in advers array
+                  return null;  
                 }
               })}
           </select>
@@ -172,13 +154,7 @@ const AddAdverse = () => {
             pattern="^[a-zA-Z\s]+$"
             title="Please enter only text"
             onChange={(e) => {
-              // if (`/^[a-zA-Z\s]+$/`.test(e.target.value)) {
               setAdverseReaction(e.target.value);
-              // setAdverseReactionError("");
-              // } else {
-              //     setAdverseReaction(adverseReaction);
-              //     setAdverseReactionError("Please enter only text");
-              // }
             }}
           />
           {adverseReactionError && (

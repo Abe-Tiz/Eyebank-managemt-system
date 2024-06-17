@@ -294,9 +294,6 @@ const getOcularPost = asyncHandler(async (req, res) => {
 const getAdverseReaction = asyncHandler(async (req, res) => {
     try {
         const totalCount = await RecipientModel.estimatedDocumentCount({ adversePost: true });
-
-        // const count = await Donor.countDocuments();
-        // console.log(totalDonorsCount);
         res.status(200).json(totalCount);
     } catch (error) {
         console.error("Error:", error);
@@ -316,6 +313,18 @@ const getDiscarded = asyncHandler(async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+const getRecipientCount = asyncHandler(async (req, res) => {
+    try {
+        // count aproval corneas 
+        const recipient = await RecipientModel.countDocuments();
+        // console.log(approvedCorneas);
+        res.status(200).json(recipient);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 // exports the modules
 module.exports = {
   getDonorCount,
@@ -328,11 +337,12 @@ module.exports = {
   getDistributedCorneaByMonth,
   getPledgeByMonth,
   getUserCount,
-    getRequesCount,
-    getOcularPost,
-    getAdverseReaction,
-    getDiscarded,
+  getRequesCount,
+  getOcularPost,
+  getAdverseReaction,
+  getDiscarded,
   getStoredCorneaCount,
   getTransplantedCorneaByMonth,
   getTransplantedCorneaCount,
+  getRecipientCount,
 };

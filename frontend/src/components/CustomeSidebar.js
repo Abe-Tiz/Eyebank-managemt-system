@@ -179,7 +179,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
                 ]}
               />
 
-              <SideCustome
+              {/* <SideCustome
                 headerProps={{
                   onClick: () => setIsOpen({ ...isOpen, donor: !isOpen.donor }),
                   iconLibrary: "bs",
@@ -201,7 +201,7 @@ const CustomSidebar = ({ collapsed, name, image,role }) => {
                     iconName: "PiUserListBold",
                   },
                 ]}
-              />
+              /> */}
 
               <SideCustome
                 headerProps={{

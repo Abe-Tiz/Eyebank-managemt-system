@@ -19,6 +19,7 @@ const CustomSidebar = ({ collapsed, name, role }) => {
         cornea: false,
         physical: false,
         request: false,
+        donor: false,
     });
 
   return (
@@ -175,6 +176,31 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                       subtitle: "Add",
                       iconLibrary: "io",
                       iconName: "IoIosAddCircle",
+                    },
+                  ]}
+                />
+                {/* for serology */}
+                <SideCustome
+                  headerProps={{
+                    onClick: () =>
+                      setIsOpen({ ...isOpen, donor: !isOpen.donor }),
+                    iconLibrary: "md",
+                    iconName: "MdDonutSmall",
+                    title: "Donor",
+                    isOpen: isOpen.donor,
+                  }}
+                  subtitleProps={[
+                    {
+                      link: "/labtechnicaldashboard/addDonor",
+                      subtitle: t("common:addDonorLabel"),
+                      iconLibrary: "md",
+                      iconName: "MdOutlineGroupAdd",
+                    },
+                    {
+                      link: "/labtechnicaldashboard/donorList",
+                      subtitle: t("common:listDonorLabel"),
+                      iconLibrary: "pi",
+                      iconName: "PiUserListBold",
                     },
                   ]}
                 />

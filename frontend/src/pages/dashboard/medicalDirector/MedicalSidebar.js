@@ -22,6 +22,7 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
       EvaluateCornea: false,
       viewTissue: false,
       dashboard: false,
+      hospital: false,
     });
     return (
       <div
@@ -146,6 +147,30 @@ const MedicalSidebar = ({ collapsed, name, role }) => {
                         subtitle: "approved List",
                         iconLibrary: "md",
                         iconName: "MdPlaylistAddCheckCircle",
+                      },
+                    ]}
+                  />
+                  <SideCustome
+                    headerProps={{
+                      onClick: () =>
+                        setIsOpen({ ...isOpen, hospital: !isOpen.hospital }),
+                      iconLibrary: "bs",
+                      iconName: "BsFillExplicitFill",
+                      title: " Hospital",
+                      isOpen: isOpen.hospital,
+                    }}
+                    subtitleProps={[
+                      {
+                        link: "/medicaldirectordashboard/viewhospital",
+                        subtitle: "List",
+                        iconLibrary: "ci",
+                        iconName: "CiHospital1",
+                      },
+                      {
+                        link: "/medicaldirectordashboard/addhospital",
+                        subtitle: "Add",
+                        iconLibrary: "ci",
+                        iconName: "CiHospital1",
                       },
                     ]}
                   />

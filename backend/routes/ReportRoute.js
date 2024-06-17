@@ -17,6 +17,7 @@ const {
   getStoredCorneaCount,
   getTransplantedCorneaByMonth,
   getTransplantedCorneaCount,
+  getRecipientCount,
 } = require("../controller/ReportController");
 const route = express.Router();
 
@@ -40,5 +41,6 @@ route.get("/discarded", getDiscarded);
 route.get("/stored", getStoredCorneaCount);
 route.get("/transplanted", getTransplantedCorneaByMonth);
 route.get("/transplant-total", getTransplantedCorneaCount);
+route.get("/recipient", getRecipientCount);
 
 module.exports = route;
