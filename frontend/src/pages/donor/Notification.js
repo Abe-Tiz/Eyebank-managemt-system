@@ -25,14 +25,13 @@ const Notification = ({ notifications, newDonorCount }) => {
   const handleNotificationClick = (notification) => {
     setClickedNotification(notification);
 
-    navigate("/adminDashboard/donorList");
+    navigate("/labtechnicaldashboard/donorList");
   };
 
   return (
     <div className="container mx-auto mt-8">
       {newDonorCount > 0 ? (
         notifications.map((notification, index) => (
-
           <SingleNotification
             key={index}
             notification={notification}
@@ -45,7 +44,7 @@ const Notification = ({ notifications, newDonorCount }) => {
       )}
 
       <div className="btn btn-secondary rounded-lg">
-        <Link to='/adminDashboard/donorList' >Activate</Link>
+        <Link to="/labtechnicaldashboard/donorList">Activate</Link>
       </div>
     </div>
   );

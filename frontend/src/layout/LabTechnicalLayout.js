@@ -30,11 +30,30 @@
     });
 
     const [newDonorCount, setNewDonorCount] = useState(0);
+      const [notifications, setNotifications] = useState([]);
+      const [countNotification, setCountNotification] = useState(0);
     const [showSidebar, setShowSidebar] = useState(false);
 
     const handleToggleSidebar = () => {
       setShowSidebar(!showSidebar);
     };
+
+     const notification = async () => {
+       try {
+         const response = await axios.get(
+           " http://localhost:4000/donor/notification"
+         );
+
+         setNotifications(response.data.notifications);
+         setCountNotification(response.data.numUnverifiedDonors);
+         //   console.log(
+         //     response.data.notifications,
+         //     // response.data.numUnverifiedDonors
+         //   );
+       } catch (error) {
+         console.log("Error : ", error);
+       }
+     };
 
     const numberDonor = async () => {
       try {
@@ -53,6 +72,7 @@
     useEffect(() => {
       numberDonor();
       getLoggedInUser();
+      notification();
     }, [setReportData, navigate, newDonorCount]);
 
     const toggleSidebar = () => {
@@ -78,7 +98,9 @@
             state={state}
             image={user && user.data.image}
             toggleSidebar={toggleSidebar}
-            newDonorCount={newDonorCount}
+            // newDonorCount={newDonorCount}
+            newDonorCount={countNotification}
+            notifications={notifications}
             role="lab"
             route="LabTechnicalDashboard"
           />

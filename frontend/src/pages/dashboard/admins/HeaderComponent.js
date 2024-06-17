@@ -77,7 +77,7 @@ const HeaderComponent = ({
             
             {/* notification section  */}
             {
-              role==='admin' && <div className="dropdown dropdown-end">
+              role==='lab' && <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
                 role="button"
