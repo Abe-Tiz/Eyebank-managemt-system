@@ -12,6 +12,7 @@ const {
   updateUser,
   getUserByName,
   activateUser,
+  getUserByIdAndChangePassWord,
 } = require("../controller/UserController");
 
 
@@ -29,5 +30,6 @@ router.get("/:id", getUserById);
 router.put("/update/:id", updateUser);
 router.post("/search", getUserByName);
 router.post("/activate", activateUser);
+router.post("/change-profile", getUserByIdAndChangePassWord);
 
 module.exports = router; 

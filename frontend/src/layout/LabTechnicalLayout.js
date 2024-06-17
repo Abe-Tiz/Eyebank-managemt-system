@@ -1,108 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { Layout } from "antd";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
-import SideBar from "../pages/dashboard/lab/SideBar";
-import socketIOClient from "socket.io-client";
-import HeaderComponent from "../pages/dashboard/admins/HeaderComponent";
-import useLoggedInUser from "../useHooks/useLoggedInUser";
+  import React, { useEffect, useState } from "react";
+  import { Layout } from "antd";
+  import axios from "axios";
+  import { useNavigate } from "react-router-dom";
+  import { Outlet } from "react-router-dom";
+  import SideBar from "../pages/dashboard/lab/SideBar";
+  import socketIOClient from "socket.io-client";
+  import HeaderComponent from "../pages/dashboard/admins/HeaderComponent";
+  import useLoggedInUser from "../useHooks/useLoggedInUser";
 
-const ENDPOINT = "http://localhost:4000"; // Your server endpoint
-const socket = socketIOClient(ENDPOINT);
+  const { Content } = Layout;
 
-const { Content } = Layout;
-
-const LabTechnicalDashboard = () => {
+  const LabTechnicalDashboard = () => {
     const navigate = useNavigate();
 
     const [state, setState] = useState({
-        name: "",
-        image: "",
-        isDropdownOpen: false,
-        isLoggedin: false,
-        collapsed: false,
-        role: "",
+      name: "",
+      image: "",
+      isDropdownOpen: false,
+      isLoggedin: false,
+      collapsed: false,
+      role: "",
     });
 
-     const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
+    const { user, setUser, getLoggedInUser } = useLoggedInUser("lab");
 
     const [reportData, setReportData] = useState({
-        donor: "",
-        user: "",
+      donor: "",
+      user: "",
     });
 
     const [newDonorCount, setNewDonorCount] = useState(0);
+    const [showSidebar, setShowSidebar] = useState(false);
 
-    // const getLoggedInUser = async () => {
-    //     fetch("http://127.0.0.1:4000/user/userLogedin", {
-    //         method: "POST",
-    //         crossDomain: true,
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             Accept: "application/json",
-    //             "Access-Control-Allow-Origin": "*",
-    //         },
-    //         body: JSON.stringify({
-    //             token: localStorage.getItem("token"),
-    //         }),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log(data.data, "user logged in");
-    //             setState((prev) => ({
-    //                 ...prev,
-    //                 name: data.data.name,
-    //                 image: data.data.image,
-    //                 role: data.data.role,
-    //                 isLoggedin: true,
-    //             }));
-
-    //             if (data.data === "token expired") {
-    //                 localStorage.clear();
-    //                 navigate("/login");
-    //             }
-    //         });
-    // };
+    const handleToggleSidebar = () => {
+      setShowSidebar(!showSidebar);
+    };
 
     const numberDonor = async () => {
-        try {
-            const response = await axios.get("http://localhost:4000/report");
-            setReportData((prevReportData) => ({
-                ...prevReportData,
-                donor: response.data,
-            }));
+      try {
+        const response = await axios.get("http://localhost:4000/report");
+        setReportData((prevReportData) => ({
+          ...prevReportData,
+          donor: response.data,
+        }));
 
-            console.log(response.data);
-        } catch (error) {
-            console.log("Error : ", error);
-        }
+        console.log(response.data);
+      } catch (error) {
+        console.log("Error : ", error);
+      }
     };
-
-  
 
     useEffect(() => {
-        numberDonor();
-        getLoggedInUser();;
+      numberDonor();
+      getLoggedInUser();
     }, [setReportData, navigate, newDonorCount]);
 
-    const handleSearchInputChange = (e) => {
-        // setSearchText(e.target.value);
-    };
-
-    const toggleDropdown = () => {
-        setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
-    };
-
     const toggleSidebar = () => {
-        setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
+      setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
     };
-
-    const [notifications, setNotifications] = useState([]);
 
     return (
-      <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
-        {/* side bar section */}
+      <Layout className="bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
         <SideBar
           collapsed={state.collapsed}
           toggleSidebar={toggleSidebar}
@@ -121,7 +79,8 @@ const LabTechnicalDashboard = () => {
             image={user && user.data.image}
             toggleSidebar={toggleSidebar}
             newDonorCount={newDonorCount}
-            type="lab"
+            role="lab"
+            route="LabTechnicalDashboard"
           />
 
           {/* content section  */}
@@ -133,6 +92,6 @@ const LabTechnicalDashboard = () => {
         </Layout>
       </Layout>
     );
-};
+  };
 
-export default LabTechnicalDashboard;
+  export default LabTechnicalDashboard;

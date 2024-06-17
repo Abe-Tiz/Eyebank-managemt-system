@@ -60,7 +60,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* information section */}
         <div className=" bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% mx-20 mb-3 mt-3 border-0 p-10 bg-white rounded-xl">
           <h1 className=" text-4xl font-bold text-center mt-1 font-sans ">
             {t("mracleTitle")}
@@ -80,13 +79,6 @@ const Home = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              {/* <button
-                className="bg-green hover:bg-gray-400 px-5 py-2 text-2xl text-white font-extrabold mt-3 mr-5  "
-                onClick={() => navigate("/awareness")}
-              >
-                {t("about:readmore")}
-              </button> */}
-
               <ButtonComponent
                 title={t("about:readmore")}
                 onClick={() => navigate("/blog")}
@@ -97,27 +89,55 @@ const Home = () => {
         </div>
 
         {/* Client Section */}
-        <div className="w-4/5 mx-auto my-8">
+        <div className="w-4/5 mx-auto my-16">
           <div className="flex overflow-x-hidden">
             <div className="full-screen-slide space-x-4 flex gap-10">
               <div className="min-w-max">
                 <img
-                  src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s="
+                  src="https://track.global/uploads/services/392.webp"
                   alt="Client Logo"
                   className="h-24"
                 />
               </div>
               <div className="min-w-max">
                 <img
-                  src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s="
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzxChumv8SHhXzOFZM7zVYT6Xw7j1idzmSUQ&s"
                   alt="Client Logo"
                   className="h-24"
                 />
               </div>
               <div className="min-w-max">
                 <img
-                  src="https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s="
+                  src="https://icladdis.com/images/ICL-LOGO-NEW.png"
                   alt="Client Logo"
+                  className="h-24"
+                />
+              </div>
+              <div className="min-w-max">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXmO_Vm7z13yTOUhw_bUdVOP2CvovhvdkjzA&s"
+                  alt="etiotelecom Logo"
+                  className="h-24"
+                />
+              </div>
+              <div className="min-w-max">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/CBE_SA.png/220px-CBE_SA.png"
+                  alt="cbe Logo"
+                  className="h-24"
+                />
+              </div>
+              <div className="min-w-max">
+                <img
+                  src="https://logos-world.net/wp-content/uploads/2023/01/Ethiopian-Airlines-Logo.png"
+                  alt="airport Logo"
+                  className="h-24"
+                />
+              </div>
+              <div className="min-w-max">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8WLm4yjrp2s9zCCbwYnnFS9MWJQDD2tB4jA&s"
+                  alt="orbis Logo"
                   className="h-24"
                 />
               </div>

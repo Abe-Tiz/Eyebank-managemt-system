@@ -3,13 +3,15 @@ import Chart from "chart.js/auto";
 import axios from 'axios';
 import ReportCard from './ReportCard';
 import RecentDonor from "../pages/donor/RecentDonor";
+import Cornea from "../pages/reports/Cornea";
 // import RecentDonor from './../pages/donor/RecentDonor';
 
     const Report = () => {
         const [reportData, setReportData] = useState({
             donor:0,
             cornea: 0,
-            evaluted:0
+            evaluted:0,
+            user:0
         });
 
         // number of donor
@@ -22,7 +24,22 @@ import RecentDonor from "../pages/donor/RecentDonor";
                donor: response.data,
              }));
 
-             console.log(response.data);
+            //  console.log(response.data);
+           } catch (error) {
+             console.log("Error : ", error);
+           }
+        };
+        // number of donor
+         const numberUsers = async () => {
+           try {
+             const response = await axios.get("http://localhost:4000/report/user");
+
+             setReportData((prevReportData) => ({
+               ...prevReportData,
+               user: response.data,
+             }));
+
+            //  console.log(response.data);
            } catch (error) {
              console.log("Error : ", error);
            }
@@ -39,7 +56,7 @@ import RecentDonor from "../pages/donor/RecentDonor";
                evaluted: response.data,
              }));
 
-             console.log(response.data);
+            //  console.log(response.data);
            } catch (error) {
              console.log("Error : ", error);
            }
@@ -55,7 +72,7 @@ import RecentDonor from "../pages/donor/RecentDonor";
                cornea: response.data,
              }));
 
-             console.log(response.data);
+            //  console.log(response.data);
            } catch (error) {
              console.log("Error : ", error);
            }
@@ -63,19 +80,17 @@ import RecentDonor from "../pages/donor/RecentDonor";
         
         useEffect(() => {
             CollectedCornea();
-            numberDonor();
-            numberOfEvalutedCornea()
+          numberDonor();
+          numberUsers();
+          numberOfEvalutedCornea()
         }, [setReportData]);
 
         
 
     const data = [
       { category: "cornea", number: reportData.cornea },
-      { category: "evaluted", number: reportData.evaluted },
-      { category: "stored", number: 15 },
-      { category: "ready", number: 5 },
+      { category: "user", number: reportData.user },
       { category: "pledeged", number: reportData.donor },
-      // { category: "donor", number: 21 },
     ];
 
     const chartRef = useRef(null);
@@ -137,8 +152,6 @@ import RecentDonor from "../pages/donor/RecentDonor";
 
     return (
       <div className="p-4 ">
-        {/* <h1 className="text-3xl font-bold mb-4">Cornea Report</h1> */}
-
         <div className="flex flex-wrap -mx-2">
           {data.map((item, index) => (
             <ReportCard

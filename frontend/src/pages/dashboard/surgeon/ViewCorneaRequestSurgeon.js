@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useToast, Button } from "@chakra-ui/react";
+import { useToast, Button,Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
+import SearchComponent from "../../../components/SearchComponent";
+import useSearch from "../../../useHooks/useSearch";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import Pagination from "../../../components/Pagination";
 import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
 
 import {
@@ -18,12 +20,28 @@ import {
   AlertDialogCloseButton,
 } from "@chakra-ui/react";
 const RequestedCorneas = () => {
+  const { searchTerm, handleChange, data, error } = useSearch("requestedCorneas");
   const toast = useToast();
   const [requestedCorneas, setRequestedCorneas] = useState([]);
   
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate();
+
+ 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(requestedCorneas.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentCorneas = requestedCorneas.slice(indexOfFirstItem, indexOfLastItem);
+
+
+
+
+
 
   useEffect(() => {
     const getAllRequestedCorneas = async () => {
@@ -98,10 +116,24 @@ const RequestedCorneas = () => {
     }
   };
 
+  const renderCornea = searchTerm ? data : currentCorneas;
+// Function to change page
+const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <>
       <div className="m-10 relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="w-full mt-2 flex justify-between ">
+              <Text fontSize="3xl" className="text-center text-black mt-0 mb-4">
+                List of Requested Corneas
+              </Text>
+              {/* search component */}
+              <SearchComponent
+                searchTerm={searchTerm}
+                handleChange={handleChange}
+              />
+            </div>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+       
           <thead className="text-xs text-gray-700 uppercase bg-blue-200 dark:bg-gray-700 dark:text-gray-400">
             {" "}
             <tr>
@@ -123,7 +155,11 @@ const RequestedCorneas = () => {
             </tr>
           </thead>
           <tbody>
-            {requestedCorneas.map((request, index) => (
+        
+                   
+            {renderCornea
+            .filter((request) => request.isGetCornea === false)
+            .map((request, index) => (
               <tr
                 key={request.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -203,6 +239,12 @@ const RequestedCorneas = () => {
               </tr>
             ))}
           </tbody>
+          <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                paginate={paginate}
+              />
         </table>
       </div>
     </>

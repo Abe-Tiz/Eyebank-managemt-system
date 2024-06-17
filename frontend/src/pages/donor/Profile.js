@@ -14,13 +14,15 @@ const Profile = () => {
     id: "",
     sex: "",
     HNumber: "",
-    age: "",
+    // age: "",
+    dob: "",
     city: "",
     subcity: "",
     kebele: "",
     mobile: "",
     isVolunter: false,
   });
+  const [age, setAge] = useState('');
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -56,7 +58,8 @@ const Profile = () => {
           id: data.data._id,
           sex: data.data.sex,
           HNumber: data.data.HNumber,
-          age: data.data.age,
+          // age: data.data.age,
+          dob: data.data.dob,
           city: data.data.city,
           subcity: data.data.subcity,
           kebele: data.data.kebele,
@@ -68,9 +71,23 @@ const Profile = () => {
       }
     };
 
+const computeAge = () => {
+  if (profileData.dob) {
+    const birthdate = new Date(profileData.dob);
+    const currentDate = new Date();
+    const ageInMilliseconds = currentDate.getTime() - birthdate.getTime();
+    const ageInYears = Math.floor(
+      ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000)
+    );
+    setAge(ageInYears);
+  }
+};
+
   useEffect(() => {
     getLoggedInDonor();
-  }, [navigate]);
+    computeAge();
+  }, [profileData.dob]);
+//  console.log("age:", age);
 
   return (
     <div className="container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] t0-100% min-h-screen flex flex-col items-center justify-center">
@@ -97,7 +114,7 @@ const Profile = () => {
                 profileData.isVolunter ? "badge-secondary" : "badge-primary"
               }`}
             >
-                {profileData.name}
+              {profileData.name}
             </div>
             <div
               className={`p-3 badge ${
@@ -119,8 +136,7 @@ const Profile = () => {
               />
               <ProfileDetail
                 label={t("donor:AgeDonor")}
-                value={profileData.age}
-              />
+                value={age} />
               <ProfileDetail
                 label={t("donor:donorMobile")}
                 value={profileData.mobile}
@@ -149,7 +165,6 @@ const Profile = () => {
 
           {/* Buttons */}
           <div className="flex justify-center gap-16 mt-6">
-          
             {/* Update Button */}
             <LinkButton
               path={`/update/${profileData.id}`}

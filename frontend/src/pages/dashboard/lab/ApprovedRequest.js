@@ -16,6 +16,7 @@ const ApprovedRequest = () => {
           "http://localhost:4000/requestCornea/getRequests"
         );
         setRequestedCorneas(data);
+        // console.log("dataaaa:",data);
       } catch (error) {
         console.log(error);
         toast.error("Something Went Wrong");
@@ -25,50 +26,8 @@ const ApprovedRequest = () => {
     getAllRequestedCorneas();
   }, []);
 
-  //retrive all the possible cornea lists
-  useEffect(() => {
-    const getAllCorneas = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:4000/cornea/read");
-        setCorneas(data);
-      } catch (error) {
-        console.log(error);
-        toast.error("Something Went Wrong");
-      }
-    };
-
-    getAllCorneas();
-  }, []);
-
-  const navigate = useNavigate();
-
-  // const handleApprove = async (id) => {
-  //     try {
-  //         await axios.put(http://localhost:4000/requestCornea/approve/${id});
-  //         setRequestedCorneas(
-  //             requestedCorneas.map((p) =>
-  //                 p._id === id ? { ...p, isApproved: true } : p
-  //             )
-  //         );
-  //         toast({
-  //             title: "Requste Approved",
-  //             status: "success",
-  //             duration: 3000,
-  //             isClosable: true,
-  //             position: "top",
-  //         });
-  //     } catch (error) {
-  //         toast({
-  //             title: "Error Occurred!",
-  //             description: error.message,
-  //             status: "error",
-  //             duration: 5000,
-  //             isClosable: true,
-  //             position: "top",
-  //         });
-  //     }
-  // };
-
+ const navigate = useNavigate();
+ 
   const handleDistribute = async (id, suiatablity) => {
     try {
       const params = {
@@ -110,16 +69,10 @@ const ApprovedRequest = () => {
               </th> */}
             </tr>
           </thead>
-          <tbody>{requestedCorneas
-  .filter((request) => {
-    const matchingCornea = corneas.find(
-      (cornea) => cornea.distributed === false
-    );
-    return request.distribute === false &&
-      request.isApproved === true &&
-      matchingCornea;
-  })
-              .map((request, index) => (
+
+       <tbody>{requestedCorneas
+  .filter((request) => (request.isGetCornea === false && request.isApproved === true ))
+  .map((request, index) => (
                 <tr
                   key={index}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"

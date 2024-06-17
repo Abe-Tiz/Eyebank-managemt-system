@@ -1,15 +1,20 @@
 // Pagination.js
 import React from "react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
+import DynamicIcon from "./DynamicIcon";
 
 const Pagination = ({ totalPages, currentPage, paginate, setCurrentPage }) => (
   <ButtonGroup isAttached variant="outline">
     <Button
       onClick={() => setCurrentPage(currentPage - 1)}
       className="btn"
-      disabled={currentPage === 1 ? "disabled" : null}
+      disabled={currentPage === 0 ? "disabled" : null}
     >
-      Previous
+       <DynamicIcon
+        library="bi"
+        iconName="BiSolidLeftArrow"
+        className="text-2xl"
+      />
     </Button>
     {[...Array(totalPages).keys()].map((number) => (
       <Button
@@ -25,7 +30,12 @@ const Pagination = ({ totalPages, currentPage, paginate, setCurrentPage }) => (
       className="btn"
       disabled={currentPage === totalPages ? "disabled" : null}
     >
-      Next
+     
+      <DynamicIcon
+        library="bi"
+        iconName="BiSolidRightArrow"
+        className="text-2xl"
+      />
     </button>
   </ButtonGroup>
 );

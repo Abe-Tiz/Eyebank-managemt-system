@@ -3,6 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@chakra-ui/react';
+import useLoggedInUser from "../../../useHooks/useLoggedInUser";
+import ButtonComponent from '../../../components/ButtonComponent';
+
 const EvaluateCornea = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -20,11 +23,10 @@ const EvaluateCornea = () => {
     const [suiatablity, setSuiatablity] = useState('');
     const [reason, setReason] = useState('');
 
-    const [state, setState] = useState({
-        name: ""
-    })
 
-    
+    const { user, setUser, getLoggedInUser } = useLoggedInUser("medical");
+
+
     useEffect(() => {
         // Fetch cornea data from the server based on the provided ID
         const fetchCorneaData = async () => {
@@ -59,7 +61,7 @@ const EvaluateCornea = () => {
             stroma,
             endothelium,
             approval,
-            evaluater,
+            evaluater: user && user.data.name,
             evaluationComment,
             suiatablity,
             reason
@@ -73,7 +75,7 @@ const EvaluateCornea = () => {
                 duration: 5000,
                 isClosable: true,
             });
-            navigate('/medicaldirectordashboard/viewTissue');
+            navigate('/medicaldirectordashboard/evaluatedlist');
         } catch (error) {
             // Handle error
             toast({
@@ -88,34 +90,6 @@ const EvaluateCornea = () => {
     const handleApproval = (event) => {
         setApproval(event.target.value);
     }
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:4000/user/userLogedin", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("token"),
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data.data, "user logged in");
-                setState((prev) => ({
-                    ...prev,
-                    name: data.data.name,
-                }));
-                if (data.data === "token expired") {
-                    localStorage.clear();
-                    navigate("/login");
-                }
-            });
-    }, [navigate]);
-    const evaluater = state.name
     if (isLoading) {
         return <div>{t('Loading...')}</div>;
     }
@@ -128,35 +102,51 @@ const EvaluateCornea = () => {
                     handleSave();
                 }}
             >
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-2">
                     <label>
-                        endothelium:
-                        <input
+                        Endothelium:
+                        <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
                             value={endothelium}
                             onChange={(e) => setEndothelium(e.target.value)}
-                        />
+                        >
+                            <option value="">Select endothelium</option>
+                            <option value="normal">Normal</option>
+                            <option value="edema">Edema</option>
+                            <option value="guttata">Guttata</option>
+                            <option value="other">Other</option>
+                        </select>
                     </label>
                     <label>
-                        stroma:
-                        <input
+                        Stroma:
+                        <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
                             value={stroma}
                             onChange={(e) => setStroma(e.target.value)}
-                        />
+                        >
+                            <option value="">Select stroma</option>
+                            <option value="normal">Normal</option>
+                            <option value="edema">Corneal edema</option>
+                            <option value="degeneration">Degeneration</option>
+                            <option value="scarring">Scarring</option>
+                            <option value="keratoconus">Keratoconus</option>
+                        </select>
                     </label>
                 </div>
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-2">
                     <label>
-                        epitheliam:
-                        <input
+                        Epithelium:
+                        <select
                             className="form-input mt-1 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="text"
                             value={epitheliam}
                             onChange={(e) => setEpitheliam(e.target.value)}
-                        />
+                        >
+                            <option value="">Select epithelium</option>
+                            <option value="normal">Normal</option>
+                            <option value="irregularity">Irregularity</option>
+                            <option value="erosion">Erosion</option>
+                            <option value="other">Other</option>
+                        </select>
                     </label>
                     <label>
                         Comment:
@@ -234,7 +224,9 @@ const EvaluateCornea = () => {
                         </lable>) : (null)
                     }
                 </div>
-                <button className="bg-teal-500 text-center hover:bg-teal-700 focus:outline-none text-white px-4 py-2 mt-2 rounded-md" type="submit">Evaluate</button>
+                <div className="text-center mt-4 mb-2">
+                    <ButtonComponent label="Submit" title={"Evaluate"} type="submit" />
+                </div>
             </form >
         </div >
     );

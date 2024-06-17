@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@chakra-ui/react';
+import ButtonComponent from '../../../components/ButtonComponent';
 
 const EditAdverseData = () => {
     const navigate = useNavigate();
@@ -55,7 +56,7 @@ const EditAdverseData = () => {
                 duration: 5000,
                 isClosable: true,
             });
-            navigate('/surgondashboard/adverseDatalist');
+            navigate('/surgondashboard/adverselist');
         } catch (error) {
             toast({
                 title: t('Error'),
@@ -66,13 +67,10 @@ const EditAdverseData = () => {
             });
         }
     };
-
     const { dateOfadverse, adverseDataReaction, probabilityCase, donorTissue } = adverseReactionData;
-
     if (isLoading) {
         return <div>{t('Loading...')}</div>;
     }
-
     return (
         <div>
             <h1 className="text-2xl font-bold mb-4" style={{ textAlign: 'center' }}>
@@ -124,14 +122,12 @@ const EditAdverseData = () => {
                         />
                     </label>
                 </div>
-                <div className="text-center">
-                    <button className="w-1/4 bg-sky-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded">
-                        {t('Update')}
-                    </button>
+                <div className="text-center mt-4 mb-2">
+                    <ButtonComponent label="Submit" title={"Update"} type="submit" />
                 </div>
+
             </form>
         </div>
     );
 };
-
 export default EditAdverseData;

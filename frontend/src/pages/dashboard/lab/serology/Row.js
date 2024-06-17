@@ -1,32 +1,31 @@
-// TableRow.js
+
 import React from "react";
 import { Tr, Td } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
-const Row = ({ cornea }) => (
-  <Tr className="mb-2 text-lg">
-    <Td>{cornea.lotNo}</Td>
-    <Td>{cornea.position}</Td>
-    <Td>{cornea.clarity}</Td>
-    <Td> {cornea.size}</Td>
-    <Td> {cornea.eyeLid}</Td>
-    <Td> {cornea.irisColor}</Td>
-    {/* <Td>
-      {" "}
-      {cornea.expirationDate < 14
-        ? `${14 - cornea.expirationDate} Day Left`
-        : "Expired"}
-    </Td> */}
-    <Td>
-      <Link
-        to={`/labtechnicaldashboard/serology/${cornea._id}`}
-        // className=" flex items-center text-white bg-sky-700 border-2 p-3 font-medium dark:text-blue-500 hover:bg-green-700 hover:border-green-700"
-      >
-        Test
-      </Link>
-    </Td>
-  </Tr>
-);
+const Row = ({ cornea }) => {
+  const { t } = useTranslation();
+  return(
+    <Tr key={cornea._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+      <Td>{cornea.lotNo}</Td>
+      <Td>{cornea.position}</Td>
+      <Td>{cornea.clarity}</Td>
+      <Td> {cornea.size}</Td>
+      <Td> {cornea.eyeLid}</Td>
+      <Td> {cornea.irisColor}</Td>
+
+      <Td className=" text-center ">
+        <Link
+          className="text-blue-600"
+          to={`/labtechnicaldashboard/testserology/${cornea._id}`}
+        >
+          {t('serology:test')}
+        </Link>
+      </Td>
+    </Tr>
+  )
+};
 
 export default Row;

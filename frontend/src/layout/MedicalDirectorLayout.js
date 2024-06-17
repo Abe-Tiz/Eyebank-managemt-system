@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Badge } from "antd";
-import { BellOutlined, SettingOutlined } from "@ant-design/icons";
+import { Layout } from "antd";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { TfiMenuAlt } from "react-icons/tfi";
-import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import MedicalSidebar from "../pages/dashboard/medicalDirector/MedicalSidebar";
+// import MedicalSidebar from "../pages/dashboard/medicalDirector/MedicalSidebar";
+import socketIOClient from "socket.io-client";
+import HeaderComponent from "../pages/dashboard/admins/HeaderComponent";
 import useLoggedInUser from "../useHooks/useLoggedInUser";
+import MedicalSidebar from '../pages/dashboard/medicalDirector/MedicalSidebar';
 
-const { Header, Content } = Layout;
+
+
+const { Content } = Layout;
 
 const MedicalDirectorDashboard = () => {
     const navigate = useNavigate();
-    const { t } = useTranslation();
-
-    const [searchText, setSearchText] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
-     const { user, setUser, getLoggedInUser } = useLoggedInUser("token");
 
     const [state, setState] = useState({
         name: "",
@@ -28,133 +24,91 @@ const MedicalDirectorDashboard = () => {
         collapsed: false,
         role: "",
     });
-    const handleSearch = () => {
-        const sampleList = [
-            { id: 1, name: "John Doe" },
-            { id: 2, name: "Jane Doe" },
-        ];
 
-        const results = sampleList.filter((item) =>
-            item.name.toLowerCase().includes(searchText.toLowerCase())
-        );
+    const { user, setUser, getLoggedInUser } = useLoggedInUser("medical");
 
-        setSearchResults(results);
+    const [reportData, setReportData] = useState({
+        donor: "",
+        user: "",
+    });
+
+    const [newDonorCount, setNewDonorCount] = useState(0);
+
+
+    const numberDonor = async () => {
+        try {
+            const response = await axios.get("http://localhost:4000/report");
+            setReportData((prevReportData) => ({
+                ...prevReportData,
+                donor: response.data,
+            }));
+
+            console.log(response.data);
+        } catch (error) {
+            console.log("Error : ", error);
+        }
     };
+
+
+
+    useEffect(() => {
+        numberDonor();
+        getLoggedInUser();;
+    }, [setReportData, navigate, newDonorCount]);
+
     const handleSearchInputChange = (e) => {
-        setSearchText(e.target.value);
+        // setSearchText(e.target.value);
     };
+
     const toggleDropdown = () => {
         setState({ ...state, isDropdownOpen: !state.isDropdownOpen });
     };
+
     const toggleSidebar = () => {
         setState((prev) => ({ ...prev, collapsed: !prev.collapsed }));
     };
+
+    const [notifications, setNotifications] = useState([]);
+
     //! handle Logout
-    const handleLogout = () => {
-        localStorage.removeItem("medical");
-        navigate("/login");
-    };
-    //! handle loggedin user
-    useEffect(() => {
-        getLoggedInUser();
-    }, [navigate]);
+    // const handleLogout = () => {
+    //     localStorage.removeItem("lab");
+    //     navigate("/login");
+    // };
+
     return (
-        <Layout className="min-h-screen w-full grid  md:grid-cols-1 ">
-            <MedicalSidebar
-                collapsed={state.collapsed}
-                toggleSidebar={toggleSidebar}
-                name={user && user.data.name}
-                role={user && user.data.role}
-                image={user && user.data.image}
-            />
-            <Layout
-                className={`${state.collapsed ? "ml-20" : "ml-64"
-                    } transition-all duration-300 ease-in-out flex-grow`}
-            >
-                <Header
-                    className="bg-slate-300 p-4 w-full  flex justify-between items-center text-black "
-                    style={{ position: "sticky", top: 0, right: 0 }}
-                >
-                    <div className="flex items-center">
-                        {state.collapsed ? (
-                            <TfiMenuAlt
-                                className="text-2xl text-black mr-2 cursor-pointer"
-                                onClick={toggleSidebar}
-                            />
-                        ) : (
-                            <GiHamburgerMenu
-                                className="text-2xl text-black mr-2 cursor-pointer"
-                                onClick={toggleSidebar}
-                            />
-                        )}
-                        <span className="text-xl font-bold">
-                            {state.role} {state.name}
-                        </span>
-                    </div>
-                    <div className="flex items-center space-x-4">
-                        {/* <input
-                            type="text"
-                            placeholder="Search"
-                            value={searchText}
-                            onChange={handleSearchInputChange}
-                            className="border p-2 rounded bg-white text-black"
-                        /> */}
-                        {/* <button
-                            onClick={handleSearch}
-                            className="text-black hover:text-gray-300 transition-all duration-300"
-                        >
-                            Search
-                        </button> */}
+      <Layout className=" bg-base-200 min-h-screen w-full grid  md:grid-cols-1 ">
+        {/* side bar section */}
+        <MedicalSidebar
+          collapsed={state.collapsed}
+          toggleSidebar={toggleSidebar}
+          name={user && user.data.name}
+          role={user && user.data.role}
+        />
 
-                        {/* <Badge count={5} offset={[0, 5]} className="mr-5">
-                            <BellOutlined className="text-2xl text-blue-500" />
-                        </Badge> */}
-                        <div className="relative inline-block">
-                            <button
-                                onClick={toggleDropdown}
-                                className="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
-                                type="button"
-                            >
-                                <img
-                                    className="w-8 h-8 rounded-full"
-                                    src={state.image}
-                                    alt="user photo"
-                                />
-                            </button>
+        <Layout
+          className={`${
+            state.collapsed ? "ml-20" : "ml-64"
+          }  bg-base-200 transition-all duration-300 ease-in-out flex-grow`}
+        >
+          {/* header componnet  */}
+          <HeaderComponent
+            state={state}
+            image={user && user.data.image}
+            toggleSidebar={toggleSidebar}
+            newDonorCount={newDonorCount}
+            role="medical"
+            route="MedicalDirectorDashboard"
+          />
 
-                            {state.isDropdownOpen && (
-                                <div className="absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                                    <ul className="py-2 text-sm text-gray-700">
-                                        <li>
-                                            <Link
-                                                to="/settings"
-                                                className="block px-4 py-2 hover:bg-gray-100"
-                                            >
-                                                <SettingOutlined className="text-2xl text-blue-500" />{" "}
-                                                {t("common:settingButtonLabel")}
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                    <div className="py-2">
-                                        <button
-                                            onClick={handleLogout}
-                                            className="ml-5 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        >
-                                            {t("common:logouttButtonLabel")}
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </Header>
-                <Content className="">
-                    <div className=" bg-slate-100 shadow py-4 pl-4 rounded w-full">
-                        <Outlet />
-                    </div>
-                </Content>
-            </Layout >
-        </Layout >
+          {/* content section  */}
+          <Content className="p-4 mt-10">
+            <div className=" bg-slate-100  w-full">
+              <Outlet />
+            </div>
+          </Content>
+        </Layout>
+      </Layout>
     );
 };
 

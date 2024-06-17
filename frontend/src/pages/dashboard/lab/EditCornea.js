@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@chakra-ui/react';
+import ButtonComponent from '../../../components/ButtonComponent';
 
 const EditCornea = () => {
     const navigate = useNavigate();
@@ -173,9 +174,9 @@ const EditCornea = () => {
                     </label>
                 </div>
                 <div className='text-center  '>
-                    <button className="w-1/4 mb-3 bg-sky-600 hover:bg-blue-700 text-white  font-bold py-2 px-4 mt-5 rounded">
-                        Update
-                    </button>
+                    <div className="text-center mt-4 mb-2">
+                        <ButtonComponent label="Submit" title={"Update Cornea"} type="submit" />
+                    </div>
                 </div>
             </form>
         </div>

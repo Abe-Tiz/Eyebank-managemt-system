@@ -3,9 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import useLoggedInUser from "../../../useHooks/useLoggedInUser";
+import ButtonComponent from '../../../components/ButtonComponent';
+
 const AddRecipient = () => {
     const [recipientname, setRecipientname] = useState("");
+    const [recipientNameWarning, setRecipientNameWarning] = useState("");
     const [age, setAge] = useState("");
+    const [ageWarning, setAgeWarning] = useState("");
     const [diagnosis, setDiagnosis] = useState("");
     const [sex, setSex] = useState("");
     const [surgeons, setSurgeons] = useState([]);
@@ -15,12 +20,14 @@ const AddRecipient = () => {
     const [hospital, setHospital] = useState("");
     const [surgeryType, setSurgeryType] = useState("");
     const [phone, setPhone] = useState("");
+    const [phoneWarning, setPhoneWarning] = useState("");
     //for ocurar and adverse reaction 
     const [dateOfSurgry, setDateOfSurgry] = useState("");
     const [ocularOperativeEye, setOcularOperativeEye] = useState("");
     const [ocularNonOperativeEye, setOcularNonOperativeEye] = useState("");
     const [dateOfadverse, setDateOfadverse] = useState("");
     const [adverseReaction, setAdvererReaction] = useState("");
+    const [lotNo, setLotNo] = useState("");
     //for probablity
     const [probablityCase, setProbablityCase] = useState("");
     const [donorTissue, setDonorTissue] = useState("");
@@ -28,9 +35,8 @@ const AddRecipient = () => {
     const navigate = useNavigate();
     const toast = useToast();
     const { t } = useTranslation();
-    const [state, setState] = useState({
-        name: ""
-    })
+    const { user, setUser, getLoggedInUser } = useLoggedInUser("doctor");
+
     useEffect(() => {
         const fetchSurgeon = async () => {
             try {
@@ -67,9 +73,10 @@ const AddRecipient = () => {
             sex,
             phone,
             registerDate,
-            surgeonName,
+            surgeonName: user && user.data._id,
             dateOfSurgry,
-            surgeryType,
+            lotNo,
+            lotNo,
             ocularOperativeEye,
             ocularNonOperativeEye,
             dateOfadverse,
@@ -98,34 +105,6 @@ const AddRecipient = () => {
             console.log(err);
         }
     };
-    useEffect(() => {
-        fetch("http://127.0.0.1:4000/user/userLogedin", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("token"),
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data.data, "user logged in");
-                setState((prev) => ({
-                    ...prev,
-                    name: data.data.name,
-                }));
-
-                if (data.data === "token expired") {
-                    localStorage.clear();
-                    navigate("/login");
-                }
-            });
-    }, [navigate]);
-    const surgeonName = state.name
     return (
         <div>
             <h2 className="text-3xl mb-3 " style={{ textAlign: 'center' }}>Recipient Registration Form</h2>
@@ -135,18 +114,45 @@ const AddRecipient = () => {
                         <input
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             value={recipientname}
+                            pattern="^[a-zA-Z\u1200-\u137F ]{6,}$"
+                            type="text"
                             placeholder="Recipient Name"
-                            onChange={(e) => setRecipientname(e.target.value)}
+                            title="Please enter a name without numbers"
+                            onChange={(e) => {
+                                if (/\d/.test(e.target.value)) {
+                                    setRecipientNameWarning("Please enter a name without numbers");
+                                } else {
+                                    setRecipientNameWarning("");
+                                    setRecipientname(e.target.value);
+                                }
+                            }}
                         />
+                        {recipientNameWarning && (
+                            <div className="text-red-500 mt-2">{recipientNameWarning}</div>
+                        )}
                     </label>
                     <label>
                         <input
                             className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="number"
-                            value={age}
+                            value={age || ""}
                             placeholder="Age"
-                            onChange={(e) => setAge(e.target.value)}
+                            min="1"
+                            max="120"
+                            title="Please enter a valid age (1-120)"
+                            onChange={(e) => {
+                                const value = parseInt(e.target.value, 10);
+                                if (isNaN(value) || value < 1 || value > 120) {
+                                    setAgeWarning("Please enter a valid age (1-120)");
+                                } else {
+                                    setAgeWarning("");
+                                    setAge(value);
+                                }
+                            }}
                         />
+                        {ageWarning && (
+                            <div className="text-red-500 mt-2">{ageWarning}</div>
+                        )}
                     </label>
                 </div>
                 <div className="grid mt-3 grid-cols-2">
@@ -173,12 +179,26 @@ const AddRecipient = () => {
                     </label>
                     <label>
                         <input
-                            className="form-input  block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            type="number"
+                            className="form-input block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            type="tel"
                             placeholder="Phone"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            value={phone || ""}
+                            pattern="^\d{10,13}$"
+                            title="Please enter a valid phone number (10 digits)"
+                            onInput={(e) => {
+                                const inputValue = e.target.value.replace(/\D/g, "");
+                                if (inputValue.length > 13) {
+                                    setPhoneWarning("Please enter a valid phone number (10-13 digits)");
+                                    setPhone(inputValue.slice(0, 13));
+                                } else {
+                                    setPhoneWarning("");
+                                    setPhone(inputValue);
+                                }
+                            }}
                         />
+                        {phoneWarning && (
+                            <div className="text-red-500 mt-2">{phoneWarning}</div>
+                        )}
                     </label>
                 </div>
                 <div className="grid mt-3 grid-cols-2">
@@ -224,12 +244,9 @@ const AddRecipient = () => {
                             <option value="Benshangul">Benshangul</option>
                         </select>
                     </label>
-                    <button
-                        type="submit"
-                        className="w-1/3 mr-4 py-2 px-4 border bg-sky-600  text-white font-semibold rounded"
-                    >
-                        Add Recipient
-                    </button>
+                    <div className=" text-center mt-4 mb-2">
+                        <ButtonComponent label="Submit" title={"Register "} type="submit" />
+                    </div>
                 </div>
             </form >
         </div >

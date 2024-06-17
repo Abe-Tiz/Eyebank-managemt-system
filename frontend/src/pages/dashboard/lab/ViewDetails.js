@@ -202,7 +202,7 @@ const navigate=useNavigate()
               <th className="px-2 py-2">
                 <h1 className="font-bold">sexual</h1>
               </th>
-              <td className="border px-2 py-2">{exam.highRiskexamined?.sexual? 'evidemce':'no evidence'}</td>
+              {exam.highRiskexamined.sexual === 'evidence' ? 'evidence' : 'Noevidence'}
             </tr>
 
             <tr>
@@ -227,13 +227,13 @@ const navigate=useNavigate()
 <th className="px-2 py-2">
   <h1 className="font-bold">Blue</h1>
 </th>
-<td className="border px-2 py-2">{exam.highRiskexamined?.Blue? 'evidemce':'no evidence'}</td>
+<td className="border px-2 py-2">{exam.Blue}</td>
 </tr>
 <tr>
 <th className="px-2 py-2">
   <h1 className="font-bold">enlargedLiver</h1>
 </th>
-<td className="border px-2 py-2">{exam.highRiskexamined?.enlargedLiver? 'evidemce':'no evidence'}</td>
+<td className="border px-2 py-2">{exam.enlargedLiver}</td>
 </tr>
 
           </tbody>

@@ -1,0 +1,25 @@
+{
+  "titleSerology": "የተሰበሰበ ኮርኒያ ዝርዝር",
+  "lotnumber": "ቁጥር",
+  "position": "አቀማመጥ",
+  "clarity": "ግልጽነት",
+  "size": "መጠን",
+  "eyelid": "የዓይን ክዳን",
+  "iriscolor": "አይሪስ ቀለም",
+
+  "testedTitle": "የተሞከሩ ውጤቶች ዝርዝር",
+  "bloodtype": "የደም አይነት",
+  "tested": "ተሞክሯል",
+
+  "test": "ሙከራ",
+  "failled": "አልተሳካም",
+  "testTitle": "ሙከራ ተከናውኗል",
+  "hiv": "ኤች አይ ቪ",
+  "hepatitusb": "ሄፓታይተስ ቢ",
+  "syphilis": "ቂጥኝ",
+  "hepatitusc": "ሄፓታይተስ ሲ",
+  "discardTitle": "የተጣለ ኮርኒያ ዝርዝር",
+  "reason": "ምክንያት",
+  "reasonplaceholder": "ያልተሳካ ምክንያት አስገባ",
+  "save": "አስቀምጥ"
+}

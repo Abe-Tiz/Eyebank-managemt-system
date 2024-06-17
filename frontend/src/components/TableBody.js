@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { RiEdit2Line, RiDeleteBin2Line } from "react-icons/ri";
 import useSearch from "../useHooks/useSearch";
+import { useTranslation } from "react-i18next";
 
-const TableBody = ({ donors, donor, handleActivate, onOpen, searchTerm }) => {
-  const renderDonors = searchTerm ? donor : donors;
-  // console.log("search term", searchTerm);
-  console.log("donor", renderDonors);
+const TableBody = ({ donors, donor, handleActivate, onOpen, searchTerm,currentCorneas }) => {
+  const renderDonors = searchTerm ? donor : currentCorneas;
+  const { t } = useTranslation();
 
   return (
     <tbody>
@@ -29,14 +29,14 @@ const TableBody = ({ donors, donor, handleActivate, onOpen, searchTerm }) => {
           <td className="px-6 py-4">
             {donor.verified ? (
               <p className="hover:bg-base-200 text-blue-700 px-4 py-2 rounded font-bold">
-                Active
+                {t("donor:activeLabel")}
               </p>
             ) : (
               <button
                 onClick={() => handleActivate(donor._id)}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
               >
-                Pending
+                {t("donor:pendingLabel")}
               </button>
             )}
           </td>
@@ -53,7 +53,6 @@ const TableBody = ({ donors, donor, handleActivate, onOpen, searchTerm }) => {
             >
               <RiDeleteBin2Line size={20} color="#000" className="mr-2" />
             </button>
-           
           </td>
         </tr>
       ))}

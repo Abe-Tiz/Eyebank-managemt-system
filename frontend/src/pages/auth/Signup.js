@@ -38,7 +38,7 @@ const Signup = () => {
         });
         return;
       }
-      console.log(pics);
+      // console.log(pics);
 
       if (pics.type === "image/jpeg" || pics.type === "image/png") {
         const data = new FormData();
@@ -71,7 +71,6 @@ const Signup = () => {
         return;
       }
     }
-
 
   const handleConfirmPassword = (e) => {
     const confirmPasswordValue = e.target.value;

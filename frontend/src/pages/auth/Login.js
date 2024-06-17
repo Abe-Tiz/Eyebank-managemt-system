@@ -36,7 +36,9 @@ const Login = () => {
             } else {
                 if (data.status === "ok") {
                     if (data.user.role === "admin") {
-                        localStorage.setItem("token", data.data);
+                        // localStorage.setItem("token", data.data);
+                        localStorage.setItem("adminId", data.user._id);
+                        localStorage.setItem("admin", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -49,9 +51,11 @@ const Login = () => {
                         navigate("/adminDashboard");
                     }
                     else if (data.user.role === "doctor") {
-                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("doctor", data.data);
                         localStorage.setItem("surgeonId", data.user._id);
+                        localStorage.setItem("surgeonName", data.user.name);
                         localStorage.setItem("loggedIn", true);
+                        localStorage.setItem("token", data.data);
                         toast({
                             title: "Login Succeeded",
                             status: "success",
@@ -59,11 +63,14 @@ const Login = () => {
                             isClosable: true,
                             position: "top",
                         });
+                        console.log(data.user._id);
+                        console.log("tefisha");
+                        console.log(data.user.name);
                         // setRefreshed(true);
                         navigate("/surgondashboard");
                     }
                     else if (data.user.role === "lab Techinician") {
-                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("lab", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -76,7 +83,7 @@ const Login = () => {
                         navigate("/labtechnicaldashboard");
                     }
                     else if (data.user.role === "medical Director") {
-                        localStorage.setItem("token", data.data);
+                        localStorage.setItem("medical", data.data);
                         localStorage.setItem("loggedIn", true);
                         toast({
                             title: "Login Succeeded",
@@ -87,9 +94,20 @@ const Login = () => {
                         });
                         // setRefreshed(true);
                         navigate("/medicaldirectordashboard");
+                    } else {
+                      // localStorage.setItem("medical", data.data);
+                      // localStorage.setItem("loggedIn", true);
+                      toast({
+                        title: "Please Try The Autherized  User",
+                        status: "warning",
+                        duration: 5000,
+                        isClosable: true,
+                        position: "top",
+                      });
+                      // setRefreshed(true);
+                      // navigate("/medicaldirectordashboard");
                     }
                 }
-                
             }
         } catch (error) {
             if (error.response) {

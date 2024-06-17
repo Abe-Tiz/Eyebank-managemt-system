@@ -4,6 +4,7 @@ import axios from "axios";
 //import "../../static/styles/cornea.css";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import ButtonComponent from './../../../components/ButtonComponent';
 const RecordAccident = () => {
 
     const { id } = useParams();
@@ -136,92 +137,86 @@ const RecordAccident = () => {
         fetchRecipientData();
     }, []);
     return (
-        <div>
-            <h2 className="text-3xl mb-4" style={{ textAlign: 'center' }}>
-                Welcome to Accident Record Form
-            </h2>
-            <form onSubmit={handleFormSubmit}>
-                <div className="grid grid-cols-2">
-                    <label>
-
-                        <input
-                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={category}
-                            placeholder="Category"
-                            onChange={(e) => setCategory(e.target.value)}
-                        />
-                    </label>
-                    <label>
-
-                        <input
-                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={errorType}
-                            placeholder="Error Type"
-                            onChange={(e) => setErrorType(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        <select
-                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={hospitalName}
-                            onChange={(e) => setHospitalName(e.target.value)}
-                        >
-                            <option>select hospital Name</option>
-                            {hospitals.map((hospital, index) => (
-                                <option key={index} value={hospital._id}>
-                                    {hospital.hospitalName}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        <select
-                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={nameOfSurgeon}
-                            onChange={(e) => setSurgeonName(e.target.value)}
-                        >
-                            <option>select Surgeon Name</option>
-                            {surgeons.map((surgeon, index) => (
-                                <option key={index} value={surgeon._id}>
-                                    {surgeon.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        <select
-                            className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            value={receipentName}
-                            onChange={(e) => setReceipentName(e.target.value)}
-                        >
-                            <option>Select Recipient </option>
-                            {surgeons.map((recipient, index) => (
-                                <option key={index} value={recipient._id}>
-                                    {recipient.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-
-                </div>
-                <div className="text-center mt-4">
-                    <button
-                        type="submit"
-                        className="w-1/3 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600 text-white font-semibold rounded"
-                    >
-                        Record Accident
-                    </button>
-
-                    {/* <Link
-                        to={`/surgeondashboard/viewaccident`}
-                        type="submit"
-                        className="w-1/2 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600 text-white font-semibold rounded"
-                    >
-                        Record Accident
-                    </Link> */}
-                </div>
-            </form>
-        </div>
+      <div>
+        <h2 className="text-3xl mb-4" style={{ textAlign: "center" }}>
+          Welcome to Accident Record Form
+        </h2>
+        <form onSubmit={handleFormSubmit}>
+          <div className="grid grid-cols-2">
+            <label>
+              <input
+                className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={category}
+                placeholder="Category"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+            </label>
+            <label>
+              <input
+                className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={errorType}
+                placeholder="Error Type"
+                onChange={(e) => setErrorType(e.target.value)}
+              />
+            </label>
+            <label>
+              <select
+                className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={hospitalName}
+                onChange={(e) => setHospitalName(e.target.value)}
+              >
+                <option>select hospital Name</option>
+                {hospitals.map((hospital, index) => (
+                  <option key={index} value={hospital._id}>
+                    {hospital.hospitalName}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <select
+                className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={nameOfSurgeon}
+                onChange={(e) => setSurgeonName(e.target.value)}
+              >
+                <option>select Surgeon Name</option>
+                {surgeons.map((surgeon, index) => (
+                  <option key={index} value={surgeon._id}>
+                    {surgeon.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <select
+                className="form-input mt-4 block w-4/5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                value={receipentName}
+                onChange={(e) => setReceipentName(e.target.value)}
+              >
+                <option>Select Recipient </option>
+                {surgeons.map((recipient, index) => (
+                  <option key={index} value={recipient._id}>
+                    {recipient.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className="text-center mt-4">
+            {/* <button
+              type="submit"
+              className="w-1/3 mr-4 py-2 px-4 bg-sky-600 hover:bg-blue-600 text-white font-semibold rounded"
+            >
+              Record Accident
+            </button> */}
+            <ButtonComponent
+              onClick={() => navigate("/surgondashboard/viewaccident")}
+              title=" Save"
+              type="submit"
+            />
+          </div>
+        </form>
+      </div>
     );
 }
 

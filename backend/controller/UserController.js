@@ -96,7 +96,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      console.log("User is not found.");
+      // console.log("User is not found.");
       return res.status(404).json({ message: "User is not found." });
     }
 
@@ -108,9 +108,8 @@ const loginUser = asyncHandler(async (req, res) => {
             "Your account is deactivated. Please contact Admin to activate.",
         });
     }
-
-    const passwordMatch = await Bcrypt.compare(password, user.password);
-    console.log(user);
+  const passwordMatch = await Bcrypt.compare(password, user.password);
+    // console.log(user);
     if (passwordMatch) {
       if (user.verified) {
         const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
@@ -120,14 +119,14 @@ const loginUser = asyncHandler(async (req, res) => {
         await user.save();
         res.status(200).json({ status: "ok", data: token, user });
       } else {
-        console.log("User not verified");
+        // console.log("User not verified");
         res.json({ message: "Not verified" });
       }
     } else {
-      console.log("Password is not matched");
+      // console.log("Password is not matched");
       user.failedLoginAttempts += 1;
       await user.save();
-      console.log(user.failedLoginAttempts);
+      // console.log(user.failedLoginAttempts);
       if (user.failedLoginAttempts >= 4) {
         user.isActive = false;
         await user.save();
@@ -141,7 +140,7 @@ const loginUser = asyncHandler(async (req, res) => {
       res.status(500).json({ message: "Password is not matched" });
     }
   } catch (error) {
-    console.error("Error in loginUser:", error);
+    // console.error("Error in loginUser:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -185,7 +184,7 @@ const getloggedInUser = asyncHandler(async (req, res) => {
       }
       return res;
     });
-    console.log(user);
+    // console.log(user);
     if (user === "token expired") {
       return res.send({ status: "error", data: "token expired" });
     }
@@ -316,7 +315,7 @@ const getUser = asyncHandler(async (req, res) => {
 });
 
 
-// displays donor by id
+// displays user by id
 const getUserById = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;
@@ -325,6 +324,33 @@ const getUserById = asyncHandler(async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// change profile  image and password
+const getUserByIdAndChangePassWord = asyncHandler(async (req, res) => {
+  try {
+    const { image, oldPassword, password, userId } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    // Compare the old password with the password stored in the database
+    const isMatch = await Bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "password does not match!" });
+    }
+    // Update the image field and password
+    user.image = image;
+    const hashedPassword = await Bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+
+    await user.save();
 
     res.status(200).json(user);
   } catch (error) {
@@ -404,4 +430,5 @@ module.exports = {
   updateUser,
   getUserByName,
   activateUser,
+  getUserByIdAndChangePassWord,
 };

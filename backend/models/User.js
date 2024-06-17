@@ -3,28 +3,22 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
-      required: true,
     },
     password: {
       type: String,
-      required: true,
-},
+    },
     role: {
       type: String,
-      required: true,
     },
     failedLoginAttempts: {
       type: Number,
-      required: true,
       default: 0,
     },
     isActive: {
       type: Boolean,
-      required: true,
       default: true,
     },
     verified: {
@@ -34,7 +28,6 @@ const userSchema = new mongoose.Schema(
     verificationToken: String,
     image: {
       type: String,
-      required: true,
     },
   },
   {

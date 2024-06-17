@@ -108,11 +108,10 @@ const ViewUsers = () => {
             <TableHeader
               name={t("register:LabelsignUpName")}
               city={t("login:labelLoginEmail")}
-              mobile={t("donor:userstatus")}
-              status="Status"
+              mobile={t("donor:statusLabel")}
+              status={t("donor:roleLabel")}
               action={t("donor:donorAction")}
             />
-
             <tbody>
               {renderUser.map((user) => (
                 <tr
