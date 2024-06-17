@@ -82,23 +82,22 @@ const ExaminedDonor = () => {
   return (
     <div>
       <TableContainer>
-        <Text
-          fontSize="3xl"
-          className="text-center bg-teal-600 text-white mt-0"
-        >
-          List of Plege Donor
-        </Text>
-        <div className="flex justify-end mb-4">
-          <Input
-            placeholder="Search by name"
-            w="250px"
-            value={searchTerm}
-            onChange={handleSearch}
-            className="border-4 border-blue"
-          />
+        <div className="flex justify-between gap-3">
+          <Text fontSize="3xl" className="text-center  mt-0">
+            List of Examined Donors
+          </Text>
+          <div className="flex justify-end mb-4">
+            <Input
+              placeholder="Search by name"
+              w="250px"
+              value={searchTerm}
+              onChange={handleSearch}
+              className="border-4 border-blue"
+            />
+          </div>
         </div>
-        <Table size="sm">
-          <Thead>
+        <Table>
+          <Thead className="bg-blue-300 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <Tr>
               <Th>S.No</Th>
               <Th>Name</Th>

@@ -2,6 +2,7 @@ const RecipientModel = require("../models/Recipient");
 const HospitalModel = require("../models/Hospital");
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
+const Distribution = require("../models/CorneaDistribution");
 
 const createRecipient = async (req, res) => {
     const {
@@ -105,6 +106,8 @@ const GetocularPost = async (req, res) => {
 const adverseReaction = async (req, res) => {
     try {
         const recipient = await RecipientModel.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
+        // const adversed = Distribution.find();
+        //  console.log("adversed:", adversed);
         res.send(recipient);
     }
     catch (error) {

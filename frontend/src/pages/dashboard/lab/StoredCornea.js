@@ -82,16 +82,16 @@ const StoredCornea = () => {
               fontSize="2xl"
               className="text-center font-bold text-black mt-0"
             >
-              <span> List of evaluated cornea </span>
+              <span> List of Stored cornea </span>
             </Text>
             <Table variant="simple">
-              <Thead>
-                <Tr className="bg-sky-600 text-white">
-                  <Th className="text-white">S.No</Th>
-                  <Th className="text-white">LotNo</Th>
-                  <Th className="text-white">Date</Th>
-                  <Th className="text-white">Evaluater</Th>
-                  <Th className="text-white">Suiatablity</Th>
+              <Thead className="bg-blue-300">
+                <Tr>
+                  <Th >S.No</Th>
+                  <Th >LotNo</Th>
+                  <Th >Date</Th>
+                  <Th >Evaluater</Th>
+                  <Th >Suiatablity</Th>
                 </Tr>
               </Thead>
               <Tbody>

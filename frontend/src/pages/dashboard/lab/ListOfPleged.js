@@ -3,78 +3,87 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { Table, Thead, Tbody, Tr, Th, Td, Text, TableContainer, Input, Button, useTableStyles } from '@chakra-ui/react';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Text,
+  TableContainer,
+  Input,
+  Button,
+  useTableStyles,
+} from "@chakra-ui/react";
 
 const ListOfPleged = () => {
-    const [donors, setDonors] = useState([]);
-    const [filteredDonors, setFilteredDonors] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [deleteId, setDeleteId] = useState(null);
-    const [searchTerm, setSearchTerm] = useState("");
+  const [donors, setDonors] = useState([]);
+  const [filteredDonors, setFilteredDonors] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
-    const toast = useToast();
-    const { t } = useTranslation();
-    const cancelRef = useRef();
+  const toast = useToast();
+  const { t } = useTranslation();
+  const cancelRef = useRef();
 
-    useEffect(() => {
-      const fetchDonor = async () => {
-        try {
-          const response = await axios.get("http://localhost:4000/donor");
-          const donordata = response.data;
-          if (donordata && donordata.length > 0) {
-            setLoading(true);
-            setDonors(donordata);
-            setFilteredDonors(donordata);
-          } else {
-            toast({
-              title: "Empty Array",
-              description: "Array is empty.",
-              status: "warning",
-              duration: 5000,
-              isClosable: true,
-              position: "top",
-            });
-          }
-        } catch (error) {
+  useEffect(() => {
+    const fetchDonor = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/donor");
+        const donordata = response.data;
+        if (donordata && donordata.length > 0) {
+          setLoading(true);
+          setDonors(donordata);
+          setFilteredDonors(donordata);
+        } else {
           toast({
-            title: "Error Occurred!",
-            description: error.message,
-            status: "error",
+            title: "Empty Array",
+            description: "Array is empty.",
+            status: "warning",
             duration: 5000,
             isClosable: true,
             position: "top",
           });
         }
-      };
-
-      fetchDonor();
-    }, [toast]);
-
-    const onClose = () => setIsOpen(false);
-
-    const onOpen = (id) => {
-      setIsOpen(true);
-      setDeleteId(id);
+      } catch (error) {
+        toast({
+          title: "Error Occurred!",
+          description: error.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
     };
 
-    const handleSearch = (e) => {
-      const term = e.target.value.toLowerCase();
-      setSearchTerm(term);
-      const filtered = donors.filter((donor) =>
-        donor.name.toLowerCase().includes(term)
-      );
-      setFilteredDonors(filtered);
-    };
+    fetchDonor();
+  }, [toast]);
+
+  const onClose = () => setIsOpen(false);
+
+  const onOpen = (id) => {
+    setIsOpen(true);
+    setDeleteId(id);
+  };
+
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    const filtered = donors.filter((donor) =>
+      donor.name.toLowerCase().includes(term)
+    );
+    setFilteredDonors(filtered);
+  };
 
   return (
     <div>
       <TableContainer>
         <div className="flex justify-between">
-          <Text
-            fontSize="xl"
-            className="text-center mt-0"
-          >
+          <Text fontSize="xl" className="text-center mt-0">
             List of Plege Donor
           </Text>
           <div className="flex justify-end mb-4">
@@ -88,8 +97,8 @@ const ListOfPleged = () => {
           </div>
         </div>
 
-        <Table size="sm">
-          <Thead>
+        <Table>
+          <Thead className="bg-blue-300">
             <Tr>
               <Th>S.No</Th>
               <Th>Name</Th>

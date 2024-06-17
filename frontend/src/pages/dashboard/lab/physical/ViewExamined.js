@@ -141,9 +141,9 @@ const ViewExamined = () => {
         <Table className="table-auto w-full">
           <thead>
             <tr className="bg-blue-100">
-              {/* <th className="px-2 py-2">
-                <h1 className="font-bold">Exam_id</h1>
-              </th> */}
+              <th className="px-2 py-2">
+                <h1 className="font-bold">#</h1>
+              </th>
               <th className="px-2 py-2">
                 <h1 className="font-bold">Height</h1>
               </th>
@@ -167,9 +167,9 @@ const ViewExamined = () => {
 
 
           <tbody>
-            {filteredExams.map((exam) => (
+            {filteredExams.map((exam,index) => (
               <tr key={exam._id}>
-                {/* <Td className="px-2 py-2">{exam.exam_id}</Td> */}
+                <Td className="px-2 py-2">{index + 1}</Td>
                 <Td className="px-2 py-2">{exam.height}</Td>
                 <Td className="px-2 py-2">{exam.weight}</Td>
                 <Td className="px-2 py-2">{exam.sex}</Td>

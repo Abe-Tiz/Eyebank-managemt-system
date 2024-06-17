@@ -31,6 +31,16 @@ const ExamedList = () => {
         fetchPhysicalExams();
     }, []);
 
+
+       function formatTimestamp(timestamp) {
+         const options = {
+           year: "numeric",
+           month: "short",
+           day: "numeric",
+         };
+         return new Date(timestamp).toLocaleString("en-US", options);
+       }
+
     const fetchPhysicalExams = async () => {
         try {
             const response = await fetch("http://localhost:4000/api/getAll");
@@ -101,49 +111,51 @@ const ExamedList = () => {
     };
 
     return (
-        <Box p={6}>
-            {exams.length === 0 ? (
-                <Heading as="h3" size="lg" textAlign="center">No physical exams found.</Heading>
-            ) : (
-                <Table variant="striped" colorScheme="gray">
-                    <Thead>
-                        <Tr className="bg-blue-300">
-                            <Th>Height</Th>
-                            <Th>Weight</Th>
-                            <Th>Sex</Th>
-                            <Th>Cause of Death</Th>
-                            <Th>Date of Death</Th>
-                            <Th>Time of Death</Th>
-                            <Th>Actions</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {exams
-                            .filter(
-                                (exam) =>
-                                    (exam.collect === false)
-                            )
-                            .map((exam, index) => (
-                                <Tr key={index}>
-                                    <ChakraTd>{exam.height}</ChakraTd>
-                                    <ChakraTd>{exam.weight}</ChakraTd>
-                                    <ChakraTd>{exam.sex}</ChakraTd>
-                                    <ChakraTd>{exam.causeOfDeath}</ChakraTd>
-                                    <ChakraTd>{exam.dod}</ChakraTd>
-                                    <ChakraTd>{exam.time}</ChakraTd>
-                                    <ChakraTd>
-                                        <Flex justify="center" gap={2}>
-                                            <Button colorScheme="blue" onClick={() => handleCollect(exam._id)}>
-                                                Collect
-                                            </Button>
-                                        </Flex>
-                                    </ChakraTd>
-                                </Tr>
-                            ))}
-                    </Tbody>
-                </Table>
-            )}
-        </Box>
+      <Box p={6}>
+        {exams.length === 0 ? (
+          <Heading as="h3" size="lg" textAlign="center">
+            No physical exams found.
+          </Heading>
+        ) : (
+          <Table variant="striped" colorScheme="gray">
+            <Thead>
+              <Tr className="bg-blue-300">
+                <Th>Height</Th>
+                <Th>Weight</Th>
+                <Th>Sex</Th>
+                <Th>Cause of Death</Th>
+                <Th>Date of Death</Th>
+                <Th>Death Time</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {exams
+                .filter((exam) => exam.collect === false)
+                .map((exam, index) => (
+                  <Tr key={index}>
+                    <ChakraTd>{exam.height}</ChakraTd>
+                    <ChakraTd>{exam.weight}</ChakraTd>
+                    <ChakraTd>{exam.sex}</ChakraTd>
+                    <ChakraTd>{exam.causeOfDeath}</ChakraTd>
+                    <ChakraTd>{formatTimestamp(exam.dod)}</ChakraTd>
+                    <ChakraTd>{exam.time}</ChakraTd>
+                    <ChakraTd>
+                      <Flex justify="center" gap={2}>
+                        <Button
+                          colorScheme="blue"
+                          onClick={() => handleCollect(exam._id)}
+                        >
+                          Collect
+                        </Button>
+                      </Flex>
+                    </ChakraTd>
+                  </Tr>
+                ))}
+            </Tbody>
+          </Table>
+        )}
+      </Box>
     );
 };
 

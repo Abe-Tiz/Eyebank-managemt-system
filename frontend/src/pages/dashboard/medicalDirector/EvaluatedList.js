@@ -65,67 +65,64 @@ const EvaluatedList = () => {
     };
 
     return (
-        <div>
-            <div className='text-center mt-1'>
-                <TableContainer>
-                    {/* <Text fontSize='3xl' className='text-center text-black mt-0 mb-4'>
+      <div>
+        <div className="text-center mt-1">
+          <TableContainer>
+            {/* <Text fontSize='3xl' className='text-center text-black mt-0 mb-4'>
                         <span> List of evaluated cornea </span>
                     </Text> */}
-                    <Table variant='simple'>
-                        <Thead>
-                            <Tr className="bg-gray-200 ">
-                                {/* <Th >S.No</Th> */}
-                                <Th >LotNo</Th>
-                                {/* <Th >Date</Th> */}
-                                <Th >Evaluater</Th>
-                                <Th >Epitheliam</Th>
-                                {/* <Th >Stroma</Th> */}
-                                <Th >Endothelium</Th>
-                                <Th >Approval</Th>
-                                <Th >Suiatabl</Th>
-                                <Th colSpan={2}>Operations</Th>
-                            </Tr >
-                        </Thead >
-                        <Tbody>
-                            {corneas
-                                .filter(
-                                    (cornea) =>
-                                        cornea.evaluation &&
-                                        (cornea.evaluation.approval === 'yes')
-                                )
-                                .map((cornea, index) => (
-                                    <Tr key={index}>
-                                        {/* <Td>{index + 1}</Td> */}
-                                        <Td>{cornea.lotNo}</Td>
-                                        {/* <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td> */}
-                                        <Td>{cornea.evaluation.evaluater}</Td>
-                                        <Td>{cornea.evaluation.epitheliam}</Td>
-                                        {/* <Td>{cornea.evaluation.stroma}</Td> */}
-                                        <Td>{cornea.evaluation.endothelium}</Td>
-                                        <Td>{cornea.evaluation.approval}</Td>
-                                        <Td>
-                                            {
-                                                cornea.evaluation.suiatablity
-                                            }
-                                        </Td>
+            <Table variant="simple">
+              <Thead className="bg-blue-300">
+                <Tr>
+                  {/* <Th >S.No</Th> */}
+                  <Th>LotNo</Th>
+                  {/* <Th >Date</Th> */}
+                  <Th>Evaluater</Th>
+                  <Th>Epitheliam</Th>
+                  {/* <Th >Stroma</Th> */}
+                  <Th>Endothelium</Th>
+                  <Th>Approval</Th>
+                  <Th>Suiatabl</Th>
+                  <Th colSpan={2}>Operations</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {corneas
+                  .filter(
+                    (cornea) =>
+                      cornea.evaluation && cornea.evaluation.approval === "yes"
+                  )
+                  .map((cornea, index) => (
+                    <Tr key={index}>
+                      {/* <Td>{index + 1}</Td> */}
+                      <Td>{cornea.lotNo}</Td>
+                      {/* <Td>{formatTimestamp(cornea.evaluation.evaluationDate)}</Td> */}
+                      <Td>{cornea.evaluation.evaluater}</Td>
+                      <Td>{cornea.evaluation.epitheliam}</Td>
+                      {/* <Td>{cornea.evaluation.stroma}</Td> */}
+                      <Td>{cornea.evaluation.endothelium}</Td>
+                      <Td>{cornea.evaluation.approval}</Td>
+                      <Td>{cornea.evaluation.suiatablity}</Td>
 
-                                        <Td className='text-center ml-3 text-blue-600'>
-                                            <Link to={`/medicaldirectordashboard/editevaluation/${cornea._id}`}>
-                                                <EditIcon />
-                                            </Link>
-                                        </Td>
-                                        <Td className='text-center ml-3 text-red-600'>
-                                            <button onClick={() => deleteCornea(cornea._id)}>
-                                                <DeleteIcon />
-                                            </button>
-                                        </Td>
-                                    </Tr >
-                                ))}
-                        </Tbody >
-                    </Table >
-                </TableContainer >
-            </div >
-        </div >
+                      <Td className="text-center ml-3 text-blue-600">
+                        <Link
+                          to={`/medicaldirectordashboard/editevaluation/${cornea._id}`}
+                        >
+                          <EditIcon />
+                        </Link>
+                      </Td>
+                      <Td className="text-center ml-3 text-red-600">
+                        <button onClick={() => deleteCornea(cornea._id)}>
+                          <DeleteIcon />
+                        </button>
+                      </Td>
+                    </Tr>
+                  ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </div>
+      </div>
     );
 };
 
