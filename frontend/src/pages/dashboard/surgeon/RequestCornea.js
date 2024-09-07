@@ -19,7 +19,7 @@ export default function SendRequestCornea() {
   useEffect(() => {
     const fetchHospitals = async () => {
       try {
-        const { data } = await axios.get("http://localhost:4000/hospital/read");
+        const { data } = await axios.get("https://eyebank-backend-2.onrender.com/hospital/read");
         setHospitals(data);
       } catch (error) {
         console.error("Error fetching hospitals:", error);
@@ -43,7 +43,7 @@ export default function SendRequestCornea() {
       };
 
       const { data } = await axios.post(
-        "http://localhost:4000/requestCornea/send",
+        "https://eyebank-backend-2.onrender.com/requestCornea/send",
         requestCorneaData
       );
       navigate("/surgondashboard/viewRequestedCornea");

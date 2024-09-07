@@ -13,14 +13,14 @@ const ViewHospital = () => {
     
   useEffect(() => {
         axios
-            .get("http://localhost:4000/hospital/read")
+            .get("https://eyebank-backend-2.onrender.com/hospital/read")
             .then((result) => setHospitals(result.data))
             .catch((err) => console.log(err));
     }, []);
 
     const handleDelete = (id) => {
         axios
-            .delete(`http://localhost:4000/hospital/delete/${id}`)
+            .delete(`https://eyebank-backend-2.onrender.com/hospital/delete/${id}`)
             .then((res) => {
                 console.log(res);
                 //window.location.reload();

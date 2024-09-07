@@ -76,7 +76,7 @@ const RecordAccident = () => {
         console.log(data);
         handleAccident(id);
         try {
-            const response = await axios.post('http://localhost:4000/accident/create', data);
+            const response = await axios.post('https://eyebank-backend-2.onrender.com/accident/create', data);
             console.log(response.data);
             toast({
                 title: "Data recorded successfully",
@@ -94,7 +94,7 @@ const RecordAccident = () => {
 
     const handleAccident = async (id) => {
         try {
-            await axios.put(`http://localhost:4000/accident/${id}`, accid);
+            await axios.put(`https://eyebank-backend-2.onrender.com/accident/${id}`, accid);
         } catch (error) {
             console.error("Failed to handle accident.", error);
         }
@@ -103,7 +103,7 @@ const RecordAccident = () => {
     useEffect(() => {
         const fetchSurgeon = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/user");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/user");
                 setSurgeons(response.data);
             } catch (error) {
                 console.log(error);
@@ -115,7 +115,7 @@ const RecordAccident = () => {
     useEffect(() => {
         const fetchHospitalData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/hospital/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/hospital/read");
                 setHospitals(response.data);
             } catch (error) {
                 console.log(error);
@@ -127,7 +127,7 @@ const RecordAccident = () => {
     useEffect(() => {
         const fetchRecipientData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/recipient/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/recipient/read");
                 setReceipents(response.data);
             } catch (error) {
                 console.log(error);

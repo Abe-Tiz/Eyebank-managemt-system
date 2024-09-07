@@ -14,7 +14,7 @@ const ActivateAccount = () => {
        e.preventDefault();
        try {
          const response = await axios.post(
-           "http://localhost:4000/user/activate",
+           "https://eyebank-backend-2.onrender.com/user/activate",
            {
              email
            }

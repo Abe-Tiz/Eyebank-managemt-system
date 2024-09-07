@@ -65,7 +65,7 @@
         try {
         if (!isFailled) {
             const response = await axios.post(
-            "http://localhost:4000/blood/create",
+            "https://eyebank-backend-2.onrender.com/blood/create",
             data
             );
             console.log(response.data);
@@ -78,7 +78,7 @@
             });
         } else {
             const response = await axios.post(
-              "http://localhost:4000/blood/discard",
+              "https://eyebank-backend-2.onrender.com/blood/discard",
               discard
             );
             console.log(response.data);

@@ -24,7 +24,7 @@ const EditAdverseData = () => {
     useEffect(() => {
         const fetchAdverseReactionData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/recipient/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/recipient/getOne/${id}`);
                 setAdverseReactionData(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -43,7 +43,7 @@ const EditAdverseData = () => {
     }, [id, t, toast]);
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:4000/cornea/update/${id}`, {
+            await axios.put(`https://eyebank-backend-2.onrender.com/cornea/update/${id}`, {
                 dateOfadverse: adverseData.dateOfAdverse || adverseReactionData.dateOfadverse,
                 adverseDataReaction: adverseData.adverseDataReaction || adverseReactionData.adverseDataReaction,
                 probabilityCase: adverseData.probabilityCase || adverseReactionData.probablityCase,

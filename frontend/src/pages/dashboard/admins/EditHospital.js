@@ -11,7 +11,7 @@ const EditHospital = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:4000/hospital/getOne/${id}`)
+            .get(`https://eyebank-backend-2.onrender.com/hospital/getOne/${id}`)
             .then((result) => {
                 console.log(result);
                 setType(result.data.type);
@@ -24,7 +24,7 @@ const EditHospital = () => {
     const Update = (e) => {
         e.preventDefault();
         axios
-            .put(`http://localhost:4000/hospital/update/${id}`, {
+            .put(`https://eyebank-backend-2.onrender.com/hospital/update/${id}`, {
                 type,
                 hospitalName,
                 address,

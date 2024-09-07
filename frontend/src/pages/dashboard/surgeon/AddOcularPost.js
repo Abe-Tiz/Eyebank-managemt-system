@@ -31,7 +31,7 @@ const AddOcularPost = () => {
   const getAllRecipients = async () => {
     try {
       // Retrieve the surgeon ID from local storage
-      const response = await axios.get("http://localhost:4000/recipient/read");
+      const response = await axios.get("https://eyebank-backend-2.onrender.com/recipient/read");
       const data = response.data;
       setOcular(data);
       // console.log(data.name);
@@ -47,7 +47,7 @@ const AddOcularPost = () => {
       try {
         const surgeonName = localStorage.getItem("surgeonName"); // Retrieve the surgeon ID from local storage
         const response = await axios.get(
-          "http://localhost:4000/distribution/eachsurgeon",
+          "https://eyebank-backend-2.onrender.com/distribution/eachsurgeon",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -71,7 +71,7 @@ const AddOcularPost = () => {
   const handleSave = async () => {
     // console.log(ocularPost);
     try {
-      await axios.put(`http://localhost:4000/recipient/ocular/${id}`, {
+      await axios.put(`https://eyebank-backend-2.onrender.com/recipient/ocular/${id}`, {
         ocularPost,
       });
       toast({

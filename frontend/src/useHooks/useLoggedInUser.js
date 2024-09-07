@@ -23,7 +23,7 @@ const useLoggedInUser = (type) => {
                     break;
             }
             const response = await axios.post(
-                "http://127.0.0.1:4000/user/userLogedin",
+                "https://eyebank-backend-2.onrender.com/user/userLogedin",
                 {
                     token: token,
                 }

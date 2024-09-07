@@ -19,7 +19,7 @@ const BlogDetails = () => {
   const getPost = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:4000/post/get-post/${params.slug}`
+        `https://eyebank-backend-2.onrender.com/post/get-post/${params.slug}`
       );
       setPost(data?.post);
     } catch (error) {
@@ -38,7 +38,7 @@ const BlogDetails = () => {
         <div className="px-6">
           <Link to="/Blog" className="block mb-4">
             <img
-              src={`http://localhost:4000/post/post-photo/${post._id}`}
+              src={`https://eyebank-backend-2.onrender.com/post/post-photo/${post._id}`}
               alt={post.title}
               className="object-cover w-3/4 h-64 mx-auto rounded-md transition duration-300 transform hover:scale-105 hover:shadow-lg"
             />

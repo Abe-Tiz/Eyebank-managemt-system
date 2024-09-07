@@ -13,7 +13,7 @@ const ApprovedRequest = () => {
     const getAllRequestedCorneas = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/requestCornea/getRequests"
+          "https://eyebank-backend-2.onrender.com/requestCornea/getRequests"
         );
         setRequestedCorneas(data);
         // console.log("dataaaa:",data);

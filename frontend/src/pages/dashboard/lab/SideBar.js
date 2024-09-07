@@ -127,7 +127,7 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                   }}
                   subtitleProps={[
                     {
-                      link: "/labtechnicaldashboard/getAll",
+                      link: "/labtechnicaldashboard/phyexamlist",
                       subtitle: "View",
                       iconLibrary: "md",
                       iconName: "MdPlaylistAddCheckCircle",
@@ -144,12 +144,12 @@ const CustomSidebar = ({ collapsed, name, role }) => {
                       iconLibrary: "md",
                       iconName: "MdStreetview",
                     },
-                    {
-                      link: "/labtechnicaldashboard/examined-donor",
-                      subtitle: "Examined Donor",
-                      iconLibrary: "md",
-                      iconName: "MdPlaylistAddCircle",
-                    },
+                    // {
+                    //   link: "/labtechnicaldashboard/examined-donor",
+                    //   subtitle: "Examined Donor",
+                    //   iconLibrary: "md",
+                    //   iconName: "MdPlaylistAddCircle",
+                    // },
                   ]}
                 />
 

@@ -66,7 +66,7 @@ const ListSerology = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/blood");
+        const response = await axios.get("https://eyebank-backend-2.onrender.com/blood");
         const samplData = response.data;
         // console.log("sample::", data);
         setBlood(samplData);
@@ -89,7 +89,7 @@ const ListSerology = () => {
   const deleteSerology = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/blood/delete/${deleteId}`
+        `https://eyebank-backend-2.onrender.com/blood/delete/${deleteId}`
       );
       // setBlood(blood.filter((cornea) => cornea._id !== id));
       console.log(response);

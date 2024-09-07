@@ -86,7 +86,7 @@ const Signup = () => {
     // setImageLoading(true);
 
     const data  = axios
-      .post("http://localhost:4000/user/register", {
+      .post("https://eyebank-backend-2.onrender.com/user/register", {
         name,
         email,
         image,

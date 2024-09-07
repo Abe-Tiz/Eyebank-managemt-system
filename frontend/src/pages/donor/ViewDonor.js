@@ -48,7 +48,7 @@ const ViewDonor = () => {
     // }
 
       const getLoggedInDonor = async () => {
-        fetch("http://127.0.0.1:4000/donor/donorLogedin", {
+        fetch("https://eyebank-backend-2.onrender.com/donor/donorLogedin", {
           method: "POST",
           crossDomain: true,
           headers: {

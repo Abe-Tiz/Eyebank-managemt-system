@@ -11,7 +11,7 @@ const [users, setUsers] = useState([]);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const { data } = await axios.get("http://localhost:4000/user");
+        const { data } = await axios.get("https://eyebank-backend-2.onrender.com/user");
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -24,7 +24,7 @@ const [users, setUsers] = useState([]);
   // get all posts
   const getAllPosts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/post/get-post");
+      const { data } = await axios.get("https://eyebank-backend-2.onrender.com/post/get-post");
       setPosts(data.posts);
     } catch (error) {
       console.log(error);
@@ -42,7 +42,7 @@ const [users, setUsers] = useState([]);
       <div className="col-md-9">
       
         <h1
-          className="text-4xl text-center font-bold text-gray-800 mb-8 text-sky-700"
+          className="text-4xl text-center font-bold   mb-8 text-sky-700"
           style={{
             borderBottom: "2px solid sky-700",
             letterSpacing: "2px",
@@ -85,7 +85,7 @@ const [users, setUsers] = useState([]);
                   >
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300">
                       <img
-                        src={`http://localhost:4000/post/post-photo/${p._id}`}
+                        src={`https://eyebank-backend-2.onrender.com/post/post-photo/${p._id}`}
                         alt={p.title}
                         className="w-96 h-24 object-cover"
                       />

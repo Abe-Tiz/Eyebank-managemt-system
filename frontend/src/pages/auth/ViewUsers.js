@@ -23,7 +23,7 @@ const ViewUsers = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/user");
+        const response = await axios.get("https://eyebank-backend-2.onrender.com/user");
         const userdata = response.data;
 
         // Check if the array is not empty
@@ -68,7 +68,7 @@ const ViewUsers = () => {
   // handle delete donor
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:4000/user/delete/${deleteId}`);
+      await axios.delete(`https://eyebank-backend-2.onrender.com/user/delete/${deleteId}`);
       setusers(users.filter((user) => user._id !== deleteId));
       toast({
         title: "User Deleted",

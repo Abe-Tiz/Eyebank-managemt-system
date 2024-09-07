@@ -28,7 +28,7 @@ const EditRecipient = () => {
     useEffect(() => {
         const fetchrecipientData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/recipient/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/recipient/getOne/${id}`);
                 setRecipientData(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -52,7 +52,7 @@ const EditRecipient = () => {
 
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:4000/recipient/update/${id}`, {
+            await axios.put(`https://eyebank-backend-2.onrender.com/recipient/update/${id}`, {
                 recipientname: recipient.recipientname || recipientData.recipientname,
                 age: recipient.age || recipientData.age,
                 sex: recipient.sex || recipientData.sex,

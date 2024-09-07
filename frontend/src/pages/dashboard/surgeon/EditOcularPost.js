@@ -22,7 +22,7 @@ const EditOcularPost = () => {
     useEffect(() => {
         const fetchocularPostData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/recipient/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/recipient/getOne/${id}`);
                 setocularPostData(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -41,7 +41,7 @@ const EditOcularPost = () => {
     }, [id, t, toast]);
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:4000/cornea/update/${id}`, {
+            await axios.put(`https://eyebank-backend-2.onrender.com/cornea/update/${id}`, {
                 dateOfadverse: ocularData.dateOfAdverse || ocularPostData.dateOfadverse,
                 ocularDataReaction: ocularData.ocularDataReaction || ocularPostData.ocularDataReaction,
                 probabilityCase: ocularData.probabilityCase || ocularPostData.probablityCase,

@@ -31,7 +31,7 @@ const Viewdistribute = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/distribution/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/distribution/read");
                 const data = response.data;
                 setdistribute(data);
                 // setExpirationDate(new Date(data.expirationDate));

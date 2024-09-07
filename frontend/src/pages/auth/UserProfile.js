@@ -81,7 +81,7 @@
         e.preventDefault();
         // setImageLoading(true);
 
-        const data = axios.post(" http://localhost:4000/user/change-profile", {
+        const data = axios.post(" https://eyebank-backend-2.onrender.com/user/change-profile", {
         image,
         password,
         oldPassword,

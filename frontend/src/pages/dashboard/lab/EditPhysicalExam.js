@@ -42,7 +42,7 @@ const EditPhysicalExam = () => {
     useEffect(() => {
         const fetchExamData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/api/getOne/${id}`);
                 setExam(response.data);
             } catch (error) {
                 handleFetchError();
@@ -85,7 +85,7 @@ const EditPhysicalExam = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:4000/api/update/${id}`, exam);
+            await axios.put(`https://eyebank-backend-2.onrender.com/api/update/${id}`, exam);
             toast({
                 title: t('Success'),
                 description: t('Physical exam updated successfully.'),

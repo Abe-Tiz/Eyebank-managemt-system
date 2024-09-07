@@ -111,6 +111,7 @@ import ListOfPleged from '../pages/dashboard/lab/ListOfPleged';
 import ExaminedDonor from "../pages/dashboard/lab/physical/ExaminedDonor";
 import ViewExamined from './../pages/dashboard/lab/physical/ViewExamined';
 import ReportDoctor from './../pages/reports/doctor/ReportDoctor';
+import PhysicalExamedList from './../pages/dashboard/lab/PhysicalExamedList';
 
 const router = createBrowserRouter([
   {
@@ -183,6 +184,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  
   {
     path: "/labtechnicaldashboard",
     element: <LabTechnicalDashboard />,
@@ -290,6 +292,10 @@ const router = createBrowserRouter([
       {
         path: "examlist",
         element: <ExamedList />,
+      },
+      {
+        path: "phyexamlist",
+        element: <PhysicalExamedList />,
       },
       {
         path: "viewRequestCornea",

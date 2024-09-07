@@ -31,7 +31,7 @@ const AccidentList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/accident/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/accident/read");
                 const data = response.data;
                 setAccident(data);
             } catch (error) {
@@ -43,7 +43,7 @@ const AccidentList = () => {
 
     const deleteAccident = async (id) => {
         try {
-            await axios.delete(`http://localhost:4000/accident/delete/${id}`);
+            await axios.delete(`https://eyebank-backend-2.onrender.com/accident/delete/${id}`);
             setAccident(accident.filter((accident) => accident._id !== id));
         } catch (error) {
             console.error(error);

@@ -15,7 +15,7 @@ const RequestedCorneas = () => {
     const getAllRequestedCorneas = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/requestCornea/getRequests"
+          "https://eyebank-backend-2.onrender.com/requestCornea/getRequests"
         );
         setRequestedCorneas(data);
       } catch (error) {
@@ -30,7 +30,7 @@ const navigate = useNavigate();
 
   const handleApprove = async (id) => {
     try {
-      await axios.put(`http://localhost:4000/requestCornea/approve/${id}`);
+      await axios.put(`https://eyebank-backend-2.onrender.com/requestCornea/approve/${id}`);
       setRequestedCorneas(
         requestedCorneas.map((p) =>
           p._id === id ? { ...p, isApproved: true } : p

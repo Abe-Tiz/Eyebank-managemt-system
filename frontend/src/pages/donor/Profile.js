@@ -31,7 +31,7 @@ const Profile = () => {
    const getLoggedInDonor = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:4000/donor/donorLogedin",
+          "https://eyebank-backend-2.onrender.com/donor/donorLogedin",
           {
             method: "POST",
             headers: {

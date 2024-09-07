@@ -34,7 +34,7 @@ import { FormControl } from "@chakra-ui/form-control";
 
     try {
         const response = await axios.post(
-        `http://127.0.0.1:4000/user/reset-password/${id}/${token}`,
+        `https://eyebank-backend-2.onrender.com/user/reset-password/${id}/${token}`,
         {
             code,
         }

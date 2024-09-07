@@ -38,7 +38,7 @@ const RecievedCornea = () => {
         const fetchData = async () => {
             const surgeonName = localStorage.getItem("surgeonName");
             try {
-                const response = await axios.get("http://localhost:4000/distribution/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/distribution/read");
                 const data = response.data;
                 setdistribute(data);
             } catch (error) {

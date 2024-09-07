@@ -65,7 +65,7 @@ const OcularPostReport = () => {
       try {
         // Retrieve the surgeon ID from local storage
         const response = await axios.get(
-          "http://localhost:4000/recipient/getocular-repo"
+          "https://eyebank-backend-2.onrender.com/recipient/getocular-repo"
         );
         const data = response.data;
         setRecipient(data);
@@ -80,7 +80,7 @@ const OcularPostReport = () => {
   };
   const deleteRecipient = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/recipient/delete/${id}`, {
+      await axios.delete(`https://eyebank-backend-2.onrender.com/recipient/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

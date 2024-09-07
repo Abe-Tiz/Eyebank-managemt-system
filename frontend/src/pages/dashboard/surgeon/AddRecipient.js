@@ -40,7 +40,7 @@ const AddRecipient = () => {
     useEffect(() => {
         const fetchSurgeon = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/user");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/user");
                 setSurgeons(response.data);
             } catch (error) {
                 console.log(error);
@@ -52,7 +52,7 @@ const AddRecipient = () => {
     useEffect(() => {
         const fetchHospitalData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/hospital/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/hospital/read");
                 setHospitals(response.data);
             } catch (error) {
                 console.log(error);
@@ -89,7 +89,7 @@ const AddRecipient = () => {
         console.log(data);
         try {
             const response = await axios.post(
-                "http://localhost:4000/recipient/create",
+                "https://eyebank-backend-2.onrender.com/recipient/create",
                 data
             );
             console.log(response.data);

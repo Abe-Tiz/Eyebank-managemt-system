@@ -43,7 +43,7 @@ const StoredCornea = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/cornea/read');
+                const response = await axios.get('https://eyebank-backend-2.onrender.com/cornea/read');
                 const data = response.data;
                 setCorneas(data);
             } catch (error) {
@@ -55,7 +55,7 @@ const StoredCornea = () => {
     }, []);
     const handleDistribute = async (id) => {
         try {
-            // await axios.put(`http://localhost:4000/cornea/distribute/${id}`, data);
+            // await axios.put(`https://eyebank-backend-2.onrender.com/cornea/distribute/${id}`, data);
             navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
         } catch (error) {
             console.error("Failed to collect physical exam:", error);
@@ -67,7 +67,7 @@ const StoredCornea = () => {
 
     const deleteCornea = async (id) => {
         try {
-            await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
+            await axios.delete(`https://eyebank-backend-2.onrender.com/cornea/delete/${id}`);
             setCorneas(corneas.filter((cornea) => cornea._id !== id));
         } catch (error) {
             console.error(error);

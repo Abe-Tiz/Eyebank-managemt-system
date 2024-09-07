@@ -35,7 +35,7 @@ const DistributeCornea = () => {
     const getAllRequestedCorneas = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/requestCornea/getRequests"
+          "https://eyebank-backend-2.onrender.com/requestCornea/getRequests"
         );
 
         setRequestedCorneas(data);
@@ -62,7 +62,7 @@ const DistributeCornea = () => {
         }
 
       const response = await axios.get(
-        `http://localhost:4000/requestCornea/getRequest/${id}`
+        `https://eyebank-backend-2.onrender.com/requestCornea/getRequest/${id}`
       );
       console.log("Response data:", response.data);
         setRequest(response.data);
@@ -130,7 +130,7 @@ const DistributeCornea = () => {
     // handleDistribution(id);
     try {
       const response = await axios.post(
-        "http://localhost:4000/distribution/create",
+        "https://eyebank-backend-2.onrender.com/distribution/create",
         data
       );
       console.log("dist:", response.data);
@@ -148,7 +148,7 @@ const DistributeCornea = () => {
   };
   const handleDistribution = async (id) => {
     try {
-      await axios.put(`http://localhost:4000/cornea/distribute/${id}`, distri);
+      await axios.put(`https://eyebank-backend-2.onrender.com/cornea/distribute/${id}`, distri);
       //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
     } catch (error) {
       console.error("Failed to collect physical exam:", error);
@@ -164,7 +164,7 @@ const DistributeCornea = () => {
         const queryString = new URLSearchParams(params).toString();
         //   console.log(queryString);
 
-        const response = await axios.get(`http://localhost:4000/cornea/read`);
+        const response = await axios.get(`https://eyebank-backend-2.onrender.com/cornea/read`);
 
         const data = response.data;
         const filteredCornea = data.filter(
@@ -185,7 +185,7 @@ const DistributeCornea = () => {
   }, [suiatablity]); // Use 'suitability' as the dependency
   const handleDistribute = async (id) => {
     try {
-      await axios.put(`http://localhost:4000/cornea/distributed/${id}`);
+      await axios.put(`https://eyebank-backend-2.onrender.com/cornea/distributed/${id}`);
 
       setCorneas(
         corneas.map((p) => (p._id === id ? { ...p, distributed: true } : p))

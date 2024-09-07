@@ -22,7 +22,7 @@ const EditDistribute = () => {
     useEffect(() => {
         const fetchDistributeData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/distribution/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/distribution/getOne/${id}`);
                 setDistributeData(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -45,7 +45,7 @@ const EditDistribute = () => {
     useEffect(() => {
         const fetchSurgeon = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/user");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/user");
                 setSurgeons(response.data);
             } catch (error) {
                 console.log(error);
@@ -57,7 +57,7 @@ const EditDistribute = () => {
     useEffect(() => {
         const fetchHospitalData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/hospital/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/hospital/read");
                 setHospitals(response.data);
             } catch (error) {
                 console.log(error);
@@ -68,7 +68,7 @@ const EditDistribute = () => {
     }, []);
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:4000/distribution/update/${id}`, {
+            await axios.put(`https://eyebank-backend-2.onrender.com/distribution/update/${id}`, {
                 hospitalName: distribute.hospitalName || distributeData.hospitalName,
                 modeOfTransportation: distribute.modeOfTransportation || distributeData.modeOfTransportation,
                 nameOfSurgeon: distribute.nameOfSurgeon || distributeData.nameOfSurgeon,

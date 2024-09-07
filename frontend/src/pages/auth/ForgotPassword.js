@@ -48,7 +48,7 @@ const LoadingCircle = () => (
 
         try {
         const response = await axios.post(
-            `http://localhost:4000/user/forgot_password`,
+            `https://eyebank-backend-2.onrender.com/user/forgot_password`,
             {
             email,
             }

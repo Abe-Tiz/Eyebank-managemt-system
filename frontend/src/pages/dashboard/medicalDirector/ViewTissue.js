@@ -48,7 +48,7 @@ const ViewTissue = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/cornea/read?searchTerm=${searchTerm}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/cornea/read?searchTerm=${searchTerm}`);
                 const data = response.data;
                 setCorneas(data);
             } catch (error) {
@@ -72,7 +72,7 @@ const ViewTissue = () => {
     }
     const deleteCornea = async (id) => {
         try {
-            await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
+            await axios.delete(`https://eyebank-backend-2.onrender.com/cornea/delete/${id}`);
             setCorneas(corneas.filter((cornea) => cornea._id !== id));
         } catch (error) {
             console.error(error);
@@ -96,7 +96,7 @@ const ViewTissue = () => {
                             <Th>S.No</Th>
                             <Th>LotNo</Th>
                             <Th>Date</Th>
-                            <Th>Technical</Th>
+                            {/* <Th>Technical</Th> */}
                             <Th>Position</Th>
                             <Th>Lens</Th>
                             <Th>Clarity</Th>
@@ -131,7 +131,7 @@ const ViewTissue = () => {
                                     <Td>
                                         {formatTimestamp(cornea.createdAt)}
                                     </Td>
-                                    <Td>{cornea.recoveryTechnical.name}</Td>
+                                    {/* <Td>{cornea?.recoveryTechnical?.name}</Td> */}
                                     <Td>{cornea.position}</Td>
                                     <Td>{cornea.lens}</Td>
                                     <Td>{cornea.clarity}</Td>

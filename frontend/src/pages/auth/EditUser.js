@@ -37,7 +37,7 @@ const EditUser = () => {
                 });
             }
 
-            const res = await axios.get(`http://localhost:4000/user/${id}`);
+            const res = await axios.get(`https://eyebank-backend-2.onrender.com/user/${id}`);
             const userData = res.data;
         
             console.log(userData);
@@ -115,7 +115,7 @@ const EditUser = () => {
     e.preventDefault();
     // setImageLoading(true);
 
-    const data = axios.put(`http://localhost:4000/user/update/${id}`, {
+    const data = axios.put(`https://eyebank-backend-2.onrender.com/user/update/${id}`, {
       name,
       email,
       role,

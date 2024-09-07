@@ -17,7 +17,7 @@ const Serology = () => {
     }
     const fetchPhysicalExams = async () => {
         try {
-            const response = await fetch("http://localhost:4000/api/getAll");
+            const response = await fetch("https://eyebank-backend-2.onrender.com/api/getAll");
             const data = await response.json();
             setExams(data);
             // console.log(data);

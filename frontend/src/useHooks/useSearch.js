@@ -11,37 +11,37 @@ const useSearch = (searchType) => {
             let requestData = { name: searchTerm };
             switch (searchType) {
                 case "donor":
-                    url = "http://localhost:4000/donor/search";
+                    url = "https://eyebank-backend-2.onrender.com/donor/search";
                     break;
                 case "user":
-                    url = "http://localhost:4000/user/search";
+                    url = "https://eyebank-backend-2.onrender.com/user/search";
                     break;
                 case "cornea":
-                    url = "http://localhost:4000/cornea/search";
+                    url = "https://eyebank-backend-2.onrender.com/cornea/search";
                     requestData = { lotNo: searchTerm };
                     break;
                 case "blood":
-                    url = "http://localhost:4000/blood/search";
+                    url = "https://eyebank-backend-2.onrender.com/blood/search";
                     requestData = { lotNo: searchTerm };
                     break;
                 case "hospital":
-                    url = "http://localhost:4000/hospital/search";
+                    url = "https://eyebank-backend-2.onrender.com/hospital/search";
                     requestData = { hospitalName: searchTerm };
                     break;
                 case "recipient":
-                    url = "http://localhost:4000/recipient/search";
+                    url = "https://eyebank-backend-2.onrender.com/recipient/search";
                     requestData = { recipientname: searchTerm };
                     break;
                 case "blood":
-                    url = "http://localhost:4000/blood/search";
+                    url = "https://eyebank-backend-2.onrender.com/blood/search";
                     requestData = { lotNo: searchTerm };
                     break;
                 case "requestedCorneas":
-                    url = "http://localhost:4000/requestCornea/search";
+                    url = "https://eyebank-backend-2.onrender.com/requestCornea/search";
                     requestData = { descriptionOfRequest: searchTerm };
                     break;
                 case "distributed":
-                    url = "http://localhost:4000/distribution/search";
+                    url = "https://eyebank-backend-2.onrender.com/distribution/search";
                     requestData = { hospitalName: searchTerm };
                     break;
 

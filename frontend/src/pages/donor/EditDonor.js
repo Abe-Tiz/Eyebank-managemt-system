@@ -57,7 +57,7 @@ const EditDonor = () => {
             });
           }
 
-          const res = await axios.get(`http://localhost:4000/donor/${id}`);
+          const res = await axios.get(`https://eyebank-backend-2.onrender.com/donor/${id}`);
           const donorData = res.data;
           // console.log(donorData);
 
@@ -106,7 +106,7 @@ const EditDonor = () => {
     };
 
     axios
-      .put(`http://localhost:4000/donor/update/${id}`, payload)
+      .put(`https://eyebank-backend-2.onrender.com/donor/update/${id}`, payload)
       .then((res) => {
         if (!name || !email || !sex || !age) {
           toast({

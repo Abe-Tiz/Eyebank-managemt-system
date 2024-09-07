@@ -32,7 +32,7 @@ const EvaluateCornea = () => {
         const fetchCorneaData = async () => {
             try {
 
-                const response = await axios.get(`http://localhost:4000/cornea/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/cornea/getOne/${id}`);
                 setEvaluationdata(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -67,7 +67,7 @@ const EvaluateCornea = () => {
             reason
         };
         try {
-            await axios.put(`http://localhost:4000/cornea/evaluate/${id}`, { evaluation });
+            await axios.put(`https://eyebank-backend-2.onrender.com/cornea/evaluate/${id}`, { evaluation });
             toast({
                 title: t('Success'),
                 description: t('Evalution  data saved successfully.'),

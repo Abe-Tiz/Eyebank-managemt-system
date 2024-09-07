@@ -32,7 +32,7 @@ const ExaminedDonor = () => {
   useEffect(() => {
     const fetchDonor = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/donor");
+        const response = await axios.get("https://eyebank-backend-2.onrender.com/donor");
         const donordata = response.data;
         if (donordata && donordata.length > 0) {
           setLoading(true);

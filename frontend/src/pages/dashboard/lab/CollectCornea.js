@@ -85,7 +85,7 @@ const CollectCornea = () => {
         console.log(data);
         handleCollect(id);
         try {
-            const response = await axios.post('http://localhost:4000/cornea/create',
+            const response = await axios.post('https://eyebank-backend-2.onrender.com/cornea/create',
                 data
             );
             console.log(response.data);
@@ -104,7 +104,7 @@ const CollectCornea = () => {
     };
     const handleCollect = async (id) => {
         try {
-            await axios.put(`http://localhost:4000/api/collect/${id}`, collectd);
+            await axios.put(`https://eyebank-backend-2.onrender.com/api/collect/${id}`, collectd);
             //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
         } catch (error) {
             console.error("Failed to collect physical exam:", error);
@@ -278,7 +278,7 @@ const CollectCornea = () => {
           <div className="text-center mt-4 mb-2">
             <ButtonComponent
               label="Submit"
-              title={"Collect Cornea"}
+              title={"Collect"}
               type="submit"
             />
           </div>

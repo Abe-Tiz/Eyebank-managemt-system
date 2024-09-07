@@ -26,7 +26,7 @@ const EditCornea = () => {
     useEffect(() => {
         const fetchCorneaData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/cornea/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/cornea/getOne/${id}`);
                 setCorneaData(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -52,7 +52,7 @@ const EditCornea = () => {
 
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:4000/cornea/update/${id}`, {
+            await axios.put(`https://eyebank-backend-2.onrender.com/cornea/update/${id}`, {
                 recoveryTechnical: cornea.recoveryTechnical || corneaData.recoveryTechnical,
                 eyeLid: cornea.eyeLid || corneaData.eyeLid,
                 size: cornea.size || corneaData.size,

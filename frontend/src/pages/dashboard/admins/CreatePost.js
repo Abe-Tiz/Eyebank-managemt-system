@@ -29,7 +29,7 @@ export default function CreatePost() {
       postData.append("content", content);
 
       const { data } = await axios.post(
-        "http://localhost:4000/post/create-post",
+        "https://eyebank-backend-2.onrender.com/post/create-post",
         postData
       );
 

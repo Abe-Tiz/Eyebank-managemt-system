@@ -21,7 +21,7 @@ const LoginDonor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/donor/login", {
+      const response = await axios.post("https://eyebank-backend-2.onrender.com/donor/login", {
         email,
         code,
       });

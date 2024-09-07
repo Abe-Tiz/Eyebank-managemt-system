@@ -33,7 +33,7 @@ const DisplayDonor = () => {
     // fetch donors
     const fetchDonor = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/donor");
+            const response = await axios.get("https://eyebank-backend-2.onrender.com/donor");
             const donordata = response.data;
 
             if (donordata && donordata.length > 0) {
@@ -76,7 +76,7 @@ const DisplayDonor = () => {
     // handle delete donor
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:4000/donor/delete/${deleteId}`);
+            await axios.delete(`https://eyebank-backend-2.onrender.com/donor/delete/${deleteId}`);
             setDonors(donors.filter((donor) => donor._id !== deleteId));
             toast({
                 title: "Donor Deleted",
@@ -102,7 +102,7 @@ const DisplayDonor = () => {
     // activate donor
     const handleActivate = async (id) => {
         try {
-            await axios.put(`http://localhost:4000/donor/activate/${id}`);
+            await axios.put(`https://eyebank-backend-2.onrender.com/donor/activate/${id}`);
             setDonors(
                 donors.map((donor) =>
                     donor._id === id ? { ...donor, verified: true } : donor

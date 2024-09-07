@@ -15,7 +15,7 @@ const ReportMedical = () => {
   // number of donor
   const numberDonor = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/report");
+      const response = await axios.get("https://eyebank-backend-2.onrender.com/report");
 
       setReportData((prevReportData) => ({
         ...prevReportData,
@@ -30,7 +30,7 @@ const ReportMedical = () => {
   // number of donor
   const numberUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/report/user");
+      const response = await axios.get("https://eyebank-backend-2.onrender.com/report/user");
 
       setReportData((prevReportData) => ({
         ...prevReportData,
@@ -45,7 +45,7 @@ const ReportMedical = () => {
   // number of donor
   const numberOfEvalutedCornea = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/report/evaluted");
+      const response = await axios.get("https://eyebank-backend-2.onrender.com/report/evaluted");
 
       setReportData((prevReportData) => ({
         ...prevReportData,
@@ -61,7 +61,7 @@ const ReportMedical = () => {
   // number of cornea
   const CollectedCornea = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/report/cornea");
+      const response = await axios.get("https://eyebank-backend-2.onrender.com/report/cornea");
 
       setReportData((prevReportData) => ({
         ...prevReportData,

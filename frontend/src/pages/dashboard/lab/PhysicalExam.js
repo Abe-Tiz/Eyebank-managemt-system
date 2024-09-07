@@ -47,7 +47,7 @@ const PhysicalExam = () => {
 
   const hanleDonate = async (id) => {
     try {
-      await axios.post(`http://localhost:4000/donor/donate/${id}`, donated);
+      await axios.post(`https://eyebank-backend-2.onrender.com/donor/donate/${id}`, donated);
       //navigate(`/labtechnicaldashboard/distributeCornea/${id}`);
     } catch (error) {
       console.error("Failed to collect physical exam:", error);
@@ -207,7 +207,7 @@ const PhysicalExam = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/api/create", {
+      const res = await fetch("https://eyebank-backend-2.onrender.com/api/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -252,7 +252,7 @@ const PhysicalExam = () => {
         isClosable: true,
         position: "top",
       });
-      navigate("/labtechnicaldashboard/getAll")
+      navigate("/labtechnicaldashboard/examlist");
     } catch (error) {
       console.error(error);
       toast({
@@ -330,7 +330,7 @@ const PhysicalExam = () => {
               <option disabled value="">Sex</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="other">Other</option>
+              {/* <option value="other">Other</option> */}
             </select>
           </div>
         </div>

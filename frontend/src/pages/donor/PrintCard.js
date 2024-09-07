@@ -14,7 +14,7 @@ const PrintCard = () => {
     useEffect(() => {
       const fetchDonor = async () => {
         try {
-          const res = await axios.get(`http://localhost:4000/donor/${id}`);
+          const res = await axios.get(`https://eyebank-backend-2.onrender.com/donor/${id}`);
           console.log(res);
         } catch (error) {
           toast({

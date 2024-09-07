@@ -22,7 +22,7 @@ const UpdatePost = () => {
   const getSinglePost = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:4000/post/get-post/${params.slug}`
+        `https://eyebank-backend-2.onrender.com/post/get-post/${params.slug}`
       );
       setTitle(data.post.title);
       setId(data.post._id);
@@ -48,7 +48,7 @@ const UpdatePost = () => {
       photo && postData.append("photo", photo);
       postData.append("content", content);
       const { data } = axios.put(
-        `http://localhost:4000/post/update-post/${id}`,
+        `https://eyebank-backend-2.onrender.com/post/update-post/${id}`,
         postData
       );
       
@@ -70,7 +70,7 @@ const UpdatePost = () => {
       let answer = window.prompt("Are You Sure want to delete this blog ? ");
       if (!answer) return;
       const { data } = await axios.delete(
-        `http://localhost:4000/post/delete-post/${id}`
+        `https://eyebank-backend-2.onrender.com/post/delete-post/${id}`
       );
       toast.success("Post Deleted Succfully");
       navigate("/adminDashboard/posts");
@@ -85,7 +85,7 @@ const UpdatePost = () => {
       <div className="w-full md:w-4/3 lg:w-1/2 xl:w-1/2 mx-auto bg-white rounded-lg shadow">
         <div className="px-6 py-4">
           <h1
-            className="text-4xl text-center font-bold text-gray-800 mb-8 text-sky-700"
+            className="text-4xl text-center font-bold mb-8 text-sky-700"
             style={{
               letterSpacing: "2px",
               textTransform: "capitalize",
@@ -120,7 +120,7 @@ const UpdatePost = () => {
               ) : (
                 <div className="text-center">
                   <img
-                    src={`http://localhost:4000/post/post-photo/${id}`}
+                    src={`https://eyebank-backend-2.onrender.com/post/post-photo/${id}`}
                     alt="blog_photo"
                     height="200px"
                     className="img img-responsive"

@@ -24,7 +24,7 @@ const ForgotCode = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:4000/donor/forgot_code`,
+        `https://eyebank-backend-2.onrender.com/donor/forgot_code`,
         {
           email,
         }

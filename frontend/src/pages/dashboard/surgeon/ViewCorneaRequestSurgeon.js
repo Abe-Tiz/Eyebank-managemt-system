@@ -49,7 +49,7 @@ const RequestedCorneas = () => {
         const surgeonId = localStorage.getItem("surgeonId"); // Retrieve the surgeon ID from local storage
   
         const response = await axios.get(
-          "http://localhost:4000/requestCornea/getRequest",
+          "https://eyebank-backend-2.onrender.com/requestCornea/getRequest",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -72,7 +72,7 @@ const RequestedCorneas = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:4000/requestCornea/delete-request/${id}`
+        `https://eyebank-backend-2.onrender.com/requestCornea/delete-request/${id}`
       );
       setRequestedCorneas(
         requestedCorneas.filter((request) => request._id !== id)
@@ -91,7 +91,7 @@ const RequestedCorneas = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.put(`http://localhost:4000/requestCornea/approve/${id}`);
+      await axios.put(`https://eyebank-backend-2.onrender.com/requestCornea/approve/${id}`);
       setRequestedCorneas(
         requestedCorneas.map((p) =>
           p._id === id ? { ...p, isApproved: true } : p

@@ -11,7 +11,7 @@ const RequestedCorneas = () => {
     const getAllRequestedCorneas = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/requestCornea/getRequest"
+          "https://eyebank-backend-2.onrender.com/requestCornea/getRequest"
         );
         setRequestedCorneas(data);
 
@@ -26,7 +26,7 @@ const RequestedCorneas = () => {
   }, []);
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:4000/requestCornea/delete-request/${id}`)
+      .delete(`https://eyebank-backend-2.onrender.com/requestCornea/delete-request/${id}`)
       .then((res) => {
         console.log(res);
         window.location.reload();
@@ -39,7 +39,7 @@ const RequestedCorneas = () => {
     // For example, using axios:
     
     axios
-      .put(`http://localhost:4000/corneaRequest/update-corneaRequest/${id}`, {
+      .put(`https://eyebank-backend-2.onrender.com/corneaRequest/update-corneaRequest/${id}`, {
         isApproved: true,
       })
       .then((res) => {

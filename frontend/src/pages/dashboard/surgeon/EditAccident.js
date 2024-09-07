@@ -26,7 +26,7 @@ const EditAccident = () => {
     useEffect(() => {
         const fetchAccidenteData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/accident/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/accident/getOne/${id}`);
                 setAccidentData(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -50,7 +50,7 @@ const EditAccident = () => {
     useEffect(() => {
         const fetchSurgeon = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/user");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/user");
                 setSurgeons(response.data);
             } catch (error) {
                 console.log(error);
@@ -62,7 +62,7 @@ const EditAccident = () => {
     useEffect(() => {
         const fetchHospitalData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/hospital/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/hospital/read");
                 setHospitals(response.data);
             } catch (error) {
                 console.log(error);
@@ -74,7 +74,7 @@ const EditAccident = () => {
     useEffect(() => {
         const fetchRecipientData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/recipient/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/recipient/read");
                 setRecipients(response.data);
             } catch (error) {
                 console.log(error);
@@ -87,7 +87,7 @@ const EditAccident = () => {
 
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:4000/accident/update/${id}`, {
+            await axios.put(`https://eyebank-backend-2.onrender.com/accident/update/${id}`, {
                 category: accident.category || accidentData.category,
                 errorType: accident.errorType || accidentData.errorType,
                 hospitalName: accident.hospitalName || accidentData.hospitalName,

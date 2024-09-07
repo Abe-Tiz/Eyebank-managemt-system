@@ -22,7 +22,7 @@ const EditRequest = () => {
           return;
         }
        
-        const { data } = await axios.get(`http://localhost:4000/requestCornea/getRequest/${id}`);
+        const { data } = await axios.get(`https://eyebank-backend-2.onrender.com/requestCornea/getRequest/${id}`);
         setDescriptionOfRequest(data.descriptionOfRequest);
         setSuiatablity(data.suiatablity);
       } catch (error) {
@@ -48,7 +48,7 @@ const EditRequest = () => {
       }
 
       await axios.put(
-        `http://localhost:4000/requestCornea/updateRequest/${id}`,
+        `https://eyebank-backend-2.onrender.com/requestCornea/updateRequest/${id}`,
         {
           descriptionOfRequest,
           suiatablity,

@@ -45,7 +45,7 @@ const DiscardCornea = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/cornea/read");
+        const response = await axios.get("https://eyebank-backend-2.onrender.com/cornea/read");
         const cornData = response.data;
         const filteredCorneas = cornData.filter(
           (cornea) =>

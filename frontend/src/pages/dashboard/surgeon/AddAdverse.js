@@ -36,7 +36,7 @@ const AddAdverse = () => {
       try {
         // Retrieve the surgeon ID from local storage
         const response = await axios.get(
-          "http://localhost:4000/recipient/read"
+          "https://eyebank-backend-2.onrender.com/recipient/read"
         );
         const data = response.data;
         setOcular(data);
@@ -53,7 +53,7 @@ const AddAdverse = () => {
       try {
         const surgeonName = localStorage.getItem("surgeonName"); // Retrieve the surgeon ID from local storage
         const response = await axios.get(
-          "http://localhost:4000/distribution/eachsurgeon",
+          "https://eyebank-backend-2.onrender.com/distribution/eachsurgeon",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,7 +80,7 @@ const AddAdverse = () => {
   const handleSave = async () => {
     // console.log(adverse);
     try {
-      await axios.put(`http://localhost:4000/recipient/adverse/${id}`, {
+      await axios.put(`https://eyebank-backend-2.onrender.com/recipient/adverse/${id}`, {
         adverse,
       });
       toast({

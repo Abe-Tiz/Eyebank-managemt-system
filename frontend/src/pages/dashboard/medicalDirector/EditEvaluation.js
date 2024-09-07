@@ -28,7 +28,7 @@ const EditEvaluation = () => {
         // Fetch cornea data from the server based on the provided ID
         const fetchCorneaData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/cornea/getOne/${id}`);
+                const response = await axios.get(`https://eyebank-backend-2.onrender.com/cornea/getOne/${id}`);
                 setCorneaData(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -50,7 +50,7 @@ const EditEvaluation = () => {
         // Example save functionality
         try {
             console.log(evaluateData);
-            await axios.put(`http://localhost:4000/cornea/update/${id}`, {
+            await axios.put(`https://eyebank-backend-2.onrender.com/cornea/update/${id}`, {
                 epitheliam: evaluateData.epitheliam || corneaData.evaluation.epitheliam,
                 stroma: evaluateData.stroma || corneaData.evaluation.stroma,
                 endothelium: evaluateData.endothelium || corneaData.evaluation.endothelium,

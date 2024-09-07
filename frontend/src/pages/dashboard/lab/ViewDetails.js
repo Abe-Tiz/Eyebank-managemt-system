@@ -19,7 +19,7 @@ const navigate=useNavigate()
 
   const fetchPhysicalExam = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/getOne/${id}`);
+      const response = await axios.get(`https://eyebank-backend-2.onrender.com/api/getOne/${id}`);
       setExam(response.data);
     } catch (error) {
       console.error("Failed to fetch physical exam:", error);
@@ -48,7 +48,7 @@ const navigate=useNavigate()
   const performDelete = async (examId) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/delete/${examId}`,
+        `https://eyebank-backend-2.onrender.com/api/delete/${examId}`,
         {
           method: 'DELETE',
         }
@@ -75,7 +75,7 @@ const navigate=useNavigate()
 
   const handleCollect = async (id) => {
     try {
-      await axios.put(`http://localhost:4000/api/getOne/${id}/collect`);
+      await axios.put(`https://eyebank-backend-2.onrender.com/api/getOne/${id}/collect`);
       navigate(`/labtechnicaldashboard/collectCornea/${id}`);
     } catch (error) {
       console.error("Failed to collect physical exam:", error);
@@ -84,7 +84,7 @@ const navigate=useNavigate()
 
   // const deletePhysicalExam = async (id) => {
   //   try {
-  //     await axios.delete(`http://localhost:4000/api/getOne/${id}`);
+  //     await axios.delete(`https://eyebank-backend-2.onrender.com/api/getOne/${id}`);
   //     navigate('/labtechnicaldashboard');
   //   } catch (error) {
   //     console.error("Failed to delete physical exam:", error);

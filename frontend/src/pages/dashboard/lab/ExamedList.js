@@ -18,7 +18,7 @@ const ExamedList = () => {
 
     const handleCollect = async (id) => {
         try {
-            await axios.put(`http://localhost:4000/api/collect/${id}`);
+            await axios.put(`https://eyebank-backend-2.onrender.com/api/collect/${id}`);
             navigate(`/labtechnicaldashboard/collectCornea/${id}`);
         } catch (error) {
             console.error("Failed to collect physical exam:", error);
@@ -43,7 +43,7 @@ const ExamedList = () => {
 
     const fetchPhysicalExams = async () => {
         try {
-            const response = await fetch("http://localhost:4000/api/getAll");
+            const response = await fetch("https://eyebank-backend-2.onrender.com/api/getAll");
             const data = await response.json();
             setExams(data);
         } catch (error) {
@@ -73,7 +73,7 @@ const ExamedList = () => {
     const performDelete = async (examId) => {
         try {
             const response = await fetch(
-                `http://localhost:4000/api/delete/${examId}`,
+                `https://eyebank-backend-2.onrender.com/api/delete/${examId}`,
                 {
                     method: 'DELETE',
                 }

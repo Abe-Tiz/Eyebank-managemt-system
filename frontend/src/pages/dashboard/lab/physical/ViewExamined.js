@@ -40,7 +40,7 @@ const ViewExamined = () => {
 
   const fetchPhysicalExams = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/getAll");
+      const response = await axios.get("https://eyebank-backend-2.onrender.com/api/getAll");
       setExams(response.data);
     } catch (error) {
       console.error("Failed to fetch physical exams:", error);
@@ -66,7 +66,7 @@ const ViewExamined = () => {
 
   const performDelete = async (examId) => {
     try {
-      await axios.delete(`http://localhost:4000/api/delete/${examId}`);
+      await axios.delete(`https://eyebank-backend-2.onrender.com/api/delete/${examId}`);
       fetchPhysicalExams();
       toast({
         title: "Physical exam deleted successfully.",

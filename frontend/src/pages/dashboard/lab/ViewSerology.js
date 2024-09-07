@@ -52,7 +52,7 @@ const ViewCornea = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/cornea/read");
+                const response = await axios.get("https://eyebank-backend-2.onrender.com/cornea/read");
                 const data = response.data;
                 setCorneas(data);
                 // setExpirationDate(new Date(data.expirationDate));
@@ -68,7 +68,7 @@ const ViewCornea = () => {
     };
     const deleteCornea = async (id) => {
         try {
-            await axios.delete(`http://localhost:4000/cornea/delete/${id}`);
+            await axios.delete(`https://eyebank-backend-2.onrender.com/cornea/delete/${id}`);
             setCorneas(corneas.filter((cornea) => cornea._id !== id));
             toast({
                 title: 'Cornea deleted successfully.',

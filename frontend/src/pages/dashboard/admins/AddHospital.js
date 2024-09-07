@@ -12,7 +12,7 @@ const AddHospital = () => {
     const Submit = (e) => {
         e.preventDefault();
         axios
-            .post("http://localhost:4000/hospital/create", {
+            .post("https://eyebank-backend-2.onrender.com/hospital/create", {
                 hospitalName,
                 address,
                 type
